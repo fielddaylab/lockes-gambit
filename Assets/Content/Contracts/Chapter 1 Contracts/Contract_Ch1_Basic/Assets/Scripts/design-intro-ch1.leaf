@@ -80,5 +80,5 @@ $set temp:designTutorialStep = 3
 ::AllTestsPassed
 @trigger    OnAllTestsComplete
 $call   ReleaseAllHighlights()
-{@PAL}  It looks like all test cases passed!
+{@PAL}  All test cases passed!
 $set    temp:designTutorialStep = 4

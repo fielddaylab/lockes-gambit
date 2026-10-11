@@ -86,13 +86,13 @@ $call   ReleaseAllHighlights()
 {@PAL}      You need materials first. 
 
 
-{@Player}	I'll call the Hauler company to let them know they'll be working with me. 
+{@Player}	I'll call the Hauler company. 
 //phone dial 
-{@Quinn}    Oh... Locke! Hiya! Suprised to see your face, is Dorian sick or something? 
-{@Player}	It's a long story -- I'll tell you later. Looks like I'm planning the routes now. 
+{@Quinn}    Oh... Locke! Hiya! Suprised to see your face, is Dorian sick? 
+{@Player}	It's a long story -- I'll tell you later. I'm planning the routes now. 
 //Sarah: I am going to have Quinn give him the nickname "cowboy" to thread the idea of the space western. :)
 {@Quinn}    Okay, <i>Cowboy.</i> Going off on your own, eh?
-{@Quinn}    You decide where you want to get your materials. I’ll handle the haulers.
+{@Quinn}    Sounds fun. You can count on me to wrangle the haulers for you.
 
 //Sarah: kacy we can't add so many lines. I like these lines, but if we are going to bring in personality, we have to do it within the current line counts I have without losing content. Some of this has to remain more flat at the start of the game because so much onboarding is happening here. 
 //{@Quinn}    Ooo, the drama, the suspense, the mystique! Please do tell more.  
@@ -116,9 +116,9 @@ $call   ReleaseAllHighlights()
 @cutscene
 @once
 
-{@PAL}      The haulers arrived. Quinn is quite efficient!...For a human. 
-{@PAL} 		Ready to work with our incredible new automation unit? 
-{@Player}   Um... I think so. I used to work with Arken at the Fab.
+{@PAL}      The haulers arrived. Quinn is quite efficient... for a human. 
+{@PAL} 		Ready to try out your state of the art automated Fab bay? 
+{@Player}   Um... I think so. I used to work there with Arken.
 {@PAL}     	OOOh, this will be soooo much faster than your human teammate. 
 
 //EDIT - KACY 
