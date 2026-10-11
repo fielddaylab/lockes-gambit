@@ -23,22 +23,23 @@
 {@Player}   ...I miss my old crew already.
 
 {@PAL}      The first “contract” is your orientation. 
-$call   HighlightElement(overarching:costs-section, false, 25, true)
+//TODO highlight should be arrow not button highlight
+//$call   HighlightElement(overarching:costs-section, false, 25, true)
+$call   PointElement(overarching:costs-section)
 {@PAL}      This is how long the contract should take.
 $call   ReleaseAllHighlights()
-$call   HighlightElement(overarching:profit-section, false, 25, true)
+//TODO highlight should be arrow not button highlight
+//$call   HighlightElement(overarching:profit-section, false, 25, true)
+$call   PointElement(overarching:profit-section)
 {@PAL}      ...and this is what you'll be paid.
 $call   ReleaseAllHighlights()
 
-{@PAL}      You can chip away at that debt to Frontier Robotics! 
+{@PAL}      You can chip away at that huge debt! 
+$call   HighlightElement(overarching:select-contract-btn)
+
 //{@Player}   P.A.L., I've been doing business with my team for years. 
 //{@PAL}      As the Personal Automation Liaison and I'm WAY more useful than human assistants.
- {@Player} 	...hmmmm... 
- {@PAL}      Start with either the Research Lab or Chip Design. 
 
- {@Player} 	...hmmmm... we'll see. 
- {@PAL}      You can start with the Research Lab or Chip Design, Captain!
->>>>>>> Stashed changes
 
 //EDIT - KACY 
 // Added line for PAL for better flow and to reinforce debt being centeral issue player has to tackle. 
@@ -48,14 +49,20 @@ $call   UnlockWikiPage("Basic Insulator")
 $call   LockWikiPage("Conductor") // only Basic Conductor is available in first chapter 
 $call   LockWikiPage("Insulator") // only Basic Insulator is available in first chapter 
 
-:: FirstContractAcceptCh1
-@trigger    OnOverarchingLoaded
-@when       IsSolutionFoundFor(Research)
-@cutscene 
-@once
-$call   ReleaseAllHighlights()
 
-//TODO be sure I added this to fire after research to establish PAL is sure about something that he is later incorrect about - AI literacy thread.
+::FirstContractAcceptCh1
+@trigger    OnOverarchingLoaded
+@cutscene
+@once
+
+$call   ReleaseAllHighlights()
+{@PAL}      As a trainee, you'll learn to operate four systems...
+{@PAL}      ...all recently upgraded aboard this obsolete ship.
+{@Player}   Hey! She's got plenty of life left in her!
+{@PAL}      Start with either the Research  or Chip Design. 
+
+
+//written to stablish PAL is sure about something that he is later incorrect about - AI literacy thread.
 ::AfterResearchCh1
 @trigger    OnOverarchingLoaded
 @when       IsSolutionFoundFor(Research)
