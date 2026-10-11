@@ -63,6 +63,7 @@ $call   ReleaseAllHighlights()
 
 
 //written to stablish PAL is sure about something that he is later incorrect about - AI literacy thread.
+//TODO - this breaks the game if you do research after design because the game is calling this and before supply chain at the same time. 
 ::AfterResearchCh1
 @trigger    OnOverarchingLoaded
 @when       IsSolutionFoundFor(Research)
@@ -81,11 +82,8 @@ $call   ReleaseAllHighlights()
 @when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
 @cutscene
 @once
-<<<<<<< Updated upstream
 {@Player}    I'm ready to build the chips now, right? 
 {@PAL}      You need materials first. 
-{@Player}	Oh... Dorian used to manage all that...
-{@PAL}		Nothing the upgraded Supply console can’t handle!
 
 
 {@Player}	I'll call the Hauler company to let them know they'll be working with me. 
@@ -93,7 +91,7 @@ $call   ReleaseAllHighlights()
 {@Quinn}    Oh... Locke! Hiya! Suprised to see your face, is Dorian sick or something? 
 {@Player}	It's a long story -- I'll tell you later. Looks like I'm planning the routes now. 
 //Sarah: I am going to have Quinn give him the nickname "cowboy" to thread the idea of the space western. :)
-{@Quinn}    Okay, <i>cowboy.</i> Going off on your own, eh?
+{@Quinn}    Okay, <i>Cowboy.</i> Going off on your own, eh?
 {@Quinn}    You decide where you want to get your materials. I’ll handle the haulers.
 
 //Sarah: kacy we can't add so many lines. I like these lines, but if we are going to bring in personality, we have to do it within the current line counts I have without losing content. Some of this has to remain more flat at the start of the game because so much onboarding is happening here. 

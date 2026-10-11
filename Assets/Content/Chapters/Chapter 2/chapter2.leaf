@@ -29,13 +29,8 @@ $call   UnlockWikiPage("Insulator")
 {@Player}   P.A.L., turns out that material wasn't an insulator. It's a semiconductor.
 {@PAL}      Exactly! Great work, Captain.
 {@Player}   Exactly? You verified it as an insulator before.
-<<<<<<< Updated upstream
 {@PAL}      You're absolutely right. Your research clearly shows that it's a semiconductor.
 {@Player}   But you seemed pretty sure before.
-=======
-{@PAL}      You're right. Your research clearly shows that it's a semiconductor.
-{@Player}   But you seemed pretty sure before...
->>>>>>> Stashed changes
 {@PAL}      Absolutely! And now we have the correct answer.
 {@Player}   ...It's weird how you just keep agreeing with me.
 
@@ -76,15 +71,14 @@ $call   UnlockWikiPage("Insulator")
 {@Player}	P.A.L. did you get the fab bay cleaned up? 
 {@PAL}		The fab bay is in perfect condition, as always. 
 {@PAL}		...at least as perfect as it can be on a near obsolete ship.
-{@Player}	Clunker? As always? Looks like someone's system needs some updating...
-
-{@PAL}		[ >_< ]
+{@Player}	Clunker? As always!?
 
 //call coming in from Quinn
-{@Quinn}    Hey Cap'... Frontier Robotics paid your last invoice. What's up with that?
-{@Player}   Yeah... I had to take a job with them. Ship repairs put me in some serious debt.
-{@Quinn}    Bad luck. I'm not sure about working with those guys...
-{@Quinn}    Sure, sure. Just make sure I get paid.
+{@Quinn}    Why do you have Frontier's bots on the Constantine?
+{@Player}   Oh, hey Quinn. Well... ship repairs put me in some serious debt. 
+{@Player}	Can't afford my old crew, so I need the bots to run Fabrication.
+{@Quinn}    Oooof. Bad luck. Watch out Cowboy. Frontier builds those bots cheap. 
+{@Quinn}		Always needing new parts.
 //end call
 
 
@@ -95,8 +89,6 @@ $call   UnlockWikiPage("Insulator")
 @cutscene 
 @once
 
-{@Player}   P.A.L.? 
-{@PAL}      Yes, Locke? 
-{@Player}   What's the deal with Quinn and Frontier Robotics? Is there some kind of bad blood?  
-{@PAL}      Frontier Robotics has a stellar reputation! Just check our reviews. We have great cash flow and always pay our invoices.  
 
+{@PAL}      Frontier Robotics has a stellar reputation! 
+{@Player}	Were you listening to that call? 
