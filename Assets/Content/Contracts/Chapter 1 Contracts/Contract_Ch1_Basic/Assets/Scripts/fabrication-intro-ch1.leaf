@@ -12,14 +12,14 @@ $endif
 @trigger    OnFabAttempt
 $if temp:fabTutorialStep == 1
     $set temp:fabTutorialStep = 2
-    {@PAL}  Find the station shown on the yellow card.
+    {@PAL}  Find the station shown on the gray card.
 $endif
 
 ::ActivateFurnace
 @trigger    OnFabArriveAtStation
 @when       station == "station:furnace"
 $if temp:fabTutorialStep == 2
-    {@PAL}  Now press the Space to add the wafer, then bring the furnace to the right temperature.
+    {@PAL}  Press the Space to add the wafer, then bring the furnace to the right temperature.
 $endif
 
 ::GateFurnace
@@ -31,7 +31,7 @@ $call       RequireMicrogamePrecision(0.9)
 @trigger    OnFabMicrogameExited
 $if temp:fabTutorialStep == 2
     $set temp:fabTutorialStep = 3
-    {@PAL}  Now follow the yellow cards and finish the rest of the tasks.
+    {@PAL}  Now follow the gray cards and finish the rest of the tasks.
 $endif
 
 ::GeneralStun

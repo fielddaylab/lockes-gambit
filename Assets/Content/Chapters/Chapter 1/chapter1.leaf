@@ -82,14 +82,13 @@ $call   ReleaseAllHighlights()
 @when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
 @cutscene
 @once
-{@Player}    I'm ready to build the chips now, right? 
-{@PAL}      You need materials first. 
+{@PAL}      You'll need materials before you start fabricating the microchips. 
 
 
 {@Player}	I'll call the Hauler company. 
 //phone dial 
 {@Quinn}    Oh... Locke! Hiya! Suprised to see your face, is Dorian sick? 
-{@Player}	It's a long story -- I'll tell you later. I'm planning the routes now. 
+{@Player}	It's a long story -- I'll tell you later. 
 //Sarah: I am going to have Quinn give him the nickname "cowboy" to thread the idea of the space western. :)
 {@Quinn}    Okay, <i>Cowboy.</i> Going off on your own, eh?
 {@Quinn}    Sounds fun. You can count on me to wrangle the haulers for you.
@@ -121,8 +120,6 @@ $call   ReleaseAllHighlights()
 {@Player}   Um... I think so. I used to work there with Arken.
 {@PAL}     	OOOh, this will be soooo much faster than your human teammate. 
 
-//EDIT - KACY 
-// Added minor dialogue changes and changed Arken's name spelling (was Arkan)
 
 
 
@@ -133,13 +130,8 @@ $call   ReleaseAllHighlights()
 @cutscene
 @once
 
+
 {@PAL}      You finished the orientation! 
 {@PAL}      Positive.Affirmation.exe! 
-{@Player}   Back atcha bro. 
-{@PAL}      My name's not bro, it's P.A.L!
-{@Player} 	Right...
-
-//endregion 
-
-//EDIT - KACY 
-// Edited Pal's line to be reminiscent to lines when PAL becomes MAL later. 
+{@Player}	uhhhh...thanks.
+{@PAL} 	    Now submit your contract and Frontier will transfer payment into your account. 
