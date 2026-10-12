@@ -5748,10 +5748,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.618
       objectReference: {fileID: 0}
-    - target: {fileID: 841392584259480295, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ae5111483b24fda44a80c83db51c6f00, type: 3}
+    - target: {fileID: 691771272908712214, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
+      propertyPath: m_text
+      value: sputterer
+      objectReference: {fileID: 0}
+    - target: {fileID: 691771272908712214, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
+      propertyPath: m_fontSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 691771272908712214, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1042425920116061473, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_Id.m_Source
       value: station:sputter
@@ -5764,6 +5772,10 @@ PrefabInstance:
       propertyPath: m_MicrogameComponent
       value: 
       objectReference: {fileID: 884887570974795347}
+    - target: {fileID: 1427548220235097794, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2029361307171858278, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -5822,15 +5834,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7272400009134553739, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.43693653
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7272400009134553739, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.43693653
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7272400009134553739, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.43693653
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7272400009134553739, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_LocalPosition.x

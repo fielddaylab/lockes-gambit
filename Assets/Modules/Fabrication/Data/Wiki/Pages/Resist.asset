@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Resist
   m_EditorClassIdentifier: 
-  Title: Spin Coat Machine
+  Title: Spin Coater
   Icon: {fileID: 21300000, guid: 8ac97b33f2976464cae20751b8286b92, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 0366ad6cfea6df74f8a05ebb9945d842, type: 3}
   IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
   BodyText: The Resist spreads a thin, even layer of material across the chip by
     spinning it at high speed.
   MaterialId:
