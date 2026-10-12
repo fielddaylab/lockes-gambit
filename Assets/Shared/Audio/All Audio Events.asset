@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: All Audio Events
   m_EditorClassIdentifier: 
   SortOrder: 0
-  IsLocked: 0
+  IsLocked: 1
   ShowDuringContexts: role-audio
   HideDuringContexts: 
   ReadMe: 

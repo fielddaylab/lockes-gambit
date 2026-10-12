@@ -3869,7 +3869,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1904662656}
   - component: {fileID: 1904662655}
-  - component: {fileID: 1904662657}
   m_Layer: 0
   m_Name: Fabrication Assets
   m_TagString: Untagged
@@ -3911,22 +3910,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1904662657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904662654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79013ef6b98af0b4d9b5228746b3aba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EventId:
-    m_HashValue: 2734154260
-  PlaylistId:
-    m_HashValue: 0
 --- !u!120 &1938538705 stripped
 LineRenderer:
   m_CorrespondingSourceObject: {fileID: 2561715883389720815, guid: 338e5776d07785b40aa1a3c5ad36e4a1, type: 3}

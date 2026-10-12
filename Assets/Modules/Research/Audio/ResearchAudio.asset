@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4be90a9d33d3784caac2e5eb4b5636c, type: 3}
   m_Name: ResearchAudio
   m_EditorClassIdentifier: 
+  m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
   m_NamedAssets:
-  - {fileID: 11400000, guid: cab31e1c3b1c25841a463865308c0e78, type: 2}
   - {fileID: 11400000, guid: 3594cc7e0281f4c499188e8b0184b663, type: 2}
   m_LiteAssets: []
