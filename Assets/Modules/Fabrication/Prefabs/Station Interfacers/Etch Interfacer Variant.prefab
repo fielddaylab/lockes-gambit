@@ -345,13 +345,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 841392584259480295, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2ee23867cdada9d478b261d641abe950, type: 3}
-    - target: {fileID: 841392584259480295, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
-      propertyPath: m_DrawMode
-      value: 0
+    - target: {fileID: 691771272908712214, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
+      propertyPath: m_text
+      value: etcher
       objectReference: {fileID: 0}
     - target: {fileID: 1042425920116061473, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_Id.m_Source
@@ -439,15 +435,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7272400009134553739, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5763
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7272400009134553739, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5763
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7272400009134553739, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5763
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7272400009134553739, guid: 02114744d3877ac478226a8e5117e5e5, type: 3}
       propertyPath: m_LocalPosition.x

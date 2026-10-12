@@ -83,3 +83,16 @@
 {@Joel}     Quinnie... 
 {@Quinn}    Right... sorry Cap'
 {@Arken}    Whenever you're ready Captain. 
+
+
+// After final contract is paid IF PLAYER HAS NOT PREVIOUSLY PAID OFF DEBT:
+
+{@Player}   That's it! I've got enough to pay off Frontier!
+
+//show money clearing and debt marker disappearing
+
+//{@Player}   <i>gulp</i>. And now I'm broke again.
+//{@Player}   But no one can take the Constantine from me!
+//{@Callie}   Except for pirates... ARRR!
+//{@Player}   Heh, heh. I'll keep an eye out for you, Callie.
+//{@Player}   I'm calling Arken. Let's see if we can get what's left of our old crew back together.
