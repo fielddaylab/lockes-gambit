@@ -15,7 +15,8 @@ $call   CloseWiki()
 $if     !temp:firstNodeClicked
     $set    temp:firstNodeClicked = true
     {@PAL}  Use the <color=yellow>WASD</color> or <color=yellow>Arrow</color> keys to move around and find other planets.
-$else
+$elseif !temp:secondNodeClicked
+    $set    temp:secondNodeClicked = true
     {@PAL}  The planets with the highest time determines the total production time of your route.
 $endif
 

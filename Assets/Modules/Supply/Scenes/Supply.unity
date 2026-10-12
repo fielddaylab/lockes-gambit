@@ -8713,10 +8713,54 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -23.685402
       objectReference: {fileID: 0}
+    - target: {fileID: 3049636374515468319, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337983049247082392, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337983049247082392, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363619984284259709, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363619984284259709, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363619984284259709, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363619984284259709, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363619984284259709, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363619984284259709, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363619984284259709, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6603965380426681252, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
       propertyPath: ShoppingListParent
       value: 
       objectReference: {fileID: 512969075}
+    - target: {fileID: 6742677351971581422, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -23.685394
+      objectReference: {fileID: 0}
     - target: {fileID: 8062363014309675910, guid: 3e81d536e7a38da4dadd999c4f203bdc, type: 3}
       propertyPath: m_Camera
       value: 
