@@ -109,14 +109,6 @@ node_modules/
 /.vscode
 /Assets/FieldDay/.doxy
 
-/Assets/StreamingAssets/packs/*.manifest
-/Assets/StreamingAssets/packs/*.manifest.meta
-/Assets/StreamingAssets/packs/*.pak
-/Assets/StreamingAssets/packs/*.pak.meta
-/Assets/StreamingAssets/packs/*.toc
-/Assets/StreamingAssets/packs/*.toc.meta
-/Assets/StreamingAssets/packs/packs.meta
-/Assets/StreamingAssets/packs/packs
 /Assets/StreamingAssets/__buildInfo.txt
 /Assets/StreamingAssets/__buildInfo.txt.meta
-
+/Assets/StreamingAssets/packs
