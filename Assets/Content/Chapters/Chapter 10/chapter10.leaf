@@ -6,11 +6,11 @@
 @once 
 //saying goodbye to arkan, learning about mountain station employee owned 
 //todo could add sad news that velos station is gone?
-{@Arkan}    Hey, don't look so grim, buddy. It's not all bad.
-{@Arkan}    Mountain Station just opened up for sourcing. 
-{@Arkan}	First employee-owned station in the system and we get a say in how--and if--the bots are used.
+{@Arken}    Hey, don't look so grim, buddy. It's not all bad.
+{@Arken}    Mountain Station just opened up for sourcing. 
+{@Arken}	First employee-owned station in the system and we get a say in how--and if--the bots are used.
 {@Player}   Huh. That'd be really nice. 
-{@Arkan}	Remember what I told you...
+{@Arken}	Remember what I told you...
 
 //end call
 
@@ -69,7 +69,7 @@
 
 
 //reminder of money due threat and now its coming from dorian. 
-{{@MAL}      C-Captain! Y0u h@ve a l-letter from... Fr0ntier Robotics!
+{@MAL}      C-Captain! Y0u h@ve a l-letter from... Fr0ntier Robotics!
 {@Player}   Of course I do.
 
 {@MAL}      "Captain Locke Sawyer: This is a reminder that your final payment deadline for the Constance is approaching."

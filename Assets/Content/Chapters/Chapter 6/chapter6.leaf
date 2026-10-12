@@ -4,42 +4,32 @@
 @trigger    OnContractSelectOpen
 @cutscene
 @once 
-{@Player}   P.A.L., do you have details on what is going on at Kalvis? 
-{@PAL}      Ah! I have a report of a minor operational incident at the Cu-6355-29...Kalvis mining facility.
-{@Player}  Minor!? Mara said there was a mine collapse!
-{@Player}   She said people were trapped. Blaze got hurt.
-{@PAL}      The incident has been resolved and production remains within acceptable parameters.
-{@Player}   That's not what I asked.
-{@PAL}      Shall we get back to work, Captain?
-{@Pal}		You have three contracts to pick from. 
-{@Player}   ...Yeah. Sure.
+
+
+{@Player}   P.A.L., any updates on what's happening at Kalvis?
+{@PAL}      Frontier Robotics reports a minor disruption to mining operations on Cu-6355-29.
+{@PAL}      Production has resumed and output remains within acceptable parameters!
+{@Player}   That's not what I'm hearing.
+{@PAL}      Worker safety is a top priority! Winkler Station has transitioned to a fully autonomous workforce.
+{@PAL}      With no human workers, workplace injuries have been reduced to zero!
+{@Player}   ...Right.
+{@PAL}      Shall we get back to work? You have three contracts to choose from.
+
 
 ::BeforeSupplyChainCh6
 @trigger    OnOverarchingLoaded
 @when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
 @cutscene 
 @once 
-::BeforeSupplyChainCh6
-@trigger    OnOverarchingLoaded
-@when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
-@cutscene 
-@once 
 
-{@Xavier}   Hey... uh. What's your name?
-{@Player}   Locke.
-{@Xavier}   Locke. Right. Listen, Winkler Station just opened up. Germanium.
-{@Player}   That's in your sector?
-{@Xavier}   Yep. Frontier's been tinkering around with autonomous workforces for a couple years.
-{@Xavier}   And you'll never guess which station is seeing its first implementation.
-{@Player}   ...Winkler.
-{@Xavier}   Productivity's gonna go through the roof! Our margins are expected to boom this next quarter.
-{@Player}   Wait, so what happened to the workers?
-{@Xavier}   They've been... reassigned.
-{@Xavier}   Telling you, the only people needed will be people like us.
+{@Player}	Hey Xavier, do you have any leads on new sources for semiconductors?
+{@Xavier}   Hey... uh... Locke...
+{@Xavier}   Right. Winkler Station just opened up with germanium!
+{@Xavier}   First fully autonomous station in my sector. Profits are gonna soar!
+{@Xavier}   Workers reassigned. Ah, the beauty of automation!
+{@Xavier}   Soon the only people we'll need are people like us.
 {@Player}   Like us?
-{@Xavier}   Managers of autonomous workforces.
-{@Xavier}   Corporate's expecting us to up our cooperation percentage.
-{@Xavier}   So don't disappoint. Expecting your business soon.
+{@Xavier}   Managers! We have the good life, eh?
 
 // hang up
 

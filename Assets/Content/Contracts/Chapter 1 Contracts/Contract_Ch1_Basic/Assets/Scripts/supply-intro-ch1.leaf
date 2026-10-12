@@ -8,7 +8,7 @@ $else
     $set    temp:researchTutorialStep = 0
     $call   HighlightElement(supply:ship0)
     $call   CloseWiki()
-    {@PAL}  Build a route to complete the contract.\n\nStart by selecting a Hauler.
+    {@PAL}  Build a route to complete the contract.\n\nStart by selecting a <color=yellow>HAULER</color>.
 $endif
 
 :: FirstShipSelected
@@ -17,7 +17,7 @@ $endif
 $set    temp:researchTutorialStep = 1
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
-{@PAL}  You will need a Conductor for this contract.\n\nUse the wiki to identify the correct material.
+{@PAL}  You will need a Conductor for this contract.
 $if     !temp:wikiOpened
     $wait   2
     $call   OpenWikiTo("Materials", "Copper")

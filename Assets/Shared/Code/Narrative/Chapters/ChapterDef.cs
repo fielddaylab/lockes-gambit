@@ -1,6 +1,7 @@
 using BeauUtil;
 using FieldDay;
 using FieldDay.Assets;
+using FieldDay.Music;
 using Leaf;
 using SpaceFab.Design;
 using SpaceFab.Materials;
@@ -30,5 +31,8 @@ namespace SpaceFab
         public LeafAsset Script;
         public Material SkyboxMaterial;
         public float SkyboxRotation;
+
+        [Header("Playlists")]
+        [AssetName(typeof(MusicAsset))] public StringHash32 MusicPlaylist;
     }
 }

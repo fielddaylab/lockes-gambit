@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortOrder: 10
   IsLocked: 1
-  ShowDuringContexts: 'role-content
-
-    role-writer'
+  ShowDuringContexts: role-content
   HideDuringContexts: 
   ReadMe: 
   Items: []

@@ -16,7 +16,7 @@ MonoBehaviour:
   DialogueTint:
     serializedVersion: 2
     rgba: 197288
-  NonMinigamePortrait: {fileID: 0}
+  NonMinigamePortrait: {fileID: 21300000, guid: 794ef7ed1c9ed1e4f9ae5487edbebce4, type: 3}
   MinigamePortrait: {fileID: 0}
   CharacterTypeEvent:
     m_HashValue: 2289341433

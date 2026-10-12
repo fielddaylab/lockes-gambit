@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b909cc64f4cfb1b4993be2af5cdfc0f2, type: 3}
-  m_Name: Joel
+  m_Name: Blaze
   m_EditorClassIdentifier: 
-  DisplayName: Joel
+  DisplayName: Blaze
   DialogueTint:
     serializedVersion: 2
-    rgba: 10895913
-  NonMinigamePortrait: {fileID: 21300000, guid: 79adbed221c33c74ba505ea1e17ba69b, type: 3}
+    rgba: 3563263
+  NonMinigamePortrait: {fileID: 21300000, guid: 440679bd61e7895458c0dc8df90839be, type: 3}
   MinigamePortrait: {fileID: 0}
   CharacterTypeEvent:
     m_HashValue: 2289341433

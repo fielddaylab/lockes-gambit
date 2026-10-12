@@ -18,7 +18,7 @@ MonoBehaviour:
   m_omitFromSupplyRequirements:
   - {fileID: 11400000, guid: 11e34deaa990d3e4e8b4879a1798a4af, type: 2}
   m_title: Connect Chip
-  m_description: This chip is... well, completely useless. But you gotta start somewhere!
+  m_description: This is a Test
   m_client:
     m_Source: cm
     m_HashValue: 1680451373
@@ -28,6 +28,8 @@ MonoBehaviour:
   m_contractType: 0
   m_difficulty: 0
   m_unlocksBigBattery: 0
+  m_unlocksThermalChamber: 0
+  m_unlocksDopingChamber: 0
   StreamedPack:
     m_HashValue: 3466264896
   AssetSet:

@@ -1,23 +1,27 @@
 ManifestFileVersion: 0
-CRC: 3545787081
+CRC: 1405428806
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7628894eb76f885b7cc123ae953520d5
+    Hash: 3ecd5c6394f4eaeb53219fca26f919ef
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 9b0a45e10d210733457b32e58a06a8cb
+    Hash: 3b3d2fe95043c243b4ff3a7d3e4c3526
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 7628894eb76f885b7cc123ae953520d5
+    Hash: 3ecd5c6394f4eaeb53219fca26f919ef
 HashAppended: 0
 ClassTypes:
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 83
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: c3760780465900a41abc9d5b147727d6, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f3fa937c2c803464d8f0eaff2033531d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc4a12e31f72d6040a99115010bf0fe7, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: a5b78d150942f694b932cb7f1886573b, type: 3}
 - Class: 114
@@ -43,6 +47,8 @@ SerializeReferenceClassIdentifiers:
   ClassName: SpaceFab.Research.ResearchObservationChipAssets/ObservationSpriteOverride
 - AssemblyName: Assembly-CSharp
   ClassName: SpaceFab.Research.ResearchObservationChipAssets/ObservationStyle
+- AssemblyName: BeauRoutine-Extensions
+  ClassName: BeauRoutine.Extensions.FloatRange
 - AssemblyName: BeauUtil
   ClassName: BeauUtil.SerializedHash32
 - AssemblyName: BeauUtil
