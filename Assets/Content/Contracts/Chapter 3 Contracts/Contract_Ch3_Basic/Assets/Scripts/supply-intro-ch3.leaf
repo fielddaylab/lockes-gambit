@@ -1,0 +1,31 @@
+# basePath SupplyIntroCh3
+
+:: StartBuilding
+@trigger    OnSupplySetupCompleted
+@when   !MinigameHasValidSolution()
+$call   PointElement(supply:ship1)
+{@PAL}  We have a new faster ship.\n\nYou can use it on longer routes to reduce travel time.
+
+:: ShipSelected
+@trigger    OnShipSelected
+@when   !MinigameHasValidSolution()
+$call   ReleaseAllHighlights()
+$call   PointElement(supply:planet_p)
+$call   PointElement(supply:planet_p_alt)
+{@PAL}  There are two sources of phosphorus. Hover over the planets and compare the cost and time.
+
+
+:: PlanetHovered
+@trigger    OnPlanetHovered
+@when   !MinigameHasValidSolution()
+$call   ReleaseAllHighlights()
+
+
+:: RouteCompleted
+@trigger    OnRouteCompleted
+@when   !MinigameHasValidSolution()
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  All your ships travel at the same time. The one that takes the longest determines your total time.\n\nThis is called a bottleneck.
+// TODO: open time page
+// TODO: point the time section of the progress meter

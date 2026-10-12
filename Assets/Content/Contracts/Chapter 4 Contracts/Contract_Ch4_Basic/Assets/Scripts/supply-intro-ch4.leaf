@@ -1,6 +1,41 @@
-# basePath SupplyIntroCh4
+// # basePath SupplyIntroCh4
 
-// TODO: Introduce multiple options and guide players to return to research if they
-// haven't discovered that gold is a conductor. (Copper is an unaffordable option in this level)
+// :: StartBuilding
+// @trigger    OnSupplySetupCompleted
+// @when   !MinigameHasValidSolution()
+// {@PAL}  There are two sources of boron. Hover over the planets and compare them.
 
-// "You don't have enough money. Try going back to research to identify another conductor."
+// :: OnPlanetHovered
+// @trigger    OnPlanetHovered
+// @when   planet == "planet_b"
+
+
+
+// :: NodeClicked
+// @trigger    OnNodeClicked
+// @when   !MinigameHasValidSolution(), !temp:firstNodeClicked
+// $call   ReleaseAllHighlights()
+// $call   CloseWiki()
+// $set    temp:firstNodeClicked = true
+// {@PAL}  Use the <color=yellow>WASD</color> or <color=yellow>Arrow</color> keys to move around and find other planets.
+
+
+// :: RouteCompleted
+// @trigger    OnRouteCompleted
+// @when   !MinigameHasValidSolution()
+// $call   ReleaseAllHighlights()
+// $call   CloseWiki()
+// $if !IsMaterialCollected("Silicon")
+//     {@PAL}  You need a semiconductor, so you'll need to take the silicon dioxide to the refining station.
+// $elseif !IsMaterialCollected("Copper")
+//     {@PAL}	Use the <color=yellow>WASD</color> or <color=yellow>Arrow</color> keys to move around and find other planets.
+// $else
+//     {@PAL}  Click <color=yellow>CONFIRM ROUTES</color> to commit your supply routes.
+// $endif
+
+// // TODO: Introduce multiple options and guide players to return to research if they
+// // haven't discovered that gold is a conductor. (Copper is an unaffordable option in this level)
+
+// // "You don't have enough money. Try going back to research to identify another conductor."
+
+// // Risk: Boron - cost vs risk
