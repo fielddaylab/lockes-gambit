@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1582155656
+CRC: 3205455559
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6c5e2829d3ff50fedfb5fc0c8864d73b
+    Hash: 3daef86271783071b39766e5820a0181
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e046b2cdb2d8e168c164350b8ef38214
+    Hash: afd6e7fd331f079d4d87d80e38889ee3
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 6c5e2829d3ff50fedfb5fc0c8864d73b
+    Hash: 3daef86271783071b39766e5820a0181
 HashAppended: 0
 ClassTypes:
 - Class: 21
@@ -21,6 +21,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 2c78611cb5392e640a73962df854e6da, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 49393f611e86ee843be4d69cc223e8c6, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: a5b78d150942f694b932cb7f1886573b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0e92568ecc7a7614c9937680232609b9, type: 3}
@@ -31,6 +33,8 @@ ClassTypes:
 SerializeReferenceClassIdentifiers:
 - AssemblyName: BeauUtil
   ClassName: BeauUtil.StringHash32
+- AssemblyName: FieldDay.Music
+  ClassName: FieldDay.Music.MusicTransitionParams
 Assets:
 - Assets/Content/Chapters/Chapter 1/Ch1Stream.asset
 Dependencies: []

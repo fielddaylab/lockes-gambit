@@ -19,6 +19,8 @@ jobs:
     if: github.event_name != 'delete'
     uses: VaultLearningGames/vault-publisher/.github/workflows/unity-build.yml@v1
     # Passed explicitly: `secrets: inherit` doesn't cross GitHub orgs.
+    with:
+      buildMethod: FieldDay.Editor.BuildActions.AutomatedBuild
     secrets:
       UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
       UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
