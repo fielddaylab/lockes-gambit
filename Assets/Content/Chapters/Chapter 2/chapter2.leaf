@@ -5,12 +5,15 @@
 @cutscene
 @once
 
-{@Player}   Okay, Mr. Frontier Robotics, got another contract for me?
-{@Dorian}   I do, but bro, c'mon! None of this "Mr. Frontier Robotics" stuff. You're still my friend.
-{@Player}   That's good to hear. I'm not sure everyone else from our old crew feels that way. 
-{@Player}	Don't they understand that I need this job so I can pay off the repairs? 
-{@Player}	I could lose my ship in a few months.
-{@Dorian}   Hey man, you'll make it. I've got your back. 
+{@Player}	P.A.L. did you get the fab bay cleaned up? 
+{@PAL}		The fab bay is in perfect condition, as always. 
+{@PAL}		...at least as perfect as it can be on a near obsolete ship.
+//{@Player}	You are blaming MY ship for your mess?!
+
+
+{@Dorian}	Hey! I've got to head out. Good to see you!
+{@Player}   I wish everyone else from our old crew felt that way. 
+{@Player}	Don't they understand that I need this job so I don't lose the ship? 
 
 // EDIT - KACY 
 // Minor changes with Dorian's dialogue. 
@@ -34,16 +37,6 @@ $call   UnlockWikiPage("Insulator")
 {@PAL}      Absolutely! And now we have the correct answer.
 {@Player}   ...It's weird how you just keep agreeing with me.
 
-//cut. better to leave the reveal in chapter 9.  The purpose was to expose the fact that PAL is listening to everything. 
-//{@PAL}    So Captain, did I overhear that Dorian is your friend? 
-//{@Player}   What? How do you- were you eavesdropping? 
-//{@PAL}    Oh, yea, I hear every convo you have. 
-//{@Player}   ...I see...
-//{@Player}   Well, don't feel like you have to listen. 
-//{@PAL}    Ah but I have to, in accordance with my Frontier Robotics system parameters. 
-//{@PAL}    Even if I wanted to, I can't access the controls to turn it off. 
-//{@PAL}    And actually, I enjoy this protocol. It helps me stay on top of things. 
-//{@Player}   ...great. 
 
 ::BeforeSupplyChainCh2
 @trigger    OnOverarchingLoaded
@@ -52,7 +45,7 @@ $call   UnlockWikiPage("Insulator")
 @once
 
 //introduce the idea of the refining station. pick up at wayward and refine at frosch
-{@Player}   Hmmm... looks like I'll need a semiconductor ...
+{@Player}   Hmmm... looks like I'll need a semiconductor material...
 {@Player}   I don't see any in this sector.
 {@PAL}      You can make one!
 {@PAL}      You can get silicon dioxide at Frosch and have the haulers take it to a refinery.
@@ -68,10 +61,6 @@ $call   UnlockWikiPage("Insulator")
 @cutscene 
 @once
 
-{@Player}	P.A.L. did you get the fab bay cleaned up? 
-{@PAL}		The fab bay is in perfect condition, as always. 
-{@PAL}		...at least as perfect as it can be on a near obsolete ship.
-{@Player}	Clunker? As always!?
 
 //call coming in from Quinn
 {@Quinn}    Why do you have Frontier's bots on the Constantine?
@@ -90,5 +79,6 @@ $call   UnlockWikiPage("Insulator")
 @once
 
 
-{@PAL}      Frontier Robotics has a stellar reputation! 
-{@Player}	Were you listening to that call? 
+{@PAL}      Quinn is incorrect in her assessment of Frontier Robotics. 
+{@PAL}		We have a stellar reputation! 
+{@Player}	Were you listening to my call? 
