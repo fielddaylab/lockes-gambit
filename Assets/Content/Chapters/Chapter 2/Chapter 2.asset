@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4be90a9d33d3784caac2e5eb4b5636c, type: 3}
   m_Name: Chapter 2
   m_EditorClassIdentifier: 
+  m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
   m_NamedAssets:
+  - {fileID: 11400000, guid: 52513770528b0e84dbe98afec5014bba, type: 2}
   - {fileID: 11400000, guid: f33d0cdf49156cf4f99bf78939487c71, type: 2}
   m_LiteAssets: []

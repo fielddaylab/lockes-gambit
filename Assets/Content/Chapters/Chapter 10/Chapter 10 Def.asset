@@ -32,3 +32,5 @@ MonoBehaviour:
   Script: {fileID: -1942890987711236906, guid: f27f33d6226cbb348947e4ffdd6436b1, type: 3}
   SkyboxMaterial: {fileID: 2100000, guid: 4e3dcd7423137994e8ded390696ecea2, type: 2}
   SkyboxRotation: 0
+  MusicPlaylist:
+    m_HashValue: 2526923836

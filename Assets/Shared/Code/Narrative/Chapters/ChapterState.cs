@@ -4,6 +4,7 @@ using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.Assets;
 using FieldDay.Data;
+using FieldDay.Music;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
 using FieldDay.SharedState;
@@ -78,6 +79,7 @@ namespace SpaceFab
 
         static public bool LoadChapterData(ChapterState chapterState, ChapterManifest.Entry loadInfo) {
             if (chapterState.ChapterId == loadInfo.ChapterId) {
+                HandleMusicPlayer();
                 return false;
             }
 
@@ -97,6 +99,12 @@ namespace SpaceFab
             chapterState.ChapterDefinition = chapterAsset;
             chapterState.ChapterScriptHandle = ScriptDBUtility.Load(chapterAsset.Script);
             Game.Events.Queue(GameEvents.ChapterLoaded);
+
+            if (Game.Scenes.IsMainLoaded()) {
+                HandleMusicPlayer();
+            } else {
+                Game.Scenes.QueueOnLoad(HandleMusicPlayer);
+            }
         }
 
         static public bool UnloadChapterData(ChapterState chapterState) {
@@ -105,6 +113,8 @@ namespace SpaceFab
             }
 
             ScriptDBUtility.Unload(chapterState.ChapterScriptHandle);
+            MusicPlayer.ClearQueue(0);
+            MusicPlayer.SetPlaylistId(null);
 
             var loadInfo = GetLoadInfo(chapterState.ChapterId);
             Game.Assets.UnloadStreamedPackage(loadInfo.PackageId);
@@ -118,6 +128,17 @@ namespace SpaceFab
         }
 
         #endregion // Data Load/Unload
+
+        #region Music Playback
+
+        static private void HandleMusicPlayer() {
+            Find.State(out ChapterState chapterState);
+            if (chapterState.ChapterDefinition) {
+                MusicPlayer.SetPlaylistFromAssetId(chapterState.ChapterDefinition.MusicPlaylist);
+            }
+        }
+
+        #endregion // Music Playback
 
         static public StringHash32 GetSelectedContractId(ChapterState chapterState) {
             if (chapterState.LastSelectedContractIndex < 0 || !chapterState.ChapterDefinition) {

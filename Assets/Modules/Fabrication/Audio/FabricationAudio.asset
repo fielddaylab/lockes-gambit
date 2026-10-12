@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4be90a9d33d3784caac2e5eb4b5636c, type: 3}
   m_Name: FabricationAudio
   m_EditorClassIdentifier: 
+  m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
-  m_NamedAssets:
-  - {fileID: 11400000, guid: daa1bacb9db2642498f0a26088461eeb, type: 2}
+  m_NamedAssets: []
   m_LiteAssets: []

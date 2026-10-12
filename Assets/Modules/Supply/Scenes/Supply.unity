@@ -983,7 +983,6 @@ GameObject:
   m_Component:
   - component: {fileID: 804920511}
   - component: {fileID: 804920510}
-  - component: {fileID: 804920512}
   - component: {fileID: 804920514}
   m_Layer: 0
   m_Name: Supply Assets
@@ -1021,22 +1020,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &804920512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 804920509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79013ef6b98af0b4d9b5228746b3aba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EventId:
-    m_HashValue: 1528660114
-  PlaylistId:
-    m_HashValue: 0
 --- !u!114 &804920514
 MonoBehaviour:
   m_ObjectHideFlags: 0
