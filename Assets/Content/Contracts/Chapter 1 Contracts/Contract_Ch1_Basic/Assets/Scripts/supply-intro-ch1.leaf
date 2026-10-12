@@ -23,7 +23,7 @@ $if     !temp:wikiOpened
     $call   OpenWikiTo("Materials", "Copper")
     $set    temp:wikiOpened = true
 $endif
-
+//TODO add highlight pointer to contract
 
 :: FirstNodeClicked
 @trigger    OnNodeClicked
@@ -42,10 +42,10 @@ $call   CloseWiki()
 $if IsMaterialCollected("Copper")
     $set    temp:researchTutorialStep = 3
     $call   HighlightElement(supply:confirm-btn)
-    {@PAL}  Click <color=yellow>CONFIRM ROUTES</color> to commit your supply routes.
+    {@PAL}  Click <color=yellow>CONFIRM ROUTES</color> to commit your supply routes. /n/n To modify your route, click on a segment to <color=red>DELETE</color>.
 $else
     $set    temp:researchTutorialStep = 2
-    {@PAL}  Uh-oh, this material wasn't a Conductor.\n\nUse the wiki to identify the correct material.
+    {@PAL}  Uh-oh, this material wasn't a Conductor.\n\nTo modify your route, click on a segment to <color=red>DELETE</color>.
 $endif
 
 
