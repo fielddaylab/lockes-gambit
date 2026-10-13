@@ -126,16 +126,14 @@ namespace SpaceFab.Research {
             ActiveChamberKind chamberKind = ChamberInterfacerUtility.GetActiveChamber(interfacerState);
 
             if (panel.VoltageChamberButton != null) {
-                panel.VoltageChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Voltage
-                    ? uiAssets.VoltagePressed : uiAssets.VoltageNormal;
+                panel.VoltageChamberButton.Interactable = chamberKind != ActiveChamberKind.Voltage;
             }
             if (panel.ThermalChamberButton != null) {
                 if (interfacerState.LastUnlockedChamber < ActiveChamberKind.Thermal) {
                     SamplePanelInputUtility.LockChamberButton(panel, ActiveChamberKind.Thermal, uiAssets);
                 }
                 else {
-                    panel.ThermalChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Thermal
-                        ? uiAssets.ThermalPressed : uiAssets.ThermalNormal;
+                    panel.ThermalChamberButton.Interactable = chamberKind != ActiveChamberKind.Thermal;
                 }
             }
             if (panel.DopingChamberButton != null) {
@@ -143,8 +141,7 @@ namespace SpaceFab.Research {
                     SamplePanelInputUtility.LockChamberButton(panel, ActiveChamberKind.Doping, uiAssets);
                 }
                 else {
-                    panel.DopingChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Doping
-                        ? uiAssets.DopingPressed : uiAssets.DopingNormal;
+                    panel.DopingChamberButton.Interactable = chamberKind != ActiveChamberKind.Doping;
                 }
             }
 

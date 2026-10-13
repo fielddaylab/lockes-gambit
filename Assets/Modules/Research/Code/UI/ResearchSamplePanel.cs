@@ -43,9 +43,9 @@ namespace SpaceFab.Research {
         public CursorHint VerifyButton;
 
         // Chamber buttons
-        public ChamberButton VoltageChamberButton;
-        public ChamberButton ThermalChamberButton;
-        public ChamberButton DopingChamberButton;
+        public GuiButton VoltageChamberButton;
+        public GuiButton ThermalChamberButton;
+        public GuiButton DopingChamberButton;
         public TMP_Text ChamberText;
 
         // Sample material view
@@ -118,13 +118,13 @@ namespace SpaceFab.Research {
             }
 
             if (VoltageChamberButton != null) {
-                VoltageChamberButton.Cursor.onClick.AddListener(() => HandleChamberSwitch(ActiveChamberKind.Voltage));
+                VoltageChamberButton.CursorHint.onClick.AddListener(() => HandleChamberSwitch(ActiveChamberKind.Voltage));
             }
             if (ThermalChamberButton != null) {
-                ThermalChamberButton.Cursor.onClick.AddListener(() => HandleChamberSwitch(ActiveChamberKind.Thermal));
+                ThermalChamberButton.CursorHint.onClick.AddListener(() => HandleChamberSwitch(ActiveChamberKind.Thermal));
             }
             if (DopingChamberButton != null) {
-                DopingChamberButton.Cursor.onClick.AddListener(() => HandleChamberSwitch(ActiveChamberKind.Doping));
+                DopingChamberButton.CursorHint.onClick.AddListener(() => HandleChamberSwitch(ActiveChamberKind.Doping));
             }
             if (CompleteButton != null) {
                 CompleteButton.OnClick.AddListener(HandleCompleteMinigame);
@@ -167,13 +167,13 @@ namespace SpaceFab.Research {
             }
 
             if (VoltageChamberButton != null) {
-                VoltageChamberButton.Cursor.onClick.RemoveListener(() => HandleChamberSwitch(ActiveChamberKind.Voltage));
+                VoltageChamberButton.CursorHint.onClick.RemoveListener(() => HandleChamberSwitch(ActiveChamberKind.Voltage));
             }
             if (ThermalChamberButton != null) {
-                ThermalChamberButton.Cursor.onClick.RemoveListener(() => HandleChamberSwitch(ActiveChamberKind.Thermal));
+                ThermalChamberButton.CursorHint.onClick.RemoveListener(() => HandleChamberSwitch(ActiveChamberKind.Thermal));
             }
             if (DopingChamberButton != null) {
-                DopingChamberButton.Cursor.onClick.RemoveListener(() => HandleChamberSwitch(ActiveChamberKind.Doping));
+                DopingChamberButton.CursorHint.onClick.RemoveListener(() => HandleChamberSwitch(ActiveChamberKind.Doping));
             }
 
             if (CompleteButton != null) {
@@ -313,26 +313,26 @@ namespace SpaceFab.Research {
         }
 
         public static void LockChamberButton(ResearchSamplePanel panel, ActiveChamberKind chamberKind, ResearchUIAssets config) {
-            ChamberButton chamberButton = chamberKind switch {
+            GuiButton chamberButton = chamberKind switch {
                 ActiveChamberKind.Thermal => panel.ThermalChamberButton,
                 ActiveChamberKind.Doping => panel.DopingChamberButton,
                 _ => null,
             };
 
             if (chamberButton == null) { return; }
-            chamberButton.Image.sprite = config.LockedChamber;
-            chamberButton.Cursor.enabled = false;
+            chamberButton.ImageGraphic.sprite = config.LockedChamberButton;
+            chamberButton.CursorHint.enabled = false;
         }
 
         public static void UnlockChamberButton(ResearchSamplePanel panel, ActiveChamberKind chamberKind, ResearchUIAssets config) {
             switch (chamberKind) {
                 case ActiveChamberKind.Thermal:
-                    panel.ThermalChamberButton.Image.sprite = config.ThermalNormal;
-                    panel.ThermalChamberButton.Cursor.enabled = true;
+                    panel.ThermalChamberButton.ImageGraphic.sprite = config.ThermalButton;
+                    panel.ThermalChamberButton.CursorHint.enabled = true;
                     break;
                 case ActiveChamberKind.Doping:
-                    panel.DopingChamberButton.Image.sprite = config.DopingNormal;
-                    panel.DopingChamberButton.Cursor.enabled = true;
+                    panel.DopingChamberButton.ImageGraphic.sprite = config.DopingButton;
+                    panel.DopingChamberButton.CursorHint.enabled = true;
                     break;
                 default:
                     return;

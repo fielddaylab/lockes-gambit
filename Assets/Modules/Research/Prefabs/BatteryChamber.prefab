@@ -185,6 +185,7 @@ MonoBehaviour:
   BulbShines:
   - {fileID: 8914712557552992004}
   AnimSpeedMultiplier: 1
+  HighMobilityParticles: {fileID: 0}
 --- !u!1 &1398817839942986760
 GameObject:
   m_ObjectHideFlags: 0
