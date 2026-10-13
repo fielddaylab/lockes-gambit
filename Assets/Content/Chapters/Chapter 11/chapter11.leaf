@@ -61,16 +61,15 @@
 
 {@Blaze}   Locke! Have you heard? People all over the sector are disconnecting their Frontier software!
 {@Player}   How are they getting the bots to work without it?
-{@Blaze}   Well, Keela and I have been up to a little something.
-{@Blaze}   She's giving her original software away to everyone. Free. Open.
-{@Player}   Keela? So... that was her plan all along?
-{@Blaze}   And now I'm ripping out all those cheap parts and giving these bots some real upgrades!
-{@Player}   Of course you are, Blaze.
-{@Player}   You sound busy.
-{@Blaze}   Fewer units, sure. But at least they'll be safe!
+{@Blaze}   Well, Keela’s giving her original software away to everyone. Free. Open.
+{@Player}  Arken said he was doing this on Blair too!
+{@Blaze}   Yeah, we've been in touch. 
+{@Player}     It’s got to feel good to rip out those cheap parts and give the bots some real upgrades!
+{@Blaze}      We'll have fewer units, sure. But at least they'll be safe!
 {@Player}   And the company owners on Kalvis are okay with this?
-{@Blaze}   Ha! We're not giving them much choice!
-{@Blaze}   Now that they aren't under Frontier's thumb, they're have not excuse not to negotiate.
+{@Blaze}       Well, we're not giving them much choice!
+{@Blaze}       Now that they aren't under Frontier's thumb, they have no excuse not to negotiate.
+
 
 //At the end of level 11: must be able to pay off in one level with easy contract. 
 
