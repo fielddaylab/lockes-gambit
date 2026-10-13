@@ -26,6 +26,7 @@ MonoBehaviour:
   m_payout: 15
   m_expectedDuration: 6
   m_expectedProfit: 6
+  m_minimumProfit: 6
   m_contractType: 2
   m_difficulty: 2
   m_unlocksBigBattery: 0
