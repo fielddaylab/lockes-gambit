@@ -72,7 +72,6 @@
 {@Blaze}   Ha! We're not giving them much choice!
 {@Blaze}   Now that they aren't under Frontier's thumb, they're have not excuse not to negotiate.
 
-
 //At the end of level 11: must be able to pay off in one level with easy contract. 
 
 // After contract is paid IF PLAYER HAS PAID OFF DEBT for the first time:
@@ -84,7 +83,7 @@
 //{@Player} gulp. And now I'm broke again, but I'm a free man!
 
 //{@Player} Wait... what is this? An invoice from Frontier Robotics? 
-Show new red flag on money/timeline: Unauthorized Equipment Disposal
+//Show new red flag on money/timeline: Unauthorized Equipment Disposal
 
 //{@Player} Oh blast. They're charging me for the "Unauthorized disposal of company property..."
 
@@ -110,4 +109,5 @@ Show new red flag on money/timeline: Unauthorized Equipment Disposal
 //{@Player} I think they have got me with their stupid lawyers. 
 
 //{@Player} They still could come take my ship.
+
 
