@@ -9080,8 +9080,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4098631922237299991, guid: 23d36b412118ac44a99d66e9d1677d9a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2027781835040002762}
   m_SourcePrefab: {fileID: 100100000, guid: 23d36b412118ac44a99d66e9d1677d9a, type: 3}
+--- !u!1 &2027781835040002761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4098631922237299991, guid: 23d36b412118ac44a99d66e9d1677d9a, type: 3}
+  m_PrefabInstance: {fileID: 2027781835040002760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2027781835040002762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027781835040002761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4854730e970a4abb8b0d80ce8c5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id:
+    m_Source: supply:ship0-time
+    m_HashValue: 864258108
+  RectTransform: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  Collider: {fileID: 0}
 --- !u!1001 &5846735789984306294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10799,8 +10825,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 939414912291847596, guid: 4f4060100cea14d44b2a28ee2f697427, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7015587884658692676}
   m_SourcePrefab: {fileID: 100100000, guid: 4f4060100cea14d44b2a28ee2f697427, type: 3}
+--- !u!1 &7015587884658692675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 939414912291847596, guid: 4f4060100cea14d44b2a28ee2f697427, type: 3}
+  m_PrefabInstance: {fileID: 7015587884658692674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7015587884658692676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015587884658692675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4854730e970a4abb8b0d80ce8c5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id:
+    m_Source: supply:time-meter
+    m_HashValue: 794843169
+  RectTransform: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  Collider: {fileID: 0}
 --- !u!224 &7015587884658692678 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5576583496230604757, guid: 4f4060100cea14d44b2a28ee2f697427, type: 3}

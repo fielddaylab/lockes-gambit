@@ -334,7 +334,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 347611274669298378, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2010280006177584189, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 51436383}
   m_SourcePrefab: {fileID: 100100000, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
 --- !u!224 &51436378 stripped
 RectTransform:
@@ -362,12 +365,35 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5417778828197023071, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
   m_PrefabInstance: {fileID: 51436377}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 51436382}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 906fb8621338e4a4aad55f85580e6292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &51436382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2010280006177584189, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
+  m_PrefabInstance: {fileID: 51436377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &51436383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51436382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4854730e970a4abb8b0d80ce8c5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id:
+    m_Source: research:thermal-chamber-btn
+    m_HashValue: 2519215171
+  RectTransform: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  Collider: {fileID: 0}
 --- !u!1 &61560484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3288,7 +3314,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 347611274669298378, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2010280006177584189, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 919715459}
   m_SourcePrefab: {fileID: 100100000, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
 --- !u!224 &919715454 stripped
 RectTransform:
@@ -3311,7 +3340,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5417778828197023071, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
   m_PrefabInstance: {fileID: 919715453}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 919715458}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 906fb8621338e4a4aad55f85580e6292, type: 3}
@@ -3322,6 +3351,29 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 679788699090296843, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
   m_PrefabInstance: {fileID: 919715453}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &919715458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2010280006177584189, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
+  m_PrefabInstance: {fileID: 919715453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &919715459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919715458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4854730e970a4abb8b0d80ce8c5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id:
+    m_Source: research:voltage-chamber-btn
+    m_HashValue: 2405863118
+  RectTransform: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  Collider: {fileID: 0}
 --- !u!1 &988049078
 GameObject:
   m_ObjectHideFlags: 0
@@ -5528,7 +5580,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 347611274669298378, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2010280006177584189, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1765915981}
   m_SourcePrefab: {fileID: 100100000, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
 --- !u!224 &1765915976 stripped
 RectTransform:
@@ -5556,12 +5611,35 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5417778828197023071, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
   m_PrefabInstance: {fileID: 1765915975}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1765915980}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 906fb8621338e4a4aad55f85580e6292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1765915980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2010280006177584189, guid: 8d3ef24047cbf184fa3e6738dbbd29db, type: 3}
+  m_PrefabInstance: {fileID: 1765915975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1765915981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765915980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4854730e970a4abb8b0d80ce8c5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id:
+    m_Source: research:doping-chamber-btn
+    m_HashValue: 299945545
+  RectTransform: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  Collider: {fileID: 0}
 --- !u!1 &1770166377
 GameObject:
   m_ObjectHideFlags: 0
