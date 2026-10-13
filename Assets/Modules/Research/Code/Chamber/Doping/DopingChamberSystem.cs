@@ -55,7 +55,7 @@ namespace SpaceFab.Research
                 UpdateSemiconductor(interfacerState, dopingChamberState, researchState, explosionState, pools);
             }
             else {
-                UpdateDopant(interfacerState, dopingChamberState, explosionState, pools);
+                UpdateDopant(interfacerState, dopingChamberState, researchState, explosionState, pools);
             }
 
             dopingChamberState.AtomicViewChangedThisFrame = false;
@@ -80,46 +80,43 @@ namespace SpaceFab.Research
 
             // Clear dopant
             ResearchSlotUtility.FillInSlot(interfacerState, ChamberInterfacerUtility.GetSlot(interfacerState, ChamberSlotKind.Secondary), ChamberSlotKind.Secondary, null);
-            dopingChamber.EmptyState.SetActive(material == null);
-            dopingChamber.SubstrateAtom.gameObject.SetActive(material != null);
+            dopingChamber.EmptyState.text = "";
+            dopingChamber.SubstrateAtom.gameObject.SetActive(false);
             dopingChamber.DopantAtom.gameObject.SetActive(false);
 
             if (material == null || profile == null) {
+                dopingChamber.EmptyState.text = "ADD\nSEMICONDUCTOR SAMPLE\n|\nV";
+                dopingChamber.EmptyState.color = Color.white;
                 CircuitUtility.SetLightStrength(dopingChamber.Circuit, 0f);
                 CircuitUtility.SetFlowStrength(dopingChamber.Circuit, 0f);
                 return;
-            }
-
-            // Show toggle for polyelemental substrates
-            dopingChamber.HostElementIndex = 0;
-            bool isPolyelemental = material.AtomicRadii.Length > 1;
-            if (isPolyelemental) {
-                if (material.AtomicRadii[0] > material.AtomicRadii[1]) {
-                    dopingChamber.HostElementIndex = 0;
-                } else {
-                    dopingChamber.HostElementIndex = 1;
-                }
             }
 
             // Substrates must be confirmed semiconductors.
             ResearchSlot slot = ChamberInterfacerUtility.GetSlot(interfacerState, ChamberSlotKind.Primary);
             if (!ResearchStateUtility.HasConfirmed(researchState, material.AssetId, MaterialPropertyLabel.Semiconductor, StringHash32.Null)) {
+                dopingChamber.EmptyState.text = "NOT A KNOWN\nSEMICONDUCTOR";
+                dopingChamber.EmptyState.color = Color.red;
+
                 ResearchExplosionUtility.ExplodeSlot(
                     explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Primary,
                     ExplosionStyle.InvalidSubstrate, delay: 1f); // TODO: add explosion style if needed
-                CircuitUtility.SetLightStrength(dopingChamber.Circuit, 0f);
-                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, 0f);
                 dopingChamber.AtomicViewChangedThisFrame = true;
 
                 return;
             }
+
+            if (material.ConstituentElementNames.Length > 1) {
+                dopingChamber.HostElementIndex = material.AtomicRadii[0] >= material.AtomicRadii[1] ? 0 : 1;
+            }
+            dopingChamber.SubstrateAtom.gameObject.SetActive(true);
 
             float current = MaterialPhysicsUtility.GetCurrent(profile, dopingChamber.Voltage, dopingChamber.Temperature);
             CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
             CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility);
         }
 
-        private static void UpdateDopant(ChamberInterfacerState interfacerState, DopingChamberState dopingChamber, ResearchExplosionState explosionState, ResearchPools vfxPool)
+        private static void UpdateDopant(ChamberInterfacerState interfacerState, DopingChamberState dopingChamber, ResearchMinigameState researchState, ResearchExplosionState explosionState, ResearchPools vfxPool)
         {
             MaterialAsset substrate = ChamberInterfacerUtility.GetCurrent(interfacerState, ChamberSlotKind.Primary);
             MaterialPhysicsProfile profile = substrate == null ? null : Find.NamedAsset<MaterialPhysicsProfile>(substrate.AssetId);
@@ -137,20 +134,9 @@ namespace SpaceFab.Research
             }
 
             ResearchSlot slot = ChamberInterfacerUtility.GetSlot(interfacerState, ChamberSlotKind.Secondary);
-            // Polyelemental materials cannot be used as dopants.
-            if (dopant.ConstituentElementNames.Length > 1) {
-                ResearchExplosionUtility.ExplodeSlot(
-                explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Secondary,
-                ExplosionStyle.Polyelemental, delay: 1f); // TODO: add explosion style if needed
-                CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
-                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility);
-                dopingChamber.AtomicViewChangedThisFrame = true;
-
-                return;
-            }
 
             int index = dopingChamber.HostElementIndex;
-            bool validRadius = substrate.SimpleAtomicRadii[index] > dopant.SimpleAtomicRadii[0];
+            bool validRadius = dopant.ConstituentElementNames.Length <= 1 && substrate.SimpleAtomicRadii[index] > dopant.SimpleAtomicRadii[0];
             bool validElectronDiff = Mathf.Abs(substrate.ValenceElectronCounts[index] - dopant.ValenceElectronCounts[0]) == 1;
 
             if (validRadius && validElectronDiff) {
@@ -158,16 +144,20 @@ namespace SpaceFab.Research
                 CircuitUtility.SetLightStrength(dopingChamber.Circuit, dopedCurrent);
                 CircuitUtility.SetFlowStrength(dopingChamber.Circuit, dopedCurrent, profile.IsHighMobility);
 
-                return;
+                // Auto-populate 'Atom fits' chip
+                if (ResearchInventoryUtility.AddObservation(researchState, dopant.AssetId, MaterialPropertyLabel.AtomicRadiusCompliant, substrate.AssetId)) {
+                    Find.State(out HypothesisViewModelState viewModelState);
+                    HypothesisViewModelUtility.RequestRebuild(viewModelState);
+                }
             }
-
-            ExplosionStyle explosionStyle = validRadius ? ExplosionStyle.InvalidCombo : ExplosionStyle.TooBig;
-            ResearchExplosionUtility.ExplodeSlot(
-                explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Secondary,
-                explosionStyle, delay: 1f);
-            CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
-            CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility);
-            dopingChamber.AtomicViewChangedThisFrame = true;
+            else if (!validRadius) {
+                ResearchExplosionUtility.ExplodeSlot(
+                    explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Secondary,
+                    ExplosionStyle.TooBig, delay: 1f);
+                CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
+                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility);
+                dopingChamber.AtomicViewChangedThisFrame = true;
+            }
         }
 
         private static void UpdateAtomicView(ChamberInterfacerState interfacer, DopingChamberState dopingChamber, ResearchMinigameState researchState)
