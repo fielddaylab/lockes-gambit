@@ -92,7 +92,7 @@ namespace SpaceFab.Research {
             panel.LoadingBar.SetActive(true);
             panel.FilledBar.fillAmount = 0;
 
-            yield return 0.3f;
+            yield return 0.25f;
 
             yield return panel.FilledBar.FillTo(1f, 2f).Ease(Curve.QuadInOut);
 
@@ -128,7 +128,7 @@ namespace SpaceFab.Research {
                 }
             }
 
-            yield return 0.5f;
+            yield return 0.25f;
 
             panel.Lines.color = success ? config.SuccessColor : config.FailureColor;
             panel.ResultIcon.gameObject.SetActive(true);
@@ -137,7 +137,7 @@ namespace SpaceFab.Research {
             panel.ResultText.color = success ? config.SuccessColor : config.FailureColor;
             panel.LoadingBar.SetActive(false);
 
-            yield return 2f;
+            yield return 3f;
 
             panel.Lines.color = config.DefaultColor;
             panel.ResultIcon.gameObject.SetActive(false);

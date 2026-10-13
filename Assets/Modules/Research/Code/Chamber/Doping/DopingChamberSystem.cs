@@ -113,7 +113,7 @@ namespace SpaceFab.Research
 
             float current = MaterialPhysicsUtility.GetCurrent(profile, dopingChamber.Voltage, dopingChamber.Temperature);
             CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
-            CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility);
+            CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility, profile.IsLightEmitting);
         }
 
         private static void UpdateDopant(ChamberInterfacerState interfacerState, DopingChamberState dopingChamber, ResearchMinigameState researchState, ResearchExplosionState explosionState, ResearchPools vfxPool)
@@ -129,7 +129,7 @@ namespace SpaceFab.Research
             MaterialAsset dopant = ChamberInterfacerUtility.GetCurrent(interfacerState, ChamberSlotKind.Secondary);
             if (dopant == null) {
                 CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
-                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility);
+                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility, profile.IsLightEmitting);
                 return;
             }
 
@@ -142,7 +142,7 @@ namespace SpaceFab.Research
             if (validRadius && validElectronDiff) {
                 float dopedCurrent = MaterialPhysicsUtility.GetCurrent(profile, dopingChamber.Voltage, 1f);
                 CircuitUtility.SetLightStrength(dopingChamber.Circuit, dopedCurrent);
-                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, dopedCurrent, profile.IsHighMobility);
+                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, dopedCurrent, profile.IsHighMobility, profile.IsLightEmitting);
 
                 // Auto-populate 'Atom fits' chip
                 if (ResearchInventoryUtility.AddObservation(researchState, dopant.AssetId, MaterialPropertyLabel.AtomicRadiusCompliant, substrate.AssetId)) {
@@ -155,7 +155,7 @@ namespace SpaceFab.Research
                     explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Secondary,
                     ExplosionStyle.TooBig, delay: 1f);
                 CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
-                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility);
+                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility, profile.IsLightEmitting);
                 dopingChamber.AtomicViewChangedThisFrame = true;
             }
         }

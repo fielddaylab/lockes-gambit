@@ -3901,6 +3901,10 @@ PrefabInstance:
       propertyPath: HighMobilityParticles
       value: 
       objectReference: {fileID: 2608935892718958072}
+    - target: {fileID: 130131968842501781, guid: 9fb9018788eebcc48b60bf751ba3c592, type: 3}
+      propertyPath: LightEmittingParticles
+      value: 
+      objectReference: {fileID: 2608935892718958073}
     - target: {fileID: 2003659318436975884, guid: 9fb9018788eebcc48b60bf751ba3c592, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6815,6 +6819,26 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4694516398148346222, guid: 74eb29838923c8743a545a6ebb408efb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9659258
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694516398148346222, guid: 74eb29838923c8743a545a6ebb408efb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694516398148346222, guid: 74eb29838923c8743a545a6ebb408efb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694516398148346222, guid: 74eb29838923c8743a545a6ebb408efb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.2588191
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694516398148346222, guid: 74eb29838923c8743a545a6ebb408efb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7107768215286049527, guid: 74eb29838923c8743a545a6ebb408efb, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -6871,6 +6895,11 @@ PrefabInstance:
 --- !u!198 &2608935892718958072 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8403982194204531051, guid: 74eb29838923c8743a545a6ebb408efb, type: 3}
+  m_PrefabInstance: {fileID: 2608935892718958071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2608935892718958073 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7414023473411969284, guid: 74eb29838923c8743a545a6ebb408efb, type: 3}
   m_PrefabInstance: {fileID: 2608935892718958071}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4056313152462021288
@@ -7041,6 +7070,10 @@ PrefabInstance:
       propertyPath: HighMobilityParticles
       value: 
       objectReference: {fileID: 2608935892718958072}
+    - target: {fileID: 130131968842501781, guid: 383442da04804ce4e82237595cc8dec6, type: 3}
+      propertyPath: LightEmittingParticles
+      value: 
+      objectReference: {fileID: 2608935892718958073}
     - target: {fileID: 2003659318436975884, guid: 383442da04804ce4e82237595cc8dec6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7219,6 +7252,10 @@ PrefabInstance:
       propertyPath: HighMobilityParticles
       value: 
       objectReference: {fileID: 2608935892718958072}
+    - target: {fileID: 130131968842501781, guid: 3b021d80c505e4a48a70a478882b7cfd, type: 3}
+      propertyPath: LightEmittingParticles
+      value: 
+      objectReference: {fileID: 2608935892718958073}
     - target: {fileID: 2003659318436975884, guid: 3b021d80c505e4a48a70a478882b7cfd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

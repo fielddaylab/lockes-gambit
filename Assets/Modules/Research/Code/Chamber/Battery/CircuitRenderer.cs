@@ -33,6 +33,7 @@ namespace SpaceFab.Research
         public float AnimSpeedMultiplier = 1f;
 
         public ParticleSystem HighMobilityParticles;
+        public ParticleSystem LightEmittingParticles;
 
         // Magnitude drives flow speed. Set by CircuitUtility.SetFlowStrength.
         [NonSerialized] public float CircuitCurrent;
@@ -112,7 +113,7 @@ namespace SpaceFab.Research
         }
 
         // Sets the flow tube's density. The animation system reads CircuitSpriteSpeed each frame.
-        public static void SetFlowStrength(CircuitRenderer circuit, float strength, bool isHighMobility = false)
+        public static void SetFlowStrength(CircuitRenderer circuit, float strength, bool isHighMobility = false, bool isLightEmitting = false)
         {
             if (circuit == null) return;
             circuit.CircuitCurrent = strength;
@@ -131,6 +132,18 @@ namespace SpaceFab.Research
                 } else {
                     circuit.HighMobilityParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                 }
+            }
+
+            if (circuit.LightEmittingParticles) {
+                if (isLightEmitting && strength > 0) {
+                    if (!circuit.LightEmittingParticles.isPlaying) {
+                        circuit.LightEmittingParticles.Play();
+                    }
+                    circuit.LightEmittingParticles.SetEmissionMultiplier(strength * 10);
+                } else {
+                    circuit.LightEmittingParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                }
+                
             }
         }
 
