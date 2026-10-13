@@ -5,37 +5,18 @@
 @cutscene
 @once
 
-{@PAL}      Okey-dokey Captain. 
-{@PAL}      Now, you're going to be working with Diodes! 
+{@PAL}      Okey-dokey Captain, you're going to be working with Diodes! 
 {@Player}   ...
 {@PAL}      Now, diodes can enforce unidirectional current flow and they-
-{@Player}   ... 
 {@PAL}      Uh... Captain? 
 {@Player}   Huh? 
-{@PAL}      I'm talking about the diodes capacity to attenuate high signals and you seem...
-{@PAL}      Unenthused. 
+{@PAL}      I'm talking about the diodes capacity to attenuate high signals and you seem... unenthused
 {@Player}   Sorry, P.A.L., my mind was somewhere else. 
 {@PAL}      Perhaps, it has something to do with your call with your former crew-mate?
-{@Player}   Doesn't matter, let's just do the contract. 
-{@PAL}      Sounds good Captain! 
 
 //endregion
 
-::AfterResearchCh3
-@trigger    OnOverarchingLoaded 
-@when       IsSolutionFoundFor(Research)
-@cutscene
-@once 
-
-
-::AfterDesignCh3
-@trigger    OnOverarchingLoaded
-@when       IsSolutionFoundFor(Design)
-@cutscene
-@once
-
-
-//endregion 
+//EDIT - Cut lines for 10 line max. 
 
 ::BeforeSupplyChainCh3
 @trigger    OnOverarchingLoaded
@@ -46,54 +27,25 @@
 //Introduced idea of cost vs time. Au doesn't show up till next level but P now has two sources. Setting up onboarding to learn how to pick between two sources of materials with Hennig Station (P) and Menuo station (P)Menuo is new Kalvis sector statio and Hennig is Frontier where Ovill is. 
 
 //incoming call
-{@Ovill}    We have a super duper exclusive deal just for you! 
-{@Player}   Wait, wait, what are you even selling? 
-{@Ovill}    Phosphorus! Commit to Hennig Station in the Forsch sector today and I'll throw in a complimentary Frontier Robotics swag bag! 
-{@Player}   Ah... you are selling phosphorus. 
-{@Player}	I hear that there is a new station... Menuo Station... near Kalvis that is selling phosphorus for much cheaper!
-{@Ovill}    If you source with us, you will get the materials in a flash. We are fast, fast, fast. The fastest in the region!
+{@Ovill}    We have a super duper exclusive deal just for you on phosphorus! 
+{@Ovill}    Commit to Hennig Station in the Forsch sector today and I'll throw in a complimentary Frontier Robotics swag bag! 
+{@Player}	I heard that ... Menuo Station... is selling phosphorus for much cheaper...
+{@Ovill}    If you source with us, you will get the materials in a flash. We are fast, fast, fast. 
 {@Player}   I'll...lll... think about it. 
-{@Ovill}    You didn't like my offer?  
-{@Player}   Well, like I said, I'll THINK ABOUT IT.  
-{@Ovill}	Fantastic! I'm glad you are excited! This is going to be a great deal for you. 
-{@Ovill}    Anyways. I'm Ovill. 
-{@Ovill}    Supplier and contact for the planets and stations of the Forsch sector. Holo back!
+{@Ovill}	Fantastic! I'm glad you are excited! 
 //end call
 
 
-//move this to level 4 gold level
-
-//{@PAL}      Hey Captain, you have a new supplier who is selling gold which would work as a conductor. 
-//{@Player} 	Ummm... gold? Isn't that really expensive? 
-//{@PAL} 		Sure it is but when you compare the travel time the extra money can be worth it. 
-//{@Player}	Alright, let's give him a call. 
-//call Xavier
-//{@Xavier}   ... 
-//{@Xavier}   Hello. 
-//{@Player}   So... are you the supplier or-- 
-//{@Xavier}	I'm Xavier. Supplier contact for the Ralston sector.
-//{@Xavier}   Planet of Gold and Golden Opportunities. 
-//{@Player}   Okay... well... I'll let you know. Gold seems kinda pricey...
-//{@Xavier}   Hmph. Fine. Call me back when you are ready for the good stuff. 
 
 //end call
 //{@Player}	Hmmm... I wonder if I can afford the gold. I'm trying to actually make a profit.
 
-
-::AfterSupplyChainCh3
-
-
-
-::AfterFabrication
-@trigger 
-@when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply), IsSolutionFoundFor(Fabrication)
-@cutscene
-@once 
-
-{@PAL}      Looks like this contract was a piece of cake!
-{@Player} 	You don’t even know what cake tastes like. 
-{@PAL} 	    According to my human empathy algorithm cake tastes…
-{@PAL}      10011000  10101000 10110000 !
-{@Player} 	…right. 	
+//::AfterFabrication
+//@trigger 
+//@when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply), IsSolutionFoundFor(Fabrication)
+//@cutscene
+//@once 
+//I cut previous text. Could add some contract specific dialog if necessary.
+	
 
 

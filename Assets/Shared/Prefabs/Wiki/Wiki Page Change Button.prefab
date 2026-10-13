@@ -233,6 +233,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -2
       objectReference: {fileID: 0}
+    - target: {fileID: 7224994389484717713, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+      propertyPath: OnClick.m_HashValue
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7858774295019505386, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
       propertyPath: m_Name
       value: Wiki Page Change Button
@@ -243,6 +247,7 @@ PrefabInstance:
     - {fileID: 2356737789482036004, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
     - {fileID: 6787585165383491076, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
     - {fileID: 3831710365006796672, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+    - {fileID: 7224994389484717713, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 349155167643278929, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}

@@ -8,7 +8,7 @@ $if IsLevelSolved(0) == true
 $else
     $set temp:designTutorialStep = 0
     $call   HighlightElement(design:metal-tool-btn)
-    {@PAL}  You're taking over Keela's Chip Design Lab.\n\nStart by making a connection between Input A and Output X.\n\nSelect the <color=yellow>Metal Tool</color>.
+    {@PAL}  This chip needs a connection between Input A and Output X on the metal layer. \n\nSelect the <color=yellow>Metal Tool</color>.
 $endif
 
 
@@ -19,6 +19,7 @@ $set temp:designTutorialStep = 1
 $call   ReleaseAllHighlights()
 $call   HighlightElement(design:input-a, false, 25)
 {@PAL} Now click and drag to draw a connection between Input A and Output X.
+
 
 
 ::TestConnectionDrag
@@ -44,7 +45,7 @@ $endif
 ::TestConnectionClick
 @trigger    OnClickReleased
 @when       temp:designTutorialStep == 1
-{@PAL}  You'll need to click and drag to form a solid path.
+{@PAL}  Click and drag to form a solid path on the Metal Layer. 
 
 
 ::TestIncorrect
@@ -79,5 +80,5 @@ $set temp:designTutorialStep = 3
 ::AllTestsPassed
 @trigger    OnAllTestsComplete
 $call   ReleaseAllHighlights()
-{@PAL}  It looks like all test cases passed!
+{@PAL}  All test cases passed!
 $set    temp:designTutorialStep = 4

@@ -19,8 +19,8 @@ namespace SpaceFab.Fabrication.LayerInstructions
         public LayerInstructionRow RowPrefab;
         public Transform Rows;
 
-        public float FadeSeconds = 0.3f;
-        public float HoldSeconds = 2f;
+        public float FadeSeconds;
+        public float HoldSeconds;
 
         // One row per Layer Visuals entry on the sequence's Layer Instruction asset.
         [NonSerialized] private readonly List<LayerInstructionRow> m_rows = new List<LayerInstructionRow>();

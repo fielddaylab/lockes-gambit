@@ -4,45 +4,77 @@
 @cutscene
 @once
 
-{@PAL}      Welcome to the Frontier Robotics employee orientation! 
-{@Player}   Wait... I own this ship. I'm not an employee!
-{@PAL}      The agreement you signed says otherwise.
+//EDIT - KACY 
+// Changed this section to support narrative idea that Frontier paid for Locke's ship damages and Locke is in debt, simplifying their relationship.  
+//{@PAL}      Welcome to the Frontier Robotics employee orientation! 
+//{@Player}   Wait... I own this ship. I'm not an employee!
+//{@PAL}      The agreement you signed says otherwise.
+//{@PAL}      Welcome to the Frontier Robotics Employee Fabrication Orientation! 
+//{@Player}   Wait... I'm not an employee, I own this ship! 
+//We should find another place to put this line. {@PAL}      Technically, yes! However, since Frontier paid for your ship's damages, all debtors are classified as "employees."
+//{@Player}   I see.
 
-{@PAL}      Your first “contract” is your orientation. 
-$call   HighlightElement(overarching:costs-section, false, 25, true)
+
+//changed this from employee to trainee while he still owns his ship.
+
+{@PAL}      As a trainee, you'll learn to operate four systems...
+{@PAL}      ...all recently upgraded aboard this obsolete ship.
+{@Player}   Hey! She's got plenty of life left in her!
+{@Player}   ...I miss my old crew already.
+
+{@PAL}      The first “contract” is your orientation. 
+//TODO highlight should be arrow not button highlight
+//$call   HighlightElement(overarching:costs-section, false, 25, true)
+$call   PointElement(overarching:costs-section)
 {@PAL}      This is how long the contract should take.
 $call   ReleaseAllHighlights()
-$call   HighlightElement(overarching:profit-section, false, 25, true)
+//TODO highlight should be arrow not button highlight
+//$call   HighlightElement(overarching:profit-section, false, 25, true)
+$call   PointElement(overarching:profit-section)
 {@PAL}      ...and this is what you'll be paid.
 $call   ReleaseAllHighlights()
-{@Player}   I miss my old team. I've never done any of this all by myself. 
-{@PAL}      As the Personal Automation Liaison and I'm WAY more useful than human assistants.
- {@Player} 	...hmmmm... 
- {@PAL}      Sart with either the Research Lab or Chip Design. 
 
-
+{@PAL}      You can chip away at that huge debt! 
 $call   HighlightElement(overarching:select-contract-btn)
+
+//{@Player}   P.A.L., I've been doing business with my team for years. 
+//{@PAL}      As the Personal Automation Liaison and I'm WAY more useful than human assistants.
+
+
+//EDIT - KACY 
+// Added line for PAL for better flow and to reinforce debt being centeral issue player has to tackle. 
+
 $call   UnlockWikiPage("Basic Conductor")
 $call   UnlockWikiPage("Basic Insulator")
 $call   LockWikiPage("Conductor") // only Basic Conductor is available in first chapter 
 $call   LockWikiPage("Insulator") // only Basic Insulator is available in first chapter 
 
-:: FirstContractAcceptCh1
+
+::FirstContractAcceptCh1
+@trigger    OnOverarchingLoaded
+@cutscene
+@once
+
+$call   ReleaseAllHighlights()
+{@PAL}      As a trainee, you'll learn to operate four systems...
+{@PAL}      ...all recently upgraded aboard this obsolete ship.
+{@Player}   Hey! She's got plenty of life left in her!
+{@PAL}      Start with either the Research  or Chip Design. 
+
+
+//written to stablish PAL is sure about something that he is later incorrect about - AI literacy thread.
+//TODO - this breaks the game if you do research after design because the game is calling this and before supply chain at the same time. 
+::AfterResearchCh1
 @trigger    OnOverarchingLoaded
 @when       IsSolutionFoundFor(Research)
-@cutscene 
+@cutscene
 @once
-$call   ReleaseAllHighlights()
+{@PAL}      Research complete! Conductor and insulator verified.
+{@Player}   You're sure?
+{@PAL}      Absolutely, Captain.
 
-//TODO can I add this here to fire after research?
-//::AfterResearchCh1
-//@trigger    OnOverarchingLoaded
-//@when       IsSolutionFoundFor(Research)
-//@cutscene
-//@once
-//{@PAL}      Research complete! Conductor and insulator verified.
-//{@Player}   You're sure?
-//{@PAL}      Absolutely, Captain.
+//SUGGESTION - KACY 
+// If we do add this dialogue above in, maybe adding a few more lines to establish PAL and Locke's relationship further - Sarah: i think the comic has done a lot of this. 
 
 
 :: BeforeSupplyChainCh1
@@ -50,44 +82,30 @@ $call   ReleaseAllHighlights()
 @when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
 @cutscene
 @once
-{@Player}    I'm ready to build the chips now, right? 
-{@PAL}      You need materials first. 
-{@Player}	Oh... Dorian used to manage all that...
-{@PAL}		Nothing the Supply console can’t handle!
-{@Player}	I'll call the Hauler company to let them know they'll be working with me. 
+{@PAL}      You'll need materials before you start fabricating the microchips. 
+
+
+{@Player}	I'll call the Hauler company. 
 //phone dial 
-{@Quinn}    Oh... hi Locke! I was expecting to see Dorian. 
-{@Player}   Hi Quinn. Nice to see you again. Yeah, Dorian's not on the ship anymore. Its just me now.
-@{Player}	It's a long story -- I'll tell you later. Looks like I'm planning the routes now. 
-{@Quinn}    Okay, Cap'. I’ve got you.
-{@Quinn}    You decide where you want to get your materials. I’ll handle the haulers.
-{@Player} Sounds easy enough. Talk to you later.
+{@Quinn}    Oh... Locke! Hiya! Suprised to see your face, is Dorian sick? 
+{@Player}	It's a long story -- I'll tell you later. 
+//Sarah: I am going to have Quinn give him the nickname "cowboy" to thread the idea of the space western. :)
+{@Quinn}    Okay, <i>Cowboy.</i> Going off on your own, eh?
+{@Quinn}    Sounds fun. You can count on me to wrangle the haulers for you.
+
+//Sarah: kacy we can't add so many lines. I like these lines, but if we are going to bring in personality, we have to do it within the current line counts I have without losing content. Some of this has to remain more flat at the start of the game because so much onboarding is happening here. 
+//{@Quinn}    Ooo, the drama, the suspense, the mystique! Please do tell more.  
+//@{Player}	I'm planning the routes now, well, I'm running everthing. It's a long story -- I'll tell you later. 
+//{@Quinn}    Okay, Cap'. I’ve got you. But I'm holding you to it.
+//{@Quinn}    You decide where you want to get your materials. I’ll handle the haulers.
+//{@Player}   Sounds easy enough. Talk to you later.
+
+// EDIT - KACY (TO-DO)
+// Editing Quinn's dialogue to match her quippiness.
 
 
-//region Supply Chain - Taryn Intro 
 
-//{@Player}   Guess I should call one of the supplier contacts... Cu-6533... jeez so many numbers. 
-//phone dial character
-//{@Quinn}    Oh Universe above. I swear, for the last time, P.A.L. 
-//{@Taryn}    We won't work for you unless you have a human on board,
-//{@Taryn}    AND ANOTHER THING-... Oh my stars you're a human. 
-//{@Player}   Last time I checked, yeah. 
-//{@Taryn}    Shoot, uh, hi I'm Kalvis Sector- 
-//{@Taryn}    Wait uh no, in the-supplier... uh-
-//{@Player}   What?
-//{@Taryn}    Ack-... Sorry.
-//{@Taryn}    Let's just say, P.A.L. called and left a bad taste in my mouth. 
-//{@Player}   I... understand. 
-//{@Taryn}    How about we start over and forget about the embarassing yelling and the word vomit that just happened? 
-//{@Taryn}    Name's Taryn. I'm the supplier contact for the Kalvis sector. 
-//{@Player}   Nice to meet you Taryn. I'm Locke. 
-//{@Taryn}    ...Locke... why does that sound familiar? 
-//{@Taryn}    Anyways, pleasure to meet you Locke!
-//{@Taryn}    If you want any materials in our sector, I'm the one to call! 
-//{@Player}   I'll keep that in mind.
-//hang up dial.
 
-// end region
 
 //#region - After Supply Chain 
 
@@ -97,30 +115,13 @@ $call   ReleaseAllHighlights()
 @cutscene
 @once
 
-{@PAL}      The conductor materials just arrived. Quinn is so efficient for a human. 
-{@PAL} 		Are you ready to work with our incredible new automation unit? You will have to keep up!
-{@Player}   Um... I think so. I used to work with Arkan at the Fab, so I know what to expect. 
-{@PAL}     	OOOh, this will be much faster than your human teammate. 
-{@Player}  	We'll see...
+{@PAL}      The haulers arrived. Quinn is quite efficient... for a human. 
+{@PAL} 		Ready to try out your state of the art automated Fab bay? 
+{@Player}   Um... I think so. I used to work there with Arken.
+{@PAL}     	OOOh, this will be soooo much faster than your human teammate. 
 
-//pickup tone
-//{@Ovill}    We have a super duper exclusive deal just for you! 
-//{@Player}   What?
-//{@Ovill}    If you source with us today, and we'll throw in a complimentary Frontier Robotics swag bag! 
-//{@Ovill}    All you need to do is source with us within the next 24 hours-
-//{@Player}   I already sourced materials with Kalvis...I needed Copper so...
-//{@Ovill}    Oh-... was my pitch bad?
-//{@Ovill}    Maybe if I raise my voice and bring more "pazaaz". Let me start over.
-//{@Ovill}    LOCKE, DO I HAVE A DEAL FOR YOU, IF YOU SOURCE WITH US TODAY- 
-//{@Player}   I'M NOT INTERESTED!
-//{@Player}   Not because you did a bad pitch. Just... bad timing. Sorry.
-//{@Ovill}    So... it wasn't my fault? 
-//{@Player}   Yes. I guess. 
-//{@Ovill}    Fantastic!  I can put that in my daily report. Perfect marks.  
-//{@Ovill}    Anyways. I'm Ovill. 
-//{@Ovill}    Just holo if you would like to business with the Forsch sector!
-//{@Player}   Thanks, Ovill. 
-//hang-up dial
+
+
 
 //#region - Fabrication 
 ::AfterFabricationCh1
@@ -129,12 +130,8 @@ $call   ReleaseAllHighlights()
 @cutscene
 @once
 
-{@PAL}      Congratulations on completing your orientation Captain.
-{@Player}   Thanks... I think I am getting the hang of it. 
-{@PAL}      Positive.Affirmation.exe! 
-{@Player}   Back atcha bro. 
-{@PAL}      ...my name is P.A.L, not bro.
-{@Player} 	Right...
-{@PAL} 	    Now submit your contract and Frontier will transfer payment into your account. 
 
-//endregion 
+{@PAL}      You finished the orientation! 
+{@PAL}      Positive.Affirmation.exe! 
+{@Player}	uhhhh...thanks.
+{@PAL} 	    Now submit your contract and Frontier will transfer payment into your account. 

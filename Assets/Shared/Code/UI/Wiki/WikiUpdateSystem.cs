@@ -2,6 +2,7 @@ using BeauPools;
 using BeauUtil;
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Debugging;
 using FieldDay.Scripting;
 using FieldDay.Systems;
@@ -36,8 +37,8 @@ namespace SpaceFab.UI {
 
             ResolvedQueuedNavigation(state, content, layout);
 
-            UpdateViewVisibility(state, layout);
-            RepaintDirtyLayout(state, content, layout);
+            bool updatedVisibility = UpdateViewVisibility(state, layout);
+            RepaintDirtyLayout(state, content, layout, !updatedVisibility);
 
             if (state.Expanded) {
                 WikiUtility.FlushScriptAnnouncements(state, content);
@@ -166,6 +167,8 @@ namespace SpaceFab.UI {
                     } else if (currentVisualIndex >= nextScroll + windowSize) {
                         state.QueuedPageId = pageList.Indices[nextScroll + windowSize - 1];
                         seekMode = PageSeekMode.ScrollInduced;
+                    } else {
+                        Sfx.Play("Wiki.PageScroll");
                     }
                 }
             }
@@ -193,9 +196,9 @@ namespace SpaceFab.UI {
         /// <summary>
         /// Responds to visibility change requests.
         /// </summary>
-        static private void UpdateViewVisibility(WikiViewState state, WikiLayoutState layout) {
+        static private bool UpdateViewVisibility(WikiViewState state, WikiLayoutState layout) {
             if (state.Expanded == state.QueuedExpanded) {
-                return;
+                return false;
             }
 
             state.Expanded = state.QueuedExpanded;
@@ -203,17 +206,20 @@ namespace SpaceFab.UI {
             if (!state.Expanded) {
                 WikiUtility.ClearScriptAnnouncements(state);
                 ScriptUtility.Trigger(ScriptTriggers.OnWikiClosed);
+                Sfx.Play("Wiki.Close");
             } else {
                 ScriptUtility.Trigger(ScriptTriggers.OnWikiOpened);
                 WikiUtility.Invalidate(state, WikiViewDirtyFlags.PageContent);
+                Sfx.Play("Wiki.Open");
             }
             WikiLayoutUtility.SnapExpandedState(layout, state.Expanded);
+            return true;
         }
 
         /// <summary>
         /// Repaints all dirty layout domains.
         /// </summary>
-        static private void RepaintDirtyLayout(WikiViewState state, WikiContent content, WikiLayoutState layout) {
+        static private void RepaintDirtyLayout(WikiViewState state, WikiContent content, WikiLayoutState layout, bool canPlayAudio) {
             if (!state.Expanded) {
                 return;
             }
@@ -234,6 +240,10 @@ namespace SpaceFab.UI {
                     layout.Header.SetText("---");
                 }
                 state.DirtyFlags &= ~WikiViewDirtyFlags.TabSelection;
+                if (canPlayAudio) {
+                    Sfx.Play("Wiki.TabOpen");
+                    canPlayAudio = false;
+                }
             }
 
             bool pagesChangedInstant = false;
@@ -258,6 +268,9 @@ namespace SpaceFab.UI {
                 }
                 state.DirtyFlags &= ~WikiViewDirtyFlags.PageContent;
                 WikiUtility.Invalidate(state, WikiViewDirtyFlags.PageChips);
+                if (canPlayAudio) {
+                    Sfx.Play("Wiki.PageOpen");
+                }
             }
 
             if ((state.DirtyFlags & WikiViewDirtyFlags.PageChips) != 0) {

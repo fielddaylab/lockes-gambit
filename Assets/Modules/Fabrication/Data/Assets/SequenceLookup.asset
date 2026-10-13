@@ -43,7 +43,7 @@ MonoBehaviour:
       m_Source: 
       m_HashValue: 0
     StationIconSprite: {fileID: 21300000, guid: 9f830cc135a5eab4db9ae26810996c2d, type: 3}
-    StationLabel: SPIN COAT
+    StationLabel: SPIN COATER
     InstructionLabel: Apply Photo Resist
   - StepId: 2
     StationId:
@@ -91,7 +91,7 @@ MonoBehaviour:
       m_Source: 
       m_HashValue: 0
     StationIconSprite: {fileID: 21300000, guid: 3dd73ff47aaac054697e55a84a150997, type: 3}
-    StationLabel: SPUTTER MACHINE
+    StationLabel: SPUTTERER
     InstructionLabel: Apply Metal Layer
   - StepId: 5
     StationId:

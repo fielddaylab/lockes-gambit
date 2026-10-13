@@ -66,6 +66,7 @@ namespace FieldDay.Audio {
         private AudioPropertyBlock[] m_WorkingBusProperties;
 
         private AudioListener m_ListenerReference;
+        private AudioListener m_FallbackListener;
 
 #if DEVELOPMENT
         private AudioPropertyBlock[] m_DebugBusProperties;
@@ -122,6 +123,8 @@ namespace FieldDay.Audio {
 
             m_AudioSourceRoot = new GameObject("AudioMgr");
             GameObject.DontDestroyOnLoad(m_AudioSourceRoot);
+            m_FallbackListener = m_AudioSourceRoot.AddComponent<AudioListener>();
+            m_FallbackListener.enabled = false;
 
             m_VoiceComponentPool = new FixedPool<AudioVoiceComponents>(MaxVoices, ConstructNewSource);
             m_VoiceComponentPool.Config.RegisterOnDestruct((p, a) => GameObject.Destroy(a.gameObject));
@@ -164,6 +167,7 @@ namespace FieldDay.Audio {
             using (Profiling.Sample("AudioMgr::PreUpdate")) {
                 ProcessLateBindings();
                 CullFinishedVoices();
+                CullVoicesWithUnloadedClips();
                 if (m_ActiveStreamedClips.Count > 0) {
                     UnloadOneUnusedStreamedClip();
                 }
@@ -447,7 +451,9 @@ namespace FieldDay.Audio {
         /// Sets the global AudioListener reference.
         /// </summary>
         public void SetListener(AudioListener listener) {
+            Assert.NotNullOrDestroyed(listener);
             m_ListenerReference = listener;
+            m_FallbackListener.enabled = false;
         }
 
         /// <summary>
@@ -456,6 +462,7 @@ namespace FieldDay.Audio {
         public void RemoveListener(AudioListener listener) {
             if (m_ListenerReference == listener) {
                 m_ListenerReference = null;
+                m_FallbackListener.enabled = true;
             }
         }
 
@@ -466,7 +473,13 @@ namespace FieldDay.Audio {
             get {
                 if (!m_ListenerReference) {
                     Log.Error("[AudioMgr] AudioListener reference not assigned - make sure to attach an 'AudioListenerReference' component!");
-                    m_ListenerReference = Find.Any<AudioListener>();
+                    var allListeners = GameObject.FindObjectsOfType<AudioListener>();
+                    foreach(var listener in allListeners) {
+                        if (listener != m_FallbackListener) {
+                            m_ListenerReference = listener;
+                            break;
+                        }
+                    }
                 }
                 return m_ListenerReference;
             }

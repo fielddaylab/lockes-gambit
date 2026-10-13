@@ -47,7 +47,14 @@ namespace FieldDay.Music {
     public enum MusicTrackFlags : byte {
         Default = 0,
         PlayOnce = 0x01
-    } 
+    }
+
+    public enum MusicShuffleMode : byte {
+        NoShuffle,
+        ShuffleAlways,
+        ShuffleAfterFirstCycle,
+        ShuffleAfterFirstTrack
+    }
 
     internal struct MusicTrack : IEquatable<MusicTrack> {
         internal UniqueId16 Id;
@@ -119,6 +126,10 @@ namespace FieldDay.Music {
             }
 
             if (music.CurrentlyPlayingTrackId == UniqueId16.Invalid) {
+                if (!AudioMgr.HasFocus()) {
+                    return;
+                }
+
                 if (music.OverlapCountdown > 0) {
                     if (GameLoop.IsPhase(GameLoopPhase.UnscaledLateUpdate)) {
                         music.OverlapCountdown -= dt;
@@ -161,20 +172,22 @@ namespace FieldDay.Music {
 
                 if (!shouldLoopCurrent && music.TrackQueue.Count > 1) {
                     MusicTrack nextTrack = music.TrackQueue[1];
-                    AudioSource currentSource = Sfx.GetSource(music.CurrentlyPlaying);
-                    float timeFromEnd = currentSource.clip.length - currentSource.time;
-                    if (timeFromEnd <= nextTrack.Transition.FadeOut) {
-                        Log.Msg("[MusicPlayer] Starting transition to next track");
-                        Sfx.Stop(music.CurrentlyPlaying, nextTrack.Transition.FadeOut);
-                        music.CurrentlyPlaying = default;
-                        music.CurrentlyPlayingTrackId = default;
-                        music.OverlapCountdown = nextTrack.Transition.FadeOut - nextTrack.Transition.Overlap;
+                    if (Sfx.IsLoaded(music.CurrentlyPlaying)) {
+                        AudioSource currentSource = Sfx.GetSource(music.CurrentlyPlaying);
+                        float timeFromEnd = currentSource.clip.length - currentSource.time;
+                        if (timeFromEnd <= nextTrack.Transition.FadeOut) {
+                            Log.Msg("[MusicPlayer] Starting transition to next track");
+                            Sfx.Stop(music.CurrentlyPlaying, nextTrack.Transition.FadeOut);
+                            music.CurrentlyPlaying = default;
+                            music.CurrentlyPlayingTrackId = default;
+                            music.OverlapCountdown = nextTrack.Transition.FadeOut - nextTrack.Transition.Overlap;
 
-                        MusicTrack prevTrack = music.TrackQueue.PopFront();
-                        if (music.RepeatMode == MusicRepeatMode.NoRepeat || (prevTrack.Flags & MusicTrackFlags.PlayOnce) != 0) {
-                            music.IdAllocator.Free(prevTrack.Id);
-                        } else {
-                            music.TrackQueue.PushBack(prevTrack);
+                            MusicTrack prevTrack = music.TrackQueue.PopFront();
+                            if (music.RepeatMode == MusicRepeatMode.NoRepeat || (prevTrack.Flags & MusicTrackFlags.PlayOnce) != 0) {
+                                music.IdAllocator.Free(prevTrack.Id);
+                            } else {
+                                music.TrackQueue.PushBack(prevTrack);
+                            }
                         }
                     }
                 }
@@ -488,6 +501,7 @@ namespace FieldDay.Music {
             Find.State(out MusicPlayerState music);
             if (music.PlaylistId != id) {
                 music.PlaylistId = id;
+                Log.Msg("[MusicPlayer] Playlist id set to '{0}'", id);
                 return true;
             }
 

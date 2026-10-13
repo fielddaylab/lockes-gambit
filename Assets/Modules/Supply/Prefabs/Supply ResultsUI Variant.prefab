@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6988452566914242663, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7173146612041189541, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -382,9 +386,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8497661724219934498, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497661724219934498, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 76.8
+      objectReference: {fileID: 0}
     - target: {fileID: 8618631155860822680, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
       propertyPath: m_Name
       value: Supply ResultsUI Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053788125067728599, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -398,15 +414,15 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4580237166737907120}
   m_SourcePrefab: {fileID: 100100000, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
---- !u!114 &1050498254468975596 stripped
+--- !u!114 &5107970931295011755 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3827525587463525061, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
+  m_CorrespondingSourceObject: {fileID: 9036803438577293954, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
   m_PrefabInstance: {fileID: 4290246708714133801}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eee9c2c266d7b04086359698c88f959, type: 3}
+  m_Script: {fileID: 11500000, guid: 906fb8621338e4a4aad55f85580e6292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5481307330991817649 stripped
@@ -428,7 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelGroup:
     m_HashValue: 0
-  NextButton: {fileID: 1050498254468975596}
+  NextButton: {fileID: 5107970931295011755}
   NextScene:
     m_ScenePath: Assets/Modules/Overarching/Scenes/Overarching.unity
     m_GUID: e7f14cd189ad9e747a51a3c21ee45e32

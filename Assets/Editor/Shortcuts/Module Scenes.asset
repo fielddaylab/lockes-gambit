@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8d4ce805ac1ac4581172e8e407b18f, type: 3}
+  m_Name: Module Scenes
+  m_EditorClassIdentifier: 
+  SortOrder: -998
+  IsLocked: 1
+  ShowDuringContexts: 
+  HideDuringContexts: 
+  ReadMe: Scenes specifically for minigames and overarching.
+  Items:
+  - Object: {fileID: 102900000, guid: e7f14cd189ad9e747a51a3c21ee45e32, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 102900000, guid: afca99bc1d285fa409336ad60445568f, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 102900000, guid: 97d523d0140735349a8156319e1862ca, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 102900000, guid: 79ca403f924321f4b8bb6edd6399951e, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 102900000, guid: 8fa7bf6efe4210c4cb6f6dc5c1a6602d, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  ProjectSearchFilter: 

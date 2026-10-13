@@ -5,30 +5,7 @@
 @cutscene 
 @once 
 
-::AfterResearchCh9
 
-@trigger 
-@when       IsSolutionFoundFor(Research)
-@cutscene 
-@once 
-
-//{@Xavier}   Listen, Lake. 
-//{@Player}   Locke.
-//{@Xavier}   Whatever. 
-//{@Xavier}   I'm gonna keep it real. 
-//{@Xavier}   You're a pawn. 
-//{@Player}   ...Excuse me? 
-//{@Xavier}   This is all a game, you see, and pieces on the board are shifting.
-//{@Xavier}   No one reveals their strategy till it's in play, and once known it's already too //late. 
-//{@Xavier}   Such is the game. 
-//{@Player}   Your point? 
-//{@Xavier}   My point is... 
-//{@Xavier}   You're a pawn, but every pawn can rise if given the right opportunity. 
-//{@Player}   Why... are you telling me this?
-//{@Xavier}   Simple, you have potential. 
-//{@Xavier}   And you’ll need people in… high places. 
-//{@Player}   Okay...
-//{@Xavier}   Holo you soon. 
 
 ::BeforeSupplyChainCh9
 @trigger 
@@ -46,31 +23,15 @@
 {@Callie}   Why, it is I...
 {@Ovill}    Here we go...
 {@Callie}   Callie Lee! The Space Pirate Queen of Velos Station!
-{@Player}   Hey Callie. Can't you leave ol' Ovill here alone? He's scared enough of you...
-{@Ovill}    This isn't funny! They're taking credits from every shipment that crosses their territory!
+{@Player}   Hey Callie. 
+{@Ovill}    This isn't funny! They're taking credits from any shipment that crosses their territory!
 {@Ovill}    That's you too, Locke!
 {@Callie}   Sounds like a toll to me.
 {@Ovill}    It's extortion!
-{@Callie}   When Frontier does it, I suppose it's a service fee.
-{@Callie}   Anyway, good luck with the pirates, Clackey!
+{@Callie}   When Frontier does it, they call it a service fee.
 
 //end call
-//{@Player}   It's Locke. <i>sigh</i>
 
-//{@Mai}      Hi. 
-//{@Player}   Oh, hey Mai. 
-//{@Mai}      ...the protests are stirring up again. 
-//{@Mai}      Wolfram's Tungsten production has stopped. 
-//{@Player}   You doing alright?
-//{@Mai}      This is nothing new. 
-//{@Mai}      Wolfram's known for their revolts. 
-//{@Mai}      Hoping to see some change this time around. 
-//{@Player}   Yea...
-//{@Mai}      Get rid of the bug Locke. 
-//{@Mai}      Don't trust Dorian.
-//{@Player}   Wh- how do you- what??
-//{@Mai}      ...the call must've glitched. 
-//{@Mai}      Cya. 
 
 ::AfterFabrication 
 @trigger    OnOverarchingLoaded
@@ -78,12 +39,11 @@
 @cutscene
 @once
 
-{@MAL}      Okey dokeeyyyyyyy CAP-tain!
 {@MAL}      Time to submiiiiiiiiiiiiiiiiiii-
 {@MAL}      Hi CaptiAin, howwww are you doing today?
 {@Player}   ...
-{@MAL}      Your silence is reassuring! 
-{@Player}   M.A.L... after this contract, we need to make a detour. 
+{@Player}   Keela's hack is making a mess of everything.
+{@Player}   P... M.A.L., after this contract, we need to make a detour. 
 {@Player}	Time to have a chat with Keela. 
 //should leave player questioning if he is going to find Keela to bug her.  
 {@MAL}      Great idea, Captain!

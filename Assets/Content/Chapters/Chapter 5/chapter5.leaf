@@ -6,14 +6,12 @@
 @once 
 //todo need a bridge between end of comic with keela not picking up the phone. 
 
-{@PAL}      	Captain, I have a surprise for you.  
-{@Player}   	Wait... did Keela call me back?
+{@Player}   	Hey Pal... did Keela call me back?
 {@PAL}      	No. 
-{@Player}   	Oh.
-{@PAL}      	Instead of one contract, you now have... two!
-{@PAL}      	Congratulations on achieving agency Captain! 
-{@Player}   	...thanks P.A.L. 
-{@Pal}			One of them is a little more complicated. You can switch back to the other one if you decide its too hard. 
+{@PAL}      	But, good news, business is picking up. 
+{@PAL} 			You have two companies offering you contracts. 
+{@PAL}			Scroll through the contracts. You can switch anytime, but you'll have to start over.
+
 
 ::BeforeSupplyChainCh5
 @trigger    OnOverarchingLoaded
@@ -21,44 +19,20 @@
 @cutscene 
 @once 
 
-{@Quinn}    Hey Cap', we're hauling farther out this time.
-{@Player}   How much farther?
-{@Quinn}    Far enough that some of these routes cut through pirate territory.
-{@Player}   Velos?
-{@Quinn}    Yep. Callie's neighborhood.
-{@Quinn}	Callie's been taunting ol'Ovill over in Forsch. I think he's going to have to get on blood pressure meds soon. 
+{@Quinn}    Hey, Cowboy.
+{@Quinn}    We're haulin' through space that cuts through pirate territory.
+{@Quinn}    Its near Velos. Callie's neighborhood.
+{@Quinn}	Callie's been taunting ol'Ovill over in Forsch. He'll be takin' blood pressure meds soon. 
 {@Player}	Are your haulers on good terms with her? 
-{@Quinn}   Well, she is a pirate. You never know.
-{@Quinn}    Just watch where you draw your routes.
+{@Quinn}  	 Well, she is a pirate. 
 
-//{@Ovill}    	Hi Locke.
-//{@Ovill}    	I got a thrilling new update for the Forsch Sector!
-//{@Callie}   	I wouldn’t listen to him, my Clackey friend.
-//{@Ovill}    	How-how did you get this frequency?! This is an encrypted channel!
-//{@Ovill}    	Who are you?
-//{@Callie}   	Why, it is I...
-//{@Player}  	    Here we go... 
-//{@Callie}   	Callie Lee! The Space Pirate Queen of Velos Station! 
-//{@Callie}   	Trying to steal me business huh?
-//{@Ovill}    	Stealing- you stole a whole station from Frontier!
-//{@Callie}   	You seriously want to conduct business with this fool, Clackey? 
-//{@Player}   	My name is not Clackey. 
-//{@Ovill}    	Get OFF this frequency!
-//{@Callie}   	Seeesh! Okay I will! Don't forget to take some blood pressure meds. 
-//{@Callie}   	See you later, Clackey.
-//{@Ovill}   	    Hm-ph... sorry about that. 
-//{@Player}   	No worries. 
-//{@Ovill}    	...reach out if you want to do business. 
 
-::AfterSupplyChain
+::AfterSupplyChainCh5
 @trigger	    OnOverarchingLoaded 
 @when 	        IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
-{@Player} 	    P.A.L., Fabrication is going to be… not glitched this time, right? 
-{@PAL} 	        After much evaluation, I have a 97.1% certainty that all Frontier Fabrication Ships are in proper working order!
-{@Player} 	    So Fabrication’s glitches are solved? 
-{@PAL}	        That percentage is based on the Frontier Robotics Productivity Database, which estimates the effectiveness of all Frontier Robotics Fabrication Ships. 
-{@Player} 	    Okay… what about my ship? 
-{@PAL}	        Unfortunately, I can't determine that percentage right now. 
-{@PAL}			You can always look up the directions in your reference guide. 
-{@Player} 	    Of course. I thought you were supposed to speed things up not slow me down. I need to start memorizing this process.
-{@Player}		I'm really missing Arkan about now. 
+{@Player} 	P.A.L., Fabrication is going to be… not glitched this time, right? 
+{@PAL}      Frontier's automation is the most widely used technology in the system!
+{@Player}   That doesn't mean it works.
+{@Player}   Do we have any other options?
+{@PAL}	Frontier Robotics has acquired all competing manufacturers. Standardization benefits everyone!
+{@Player}   Arken used to do this manually and our microchips were the highest quality around!

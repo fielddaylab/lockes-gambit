@@ -17,8 +17,10 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: a2c02af80e5499e4196eb997b2841cc8, type: 3}
   IllustrationFPS: 0.5
-  BodyText: Risk Level affects the outcome of the route by increasing the chances
-    that a route will take longer or cost more.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: Risk Level may affect the outcome of the route by increasing the chances
+    that your routes will take longer and/or cost more.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

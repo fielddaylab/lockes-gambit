@@ -4,6 +4,7 @@ using BeauUtil.UI;
 using FieldDay;
 using FieldDay.SharedState;
 using FieldDay.UI;
+using FieldDay.UI.Widgets;
 using SpaceFab.Save;
 using SpaceFab.UI;
 using TMPro;
@@ -12,8 +13,8 @@ using UnityEngine.UI;
 
 namespace SpaceFab.Research {
     public sealed class ResearchResultPanel : SharedPanel {
-        public DynamicButton BackButton;
-        public DynamicButton NextButton;
+        public GuiButton BackButton;
+        public GuiButton NextButton;
         public SceneReference NextScene;
         public ContractRequirementTable Table;
 
@@ -24,8 +25,8 @@ namespace SpaceFab.Research {
         protected override void Awake() {
             base.Awake();
 
-            BackButton.onClick.AddListener(Cancel);
-            NextButton.onClick.AddListener(Commit);
+            BackButton.OnClick.AddListener(Cancel);
+            NextButton.OnClick.AddListener(Commit);
         }
 
         private void Start() {
