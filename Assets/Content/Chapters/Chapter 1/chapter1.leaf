@@ -4,31 +4,23 @@
 @cutscene
 @once
 
-//EDIT - KACY 
-// Changed this section to support narrative idea that Frontier paid for Locke's ship damages and Locke is in debt, simplifying their relationship.  
-//{@PAL}      Welcome to the Frontier Robotics employee orientation! 
-//{@Player}   Wait... I own this ship. I'm not an employee!
-//{@PAL}      The agreement you signed says otherwise.
-//{@PAL}      Welcome to the Frontier Robotics Employee Fabrication Orientation! 
-//{@Player}   Wait... I'm not an employee, I own this ship! 
-//We should find another place to put this line. {@PAL}      Technically, yes! However, since Frontier paid for your ship's damages, all debtors are classified as "employees."
-//{@Player}   I see.
 
 
 //changed this from employee to trainee while he still owns his ship.
 
-{@PAL}      As a trainee, you'll learn to operate four systems...
-{@PAL}      ...all recently upgraded aboard this obsolete ship.
+{@PAL}		As a trainee, you'll learn to operate four systems...
+{@PAL}		...all recently upgraded with Frontier Robotics automation systems...
+{@PAL}		...aboard this obsolete ship.
 {@Player}   Hey! She's got plenty of life left in her!
 {@Player}   ...I miss my old crew already.
 
 {@PAL}      The first “contract” is your orientation. 
-//TODO highlight should be arrow not button highlight
+//Check - did I do this right? highlight should be arrow not button highlight
 //$call   HighlightElement(overarching:costs-section, false, 25, true)
 $call   PointElement(overarching:costs-section)
 {@PAL}      This is how long the contract should take.
 $call   ReleaseAllHighlights()
-//TODO highlight should be arrow not button highlight
+//ChECK:  highlight should be arrow not button highlight
 //$call   HighlightElement(overarching:profit-section, false, 25, true)
 $call   PointElement(overarching:profit-section)
 {@PAL}      ...and this is what you'll be paid.
