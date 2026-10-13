@@ -6,12 +6,11 @@
 @cutscene 
 @once 
 
-{@Arken}    How're feeling Locke? 
-{@Player}   Feeling relieved. 
-{@Arken} 	That’s good.
-{@Arken} 	I’m here to help out as much as I can. 
-{@Arken}	I’m not there physically but I am always there for you Locke. 
-{@Locke}	Thanks, Arken.
+{@Player}   Hey, MA...
+{@Player}   Oh, yeah. I'm alone...
+{@Player}   Kind of my fault, I guess.
+{@Player}   What was I thinking? Now I gotta do all this?
+{@Player}   Those bots were just slowing me down... Right?
 
 ::AfterResearchCh11
 @trigger 
@@ -19,26 +18,37 @@
 @cutscene 
 @once 
 
-{@Quinn}        Did you do it?
-{@Player}       I did it. 
-{@Quinn}        Good.
-{@Joel}         Good riddance. 
-{@Callie}       Yea, good riddance! 
-{@Player}       ...Callie? 
-{@Joel}         The Space Pirate Queen of Velos Station??
-{@Quinn}        I thought your station blew up. 
-{@Callie}       You thought correctly!
-{@Joel}         How did you even get on this channel?
-{@Callie}       Well... I may or more not have commandeered your smallest hauler.
-{@Quinn}        That's so rad. 
-{@Callie}       I was going to run, but I realized this was one of your ships Clackey. 
-{@Callie} 	    So I was thinking… what if I started working for ya? 
+// Callie calls
+
+{@Callie}   Hey, Clacky! How's that clunker of a ship? Heard you're all alone out there!
+{@Player}   Callie?! I thought you got arrested!
+{@Callie}   Ha! They'll have to catch me first!
+{@Player}   What happened to Velos?
+{@Callie}   The FRA commandeered our ships and took over the station. 
+{@Callie}	Shut the whole thing down.
+{@Player}   So how are you?
+{@Callie}   Are you trying to hire me? HA HA HA!
+
+// Callie hangs up
+
+{@Player}   That's not what I was saying! ...that would be a disaster.
+
+//{@Quinn}        Did you do it?
+//{@Player}       I did it. 
+//{@Quinn}        Good.
+//{@Callie}       ...good riddance! 
+//{@Player}       ...Callie? 
+//{@Quinn}        I thought your station blew up. 
+//{@Callie}       You thought correctly!
+//{@Callie}       I may or more not have commandeered your smallest hauler.
+//{@Quinn}        That's so rad. 
+//{@Callie}       I was going to run, but I realized this was one of your ships Clackey. 
+//{@Callie} 	    So I was thinking… what if I started working for ya? 
 {@Player}       Uh...
-{@Joel}         I mean, I'm not against it. 
-{@Quinn}	    C’mon Locke pleeeeease I want cool space pirate as a co-worker. 
-{@Player}       Sure, why not. 
-{@Callie}       Thanks Clackey-
-{@Callie}       Hmph- I mean, thanks, Captain!
+//{@Quinn}	    C’mon Locke pleeeeease I want cool space pirate as a co-worker. 
+//{@Player}       Sure, why not. 
+//{@Callie}       Thanks Clackey-
+//{@Callie}       Hmph- I mean, thanks, Captain!
 
 
 ::AfterSupplyChainCh11
@@ -47,18 +57,18 @@
 @cutscene 
 @once
 
-{@Mai}      So, you got rid of the bots? 
-{@Player}   What don't you know? 
-{@Mai}      You're favorite color. 
-{@Player}   Oh, uh- 
-{@Mai}      It's orange. 
-{@Player}   Mai, how in the stars- 
-{@Mai}      I'm going to be leaving. 
-{@Player}   Oh-
-{@Mai}      Other things are taking priority. 
-{@Mai}      Who knows. 
-{@Mai}      Maybe we'll see each other around. 
-{@Mai}      Oh...
-{@Mai}      Keela says good job. 
-{@Player}   Heh... thanks Mai. See you around. Maybe. 
+// Incoming call from Blaze
+
+{@Blaze}   Locke! Have you heard? People all over the sector are disconnecting their Frontier software!
+{@Player}   How are they getting the bots to work without it?
+{@Blaze}   Well, Keela and I have been up to a little something.
+{@Blaze}   She's giving her original software away to everyone. Free. Open.
+{@Player}   Keela? So... that was her plan all along?
+{@Blaze}   And now I'm ripping out all those cheap parts and giving these bots some real upgrades!
+{@Player}   Of course you are, Blaze.
+{@Player}   You sound busy.
+{@Blaze}   Fewer units, sure. But at least they'll be safe!
+{@Player}   And the company owners on Kalvis are okay with this?
+{@Blaze}   Ha! We're not giving them much choice!
+{@Blaze}   Now that they aren't under Frontier's thumb, they're have not excuse not to negotiate.
 
