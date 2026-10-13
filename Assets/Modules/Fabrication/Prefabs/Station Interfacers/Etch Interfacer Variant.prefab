@@ -180,8 +180,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.6084906, b: 0.6161673, a: 1}
-      key1: {r: 1, g: 0.015873017, b: 0, a: 1}
+      key0: {r: 0, g: 0.627451, b: 0.85490197, a: 1}
+      key1: {r: 0, g: 0.39215687, b: 0.53333336, a: 1}
       key2: {r: 1, g: 0.515167, b: 0.504717, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
