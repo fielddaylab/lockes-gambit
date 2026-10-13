@@ -110,7 +110,7 @@ namespace SpaceFab.Research {
                     obsTabOpen = contents.Tabs[wikiState.CurrentTabId].AssetId == "Observations";
                     // TODO: grey out button when obs tab is open
                 }
-                panel.AddObservationButton.gameObject.SetActive(hypoVm.SlotCount <= 3 && !hypoVm.VerifyButtonVisible && !hypoVm.HypothesisVerified);
+                panel.AddObservationButton.gameObject.SetActive(hypoVm.SlotCount <= 3 && !hypoVm.HypothesisVerified);
             }
 
             if (panel.AddPropertyButton != null) {
@@ -119,7 +119,7 @@ namespace SpaceFab.Research {
                     propsTabOpen = contents.Tabs[wikiState.CurrentTabId].AssetId == "Properties";
                     // TODO: grey out button when obs tab is open
                 }
-                panel.AddPropertyButton.gameObject.SetActive(hypoVm.SlotCount > 0 && !hypoVm.VerifyButtonVisible && !hypoVm.HypothesisVerified);
+                panel.AddPropertyButton.gameObject.SetActive(hypoVm.SlotCount > 0 && !hypoVm.HypothesisSelected && !hypoVm.HypothesisVerified);
             }
 
             ResearchUIAssets uiAssets = Find.GlobalAsset<ResearchUIAssets>();

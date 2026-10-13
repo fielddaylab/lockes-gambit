@@ -59,7 +59,7 @@ $call   ReleaseAllHighlights()
 {@PAL}      As a trainee, you'll learn to operate four systems...
 {@PAL}      ...all recently upgraded aboard this obsolete ship.
 {@Player}   Hey! She's got plenty of life left in her!
-{@PAL}      Start with either the Research  or Chip Design. 
+{@PAL}      Start with either the Research or Chip Design. 
 
 
 //written to stablish PAL is sure about something that he is later incorrect about - AI literacy thread.

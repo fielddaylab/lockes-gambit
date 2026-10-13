@@ -22,7 +22,7 @@ $call   CloseWiki()
 @when       result == "failure", reason == "observation_mismatch"
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
-{@PAL}  Your Property was incorrect.\n\nTry again.
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
 
 ::OnHypothesisIncorrectInvalidObservation
 @trigger    OnHypothesisSubmitted

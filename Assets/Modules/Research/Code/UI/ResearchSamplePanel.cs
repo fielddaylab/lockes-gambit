@@ -4,6 +4,7 @@ using FieldDay.Components;
 using FieldDay.HID;
 using FieldDay.Scripting;
 using FieldDay.UI;
+using FieldDay.UI.Widgets;
 using SpaceFab.Materials;
 using SpaceFab.UI;
 using System;
@@ -37,7 +38,7 @@ namespace SpaceFab.Research {
         public CursorHint AddObservationButton;
         public CursorHint AddPropertyButton;
 
-        public DynamicButton CompleteButton;
+        public GuiButton CompleteButton;
 
         public CursorHint VerifyButton;
 
@@ -126,7 +127,7 @@ namespace SpaceFab.Research {
                 DopingChamberButton.Cursor.onClick.AddListener(() => HandleChamberSwitch(ActiveChamberKind.Doping));
             }
             if (CompleteButton != null) {
-                CompleteButton.onClick.AddListener(HandleCompleteMinigame);
+                CompleteButton.OnClick.AddListener(HandleCompleteMinigame);
             }
 
             if (ResultText != null) {
@@ -176,7 +177,7 @@ namespace SpaceFab.Research {
             }
 
             if (CompleteButton != null) {
-                CompleteButton.onClick.RemoveListener(HandleCompleteMinigame);
+                CompleteButton.OnClick.RemoveListener(HandleCompleteMinigame);
             }
         }
 
