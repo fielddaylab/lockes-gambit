@@ -1,5 +1,6 @@
 using BeauRoutine;
 using BeauUtil;
+using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.SharedState;
 using System;
@@ -145,7 +146,7 @@ namespace SpaceFab.Fabrication.Sequence
             // 5. Stage 3 — surrounding cards slide in from offscreen. Skip the center (already
             //    onscreen) and any out-of-range slots. MoveTo tweens from the card's current
             //    localPosition (set to the offscreen pos here) to the slot's landing position.
-            List<IEnumerator> slides = new List<IEnumerator>();
+            List<IEnumerator> fadeIns = new List<IEnumerator>();
             for (int i = 0; i < 5; i++) {
                 if (i == 2) continue;
                 if (!slotVisible[i]) continue;
@@ -156,15 +157,19 @@ namespace SpaceFab.Fabrication.Sequence
                     card.CardBackground.enabled = true;
                 }
                 Vector3 offscreen = i < 2 ? recapState.OffscreenLeftLocalPos : recapState.OffscreenRightLocalPos;
+                offscreen.x = SlotPositionFor(recapState, i).x;
                 card.Root.localPosition = offscreen;
                 card.Root.localScale = Vector3.one;
-                card.Group.alpha = 1f;
+                card.Group.alpha = 0f;
                 card.Group.interactable = false;
                 card.Group.blocksRaycasts = false;
-                slides.Add(card.Root.MoveTo(SlotPositionFor(recapState, i), recapState.SlideSeconds, Axis.XYZ, Space.Self).Ease(Curve.CubeOut));
+                float delay = Math.Abs(i - 2) * 0.12f + Math.Clamp(2 - i, 0, 1) * 0.08f;
+                Log.Msg("index: {0}, delay: {1}", i, delay);
+                fadeIns.Add(card.Root.MoveTo(SlotPositionFor(recapState, i), recapState.SlideSeconds, Axis.XYZ, Space.Self).Ease(Curve.BackOut).DelayBy(delay));
+                fadeIns.Add(card.Group.FadeTo(1f, recapState.SlideSeconds * 0.8f).Ease(Curve.SineIn).DelayBy(delay));
             }
-            if (slides.Count > 0) {
-                yield return Routine.Combine(slides.ToArray());
+            if (fadeIns.Count > 0) {
+                yield return Routine.Combine(fadeIns.ToArray());
             }
 
             // 6. Stage 4 — hold so the player can read the row.

@@ -35,11 +35,11 @@
 {@PAL}      I'm always available to answer your questions, Captain!
 {@Player}	Does she think I wrecked the ship and then sold out to Frontier?
 {@Player}	I'M DOING ALL THIS TO GET MY TEAM BACK TOGETHER. 
-{@Player}	Keela. I'm doing it for you guys. 
+{@Player}	Keela... I'm doing it for you guys. 
 
 //no answer
 
-{@PAL}		We have a contract to fill Captain.  
+{@PAL}		We have a contract to fulfill Captain.  
 
 ::AfterResearchCh7
 @trigger    OnOverarchingLoaded
@@ -61,28 +61,19 @@
 @cutscene 
 @once
 
-//call Mai              
-{@Mai}      ...Hi.
-{@Player}   Hi.
-{@Mai}      ...I'm Mai.
-{@Player}   I'm Locke...
-{@Mai}      Like... an Air-Lock? 
-{@Player}   Uh, no. It has an E at the end. 
-{@Mai}      Did your parents dislike you?
-{@Player}   Excuse me?  
-{@Mai}      I'm the supplier contact for the...
-{@Mai}      "Recently liberated" Wolfram. 
-{@Player}   Oh, the factory planet? 
-{@Mai}      Yeah, sure, if that's what you want to call it. 
-{@Player}   Oh, I didn't mean that, I- your planet isn't just a factory planet- 
-{@Mai}      You're funny. Yeah, It's my home. 
-{@Mai}      If you need anything from my sector, call me. 
-{@Player}   Will do...
+//call Mai  
+
+
+{@Player}   Hey, is this Wolfram? Is that factory planet up and running?
+{@Mai}      Factory planet? You know people actually live here, right?
+{@Player}   Oh. Sorry...
+{@Mai}      We've been here for generations! And our factories are worker-owned.
+{@Player}   So you don't use Frontier tech?
+{@Mai}      *Sigh*... I wish. Frontier owns the rights to all the mining tech.
+{@Mai}      But YES, we're up and running.
 //end call
 
-{@Player}    Wow. That was rough. 
-{@Pal}		Yes, humans can be so sensitive. Robots are very pragmatic and easy to get along with. 
-{@Player}	But, that's what I like about my human friends. They have feelings.
+{@Player}   Worker-owned? Sounds exhausting. I like being in charge of my own ship.
 
 
 ::AfterSupplyChain
@@ -106,10 +97,6 @@
 {@Mara}	At dusk, everyone extinguishes their lights. An old miner's lamp is lit at the mine entrance, and people pass the light from lamp to lamp until the whole settlement is illuminated.
 {@Player}   Wow, that sounds beautiful.  And the strike?
 {@Mara}     People are scared, Locke. They want Frontier to guarantee the bots won't put anyone else in the hospital.
-{@Player}   Frontier just raised Kalvis's risk rating.
-{@Mara}     Of course they did.
-{@Player}   It's making it harder to source anything from you.
-{@Mara}     That's the point. Pressure our workers until we give in. We have to feed our families you know. 
-{@Player}   ...That's not how P.A.L. explained it.
-{@Mara}     I'm sure it isn't.
+{@Player}   I've noticed it's getting riskier to source from Kalvis.
+{@Mara}     But we're willing to take that risk. We need to protect our people.
 //end call

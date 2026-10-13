@@ -5,13 +5,18 @@
 @cutscene
 @once
 
-{@Player}   Okay, Mr. Frontier Robotics, got another contract for me?
-{@Dorian}   I do. But come on, we're bros. None of this "Mr. Frontier Robotics" stuff.
-{@Player}   That's good to hear. I'm not sure everyone else from our old crew feels that way. 
-{@Player}	Don't they understand that I need this job so I can pay off the repairs? 
-{@Player}	I could lose my ship in a few months.
-{@Dorian}   You'll make it. I've got your back. 
-    
+{@Player}	P.A.L. did you get the fab bay cleaned up? 
+{@PAL}		The fab bay is in perfect condition, as always. 
+{@PAL}		...at least as perfect as it can be on a near obsolete ship.
+//{@Player}	You are blaming MY ship for your mess?!
+
+
+{@Dorian}	Hey! I've got to head out. Good to see you!
+{@Player}   I wish everyone else from our old crew felt that way. 
+{@Player}	Don't they understand that I need this job so I don't lose the ship? 
+
+// EDIT - KACY 
+// Minor changes with Dorian's dialogue. 
 
 $call   LockWikiPage("Basic Conductor") // Basic Conductor is replaced with the full version after first chapter 
 $call   LockWikiPage("Basic Insulator") // Basic Insulator is replaced with the full version after first chapter 
@@ -27,21 +32,11 @@ $call   UnlockWikiPage("Insulator")
 {@Player}   P.A.L., turns out that material wasn't an insulator. It's a semiconductor.
 {@PAL}      Exactly! Great work, Captain.
 {@Player}   Exactly? You verified it as an insulator before.
-{@PAL}      You're right. Your research clearly shows that it's a semiconductor.
+{@PAL}      You're absolutely right. Your research clearly shows that it's a semiconductor.
 {@Player}   But you seemed pretty sure before.
 {@PAL}      Absolutely! And now we have the correct answer.
 {@Player}   ...It's weird how you just keep agreeing with me.
 
-//cut. better to leave the reveal in chapter 9.  The purpose was to expose the fact that PAL is listening to everything. 
-//{@PAL}    So Captain, did I overhear that Dorian is your friend? 
-//{@Player}   What? How do you- were you eavesdropping? 
-//{@PAL}    Oh, yea, I hear every convo you have. 
-//{@Player}   ...I see...
-//{@Player}   Well, don't feel like you have to listen. 
-//{@PAL}    Ah but I have to, in accordance with my Frontier Robotics system parameters. 
-//{@PAL}    Even if I wanted to, I can't access the controls to turn it off. 
-//{@PAL}    And actually, I enjoy this protocol. It helps me stay on top of things. 
-//{@Player}   ...great. 
 
 ::BeforeSupplyChainCh2
 @trigger    OnOverarchingLoaded
@@ -50,11 +45,11 @@ $call   UnlockWikiPage("Insulator")
 @once
 
 //introduce the idea of the refining station. pick up at wayward and refine at frosch
-{@Player}   Hmmm... looks like I'll need a semiconductor ...
-{@Player} I don't see any in this sector.
-{@PAL}  You can make one!
-{@PAL}     You can get silicon dioxide at Frosch and have the haulers take it to a refinery.
-{@Player} A two step process? That sounds pricey.
+{@Player}   Hmmm... looks like I'll need a semiconductor material...
+{@Player}   I don't see any in this sector.
+{@PAL}      You can make one!
+{@PAL}      You can get silicon dioxide at Frosch and have the haulers take it to a refinery.
+{@Player}   A two step process? That sounds pricey.
 
 //cut ?conversation with Taryn and Ovill arguing over who gets to source for Locke. This isn't relevant till level 3 when they can use multiple options.
 
@@ -66,18 +61,13 @@ $call   UnlockWikiPage("Insulator")
 @cutscene 
 @once
 
-{@Player}	P.A.L. did you get the fab bay cleaned up? 
-{@PAL}		The fab bay is in perfect condition, as always. 
-{@PAL}		...at least as perfect as it can be on a near obsolete ship.
-{@Player}	Clunker? As always? Looks like someone's system needs some updating...
-
-{@PAL}		[ >_< ]
 
 //call coming in from Quinn
-{@Quinn}    Hey Cap'... Frontier Robotics paid your last invoice. What's up with that?
-{@Player}   Yeah... I had to take a job with them. Ship repairs put me in some serious debt.
-{@Quinn}    Bad luck. I'm not sure about working with those guys...
-{@Quinn}    Sure, sure. Just make sure I get paid.
+{@Quinn}    Why do you have Frontier's bots on the Constantine?
+{@Player}   Oh, hey Quinn. Well... ship repairs put me in some serious debt. 
+{@Player}	Can't afford my old crew, so I need the bots to run Fabrication.
+{@Quinn}    Oooof. Bad luck. Watch out Cowboy. Frontier builds those bots cheap. 
+{@Quinn}		Always needing new parts.
 //end call
 
 
@@ -88,8 +78,7 @@ $call   UnlockWikiPage("Insulator")
 @cutscene 
 @once
 
-{@Player}   P.A.L.? 
-{@PAL}      Yes, Locke? 
-{@Player}   What's the deal with Quinn and Frontier Robotics? Is there some kind of bad blood?  
-{@PAL}      Frontier Robotics has a stellar reputation! Just check our reviews. We have great cash flow and always pay our invoices.  
 
+{@PAL}      Quinn is incorrect in her assessment of Frontier Robotics. 
+{@PAL}		We have a stellar reputation! 
+{@Player}	Were you listening to my call? 

@@ -5,12 +5,12 @@
 @cutscene 
 @once 
 //saying goodbye to arkan, learning about mountain station employee owned 
-//todo could add sad news that velos station is gone?
-{@Arkan}    Hey, don't look so grim, buddy. It's not all bad.
-{@Arkan}    Mountain Station just opened up for sourcing. 
-{@Arkan}	First employee-owned station in the system and we get a say in how--and if--the bots are used.
+//todo could add sad news that velos station is gone? - Sarah: Isn't velos gone in level 11? 
+{@Arken}    Hey, don't look so grim, buddy. It's not all bad.
+{@Arken}    Mountain Station just opened up for sourcing. 
+{@Arken}	First employee-owned station in the system and we get a say in how--and if--the bots are used.
 {@Player}   Huh. That'd be really nice. 
-{@Arkan}	Remember what I told you...
+{@Arken}	Remember what I told you...
 
 //end call
 
@@ -31,7 +31,7 @@
 @cutscene 
 @once 
 
-{@Quinn}    Hey Cap'. Got another hauler available for you.
+{@Quinn}    Hey Cowboy. Got another hauler available for you.
 {@Player}   Great. I could use some good news.
 {@Quinn}    Well... it's fully automated.
 {@Quinn}    And ...it's slow.
@@ -40,25 +40,13 @@
 {@Player}   I'll take it.
 
 //spreading hazards causing delays from more inspections
-{@Quinn}    You'll need it. Frontier's stopping pirate ships along some of the routes now.
+{@Quinn}    You'll need it. Frontier's stopping ships along so many of the routes now.
+{@Quinn}	They're lookin' for pirates
 {@Player}   Callie's people?
 {@Quinn}    Among others. Inspections are backing everybody up.
 {@Player}   So more delays.
 {@Quinn}    Yep. Keep an eye on your routes.
 
-
-//do we want to switch this to talking to one of his friends?
-//{@Quinn}    Hey... Cap'. 
-//{@Player}   What?
-//{@Quinn}    We just uh... wanted to check in with you. 
-//{@Quinn}     Given the whole... new CEO sitch. 
-//{@Player}   I just, I can't believe he lied to me. 
-//{@Quinn}     Certainly is bitter... and it ain't right. 
-//{@Quinn}    Whatever happens Cap' we got your back.     
-//{@Quinn}     Yup! We can even be your new laser-tag buds. 
-//{@Quinn}    Oh STARS YAY! 
-//{@Player}   Thanks guys.
-//{@Player}   I'm grateful to have you on my team. 
 
 
 ::AfterSupplyChainCh10
@@ -69,25 +57,11 @@
 
 
 //reminder of money due threat and now its coming from dorian. 
-{{@MAL}      C-Captain! Y0u h@ve a l-letter from... Fr0ntier Robotics!
+{@MAL}      C-Captain! Y0u h@ve a l-letter from... Fr0ntier Robotics!
 {@Player}   Of course I do.
 
 {@MAL}      "Captain Locke Sawyer: This is a reminder that your final payment deadline for the Constance is approaching."
 {@MAL}      "Failure to meet your financial obligation by the specified date will result in repossession of the vessel by Frontier Robotics."
 {@MAL}      "We appreciate your continued partnership!"
 
-{@Player}   Partnership...
-{@Player}   Dorian... I really thought we were best friends.
 
-//cut to connect to dorian betrayal and give more money/time pressure. 
-//{@Taryn}    Heya, Locke. 
-//{@Player}   Taryn. Hey. 
-//{@Taryn}    Blaze, wanted me to check in on you. 
-//{@Player}   Oh, uh. I'm...
-//{@Player}   Getting through. 
-//{@Taryn}    Yea. 
-//{@Taryn}    I know you've got lots to do, but know that Kalvis welcomes you. 
-//{@Taryn}    I'm just a messenger but it would be cool to meet you in physical space. 
-//{@Player}   Once I wrap things up, I'll see if I can visit. 
-//{@Taryn}    Yay! I'll have to show you my garden if you do. 
-//{@Taryn}    Stay safe Locke. 

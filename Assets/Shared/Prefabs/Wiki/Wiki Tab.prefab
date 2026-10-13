@@ -150,7 +150,6 @@ GameObject:
   - component: {fileID: 4542525751125533162}
   - component: {fileID: 4360009080446103270}
   - component: {fileID: 4952652600211623198}
-  - component: {fileID: 1945724388015032908}
   - component: {fileID: 2175827964934816558}
   m_Layer: 5
   m_Name: Wiki Tab
@@ -267,28 +266,6 @@ MonoBehaviour:
   TooltipHeader: Tab
   Tooltip: 
   TooltipFooter: 
---- !u!114 &1945724388015032908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2543509618474448267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7205386b1fab3c4298e01aa76336509, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnEnter:
-    m_HashValue: 0
-  OnExit:
-    m_HashValue: 0
-  OnDown:
-    m_HashValue: 1565301338
-  OnUp:
-    m_HashValue: 0
-  OnClick:
-    m_HashValue: 2753197488
 --- !u!114 &2175827964934816558
 MonoBehaviour:
   m_ObjectHideFlags: 0

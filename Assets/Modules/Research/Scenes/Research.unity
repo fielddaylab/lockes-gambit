@@ -1831,7 +1831,6 @@ GameObject:
   - component: {fileID: 436549460}
   - component: {fileID: 436549459}
   - component: {fileID: 436549461}
-  - component: {fileID: 436549462}
   m_Layer: 0
   m_Name: Research Assets
   m_TagString: Untagged
@@ -1885,22 +1884,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Scripts:
   - {fileID: -1942890987711236906, guid: ca6d5004868a07645bc7ddf700885706, type: 3}
---- !u!114 &436549462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436549458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79013ef6b98af0b4d9b5228746b3aba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EventId:
-    m_HashValue: 2565875709
-  PlaylistId:
-    m_HashValue: 0
 --- !u!1 &460799335
 GameObject:
   m_ObjectHideFlags: 0

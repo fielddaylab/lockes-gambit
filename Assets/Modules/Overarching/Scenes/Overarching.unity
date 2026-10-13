@@ -362,7 +362,6 @@ GameObject:
   m_Component:
   - component: {fileID: 422788435}
   - component: {fileID: 422788434}
-  - component: {fileID: 422788436}
   - component: {fileID: 422788437}
   - component: {fileID: 422788438}
   - component: {fileID: 422788439}
@@ -404,22 +403,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &422788436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422788433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79013ef6b98af0b4d9b5228746b3aba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EventId:
-    m_HashValue: 3632275072
-  PlaylistId:
-    m_HashValue: 0
 --- !u!114 &422788437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3488,10 +3471,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4006053134420901605, guid: 3d915541ee8314e4393844d1f2eec9c1, type: 3}
-      propertyPath: m_Testing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5804591859698315470, guid: 3d915541ee8314e4393844d1f2eec9c1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4864,6 +4843,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 468121347495355592, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
+      propertyPath: m_text
+      value: 'FRA Manufacturing Logistics "Protect, preserve, persevere, we are the
+        FRA." '
+      objectReference: {fileID: 0}
     - target: {fileID: 543103352869115376, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5044,6 +5028,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1508963120985238418, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508963120985238418, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508963120985238418, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1586509466720556515, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5187,6 +5183,14 @@ PrefabInstance:
     - target: {fileID: 2171299934344521450, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273690110043270820, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
+      propertyPath: m_Name
+      value: ContractorDescription1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273690110043270820, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2289906426012449382, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5476,6 +5480,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214932998144580440, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3548367805206457599, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -5675,6 +5683,10 @@ PrefabInstance:
     - target: {fileID: 4465851791942372570, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472721575574459394, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4816109517798813332, guid: 3c04d8d1d6b5ff746aaed33926794c92, type: 3}
       propertyPath: m_AnchorMax.y

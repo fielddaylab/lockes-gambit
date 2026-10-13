@@ -37,7 +37,7 @@ $call   ResetCurrentChamber()
 $call   ReleaseAllHighlights()
 $call   HighlightElement(research:increase-voltage-btn)
 $call   AddObsBtn->SetActive(false)
-{@PAL}  Let's add voltage and observe the electrical current.
+{@PAL}  INCREASE voltage and observe the electrical current.
 
 
 ::OnVoltageIncreased
@@ -51,7 +51,7 @@ $call   CloseWiki()
 @trigger    OnObservationAdded
 @when       !MinigameHasValidSolution()
 $call   CloseWiki()
-{@PAL}  Now choose a property that matches your observation.\nClick <color=yellow>ADD PROPERTY</color>.
+{@PAL}  Choose a property that matches your observation.\n\nClick <color=yellow>ADD PROPERTY</color>.
 
 ::OnVerifyButtonShown
 @trigger    OnVerifyButtonShown
@@ -67,10 +67,10 @@ $call   ReleaseAllHighlights()
 $call   CloseWiki()
 $if MinigameHasValidSolution()
     $call   HighlightElement(return-button)
-    {@PAL}  Correct. You've completed the Contract Requirements!\n\nPress <color=yellow>LEAVE</color> to leave the lab.
+    {@PAL}  You've completed the Contract Requirements!\n\nPress <color=yellow>LEAVE</color> to leave the lab.
 $else
     $call   HighlightElement(research:primary-slot)
-    {@PAL}  Correct. Now see if you can find a sample that matches the other Property.
+    {@PAL}  Correct. Now find a sample that matches the other Property.
 $endif
 
 ::OnHypothesisIncorrectHypothesisMismatch

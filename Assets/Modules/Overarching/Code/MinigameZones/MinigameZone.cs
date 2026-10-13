@@ -1,6 +1,7 @@
 using BeauUtil;
 using BeauUtil.UI;
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Components;
 using FieldDay.UI;
 using System;
@@ -53,6 +54,7 @@ namespace SpaceFab.Overarching
         {
             if (CursorCount++ == 0) {
                 MinigameZonesUtility.SetHoverState(this, true);
+                Sfx.Play("Overarching.Zone.Hover");
             }
         }
 

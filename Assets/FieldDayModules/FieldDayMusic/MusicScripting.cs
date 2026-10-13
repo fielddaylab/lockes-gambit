@@ -16,7 +16,7 @@ namespace FieldDay.Music {
 #endif // #!FIELD_DAY_INCLUDE_SCRIPTING
 
         [LeafMember("MusicLoop")]
-        static public void MusicPlay(StringHash32 musicId) {
+        static public void MusicLoop(StringHash32 musicId) {
             if (musicId.IsEmpty) {
                 MusicPlayer.SetPlaylistId(null);
                 MusicPlayer.ClearQueue();

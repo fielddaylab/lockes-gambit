@@ -62,8 +62,7 @@ namespace SpaceFab
         [NonSerialized] public float CurrentTransitionDelay;
         [NonSerialized] public Color32 CurrentColor;
 
-        public void OnDeregister()
-        {
+        public void OnDeregister() {
             CameraHelper.RemoveOnPreCull(this);
             Game.Gui.DeregisterUpdate(this);
         }
