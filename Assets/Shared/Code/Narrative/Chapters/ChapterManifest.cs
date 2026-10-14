@@ -21,6 +21,7 @@ namespace SpaceFab {
         [Serializable]
         public struct ExportedData {
             [AssetName(typeof(MaterialAsset))] public StringHash32[] ResearchableMaterials;
+            [StreamedPackId] public StringHash32 ComicPackage;
         }
 
         public Entry[] Chapters;
@@ -49,7 +50,8 @@ namespace SpaceFab {
                     }
 
                     ResidentData[i] = new ExportedData() {
-                        ResearchableMaterials = materialIds.ToArray()
+                        ResearchableMaterials = materialIds.ToArray(),
+                        ComicPackage = chapter.ComicPackage
                     };
                     materialIds.Clear();
                 }

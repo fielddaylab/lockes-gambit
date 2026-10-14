@@ -8,6 +8,7 @@ using FieldDay.Music;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
 using FieldDay.SharedState;
+using SpaceFab.Comic;
 using SpaceFab.Design;
 using SpaceFab.Save;
 using System;
@@ -179,7 +180,7 @@ namespace SpaceFab
             chapterState.ChapterIndex++;
             progressState.RecentlyCompletedContract = contractState.ContractId;
             SaveUtility.Save(SaveSlot.Main);
-            Game.Scenes.ReloadMainScene();
+            ComicScripting.LoadComicForCurrentChapter();
         }
     }
 }
