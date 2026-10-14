@@ -61,7 +61,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -458660017
   m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &7283128513395843964
@@ -203,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 153714382079927428, guid: df7f4f75578cd4449a6e7aaeec714566, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 153714382079927428, guid: df7f4f75578cd4449a6e7aaeec714566, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

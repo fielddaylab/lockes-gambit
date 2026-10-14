@@ -62,6 +62,10 @@ namespace SpaceFab.Fabrication.Sequence
         // until the next reset.
         [NonSerialized] public bool CompletionRequested;
 
+        // Set when leaving PreAttempt (the layer panel was just shown there); skips the panel show
+        // at the end of that first countdown.
+        [NonSerialized] public bool SkipLayerPanelAfterCountdown;
+
         public void OnRegister()
         {
             FrontCard = CardSlotA;
@@ -69,7 +73,8 @@ namespace SpaceFab.Fabrication.Sequence
             ResetRequested = false;
             AdvanceRequested = false;
             CompletionRequested = false;
-            
+            SkipLayerPanelAfterCountdown = false;
+
             SequencePanelGroup.anchoredPosition = new Vector2(0, 250);
 
             // Start hidden. Cards only become visible once ModeTransitionSystem transitions into
