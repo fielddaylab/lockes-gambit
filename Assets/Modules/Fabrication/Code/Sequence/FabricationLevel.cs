@@ -57,5 +57,9 @@ namespace SpaceFab.Fabrication.Sequence
         void IRegistrationCallbacks.OnDeregister() {
             m_CachedSequenceRef = null;
         }
+
+        public void ClearCachedReferences() {
+            m_CachedSequenceRef = null;
+        }
     }
 }
