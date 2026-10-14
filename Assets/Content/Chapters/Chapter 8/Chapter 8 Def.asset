@@ -29,6 +29,8 @@ MonoBehaviour:
   - m_HashValue: 527899933
   ExcludeFromResearch: []
   UnlockSpecialProperties: 0
+  ComicPackage:
+    m_HashValue: 3311712746
   Script: {fileID: -1942890987711236906, guid: 8a380919be956944586a6f6463e984d8, type: 3}
   SkyboxMaterial: {fileID: 2100000, guid: 4e3dcd7423137994e8ded390696ecea2, type: 2}
   SkyboxRotation: 0

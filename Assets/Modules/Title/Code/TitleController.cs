@@ -36,7 +36,6 @@ namespace SpaceFab.Title
         public TitleCanvasLayer OptionsPage;
 
         [Header("Targets")]
-        [StreamedPackId] public StringHash32 NewGameComic;
         public SceneReference ContinueGameScene;
         public SceneReference CreditsScene;
 
@@ -326,7 +325,7 @@ namespace SpaceFab.Title
             SpacefabGame.Events.Dispatch(GameEvents.TitleProfileStarting, PlayCodeInput.text);
 
             if (CurrentPage == PageId.NewGame) {
-                ComicScripting.LoadComic(NewGameComic);
+                ComicScripting.LoadComicForChapter(0);
                 Game.Scenes.GetQueuedLoadContext(out SceneRequestContext context);
                 context.Set("QueueSave", true);
                 Game.Scenes.QueueMainLoadContext(context);

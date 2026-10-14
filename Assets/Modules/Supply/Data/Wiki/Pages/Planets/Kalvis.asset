@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kalvis
   m_EditorClassIdentifier: 
   Title: Kalvis
-  Icon: {fileID: 21300000, guid: e566c0107375b994fa6a8c6cbfae413a, type: 3}
+  Icon: {fileID: 21300000, guid: ab233415b326fad4fa56d4e27aef3985, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 35b25da72912c4749a70171471aa3278, type: 3}
   IllustrationFPS: 0.5

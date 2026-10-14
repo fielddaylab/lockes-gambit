@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ralston
   m_EditorClassIdentifier: 
   Title: Ralston
-  Icon: {fileID: 21300000, guid: 212a6fc0887cd804e9083385ac15a604, type: 3}
+  Icon: {fileID: 21300000, guid: 76aa8c37f842ae944ae16cf7aeb01cee, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 039be44effd572149b3bb5490f0bc1fe, type: 3}
   IllustrationFPS: 0.5

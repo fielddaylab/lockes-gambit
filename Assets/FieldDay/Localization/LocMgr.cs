@@ -22,6 +22,9 @@ namespace FieldDay.Localization {
         internal void Shutdown() {
             m_MainDb.Clear();
             m_SubDb.Clear();
+
+            m_MainDb = null;
+            m_SubDb = null;
         }
 
         #endregion // Events

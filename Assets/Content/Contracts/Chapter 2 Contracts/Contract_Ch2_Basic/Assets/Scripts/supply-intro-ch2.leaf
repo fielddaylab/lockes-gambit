@@ -17,6 +17,7 @@ $if     !temp:firstNodeClicked
     {@PAL}  Use the <color=yellow>WASD</color> or <color=yellow>Arrow</color> keys to move around and find other planets.
 $elseif !temp:secondNodeClicked
     $set    temp:secondNodeClicked = true
+    $call   PointElement(supply:ship0-time)
     {@PAL}  The planets with the highest time determines the total production time of your route.
 $endif
 

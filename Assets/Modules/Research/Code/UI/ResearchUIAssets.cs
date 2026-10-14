@@ -15,13 +15,10 @@ namespace SpaceFab.Research {
         // TODO: Replace chamber button sprites to the shared ButtonUp/ButtonDown sprites
         // with separate icon overlays to reduce the number of sprite assets.
         [Header("Chamber Button Sprites")]
-        public Sprite VoltageNormal;
-        public Sprite VoltagePressed;
-        public Sprite ThermalNormal;
-        public Sprite ThermalPressed;
-        public Sprite DopingNormal;
-        public Sprite DopingPressed;
-        public Sprite LockedChamber;
+        public Sprite VoltageButton;
+        public Sprite ThermalButton;
+        public Sprite DopingButton;
+        public Sprite LockedChamberButton;
 
         [Header ("Atomic View Toggle")]
         public Sprite ButtonUp;

@@ -26,6 +26,6 @@ $call   ReleaseAllHighlights()
 @when   !MinigameHasValidSolution()
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
+$call   PointElement(supply:time-meter)
 {@PAL}  All your ships travel at the same time. The one that takes the longest determines your total time.\n\nThis is called a bottleneck.
-// TODO: open time page
-// TODO: point the time section of the progress meter
+// TODO: open time pages

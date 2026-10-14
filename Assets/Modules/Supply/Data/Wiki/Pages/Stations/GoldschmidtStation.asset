@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: GoldschmidtStation
   m_EditorClassIdentifier: 
   Title: Goldschmidt Station
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
-  IllustrationFrames: []
+  Icon: {fileID: 21300000, guid: b805cd722fc50cd48a8bec1993574885, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 5624cd343de50554db2e8fa3575e12b4, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
+  CaptionText: 
   BodyText: Goldschmidt Station acts as Frontier Robotics main source of radioactive
     resistant components, making it a vital station for Frontier's robot worker manufacturing.
   MaterialId:

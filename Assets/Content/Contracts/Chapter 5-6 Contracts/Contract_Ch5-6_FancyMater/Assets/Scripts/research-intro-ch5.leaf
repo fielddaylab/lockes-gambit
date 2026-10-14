@@ -3,7 +3,7 @@
 ::IntroSelectTrace
 @trigger    OnSetupComplete
 $if MinigameHasValidSolution()
-    {@PAL}  You've already researched everything you need to! You can continue your experiments to uncover new insights.
+    {@PAL}  You've already researched everything you need to!\n\nYou can continue your experiments to uncover new insights.
 $else
     {@PAL}  The battery capacity has been increased. Now you can test for Hi-Voltage Semiconductors.\n\nTest a new sample.
 $endif
@@ -59,7 +59,7 @@ $call   CloseWiki()
 @when       result == "failure", reason == "observation_mismatch"
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
-{@PAL}  Your Property was incorrect.\n\nTry again.
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
 
 ::OnHypothesisIncorrectInvalidObservation
 @trigger    OnHypothesisSubmitted

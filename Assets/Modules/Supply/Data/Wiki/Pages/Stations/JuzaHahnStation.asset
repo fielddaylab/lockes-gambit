@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: JuzaHahnStation
   m_EditorClassIdentifier: 
   Title: Juza-Hahn Station
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
-  IllustrationFrames: []
+  Icon: {fileID: 21300000, guid: 5525b15f5b4195244812011735aa65c6, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: cf6f812b6d63ab24e8e0f464f689ddd8, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
+  CaptionText: 
   BodyText: Juza-Hahn Station Frontier Robotics military and energy operation, an
     integral station the Frontier Robotics Peace Authority (FRPA), the major policing
     entity in all of Ausrine.
