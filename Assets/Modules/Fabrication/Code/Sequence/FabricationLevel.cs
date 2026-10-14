@@ -1,3 +1,6 @@
+using System;
+using BeauUtil;
+using FieldDay;
 using FieldDay.Assets;
 using UnityEngine;
 
@@ -10,10 +13,19 @@ namespace SpaceFab.Fabrication.Sequence
     /// and lives on SequenceUtility.
     /// </summary>
     [CreateAssetMenu(menuName = "SpaceFab/Fabrication/Level")]
-    public class FabricationLevel : NamedAsset
+    public class FabricationLevel : NamedAsset, IRegistrationCallbacks
     {
-        [SerializeField] private FabricationSequence m_sequence;
-        public FabricationSequence Sequence => m_sequence;
+        [NonSerialized] private FabricationSequence m_CachedSequenceRef;
+
+        [SerializeField, AssetName(typeof(FabricationSequence))] private StringHash32 m_sequenceId;
+        public FabricationSequence Sequence {
+            get {
+                if (m_CachedSequenceRef == null) {
+                    m_CachedSequenceRef = Find.NamedAsset<FabricationSequence>(m_sequenceId);
+                }
+                return m_CachedSequenceRef;
+            }
+        }
 
         // Each step is independently rolled against this
         // probability at sequence reset. Range [0,1].
@@ -37,6 +49,13 @@ namespace SpaceFab.Fabrication.Sequence
                 default:
                     return 0;
             }
+        }
+
+        void IRegistrationCallbacks.OnRegister() {
+        }
+
+        void IRegistrationCallbacks.OnDeregister() {
+            m_CachedSequenceRef = null;
         }
     }
 }

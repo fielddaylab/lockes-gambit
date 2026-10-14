@@ -22,6 +22,11 @@ namespace FieldDay.Localization {
             m_Entries = new Dictionary<uint, string>(capacity);
         }
 
+        public LocDb(Dictionary<uint, string> premadeEntries) {
+            Assert.NotNull(premadeEntries);
+            m_Entries = premadeEntries;
+        }
+
         /// <summary>
         /// Attempts to retrieve the entry for the given localization id.
         /// </summary>

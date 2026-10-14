@@ -3909,10 +3909,11 @@ MonoBehaviour:
   m_Packs:
   - {fileID: 11400000, guid: 450a1aa5e925122438d019b05630515d, type: 2}
   - {fileID: 11400000, guid: 35a49fd885ee0434cb3480823562390c, type: 2}
-  - {fileID: 11400000, guid: 35a49fd885ee0434cb3480823562390c, type: 2}
   - {fileID: 11400000, guid: 7c190105b99806d40bd06e38a3f6e5a6, type: 2}
   - {fileID: 11400000, guid: 3a98e826e688ab548814ae7ee05059ae, type: 2}
   - {fileID: 11400000, guid: 71030d21d6d824aac897cbb16b18de32, type: 2}
+  - {fileID: 11400000, guid: b0e2845640afb2840ad30ef1b0b88467, type: 2}
+  - {fileID: 11400000, guid: 91dcd3ac60c74fd4e8bb2dd421251544, type: 2}
 --- !u!4 &1904662656
 Transform:
   m_ObjectHideFlags: 0
