@@ -23,6 +23,10 @@ namespace SpaceFab {
         public Graphic DifficultyBackground;
         public TMP_Text DifficultyLabel;
 
+        [Header("Chip Diagram")]
+        public Graphic ChipDiagramEmpty;
+        public Graphic ChipDiagramFilled;
+
         [Header("Client")]
         public TMP_Text ClientText;
         public Image ClientIcon;
@@ -36,10 +40,23 @@ namespace SpaceFab {
 
         [Header("Buttons")]
         public GuiButton SelectContractButton;
+        public GuiButton ContextBackButton;
+        public GuiButton ContextContinueButton;
+        public GuiButton CloseButton;
         
         [Header("Animated")]
         public GameObject ApprovedStamp;
         public Image SignatureImage;
+        public DitherFadeGroup ApprovedStampMask;
+        public DitherFadeGroup ChipDiagramMask;
+        public DitherFadeGroup ControlsMask;
+        public DitherFadeGroup ContextContentsMask;
+
+        [Header("Context Panel")]
+        public Canvas ContextSubCanvas;
+        public RectTransform ContextPanel;
+        public TMP_Text ContextHeader;
+        public TMP_Text ContextDescription;
 
         public void ClearElements()
         {

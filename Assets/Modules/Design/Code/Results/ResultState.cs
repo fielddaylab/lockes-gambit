@@ -15,13 +15,8 @@ namespace SpaceFab.Design
     /// </summary>
     public class ResultState : SharedStateComponent, IRegistrationCallbacks
     {
-        public CanvasGroup ResultsGroup;
-        public TextMeshProUGUI TitleText;
-        public TextMeshProUGUI SummaryText;
-        public GuiButton DismissButton;
-        public GuiButton RetryButton;
+        public ResultsPanelLayout PanelLayout;
         public SimTableLayout Table;
-        public CanvasInputLayer Input;
 
         // One-frame intent flag: the player clicked "Continue" on a passing results panel. Consumed
         // by DesignContinueSystem, which decides whether to advance to the next level (reload the
@@ -31,6 +26,10 @@ namespace SpaceFab.Design
 
         public void OnRegister()
         {
+            PanelLayout.Canvas.enabled = false;
+            PanelLayout.Input.SetInputOverride(false);
+            
+
 
             if (ResultsGroup != null)
             {

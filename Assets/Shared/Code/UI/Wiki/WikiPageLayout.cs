@@ -38,7 +38,7 @@ namespace SpaceFab.UI {
         public LayoutOptions VerticalLayout = LayoutOptions.PreferredSize(4, 1);
 
         [Header("Masking")]
-        public Mask AnimatedMask;
+        public DitherFadeGroup AnimatedMask;
 
         [NonSerialized] public WikiPageType CurrentPageType;
         [NonSerialized] public StringHash32 CurrentMaterialId;
@@ -57,8 +57,7 @@ namespace SpaceFab.UI {
             CurrentObservationChipCount = 0;
             CurrentPageType = WikiPageType.Default;
 
-            AnimatedMask.enabled = false;
-            AnimatedMask.graphic.enabled = false;
+            AnimatedMask.SetAlpha(0);
 
             OriginalIllustrationHeight = Illustration.Target.rectTransform.sizeDelta.y;
         }
@@ -363,8 +362,7 @@ namespace SpaceFab.UI {
             layout.CurrentObservationChipCount = 0;
             layout.CurrentMaterialId = default;
 
-            layout.AnimatedMask.enabled = false;
-            layout.AnimatedMask.graphic.enabled = false;
+            layout.AnimatedMask.SetAlpha(0);
             Anims.Cancel(ref layout.AppearAnim);
         }
 
@@ -467,21 +465,14 @@ namespace SpaceFab.UI {
         private sealed class DissolveInAnimation : LiteAnimator<WikiPageLayout> {
             public override void InitAnimation(WikiPageLayout target, ref LiteAnimatorState state) {
                 state.ResetTime(0.44f);
-                target.AnimatedMask.enabled = true;
-                target.AnimatedMask.graphic.SetAlpha(0);
-                target.AnimatedMask.graphic.enabled = true;
+                target.AnimatedMask.SetAlpha(0);
             }
 
             public override void ResetAnimation(WikiPageLayout target, ref LiteAnimatorState state) {
             }
 
             public override void UpdateAnimation(WikiPageLayout target, ref LiteAnimatorState state, float deltaTime) {
-                if (state.IsLastFrame()) {
-                    target.AnimatedMask.enabled = false;
-                    target.AnimatedMask.graphic.enabled = false;
-                } else {
-                    target.AnimatedMask.graphic.SetAlpha(state.PercentProgress);
-                }
+                target.AnimatedMask.SetAlpha(state.PercentProgress);
             }
         }
 

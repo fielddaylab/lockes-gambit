@@ -290,6 +290,40 @@ namespace FieldDay {
 
         #endregion // Local Position
 
+        #region Sibling Ordering
+
+        static public void MoveToFront(RectTransform rect) {
+            Assert.NotNullOrDestroyed(rect.parent, "Transform must be in a hierarchy");
+            rect.SetAsLastSibling();
+        }
+
+        static public void MoveToBack(RectTransform rect) {
+            Assert.NotNullOrDestroyed(rect.parent, "Transform must be in a hierarchy");
+            rect.SetAsFirstSibling();
+        }
+
+        static public void MoveBeforeSibling(RectTransform rect, RectTransform target) {
+            Assert.NotNullOrDestroyed(rect.parent, "Transform must be in a hierarchy");
+            if (target != null) {
+                Assert.True(target.parent == rect.parent, "Transforms must be in the same hierarchy");
+                rect.SetSiblingIndex(target.GetSiblingIndex());
+            } else {
+                rect.SetAsFirstSibling();
+            }
+        }
+
+        static public void MoveAfterSibling(RectTransform rect, RectTransform target) {
+            Assert.NotNullOrDestroyed(rect.parent, "Transform must be in a hierarchy");
+            if (target != null) {
+                Assert.True(target.parent == rect.parent, "Transforms must be in the same hierarchy");
+                rect.SetSiblingIndex(target.GetSiblingIndex() + 1);
+            } else {
+                rect.SetAsLastSibling();
+            }
+        }
+
+        #endregion // Sibling Ordering
+
         #region Size Delta
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
