@@ -62,6 +62,7 @@ namespace SpaceFab.Fabrication.StationControl {
         public float EnterMicrogameDuration = 0.5f;
         public float ExitMicrogameDuration = 0.5f;
         public float StunDuration = 1.5f;
+        public float CompletionHoldDuration = 0.5f;
 
         // One-frame flags, cleared by StationControlFlagRefreshSystem in LateUpdate.
         [NonSerialized] public bool MicrogameCompletedThisFrame;
