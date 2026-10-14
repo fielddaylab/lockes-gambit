@@ -39,7 +39,7 @@ PrefabInstance:
     - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8eb90109baa0712479eab12f7d2602bb, type: 3}
+      objectReference: {fileID: 21300000, guid: db5fcffb41659ce4a9560134c9b44aed, type: 3}
     - target: {fileID: 6139377420993714670, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Id.m_Source
       value: supply:planet_sic
@@ -88,6 +88,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Cost
       value: 3
@@ -103,6 +119,14 @@ PrefabInstance:
     - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: MaterialType.m_HashValue
       value: 3774176290
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: Tooltip
+      value: This station will sell you SiC.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: TooltipHeader
+      value: Silicon Carbide
       objectReference: {fileID: 0}
     - target: {fileID: 8792477959654819082, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: TooltipHeader

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: WaywardStation
   m_EditorClassIdentifier: 
   Title: Wayward Station
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
-  IllustrationFrames: []
+  Icon: {fileID: 21300000, guid: 3dbf49e149685d648b787599c29a8f9c, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 2170dd5732cb6cb498b6716af61af721, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
+  CaptionText: 
   BodyText: Originally a premiere Frontier Station, it has now become a neutral site
     between Frontier Robotics and The Independents following the recent conflict
     between the Kalvis Sector and it's former employer.

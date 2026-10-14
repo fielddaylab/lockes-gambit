@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: VelosStation
   m_EditorClassIdentifier: 
   Title: Velos Station
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
-  IllustrationFrames: []
+  Icon: {fileID: 21300000, guid: 2643fae07c49cae408cb31bbc059e78c, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 3cddbe78d735acc4092c945cd0bc5524, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
+  CaptionText: 
   BodyText: The Boron Space Pirates are a former blue-collar prison station who revolted
     against the Frontier Robotic Authority. They are led by Callie Lee, and are known
     as the anarchists within the Ausrine system.

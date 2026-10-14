@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: LussacStation
   m_EditorClassIdentifier: 
   Title: Lussac Station
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
-  IllustrationFrames: []
+  Icon: {fileID: 21300000, guid: 2388c4197dab8ac408ca038ef1e82364, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 2fe0bad3e5b426c48b2cc88aa75bbc52, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
+  CaptionText: 
   BodyText: Lussac Station is the response to the Velos station revolt, as the Boron
     space pirates took over the Boron market. Lussac is the Frontier friendly option,
     but tends to be rather pricey.

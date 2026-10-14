@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Frosch
   m_EditorClassIdentifier: 
   Title: Frosch
-  Icon: {fileID: 21300000, guid: 572d0f1ecc2e3a448839a247613d2e76, type: 3}
+  Icon: {fileID: 21300000, guid: 6f754e6b0035bae458d320e151dcabf3, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 282906d88725aea4f94411a83b02b008, type: 3}
   IllustrationFPS: 0.5

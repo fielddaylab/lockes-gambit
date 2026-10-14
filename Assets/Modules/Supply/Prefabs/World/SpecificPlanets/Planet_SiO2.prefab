@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1683349872946723301, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: TooltipHeader
-      value: Wayward Station
+      value: Frosch
       objectReference: {fileID: 0}
     - target: {fileID: 2809890985908838907, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: HoverMaterial
@@ -39,7 +39,7 @@ PrefabInstance:
     - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8eb90109baa0712479eab12f7d2602bb, type: 3}
+      objectReference: {fileID: 21300000, guid: a789e664f35815c4d9f3d25a38d4408a, type: 3}
     - target: {fileID: 6139377420993714670, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Id.m_Source
       value: supply:planet_sio2
@@ -88,17 +88,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Time
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: WikiPage.m_HashValue
-      value: 1348497682
+      value: 1755696112
       objectReference: {fileID: 0}
     - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: MaterialType.m_HashValue
       value: 1571298950
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: Tooltip
+      value: This planet will sell you SiO2.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: TooltipHeader
+      value: Silicon Dioxide
       objectReference: {fileID: 0}
     - target: {fileID: 8792477959654819082, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: TooltipHeader

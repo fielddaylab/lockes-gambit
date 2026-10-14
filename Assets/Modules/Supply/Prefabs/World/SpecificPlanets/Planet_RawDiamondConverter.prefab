@@ -17,6 +17,10 @@ PrefabInstance:
       value: Planet_RawDiamondConverter
       objectReference: {fileID: 0}
     - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9327ba76980f8c4088585538c919957, type: 3}
+    - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: m_SortingLayer
       value: 18
       objectReference: {fileID: 0}
@@ -125,6 +129,14 @@ PrefabInstance:
     - target: {fileID: 2606513782869014858, guid: 4b0f04723e5e4a942bdec67a69cb6e4c, type: 3}
       propertyPath: m_Name
       value: ConverterMaterialInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872543400630215273, guid: 4b0f04723e5e4a942bdec67a69cb6e4c, type: 3}
+      propertyPath: Tooltip
+      value: This planet will refine C into Diamond.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872543400630215273, guid: 4b0f04723e5e4a942bdec67a69cb6e4c, type: 3}
+      propertyPath: TooltipHeader
+      value: C to Diamond
       objectReference: {fileID: 0}
     - target: {fileID: 6683377774293424528, guid: 4b0f04723e5e4a942bdec67a69cb6e4c, type: 3}
       propertyPath: m_LocalPosition.x
