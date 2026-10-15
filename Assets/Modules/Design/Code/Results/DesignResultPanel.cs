@@ -13,7 +13,7 @@ namespace SpaceFab.Design
     /// <summary>
     /// Holds data relevant to displaying simulation results.
     /// </summary>
-    public class ResultState : SharedStateComponent, IRegistrationCallbacks
+    public class DesignResultPanel : SharedStateComponent
     {
         public ResultsPanelLayout PanelLayout;
         public SimTableLayout Table;
@@ -23,44 +23,6 @@ namespace SpaceFab.Design
         // Design scene) or return to overarching (last level). Mirrors the PlayFullSuiteRequested
         // hand-off OnRetryClicked uses, keeping scene-loading out of this UI click handler.
         [NonSerialized] public bool ContinueRequested;
-
-        public void OnRegister()
-        {
-            PanelLayout.Canvas.enabled = false;
-            PanelLayout.Input.SetInputOverride(false);
-            
-
-
-            if (ResultsGroup != null)
-            {
-                ResultStateUtility.SetEnabledResultsGroup(this, false);
-            }
-
-            if (DismissButton != null)
-            {
-                DismissButton.gameObject.SetActive(true);
-                DismissButton.OnClick.AddListener(OnDismissClicked);
-            }
-
-            if (RetryButton != null)
-            {
-                RetryButton.gameObject.SetActive(true);
-                RetryButton.OnClick.AddListener(OnRetryClicked);
-            }
-        }
-
-        public void OnDeregister()
-        {
-            if (DismissButton != null)
-            {
-                DismissButton.OnClick.RemoveListener(OnDismissClicked);
-            }
-
-            if (RetryButton != null)
-            {
-                RetryButton.OnClick.RemoveListener(OnRetryClicked);
-            }
-        }
 
         private void OnDismissClicked()
         {
@@ -89,7 +51,7 @@ namespace SpaceFab.Design
 
     public static class ResultStateUtility
     {
-        public static void BuildResultsTable(ResultState resultState, TestSuiteData suite, SuiteVisualConfig suiteDB) {
+        public static void BuildResultsTable(DesignResultPanel resultState, TestSuiteData suite, SuiteVisualConfig suiteDB) {
             SimTableUtility.ConstructTable(resultState.Table, suite, suiteDB);
         }
 
@@ -101,7 +63,7 @@ namespace SpaceFab.Design
             LevelData levelData = DesignLevelUtility.GetActiveLevelData(contractState, designState);
             TestSuiteData suite = levelData.GetTestSuite();
 
-            Find.State(out SimulateUIState uiState, out ResultState resultState, out SimulateRunState simState);
+            Find.State(out SimulateUIState uiState, out DesignResultPanel resultState, out SimulateRunState simState);
 
             var suiteDB = Find.GlobalAsset<SuiteVisualConfig>();
 
@@ -117,39 +79,39 @@ namespace SpaceFab.Design
             }
         }
 
-        public static void SetEnabledResultsGroup(ResultState resultState, bool isEnabled)
+        public static void SetEnabledResultsGroup(DesignResultPanel resultState, bool isEnabled)
         {
-            if (resultState.ResultsGroup == null)
-            {
-                Debug.LogWarning("ResultState.ResultsGroup is null!");
-                return;
-            }
+            //if (resultState.ResultsGroup == null)
+            //{
+            //    Debug.LogWarning("ResultState.ResultsGroup is null!");
+            //    return;
+            //}
 
-            resultState.ResultsGroup.alpha = isEnabled ? 1f : 0f;
-            resultState.ResultsGroup.blocksRaycasts = isEnabled;
-            resultState.ResultsGroup.interactable = isEnabled;
-            if (isEnabled) {
-                resultState.Input.TryPushPriority();
-            } else {
-                resultState.Input.TryPopPriority();
-            }
+            //resultState.ResultsGroup.alpha = isEnabled ? 1f : 0f;
+            //resultState.ResultsGroup.blocksRaycasts = isEnabled;
+            //resultState.ResultsGroup.interactable = isEnabled;
+            //if (isEnabled) {
+            //    resultState.Input.TryPushPriority();
+            //} else {
+            //    resultState.Input.TryPopPriority();
+            //}
         }
 
-        public static void ShowResults(ResultState resultState, bool allCorrect)
+        public static void ShowResults(DesignResultPanel resultState, bool allCorrect)
         {
-            if (resultState.TitleText != null)
-            {
-                resultState.TitleText.SetText(allCorrect ? "Design complete" : "Failure");
-                resultState.TitleText.color = allCorrect ? Color.white : Color.red;
-            }
+            //if (resultState.TitleText != null)
+            //{
+            //    resultState.TitleText.SetText(allCorrect ? "Design complete" : "Failure");
+            //    resultState.TitleText.color = allCorrect ? Color.white : Color.red;
+            //}
 
-            if (resultState.SummaryText != null)
-            {
-                resultState.SummaryText.SetText(
-                    allCorrect
-                        ? "All outputs matched the expected values."
-                        : "Some outputs were incorrect or unstable.");
-            }
+            //if (resultState.SummaryText != null)
+            //{
+            //    resultState.SummaryText.SetText(
+            //        allCorrect
+            //            ? "All outputs matched the expected values."
+            //            : "Some outputs were incorrect or unstable.");
+            //}
 
             SetEnabledResultsGroup(resultState, true);
         }

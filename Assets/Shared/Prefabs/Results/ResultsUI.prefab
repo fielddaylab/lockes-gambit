@@ -132,10 +132,15 @@ MonoBehaviour:
   Canvas: {fileID: 0}
   Group: {fileID: 573094207628261867}
   Input: {fileID: 0}
+  Fader: {fileID: 0}
   HeaderPosition: {fileID: 3307431629089049649}
+  HeaderPositionOffset: {fileID: 5748090770445178797}
   HeaderText: {fileID: 2391136929134025770}
   HeaderBackground: {fileID: 8410202346270154714}
   Contract: {fileID: 8152662057592398980}
+  ContractPositionOffset: {fileID: 1299258466547480353}
+  ContractInitialPosition: 0
+  HeaderInitialPosition: 218
 --- !u!1001 &5783244916454947031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -241,6 +246,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9053481097628742886, guid: 89c7bf825c805e044a58466696aa4fe1, type: 3}
   m_PrefabInstance: {fileID: 5783244916454947031}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5748090770445178797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2271895061899210618, guid: 89c7bf825c805e044a58466696aa4fe1, type: 3}
+  m_PrefabInstance: {fileID: 5783244916454947031}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd60b9a67a0443343b479b094c836759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8410202346270154714 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2663101712209258253, guid: 89c7bf825c805e044a58466696aa4fe1, type: 3}
