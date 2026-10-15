@@ -10,37 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1683349872946723301, guid: 915948aabbf55f848be1bbea69795866, type: 3}
       propertyPath: TooltipHeader
-      value: +1 Cost
-      objectReference: {fileID: 0}
-    - target: {fileID: 1972050106573446033, guid: 915948aabbf55f848be1bbea69795866, type: 3}
-      propertyPath: Cost
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1972050106573446033, guid: 915948aabbf55f848be1bbea69795866, type: 3}
-      propertyPath: Risk
-      value: 0
+      value: +1 Risk
       objectReference: {fileID: 0}
     - target: {fileID: 2255198818187008730, guid: 915948aabbf55f848be1bbea69795866, type: 3}
       propertyPath: m_text
-      value: 'Pirate
-
-        Toll'
+      value: PIRATE \nRAIDS
       objectReference: {fileID: 0}
     - target: {fileID: 3687948971506205187, guid: 915948aabbf55f848be1bbea69795866, type: 3}
       propertyPath: m_Name
-      value: Hazard_Cost
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762547994963964593, guid: 915948aabbf55f848be1bbea69795866, type: 3}
-      propertyPath: m_Color.b
-      value: 0.007843138
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762547994963964593, guid: 915948aabbf55f848be1bbea69795866, type: 3}
-      propertyPath: m_Color.g
-      value: 0.58431375
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762547994963964593, guid: 915948aabbf55f848be1bbea69795866, type: 3}
-      propertyPath: m_Color.r
-      value: 1
+      value: Hazard_Raid
       objectReference: {fileID: 0}
     - target: {fileID: 6285069881206567461, guid: 915948aabbf55f848be1bbea69795866, type: 3}
       propertyPath: m_LocalPosition.x
