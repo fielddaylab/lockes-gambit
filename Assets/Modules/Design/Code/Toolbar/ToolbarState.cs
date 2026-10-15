@@ -69,7 +69,7 @@ namespace SpaceFab.Design {
         // a row — any lingering hover focus is now outdated.
         public static void SelectTool(ToolModeState toolModeState, ToolbarState toolbarState, ToolbarButtonKind kind, ToolbarLayer row) {
             toolModeState.ActiveTool = ToolTypeForKind(kind);
-            if (row != ToolbarLayer.Erase) {
+            if (row != ToolbarLayer.Other) {
                 toolModeState.ActiveLayer = (StackLayer)row;
             }
             toolbarState.FocusedRow = row;
@@ -142,7 +142,7 @@ namespace SpaceFab.Design {
                 case ToolType.DrawPNodes:
                     return ToolbarLayer.Transistor;
                 case ToolType.Erase:
-                    return ToolbarLayer.Erase;
+                    return ToolbarLayer.Other;
                 default:
                     return fallback;
             }

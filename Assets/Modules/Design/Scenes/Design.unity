@@ -2148,6 +2148,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 994501228}
+    - target: {fileID: 3602939373621846706, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15.099998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309419174999487231, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4989379985760522201, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2228,9 +2236,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5524462798096074096, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 19.200012
+      objectReference: {fileID: 0}
     - target: {fileID: 5741709982962218228, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
       propertyPath: m_Name
       value: Design Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109494277713484866, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -29.099998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461377790947056824, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461377790947056824, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461377790947056824, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461377790947056824, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 82.099976
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
