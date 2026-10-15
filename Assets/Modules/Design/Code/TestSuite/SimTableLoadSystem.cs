@@ -61,7 +61,7 @@ namespace SpaceFab.Design
                     SimulateUIUtility.BuildTable(simUIState, suiteData, simRunState, designState, suiteDB);
                     ResultStateUtility.BuildResultsTable(resultState, suiteData, suiteDB);
                     DesignLevelUtility.ApplyWikiPageUnlocks(progressState, levelData);
-
+                    DesignLevelUtility.PopulateDescriptionPanel(simUIState, levelData);
                     // If the player has already passed this contract's suite, present all rows as
                     // Correct on entry rather than forcing them to re-run. FoundValidSolution is
                     // hydrated by DesignStateUtility.ImportState during the prior Loading phase,

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level22_HighPowerCharger
   m_EditorClassIdentifier: 
   m_title: High-Power Charger
+  m_description: This rapid charger reads battery from A and power from B. Send the
+    inverse of A, unless B is LO.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 60565ef684af740e19abd8aba3e895a4, type: 2}
   m_testSuite: {fileID: 11400000, guid: 90edf0cdf2ae0e0478c628da92b8ed0e, type: 2}

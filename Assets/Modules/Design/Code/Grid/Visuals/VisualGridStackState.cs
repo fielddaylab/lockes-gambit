@@ -3,6 +3,7 @@ using FieldDay.SharedState;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace SpaceFab.Design.Visuals
@@ -13,6 +14,10 @@ namespace SpaceFab.Design.Visuals
         public VisualGridStack VisualGridStack;
         public GameObject CellVisualsPrefab;
         public Transform CellVisualsContainer;
+
+        [Header("PuzzleDescription")]
+        public TMP_Text PuzzleTitleText;
+        public TMP_Text PuzzleDescriptionText;
 
         // TODO: set to true when:
         // LayoutChanged

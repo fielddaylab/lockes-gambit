@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level25_LongGate
   m_EditorClassIdentifier: 
   m_title: Long Gate
+  m_description: Use multiple Gates on one transistor to open for two signals.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: eb8696fc9cb8d4ea3b046f272df307f0, type: 2}
   m_testSuite: {fileID: 11400000, guid: 73d9f73834ea2493ead4a418237d0be6, type: 2}

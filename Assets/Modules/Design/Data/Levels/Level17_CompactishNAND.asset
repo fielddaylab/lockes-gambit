@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11040acf09980e54286911b24c1ffece, type: 3}
   m_Name: Level17_CompactishNAND
   m_EditorClassIdentifier: 
-  m_title: Compact-Ish NAND
+  m_title: Fast NAND
+  m_description: Using a High-Mobility Semiconductor, this NAND gate can switch rapidly.
+    Send HI unless both A and B are HI.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: b2774db6c07dd427ba4279dfd263a3cc, type: 2}
   m_testSuite: {fileID: 11400000, guid: e3d3aa6e68f9c6d4eae61aeb583db412, type: 2}
