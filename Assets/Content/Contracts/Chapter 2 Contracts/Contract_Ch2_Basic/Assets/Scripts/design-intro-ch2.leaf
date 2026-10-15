@@ -134,7 +134,7 @@ $set    temp:designTutorialStep = 4
 $set    temp:metalPlaced = true
 $call   HighlightElement(design:tool-n)
 $set    temp:designTutorialStep = 4
-{@PAL}  Look out! If that <color=#FF7441>HI</color> path connects to an Input, it could create an <color=red>UNSTABLE</color> signal!\n\nUse <color=#61B7CF>N-type</color> to cross under it without connecting.
+{@PAL}  Look out! If that <color=#FF7441>HI</color> path connects to the Input, it could create an <color=red>UNSTABLE</color> signal!\n\nUse <color=#61B7CF>N-type</color> to cross under it without connecting.
 
 ::OnSecondToolSelected
 @trigger    OnToolSelected
@@ -144,13 +144,14 @@ $call   ReleaseAllHighlights()
 
 ::TestCorrectLv2
 @trigger    OnSingleTestComplete
-@when       result == "success"
+@when       result == "success", temp:designTutorialStep < 6
 $call   ReleaseAllHighlights()
 $call   HighlightElement(design:input-a, false, 25)
+$set    temp:designTutorialStep = 6
 $if     IsInputInState("A", "LO")
-    {@PAL}  Yippee, no <color=red>UNSTABLE</color> signal!\n\nNow flip the switch on the input to change it to <color="#FF7441">HI.</color>.
+    {@PAL}  Yippee, no <color=red>UNSTABLE</color> signal!\n\nNow flip the switch on the input to change it to <color=#FF7441>HI.</color>.
 $else
-    {@PAL}  Correct! But there might still be an <color=red>UNSTABLE</color> signal...\n\nFlip the switch on the input to change it to <color="#8073C8">LO</color>.
+    {@PAL}  Correct! But there might still be an <color=red>UNSTABLE</color> signal...\n\nFlip the switch on the input to change it to <color=#8073C8>LO</color>.
     $set temp:hintGiven = 2 // guess that if the player succeeds here but fails next, it might be because of UNSTABLE
 $endif
 
@@ -159,15 +160,14 @@ $endif
 @trigger    OnSingleTestComplete
 @when       result == "failure", CurrLevelIndex() == 1
 $call   ReleaseAllHighlights()
+$set temp:designTutorialStep = 4
 $if temp:hintGiven == 0
     $call HighlightElement(design:tool-metal)
     {@PAL}  <color=yellow>Hint:</color> Inputs and Outputs on the Metal layer can't connect directly to <color=#61B7CF>N-type</color> on the Semiconductor layer.\n\nUse <color=yellow>Metal</color> and <color=yellow>Vias</color> to connect them.
-    $set temp:designTutorialStep = 4
     $set temp:hintGiven = 1
 $elseif temp:hintGiven == 1
     $call HighlightElement(design:tool-via)
     {@PAL}  <color=yellow>Hint:</color> Use <color=yellow>Vias</color> to connect the Metal and Semiconductor layers in one space.\n\nYou'll need <color=yellow>two Vias</color> for this chip!
-    $set temp:designTutorialStep = 4
     $set temp:hintGiven = 2
 $elseif temp:hintGiven == 2
     {@PAL}  <color=yellow>Hint:</color> Mixing LO and <color=#FF7441>HI</color> signals creates an <color=red>UNSTABLE</color> signal!\n\n<color=red>UNSTABLE</color> signals always fail tests.
