@@ -42,7 +42,7 @@ $call   ReleaseAllHighlights()
 $call   CloseWiki()
 $if IsMaterialCollected("Copper")
     $call   HighlightElement(supply:confirm-btn)
-    {@PAL}  Click <color=yellow>CONFIRM ROUTES</color> to commit your supply routes./n/n To modify your route, click on a segment to <color=red>DELETE</color>.
+    {@PAL}  Click <color=yellow>CONFIRM ROUTES</color> to commit your supply routes.\n\nTo modify your route, click on a segment to <color=red>DELETE</color>.
 $else
     {@PAL}  Uh-oh, this material wasn't a Conductor.\n\nTo modify your route, click on the <color=yellow>HAULER</color>.
     $wait   2
