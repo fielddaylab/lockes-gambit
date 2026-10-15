@@ -140,7 +140,12 @@ MonoBehaviour:
   Contract: {fileID: 8152662057592398980}
   ContractPositionOffset: {fileID: 1299258466547480353}
   ContractInitialPosition: 0
+  ContractExpandDistance: -20
   HeaderInitialPosition: 218
+  HeaderExpandDistance: 10
+  ContractContextHeight: 448
+  IncompleteHeaderColor: {r: 0.96862745, g: 0.51933336, b: 0.38454512, a: 1}
+  CompleteHeaderColor: {r: 0.31764707, g: 0.62352943, b: 0.41960785, a: 1}
 --- !u!1001 &5783244916454947031
 PrefabInstance:
   m_ObjectHideFlags: 0

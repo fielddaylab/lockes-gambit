@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using BeauRoutine;
+using BeauUtil;
 using FieldDay;
+using FieldDay.Scenes;
 using FieldDay.SharedState;
 using FieldDay.UI;
 using FieldDay.UI.Widgets;
 using SpaceFab.Design.Visuals;
+using SpaceFab.Save;
 using SpaceFab.UI;
 using TMPro;
 using UnityEngine;
@@ -13,7 +19,7 @@ namespace SpaceFab.Design
     /// <summary>
     /// Holds data relevant to displaying simulation results.
     /// </summary>
-    public class DesignResultPanel : SharedStateComponent
+    public class DesignResultPanel : SharedStateComponent, IScenePreload
     {
         public ResultsPanelLayout PanelLayout;
         public SimTableLayout Table;
@@ -24,7 +30,15 @@ namespace SpaceFab.Design
         // hand-off OnRetryClicked uses, keeping scene-loading out of this UI click handler.
         [NonSerialized] public bool ContinueRequested;
 
-        private void OnDismissClicked()
+        public IEnumerator<WorkSlicer.Result?> Preload() {
+            PanelLayout.Contract.ContextBackButton.OnClick.Register(OnRetryClicked);
+            PanelLayout.Contract.ContextContinueButton.OnClick.Register(OnNextClicked);
+
+            PanelLayout.Contract.ShowDesignCompleted(Find.State<MinigameSaveStates>().Design.FoundValidSolution);
+            return null;
+        }
+
+        private void OnNextClicked()
         {
             // "Continue" on a passing panel: hand off to DesignContinueSystem, which advances to the
             // next level (Design-scene reload) or returns to overarching on the last level. A failing
@@ -35,7 +49,6 @@ namespace SpaceFab.Design
             {
                 ContinueRequested = true;
             }
-            ResultStateUtility.SetEnabledResultsGroup(this, false);
         }
 
         private void OnRetryClicked()
@@ -44,8 +57,8 @@ namespace SpaceFab.Design
             // SimulateModeSystem.ProcessSuiteComplete picks up PlayFullSuiteRequested
             // on its next tick and transitions to PreparingTest.
             Find.State(out SimulateRunState runState);
-            ResultStateUtility.SetEnabledResultsGroup(this, false);
-            runState.PlayFullSuiteRequested = true;
+
+            SimulateUIUtility.HideResultsPanel(Find.State<SimulateUIState>());
         }
     }
 
@@ -79,41 +92,40 @@ namespace SpaceFab.Design
             }
         }
 
-        public static void SetEnabledResultsGroup(DesignResultPanel resultState, bool isEnabled)
-        {
-            //if (resultState.ResultsGroup == null)
-            //{
-            //    Debug.LogWarning("ResultState.ResultsGroup is null!");
-            //    return;
-            //}
-
-            //resultState.ResultsGroup.alpha = isEnabled ? 1f : 0f;
-            //resultState.ResultsGroup.blocksRaycasts = isEnabled;
-            //resultState.ResultsGroup.interactable = isEnabled;
-            //if (isEnabled) {
-            //    resultState.Input.TryPushPriority();
-            //} else {
-            //    resultState.Input.TryPopPriority();
-            //}
-        }
-
         public static void ShowResults(DesignResultPanel resultState, bool allCorrect)
         {
-            //if (resultState.TitleText != null)
-            //{
-            //    resultState.TitleText.SetText(allCorrect ? "Design complete" : "Failure");
-            //    resultState.TitleText.color = allCorrect ? Color.white : Color.red;
-            //}
+            resultState.PanelLayout.HeaderText.SetText(allCorrect ? "Design Complete" : "Design Incomplete");
+            resultState.PanelLayout.HeaderBackground.color = allCorrect ? resultState.PanelLayout.CompleteHeaderColor : resultState.PanelLayout.IncompleteHeaderColor;
 
-            //if (resultState.SummaryText != null)
-            //{
-            //    resultState.SummaryText.SetText(
-            //        allCorrect
-            //            ? "All outputs matched the expected values."
-            //            : "Some outputs were incorrect or unstable.");
-            //}
+            resultState.PanelLayout.Contract.ContextHeader.SetText(allCorrect ? "Chip Outputs Verified" : "Chip Results Unverified");
 
-            SetEnabledResultsGroup(resultState, true);
+            resultState.PanelLayout.Prepare();
+            resultState.PanelLayout.AnimationRoutine.Replace(resultState, DisplayRoutine(resultState, allCorrect));
+        }
+
+        static private IEnumerator DisplayRoutine(DesignResultPanel resultPanel, bool allCorrect) {
+            yield return resultPanel.PanelLayout.FadeIn();
+            yield return 0.1f;
+            yield return resultPanel.PanelLayout.FadeInContextPanel();
+
+            if (allCorrect) {
+                Find.State(out DesignMinigameState designState, out MinigameSaveStates saveState);
+                int activeIdx = designState.ActiveLevelIndex;
+                int levelCount = saveState.Design.LevelCount;
+                if (!resultPanel.PanelLayout.Contract.ChipDiagramFilled.enabled && activeIdx == levelCount - 1) {
+                    resultPanel.PanelLayout.Contract.ChipDiagramMask.gameObject.SetActive(true);
+                    resultPanel.PanelLayout.Contract.ChipDiagramMask.SetAlpha(0);
+                    resultPanel.PanelLayout.Contract.ChipDiagramMask.transform.localScale = new Vector3(2, 2, 2);
+                    resultPanel.PanelLayout.Contract.ChipDiagramFilled.enabled = true;
+                    yield return Routine.Combine(
+                        Tween.ZeroToOne(resultPanel.PanelLayout.Contract.ChipDiagramMask.SetAlpha, 0.2f),
+                        resultPanel.PanelLayout.Contract.ChipDiagramMask.transform.ScaleTo(1, 0.3f, Axis.XYZ).Ease(Curve.CubeOut)
+                        );
+                    resultPanel.PanelLayout.Contract.ChipDiagramEmpty.enabled = false;
+                }
+            }
+
+            resultPanel.PanelLayout.Finish();
         }
 
         static public bool IsAllCorrect(SimulateRunState runState)
@@ -124,6 +136,10 @@ namespace SpaceFab.Design
                 if (verdicts[i] != TestRowVerdict.Correct) { return false; }
             }
             return true;
+        }
+
+        static public void HideResults(DesignResultPanel panel) {
+            panel.PanelLayout.AnimationRoutine.Replace(panel, panel.PanelLayout.FadeOut());
         }
     }
 }

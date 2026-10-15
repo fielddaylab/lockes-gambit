@@ -55,6 +55,7 @@ namespace SpaceFab {
         [Header("Context Panel")]
         public Canvas ContextSubCanvas;
         public RectTransform ContextPanel;
+        public CanvasGroup ContextFader;
         public TMP_Text ContextHeader;
         public TMP_Text ContextDescription;
 
@@ -93,6 +94,12 @@ namespace SpaceFab {
             ContractUIUtility.BuildRequirementData(Requirements, chapterIndex, contract);
             ContractUIUtility.InitializeVisuals(Requirements);
             ContractUIUtility.UpdateVisualsWithCompletion(Requirements, Find.State<PlayerProgressState>().MaterialProperties);
+        }
+
+        public void ShowDesignCompleted(bool completed) {
+            ChipDiagramEmpty.enabled = !completed;
+            ChipDiagramFilled.enabled = completed;
+            ChipDiagramMask.SetAlpha(1);
         }
     }
 

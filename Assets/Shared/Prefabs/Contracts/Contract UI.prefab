@@ -687,6 +687,7 @@ MonoBehaviour:
   ContextContentsMask: {fileID: 110028805187918847}
   ContextSubCanvas: {fileID: 1492150880669708299}
   ContextPanel: {fileID: 5767047929580885732}
+  ContextFader: {fileID: 6146332714112002503}
   ContextHeader: {fileID: 314742739899906234}
   ContextDescription: {fileID: 7818523196830272118}
 --- !u!1 &1570053837378581972
@@ -2504,6 +2505,7 @@ GameObject:
   - component: {fileID: 5767047929580885732}
   - component: {fileID: 1492150880669708299}
   - component: {fileID: 1625841140009424321}
+  - component: {fileID: 6146332714112002503}
   m_Layer: 5
   m_Name: Contextual
   m_TagString: Untagged
@@ -2573,6 +2575,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &6146332714112002503
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670863928816441092}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5787700242449708296
 GameObject:
   m_ObjectHideFlags: 0
