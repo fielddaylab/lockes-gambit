@@ -42,7 +42,7 @@ namespace SpaceFab.Fabrication
             // Register the restart-button listener exactly once per scene.
             if (!interruptState.ListenerRegistered && canvasState.StationRestartButton != null)
             {
-                canvasState.StationRestartButton.onClick.AddListener(HandleRestartClicked);
+                canvasState.StationRestartButton.OnClick.AddListener(HandleRestartClicked);
                 interruptState.ListenerRegistered = true;
             }
 

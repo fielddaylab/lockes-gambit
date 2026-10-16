@@ -3,6 +3,7 @@ using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.SharedState;
 using FieldDay.UI.Animation;
+using FieldDay.UI.Widgets;
 using SpaceFab.Fabrication.Stations;
 using SpaceFab.UI;
 using System.Collections;
@@ -29,7 +30,7 @@ namespace SpaceFab.Fabrication.Layout
         public CanvasGroup PopupGroup;
         public TMP_Text PopupMainText;
         public TMP_Text PopupSecondaryText;
-        public DynamicButton StationRestartButton;
+        public GuiButton StationRestartButton;
 
         [Space(5)]
         public CanvasGroup InstructionsGroup;

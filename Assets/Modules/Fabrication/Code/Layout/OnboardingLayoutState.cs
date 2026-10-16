@@ -1,5 +1,6 @@
 using FieldDay;
 using FieldDay.SharedState;
+using FieldDay.UI.Widgets;
 using SpaceFab.Design;
 using SpaceFab.UI;
 using System;
@@ -13,9 +14,9 @@ namespace SpaceFab.Fabrication
     {
         public CanvasGroup GenerateGroup;
         public CanvasGroup ControlsGroup;
-        public DynamicButton GenerateButton;
-        public DynamicButton LeftArrowButton;
-        public DynamicButton RightArrowButton;
+        public GuiButton GenerateButton;
+        public GuiButton LeftArrowButton;
+        public GuiButton RightArrowButton;
         [NonSerialized] public bool IsGeneratePressed, IsLeftArrowPressed, IsRightArrowPressed;
 
         public void OnRegister()
@@ -26,19 +27,19 @@ namespace SpaceFab.Fabrication
             if (GenerateButton != null)
             {
                 GenerateButton.gameObject.SetActive(true);
-                GenerateButton.onClick.AddListener(OnGenerateClicked);
+                GenerateButton.OnClick.AddListener(OnGenerateClicked);
             }
 
             if (LeftArrowButton != null)
             {
                 LeftArrowButton.gameObject.SetActive(true);
-                LeftArrowButton.onClick.AddListener(OnLeftArrowClicked);
+                LeftArrowButton.OnClick.AddListener(OnLeftArrowClicked);
             }
 
             if (RightArrowButton != null)
             {
                 RightArrowButton.gameObject.SetActive(true);
-                RightArrowButton.onClick.AddListener(OnRightArrowClicked);
+                RightArrowButton.OnClick.AddListener(OnRightArrowClicked);
             }
         }
 
@@ -46,17 +47,17 @@ namespace SpaceFab.Fabrication
         {
             if (GenerateButton != null)
             {
-                GenerateButton.onClick.RemoveListener(OnGenerateClicked);
+                GenerateButton.OnClick.RemoveListener(OnGenerateClicked);
             }
 
             if (LeftArrowButton != null)
             {
-                LeftArrowButton.onClick.RemoveListener(OnLeftArrowClicked);
+                LeftArrowButton.OnClick.RemoveListener(OnLeftArrowClicked);
             }
 
             if (RightArrowButton != null)
             {
-                RightArrowButton.onClick.RemoveListener(OnRightArrowClicked);
+                RightArrowButton.OnClick.RemoveListener(OnRightArrowClicked);
             }
         }
 
