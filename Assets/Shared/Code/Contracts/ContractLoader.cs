@@ -13,7 +13,7 @@ namespace SpaceFab {
             Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState playerProgress);
 
             if (CurrentOnly) {
-                ContractUtility.LoadCurrentContract(contractState, chapterState);
+                ContractUtility.LoadCurrentContract(contractState, chapterState, ContractLoadAction.Default);
             } else {
                 ContractUtility.LoadQueuedContract(contractState, chapterState, playerProgress);
             }

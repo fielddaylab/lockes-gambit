@@ -1,6 +1,7 @@
 using System;
 using BeauRoutine;
 using BeauUtil;
+using FieldDay;
 using FieldDay.Animation;
 using ScriptableBake;
 using UnityEngine;
@@ -27,6 +28,9 @@ namespace SpaceFab.UI {
         }
 
         private void OnDisable() {
+            if (Game.IsShuttingDown) {
+                return;
+            }
             Anims.Cancel(ref QuickAnim);
         }
 

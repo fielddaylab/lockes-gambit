@@ -51,15 +51,20 @@ namespace SpaceFab.Overarching {
 
             PrevContractButton.OnClick.Register(() => {
                 Find.State(out ContractViewState view);
-                view.QueuedContractViewIndex = view.ViewingContractIndex - 1;
+                view.QueuedContractScroll = -1;
             });
             NextContractButton.OnClick.Register(() => {
                 Find.State(out ContractViewState view);
-                view.QueuedContractViewIndex = view.ViewingContractIndex + 1;
+                view.QueuedContractScroll = 1;
             });
 
             Contract.CloseButton.OnClick.Register(() => {
-                Find.State<ContractChangeState>().Phase = ContractChangePhase.Docking;
+                Find.State(out ContractViewState view);
+                view.QueuedMode = OverarchingContractMode.Closed;
+            });
+            Contract.SelectContractButton.OnClick.Register(() => {
+                Find.State(out ContractViewState view);
+                view.QueuedAction = ContractViewQueuedAction.Accept;
             });
         }
 
@@ -76,7 +81,9 @@ namespace SpaceFab.Overarching {
 
             Contract.ContextFader.alpha = 0;
             Contract.ContextSubCanvas.enabled = false;
-            
+
+            ContractScrollButtonsFader.SetAlpha(0);
+
             switch (mode) {
                 case OverarchingContractMode.Change: {
                     Contract.CloseButton.gameObject.SetActive(true);
@@ -96,6 +103,37 @@ namespace SpaceFab.Overarching {
                     Contract.SelectContractButton.gameObject.SetActive(false);
                     break;
                 }
+            }
+        }
+
+        public IEnumerator FadeIn() {
+            ContractPositionOffset.Offset0 = new Vector2(0, -60);
+            HeaderPositionOffset.Offset0 = new Vector2(0, 60);
+            yield return Routine.Combine(
+                Fader.FadeTo(1, 0.3f),
+                ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f).DelayBy(0.1f),
+                ContractPositionOffset.Offset0To(default, 0.4f).DelayBy(0.1f).Ease(Curve.CubeOut),
+                HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f).DelayBy(0.15f),
+                HeaderPositionOffset.Offset0To(default, 0.4f).DelayBy(0.15f).Ease(Curve.CubeOut),
+                Tween.ZeroToOne(ContractScrollButtonsFader.SetAlpha, 0.2f).DelayBy(0.35f)
+            );
+
+            Input.SetInputOverride(null);
+        }
+
+        public IEnumerator FadeOut(OverarchingContractMode mode, bool hasChange) {
+            yield return Routine.Combine(
+                Fader.FadeTo(0, 0.3f).DelayBy(0.1f),
+                ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.4f),
+                HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.4f)
+                );
+
+            Canvas.enabled = false;
+            Input.SetInputOverride(false);
+            Input.TryPopPriority();
+
+            if (mode == OverarchingContractMode.SelectNew || hasChange) {
+                OverarchingTransitions.RefreshShipInteractions();
             }
         }
     }

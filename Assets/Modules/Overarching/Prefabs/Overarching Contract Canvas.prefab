@@ -2057,7 +2057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020711289955171844, guid: cd1458b82b6e44540aa9f7550f80d4ef, type: 3}
       propertyPath: m_SortingOrder
-      value: 20
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 6020711289955171844, guid: cd1458b82b6e44540aa9f7550f80d4ef, type: 3}
       propertyPath: m_PlaneDistance
@@ -2065,7 +2065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020711289955171844, guid: cd1458b82b6e44540aa9f7550f80d4ef, type: 3}
       propertyPath: m_SortingLayerID
-      value: -1112968087
+      value: 1461900991
       objectReference: {fileID: 0}
     - target: {fileID: 6020711289955171844, guid: cd1458b82b6e44540aa9f7550f80d4ef, type: 3}
       propertyPath: m_VertexColorAlwaysGammaSpace
@@ -2185,4 +2185,4 @@ MonoBehaviour:
   PrevContractButton: {fileID: 4404262905256283661}
   NextContractButton: {fileID: 6256825732132301367}
   ContractScrollButtonsFader: {fileID: 4935723748839444570}
-  ContractContextHeight: 0
+  ContractContextHeight: 400
