@@ -40,6 +40,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: bac37c4e492c6144e941cb6361f2a853, type: 3}
+    - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6139377420993714670, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Id.m_Source
       value: supply:planet_sio2converter
@@ -160,11 +164,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2872543400630215273, guid: 4b0f04723e5e4a942bdec67a69cb6e4c, type: 3}
       propertyPath: Tooltip
-      value: This station will refine SiO2 into Si.
+      value: Refines SiO2 into Silicon.
       objectReference: {fileID: 0}
     - target: {fileID: 2872543400630215273, guid: 4b0f04723e5e4a942bdec67a69cb6e4c, type: 3}
       propertyPath: TooltipHeader
-      value: SiO2 to Si
+      value: SiO2 to Silicon
       objectReference: {fileID: 0}
     - target: {fileID: 6683377774293424528, guid: 4b0f04723e5e4a942bdec67a69cb6e4c, type: 3}
       propertyPath: m_LocalPosition.x

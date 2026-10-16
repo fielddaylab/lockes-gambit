@@ -23,37 +23,48 @@ MonoBehaviour:
     height: 24
   Positions:
   - Name:
+      m_Source: 
       m_HashValue: 1391791790
     Position: {x: -0.37, y: 0.01}
   - Name:
+      m_Source: 
       m_HashValue: 392540606
     Position: {x: 7.45, y: 1.2}
   - Name:
+      m_Source: 
       m_HashValue: 3566278674
     Position: {x: -7.15, y: -2.81}
   - Name:
+      m_Source: 
       m_HashValue: 1181591482
     Position: {x: 6.88, y: -5.22}
   - Name:
+      m_Source: 
       m_HashValue: 57385584
     Position: {x: -0.06, y: 4.51}
   - Name:
+      m_Source: 
       m_HashValue: 593577844
     Position: {x: -7.94, y: 1.58}
   - Name:
+      m_Source: 
       m_HashValue: 3801165340
     Position: {x: 4.52, y: -2.38}
   - Name:
+      m_Source: 
       m_HashValue: 1798506261
     Position: {x: -3.13, y: 2.07}
   - Name:
+      m_Source: 
       m_HashValue: 1616771497
     Position: {x: 5.19, y: 4.72}
   - Name:
+      m_Source: 
       m_HashValue: 241399131
     Position: {x: -1.33, y: -5.35}
   Hazards:
   - Name:
-      m_HashValue: 3227802397
+      m_Source: Hazard_Raid
+      m_HashValue: 1320586394
     Position: {x: 4.33, y: 0.98}
   Overrides: []
