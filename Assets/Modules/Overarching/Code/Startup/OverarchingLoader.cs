@@ -24,7 +24,9 @@ namespace SpaceFab.Overarching
     static public partial class OverarchingTransitions {
         static public void RefreshShipInteractions() {
             Find.State<ProgressMeterState>().NeedsRefresh = true;
-            OverarchingSubmitButtonUtility.Refresh(Find.State<OverarchingSubmitChapterSequenceState>(), Find.State<MinigameSaveStates>());
+
+            RefreshButtons(Find.State<OverarchingContractButtons>(), Find.State<MinigameSaveStates>());
+
             SpacefabGame.Events.Dispatch(GameEvents.ShipMenuDisplayed);
             ScriptUtility.Trigger(ScriptTriggers.OnOverarchingLoaded);
         }

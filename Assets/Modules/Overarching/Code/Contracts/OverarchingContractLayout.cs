@@ -36,7 +36,7 @@ namespace SpaceFab.Overarching {
         public GuiButton NextContractButton;
 
         [Header("Animation")]
-        public DitherFadeGroup ContractScrollButtonsFader;
+        public CanvasGroup ContractScrollButtonsFader;
 
         [Header("Positions")]
         public float ContractContextHeight;
@@ -82,7 +82,9 @@ namespace SpaceFab.Overarching {
             Contract.ContextFader.alpha = 0;
             Contract.ContextSubCanvas.enabled = false;
 
-            ContractScrollButtonsFader.SetAlpha(0);
+            ContractScrollButtonsFader.alpha = 0;
+
+            Find.State<OverarchingContractButtons>().ChangeButton.gameObject.SetActive(false);
 
             switch (mode) {
                 case OverarchingContractMode.Change: {
@@ -115,25 +117,28 @@ namespace SpaceFab.Overarching {
                 ContractPositionOffset.Offset0To(default, 0.4f).DelayBy(0.1f).Ease(Curve.CubeOut),
                 HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f).DelayBy(0.15f),
                 HeaderPositionOffset.Offset0To(default, 0.4f).DelayBy(0.15f).Ease(Curve.CubeOut),
-                Tween.ZeroToOne(ContractScrollButtonsFader.SetAlpha, 0.2f).DelayBy(0.35f)
+                ContractScrollButtonsFader.FadeTo(1, 0.2f).DelayBy(0.35f)
             );
 
             Input.SetInputOverride(null);
         }
 
         public IEnumerator FadeOut(OverarchingContractMode mode, bool hasChange) {
+            Input.SetInputOverride(false);
             yield return Routine.Combine(
-                Fader.FadeTo(0, 0.3f).DelayBy(0.1f),
-                ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.4f),
-                HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.4f)
+                Fader.FadeTo(0, 0.15f).DelayBy(0.1f),
+                ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.25f),
+                HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.25f),
+                ContractScrollButtonsFader.FadeTo(0, 0.25f)
                 );
 
             Canvas.enabled = false;
-            Input.SetInputOverride(false);
             Input.TryPopPriority();
 
             if (mode == OverarchingContractMode.SelectNew || hasChange) {
                 OverarchingTransitions.RefreshShipInteractions();
+            } else if (mode == OverarchingContractMode.Change) {
+                Find.State<OverarchingContractButtons>().ChangeButton.gameObject.SetActive(true);
             }
         }
     }

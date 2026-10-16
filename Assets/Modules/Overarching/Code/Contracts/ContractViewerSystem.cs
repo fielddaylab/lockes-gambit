@@ -169,7 +169,7 @@ namespace SpaceFab.Overarching {
                     Content = ColorBank.Wheat
                 }
             };
-            prompt.Callback = HandlePopupChangeCallback;
+            content.Callback = HandlePopupChangeCallback;
             prompt.Populate(content);
             prompt.Show();
         }

@@ -889,9 +889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6175301518174708097}
   - component: {fileID: 3808193671459758618}
-  - component: {fileID: 7125232213816425158}
-  - component: {fileID: 8776388898364648741}
-  - component: {fileID: 4935723748839444570}
+  - component: {fileID: 4123509171757053185}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -930,53 +928,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6353146281013662340}
   m_CullTransparentMesh: 1
---- !u!114 &7125232213816425158
-MonoBehaviour:
+--- !u!225 &4123509171757053185
+CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6353146281013662340}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a3ee03a5fada3942b82c53c377b7113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 2ca97227dafd0d14c85f9205b757f7fd, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Outline: 0
-  m_Thickness: 1
---- !u!114 &8776388898364648741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6353146281013662340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 0
---- !u!114 &4935723748839444570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6353146281013662340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d54fc25ada25d3941a42d841d49ce956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7635974907731907729
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,5 +2147,5 @@ MonoBehaviour:
   ContractPositionOffset: {fileID: 1208656129352083423}
   PrevContractButton: {fileID: 4404262905256283661}
   NextContractButton: {fileID: 6256825732132301367}
-  ContractScrollButtonsFader: {fileID: 4935723748839444570}
+  ContractScrollButtonsFader: {fileID: 4123509171757053185}
   ContractContextHeight: 400

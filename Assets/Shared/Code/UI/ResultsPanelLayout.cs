@@ -82,6 +82,7 @@ namespace SpaceFab.UI {
         }
 
         public IEnumerator FadeOut() {
+            Input.SetInputOverride(false);
             yield return Routine.Combine(
                 Fader.FadeTo(0, 0.3f).DelayBy(0.1f),
                 ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.4f),
@@ -89,7 +90,6 @@ namespace SpaceFab.UI {
                 );
 
             Canvas.enabled = false;
-            Input.SetInputOverride(false);
             Input.TryPopPriority();
         }
 

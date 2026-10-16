@@ -640,7 +640,6 @@ MonoBehaviour:
   ContentsMask: {fileID: 3951333303432365299}
   ApprovedStampMask: {fileID: 4351016878108068190}
   ChipDiagramMask: {fileID: 2833811185698087546}
-  ControlsMask: {fileID: 0}
   ContextContentsMask: {fileID: 110028805187918847}
   ContextSubCanvas: {fileID: 1492150880669708299}
   ContextPanel: {fileID: 5767047929580885732}
@@ -2022,7 +2021,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 4
+  m_PixelsPerUnitMultiplier: 3
 --- !u!1 &4844807874416681011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,7 +3163,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 4
+  m_PixelsPerUnitMultiplier: 3
 --- !u!1 &7695777283171317229
 GameObject:
   m_ObjectHideFlags: 0
