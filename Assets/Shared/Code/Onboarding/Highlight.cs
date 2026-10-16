@@ -81,7 +81,17 @@ namespace SpaceFab.Onboarding {
             ClearTarget();
             SetHighlightStyle(style);
 
-            if (tag.RectTransform != null) {
+            // I don't want to change the order of these to avoid breaking other scene's onboarding,
+            // so setting up an override system to patch a specific issue in research
+            if (tag.ColliderOverride && tag.Collider != null)
+            {
+                m_TargetKind = TargetKind.WorldCollider;
+                m_TargetCollider = tag.Collider;
+                m_Margin = margin / 128f;
+                BindWorldCollider(tag.Collider, m_Margin);
+                m_ActiveVisualRoot = m_WorldRoot.transform;
+            }
+            else if (tag.RectTransform != null) {
                 m_TargetKind = TargetKind.UI;
                 m_TargetRect = tag.RectTransform;
                 m_Margin = margin;
