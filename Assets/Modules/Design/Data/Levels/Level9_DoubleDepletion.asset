@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level9_DoubleDepletion
   m_EditorClassIdentifier: 
   m_title: Double Depletion
+  m_description: Two outputs need different signals. Use N and P-Type with Gates
+    to set what closes them.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: a3aede6c4ac49470daf431010d68df4d, type: 2}
   m_testSuite: {fileID: 11400000, guid: fa5272e1204124fb78dcd8dc8cc6deee, type: 2}

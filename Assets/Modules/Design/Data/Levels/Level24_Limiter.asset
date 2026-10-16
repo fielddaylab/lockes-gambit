@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level24_Limiter
   m_EditorClassIdentifier: 
   m_title: Limiter
+  m_description: This "lo-pass" attenuator chip blocks HI signals.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 3e6961f06577d405ab9042db5138167b, type: 2}
   m_testSuite: {fileID: 11400000, guid: 02fb3ace1fd604396b3a1ddcf7ae029f, type: 2}

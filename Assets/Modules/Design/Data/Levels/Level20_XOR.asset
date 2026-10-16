@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level20_XOR
   m_EditorClassIdentifier: 
   m_title: XOR
+  m_description: The complex XOR logic gate outputs HI only if A and B are different.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: b38af2487910645cd96fc2e969f52b01, type: 2}
   m_testSuite: {fileID: 11400000, guid: 54ddbb6fa5635b54a82d1e64dc93586f, type: 2}

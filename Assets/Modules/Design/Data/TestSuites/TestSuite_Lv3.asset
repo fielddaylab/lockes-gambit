@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2b5b6395503174db99560628ec866b, type: 3}
   m_Name: TestSuite_Lv3
   m_EditorClassIdentifier: 
-  ColumnMask: 13
+  ColumnMask: 5
   Rows:
   - InputA: 1
     InputB: 0
     OutputX: 1
-    OutputY: 1
+    OutputY: 0
   - InputA: 2
     InputB: 0
     OutputX: 2
-    OutputY: 1
-  Tests: []
+    OutputY: 0

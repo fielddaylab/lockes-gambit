@@ -64,7 +64,7 @@ namespace SpaceFab.Design {
                 }
             }
 
-            toolbarState.SelectedLayerHighlight.gameObject.SetActive(toolbarState.FocusedRow != ToolbarLayer.Erase);
+            toolbarState.SelectedLayerHighlight.gameObject.SetActive(toolbarState.FocusedRow != ToolbarLayer.Other);
 
             // set up toolbar state's CurrentArrowAnchor position for
             // toolbarState to update the ptr's position

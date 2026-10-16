@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11040acf09980e54286911b24c1ffece, type: 3}
   m_Name: Level8_Depletion2
   m_EditorClassIdentifier: 
-  m_title: Depletion 2
+  m_title: N-Type Depletion
+  m_description: Use a Gate with N-Type to close for a different signal.
   m_allowedTools: 125
   m_gridConfig: {fileID: 11400000, guid: e2556ebe8ab494bec9b5170acb4d51ce, type: 2}
   m_testSuite: {fileID: 11400000, guid: 1af50ae99f52b4f88b2f207bf3b72dfa, type: 2}

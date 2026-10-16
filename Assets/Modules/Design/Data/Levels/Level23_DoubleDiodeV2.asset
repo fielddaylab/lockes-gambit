@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level23_DoubleDiodeV2
   m_EditorClassIdentifier: 
   m_title: Double Diode
+  m_description: Use two Diodes to unite two inputs without creating an unstable
+    signal.
   m_allowedTools: 111
   m_gridConfig: {fileID: 11400000, guid: 40958bc54b5c946db9c689351faa6ac8, type: 2}
   m_testSuite: {fileID: 11400000, guid: fd1b5bd1515d54f6595276442a0a5ac9, type: 2}

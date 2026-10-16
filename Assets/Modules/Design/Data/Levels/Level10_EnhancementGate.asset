@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11040acf09980e54286911b24c1ffece, type: 3}
   m_Name: Level10_EnhancementGate
   m_EditorClassIdentifier: 
-  m_title: Enhancement Gate (PMOS)
+  m_title: Enhancement Transistor
+  m_description: 'Use N-Type and P-Type with a Gate to make a closed transistor that
+    opens for the right signal. '
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 50011c322eb334a6497ee31c2a6b69ee, type: 2}
   m_testSuite: {fileID: 11400000, guid: 7eab5d5fb465a4278a050037a22cf9f2, type: 2}
