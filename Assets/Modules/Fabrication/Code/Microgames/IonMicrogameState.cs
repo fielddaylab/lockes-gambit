@@ -78,9 +78,9 @@ namespace SpaceFab.Fabrication.Microgames
             // setup IonPoints
             // int patternIndex = sequence.Level.PatternIndex;
             int patternIndex = sequence.Level.GetPatternIndex(sequence);
+            MicrogameStationConfig stationConfig = MicrogameUtility.GetStationConfig();
 
-            Find.GlobalAsset(out MicrogameStationConfig config);
-            state.IonPattern = GameObject.Instantiate(config.IonPatterns[patternIndex], state.PatternParent).GetComponent<IonPatternData>();
+            state.IonPattern = GameObject.Instantiate(stationConfig.IonPatterns[patternIndex], state.PatternParent).GetComponent<IonPatternData>();
 
             state.IonPattern.SetupRenderers(state.PointDensity, state.FillRadius);
             state.Phase = IonMicrogamePhase.Entering;

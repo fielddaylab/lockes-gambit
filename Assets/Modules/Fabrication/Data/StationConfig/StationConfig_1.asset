@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c7474a14f7744fcca53482dfe39c866, type: 3}
-  m_Name: StationConfig
+  m_Name: StationConfig_1
   m_EditorClassIdentifier: 
   PhotolithographyMasks:
   - {fileID: 21300000, guid: ed52b26a16a6fba43b9225a3f202520b, type: 3}
