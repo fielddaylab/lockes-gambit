@@ -130,6 +130,10 @@ namespace SpaceFab.Research
             }
 
             ResearchPropertyConfirmBridge.HandleConfirmedProperty(researchState, progressState, contractState, materialId, label, contextMaterialId);
+
+            if (MaterialPropertyLabelUtility.TryGetBaseProperty(label, out MaterialPropertyLabel baseLabel)) {
+                ResearchPropertyConfirmBridge.HandleConfirmedProperty(researchState, progressState, contractState, materialId, baseLabel, contextMaterialId);
+            }
             return true;
         }
     }

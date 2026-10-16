@@ -109,5 +109,26 @@ namespace SpaceFab.Materials
                 default: label = default; return false;
             }
         }
+
+        /// <summary>
+        /// Returns the base property for a more specific property, if one exists.
+        /// HiTempConductor maps to Conductor, and semiconductor subtypes map to Semiconductor.
+        /// </summary>
+        public static bool TryGetBaseProperty(MaterialPropertyLabel label, out MaterialPropertyLabel baseLabel)
+        {
+            switch (label)
+            {
+                case MaterialPropertyLabel.HiTempConductor:
+                    baseLabel = MaterialPropertyLabel.Conductor;
+                    return true;
+                case MaterialPropertyLabel.HiTempSemiConductor:
+                case MaterialPropertyLabel.LightEmittingSemiconductor:
+                case MaterialPropertyLabel.HighVoltageSemiconductor:
+                case MaterialPropertyLabel.HighMobilitySemiconductor:
+                    baseLabel = MaterialPropertyLabel.Semiconductor;
+                    return true;
+                default: baseLabel = default; return false;
+            }
+        }
     }
 }

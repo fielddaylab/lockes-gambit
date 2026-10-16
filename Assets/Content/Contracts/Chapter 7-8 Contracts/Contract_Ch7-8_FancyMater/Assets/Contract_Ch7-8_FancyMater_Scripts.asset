@@ -17,3 +17,5 @@ MonoBehaviour:
     Script: {fileID: -1942890987711236906, guid: 1a115d6b5aa307a418a3cf81a605dc98, type: 3}
   - Scope: 8
     Script: {fileID: -1942890987711236906, guid: 415550049878e1844a27e5d02be9988b, type: 3}
+  - Scope: 2
+    Script: {fileID: -1942890987711236906, guid: 2ba73326953554c47904ec0802ba7c8e, type: 3}
