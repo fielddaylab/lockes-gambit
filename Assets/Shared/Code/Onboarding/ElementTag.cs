@@ -29,6 +29,10 @@ namespace SpaceFab.Onboarding {
         public RectTransform RectTransform;
         public SpriteRenderer SpriteRenderer;
         public Collider2D Collider;
+        
+        /// <summary>
+        /// Ovveride so onboarding highlight uses collider in world space despite having a rectransform 
+        /// </summary>
         public bool ColliderOverride = false;
 
         // Lookup registration lives on Awake/OnDestroy rather than OnRegister/OnDeregister
