@@ -60,3 +60,64 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
     Text: Central Mining Corp, a subsidiary of Expanse Materials. Contract to source
       and extract necessary materials for semiconductor production.
+  - Id:
+      m_Source: 'cm1 '
+      m_HashValue: 2230392028
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: PAL-World - Auserine's leading choice for any common good at a low-low
+      price.
+  - Id:
+      m_Source: cm2
+      m_HashValue: 3432125901
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Frontline Insurance - The best and only insurance comapny in all of Auserine.
+  - Id:
+      m_Source: cm3
+      m_HashValue: 3415348282
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: FR Pharma - For a healthier and more productive Auserine.
+  - Id:
+      m_Source: cm4
+      m_HashValue: 3331460187
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Frontier Food Services - The finest lab-grown food in the system
+  - Id:
+      m_Source: cm5
+      m_HashValue: 3314682568
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: 'FRA Logisitics - Protect, preserve, persevere, we are the FRA" '
+  - Id:
+      m_Source: 'cm6 '
+      m_HashValue: 1592695411
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Blair Assembly Co. - A manufacturer for workers, by workers
+  - Id:
+      m_Source: cm7
+      m_HashValue: 3348237806
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: A farm to table co-op led by the Kalvis sectors farmers, herbalists and
+      foragers.
+  - Id:
+      m_Source: cm8
+      m_HashValue: 3264349711
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: 'Klein Health Services - The Kalvis Sector''s all inclusive health program,
+      accessible for everyone. '
+  - Id:
+      m_Source: cm9
+      m_HashValue: 3247572092
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: 'The Creator''s Coalition - A unified group of artists, artisans, and shop
+      vendors. '
+  - Id:
+      m_Source: cm
+      m_HashValue: 1680451373
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Central Mining Corp, a subsidiary of Expanse Materials. Contract to source
+      and extract necessary materials for semiconductor production.
+  - Id:
+      m_Source: cm10
+      m_HashValue: 1961950124
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Blair Mining Union - Worker's right are people's rights, we believe in
+      a human-led mining future.
