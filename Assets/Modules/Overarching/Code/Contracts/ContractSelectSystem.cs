@@ -77,7 +77,7 @@ namespace SpaceFab.Overarching {
                 // and its -1 "nothing accepted" sentinel must never match a valid selection.
                 layoutState.SelectionContractUI.SignatureImage.fillAmount = chapterState.LastSelectedContractIndex == ContractSelectUtility.ToRawIndex(selectState, selectState.SelectedContractIndex) ? 1 : 0;
 
-                ContractUtility.LoadContractData(layoutState.SelectionContractUI,
+                ContractUtility.LoadContractUI(layoutState.SelectionContractUI,
                     chapterState.ChapterIndex,
                     ContractUtility.GetDefinition(ContractSelectUtility.GetContractId(selectState, chapterState, selectState.SelectedContractIndex)));
                 selectState.SelectedContractIndexChanged = false;

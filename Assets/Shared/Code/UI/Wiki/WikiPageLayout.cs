@@ -47,8 +47,6 @@ namespace SpaceFab.UI {
         [NonSerialized] public WikiPageChipSlot[] CurrentObservationChipSlots;
         [NonSerialized] public sbyte[] AssignedSlotIndices;
 
-        [NonSerialized] public AnimHandle AppearAnim;
-
         [NonSerialized] public float OriginalIllustrationHeight;
 
         private void Awake() {
@@ -128,7 +126,7 @@ namespace SpaceFab.UI {
             }
 
             layout.LayoutRoot.gameObject.SetActive(true);
-            Anims.Replace(ref layout.AppearAnim, DissolveInAnimInstance, layout, 0);
+            DitherFade.DissolveIn(layout.AnimatedMask);
         }
 
         static private unsafe void PopulateMaterialPage(WikiPageLayout layout, WikiPageData pageData, WikiContent content) {
@@ -363,7 +361,7 @@ namespace SpaceFab.UI {
             layout.CurrentMaterialId = default;
 
             layout.AnimatedMask.SetAlpha(0);
-            Anims.Cancel(ref layout.AppearAnim);
+            Anims.Cancel(ref layout.AnimatedMask.QuickAnim);
         }
 
         /// <summary>
@@ -457,26 +455,6 @@ namespace SpaceFab.UI {
         }
 
         #endregion // Research Updates
-
-        #region Animation
-
-        static private readonly DissolveInAnimation DissolveInAnimInstance = new DissolveInAnimation();
-
-        private sealed class DissolveInAnimation : LiteAnimator<WikiPageLayout> {
-            public override void InitAnimation(WikiPageLayout target, ref LiteAnimatorState state) {
-                state.ResetTime(0.44f);
-                target.AnimatedMask.SetAlpha(0);
-            }
-
-            public override void ResetAnimation(WikiPageLayout target, ref LiteAnimatorState state) {
-            }
-
-            public override void UpdateAnimation(WikiPageLayout target, ref LiteAnimatorState state, float deltaTime) {
-                target.AnimatedMask.SetAlpha(state.PercentProgress);
-            }
-        }
-
-        #endregion // Animation
 
         #region Handlers
 

@@ -33,8 +33,6 @@ namespace SpaceFab.Design
         public IEnumerator<WorkSlicer.Result?> Preload() {
             PanelLayout.Contract.ContextBackButton.OnClick.Register(OnRetryClicked);
             PanelLayout.Contract.ContextContinueButton.OnClick.Register(OnNextClicked);
-
-            PanelLayout.Contract.ShowDesignCompleted(Find.State<MinigameSaveStates>().Design.FoundValidSolution);
             return null;
         }
 
@@ -98,6 +96,10 @@ namespace SpaceFab.Design
             resultState.PanelLayout.HeaderBackground.color = allCorrect ? resultState.PanelLayout.CompleteHeaderColor : resultState.PanelLayout.IncompleteHeaderColor;
 
             resultState.PanelLayout.Contract.ContextHeader.SetText(allCorrect ? "Chip Outputs Verified" : "Chip Results Unverified");
+
+            if (!allCorrect) {
+                resultState.PanelLayout.Contract.ShowDesignCompleted(false);
+            }
 
             resultState.PanelLayout.Prepare();
             resultState.PanelLayout.AnimationRoutine.Replace(resultState, DisplayRoutine(resultState, allCorrect));

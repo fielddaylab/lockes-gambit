@@ -132,7 +132,7 @@ namespace SpaceFab.Overarching
             layoutState.SelectionCanvasGroup.alpha = 0;
 
             ContractDef contract = ContractUtility.GetDefinition(ContractSelectUtility.GetContractId(selectState, chapterState, index));
-            ContractUtility.LoadContractData(layoutState.SelectionContractUI, chapterState.ChapterIndex, contract);
+            ContractUtility.LoadContractUI(layoutState.SelectionContractUI, chapterState.ChapterIndex, contract);
             
             layoutState.SelectionContractUI.gameObject.SetActive(true);
             layoutState.SelectionCanvasGroup.blocksRaycasts = true;

@@ -62,7 +62,7 @@ namespace SpaceFab.Overarching
 
             // Fill the panel with the accepted contract — it may still be showing whatever was browsed last
             StringHash32 currContractId = ChapterUtility.GetSelectedContractId(chapterState);
-            ContractUtility.LoadContractData(layoutState.SelectionContractUI,
+            ContractUtility.LoadContractUI(layoutState.SelectionContractUI,
                 chapterState.ChapterIndex,
                 currContractId.IsEmpty ? null : ContractUtility.GetDefinition(currContractId));
 

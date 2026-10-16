@@ -62,7 +62,7 @@ namespace SpaceFab.Overarching
         // EvaluatePreviousRoutine credits to the player's completed list.
         public static void PopulateContractUI(ContractCompletionState completionState, ContractLayoutState layoutState, ContractState contractState, ChapterState chapterState)
         {
-            ContractUtility.LoadContractData(layoutState.CompletedContractUI, chapterState.ChapterIndex - 1, contractState.ContractDefinition);
+            ContractUtility.LoadContractUI(layoutState.CompletedContractUI, chapterState.ChapterIndex - 1, contractState.ContractDefinition);
         }
 
         public static IEnumerator EnterPreviousRoutine(ContractLayoutState layoutState)

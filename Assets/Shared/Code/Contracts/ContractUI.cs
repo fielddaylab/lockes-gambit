@@ -47,9 +47,9 @@ namespace SpaceFab {
         [Header("Animated")]
         public GameObject ApprovedStamp;
         public Image SignatureImage;
+        public DitherFadeGroup ContentsMask;
         public DitherFadeGroup ApprovedStampMask;
         public DitherFadeGroup ChipDiagramMask;
-        public DitherFadeGroup ControlsMask;
         public DitherFadeGroup ContextContentsMask;
 
         [Header("Context Panel")]
@@ -105,7 +105,7 @@ namespace SpaceFab {
 
     public static partial class ContractUtility
     {
-        public static void LoadContractData(ContractUI ui, int chapterIndex, ContractDef def)
+        public static void LoadContractUI(ContractUI ui, int chapterIndex, ContractDef def)
         {
             Find.GlobalAsset(out ContractUIAssetSet assets);
 

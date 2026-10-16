@@ -8,6 +8,7 @@ using FieldDay.Scenes;
 using FieldDay.UI;
 using FieldDay.UI.Widgets;
 using ScriptableBake;
+using SpaceFab.Save;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,6 @@ using UnityEngine.UI;
 namespace SpaceFab.UI {
     public sealed class ResultsPanelLayout : MonoBehaviour, IScenePreload, ISceneLateInitialize {
         public Canvas Canvas;
-        public CanvasGroup Group;
         public CanvasInputLayer Input;
 
         [Header("Background")]
@@ -85,7 +85,7 @@ namespace SpaceFab.UI {
             yield return Routine.Combine(
                 Fader.FadeTo(0, 0.3f).DelayBy(0.1f),
                 ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.4f),
-                HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f)
+                HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(0, 0.4f)
                 );
 
             Canvas.enabled = false;
@@ -114,7 +114,12 @@ namespace SpaceFab.UI {
 
         void ISceneLateInitialize.LateInitialize() {
             Find.State(out ChapterState chapterState, out ContractState contractState);
-            ContractUtility.LoadContractData(Contract, chapterState.ChapterIndex, contractState.ContractDefinition);
+            ContractUtility.LoadContractUI(Contract, chapterState.ChapterIndex, contractState.ContractDefinition);
+
+            Contract.SignatureImage.enabled = true;
+            Contract.SignatureImage.fillAmount = 1;
+
+            Contract.ShowDesignCompleted(Find.State<MinigameSaveStates>().Design.FoundValidSolution);
         }
     }
 }
