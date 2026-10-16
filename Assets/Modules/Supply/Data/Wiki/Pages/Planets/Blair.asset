@@ -18,9 +18,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0c6c9e1e09d88714a9216da737f31a95, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
-  BodyText: Blair was untouched from Frontier's expansion, leading to the planet
-    grow as powerful as Frontier. Though primarily isolationsists, Blair supported
-    the Kalvis Sector's autonomy and has since been inducted into the sector.
+  CaptionText: 
+  BodyText: Blair is an isolationist mining colony that remained largely untouched
+    by Fautomation until recently. Frontier Robotics is rapidly expanding its presence
+    in the colony's mines, prompting growing concerns. As strikes spread across the
+    system, Blair has begun forging closer ties with other mining planets and stations.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0
