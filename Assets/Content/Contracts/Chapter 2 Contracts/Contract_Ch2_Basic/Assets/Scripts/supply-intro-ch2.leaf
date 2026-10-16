@@ -2,4 +2,38 @@
 
 :: StartBuilding
 @trigger    OnSupplySetupCompleted
-{@PAL}	Use the WASD or Arrow keys to move around and find other planets.
+@when   !MinigameHasValidSolution()
+$call   PointElement(supply:planet_sio2converter)
+{@PAL}  You need a semiconductor, so you'll need to take the silicon dioxide to the refining station.
+
+
+:: NodeClicked
+@trigger    OnNodeClicked
+@when   !MinigameHasValidSolution()
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+$if     !temp:firstNodeClicked
+    $set    temp:firstNodeClicked = true
+    {@PAL}  Use the <color=yellow>WASD</color> or <color=yellow>Arrow</color> keys to move around and find other planets.
+$elseif !temp:secondNodeClicked
+    $set    temp:secondNodeClicked = true
+    $call   PointElement(supply:ship0-time)
+    {@PAL}  The planets with the highest time determines the total production time of your route.
+$endif
+
+:: RouteCompleted
+@trigger    OnRouteCompleted
+@when   !MinigameHasValidSolution()
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+$if !IsMaterialCollected("Silicon")
+    {@PAL}  You need a semiconductor, so you'll need to take the silicon dioxide to the refining station.
+$elseif !IsMaterialCollected("Copper")
+    {@PAL}	Use the <color=yellow>WASD</color> or <color=yellow>Arrow</color> keys to move around and find other planets.
+$else
+    {@PAL}  The route time is production time + travel time.\n\nTravel time is based on the distance and the speed of the ship.
+$endif
+
+:: OnRoutesConfirmed
+@trigger    OnRoutesConfirmed
+{@PAL} Once you confirm your route, all materials are ordered at the same time.\n\nEach route time is based on the longest production time on that route plus the travel time.

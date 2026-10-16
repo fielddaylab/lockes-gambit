@@ -58,6 +58,10 @@ PrefabInstance:
 
         Zone'
       objectReference: {fileID: 0}
+    - target: {fileID: 8010513409701770676, guid: bdeee664090cd224a83be2eeda096f2a, type: 3}
+      propertyPath: Flags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

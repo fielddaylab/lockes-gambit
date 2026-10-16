@@ -254,7 +254,11 @@ namespace FieldDay.Audio {
         }
 
         static public bool IsActive(AudioHandle handle) {
-            return Game.Audio.IsVoiceActive(handle);
+            return Game.Audio.GetIsVoiceActive(handle);
+        }
+
+        static public bool IsLoaded(AudioHandle handle) {
+            return Game.Audio.GetIsVoiceLoaded(handle);
         }
 
         static public AudioSource GetSource(AudioHandle handle) {

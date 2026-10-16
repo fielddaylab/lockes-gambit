@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11040acf09980e54286911b24c1ffece, type: 3}
   m_Name: Level6_DepletionGate
   m_EditorClassIdentifier: 
-  m_title: Depletion Gate
+  m_title: Depletion Transistor
+  m_description: Use a Gate to block a P-Type path when it receives the right signal.
   m_allowedTools: 116
   m_gridConfig: {fileID: 11400000, guid: f1ce5d590fd6a4d27a2fdebaf0713371, type: 2}
   m_testSuite: {fileID: 11400000, guid: 43c3d2d406d8244988c7ea2e06f740cd, type: 2}

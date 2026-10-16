@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: HennigStation
   m_EditorClassIdentifier: 
   Title: Hennig Station
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
-  IllustrationFrames: []
+  Icon: {fileID: 21300000, guid: db7753759a66d3d4aa61ee6fdd71fdec, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 40136ab9371bb094f98e34661f2864ce, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
+  CaptionText: 
   BodyText: A new station in the Forsch sector that came unannounced. Rumors have
     spread that this station was made directly to compete with the Kalvis sector
     in Phosphorus trade.

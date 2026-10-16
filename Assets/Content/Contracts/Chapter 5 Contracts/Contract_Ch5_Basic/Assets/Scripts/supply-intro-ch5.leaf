@@ -1,0 +1,8 @@
+# basePath SupplyIntroCh5
+
+
+:: StartBuilding
+@trigger    OnSupplySetupCompleted
+@when   !MinigameHasValidSolution()
+//$call   PointElement(supply:hazard)
+{@PAL}  Be careful! Going through a hazard will cost extra time or money of your route.

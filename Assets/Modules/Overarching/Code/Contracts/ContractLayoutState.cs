@@ -2,6 +2,7 @@ using BeauRoutine;
 using BeauUtil;
 using FieldDay;
 using FieldDay.SharedState;
+using FieldDay.UI.Widgets;
 using SpaceFab.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace SpaceFab.Overarching
         public CanvasGroup SelectionCanvasGroup;
         public RectTransform FocusedContractZone;
         public ContractUI SelectionContractUI;
-        public DynamicButton ConfirmContractButton;
+        public GuiButton ConfirmContractButton;
         public DynamicButton NextContractButton;
         public DynamicButton PrevContractButton;
 
@@ -34,11 +35,11 @@ namespace SpaceFab.Overarching
         public DynamicButton ViewCurrContractButton;
         public CanvasGroup ChangeCanvasGroup;
         public DynamicButton HideCurrContractButton;
-        public DynamicButton ChangeContractButton;
+        public GuiButton ChangeContractButton;
         public DynamicButton CancelChangeContractButton;
         public CanvasGroup DoubleConfirmCanvasGroup;
-        public DynamicButton DoubleConfirmContractButton;
-        public DynamicButton DoubleCancelContractButton;
+        public GuiButton DoubleConfirmContractButton;
+        public GuiButton DoubleCancelContractButton;
 
         public Routine CompletionRoutine;
         public Routine SelectionRoutine;
@@ -81,7 +82,7 @@ namespace SpaceFab.Overarching
             });
 
             // Initialize confirm contract button
-            ConfirmContractButton.onClick.AddListener(() => {
+            ConfirmContractButton.OnClick.AddListener(() => {
                     Find.State<ContractSelectState>().SelectionConfirmed = true;
                 });
 
@@ -92,7 +93,7 @@ namespace SpaceFab.Overarching
                 });
 
             // Initialize change contract button
-            ChangeContractButton.onClick.AddListener(() => {
+            ChangeContractButton.OnClick.AddListener(() => {
                     Find.State<ContractChangeState>().Phase = ContractChangePhase.ContractSelectSystem;
                 });
 
@@ -107,11 +108,11 @@ namespace SpaceFab.Overarching
                 });
 
             // Initialize double confirm contract button
-            DoubleConfirmContractButton.onClick.AddListener(() => {
+            DoubleConfirmContractButton.OnClick.AddListener(() => {
                     Find.State<ContractChangeState>().ChangeDoubleConfirmed = true;
                 });
 
-            DoubleCancelContractButton.onClick.AddListener(() => {
+            DoubleCancelContractButton.OnClick.AddListener(() => {
                 Find.State<ContractChangeState>().Phase = ContractChangePhase.DoubleCancelContract;
             });
         }

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1683349872946723301, guid: 915948aabbf55f848be1bbea69795866, type: 3}
+      propertyPath: TooltipHeader
+      value: +1 Cost
+      objectReference: {fileID: 0}
     - target: {fileID: 1972050106573446033, guid: 915948aabbf55f848be1bbea69795866, type: 3}
       propertyPath: Cost
       value: 1

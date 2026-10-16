@@ -23,34 +23,50 @@ MonoBehaviour:
     height: 24
   Positions:
   - Name:
+      m_Source: Home
       m_HashValue: 1391791790
     Position: {x: -0.37, y: 0.01}
   - Name:
+      m_Source: Planet_Au
       m_HashValue: 392540606
     Position: {x: 6.72, y: 2.29}
   - Name:
+      m_Source: Planet_B
       m_HashValue: 3566278674
     Position: {x: -6.7, y: -4.38}
   - Name:
+      m_Source: Planet_B_Alt
       m_HashValue: 1181591482
     Position: {x: 6.65, y: -4.68}
   - Name:
+      m_Source: Planet_Cu
       m_HashValue: 57385584
     Position: {x: -4.4, y: 5.51}
   - Name:
+      m_Source: Planet_P
       m_HashValue: 3801165340
     Position: {x: 3.04, y: -1.65}
   - Name:
+      m_Source: Planet_SiC
       m_HashValue: 1798506261
     Position: {x: -5.49, y: 0.44}
   - Name:
+      m_Source: Planet_SiO2
       m_HashValue: 1616771497
     Position: {x: 4.28, y: 6.66}
   - Name:
+      m_Source: Planet_SiO2Converter
       m_HashValue: 241399131
     Position: {x: -0.35, y: -5.44}
   Hazards:
   - Name:
+      m_Source: Hazard_Risk
       m_HashValue: 3227802397
     Position: {x: 0.53, y: 3.67}
-  Overrides: []
+  Overrides:
+  - Name:
+      m_Source: Planet_P
+      m_HashValue: 3801165340
+    Time: 1
+    Cost: 1
+    Risk: 0

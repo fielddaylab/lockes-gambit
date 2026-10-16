@@ -250,6 +250,24 @@ namespace FieldDay.Audio {
             return null;
         }
 
+        private int CullVoicesWithUnloadedClips() {
+            int culled = 0;
+            for (int i = m_ActiveVoices.Count - 1; i >= 0; i--) {
+                VoiceData voice = m_ActiveVoices[i];
+                if (voice.State == VoiceState.Playing || voice.State == VoiceState.Paused) {
+                    if (voice.Components.Source.clip == null) {
+#if DEVELOPMENT
+                        Log.Warn("[AudioMgr] Killing voice '{0}' due to unloaded clip", voice.DebugName);
+#endif // DEVELOPMENT
+                        KillVoice(voice);
+                        m_ActiveVoices.FastRemoveAt(i);
+                        culled++;
+                    }
+                }
+            }
+            return culled;
+        }
+
         private int CullFinishedVoices() {
             int culled = 0;
             for (int i = m_ActiveVoices.Count - 1; i >= 0; i--) {
@@ -264,7 +282,7 @@ namespace FieldDay.Audio {
         }
 
         private unsafe void UpdateVoices(float deltaTime, double currentTime) {
-            bool hasAudioFocus = AudioUtility.IsActive() && !AudioListener.pause;
+            bool hasAudioFocus = HasFocus();
             
             AudioPropertyBlock* busValues = stackalloc AudioPropertyBlock[m_BusCount];
             for(int i = 0; i < m_BusCount; i++) {
@@ -437,8 +455,16 @@ namespace FieldDay.Audio {
             return false;
         }
 
-        internal bool IsVoiceActive(AudioHandle handle) {
+        internal bool GetIsVoiceActive(AudioHandle handle) {
             return m_VoiceIdAllocator.IsValid(handle.m_Id);
+        }
+
+        internal bool GetIsVoiceLoaded(AudioHandle handle) {
+            var voice = FindVoiceForId(handle.m_Id);
+            if (voice != null) {
+                return voice.Components.Source.clip && voice.Components.Source.clip.loadState == AudioDataLoadState.Loaded;
+            }
+            return false;
         }
 
         internal AudioSource GetVoiceSource(AudioHandle handle) {
@@ -457,6 +483,7 @@ namespace FieldDay.Audio {
             Assert.True(m_ActiveVoices.Count > 0);
             
             int finishedCull = CullFinishedVoices();
+            finishedCull += CullVoicesWithUnloadedClips();
             if (finishedCull > 0) {
                 return;
             }
@@ -609,6 +636,13 @@ namespace FieldDay.Audio {
         #endregion // Voice Component Pool
 
         #region Helpers
+
+        /// <summary>
+        /// Returns if audio playback is currently focused and available.
+        /// </summary>
+        static public bool HasFocus() {
+            return AudioUtility.IsActive() && !AudioListener.pause;
+        }
 
         /// <summary>
         /// Returns if a clip can be seeked precisely.

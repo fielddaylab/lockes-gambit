@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1683349872946723301, guid: 915948aabbf55f848be1bbea69795866, type: 3}
+      propertyPath: TooltipHeader
+      value: +1 Risk
+      objectReference: {fileID: 0}
     - target: {fileID: 3687948971506205187, guid: 915948aabbf55f848be1bbea69795866, type: 3}
       propertyPath: m_Name
-      value: Hazard_Risk Variant
+      value: Hazard_Risk
       objectReference: {fileID: 0}
     - target: {fileID: 6285069881206567461, guid: 915948aabbf55f848be1bbea69795866, type: 3}
       propertyPath: m_LocalPosition.x

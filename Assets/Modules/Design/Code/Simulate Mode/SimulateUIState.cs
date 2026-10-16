@@ -9,6 +9,7 @@ using BeauRoutine;
 using FieldDay.UI.Widgets;
 using System;
 using BeauUtil.Debugger;
+using TMPro;
 
 namespace SpaceFab.Design
 {
@@ -23,6 +24,9 @@ namespace SpaceFab.Design
         #region Inspector
 
         public SimTableLayout TableLayout;
+        [Header("Puzzle Description")]
+        public TMP_Text TitleText;
+        public TMP_Text DescriptionText;
 
         #endregion // Inspector
 
