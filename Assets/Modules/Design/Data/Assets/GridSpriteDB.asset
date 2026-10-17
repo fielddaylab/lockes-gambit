@@ -25,16 +25,14 @@ MonoBehaviour:
   Via: {fileID: 21300000, guid: 1abbd0722d61d414488b13bdc09fbdcc, type: 3}
   ViaBase: {fileID: 21300000, guid: e4fc8657b7ddcba4ba0ec0ea630590ad, type: 3}
   Gate: {fileID: 21300000, guid: 2bce72bed08ccfd48afbfdd8ba429c0f, type: 3}
-  IOInner: {fileID: 0}
-  IOOuter: {fileID: 0}
   InputConstantHigh: {fileID: 21300000, guid: ccd825c774947c347bff4107e50f33a8, type: 3}
   InputConstantLow: {fileID: 21300000, guid: 3cc91fe61cae8e34a8692df98f8a15e4, type: 3}
   FlowHiAbove: {fileID: 21300000, guid: 6e3cb9e654e0be14881cf55eb65ff679, type: 3}
   FlowLoAbove: {fileID: 21300000, guid: f9ee1447e10cd734fa83ea8cbcb8d96b, type: 3}
-  FlowUnstableAbove: {fileID: 21300000, guid: 711a3f4979bce9b4a9e10fcef9e5b84b, type: 3}
+  FlowUnstableAbove: {fileID: 21300000, guid: 1c01b7e2fffb99e4c83cd69cfdb0af25, type: 3}
   FlowHiBelow: {fileID: 21300000, guid: 6e3cb9e654e0be14881cf55eb65ff679, type: 3}
   FlowLoBelow: {fileID: 21300000, guid: f9ee1447e10cd734fa83ea8cbcb8d96b, type: 3}
-  FlowUnstableBelow: {fileID: 21300000, guid: 691f87bd2f7ba074db27fc2fd484b8e6, type: 3}
+  FlowUnstableBelow: {fileID: 21300000, guid: 1c01b7e2fffb99e4c83cd69cfdb0af25, type: 3}
   InputToggleBackgroundHi: {fileID: 21300000, guid: e877ce26fc146df44af91033f10f79fe, type: 3}
   InputToggleBackgroundLow: {fileID: 21300000, guid: 1072ddcf57df7df4e8758d5554cfa721, type: 3}
   InputToggleArrow: {fileID: 21300000, guid: b8c34a44a51433b4d88043a596acd43e, type: 3}

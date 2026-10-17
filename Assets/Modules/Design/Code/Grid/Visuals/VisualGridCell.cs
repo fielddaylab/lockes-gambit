@@ -1,3 +1,4 @@
+using BeauRoutine;
 using FieldDay;
 using FieldDay.Components;
 using SpaceFab.Design.Visuals;
@@ -29,11 +30,15 @@ namespace SpaceFab.Design
     {
         private const int FLOW_SORT_ORDER = 500;
         private const int GATE_SORT_ORDER = 300;
-        private const int SECONDARY_SORT_ORDER = 15;
+        private const int SECONDARY_SORT_ORDER = 25;
         private const int METAL_SORT_ORDER = 200;
         private const int VIA_SORT_ORDER = 210;
         private const int TRANSISTOR_SORT_ORDER = 0;
 
+        private const float PATH_FLOW_ALPHA = 0.4f; //alpha of path sprite when a flow pattern shows
+
+        public const float METAL_OFFSET = 0.18f;
+        public const float SEMI_OFFSET = -0.1f;
         // Per-cell flow state now lives in SimulateRunScratch rather than on GridCell. Callers
         // pass the pre-fetched scratch + cellIndex so this helper doesn't repeat the Find.State
         // lookup for every cell on the grid. During Tool mode, scratch may be null (Simulate
@@ -45,24 +50,26 @@ namespace SpaceFab.Design
                 : FlowState.Empty;
             // visualCell.FlowIndicator.sortingOrder = FLOW_SORT_ORDER;
             visualCell.FlowIndicator.sortingOrder = layerIndex == 0 ? METAL_SORT_ORDER : TRANSISTOR_SORT_ORDER;
-             visualCell.FlowIndicator.sortingOrder += 1;
+            visualCell.FlowIndicator.sortingOrder -= 1;
             Vector2 flowSize = visualCell.FlowIndicator.size;
+            float pathAlpha = flow == FlowState.Empty ? 1f : PATH_FLOW_ALPHA;
+            visualCell.PathRenderer.SetAlpha(pathAlpha);
+            foreach (var r in visualCell.DirRenderers) { r.SetAlpha(pathAlpha); };
 
-            switch (flow)
-            {
-                case (FlowState.Hi):
-                    UpdateHiFlow(visualCell, cell, layerIndex, spriteDB);
-                    break;
-                case (FlowState.Lo):
-                    UpdateLoFlow(visualCell, cell, layerIndex, spriteDB);
-                    break;
-                case (FlowState.Unstable):
-                    UpdateUnstableFlow(visualCell, cell, layerIndex, spriteDB);
-                    break;
-                default:
-                    UpdateDefaultFlow(visualCell, cell, layerIndex, spriteDB);
-                    break;
-            }
+            switch (flow) {
+                    case (FlowState.Hi):
+                        UpdateHiFlow(visualCell, cell, layerIndex, spriteDB);
+                        break;
+                    case (FlowState.Lo):
+                        UpdateLoFlow(visualCell, cell, layerIndex, spriteDB);
+                        break;
+                    case (FlowState.Unstable):
+                        UpdateUnstableFlow(visualCell, cell, layerIndex, spriteDB);
+                        break;
+                    default:
+                        UpdateDefaultFlow(visualCell, cell, layerIndex, spriteDB);
+                        break;
+                }
 
             visualCell.FlowIndicator.size = flowSize;
         }
@@ -123,12 +130,14 @@ namespace SpaceFab.Design
                 // lookup via for flow state
                 var sprite = GridSpriteDBUtility.LookupViaSprite(spriteDB, flow);
                 visualCell.TransferRenderer.sprite = sprite;
+                visualCell.TransferRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
                 visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
             }
             else if (cell.TransferType == TransferType.GateAbove)
             {
                 var sprite = GridSpriteDBUtility.LookupGateSprite(spriteDB, flow);
                 visualCell.TransferRenderer.sprite = sprite;
+                visualCell.TransferRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
                 visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
             }
         }
@@ -215,7 +224,7 @@ namespace SpaceFab.Design
             visualCell.ShadowPathRenderer.sortingOrder = TRANSISTOR_SORT_ORDER + 20;
             visualCell.PathOverlayRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 3;
             visualCell.PathOverlayBaseRenderer.sortingOrder = visualCell.PathOverlayRenderer.sortingOrder - 1;
-            visualCell.SubRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder - 10;
+            visualCell.SubRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 10;
             foreach (var r in visualCell.DirRenderers) { r.sortingOrder = visualCell.PathRenderer.sortingOrder + 5; }
             visualCell.TransferRenderer.sortingOrder = cellData.TransferType == TransferType.Via ? VIA_SORT_ORDER : GATE_SORT_ORDER;
             visualCell.SecondaryTransferRenderer.sortingOrder = SECONDARY_SORT_ORDER;
