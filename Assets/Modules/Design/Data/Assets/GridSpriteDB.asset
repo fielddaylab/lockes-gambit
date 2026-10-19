@@ -21,10 +21,15 @@ MonoBehaviour:
   NSide: {fileID: 21300000, guid: 295945768a71e314d86071fab8472481, type: 3}
   PSide: {fileID: 21300000, guid: 1a6adfc6ac2bd394aa03916b29a0d84a, type: 3}
   InvertedOverlay: {fileID: 21300000, guid: 598d496783b3adb47a14ea514a4605fd, type: 3}
-  InvertedOverlayBase: {fileID: 21300000, guid: c9cb3f3cb69fc2841933aabc683be7f8, type: 3}
+  InvertedOverlayBase: {fileID: 21300000, guid: 598d496783b3adb47a14ea514a4605fd, type: 3}
   Via: {fileID: 21300000, guid: 1abbd0722d61d414488b13bdc09fbdcc, type: 3}
   ViaBase: {fileID: 21300000, guid: e4fc8657b7ddcba4ba0ec0ea630590ad, type: 3}
+  ViaHi: {fileID: 21300000, guid: 9b5b03ea6e85ada49ab1203d63ad9a23, type: 3}
+  ViaLo: {fileID: 21300000, guid: ed0b23e17e4612e40a3c452a681734ef, type: 3}
+  ViaUnstable: {fileID: 21300000, guid: f21cf33ea34738d47aefa3acf30c1fd4, type: 3}
   Gate: {fileID: 21300000, guid: 2bce72bed08ccfd48afbfdd8ba429c0f, type: 3}
+  GateHi: {fileID: 21300000, guid: b9587eed50c58a349b763490fe33d4c5, type: 3}
+  GateLo: {fileID: 21300000, guid: c005463ba2b679c4ab01459bc83637a6, type: 3}
   InputConstantHigh: {fileID: 21300000, guid: ccd825c774947c347bff4107e50f33a8, type: 3}
   InputConstantLow: {fileID: 21300000, guid: 3cc91fe61cae8e34a8692df98f8a15e4, type: 3}
   FlowHiAbove: {fileID: 21300000, guid: 6e3cb9e654e0be14881cf55eb65ff679, type: 3}

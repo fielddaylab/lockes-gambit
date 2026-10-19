@@ -138,7 +138,8 @@ namespace SpaceFab.Design
                 var sprite = GridSpriteDBUtility.LookupGateSprite(spriteDB, flow);
                 visualCell.TransferRenderer.sprite = sprite;
                 visualCell.TransferRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
-                visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
+                // remove base for gate to clarify that signals aren't sent thru gates
+                //visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
             }
         }
 
@@ -214,7 +215,8 @@ namespace SpaceFab.Design
                     break;
                 case TransferType.GateAbove:
                     visualCell.TransferRenderer.sprite = GridSpriteDBUtility.LookupGateSprite(spriteDB, FlowState.Empty);
-                    visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
+                    // remove base for gate to clarify that signals aren't sent thru gates
+                    //visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
                     break;
                 default:
                     break;
@@ -222,8 +224,8 @@ namespace SpaceFab.Design
 
             visualCell.PathRenderer.sortingOrder = layerIndex == 0 ? METAL_SORT_ORDER : TRANSISTOR_SORT_ORDER;
             visualCell.ShadowPathRenderer.sortingOrder = TRANSISTOR_SORT_ORDER + 20;
-            visualCell.PathOverlayRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 3;
-            visualCell.PathOverlayBaseRenderer.sortingOrder = visualCell.PathOverlayRenderer.sortingOrder - 1;
+            //visualCell.PathOverlayRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 3;
+            visualCell.PathOverlayBaseRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 3;
             visualCell.SubRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 10;
             foreach (var r in visualCell.DirRenderers) { r.sortingOrder = visualCell.PathRenderer.sortingOrder + 5; }
             visualCell.TransferRenderer.sortingOrder = cellData.TransferType == TransferType.Via ? VIA_SORT_ORDER : GATE_SORT_ORDER;
@@ -271,7 +273,7 @@ namespace SpaceFab.Design
             {
                 if (selfTempTransform == CellType.PTransistor)
                 {
-                    visualCell.PathOverlayRenderer.sprite = spriteDB.InvertedOverlay;
+                    //visualCell.PathOverlayRenderer.sprite = spriteDB.InvertedOverlay;
                     visualCell.PathOverlayBaseRenderer.sprite = spriteDB.InvertedOverlayBase;
                     visualCell.PathOverlayRenderer.color = spriteDB.PColor;
                     visualCell.PathOverlayBaseRenderer.color = spriteDB.NColor;
@@ -332,7 +334,7 @@ namespace SpaceFab.Design
             {
                 if (selfTempTransform == CellType.NTransistor)
                 {
-                    visualCell.PathOverlayRenderer.sprite = spriteDB.InvertedOverlay;
+                    //visualCell.PathOverlayRenderer.sprite = spriteDB.InvertedOverlay;
                     visualCell.PathOverlayBaseRenderer.sprite = spriteDB.InvertedOverlayBase;
                     visualCell.PathOverlayRenderer.color = spriteDB.NColor;
                     visualCell.PathOverlayBaseRenderer.color = spriteDB.PColor;
