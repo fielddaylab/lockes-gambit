@@ -62,7 +62,11 @@ namespace SpaceFab.Design
             // disallow drag from inputs/outputs on transistor layer
             if (type == CellType.NTransistor || type == CellType.PTransistor)
             {
-                if (fromCell.CellType == CellType.Input || fromCell.CellType == CellType.Output)
+                // inputs and outputs are on the metal layer, so we need to grab that layer
+                GridLayer metalLayer = gridState.GridStack.GridLayers[(int)StackLayer.Metal];
+                var fromCellMetal = GridLayerUtility.GetCell(metalLayer, toolModeState.LastKnownDragCoord);
+                var toCellMetal = GridLayerUtility.GetCell(gridState.GridStack.GridLayers[0], gridPos);
+                if (fromCellMetal.CellType == CellType.Input || fromCellMetal.CellType == CellType.Output)
                 {
                     ToolModeUtility.TerminateDrag(toolModeState);
                     return;

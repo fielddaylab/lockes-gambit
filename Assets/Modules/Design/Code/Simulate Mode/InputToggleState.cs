@@ -380,6 +380,7 @@ namespace SpaceFab.Design
                         // Sorting order is owned by the prefab — Input cells typically live on the
                         // top layer, but we don't override here to keep the asset side authoritative.
                         overlay.transform.position = visualCell.transform.position;
+                        overlay.transform.Translate(0, VisualGridCellUtility.METAL_OFFSET, 0, Space.Self);
 
                         // Exclude constant hi/lo inputs visual renders as their visuals are updated in
                         // VisualGridCell with different visual designs.

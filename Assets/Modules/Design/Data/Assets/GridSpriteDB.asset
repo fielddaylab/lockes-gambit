@@ -47,7 +47,7 @@ MonoBehaviour:
   InputToggleHiTextColor: {r: 0.78823537, g: 0.25882354, b: 0.06666667, a: 1}
   OutputToggleBackground: {fileID: 21300000, guid: 38df8dd3b4a49334db9aaa6c19c1437e, type: 3}
   OutputArrow: {fileID: 21300000, guid: bfb6eb2cafb881543a5d7303288f375a, type: 3}
-  OutputEmptyColor: {r: 1, g: 1, b: 1, a: 1}
-  OutputEmptyTextColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
-  OutputUnstableColor: {r: 1, g: 0.26630434, b: 0, a: 1}
-  OutputUnstableTextColor: {r: 0.4339623, g: 0.115566045, b: 0, a: 1}
+  OutputEmptyColor: {r: 0.9647059, g: 0.89411765, b: 0.83137256, a: 1}
+  OutputEmptyTextColor: {r: 0.5882353, g: 0.5019608, b: 0.42745098, a: 1}
+  OutputUnstableColor: {r: 1, g: 0, b: 0, a: 1}
+  OutputUnstableTextColor: {r: 1, g: 0.7688679, b: 0.7824334, a: 1}
