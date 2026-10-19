@@ -108,17 +108,22 @@ namespace SpaceFab.Overarching {
             }
         }
 
-        public IEnumerator FadeIn() {
-            ContractPositionOffset.Offset0 = new Vector2(0, -60);
-            HeaderPositionOffset.Offset0 = new Vector2(0, 60);
-            yield return Routine.Combine(
-                Fader.FadeTo(1, 0.3f),
-                ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f).DelayBy(0.1f),
-                ContractPositionOffset.Offset0To(default, 0.4f).DelayBy(0.1f).Ease(Curve.CubeOut),
-                HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f).DelayBy(0.15f),
-                HeaderPositionOffset.Offset0To(default, 0.4f).DelayBy(0.15f).Ease(Curve.CubeOut),
-                ContractScrollButtonsFader.FadeTo(1, 0.2f).DelayBy(0.35f)
-            );
+        public IEnumerator FadeIn(OverarchingContractMode mode) {
+
+            if (mode == OverarchingContractMode.Complete) {
+                ContractPositionOffset.Offset0 = new Vector2(0, -60);
+            } else {
+                ContractPositionOffset.Offset0 = new Vector2(0, -60);
+                HeaderPositionOffset.Offset0 = new Vector2(0, 60);
+                yield return Routine.Combine(
+                    Fader.FadeTo(1, 0.3f),
+                    ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f).DelayBy(0.1f),
+                    ContractPositionOffset.Offset0To(default, 0.4f).DelayBy(0.1f).Ease(Curve.CubeOut),
+                    HeaderPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f).DelayBy(0.15f),
+                    HeaderPositionOffset.Offset0To(default, 0.4f).DelayBy(0.15f).Ease(Curve.CubeOut),
+                    ContractScrollButtonsFader.FadeTo(1, 0.2f).DelayBy(0.35f)
+                );
+            }
 
             Input.SetInputOverride(null);
         }

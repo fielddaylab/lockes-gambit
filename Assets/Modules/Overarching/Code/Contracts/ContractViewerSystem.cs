@@ -66,7 +66,7 @@ namespace SpaceFab.Overarching {
                     }
                 }
 
-                layout.AnimationRoutine.Replace(layout, layout.FadeIn());
+                layout.AnimationRoutine.Replace(layout, layout.FadeIn(view.CurrentMode));
 
                 SpacefabGame.Events.Dispatch(GameEvents.OpenContractView);
             }
