@@ -370,7 +370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123183956925529296, guid: b04d770acee8be34685a386e291d223c, type: 3}
       propertyPath: ToolName
-      value: erase
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8469083295347066497, guid: b04d770acee8be34685a386e291d223c, type: 3}
       propertyPath: Kind

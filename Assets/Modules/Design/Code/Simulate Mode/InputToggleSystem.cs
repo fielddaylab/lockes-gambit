@@ -103,12 +103,16 @@ namespace SpaceFab.Design
 
             if (visual.ArrowRenderer != null)
             {
-                visual.ArrowRenderer.color = GridSpriteDBUtility.LookupInputToggleTextColor(spriteDB, state);
+                //use white for arrow & subtype, use color for signal switch text
+                visual.ArrowRenderer.color = Color.white;
+                //visual.ArrowRenderer.color = GridSpriteDBUtility.LookupInputToggleTextColor(spriteDB, state);
             }
 
             if (visual.SubtypeText != null)
             {
-                visual.SubtypeText.color = GridSpriteDBUtility.LookupInputToggleTextColor(spriteDB, state);
+                //use white for arrow & subtype, use color for signal switch text
+                visual.SubtypeText.color = Color.white;
+                //visual.SubtypeText.color = GridSpriteDBUtility.LookupInputToggleTextColor(spriteDB, state);
             }
 
             if (visual.ToggleHandleRenderer != null)

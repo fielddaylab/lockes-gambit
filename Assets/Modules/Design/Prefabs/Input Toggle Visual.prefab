@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 635268181043409584}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.162, y: 0.199, z: 0}
+  m_LocalPosition: {x: 0.137, y: 0.174, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -203,7 +203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.025, y: 0.066}
+  m_AnchoredPosition: {x: 0.054, y: 0.03}
   m_SizeDelta: {x: 0.3, y: 0.3}
   m_Pivot: {x: 1, y: 0}
 --- !u!23 &1103087965458563408
@@ -469,7 +469,7 @@ Transform:
   m_GameObject: {fileID: 5487020677118758781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18, y: 0, z: 0}
+  m_LocalPosition: {x: 0.14, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -584,8 +584,8 @@ MonoBehaviour:
   BackgroundRenderer: {fileID: 4948607152485315806}
   ArrowRenderer: {fileID: 1252159932155938492}
   ToggleHandleRenderer: {fileID: 5252248679516850910}
-  ToggleHandleLoLocalPosition: {x: -0.125, y: 0, z: 0}
-  ToggleHandleHiLocalPosition: {x: 0.125, y: 0, z: 0}
+  ToggleHandleLoLocalPosition: {x: -0.18, y: 0, z: 0}
+  ToggleHandleHiLocalPosition: {x: 0.18, y: 0, z: 0}
   SubtypeText: {fileID: 2657557531601067227}
   StateText: {fileID: 316494003703588638}
 --- !u!114 &4136025814031816267
@@ -640,7 +640,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.007}
+  m_AnchoredPosition: {x: 0, y: -0.041}
   m_SizeDelta: {x: 0.3, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5719019076333557325

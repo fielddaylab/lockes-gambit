@@ -163,12 +163,15 @@ namespace SpaceFab.Design
             // Render according to cell data
             switch (cellData.CellType)
             {
-                case CellType.Metal:
                 case CellType.Input:
                 case CellType.Output:
-                    spriteDB.MetalLibrary.Lookup(EdgeUtility.CondenseEdges(cellData.Edges), out pathData);
+                    spriteDB.MetalLibrary.Lookup(EdgeUtility.CondenseEdges(cellData.Edges), out pathData, true);
                     lookedUpEdge = true;
                     break;
+                case CellType.Metal:
+                    spriteDB.MetalLibrary.Lookup(EdgeUtility.CondenseEdges(cellData.Edges), out pathData);
+                    lookedUpEdge = true;
+                    break;              
                 case CellType.NTransistor:
                     RenderNTransistor(visualCell, ref cellData, ref pathData, ref lookedUpEdge, scratch, cellIndex, layerIndex, col, row, spriteDB);
                     break;
@@ -194,10 +197,12 @@ namespace SpaceFab.Design
                 case InputOutputNodeTypeFlags.VPLUS:
                     visualCell.SubRenderer.sprite = spriteDB.InputConstantHigh;
                     visualCell.SubRenderer.transform.localScale = Vector3.one * 0.75f;
+                    visualCell.SubRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
                     break;
                 case InputOutputNodeTypeFlags.VMINUS:
                     visualCell.SubRenderer.sprite = spriteDB.InputConstantLow;
                     visualCell.SubRenderer.transform.localScale = Vector3.one * 0.75f;
+                    visualCell.SubRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
                     break;
                 default:
                     break;
@@ -259,6 +264,10 @@ namespace SpaceFab.Design
         {
             if (scratch == null) { return CellType.NONE; }
             return SimulateRunScratchUtility.GetCellTempTransform(scratch, cellIndex);
+        }
+
+        private static void RenderMetalIO(VisualGridCell visualCell, ref GridCell cellData, ref PathLibrary.AssembledPathData pathData, ref bool lookedUpEdge, SimulateRunScratch scratch, int cellIndex, int layerIndex, int col, int row, GridSpriteDB spriteDB) {
+            // if North metal edge connected to Input, Output, or Constant, draw a half-length metal path over i/o
         }
 
         private static void RenderNTransistor(VisualGridCell visualCell, ref GridCell cellData, ref PathLibrary.AssembledPathData pathData, ref bool lookedUpEdge, SimulateRunScratch scratch, int cellIndex, int layerIndex, int col, int row, GridSpriteDB spriteDB)

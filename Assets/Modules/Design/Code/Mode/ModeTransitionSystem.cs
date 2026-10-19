@@ -68,8 +68,8 @@ namespace SpaceFab.Design
                     || runState.PendingPlayRowIndex >= 0;
                 if (playRequested)
                 {
-
-                    EnterSimulateMode(modeState, runState, graphState, graphBuildScratch, runScratch, gridStackState, progressState, contractState, designState);
+                    VisualGridStackUtility.SetOutlineVisible(visualState, true);
+                    EnterSimulateMode(modeState, runState, graphState, graphBuildScratch, runScratch, gridStackState, progressState, contractState, visualState, designState);
                 }
             }
             // Simulate → Tool. Any toolbar-button click triggers exit. The click flag survives
@@ -100,7 +100,7 @@ namespace SpaceFab.Design
         // Builds the evaluation graph from the current grid, sizes scratch arrays, allocates
         // RowVerdicts, and flips the active update mask from Tool to Simulate. Idempotent within
         // a single tick — caller gates on modeState.Mode.
-        static private void EnterSimulateMode(ModeTransitionState modeState, SimulateRunState runState, SimulateGraphState graphState, SimulateGraphBuildScratch graphBuildScratch, SimulateRunScratch runScratch, GridStackState gridStackState, PlayerProgressState progressState, ContractState contractState, DesignMinigameState designState)
+        static private void EnterSimulateMode(ModeTransitionState modeState, SimulateRunState runState, SimulateGraphState graphState, SimulateGraphBuildScratch graphBuildScratch, SimulateRunScratch runScratch, GridStackState gridStackState, PlayerProgressState progressState, ContractState contractState, VisualGridStackState visualState, DesignMinigameState designState)
         {
             // Rebuild graph from the current grid. The player may have edited the grid in Tool
             // mode; the prior graph (if any) is stale.
@@ -135,7 +135,10 @@ namespace SpaceFab.Design
             GameLoop.SuspendUpdates(UpdateMasks.ToolModeMask);
             GameLoop.ResumeUpdates(UpdateMasks.SimulateModeMask);
 
+            VisualGridStackUtility.SetOutlineVisible(visualState, true);
+            ToolbarUtility.DeselectTool(Find.State<ToolModeState>(), Find.State<ToolbarState>());
             modeState.Mode = DesignMode.Simulate;
+
         }
 
         // Wipes the active simulation back to Idle, clears any queued play, and flips the active
@@ -156,6 +159,7 @@ namespace SpaceFab.Design
             GameLoop.SuspendUpdates(UpdateMasks.SimulateModeMask);
             GameLoop.ResumeUpdates(UpdateMasks.ToolModeMask);
 
+            VisualGridStackUtility.SetOutlineVisible(visualState, false);
             modeState.Mode = DesignMode.Tool;
         }
     }

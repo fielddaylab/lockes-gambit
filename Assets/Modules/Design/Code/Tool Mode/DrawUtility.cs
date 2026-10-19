@@ -79,6 +79,9 @@ namespace SpaceFab.Design
                 }
             }
 
+            if (toCell.CellType == CellType.Input || toCell.CellType == CellType.Output) {
+                toCell.Edges[(int)reverseDir].EdgeState = EdgeState.Connected;
+            }
             fromCell.Edges[(int)fromDir].EdgeState = EdgeState.Connected;
             toCell.Edges[(int)reverseDir].EdgeState = EdgeState.Connected;
 
