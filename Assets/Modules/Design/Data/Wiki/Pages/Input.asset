@@ -20,7 +20,8 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: Inputs create different signals to be sent to the Output.
+  BodyText: Inputs create different signals to be sent to the Output. Switch each
+    one to test all the cases.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0
