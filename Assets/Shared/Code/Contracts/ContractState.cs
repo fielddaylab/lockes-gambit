@@ -113,13 +113,6 @@ namespace SpaceFab
             return LoadContractData(contractState, ChapterUtility.GetSelectedContractId(chapterState), loadAction);
         }
 
-        static public bool LoadQueuedContract(ContractState contractState, ChapterState chapterState, PlayerProgressState playerProgress) {
-            if (playerProgress.RecentlyCompletedContract.IsEmpty) {
-                return LoadCurrentContract(contractState, chapterState, default);
-            }
-            return LoadContractData(contractState, playerProgress.RecentlyCompletedContract, default);
-        }
-
         #region Player Progress
 
         static public void ResetProgress(ContractState contractState, PlayerProgressState playerProgress) {

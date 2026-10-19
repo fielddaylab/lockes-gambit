@@ -10,6 +10,7 @@ using FieldDay.Systems;
 using FieldDay.UI;
 using SpaceFab.Save;
 using SpaceFab.UI;
+using UnityEngine;
 
 namespace SpaceFab.Overarching {
     public sealed class ContractViewerSystem : SystemComponent {
@@ -62,6 +63,11 @@ namespace SpaceFab.Overarching {
                     case OverarchingContractMode.SelectNew: {
                         view.QueuedContractIndex = view.AvailableContractIndices[0];
                         view.ProcessRoutine.Replace(view, AnimateSelectNew(view, layout));
+                        break;
+                    }
+                    case OverarchingContractMode.Complete: {
+                        view.QueuedContractIndex = chapterState.LastSelectedContractIndex;
+                        view.ProcessRoutine.Replace(view, AnimateContractCompletion(view, layout));
                         break;
                     }
                 }
@@ -213,6 +219,65 @@ namespace SpaceFab.Overarching {
 
             SpacefabGame.Events.Dispatch(GameEvents.AcceptContract, view.CurrentContractIndex.ToStringLookup());
             ScriptUtility.Trigger("OnContractAccept");
+        }
+
+        static private IEnumerator AnimateContractCompletion(ContractViewState view, OverarchingContractLayout layout) {
+            while (layout.AnimationRoutine.Exists()) {
+                yield return null;
+            }
+
+            yield return 0.1f;
+
+            yield return layout.FadeInContextPanel();
+            yield return 1;
+
+            var trigger = ScriptUtility.Trigger("BeforeContractEvaluation");
+            do {
+                yield return null;
+            } while (trigger.IsRunning());
+            yield return 0.25f;
+
+            // TODO: animate risk
+            bool encounteredHazard = false;
+
+            using(var t = TempVarTable.Alloc()) {
+                t.Set("EncounteredHazard", encounteredHazard);
+                var thread = ScriptUtility.Trigger("AfterContractEvaluation", t);
+                do {
+                    yield return null;
+                } while (thread.IsRunning());
+            }
+
+            // TODO: animate time and money
+
+            yield return layout.FadeOutContextPanel();
+
+            yield return 1f;
+
+            layout.Contract.ApprovedStampMask.SetAlpha(0);
+            layout.Contract.ApprovedStamp.gameObject.SetActive(true);
+            layout.Contract.ApprovedStamp.transform.localScale = new Vector3(2, 2, 2);
+            yield return Routine.Combine(
+                Tween.ZeroToOne(layout.Contract.ApprovedStampMask.SetAlpha, 0.2f),
+                layout.Contract.ApprovedStamp.transform.ScaleTo(1, 0.3f, Axis.XYZ).Ease(Curve.CubeOut)
+                );
+
+            yield return 0.8f;
+
+            yield return layout.Fader.FadeTo(0, 0.3f);
+            yield return 0.5f;
+
+            // TODO: animate time and money into progress bar
+
+            var completedThread = ScriptUtility.Trigger("OnChapterEnd");
+            do {
+                yield return null;
+            } while (completedThread.IsRunning());
+
+            yield return 0.25f;
+
+            Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState progressState, out MinigameSaveStates minigameStates);
+            ChapterUtility.LoadNextChapter(chapterState, progressState, contractState, minigameStates);
         }
 
         #endregion // Routines

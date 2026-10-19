@@ -39,6 +39,7 @@ namespace SpaceFab.Overarching {
         public CanvasGroup ContractScrollButtonsFader;
 
         [Header("Positions")]
+        public float ContractExpandDistance;
         public float ContractContextHeight;
 
         [NonSerialized] public Routine AnimationRoutine;
@@ -112,6 +113,11 @@ namespace SpaceFab.Overarching {
 
             if (mode == OverarchingContractMode.Complete) {
                 ContractPositionOffset.Offset0 = new Vector2(0, -60);
+                yield return Routine.Combine(
+                    Fader.FadeTo(1, 0.3f),
+                    ContractPositionOffset.GetComponent<CanvasGroup>().FadeTo(1, 0.4f).DelayBy(0.1f),
+                    ContractPositionOffset.Offset0To(default, 0.4f).DelayBy(0.1f).Ease(Curve.CubeOut)
+                );
             } else {
                 ContractPositionOffset.Offset0 = new Vector2(0, -60);
                 HeaderPositionOffset.Offset0 = new Vector2(0, 60);
@@ -126,6 +132,31 @@ namespace SpaceFab.Overarching {
             }
 
             Input.SetInputOverride(null);
+        }
+
+        public IEnumerator FadeInContextPanel() {
+            Contract.ContextFader.alpha = 0;
+            Contract.ContextSubCanvas.enabled = true;
+            Contract.ContextContentsMask.SetAlpha(0);
+            Positioning.SetHeightDelta(Contract.ContextPanel, 32);
+
+            yield return Routine.Combine(
+                ContractPositionOffset.Offset1To(new Vector2(0, ContractExpandDistance), 0.3f).Ease(Curve.Smooth),
+                Contract.ContextFader.FadeTo(1, 0.2f).DelayBy(0.1f),
+                Contract.ContextPanel.SizeDeltaTo(ContractContextHeight, 0.3f, Axis.Y).Ease(Curve.CubeOut).DelayBy(0.1f),
+                Tween.ZeroToOne(Contract.ContextContentsMask.SetAlpha, 0.2f).DelayBy(0.35f)
+                );
+        }
+
+        public IEnumerator FadeOutContextPanel() {
+            yield return Routine.Combine(
+                ContractPositionOffset.Offset1To(default, 0.3f).Ease(Curve.Smooth).DelayBy(0.15f),
+                Contract.ContextFader.FadeTo(0, 0.2f).DelayBy(0.25f),
+                Contract.ContextPanel.SizeDeltaTo(32, 0.3f, Axis.Y).Ease(Curve.CubeInOut).DelayBy(0.25f),
+                Tween.OneToZero(Contract.ContextContentsMask.SetAlpha, 0.2f)
+                );
+
+            Contract.ContextSubCanvas.enabled = false;
         }
 
         public IEnumerator FadeOut(OverarchingContractMode mode, bool hasChange) {

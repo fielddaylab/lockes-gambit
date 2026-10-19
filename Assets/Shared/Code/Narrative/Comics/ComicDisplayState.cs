@@ -3,6 +3,7 @@ using BeauUtil.Debugger;
 using BeauUtil.UI;
 using FieldDay;
 using FieldDay.Collections;
+using FieldDay.Scripting;
 using FieldDay.SharedState;
 using FieldDay.UI;
 using FieldDay.UI.Widgets;
@@ -91,7 +92,7 @@ namespace SpaceFab.Comic
             displayState.NextButton.LayoutSizeGroup.Sync();
             GuiCommands.SetActive(displayState.NextButtonGroup, true);
             displayState.NextButton.ConsumeClick();
-            while(!displayState.NextButton.ConsumeClick()) {
+            while(!ScriptUtility.IsSkippingCutscene() && !displayState.NextButton.ConsumeClick()) {
                 yield return null;
             }
             GuiCommands.SetActive(displayState.NextButtonGroup, false);

@@ -178,9 +178,9 @@ namespace SpaceFab
 
             // advance chapter
             chapterState.ChapterIndex++;
-            progressState.RecentlyCompletedContract = contractState.ContractId;
             SaveUtility.Save(SaveSlot.Main);
             ComicScripting.LoadComicForCurrentChapter();
+            ContractUtility.UnloadContractData(contractState);
         }
     }
 }

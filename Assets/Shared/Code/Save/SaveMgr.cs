@@ -15,7 +15,8 @@ namespace SpaceFab.Save
     {
         // v1: Added "unlocked thermal chamber" and "unlocked doping chamber" to PlayerProgressState
         // v2: Added "unlocked special properties" to PlayerProgressState
-        public const int SaveVersion = 2;
+        // v3: removed "recently completed contract" from PlayerProgressState
+        public const int SaveVersion = 3;
 
         private struct ChunkRecord
         {

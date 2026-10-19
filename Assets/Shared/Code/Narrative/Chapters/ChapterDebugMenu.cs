@@ -103,9 +103,6 @@ namespace SpaceFab {
             chapterState.LastSelectedContractIndex = -1;
             MinigameSaveUtility.ClearMinigameState(saveStates);
 
-            // Nothing was actually completed, so suppress the contract-completion sequence on entry.
-            progressState.RecentlyCompletedContract = default;
-
             chapterState.ChapterIndex = chapterIndex;
             SaveUtility.Save(SaveSlot.Main);
 

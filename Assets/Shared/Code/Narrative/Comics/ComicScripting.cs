@@ -135,6 +135,9 @@ namespace SpaceFab.Comic {
 
         [LeafMember("ComicNextButton")]
         static public IEnumerator Leaf_NextButton([BindThread] ScriptThread thread) {
+            if (ScriptUtility.IsSkippingCutscene()) {
+                return null;
+            }
             bool predictEnd = LeafRuntime.PredictEnd(thread);
             return ComicsUtility.DisplayAndWaitForNextButton(predictEnd ? "Close" : "Next");
         }

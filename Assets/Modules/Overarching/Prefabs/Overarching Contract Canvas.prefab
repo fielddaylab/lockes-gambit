@@ -2148,4 +2148,5 @@ MonoBehaviour:
   PrevContractButton: {fileID: 4404262905256283661}
   NextContractButton: {fileID: 6256825732132301367}
   ContractScrollButtonsFader: {fileID: 4123509171757053185}
+  ContractExpandDistance: -20
   ContractContextHeight: 400
