@@ -143,23 +143,23 @@ namespace SpaceFab.Research {
         // Chip text for an observation label. Dopant observations are
         // comparative, so in the doping chamber they name the substrate
         // they are measured against.
-        public static string GetObservationChipText(MaterialPropertyLabel label, ChamberInterfacerState interfacerState) {
-            string text = MaterialPropertyLabelDisplay.GetObservationName(label);
-            if (interfacerState == null || interfacerState.ActiveChamber != ActiveChamberKind.Doping) {
-                return text;
-            }
-            if (MaterialObservationChamberLookup.GetChamberType(label) != ObservationType.Dopant) {
-                return text;
-            }
+        // public static string GetObservationChipText(MaterialPropertyLabel label, ChamberInterfacerState interfacerState) {
+        //     string text = MaterialPropertyLabelDisplay.GetObservationName(label);
+        //     if (interfacerState == null || interfacerState.ActiveChamber != ActiveChamberKind.Doping) {
+        //         return text;
+        //     }
+        //     if (MaterialObservationChamberLookup.GetChamberType(label) != ObservationType.Dopant) {
+        //         return text;
+        //     }
 
-            MaterialAsset substrate = ChamberInterfacerUtility.GetCurrent(interfacerState, ChamberSlotKind.Primary);
-            if (substrate == null) {
-                return text;
-            }
-            // TODO: show element name if element name has been found
-            ResearchMaterialView view = Find.NamedAsset<ResearchMaterialView>(substrate.AssetId);
-            return view != null ? $"{text} than sample {view.SampleLabel}" : text;
-        }
+        //     MaterialAsset substrate = ChamberInterfacerUtility.GetCurrent(interfacerState, ChamberSlotKind.Primary);
+        //     if (substrate == null) {
+        //         return text;
+        //     }
+
+        //     ResearchMaterialView view = Find.NamedAsset<ResearchMaterialView>(substrate.AssetId);
+        //     return view != null ? $"{text} than {view.MaterialId}" : text;
+        // }
 
         // True when a chip click can produce work: the Research states
         // exist (we're in the Research scene, not another minigame's
