@@ -35,7 +35,7 @@ namespace SpaceFab.Supply {
         public TMP_Text ShoppingListLabel;
 
         public Transform CollapseTransform;
-        public Button CollapseButton;
+        public GuiButton CollapseButton;
         public Image CollapseImage;
         public Sprite ExpandIcon, CollapseIcon;
         public bool ListExpanded = true;
@@ -61,7 +61,7 @@ namespace SpaceFab.Supply {
             Pool.Prewarm();
             ActiveRows = new List<ShoppingListRow>(4);
 
-            CollapseButton.onClick.AddListener(() =>
+            CollapseButton.OnClick.AddListener(() =>
             {
                 ListExpanded = !ListExpanded;
                 CollapseImage.sprite = ListExpanded ? CollapseIcon : ExpandIcon;
