@@ -126,6 +126,10 @@ namespace SpaceFab.Overarching
             {
                 playerProgress.DopingChamberUnlocked = true;
             }
+            if (chapterState.ChapterDefinition.UnlockSpecialProperties)
+            {
+                playerProgress.SpecialPropertiesUnlocked = true;
+            }
 
             SaveUtility.Save(SaveSlot.Main);
         }
