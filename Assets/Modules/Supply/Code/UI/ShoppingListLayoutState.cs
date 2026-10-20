@@ -44,11 +44,13 @@ namespace SpaceFab.Supply {
         // confirm button
         public GuiButton ConfirmButton;
 
-        public ShoppingListRowPool Pool;
+        [Header("Rows")]
+        public ShoppingListRow[] Rows;
+        public float RowStep = 46;
 
-        // Currently-allocated rows, grown/shrunk on rebuild. The load
-        // utility iterates this to know what to free before re-loading.
-        [NonSerialized] public List<ShoppingListRow> ActiveRows;
+        [NonSerialized] public int ActiveRowCount;
+        [NonSerialized] public float ExpandedYValue;
+        [NonSerialized] public float CurrentTargetY = float.NaN;
 
         [NonSerialized] public Routine ToggleRoutine;
         [NonSerialized] public bool IsCollapsedVisually;
@@ -58,9 +60,10 @@ namespace SpaceFab.Supply {
         [NonSerialized] public StringHash32 LastContractId;
 
         IEnumerator<WorkSlicer.Result?> IScenePreload.Preload() {
-            Pool.Prewarm();
-            ActiveRows = new List<ShoppingListRow>(4);
-
+            for (int i = 0; i < Rows.Length; i++) {
+                Rows[i].gameObject.SetActive(false);
+            }
+            
             CollapseButton.onClick.AddListener(() =>
             {
                 ListExpanded = !ListExpanded;

@@ -154,6 +154,9 @@ namespace SpaceFab
             if (contractState.ContractDefinition.UnlocksDopingChamber()) {
                 playerProgress.DopingChamberUnlocked = true;
             }
+            if (Find.State<ChapterState>().ChapterDefinition.UnlockSpecialProperties) {
+                playerProgress.SpecialPropertiesUnlocked = true;
+            }
 
             if (Game.SharedState.TryGet(out MinigameZonesState zonesState)) {
                 MinigameZonesUtility.UpdateStatusFromSave(zonesState, minigameSaveState, Find.GlobalAsset<MinigameDependencyGraph>());

@@ -30,7 +30,7 @@ MonoBehaviour:
   - m_HashValue: 2929137943
   - m_HashValue: 296790427
   ExcludeFromResearch: []
-  UnlockSpecialProperties: 0
+  UnlockSpecialProperties: 1
   ComicPackage:
     m_HashValue: 1744353716
   Script: {fileID: -1942890987711236906, guid: 94b316d69c202194c9df0f465cd5ce92, type: 3}

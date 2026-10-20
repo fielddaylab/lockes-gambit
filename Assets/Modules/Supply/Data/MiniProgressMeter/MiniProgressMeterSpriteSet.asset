@@ -16,9 +16,11 @@ MonoBehaviour:
   RiskFilled: {fileID: 21300000, guid: a9e1ca081674a3e4a9415e0ae1b7eff2, type: 3}
   RiskColor: {r: 1, g: 1, b: 1, a: 1}
   CostBase: {fileID: 21300000, guid: 2c55780fd2d236a418d5f1ef4bae06f9, type: 3}
-  CostBar: {fileID: 21300000, guid: 2c3d0c73913d1d64d9b5592a8da273ef, type: 3}
-  CostRemainingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  CostSpentColor: {r: 1, g: 0, b: 0, a: 1}
-  TimeBase: {fileID: 21300000, guid: a917a921007b5d642b98ca23ff3c38d7, type: 3}
-  TimeFilled: {fileID: 21300000, guid: aedaf82a06d7aed499a776b37696ec9c, type: 3}
-  TimeColor: {r: 1, g: 1, b: 1, a: 1}
+  CostFilled: {fileID: 21300000, guid: 2c3d0c73913d1d64d9b5592a8da273ef, type: 3}
+  CostSpent: {fileID: 21300000, guid: c313269982679d344a62dd1394f21252, type: 3}
+  CostOverSpent: {fileID: 21300000, guid: 6f6849612b0adc14ca8a3992f728142f, type: 3}
+  CostSpentX: {fileID: 21300000, guid: 151de3572dfd67841801a03b55874c3d, type: 3}
+  CostOverSpentX: {fileID: 21300000, guid: c9bad0d3bb24245439542ac55a7aea20, type: 3}
+  TimeBase: {fileID: 21300000, guid: c8705957c4873764180c6ef30c3c245d, type: 3}
+  TimeFilled: {fileID: 21300000, guid: 5b898a3d138c81547abe463143698483, type: 3}
+  TimeOverSpent: {fileID: 21300000, guid: 66697160396d093418f33323f2e3e175, type: 3}
