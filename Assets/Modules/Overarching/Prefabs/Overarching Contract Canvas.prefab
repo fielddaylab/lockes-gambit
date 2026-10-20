@@ -2186,3 +2186,15 @@ MonoBehaviour:
   WarningHeader: {fileID: 3498354994634694522}
   WarningText: {fileID: 6308017660085684974}
   RiskCounter: {fileID: 7634607538879737289}
+  SafeColor: {r: 0.31764707, g: 0.62352943, b: 0.41960785, a: 1}
+  HazardColor: {r: 0.96862745, g: 0.5176471, b: 0.38431373, a: 1}
+  RouletteTickSounds:
+  - m_HashValue: 2297598015
+  - m_HashValue: 2280820396
+  - m_HashValue: 2331153253
+  - m_HashValue: 2314375634
+  - m_HashValue: 2230487539
+  - m_HashValue: 2213709920
+  - m_HashValue: 2264042777
+  - m_HashValue: 2247265158
+  - m_HashValue: 2431818967

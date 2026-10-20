@@ -4,13 +4,16 @@ using BeauRoutine;
 using BeauUtil;
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Scripting;
 using FieldDay.SharedState;
 using FieldDay.Systems;
 using FieldDay.UI;
+using FieldDay.UI.Animation;
 using SpaceFab.Save;
 using SpaceFab.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SpaceFab.Overarching {
     public sealed class ContractViewerSystem : SystemComponent {
@@ -269,26 +272,85 @@ namespace SpaceFab.Overarching {
         }
 
         static private IEnumerator EvaluateRisk(OverarchingContractLayout layout) {
-            int[] hazardChances = Find.GlobalAsset<ChapterManifest>().HazardChances;
-            Find.State(out MinigameSaveStates minigameStates);
+            Find.GlobalAsset(out ChapterManifest chapterManifest);
+            int[] hazardChances = chapterManifest.HazardChances;
+            Find.State(out MinigameSaveStates minigameStates, out ChapterState chapterState, out ContractState contractState, out PlayerProgressState playerProgress);
+            int time = minigameStates.Supply.FinalizedTotalCycles + minigameStates.Fabrication.FinalizedTotalCycles;
+            int profit = contractState.ContractDefinition.Payout() - minigameStates.Supply.FinalizedCost; // TODO: fab cost from precision
             int risk = minigameStates.Supply.FinalizedRisk;
+            int visualRisk = risk;
+
+            //if (risk > 0 && risk < 9) {
+            //    int predictedCycles = playerProgress.ElapsedCycles + chapterState.ChapterDefinition.HazardTime;
+            //    int predictedFunds = playerProgress.Funds + profit - chapterState.ChapterDefinition.HazardCost;
+            //    if (predictedCycles >= chapterState.ChapterDefinition.CumulativeMaxTime - 2) {
+            //        risk = 0;
+            //        Log.Msg("[ContractViewerSystem] Predicted cycles is {0}, too close to cumulative max time {1} - zeroing out risk", predictedCycles, chapterState.ChapterDefinition.CumulativeMaxTime);
+            //    } else if (predictedFunds <= chapterState.ChapterDefinition.CumulativeMinProfit + 2) {
+            //        risk = 0;
+            //        Log.Msg("[ContractViewerSystem] Predicted funds is {0}, too close to cumulative min funds {1} - zeroing out risk", predictedFunds, chapterState.ChapterDefinition.CumulativeMinProfit);
+            //    }
+            //}
 
             bool encounteredHazard = false;
             int riskSlot = 0;
             if (risk > 0) {
-
+                encounteredHazard = RNG.Instance.Next(100) < chapterManifest.HazardChances[risk - 1];
             } else {
                 encounteredHazard = false;
             }
 
+            encounteredHazard = true;
+
             if (encounteredHazard) {
-                riskSlot = RNG.Instance.Next(risk);
+                riskSlot = RNG.Instance.Next(visualRisk);
             } else {
-                int leftover = layout.RiskCounter.MaxValue - risk;
-                riskSlot = risk + RNG.Instance.Next(leftover);
+                int leftover = layout.RiskCounter.MaxValue - visualRisk;
+                riskSlot = visualRisk + RNG.Instance.Next(leftover);
             }
 
-            //float value
+            int finalValue = (9 * 2) + riskSlot;
+
+            if (RNG.Instance.Chance(0.8f)) {
+                finalValue += 9;
+            }
+            if (encounteredHazard | RNG.Instance.Chance(0.5f)) {
+                finalValue += 9;
+            }
+
+            RiskMeterStyle riskStyle = (RiskMeterStyle) layout.RiskCounter.Styler;
+
+            riskStyle.Highlight.enabled = true;
+            riskStyle.Highlight.SetAlpha(0);
+            riskStyle.Highlight.rectTransform.localPosition = riskStyle.Slots[0].rectTransform.localPosition;
+            yield return riskStyle.Highlight.FadeTo(1, 0.2f);
+
+            yield return 0.1f;
+
+            int highlightedSlot = 0;
+            yield return Tween.Float(0, finalValue + RNG.Instance.NextFloat(0, 0.9f), (f) => {
+                int nextSlot = (int) f % 9;
+                if (highlightedSlot != nextSlot) {
+                    highlightedSlot = nextSlot;
+                    riskStyle.Highlight.rectTransform.localPosition = riskStyle.Slots[nextSlot].rectTransform.localPosition;
+                    Sfx.Play(layout.RouletteTickSounds[nextSlot]);
+                }
+            }, 1f + finalValue * 0.12f).Ease(Curve.CubeOut);
+
+            yield return 0.3f;
+
+            riskStyle.Flash.rectTransform.localPosition = riskStyle.Highlight.rectTransform.localPosition;
+            FlashAnim.Play(riskStyle.Flash, Color.white, FlashAnim.Default);
+
+            if (encounteredHazard) {
+                layout.Fader.GetComponentInChildren<Graphic>().SetColor(layout.HazardColor);
+                // TODO: sfx
+            } else {
+                layout.Fader.GetComponentInChildren<Graphic>().SetColor(layout.SafeColor);
+                // TODO: sfx
+            }
+
+            yield return 0.5f;
 
             using (var t = TempVarTable.Alloc()) {
                 t.Set("EncounteredHazard", encounteredHazard);
@@ -297,6 +359,8 @@ namespace SpaceFab.Overarching {
                     yield return null;
                 } while (thread.IsRunning());
             }
+
+            yield return riskStyle.Highlight.FadeTo(0, 0.2f);
         }
 
         #endregion // Routines

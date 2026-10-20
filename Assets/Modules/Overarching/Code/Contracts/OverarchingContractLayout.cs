@@ -1,10 +1,12 @@
 using BeauRoutine;
 using BeauUtil;
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Scenes;
 using FieldDay.SharedState;
 using FieldDay.UI;
 using FieldDay.UI.Widgets;
+using SpaceFab.Save;
 using SpaceFab.UI;
 using System;
 using System.Collections;
@@ -46,6 +48,9 @@ namespace SpaceFab.Overarching {
         public TMP_Text WarningHeader;
         public TMP_Text WarningText;
         public GuiCounter RiskCounter;
+        public Color SafeColor;
+        public Color HazardColor;
+        [AudioEvent] public StringHash32[] RouletteTickSounds;
 
         [NonSerialized] public Routine AnimationRoutine;
 
@@ -109,6 +114,10 @@ namespace SpaceFab.Overarching {
                     ContractShadow.gameObject.SetActive(true);
                     Contract.CloseButton.gameObject.SetActive(false);
                     Contract.SelectContractButton.gameObject.SetActive(false);
+                    ContractScrollButtonsFader.gameObject.SetActive(false);
+
+                    Find.State(out MinigameSaveStates minigameStates);
+                    RiskCounter.SetValue(minigameStates.Supply.FinalizedRisk, GuiWidgetUpdateFlags.Initialization);
                     break;
                 }
             }
