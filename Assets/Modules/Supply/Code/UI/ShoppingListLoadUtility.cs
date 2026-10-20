@@ -95,7 +95,31 @@ namespace SpaceFab.Supply {
                 layout.ShoppingListLabel.text = $"Material Requirements {totalSuccess}/{totalChecks}";
                 bool confirmActive = success && routes.TempRouteIndex < 0;
                 Log.Msg("[SupplyBug] confirm active? " + confirmActive);
+
                 layout.ConfirmButton.gameObject.SetActive(confirmActive);
+                if (confirmActive) {
+                    Find.State(out SupplyRouteDrawingState drawing);
+
+                    layout.ConfirmButton.TextGraphic.text = "CONFIRM";
+
+                    SupplyProgressMeterUtility.ComputeAggregate(routes, drawing, out int risk, out int cost, out int time, out int activeMask);
+                    bool buttonEnabled = true;
+                    if (time > contractState.ContractDefinition.ExpectedDuration())
+                    {
+                        layout.ConfirmButton.TextGraphic.text = "OUT OF TIME";
+                        buttonEnabled = false;
+                    }
+                    
+                    int maxCost = contractState.ContractDefinition.Payout() - contractState.ContractDefinition.MinimumProfit();
+                    if (cost > maxCost)
+                    {
+                        layout.ConfirmButton.TextGraphic.text = "OUT OF MONEY";
+                        buttonEnabled = false;
+                    }
+
+                    layout.ConfirmButton.Interactable = buttonEnabled;
+                }
+
             }
 
             // 5. Lay out + resize.
