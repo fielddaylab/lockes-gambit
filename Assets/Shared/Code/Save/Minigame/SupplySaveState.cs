@@ -12,7 +12,7 @@ namespace SpaceFab.Save
     public class SupplySaveState : MinigameSaveStateBase, ISaveStateChunkObject
     {
         // outputs
-        public int FinalizedReliability;
+        public int FinalizedRisk;
         public int FinalizedTotalCycles;
         public int FinalizedCost;
 
@@ -30,7 +30,7 @@ namespace SpaceFab.Save
         {
             base.Read(self, ref reader, consts);
 
-            FinalizedReliability = reader.Read<int>();
+            FinalizedRisk = reader.Read<int>();
             FinalizedTotalCycles = reader.Read<int>();
             FinalizedCost = reader.Read<int>();
 
@@ -41,7 +41,7 @@ namespace SpaceFab.Save
         {
             base.Write(self, ref writer, consts);
 
-            writer.Write(FinalizedReliability);
+            writer.Write(FinalizedRisk);
             writer.Write(FinalizedTotalCycles);
             writer.Write(FinalizedCost);
 
@@ -54,7 +54,7 @@ namespace SpaceFab.Save
         {
             base.SetDefaults();
 
-            FinalizedReliability = -1;
+            FinalizedRisk = -1;
             FinalizedTotalCycles = -1;
             FinalizedCost = -1;
 

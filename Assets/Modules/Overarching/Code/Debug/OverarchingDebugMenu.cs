@@ -26,10 +26,6 @@ namespace SpaceFab.Overarching
         // is expected to have far fewer than this many available contracts.
         private const int MaxContractSlots = 8;
 
-        // Handle to the in-flight contract-apply routine. The jump/set buttons stay disabled while it runs so
-        // a minigame jump can't fire before the contract (and the minigame save it seeds) is fully applied.
-        private static Routine s_ContractApplyRoutine;
-
         // Contributes Contracts -> Set Contract. The Contracts root merges with any other factory's
         // Contracts menu.
         [DebugMenuFactory]
@@ -54,15 +50,15 @@ namespace SpaceFab.Overarching
         // disable themselves during this window so a debug action can't race an in-flight transition.
         private static bool IsTransitioning()
         {
-            if (s_ContractApplyRoutine.Exists())
-            {
-                return true;
-            }
             if (Game.Scenes.IsLoadingAnyScene() || Game.Scenes.IsMainLoading())
             {
                 return true;
             }
             if (!Game.SharedState.Has<OverarchingState>())
+            {
+                return true;
+            }
+            if (!Game.SharedState.TryGet(out ContractState contractState) || contractState.LoadRoutine.Exists())
             {
                 return true;
             }
@@ -147,7 +143,7 @@ namespace SpaceFab.Overarching
 
             // Host on the lookup so the routine is stopped if its scene unloads mid-flight, and keep the
             // handle so IsTransitioning() can hold off a minigame jump until the contract is fully applied.
-            s_ContractApplyRoutine.Replace(ContractConfirmUtility.ApplyContractByIndex(chapterState, playerProgress, contractState, index));
+            ContractViewUtility.ApplyContract(index);
             Log.Msg("[OverarchingDebugMenu] Set contract to index {0} ('{1}')", index, ContractUtility.GetDefinition(contractId).Title());
         }
 

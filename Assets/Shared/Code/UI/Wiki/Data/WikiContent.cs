@@ -479,10 +479,10 @@ namespace SpaceFab.UI {
                     case ObservationType.Thermal:
                         return playerProgress.ThermalChamberUnlocked ? PageAvailabilityOverride.AlwaysShow : PageAvailabilityOverride.AlwaysHide;
                     case ObservationType.Dopant:
-                        return playerProgress.ThermalChamberUnlocked ? PageAvailabilityOverride.AlwaysShow : PageAvailabilityOverride.AlwaysHide;
+                        return playerProgress.DopingChamberUnlocked ? PageAvailabilityOverride.AlwaysShow : PageAvailabilityOverride.AlwaysHide;
                     case ObservationType.Special:
                         return IsMaterialPropertyVisible(MaterialPropertyLabel.HighMobility, playerProgress)
-                            || IsMaterialPropertyVisible(MaterialPropertyLabel.VoltageResistant, playerProgress)
+                            || IsMaterialPropertyVisible(MaterialPropertyLabel.LightEmitting, playerProgress)
                             ? PageAvailabilityOverride.AlwaysShow : PageAvailabilityOverride.AlwaysHide;
                 }
             }

@@ -85,6 +85,7 @@ namespace FieldDay.Scripting {
         // skipping
         internal Routine SkipCutsceneRoutine;
         internal bool IsSkippingCutscene;
+        internal float SkipCutsceneTimescaleRestore;
 
         private Routine m_BootRoutine;
 

@@ -4,11 +4,14 @@
 ::Intro
 @trigger    OnDesignSetupComplete
 $set temp:hintGiven = 0
-{@PAL}  Gates can switch semiconductor in their space. With a HI signal, they make P-Type act like N-Type.
+{@PAL}  <color=yellow>Gates</color> can switch semiconductor in their space. With a HI signal, they make P-Type act like N-Type.
+$wait   1.5
+$call   OpenWikiTo("Tools", "Gate")
 
 ::Hints
 @trigger    OnSingleTestComplete
 @when       result == "failure"
+$call   CloseWiki()
 $if temp:hintGiven == 0
     {@PAL}  <color=yellow>Hint:</color> When A is HI, block signal from reaching the output.
     $set temp:hintGiven = 1
