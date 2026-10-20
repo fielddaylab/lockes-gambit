@@ -38,3 +38,9 @@ MonoBehaviour:
   SkyboxRotation: 0
   MusicPlaylist:
     m_HashValue: 1638237650
+  HazardHeader: Sector Patrol
+  HazardDescription: 
+  HazardCost: 1
+  HazardTime: 1
+  CumulativeMinProfit: 41
+  CumulativeMaxTime: 60

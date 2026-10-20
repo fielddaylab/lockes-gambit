@@ -40,7 +40,7 @@ namespace SpaceFab.Design
                 );
             Find.State(
                 out ContractState contractState,
-                out ResultState resultState
+                out DesignResultPanel resultState
                 );
             DesignMinigameState designState = Find.State<DesignMinigameState>();
 

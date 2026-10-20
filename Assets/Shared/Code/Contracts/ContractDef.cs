@@ -20,7 +20,6 @@ namespace SpaceFab
         [SerializeField] private SerializedHash32 m_client;
         [SerializeField] private int m_payout;
         [SerializeField] private int m_expectedDuration;
-        [SerializeField] private int m_expectedProfit;
         [SerializeField] private int m_minimumProfit;
         [SerializeField] private ContractClass m_contractType;
         [SerializeField] private ContractDifficulty m_difficulty;
@@ -40,7 +39,6 @@ namespace SpaceFab
         public StringHash32 ClientId() { return m_client; }
         public int Payout() { return m_payout; }
         public int ExpectedDuration() { return m_expectedDuration; }
-        public int ExpectedProfit() { return m_expectedProfit; }
         public int MinimumProfit() { return m_minimumProfit; }
         public ContractClass ContractClass() { return m_contractType; }
         public ContractDifficulty Difficulty() { return m_difficulty; }

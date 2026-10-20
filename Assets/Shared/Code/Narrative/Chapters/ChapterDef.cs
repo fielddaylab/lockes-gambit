@@ -35,5 +35,15 @@ namespace SpaceFab
 
         [Header("Playlists")]
         [AssetName(typeof(MusicAsset))] public StringHash32 MusicPlaylist;
+
+        [Header("Hazards")]
+        public string HazardHeader;
+        [TextArea(2, 4)] public string HazardDescription;
+        public int HazardCost;
+        public int HazardTime;
+
+        [Header("Metrics")]
+        public int CumulativeMinProfit;
+        public int CumulativeMaxTime;
     }
 }

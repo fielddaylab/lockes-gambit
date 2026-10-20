@@ -52,4 +52,8 @@ MonoBehaviour:
     URL: 
     MenuPath: 
     CustomName: 
+  - Object: {fileID: 8618631155860822680, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
   ProjectSearchFilter: 

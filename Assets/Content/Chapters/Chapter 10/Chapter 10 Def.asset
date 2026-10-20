@@ -36,3 +36,9 @@ MonoBehaviour:
   SkyboxRotation: 0
   MusicPlaylist:
     m_HashValue: 2526923836
+  HazardHeader: Lockdowns
+  HazardDescription: 
+  HazardCost: 2
+  HazardTime: 1
+  CumulativeMinProfit: 31
+  CumulativeMaxTime: 48
