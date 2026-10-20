@@ -65,7 +65,6 @@ namespace SpaceFab.Fabrication.Microgames
             }   
 
             // Setup pattern
-            // int patternIndex = sequence.Level.PatternIndex;
             int patternIndex = sequence.Level.GetPatternIndex(sequence);
             MicrogameStationConfig stationConfig = MicrogameUtility.GetStationConfig();
 
