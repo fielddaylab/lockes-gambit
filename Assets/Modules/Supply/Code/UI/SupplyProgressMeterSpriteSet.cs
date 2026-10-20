@@ -18,14 +18,17 @@ namespace SpaceFab.Supply {
 
         [Header("Cost")]
         public Sprite CostBase;
-        // One bar sprite, tinted remaining (yellow) or spent (red).
-        public Sprite CostBar;
-        public Color CostRemainingColor = Color.yellow;
-        public Color CostSpentColor = Color.red;
+
+        public Sprite CostFilled;
+        public Sprite CostSpent;
+        public Sprite CostOverSpent;
+
+        public Sprite CostSpentX;
+        public Sprite CostOverSpentX;
 
         [Header("Time")]
         public Sprite TimeBase;
         public Sprite TimeFilled;
-        public Color TimeColor = Color.white;
+        public Sprite TimeOverSpent;
     }
 }
