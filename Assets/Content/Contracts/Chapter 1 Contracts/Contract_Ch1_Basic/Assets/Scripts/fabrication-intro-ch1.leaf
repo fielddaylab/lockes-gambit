@@ -5,14 +5,14 @@
 $if temp:fabTutorialStep == 0
     $set temp:fabTutorialStep = 1
     $call HighlightElement(fab:generate-button)
-    {@PAL}  Welcome to the fabrication bay!\n\nThis chip only has a metal layer.\n\nYou will add it to the silicon wafer in 5 steps.
+    {@PAL}  Welcome to the fabrication bay!\n\nThis chip only has a metal layer.\n\nThe photolithography process requires five steps for each layer of the chip.
 $endif
 
 ::FirstMovement
 @trigger    OnFabAttempt
 $if temp:fabTutorialStep == 1
     $set temp:fabTutorialStep = 2
-    {@PAL}  Find the station shown on the gray card.
+    {@PAL}  The gray card shows which station to use.
 $endif
 
 ::ActivateFurnace

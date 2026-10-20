@@ -6,11 +6,12 @@
 @cutscene 
 @once 
 
-{@Player}   Hey, MA...
+{@Player}   Hey, M.A...
 {@Player}   Oh, yeah. I'm alone...
-{@Player}   Kind of my fault, I guess.
-{@Player}   What was I thinking? Now I gotta do all this?
-{@Player}   Those bots were just slowing me down... Right?
+{@Player}   Well, no point sitting around.
+{@Player}   A few more contracts and I can finally pay off this debt.&#x20;
+
+
 
 ::AfterResearchCh11
 @trigger 
@@ -20,35 +21,22 @@
 
 // Callie calls
 
-{@Callie}   Hey, Clacky! How's that clunker of a ship? Heard you're all alone out there!
+{@Callie}   Hey, Clacky! How's that clunker of a ship?
 {@Player}   Callie?! I thought you got arrested!
 {@Callie}   Ha! They'll have to catch me first!
 {@Player}   What happened to Velos?
-{@Callie}   The FRA commandeered our ships and took over the station. 
-{@Callie}	Shut the whole thing down.
-{@Player}   So how are you?
+{@Callie}   Frontier pulled some strings. Our ships got seized and...
+{@Callie}   ...Velos Station was shut down.
+{@Callie}   So, you still got all those Frontier bots keeping you company?
+{@Player}   Nope. Got rid of the lot of them.
+{@Callie} Interesting... Good to hear, Clacky!
+{@Player}   What are you up to these days?
 {@Callie}   Are you trying to hire me? HA HA HA!
 
 // Callie hangs up
 
 {@Player}   That's not what I was saying! ...that would be a disaster.
 
-//{@Quinn}        Did you do it?
-//{@Player}       I did it. 
-//{@Quinn}        Good.
-//{@Callie}       ...good riddance! 
-//{@Player}       ...Callie? 
-//{@Quinn}        I thought your station blew up. 
-//{@Callie}       You thought correctly!
-//{@Callie}       I may or more not have commandeered your smallest hauler.
-//{@Quinn}        That's so rad. 
-//{@Callie}       I was going to run, but I realized this was one of your ships Clackey. 
-//{@Callie} 	    So I was thinking… what if I started working for ya? 
-{@Player}       Uh...
-//{@Quinn}	    C’mon Locke pleeeeease I want cool space pirate as a co-worker. 
-//{@Player}       Sure, why not. 
-//{@Callie}       Thanks Clackey-
-//{@Callie}       Hmph- I mean, thanks, Captain!
 
 
 ::AfterSupplyChainCh11
@@ -59,16 +47,18 @@
 
 // Incoming call from Blaze
 
-{@Blaze}   Locke! Have you heard? People all over the sector are disconnecting their Frontier software!
-{@Player}   How are they getting the bots to work without it?
-{@Blaze}   Well, Keela’s giving her original software away to everyone. Free. Open.
-{@Player}  Arken said he was doing this on Blair too!
-{@Blaze}   Yeah, we've been in touch. 
-{@Player}     It’s got to feel good to rip out those cheap parts and give the bots some real upgrades!
-{@Blaze}      We'll have fewer units, sure. But at least they'll be safe!
-{@Player}   And the company owners on Kalvis are okay with this?
-{@Blaze}       Well, we're not giving them much choice!
-{@Blaze}       Now that they aren't under Frontier's thumb, they have no excuse not to negotiate.
+// Locke calls Blaze
+
+{@Player}   Hey Blaze, did you hear about Dorian?
+{@Blaze}    I couldn't believe it! I heard he and <i>Callie</i> grew up together!
+{@Player}   Seriously?!!
+{@Blaze}    Yeah! They both ran away from home, too. Couple of rebellious kids!
+{@Blaze}    Speaking of rebellious kids... Keela sent me the configs to get the bots running again in the mines.
+{@Player}   Bet you're already ripping out those cheap parts, too...
+{@Blaze}    You know me.
+{@Blaze}    Need any help with the software on your bots?
+{@Player}   ...It's a little late for that.
+
 
 //At the end of level 11: must be able to pay off in one level with easy contract. 
 
@@ -78,7 +68,7 @@
 
 //show money clearing
 
-//{@Player} gulp. And now I'm broke again, but I'm a free man!
+//{@Player} *gulp.* And now I'm broke again, but I'm a free man!
 
 //{@Player} Wait... what is this? An invoice from Frontier Robotics? 
 //Show new red flag on money/timeline: Unauthorized Equipment Disposal

@@ -5,15 +5,20 @@
 @cutscene
 @once 
 
+{@Player}   Hey, Blaze. How are you? How are things on Kalvis?
+{@Blaze}    I'm okay. Just a little banged up. The mines are running again, but those bots are still breaking down.
+{@Blaze}    Management keeps pushing us to meet production targets.
+{@Player}   I guess you were right to be worried.
+{@Player}	Please be REALLY careful! 
+{@Blaze}	Ha! Who's the overly cautious old guy now?
 
-{@Player}   P.A.L., any updates on what's happening at Kalvis?
-{@PAL}      Frontier Robotics reports a minor disruption to mining operations on Cu-6355-29.
-{@PAL}      Production has resumed and output remains within acceptable parameters!
-{@Player}   That's not what I'm hearing.
-{@PAL}      Worker safety is a top priority! Winkler Station has transitioned to a fully autonomous workforce.
-{@PAL}      With no human workers, workplace injuries have been reduced to zero!
-{@Player}   ...Right.
-{@PAL}      Shall we get back to work? You have three contracts to choose from.
+// end call
+
+{@PAL}      Here's that report you asked for on Cu-6355-29.
+{@PAL}      "...minor disruption to mining operations."
+{@Player}   Minor? That's not what I'm hearing!
+{@PAL}      "...production has resumed and copper prices are down."
+
 
 
 ::BeforeSupplyChainCh6
@@ -22,14 +27,17 @@
 @cutscene 
 @once 
 
-{@Player}	Hey Xavier, do you have any leads on new sources for semiconductors?
-{@Xavier}   Hey... uh... Locke...
-{@Xavier}   Right. Winkler Station just opened up with germanium!
-{@Xavier}   First fully autonomous station in my sector. Profits are gonna soar!
-{@Xavier}   Workers reassigned. Ah, the beauty of automation!
-{@Xavier}   Soon the only people we'll need are people like us.
-{@Player}   Like us?
-{@Xavier}   Managers! We have the good life, eh?
+{@Player}   Hi, Ovill. I hear Callie's been giving you trouble.
+{@Ovill}    Callie? Oh, you mean Cordelia?
+{@Player}   Callie isn't her real name?
+{@Ovill}    No! She started calling herself 'Callie' after Kalvis a few years ago. 
+{@Ovill}	She's always been a strange one.
+{@Player}   Interesting...
+{@Ovill}    I'll tell you what's interesting! Frontier just opened its first fully robotic station. Very efficient!
+{@Ovill}    Winkler Station... it's got a great supply of germanium.
+{@Player}   Fully automated? No humans?
+{@Ovill}    Nope. Just managers like us!
+{@Player}   <i>Like us?</i> I'm a captain, not a manager!
 
 // hang up
 

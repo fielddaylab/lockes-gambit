@@ -10,13 +10,12 @@
 {@PAL}      Now, diodes can enforce unidirectional current flow and they-
 {@PAL}      Uh... Captain? 
 {@Player}   Huh? 
-{@PAL}      I'm talking about the diodes capacity to attenuate high signals and you seem... unenthused
+{@PAL}      I'm talking about the diodes' capacity to attenuate high signals and you seem... unenthused
 {@Player}   Sorry, P.A.L., my mind was somewhere else. 
-{@PAL}      Perhaps, it has something to do with your call with your former crew-mate?
+{@PAL}      Perhaps it has something to do with your call with your former crew-mate?
 
 //endregion
 
-//EDIT - Cut lines for 10 line max. 
 
 ::BeforeSupplyChainCh3
 @trigger    OnOverarchingLoaded
@@ -27,25 +26,18 @@
 //Introduced idea of cost vs time. Au doesn't show up till next level but P now has two sources. Setting up onboarding to learn how to pick between two sources of materials with Hennig Station (P) and Menuo station (P)Menuo is new Kalvis sector statio and Hennig is Frontier where Ovill is. 
 
 //incoming call
-{@Ovill}    We have a super duper exclusive deal just for you on phosphorus! 
-{@Ovill}    Commit to Hennig Station in the Forsch sector today and I'll throw in a complimentary Frontier Robotics swag bag! 
-{@Player}	I heard that ... Menuo Station... is selling phosphorus for much cheaper...
-{@Ovill}    If you source with us, you will get the materials in a flash. We are fast, fast, fast. 
-{@Player}   I'll...lll... think about it. 
-{@Ovill}	Fantastic! I'm glad you are excited! 
+{@Ovill}    Hey, Captain! Ovill here, calling from Frontier Robotics HQ on Frosch!
+{@Ovill}    Have I got an exclusive deal for you on phosphorus!
+{@Player}   I've already got a cheap source...
+{@Ovill}    But can they deliver FAST? Our automated stations are fast, fast, FAST!
+{@Player}   I'll... think about it.
+{@Ovill}    Fantastic! I've added our supplier to your console. Take a look!
+```
 //end call
 
 
 
-//end call
-//{@Player}	Hmmm... I wonder if I can afford the gold. I'm trying to actually make a profit.
 
-//::AfterFabrication
-//@trigger 
-//@when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply), IsSolutionFoundFor(Fabrication)
-//@cutscene
-//@once 
-//I cut previous text. Could add some contract specific dialog if necessary.
 	
 
 
