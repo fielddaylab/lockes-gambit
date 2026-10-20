@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Delete
   m_EditorClassIdentifier: 
-  Title: Delete
+  Title: Delete Routes
   Icon: {fileID: 21300000, guid: b78d0b0c64989ad49a496ac4386403a3, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 383a3aba3cfb46e4bb8ff1e31dda0a34, type: 3}
   IllustrationFPS: 0.5
-  BodyText: 'To Delete a route: select the ship that created it, then click the route,
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: 'To Delete a route: Select the ship that created it, then click the route,
     press Backspace, or double click the route.'
   MaterialId:
     m_HashValue: 0

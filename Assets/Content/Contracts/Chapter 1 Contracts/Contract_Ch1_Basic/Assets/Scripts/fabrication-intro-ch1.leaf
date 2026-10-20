@@ -37,9 +37,9 @@ $endif
 ::GeneralStun
 @trigger    OnFabStunned
 $if temp:fabTutorialStep == 2
-    {@PAL}  That's the wrong step.\n\nFind the station shown on the yellow card.
+    {@PAL}  That's the wrong step.\n\nFind the station shown on the gray card.
 $else temp:fabTutorialStep != 2
-    {@PAL}  That's not the right step.\n\nFind the station shown on the yellow card.
+    {@PAL}  That's not the right step.\n\nFind the station shown on the gray card.
 $endif 
 
 ::MicrogameEntered

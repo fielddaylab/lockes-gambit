@@ -9,16 +9,23 @@ $call   PointElement(supply:ship1)
 :: ShipSelected
 @trigger    OnShipSelected
 @when   !MinigameHasValidSolution()
-$call   ReleaseAllHighlights()
+@once
+$call   ReleaseHighlight(supply:ship1)
 $call   PointElement(supply:planet_p)
 $call   PointElement(supply:planet_p_alt)
 {@PAL}  There are two sources of phosphorus. Hover over the planets and compare the cost and time.
 
 
-:: PlanetHovered
+:: FirstPlanetHovered
 @trigger    OnPlanetHovered
-@when   !MinigameHasValidSolution()
-$call   ReleaseAllHighlights()
+@when   !MinigameHasValidSolution(), planet == "Planet_P"
+$call   ReleaseHighlight(supply:planet_p)
+
+
+:: SecondPlanetHovered
+@trigger    OnPlanetHovered
+@when   !MinigameHasValidSolution(), planet == "Planet_P_Alt"
+$call   ReleaseHighlight(supply:planet_p_alt)
 
 
 :: RouteCompleted
@@ -27,5 +34,6 @@ $call   ReleaseAllHighlights()
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
 $call   PointElement(supply:time-meter)
-{@PAL}  All your ships travel at the same time. The one that takes the longest determines your total time.\n\nThis is called a bottleneck.
-// TODO: open time pages
+{@PAL}  All your ships travel at the same time. The one that takes the longest determines your total time.\n\nThis is called a <color=yellow>bottleneck</color>.
+$wait   2
+$call   OpenWikiTo("Routes", "Time")

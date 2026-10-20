@@ -18,6 +18,7 @@ namespace SpaceFab.Fabrication
 
         [NonSerialized] public int TotalCycles;
         [NonSerialized] public float Precision;
+        [NonSerialized] public int TotalCost;
 
         #endregion // Saved State
 
@@ -59,7 +60,7 @@ namespace SpaceFab.Fabrication
         public static void ImportState(FabricationSaveState saveState, FabricationMinigameState fabState)
         {
             fabState.TotalCycles = saveState.FinalizedTotalCycles;
-            fabState.Precision = saveState.FinalizedPrecision;
+            fabState.TotalCost = saveState.FinalizedCost;
 
             fabState.FoundValidSolution = saveState.FoundValidSolution;
         }
@@ -68,7 +69,7 @@ namespace SpaceFab.Fabrication
         {
             // TODO: check if run completed
             saveState.FinalizedTotalCycles = fabState.TotalCycles;
-            saveState.FinalizedPrecision = fabState.Precision;
+            saveState.FinalizedCost = fabState.TotalCost;
 
             saveState.FoundValidSolution = fabState.FoundValidSolution;
 

@@ -9,7 +9,7 @@ namespace SpaceFab.Save
     public class FabricationSaveState : MinigameSaveStateBase, ISaveStateChunkObject
     {
         public int FinalizedTotalCycles;
-        public float FinalizedPrecision;
+        public int FinalizedCost;
 
         #region Interfaces
 
@@ -20,7 +20,12 @@ namespace SpaceFab.Save
             base.Read(self, ref reader, consts);
 
             FinalizedTotalCycles = reader.Read<int>();
-            FinalizedPrecision = reader.Read<float>();
+            if (consts.Version < 4) {
+                reader.Read<float>();
+                FinalizedCost = 0;
+            } else {
+                FinalizedCost = reader.Read<int>();
+            }
         }
 
         public override void Write(object self, ref ByteWriter writer, SaveStateChunkConsts consts)
@@ -28,7 +33,7 @@ namespace SpaceFab.Save
             base.Write(self, ref writer, consts);
 
             writer.Write(FinalizedTotalCycles);
-            writer.Write(FinalizedPrecision);
+            writer.Write(FinalizedCost);
         }
 
         // IMinigameSaveState
@@ -37,8 +42,8 @@ namespace SpaceFab.Save
         {
             base.SetDefaults();
 
-            FinalizedTotalCycles = -1;
-            FinalizedPrecision = -1;
+            FinalizedTotalCycles = 0;
+            FinalizedCost = 0;
         }
 
         #endregion // Interfaces

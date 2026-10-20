@@ -17,8 +17,6 @@ namespace SpaceFab
     {
         #region Save State
 
-        [NonSerialized] public StringHash32 RecentlyCompletedContract;
-
         [NonSerialized] public bool BigBatteryUnlocked;
         [NonSerialized] public bool ThermalChamberUnlocked;
         [NonSerialized] public bool DopingChamberUnlocked;
@@ -68,7 +66,9 @@ namespace SpaceFab
             UnlockedWikiPages ??= new HashSet<StringHash32>();
             UnlockedWikiPages.Clear();
 
-            RecentlyCompletedContract = reader.Read<StringHash32>();
+            if (consts.Version < 3) {
+                reader.Read<StringHash32>();
+            }
 
             int count = reader.Read<int>();
             for (int i = 0; i < count; i++)
@@ -103,8 +103,6 @@ namespace SpaceFab
 
         public void Write(object self, ref ByteWriter writer, SaveStateChunkConsts consts)
         {
-            writer.Write(RecentlyCompletedContract);
-
             int count = UnlockedWikiPages?.Count ?? 0;
             writer.Write(count);
             if (UnlockedWikiPages != null)

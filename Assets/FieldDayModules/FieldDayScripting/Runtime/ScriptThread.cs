@@ -96,7 +96,11 @@ namespace FieldDay.Scripting {
         internal void PopCutscene() {
             Assert.True(m_CutsceneDepth > 0, "ScriptThread.Push/PopCutscene calls unbalanced");
             if (m_CutsceneDepth-- == 1) {
-                m_CustomPlugin.DereferenceCutscene(GetHandle());
+                LeafThreadHandle handle = GetHandle();
+                if (IsSkipping()) {
+                    m_CustomPlugin.StopSkippingCutscene(handle);
+                }
+                m_CustomPlugin.DereferenceCutscene(handle);
             }
         }
 
@@ -111,21 +115,27 @@ namespace FieldDay.Scripting {
             return (m_Flags & ScriptThreadFlags.Skipping) != 0;
         }
 
-        internal void StartSkipping() {
-            m_Flags |= ScriptThreadFlags.SkipSingle;
-            m_Routine.SetTimeScale(1000);
-            m_CurrentPrinter?.StartSkip();
+        internal bool StartSkipping() {
+            if ((m_Flags & ScriptThreadFlags.Skipping) == 0) {
+                m_Flags |= ScriptThreadFlags.Skipping;
+                m_Routine.SetTimeScale(1000);
+                m_CurrentPrinter?.StartSkip();
+                return true;
+            }
+
+            return false;
         }
 
-        internal void StopSkipping() {
+        internal bool StopSkipping() {
             if ((m_Flags & ScriptThreadFlags.Skipping) != 0) {
                 m_Flags &= ~(ScriptThreadFlags.Skipping | ScriptThreadFlags.SkipSingle);
                 m_Routine.SetTimeScale(1);
 
                 m_CurrentPrinter?.CancelSkip();
-
-                m_CustomPlugin.StopSkippingCutscene(GetHandle());
+                return true;
             }
+
+            return false;
         }
 
         #endregion // Skipping
@@ -379,9 +389,8 @@ namespace FieldDay.Scripting {
             m_VoiceoverReleaseTime = 0;
             m_LastKnownCharacter = default;
 
-            StopSkipping();
-
             LeafThreadHandle handle = GetHandle();
+            m_CustomPlugin.StopSkippingCutscene(handle);
 
             while(m_OwnedResources.TryPopBack(out var owned)) {
                 owned.TryClearThreadOwner(handle, releaseReason);

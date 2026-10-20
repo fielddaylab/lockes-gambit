@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Gate
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Gate
-  m_Icon: {fileID: 21300000, guid: de979f397bf9e6d4c8a7e30969039c07, type: 3}
-  m_IllustrationFrames:
+  Title: Gate
+  Icon: {fileID: 21300000, guid: de979f397bf9e6d4c8a7e30969039c07, type: 3}
+  IllustrationFrames:
   - {fileID: 21300000, guid: f66bbefaa1cb4b24891e99388f9b158b, type: 3}
   - {fileID: 21300000, guid: e22e1b7fe8e4f944cacf2c0951828dba, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: 'Gates flip semiconductors below them: HIGH signals flip P-Type to N-Type,
+  - {fileID: 21300000, guid: 0940fb0f925a6b445b176cc6f9d09f2b, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: 'Gates flip semiconductors below them: HIGH signals flip P-Type to N-Type,
     and LOW signals flip N-Type to P-Type.'
-  m_MaterialId:
+  MaterialId:
     m_HashValue: 0
-  m_IsObservationPage: 0
-  m_ObservationType: 0
-  m_PropertyCheck: {fileID: 0}
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

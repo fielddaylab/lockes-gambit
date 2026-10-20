@@ -19,14 +19,14 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: '1: Engine Power
+  BodyText: '1. Engine Speed: Faster haulers take long routes with less time.
 
-    2: Cargo Capacity
+    2.
+    Cargo Capacity
 
-    3: Cargo Loaded
+    3. Cargo Loaded
 
-    4:
-    Vessel ID'
+    4. Hauler ID'
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

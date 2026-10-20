@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7474a14f7744fcca53482dfe39c866, type: 3}
+  m_Name: StationConfig_2
+  m_EditorClassIdentifier: 
+  PhotolithographyMasks:
+  - {fileID: 21300000, guid: 3523c34b4db6e7143955388661b0cb7b, type: 3}
+  - {fileID: 21300000, guid: 93e6a60050d77444a97105b4f9b1f520, type: 3}
+  - {fileID: 21300000, guid: 3edbb915676d6874f8b58a840d6d6cf4, type: 3}
+  PhotolithographyOutlines:
+  - {fileID: 21300000, guid: 13c6ea99e5e697a489019194cca513d3, type: 3}
+  - {fileID: 21300000, guid: 58986ac8a5b90a44e972ca5e96240d38, type: 3}
+  - {fileID: 21300000, guid: 43a29b6cfb28a0a4398ac46734f957ad, type: 3}
+  EtchPatterns:
+  - {fileID: 8415579751518541048, guid: bd7bac17b1b99f940b8204891c21fbe6, type: 3}
+  - {fileID: 8415579751518541048, guid: 852ecb6870603334b8d7e3a6655a0d16, type: 3}
+  - {fileID: 8415579751518541048, guid: 9af51b8cbac7c8b46b9e380c8cb47f9f, type: 3}
+  SputterPatterns:
+  - {fileID: 4477975049436297613, guid: 2cda00522fd7b1544b006c4bb68d5ff9, type: 3}
+  - {fileID: 4477975049436297613, guid: f4300119a76665a428f1903632ed6cee, type: 3}
+  - {fileID: 4477975049436297613, guid: 52cf1d0ddd222d44e832606e166467f3, type: 3}
+  IonPatterns:
+  - {fileID: 4477975049436297613, guid: 49a310ec2089974449412b45d6942f4d, type: 3}
+  - {fileID: 4477975049436297613, guid: 52d4ea5c815d7df4088b6966d1f666f8, type: 3}
+  - {fileID: 4477975049436297613, guid: ee03ccf3e2dbbfc46948e5577e0f3e55, type: 3}

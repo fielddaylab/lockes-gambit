@@ -9,6 +9,7 @@ namespace SpaceFab.Narrative {
     [PreloadOrder(-99)]
     public sealed class ChapterSkyboxLoader : MonoBehaviour, IScenePreload {
         public Material Fallback;
+        public Vector3 Rotation;
 
         private void Awake() {
             Game.Events.Register(GameEvents.ChapterLoaded, ApplyCurrentChapter)
@@ -32,6 +33,7 @@ namespace SpaceFab.Narrative {
             }
 
             RenderSettings.skybox = material;
+            Game.Rendering.PrimaryCamera.clearFlags = CameraClearFlags.Skybox;
         }
 
         private void ClearChapter() {

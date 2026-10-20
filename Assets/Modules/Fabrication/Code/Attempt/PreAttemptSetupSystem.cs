@@ -4,6 +4,7 @@ using FieldDay.Scripting;
 using FieldDay.Systems;
 using Leaf.Runtime;
 using SpaceFab.Fabrication.Layout;
+using SpaceFab.Fabrication.Sequence;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace SpaceFab.Fabrication {
                 new SysPermissions()
                     .ReadWriteShared<LayoutState>()
                     .ReadWriteShared<ModeState>()
+                    .ReadShared<SequenceState>()
+                    .ReadWriteShared<SequenceVisualsState>()
             );
         }
 
@@ -41,6 +44,14 @@ namespace SpaceFab.Fabrication {
 
                 LayoutUtility.ShuffleStations(layoutState);
                 layoutState.NeedsReshuffling = false;
+            }
+
+            // show the layer instruction panel until the player presses Start
+            Find.State(out SequenceState sequenceState, out SequenceVisualsState visualsState);
+            if (visualsState.LayerInstructionPanel != null) {
+                FabricationSequence sequence = sequenceState.Level != null ? sequenceState.Level.Sequence : null;
+                visualsState.LayerInstructionPanel.Initialize(sequence, 0);
+                visualsState.LayerInstructionPanel.ShowAndHold();
             }
 
             // trigger leaf dialogue on load

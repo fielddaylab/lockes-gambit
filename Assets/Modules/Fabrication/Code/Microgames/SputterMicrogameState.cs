@@ -41,6 +41,9 @@ namespace SpaceFab.Fabrication.Microgames
         [NonSerialized] public SputterPatternData SputterPattern;
         public SpriteRenderer sputerHitImg;
 
+        public SpriteRenderer MirrorHighlight;
+        [NonSerialized] public float MirrorHighlightTimer = 0.3f;
+
         public bool IsTrajectoryDisplayed = false;
         public float FlashTime = 0.18f;
 
@@ -97,13 +100,17 @@ namespace SpaceFab.Fabrication.Microgames
             Find.State(out SputterMicrogameState state, out SequenceState sequence);
 
             state.SputterUI.SetActive(true);
+            state.MirrorHighlightTimer = 0f;
+            state.MirrorHighlight.enabled = true;
 
             // Set pattern
             // int patternIndex = sequence.Level.PatternIndex;
             int patternIndex = sequence.Level.GetPatternIndex(sequence);
 
-            Find.GlobalAsset(out MicrogameStationConfig config);
-            state.SputterPattern = GameObject.Instantiate(config.SputterPatterns[patternIndex], state.SputterUI.transform).GetComponent<SputterPatternData>();
+            //Find.GlobalAsset(out MicrogameStationConfig config);
+            MicrogameStationConfig stationConfig = MicrogameUtility.GetStationConfig();
+
+            state.SputterPattern = GameObject.Instantiate(stationConfig.SputterPatterns[patternIndex], state.SputterUI.transform).GetComponent<SputterPatternData>();
             state.SputterPattern.SetPatternData(state.ProjectilePrefab.Sprite.bounds.size.x);
 
             state.Phase = SputterMicrogamePhase.Entering;
@@ -173,6 +180,20 @@ namespace SpaceFab.Fabrication.Microgames
         public static float GetRawResultPrecision()
         {
             return ComputePrecision();
+        }
+
+        public static void ShowMirrorHighlight(float deltaTime)
+        {
+            Find.State(out SputterMicrogameState state);
+            state.MirrorHighlightTimer += deltaTime;
+
+            float t = Mathf.PingPong(state.MirrorHighlightTimer * 2.5f, 1f);
+            float currentAlpha = Mathf.Lerp(0.3f, 1f, t);
+
+            Color currentColor = state.MirrorHighlight.color;
+            currentColor.a = currentAlpha;
+            state.MirrorHighlight.color = currentColor;
+
         }
 
         // Spraypaint-specific precision math: percent of the etched target area that got filled

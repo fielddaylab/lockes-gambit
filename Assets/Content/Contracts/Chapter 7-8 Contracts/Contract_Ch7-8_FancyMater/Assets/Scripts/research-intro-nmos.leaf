@@ -1,0 +1,75 @@
+# basePath ResearchIntroNMOS
+
+::IntroSelectTrace
+@trigger    OnSetupComplete
+$if MinigameHasValidSolution()
+    {@PAL}  You've already researched everything you need to!\n\nYou can continue your experiments to uncover new insights.
+$else
+    {@PAL}  Use a Thermal Chamber to find a <color=yellow>Hi-Temp Conductor</color> and a <color=yellow>Hi-Temp Semiconductor</color>.
+$endif
+
+
+::OnChamberSwitched
+@trigger    OnChamberSwitched
+@when   !MinigameHasValidSolution(), research:chamberId == "Thermal"
+$call   CloseWiki()
+{@PAL}  Increase the heat to max heat.
+
+
+::OnHeatIncreased
+@trigger    OnHeatIncreased
+@when     !MinigameHasValidSolution(), heat == 3
+$call   CloseWiki()
+$if     research:primaryMaterial == "SiliconCarbide"
+    {@PAL}  It didn't explode!\n\nSee if this material is a conductor or a semiconductor and verify it.
+$elseif research:primaryMaterial == "Tungsten"
+    {@PAL}  It didn't explode!\n\nSee if this material is a conductor or a semiconductor and verify it.
+$endif
+
+
+::OnSubstrateExploded
+@trigger    OnMaterialExploded
+@when   !MinigameHasValidSolution(), explosionStyle == "TemperatureBreakdownHot"
+$call   CloseWiki()
+{@PAL}  Well, looks like it couldn't stand high heat.\n\nTry another sample.
+
+
+::OnHypothesisCorrect
+@trigger    OnHypothesisSubmitted
+@when     result == "success"
+$call   CloseWiki()
+$if MinigameHasValidSolution()
+    {@PAL}  Great. You can return to the ship, or continue your experiments to uncover new insights.
+$elseif     research:propertyId == "HiTempConductor"
+    {@PAL}  Correct. Now find a Hi-Temp Semiconductor and its dopants.
+$elseif   research:propertyId == "HiTempSemiConductor"
+    {@PAL}  Correct. Now find the dopants for this semiconductor.
+$elseif   research:propertyId == "NDopantFor", research:primaryMaterial == "SiliconCarbide"
+    {@PAL}  Correct. Now complete the remaining requirements.
+$elseif   research:propertyId == "PDopantFor", research:primaryMaterial == "SiliconCarbide"
+    {@PAL}  Correct. Now complete the remaining requirements.
+$else
+    {@PAL}  Try completing the contract requirements.
+$endif
+
+
+::OnHypothesisIncorrectHypothesisMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "hypothesis_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  Your Property was incorrect.\n\nTry again.
+
+::OnHypothesisIncorrectObservationMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "observation_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
+
+::OnHypothesisIncorrectInvalidObservation
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "invalid_observation"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  One or more of your Observations were incorrect. Those are removed.\n\nTry again.

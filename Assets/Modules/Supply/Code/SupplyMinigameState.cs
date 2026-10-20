@@ -12,7 +12,7 @@ namespace SpaceFab.Supply
     {
         #region Saved State
 
-        [NonSerialized] public int Reliability;
+        [NonSerialized] public int Risk;
         [NonSerialized] public int TotalCycles;
         [NonSerialized] public int Cost;
 
@@ -69,7 +69,7 @@ namespace SpaceFab.Supply
     {
         public static void ImportState(SupplySaveState saveState, SupplyMinigameState supplyState)
         {
-            supplyState.Reliability = saveState.FinalizedReliability;
+            supplyState.Risk = saveState.FinalizedRisk;
             supplyState.TotalCycles = saveState.FinalizedTotalCycles;
             supplyState.Cost = saveState.FinalizedCost;
 
@@ -81,7 +81,7 @@ namespace SpaceFab.Supply
 
         public static void ExportState(ref SupplySaveState saveState, SupplyMinigameState supplyState)
         {
-            saveState.FinalizedReliability = supplyState.Reliability;
+            saveState.FinalizedRisk = supplyState.Risk;
             saveState.FinalizedTotalCycles = supplyState.TotalCycles;
             saveState.FinalizedCost = supplyState.Cost;
 
@@ -96,7 +96,7 @@ namespace SpaceFab.Supply
         // rather than submit the chapter on stale numbers.
         public static void InvalidateFinalizedSolution(SupplyMinigameState supplyState)
         {
-            supplyState.Reliability = -1;
+            supplyState.Risk = -1;
             supplyState.TotalCycles = -1;
             supplyState.Cost = -1;
 
