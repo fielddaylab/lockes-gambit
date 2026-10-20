@@ -8,7 +8,7 @@ $if IsLevelSolved(0) == true
 $else
     $set temp:designTutorialStep = 0
     $call   HighlightElement(design:tool-metal)
-    {@PAL}  This chip needs a connection between Input A and Output X on the metal layer. \n\nSelect the <color=yellow>Metal Tool</color>.
+    {@PAL}  This chip needs a connection between Input A and Output X on the metal layer.\n\nSelect the <color=yellow>Metal Tool</color>.
 $endif
 
 
@@ -18,7 +18,7 @@ $endif
 $set temp:designTutorialStep = 1
 $call   ReleaseAllHighlights()
 $call   HighlightElement(design:input-a, false, 25)
-{@PAL} Now click and drag to draw a connection between Input A and Output X.
+{@PAL}  Now click and drag to draw a connection between Input A and Output X.
 
 
 
