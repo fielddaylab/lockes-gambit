@@ -19,13 +19,15 @@ MonoBehaviour:
   m_omitFromSupplyRequirements:
   - {fileID: 11400000, guid: 48f18b58bb0e54eb399bf888debb2842, type: 2}
   m_title: Criss-Cross Chip
-  m_description: Flip some inputs.
+  m_description: "Need a quick and efficient chip upgrade to our customer service
+    AI algorithms. We\u2019re expecting proper service"
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm2
+    m_HashValue: 3432125901
   m_payout: 9
   m_expectedDuration: 4
   m_expectedProfit: 2
+  m_minimumProfit: 2
   m_contractType: 0
   m_difficulty: 0
   m_unlocksBigBattery: 0

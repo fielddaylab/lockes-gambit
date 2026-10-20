@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2e37b35eba4eb41ad09127a93ce165, type: 3}
+  m_Name: ContractUIAssets
+  m_EditorClassIdentifier: 
+  Types:
+  - Background:
+      serializedVersion: 2
+      rgba: 4288992230
+    Outline:
+      serializedVersion: 2
+      rgba: 4286231240
+    Icon: {fileID: 21300000, guid: 92f1c900231cf8d48ad607ca3edf8264, type: 3}
+    ShowSparkles: 0
+    Label: Basic Chip
+  - Background:
+      serializedVersion: 2
+      rgba: 4293439196
+    Outline:
+      serializedVersion: 2
+      rgba: 4291328696
+    Icon: {fileID: 21300000, guid: c0b00fcf824586845a564288947ef9fd, type: 3}
+    ShowSparkles: 1
+    Label: Special Materials
+  - Background:
+      serializedVersion: 2
+      rgba: 4292994477
+    Outline:
+      serializedVersion: 2
+      rgba: 4291020922
+    Icon: {fileID: 21300000, guid: 2c39a8e9ef88c5746877d533e679f227, type: 3}
+    ShowSparkles: 0
+    Label: Complex Circuit
+  Difficulties:
+  - Background:
+      serializedVersion: 2
+      rgba: 4285643321
+    Label: 'Difficulty: LOW'
+  - Background:
+      serializedVersion: 2
+      rgba: 4281118408
+    Label: 'Difficulty: MEDIUM'
+  - Background:
+      serializedVersion: 2
+      rgba: 4284247517
+    Label: 'Difficulty: HIGH'
+  Clients:
+  - Id:
+      m_Source: cm
+      m_HashValue: 1680451373
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Central Mining Corp, a subsidiary of Expanse Materials. Contract to source
+      and extract necessary materials for semiconductor production.
+  - Id:
+      m_Source: 'cm1 '
+      m_HashValue: 2230392028
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: PAL-World - Auserine's leading choice for any common good at a low-low
+      price.
+  - Id:
+      m_Source: cm2
+      m_HashValue: 3432125901
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Frontline Insurance - The best and only insurance comapny in all of Auserine.
+  - Id:
+      m_Source: cm3
+      m_HashValue: 3415348282
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: FR Pharma - For a healthier and more productive Auserine.
+  - Id:
+      m_Source: cm4
+      m_HashValue: 3331460187
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Frontier Food Services - The finest lab-grown food in the system
+  - Id:
+      m_Source: cm5
+      m_HashValue: 3314682568
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: 'FRA Logisitics - Protect, preserve, persevere, we are the FRA" '
+  - Id:
+      m_Source: 'cm6 '
+      m_HashValue: 1592695411
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Blair Assembly Co. - A manufacturer for workers, by workers
+  - Id:
+      m_Source: cm7
+      m_HashValue: 3348237806
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: A farm to table co-op led by the Kalvis sectors farmers, herbalists and
+      foragers.
+  - Id:
+      m_Source: cm8
+      m_HashValue: 3264349711
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: 'Klein Health Services - The Kalvis Sector''s all inclusive health program,
+      accessible for everyone. '
+  - Id:
+      m_Source: cm9
+      m_HashValue: 3247572092
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: 'The Creator''s Coalition - A unified group of artists, artisans, and shop
+      vendors. '
+  - Id:
+      m_Source: cm
+      m_HashValue: 1680451373
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Central Mining Corp, a subsidiary of Expanse Materials. Contract to source
+      and extract necessary materials for semiconductor production.
+  - Id:
+      m_Source: cm10
+      m_HashValue: 1961950124
+    Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
+    Text: Blair Mining Union - Worker's right are people's rights, we believe in
+      a human-led mining future.

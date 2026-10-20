@@ -18,7 +18,7 @@ namespace SpaceFab.Design
             ecs.Register(&ProcessWork,
                 new SysUpdate(GameLoopPhase.Update, 6, UpdateMasks.SimulateModeMask),
                 new SysPermissions()
-                    .ReadWriteShared<ResultState>()
+                    .ReadWriteShared<DesignResultPanel>()
                     .ReadWriteShared<MinigameRequestExitState>()
                     .ReadShared<MinigameStateInterfacer>()
                     .ReadShared<DesignMinigameState>()
@@ -30,7 +30,7 @@ namespace SpaceFab.Design
         static private void ProcessWork(float deltaTime)
         {
             Find.State(
-                out ResultState resultState,
+                out DesignResultPanel resultState,
                 out MinigameRequestExitState requestExitState,
                 out MinigameStateInterfacer interfacer
                 );

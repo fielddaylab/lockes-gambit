@@ -27,6 +27,12 @@ namespace SpaceFab {
         public Entry[] Chapters;
         public ExportedData[] ResidentData;
 
+        [Header("Hazards")]
+        [Range(0, 100)] public int[] HazardChances = new int[9];
+
+        [Header("Epilogue")]
+        [StreamedPackId] public StringHash32 EpilogueComicPackage;
+
 #if UNITY_EDITOR
 
         int IBaked.Order { get { return 0; } }

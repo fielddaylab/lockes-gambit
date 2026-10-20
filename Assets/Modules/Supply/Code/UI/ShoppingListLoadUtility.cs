@@ -33,14 +33,14 @@ namespace SpaceFab.Supply {
         // Frees any prior rows, then builds one row per requirement in the
         // current contract. No contract => zero rows + minimum panel size.
         public static void Rebuild(ShoppingListLayoutState layout, SupplyRouteCollection routes, PlayerProgressState progressState, ContractState contractState) {
-            if (layout == null || layout.Pool == null || layout.RowsContainer == null)
+            if (layout == null || layout.Rows == null)
             {
                 Log.Msg("[SupplyBug] crucial element is null");
                 return;
             }
 
             // 1. Free prior rows.
-            FreeAllRows(layout);
+            ResetRows(layout);
 
             // 2. Resolve the current contract via the active contract-assets
             //    wrapper — the same path Research / Design / Fabrication use, so
@@ -95,13 +95,41 @@ namespace SpaceFab.Supply {
                 layout.ShoppingListLabel.text = $"Material Requirements {totalSuccess}/{totalChecks}";
                 bool confirmActive = success && routes.TempRouteIndex < 0;
                 Log.Msg("[SupplyBug] confirm active? " + confirmActive);
+
                 layout.ConfirmButton.gameObject.SetActive(confirmActive);
+                if (confirmActive) {
+                    Find.State(out SupplyRouteDrawingState drawing);
+
+                    layout.ConfirmButton.TextGraphic.text = "CONFIRM";
+
+                    SupplyProgressMeterUtility.ComputeAggregate(routes, drawing, out int risk, out int cost, out int time, out int activeMask);
+                    bool buttonEnabled = true;
+                    if (time > contractState.ContractDefinition.ExpectedDuration())
+                    {
+                        layout.ConfirmButton.TextGraphic.text = "OUT OF TIME";
+                        buttonEnabled = false;
+                    }
+                    
+                    int maxCost = contractState.ContractDefinition.Payout() - contractState.ContractDefinition.MinimumProfit();
+                    if (cost > maxCost)
+                    {
+                        layout.ConfirmButton.TextGraphic.text = "OUT OF MONEY";
+                        buttonEnabled = false;
+                    }
+
+                    layout.ConfirmButton.Interactable = buttonEnabled;
+                }
+
             }
 
             // 5. Lay out + resize.
             // TODO: migrate to use our custom Layout elements to handle this layout
-            float contentHeight = LayoutVerticalCentered(layout.ActiveRows, RowGap);
-            ResizePanel(layout, contentHeight);
+            UpdateExpandedY(layout);
+        }
+
+        private static void UpdateExpandedY(ShoppingListLayoutState layout)
+        {
+            layout.ExpandedYValue = layout.CollapseYValue + layout.ActiveRowCount * layout.RowStep;
         }
 
         // Resolves the player's active contract through its contract-assets
@@ -124,10 +152,13 @@ namespace SpaceFab.Supply {
         // label/icon, and fills its slot with the first gathered material
         // that satisfies the check (by player-confirmed knowledge).
         private static bool AddRow(ShoppingListLayoutState layout, PlayerProgressState progress, MaterialPropertyCheck check) {
-            ShoppingListRow row = layout.Pool.Alloc();
-            if (row == null) return false;
-            row.transform.SetParent(layout.RowsContainer, false);
-            layout.ActiveRows.Add(row);
+            if (layout.ActiveRowCount >= layout.Rows.Length) { 
+                Debug.LogError("Contract needs more shoppinglist rows than setup in prefab!");
+                return false; 
+            }
+        
+            ShoppingListRow row = layout.Rows[layout.ActiveRowCount++];
+            row.gameObject.SetActive(true);
 
             // Property chip: name + sprite bucket. Dynamic dopant labels get
             // the comparison element appended ("N-TYPE DOPANT for <NAME>").
@@ -225,15 +256,13 @@ namespace SpaceFab.Supply {
         }
 
         // Returns every pooled row to the pool and clears the active list.
-        public static void FreeAllRows(ShoppingListLayoutState layout) {
-            if (layout == null || layout.ActiveRows == null) return;
-            for (int i = layout.ActiveRows.Count - 1; i >= 0; i--) {
-                ShoppingListRow row = layout.ActiveRows[i];
-                if (row != null) {
-                    Pool.TryFree(row);
+        public static void ResetRows(ShoppingListLayoutState layout) {
+            for (int i = 0; i < layout.Rows.Length; i++) {
+                if (layout.Rows[i] != null) {
+                    layout.Rows[i].gameObject.SetActive(false);
                 }
             }
-            layout.ActiveRows.Clear();
+            layout.ActiveRowCount = 0;
         }
     }
 }

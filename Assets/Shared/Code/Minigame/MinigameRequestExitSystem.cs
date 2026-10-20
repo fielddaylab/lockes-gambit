@@ -35,7 +35,7 @@ namespace SpaceFab {
             switch (requestExitState.ExitRequestState) {
                 case RequestState.Requested:
                     if (minigameInterfacer.Id == MinigameId.Research) {
-                        Find.Panel<ResearchResultPanel>().Show();
+                        Find.State<ResearchResultPanel>().Show();
                         requestExitState.ExitRequestState = RequestState.Pending;
                     } else if (DisplayLeavePopup(minigameInterfacer.Id)) {
                         requestExitState.ExitRequestState = RequestState.Pending;

@@ -72,13 +72,56 @@ namespace SpaceFab.Supply {
 
             ComputeAggregate(routes, drawing, out int risk, out int cost, out int time, out int activeMask);
             int funds = ResolvePayout(contract);
+            int expectedDuration = ResolveExpectedDuration(contract);
+            int minProfit = ResolveMinimumProfit(contract);
+
+            int timeCount = FillValidRange(layout.AggregateView.TimeCellHighlight, layout.AggregateView.TimeCells, expectedDuration, TimeEndPadding);
+            FillTimeCap(layout.AggregateView.TimeCellCap, timeCount);
+            FillValidRange(layout.AggregateView.CostCellHighlight, layout.AggregateView.CostCells, minProfit, CostEndPadding);
 
             // Aggregate "Result" panel.
             if (layout.AggregateView != null) {
                 FillUniform(layout.AggregateView.RiskCells, risk, sprites.RiskBase, sprites.RiskFilled, sprites.RiskColor);
-                FillUniform(layout.AggregateView.TimeCells, time, sprites.TimeBase, sprites.TimeFilled, sprites.TimeColor);
-                FillAggregateCost(layout.AggregateView.CostCells, funds, cost, sprites);
+                FillAggregateTime(layout.AggregateView.TimeCells, time, expectedDuration, sprites);
+                FillAggregateCost(layout.AggregateView.CostCells, funds, cost, minProfit, sprites);
             }
+        }
+
+        private static int FillValidRange(RectTransform highlight, ProgressMeterCell[] cells, int validCount, float padding) {
+            if (highlight == null) {
+                return 0;
+            }
+            int count = cells != null ? Mathf.Min(validCount, cells.Length) : 0;
+            if (count <= 0) {
+                highlight.gameObject.SetActive(false);
+                return 0;
+            }
+            highlight.gameObject.SetActive(true);
+
+            RectTransform lastCell = cells[count - 1].BaseImage.rectTransform;
+            float lastRight = GetRightEdgeLocal(highlight, lastCell);
+            float left = highlight.rect.xMin;
+            highlight.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lastRight - left + padding);
+            return count;
+        }
+
+        private static void FillTimeCap(RectTransform cap, int count) {
+            if (cap == null) {
+                return;
+            }
+            Vector3 scale = cap.localScale;
+            float y = Mathf.Abs(scale.y);
+            scale.y = (count & 1) == 1 ? y : -y;
+            cap.localScale = scale;
+        }
+
+        private const float CostEndPadding = 3f;
+        private const float TimeEndPadding = -3f;
+
+        private static readonly Vector3[] s_Corners = new Vector3[4];
+        private static float GetRightEdgeLocal(RectTransform space, RectTransform target) {
+            target.GetWorldCorners(s_Corners);
+            return space.InverseTransformPoint(s_Corners[2]).x;
         }
 
         // Reads the active contract's payout via its asset wrapper (the funds the cost meter
@@ -88,6 +131,20 @@ namespace SpaceFab.Supply {
                 return 0;
             }
             return contractState.ContractDefinition.Payout();
+        }
+
+        private static int ResolveExpectedDuration(ContractState contractState) {
+            if (!contractState.ContractDefinition) {
+                return int.MaxValue;
+            }
+            return contractState.ContractDefinition.ExpectedDuration();
+        }
+
+        private static int ResolveMinimumProfit(ContractState contractState) {
+            if (!contractState.ContractDefinition) {
+                return 0;
+            }
+            return contractState.ContractDefinition.MinimumProfit();
         }
 
         #endregion // Refresh
@@ -108,27 +165,44 @@ namespace SpaceFab.Supply {
 
         // Aggregate cost: total filled cells = contract funds (clamped to authored length).
         // The trailing `cost` of those are red (spent); the leading remainder are yellow.
-        private static void FillAggregateCost(ProgressMeterCell[] cells, int funds, int cost, SupplyProgressMeterSpriteSet sprites) {
+        private static void FillAggregateCost(ProgressMeterCell[] cells, int funds, int cost, int minProfit, SupplyProgressMeterSpriteSet sprites) {
             int length = cells != null ? cells.Length : 0;
             int filled = Mathf.Clamp(funds, 0, length);
             int red = Mathf.Clamp(cost, 0, filled);
             int yellow = filled - red;
-            FillCostBars(cells, yellow, red, sprites);
+            FillCostBars(cells, yellow, red, minProfit, sprites);
+        }
+
+        private static void FillAggregateTime(ProgressMeterCell[] cells, int time, int expectedDuration, SupplyProgressMeterSpriteSet sprites) {
+            if (cells == null)
+            {
+                return;
+            }
+            
+            for (int i = 0; i < cells.Length; i++)
+            {
+                ApplyBase(cells[i], sprites.TimeBase);
+                Sprite overlay = i >= expectedDuration ? sprites.TimeOverSpent : sprites.TimeFilled;
+                ApplyCell(cells[i], i < time, overlay, Color.white);
+            }
         }
 
         // Lays out `yellowCount` remaining bars then `redCount` spent bars, clearing the rest.
         // Counts beyond the authored cell length are naturally clamped by the loop. Every
         // cell's base is set to CostBase so empty cells share one look.
-        private static void FillCostBars(ProgressMeterCell[] cells, int yellowCount, int redCount, SupplyProgressMeterSpriteSet sprites) {
+        private static void FillCostBars(ProgressMeterCell[] cells, int yellowCount, int redCount, int minProfit, SupplyProgressMeterSpriteSet sprites) {
             if (cells == null) {
                 return;
             }
             for (int i = 0; i < cells.Length; i++) {
                 ApplyBase(cells[i], sprites.CostBase);
                 if (i < yellowCount) {
-                    ApplyCell(cells[i], true, sprites.CostBar, sprites.CostRemainingColor, false);
+                    ApplyCell(cells[i], true, sprites.CostFilled, Color.white);
                 } else if (i < yellowCount + redCount) {
-                    ApplyCell(cells[i], true, sprites.CostBar, sprites.CostSpentColor, true);
+                    bool over = i < minProfit;
+                    Sprite spent = over ? sprites.CostOverSpent : sprites.CostSpent;
+                    Sprite xMark = over ? sprites.CostOverSpentX : sprites.CostSpentX;
+                    ApplyCell(cells[i], true, spent, Color.white, xMark);
                 } else {
                     ApplyCell(cells[i], false, null, default);
                 }
@@ -158,7 +232,7 @@ namespace SpaceFab.Supply {
         }
 
         // Drives one cell's overlay: enabled with sprite+color when filled, hidden otherwise.
-        private static void ApplyCell(ProgressMeterCell cell, bool filled, Sprite sprite, Color color, bool xMark = false) {
+        private static void ApplyCell(ProgressMeterCell cell, bool filled, Sprite sprite, Color color, Sprite xMarkSprite = null) {
             if (cell == null || cell.OverlayImage == null) {
                 return;
             }
@@ -166,18 +240,23 @@ namespace SpaceFab.Supply {
                 cell.OverlayImage.sprite = sprite;
                 cell.OverlayImage.color = color;
                 cell.OverlayImage.enabled = true;
-
-                if (cell.xMarkImage != null)
-                {
-                    cell.xMarkImage.enabled = xMark;
-                }
+                SetXMark(cell, xMarkSprite);
             } else {
                 cell.OverlayImage.enabled = false;
-                if (cell.xMarkImage != null)
-                {
-                    cell.xMarkImage.enabled = false;
-                }
+                SetXMark(cell, null);
             }
+        }
+
+        private static void SetXMark(ProgressMeterCell cell, Sprite xMarkSprite) {
+            if (cell.xMarkImage == null) {
+                return;
+            }
+            if (xMarkSprite == null) {
+                cell.xMarkImage.enabled = false;
+                return;
+            }
+            cell.xMarkImage.sprite = xMarkSprite;
+            cell.xMarkImage.enabled = true;
         }
 
         #endregion // Cell rendering

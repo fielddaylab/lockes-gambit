@@ -1,65 +1,36 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using BeauRoutine;
 using BeauUtil;
 using BeauUtil.UI;
 using FieldDay;
+using FieldDay.Scenes;
 using FieldDay.SharedState;
 using FieldDay.UI;
 using FieldDay.UI.Widgets;
 using SpaceFab.Save;
 using SpaceFab.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SpaceFab.Supply {
-    public sealed class SupplyResultPanel : SharedPanel {
-        public GuiButton NextButton;
-        public SceneReference NextScene;
-
-        public Transform ShoppingListParent; // to copy the visuals from the shopping list to this
-        public Transform ListParent;
-
-        [Header("Ships")]
-        public SupplyProgressMeterView MeterView;
-        public SupplyShipBreakdownRow[] ShipRows;
-
-        protected override void Awake() {
-            base.Awake();
-
-            NextButton.OnClick.AddListener(Commit);
-        }
-
-        private void Start() {
-            Hide();
+    public sealed class SupplyResultPanel : SharedStateComponent, IScenePreload {
+        public ResultsPanelLayout PanelLayout;
+        public RiskInlayPanel RiskPanel;
+        public GuiCounter TimeCounter;
+        public GuiCounter RevenueCounter;
+        
+        public IEnumerator<WorkSlicer.Result?> Preload() {
+            PanelLayout.Contract.ContextContinueButton.OnClick.Register(Commit);
+            return null;
         }
 
         private void Commit() {
             Find.State<MinigameRequestExitState>().ExitRequestState = RequestState.Confirmed;
         }
 
-        // Safety net for the pushed priority: OnDisable fires both on Hide() (SetActive(false)) and
-        // on scene-teardown deactivation, and runs before OnDestroy invalidates the input layer, so
-        // PopPriority's not-destroyed assert still holds. This is what catches the Commit-then-exit
-        // path where Hide() never runs.
-        private void OnDisable() {
-            ReleasePriority();
-        }
-
-        // Pushes GUI input priority for this panel, at most once.
-        private void AcquirePriority() {
-            Input.TryPushPriority();
-        }
-
-        // Pops the priority pushed by AcquirePriority, if held. Skipped during shutdown (the GuiMgr
-        // stack is being torn down anyway and the layer may already be invalid).
-        private void ReleasePriority() {
-            Input.TryPopPriority();
-        }
-
-        public override void Show() {
-            base.Show();
-
-            AcquirePriority();
-            Input.SetInputOverride(null);
-
+        public void Show() {
             Find.State(out SupplyRouteCollection routes, out SupplyMinigameState minigameState, out SupplyShipIndex ships, out SupplyRouteDrawingState draw);
 
             int cost = 0,
@@ -74,7 +45,7 @@ namespace SpaceFab.Supply {
 
             minigameState.Cost = cost;
             minigameState.TotalCycles = time;
-            minigameState.Reliability = risk;
+            minigameState.Risk = risk;
 
             minigameState.FoundValidSolution = true;
 
@@ -85,31 +56,38 @@ namespace SpaceFab.Supply {
             ref SupplySaveState saveState = ref Find.State<MinigameSaveStates>().Supply;
             SupplyStateUtility.ExportState(ref saveState, minigameState);
 
-            Populate(minigameState);
+            RevenueCounter.SetValue(cost);
+            TimeCounter.SetValue(time);
+            RiskPanel.SetRisk(risk);
 
-            CopyShoppingList();
-        }
+            Find.State(out ChapterState chapterState);
 
-        private void Populate(SupplyMinigameState minigameState) {
-
-        }
-
-        private void CopyShoppingList()
-        {
-            for (int i = 0; i < ShoppingListParent.childCount; i++)
-            {
-                GameObject requirement = ShoppingListParent.GetChild(i).gameObject;
-                Instantiate(requirement, ListParent);
+            if (risk <= 0) {
+                RiskPanel.SetText(RiskPanel.DefaultNoRiskHeader, RiskPanel.DefaultNoRiskDescription);
+            } else {
+                string hazardDescription = chapterState.ChapterDefinition.HazardDescription;
+                if (string.IsNullOrEmpty(hazardDescription)) {
+                    hazardDescription = RiskPanel.DefaultRiskDescription;
+                }
+                string hazardHeader = chapterState.ChapterDefinition.HazardHeader;
+                RiskPanel.SetText(hazardHeader, hazardDescription);
             }
+
+            PanelLayout.Prepare();
+            PanelLayout.AnimationRoutine.Replace(this, DisplayRoutine(this));
         }
 
-        public override void Hide() {
-            base.Hide();
+        static private IEnumerator DisplayRoutine(SupplyResultPanel resultPanel) {
+            yield return resultPanel.PanelLayout.FadeIn();
+            yield return 0.1f;
+            yield return Routine.Combine(
+                resultPanel.PanelLayout.FadeInContextPanel()
+            );
+            yield return 0.5f;
 
-            // base.Hide() deactivates the GameObject, which fires OnDisable -> ReleasePriority; this
-            // call is a guarded no-op in that case but keeps the Show/Hide pairing explicit.
-            ReleasePriority();
-            Input.SetInputOverride(false);
+            yield return TimeMeterStyle.DrainIntoMeter(resultPanel.TimeCounter, resultPanel.PanelLayout.Contract.TimeIndicators);
+            yield return MoneyMeterStyle.DrainIntoMeter(resultPanel.RevenueCounter, resultPanel.PanelLayout.Contract.RevenueIndicators);
+            resultPanel.PanelLayout.Finish();
         }
     }
 }

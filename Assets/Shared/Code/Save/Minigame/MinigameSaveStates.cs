@@ -7,6 +7,7 @@ using FieldDay.SharedState;
 using SpaceFab;
 using SpaceFab.Overarching;
 using SpaceFab.Save;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -93,6 +94,18 @@ namespace SpaceFab.Save
                 if (save == null || !save.FoundValidSolution) { return false; }
             }
             return true;
+        }
+
+        public static int CurrentCosts(MinigameSaveStates saveStates) {
+            return Math.Max(0, saveStates.Supply.FinalizedCost) + Math.Max(0, saveStates.Fabrication.FinalizedCost);
+        }
+
+        public static int CurrentTime(MinigameSaveStates saveStates) {
+            return Math.Max(0, saveStates.Supply.FinalizedTotalCycles) + Math.Max(0, saveStates.Fabrication.FinalizedTotalCycles);
+        }
+
+        public static int CurrentRisk(MinigameSaveStates saveStates) {
+            return Math.Max(0, saveStates.Supply.FinalizedRisk);
         }
     }
 }

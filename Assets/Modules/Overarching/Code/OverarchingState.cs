@@ -22,7 +22,7 @@ namespace SpaceFab.Overarching
 
         public void OnRegister()
         {
-            DefaultUpdateMask = UpdateMasks.SetupMask;
+            DefaultUpdateMask = UpdateMasks.SetupMask | UpdateMasks.OverarchingMask;
             GameLoop.SuspendUpdates(UpdateMasks.EntireGame);
             GameLoop.ResumeUpdates(DefaultUpdateMask);
         }

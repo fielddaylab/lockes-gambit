@@ -28,15 +28,14 @@ namespace SpaceFab.Supply
 
             ShoppingListLayoutState layoutState = Find.State<ShoppingListLayoutState>();
 
-            if (layoutState.ListExpanded && layoutState.IsCollapsedVisually)
+            float targetY = layoutState.ListExpanded
+                ? layoutState.ExpandedYValue
+                : layoutState.CollapseYValue;
+
+            if (!Mathf.Approximately(targetY, layoutState.CurrentTargetY))
             {
-                layoutState.IsCollapsedVisually = false;
-                MoveToPosition(layoutState, 0f);
-            }
-            else if (!layoutState.ListExpanded && !layoutState.IsCollapsedVisually)
-            {
-                layoutState.IsCollapsedVisually = true;
-                MoveToPosition(layoutState, layoutState.CollapseYValue);
+                layoutState.CurrentTargetY = targetY;
+                MoveToPosition(layoutState, targetY);
             }
         }
 

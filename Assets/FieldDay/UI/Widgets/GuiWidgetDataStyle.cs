@@ -15,6 +15,10 @@ namespace FieldDay.UI.Widgets {
         void SetRange(in GuiDataWidgetRange<TValue> range, GuiWidget source, GuiWidgetUpdateFlags flags);
     }
 
+    public interface IGuiWidgetPreviewDataStyle<TValue> {
+        void PopulatePreview(in GuiDataWidgetPreview<TValue> preview, GuiWidget source, GuiWidgetUpdateFlags flags);
+    }
+
     public interface IGuiWidgetInteractiveStyle {
         void UpdateInteractionState(GuiWidgetInteractableState state, GuiWidget source, GuiWidgetUpdateFlags flags);
     }
@@ -32,6 +36,8 @@ namespace FieldDay.UI.Widgets {
         NoAnimation = 0x02,
         IsIncrease = 0x04,
         IsDecrease = 0x08,
+        PreviewStart = 0x10,
+        PreviewEnd = 0x20,
 
         Initialization = Force | NoAnimation
     }
@@ -45,7 +51,8 @@ namespace FieldDay.UI.Widgets {
         HideControls = 0x08,
         IsEmpty = 0x10,
         IsFull = 0x20,
-        IsToggleOn = 0x40
+        IsToggleOn = 0x40,
+        IsPreviewing = 0x80
     }
 
     public enum GuiWidgetInteractableState : byte {

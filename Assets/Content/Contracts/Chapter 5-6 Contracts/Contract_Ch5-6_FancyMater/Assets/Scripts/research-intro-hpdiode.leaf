@@ -37,8 +37,8 @@ $call   CloseWiki()
 ::OnHypothesisCorrect
 @trigger    OnHypothesisSubmitted
 @when     result == "success"
-$if MinigameHasValidSolution()
 $call   CloseWiki()
+$if MinigameHasValidSolution()
     {@PAL}  Great. You can return to the ship, or continue your experiments to uncover new insights.
 $elseif     research:propertyId == "HighVoltageSemiconductor"
     $set    temp:semiconductorFound = true

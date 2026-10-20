@@ -6,8 +6,10 @@ using BeauPools;
 using BeauUtil;
 using BeauUtil.Debugger;
 using FieldDay.Debugging;
+using FieldDay.HID;
 using FieldDay.Scenes;
 using FieldDay.Vox;
+using Leaf.Runtime;
 using System.Text;
 using UnityEngine;
 
@@ -105,6 +107,13 @@ namespace FieldDay.Scripting {
                     psb.Builder.TrimEnd(StringUtils.DefaultNewLineChars);
 
                     DebugDraw.AddViewportText(new Vector2(1, 1), new Vector2(-8, -96), psb, ColorBank.FloralWhite, 0, TextAnchor.UpperRight, DebugTextStyle.Default);
+                }
+            }
+
+            LeafThreadHandle cutscene = ScriptUtility.CurrentCutscene;
+            if (cutscene.IsRunning() && !ScriptUtility.IsSkippingCutscene()) {
+                if (DebugInput.IsPressed(InputModifierKeys.Ctrl, KeyCode.Space)) {
+                    ScriptUtility.Runtime.Plugin.BeginSkippingCutscene(cutscene);
                 }
             }
         }

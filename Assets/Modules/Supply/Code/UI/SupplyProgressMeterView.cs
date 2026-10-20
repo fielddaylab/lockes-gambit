@@ -10,6 +10,7 @@ namespace SpaceFab.Supply {
     /// </summary>
     public class SupplyProgressMeterView : MonoBehaviour {
         public Transform CostCellParent, RiskCellParent, TimeCellParent;
+        public RectTransform CostCellHighlight, TimeCellHighlight, TimeCellCap;
 
         // Summed risk across ships, rendered as filled diamond cells.
         [NonSerialized] public ProgressMeterCell[] RiskCells;
