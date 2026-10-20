@@ -178,9 +178,21 @@ namespace SpaceFab
 
             // advance chapter
             chapterState.ChapterIndex++;
-            SaveUtility.Save(SaveSlot.Main);
-            ComicScripting.LoadComicForCurrentChapter();
+
+            Find.GlobalAsset(out ChapterManifest chapterManifest);
+
             ContractUtility.UnloadContractData(contractState);
+
+            if (chapterState.ChapterIndex >= chapterManifest.Chapters.Length) {
+                ComicScripting.LoadComic(chapterManifest.EpilogueComicPackage);
+                Game.Scenes.GetQueuedLoadContext(out SceneRequestContext context);
+                context.Set("QueueCredits", true);
+                context.Set("UnloadChapter", true);
+                Game.Scenes.QueueMainLoadContext(context);
+            } else {
+                SaveUtility.Save(SaveSlot.Main);
+                ComicScripting.LoadComicForCurrentChapter();
+            }
         }
     }
 }

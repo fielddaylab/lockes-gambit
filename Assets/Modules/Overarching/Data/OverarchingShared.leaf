@@ -1,0 +1,42 @@
+# basePath Overarching
+
+:: BeforeEvaluation.1
+@trigger    BeforeContractEvaluation
+@cutscene
+{@PAL}  Let's see how our routes play out...
+
+:: BeforeEvaluation.Risky.1
+@trigger    BeforeContractEvaluation
+@when   risk > 4
+@cutscene
+{@PAL}  Not sure about this...
+
+:: BeforeEvaluation.Risky.2
+@trigger    BeforeContractEvaluation
+@when   risk > 8
+@cutscene
+{@PAL}  Locke... Are we sure about this...
+
+:: AfterEvaluation.1
+@trigger    AfterContractEvaluation
+@when   !encounteredHazard
+@cutscene
+{@PAL}  Everything went smoothly!
+
+:: AfterEvaluation.HazardTimeMoney.1
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost > 0, moneyLost > 0
+@cutscene
+{@PAL}  Unfortunately our haulers ran into hazards. This resulted in lost time and will cost us more.
+
+:: AfterEvaluation.HazardTime.1
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost > 0, moneyLost == 0
+@cutscene
+{@PAL}  Unfortunately our haulers ran into hazards. This resulted in lost time.
+
+:: AfterEvaluation.HazardMoney.1
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost == 0, moneyLost > 0
+@cutscene
+{@PAL}  Unfortunately our haulers ran into hazards. This will cost us more.

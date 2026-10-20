@@ -1023,6 +1023,7 @@ GameObject:
   - component: {fileID: 422788438}
   - component: {fileID: 422788439}
   - component: {fileID: 422788440}
+  - component: {fileID: 422788441}
   m_Layer: 0
   m_Name: Overarching Assets
   m_TagString: Untagged
@@ -1119,6 +1120,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fallback: {fileID: 2100000, guid: 3eeedab9346de9e499fd845f26fd4229, type: 2}
+  Rotation: {x: 0, y: 0, z: 0}
+--- !u!114 &422788441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422788433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43d2e3ce72f4624f9b41d4c5e0041c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scripts:
+  - {fileID: -1942890987711236906, guid: 9b5230fbd17c66b40bbf0d7958cea805, type: 3}
 --- !u!1001 &435401084
 PrefabInstance:
   m_ObjectHideFlags: 0

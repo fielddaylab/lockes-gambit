@@ -232,10 +232,13 @@ namespace SpaceFab.Overarching {
             yield return layout.FadeInContextPanel();
             yield return 1;
 
-            var trigger = ScriptUtility.Trigger("BeforeContractEvaluation");
-            do {
-                yield return null;
-            } while (trigger.IsRunning());
+            using (var t = TempVarTable.Alloc()) {
+                t.Set("risk", MinigameSaveUtility.CurrentRisk(Find.State<MinigameSaveStates>()));
+                var trigger = ScriptUtility.Trigger("BeforeContractEvaluation", t);
+                do {
+                    yield return null;
+                } while (trigger.IsRunning());
+            }
             yield return 0.25f;
 
             bool forceFailure = DebugInput.IsDown(KeyCode.F);
@@ -358,7 +361,10 @@ namespace SpaceFab.Overarching {
             }
 
             using (var t = TempVarTable.Alloc()) {
-                t.Set("EncounteredHazard", encounteredHazard);
+                t.Set("risk", visualRisk);
+                t.Set("encounteredHazard", encounteredHazard);
+                t.Set("timeLost", encounteredHazard ? chapterState.ChapterDefinition.HazardTime : 0);
+                t.Set("moneyLost", encounteredHazard ? chapterState.ChapterDefinition.HazardCost : 0);
                 var thread = ScriptUtility.Trigger("AfterContractEvaluation", t);
                 do {
                     yield return null;
