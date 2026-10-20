@@ -49,6 +49,7 @@ namespace SpaceFab.Design
                 TestSuiteData suite = ResolveSuite(contractState, designState);
                 toggleState.LastMatchedRowIndex = InputToggleUtility.FindMatchingTestRow(toggleState, suite);
                 toggleState.MatchDirty = false;
+                SimTableUtility.SetRowHighlighted(uiState.TableLayout, toggleState);
             }
 
             // Interactable iff we have a row to run AND the phase machine will accept a Play.

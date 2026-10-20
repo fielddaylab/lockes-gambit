@@ -15,11 +15,15 @@ MonoBehaviour:
   Title: Output
   Icon: {fileID: 21300000, guid: 4604d27db96d0e945868cc3ea8bed781, type: 3}
   IllustrationFrames:
-  - {fileID: 21300000, guid: 7f16d17fa2a2dbc4689d72904092d05c, type: 3}
+  - {fileID: 21300000, guid: ba5fce11d67c483448b41dd7f64ab717, type: 3}
+  - {fileID: 21300000, guid: 78d0169ffe57e4a499d826ae622bbd2d, type: 3}
+  - {fileID: 21300000, guid: 9049be8e3edaa354e8523e25120d556a, type: 3}
+  - {fileID: 21300000, guid: ff8b36ffb3a773e4fba5c6ecc58503e8, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: Outputs receive signals. They must match the Evaluation Table to proceed.
+  BodyText: Outputs receive signals. They must receive the signal shown in the Verification
+    Table for each case to complete the chip.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

@@ -76,6 +76,7 @@ namespace SpaceFab.Design
                         if (overlay == null) { continue; }
 
                         overlay.transform.position = visualCell.transform.position;
+                        overlay.transform.Translate(0, VisualGridCellUtility.METAL_OFFSET, 0, UnityEngine.Space.Self);
 
                         ApplyOverlayCommonVisuals(overlay, spriteDB);
                         ApplyOverlaySubtypeLabel(overlay, cell.SubtypeLabel);

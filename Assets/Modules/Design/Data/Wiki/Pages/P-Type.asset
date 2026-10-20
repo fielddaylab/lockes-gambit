@@ -17,6 +17,7 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: 19b26d3487a5e3f4585cfbb27341b126, type: 3}
   - {fileID: 21300000, guid: b8b9dab9f6c2b7f4ca7425d362810629, type: 3}
+  - {fileID: 21300000, guid: 3f3f32e3ae5f79148b0a1cb51278aa1a, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 

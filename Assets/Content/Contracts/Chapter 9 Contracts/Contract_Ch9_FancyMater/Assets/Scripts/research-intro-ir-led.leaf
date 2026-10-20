@@ -1,0 +1,72 @@
+# basePath ResearchIntroIRLED
+
+::IntroSelectTrace
+@trigger    OnSetupComplete
+$if MinigameHasValidSolution()
+    {@PAL}  You've already researched everything you need to!\n\nYou can continue your experiments to uncover new insights.
+$else
+    {@PAL}  <color=yellow>Light Emitting Semiconductors</color> create light from electricity.\n\nThe light emission is easier to observe at a higher current.
+$endif
+
+
+::OnChamberSwitched
+@trigger    OnChamberSwitched
+@when     !temp:semiconductorFound, research:chamberId == "Thermal"
+$call   CloseWiki()
+{@PAL}  Try increasing the heat and see how it affects the current and light emission.
+
+
+::OnLightEmissionPlayed
+@trigger    OnLightEmissionPlayed
+@when   !temp:semiconductorFound, research:primaryMaterial == "GalliumArsenide"
+$call   CloseWiki()
+{@PAL}  Look! This material emits light.\n\nTry increasing the heat to make it more noticeable.
+
+
+::OnMaxHeat
+@trigger    OnHeatIncreased
+@when     !MinigameHasValidSolution(), heat > 1, !temp:semiconductorFound
+$call   CloseWiki()
+$if     research:primaryMaterial == "GalliumArsenide"
+    {@PAL}  Great. The higher current makes the light emission more noticeable.\n\nAdd observations and verify it.
+$else
+    {@PAL}  This sample doesn't seem to emit light.\n\nTry another sample.
+$endif
+
+
+::OnHypothesisCorrect
+@trigger    OnHypothesisSubmitted
+@when     result == "success"
+$call   CloseWiki()
+$if MinigameHasValidSolution()
+    {@PAL}  Great. Let's return to the ship, or continue your experiments to uncover new insights.
+$elseif     research:propertyId == "LightEmittingSemiconductor"
+    $set    temp:semiconductorFound = true
+    {@PAL}  Now find the dopants for this semiconductor.
+$elseif     research:primaryMaterial == "GalliumArsenide"
+    {@PAL}  Now find the other dopant.
+$else
+    {@PAL}  Try completing the contract requirements.
+$endif
+
+
+::OnHypothesisIncorrectHypothesisMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "hypothesis_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  Your Property was incorrect.\n\nTry again.
+
+::OnHypothesisIncorrectObservationMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "observation_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
+
+::OnHypothesisIncorrectInvalidObservation
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "invalid_observation"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  One or more of your Observations were incorrect. Those are removed.\n\nTry again.

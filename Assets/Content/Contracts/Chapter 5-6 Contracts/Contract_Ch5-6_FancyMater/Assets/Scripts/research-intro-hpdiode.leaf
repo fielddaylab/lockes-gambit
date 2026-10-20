@@ -1,31 +1,35 @@
-# basePath ResearchIntroCh5
+# basePath ResearchIntroHpDiode
 
 ::IntroSelectTrace
 @trigger    OnSetupComplete
 $if MinigameHasValidSolution()
     {@PAL}  You've already researched everything you need to!\n\nYou can continue your experiments to uncover new insights.
 $else
-    {@PAL}  The battery capacity has been increased. Now you can test for Hi-Voltage Semiconductors.\n\nTest a new sample.
+    {@PAL}  The battery capacity has been increased.\n\nNow you can test for <color=yellow>Hi-Voltage Semiconductors</color>.\n\nTest a new sample.
 $endif
 
 
 ::OnSlotFilled
 @trigger    OnSlotFilled
-@when     !MinigameHasValidSolution()
+@when     !temp:semiconductorFound
 $call   CloseWiki()
 {@PAL}  Increase the voltage to max voltage.
 
 
 ::OnVoltageIncreased
 @trigger    OnVoltageIncreased
-@when     !MinigameHasValidSolution(), voltage == 3, research:primaryMaterial == "SiliconCarbide"
+@when     !temp:semiconductorFound, voltage == 3, !temp:semiconductorFound
 $call   CloseWiki()
-{@PAL}  It didn't explode!\n\nAdd observations and verify it.
+$if research:primaryMaterial == "SiliconCarbide"
+    {@PAL}  It didn't explode!\n\nAdd observations and verify it.
+$elseif research:primaryMaterial == "Gold"
+    {@PAL}  It didn't explode, but it's not a semiconductor.\n\nTry another sample.
+$endif
 
 
 ::OnSubstrateExploded
 @trigger    OnMaterialExploded
-@when   !MinigameHasValidSolution(), explosionStyle == "VoltageBreakdown"
+@when   !temp:semiconductorFound, explosionStyle == "VoltageBreakdown"
 $call   CloseWiki()
 {@PAL}  Well, looks like it couldn't stand high voltage.\n\nTry another sample.
 
@@ -34,16 +38,17 @@ $call   CloseWiki()
 @trigger    OnHypothesisSubmitted
 @when     result == "success"
 $if MinigameHasValidSolution()
-    {@PAL}  Great. Let's return to the ship.
+$call   CloseWiki()
+    {@PAL}  Great. You can return to the ship, or continue your experiments to uncover new insights.
 $elseif     research:propertyId == "HighVoltageSemiconductor"
-    $call   CloseWiki()
+    $set    temp:semiconductorFound = true
     {@PAL}  Now find the dopants for this semiconductor.
 $elseif   research:propertyId == "NDopantFor"
-    $call   CloseWiki()
     {@PAL}  Correct. Now see if you can find the other dopant.
 $elseif   research:propertyId == "PDopantFor"
-    $call   CloseWiki()
     {@PAL}  Correct. Now see if you can find the other dopant.
+$else
+    {@PAL}  Try completing the contract requirements.
 $endif
 
 

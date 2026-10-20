@@ -284,8 +284,8 @@ MonoBehaviour:
   m_text: Here's a description of the puzzle. It should fit three lines of text.
     Is that enough?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b846c34a56e87cf4f87eb6aad17bc47a, type: 2}
-  m_sharedMaterial: {fileID: -2490679286961177235, guid: b846c34a56e87cf4f87eb6aad17bc47a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb15a36ff3bdc5043a93a009b65945bf, type: 2}
+  m_sharedMaterial: {fileID: 1439444759007649396, guid: cb15a36ff3bdc5043a93a009b65945bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

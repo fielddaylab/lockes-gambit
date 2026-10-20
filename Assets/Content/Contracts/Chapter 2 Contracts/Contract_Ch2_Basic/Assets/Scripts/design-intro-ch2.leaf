@@ -144,7 +144,7 @@ $call   ReleaseAllHighlights()
 
 ::TestCorrectLv2
 @trigger    OnSingleTestComplete
-@when       result == "success", temp:designTutorialStep < 6
+@when       result == "success", CurrLevelIndex == 1, temp:designTutorialStep < 6
 $call   ReleaseAllHighlights()
 $call   HighlightElement(design:input-a, false, 25)
 $set    temp:designTutorialStep = 6

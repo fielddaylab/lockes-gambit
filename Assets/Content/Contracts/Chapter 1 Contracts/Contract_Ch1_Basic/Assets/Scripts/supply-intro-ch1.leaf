@@ -15,15 +15,15 @@ $endif
 @when       !MinigameHasValidSolution()
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
-{@PAL}  You will need a Conductor for this contract.
 $if     !temp:wikiOpened
+    $call   PointElement(supply:shopping-list)
+    {@PAL}  You will need a Conductor for this contract.
     $wait   2
     $call   OpenWikiTo("Materials", "Copper")
     $set    temp:wikiOpened = true
 $else
     {@PAL}  Select a segment to <color=red>DELETE</color> and build a new route.
 $endif
-//TODO add highlight pointer to contract
 
 
 :: FirstNodeClicked

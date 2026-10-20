@@ -1,5 +1,6 @@
 using FieldDay.Components;
 using FieldDay.Rendering;
+using FieldDay.Scripting;
 using System;
 using UnityEngine;
 
@@ -124,9 +125,10 @@ namespace SpaceFab.Research
             }
 
             if (circuit.HighMobilityParticles) {
-                if (isHighMobility && strength > 0) {
+                if (isHighMobility && strength > 0.01f) {
                     if (!circuit.HighMobilityParticles.isPlaying) {
                         circuit.HighMobilityParticles.Play();
+                        ScriptUtility.Trigger(ResearchScriptTriggers.OnHighMobilityPlayed);
                     }
                     circuit.HighMobilityParticles.SetEmissionMultiplier(strength * 32);
                 } else {
@@ -135,9 +137,10 @@ namespace SpaceFab.Research
             }
 
             if (circuit.LightEmittingParticles) {
-                if (isLightEmitting && strength > 0) {
+                if (isLightEmitting && strength > 0.01f) {
                     if (!circuit.LightEmittingParticles.isPlaying) {
                         circuit.LightEmittingParticles.Play();
+                        ScriptUtility.Trigger(ResearchScriptTriggers.OnLightEmissionPlayed);
                     }
                     circuit.LightEmittingParticles.SetEmissionMultiplier(strength * 10);
                 } else {
