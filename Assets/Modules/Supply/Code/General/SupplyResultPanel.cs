@@ -79,7 +79,7 @@ namespace SpaceFab.Supply {
 
             minigameState.Cost = cost;
             minigameState.TotalCycles = time;
-            minigameState.Reliability = risk;
+            minigameState.Risk = risk;
 
             minigameState.FoundValidSolution = true;
 

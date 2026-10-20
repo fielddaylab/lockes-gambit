@@ -1821,11 +1821,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df80812ebf25dfa469a073c75d74eb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3498354994634694522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4573799879500526018, guid: 457761a83764ddf4a9dc186263f48b68, type: 3}
+  m_PrefabInstance: {fileID: 1150038124520304312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4734492638451014650 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5638940407600739650, guid: 457761a83764ddf4a9dc186263f48b68, type: 3}
   m_PrefabInstance: {fileID: 1150038124520304312}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6308017660085684974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6376909293039133782, guid: 457761a83764ddf4a9dc186263f48b68, type: 3}
+  m_PrefabInstance: {fileID: 1150038124520304312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7634607538879737289 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7351654218282976113, guid: 457761a83764ddf4a9dc186263f48b68, type: 3}
+  m_PrefabInstance: {fileID: 1150038124520304312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be49b58eb1fbc44080a922f380f3840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7739288861799769983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2150,3 +2183,6 @@ MonoBehaviour:
   ContractScrollButtonsFader: {fileID: 4123509171757053185}
   ContractExpandDistance: -20
   ContractContextHeight: 400
+  WarningHeader: {fileID: 3498354994634694522}
+  WarningText: {fileID: 6308017660085684974}
+  RiskCounter: {fileID: 7634607538879737289}

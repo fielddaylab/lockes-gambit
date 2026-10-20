@@ -36,3 +36,9 @@ MonoBehaviour:
   SkyboxRotation: 0
   MusicPlaylist:
     m_HashValue: 4246794208
+  HazardHeader: Security Checkpoints
+  HazardDescription: 
+  HazardCost: 0
+  HazardTime: 1
+  CumulativeMinProfit: 17
+  CumulativeMaxTime: 30

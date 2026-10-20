@@ -35,3 +35,9 @@ MonoBehaviour:
   SkyboxRotation: 0
   MusicPlaylist:
     m_HashValue: 301246499
+  HazardHeader: Pirates
+  HazardDescription: 
+  HazardCost: 3
+  HazardTime: 1
+  CumulativeMinProfit: 14
+  CumulativeMaxTime: 25

@@ -42,6 +42,11 @@ namespace SpaceFab.Overarching {
         public float ContractExpandDistance;
         public float ContractContextHeight;
 
+        [Header("Completion")]
+        public TMP_Text WarningHeader;
+        public TMP_Text WarningText;
+        public GuiCounter RiskCounter;
+
         [NonSerialized] public Routine AnimationRoutine;
 
         IEnumerator<WorkSlicer.Result?> IScenePreload.Preload() {

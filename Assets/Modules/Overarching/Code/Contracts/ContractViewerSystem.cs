@@ -194,10 +194,7 @@ namespace SpaceFab.Overarching {
         #region Routines
 
         static private IEnumerator AnimateSelectNew(ContractViewState view, OverarchingContractLayout layout) {
-            while(layout.AnimationRoutine.Exists()) {
-                yield return null;
-            }
-
+            yield return 0.5f;
             ScriptUtility.Trigger("OnContractSelectOpen");
         }
 
@@ -237,16 +234,7 @@ namespace SpaceFab.Overarching {
             } while (trigger.IsRunning());
             yield return 0.25f;
 
-            // TODO: animate risk
-            bool encounteredHazard = false;
-
-            using(var t = TempVarTable.Alloc()) {
-                t.Set("EncounteredHazard", encounteredHazard);
-                var thread = ScriptUtility.Trigger("AfterContractEvaluation", t);
-                do {
-                    yield return null;
-                } while (thread.IsRunning());
-            }
+            yield return EvaluateRisk(layout);
 
             // TODO: animate time and money
 
@@ -278,6 +266,37 @@ namespace SpaceFab.Overarching {
 
             Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState progressState, out MinigameSaveStates minigameStates);
             ChapterUtility.LoadNextChapter(chapterState, progressState, contractState, minigameStates);
+        }
+
+        static private IEnumerator EvaluateRisk(OverarchingContractLayout layout) {
+            int[] hazardChances = Find.GlobalAsset<ChapterManifest>().HazardChances;
+            Find.State(out MinigameSaveStates minigameStates);
+            int risk = minigameStates.Supply.FinalizedRisk;
+
+            bool encounteredHazard = false;
+            int riskSlot = 0;
+            if (risk > 0) {
+
+            } else {
+                encounteredHazard = false;
+            }
+
+            if (encounteredHazard) {
+                riskSlot = RNG.Instance.Next(risk);
+            } else {
+                int leftover = layout.RiskCounter.MaxValue - risk;
+                riskSlot = risk + RNG.Instance.Next(leftover);
+            }
+
+            //float value
+
+            using (var t = TempVarTable.Alloc()) {
+                t.Set("EncounteredHazard", encounteredHazard);
+                var thread = ScriptUtility.Trigger("AfterContractEvaluation", t);
+                do {
+                    yield return null;
+                } while (thread.IsRunning());
+            }
         }
 
         #endregion // Routines
