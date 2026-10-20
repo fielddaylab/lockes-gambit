@@ -9,6 +9,7 @@ $set temp:hintGiven = 0
 ::Hints
 @trigger    OnSingleTestComplete
 @when       result == "failure"
+$call   CloseWiki()
 $if temp:hintGiven == 0
     {@PAL}  <color=yellow>Hint:</color> You will need two separate Diodes.
     $set temp:hintGiven = 1

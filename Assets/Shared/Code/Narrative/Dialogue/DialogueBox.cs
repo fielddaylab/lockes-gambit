@@ -82,6 +82,10 @@ namespace SpaceFab.Narrative {
 
             m_NextButton.ConsumeClick();
             while (!ScriptUtility.IsSkippingCutscene() && !m_NextButton.ConsumeClick()) {
+                if (Game.Input.IsKeyDown(KeyCode.Space)) {
+                    break;
+                }
+                
                 yield return null;
             }
             m_NextButton.gameObject.SetActive(false);
