@@ -23,16 +23,10 @@ $call ComicOpenPage(0)
 
 $call ComicPreloadNextPage()
 $ComicOpenSpawnPanel(0, 0.5)
-$call ComicNextButton()
-
 $ComicOpenSpawnPanel(1, 0.5)
-$call ComicNextButton()
-
 $ComicOpenSpawnPanel(2, 0.5)
 $ComicOpenSpawnPanel(3, 1)
-$call ComicNextButton()
-
-$ComicOpenSpawnPanel(4, 1)
+$ComicOpenSpawnPanel(4, 0.5)
 $call ComicNextButton()
 
 // page 2
@@ -43,17 +37,14 @@ $wait 0.5
 
 $ComicOpenSpawnPanel(0, 0.5)
 $call ComicUnloadPreviousPage()
-$call ComicNextButton()
-
 $call ComicPreloadNextPage()
 $ComicOpenSpawnPanel(1, 0.5)
-$call ComicNextButton()
-
 $ComicOpenSpawnPanel(2, 0.5)
 $ComicOpenSpawnPanel(3, 1)
+$ComicOpenSpawnPanel(4, 1)
 $call ComicNextButton()
 
-$ComicOpenSpawnPanel(4, 1)
+$ComicOpenSpawnPanel(5, 0.5)
 $call ComicNextButton()
 
 // page 3
@@ -64,14 +55,10 @@ $call ComicUnloadPreviousPage()
 
 $ComicOpenSpawnPanel(0, 0.5)
 $ComicOpenSpawnPanel(1, 1)
-$call ComicNextButton()
 $ComicOpenSpawnPanel(2, 0.5)
-$call ComicNextButton()
-
 $call ComicPreloadNextPage()
 
 $ComicOpenSpawnPanel(3, 0.5)
-$call ComicNextButton()
 $ComicOpenSpawnPanel(4, 0.5)
 $ComicOpenSpawnPanel(5, 0.5)
 $call ComicNextButton()
@@ -84,8 +71,6 @@ $call ComicPanCameraAsync("Camera", 0.5)
 $wait 0.2
 
 $ComicOpenSpawnPanel(0, 1)
-$call ComicNextButton()
-
 $call ComicUnloadPreviousPage()
 $ComicOpenSpawnPanel(1, 1)
 $ComicOpenSpawnPanel(2, 1)

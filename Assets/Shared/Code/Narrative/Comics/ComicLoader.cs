@@ -3,10 +3,12 @@ using FieldDay;
 using FieldDay.Assets;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
+using FieldDay.UI;
 using Leaf.Runtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace SpaceFab.Comic {
     public sealed class ComicLoader : SceneController, ISceneLoadDependency {
@@ -26,6 +28,10 @@ namespace SpaceFab.Comic {
                 PackageId = name;
                 Game.Assets.LoadStreamedPackage(name);
             }
+            Find.State(
+                out ComicDisplayState displayState
+            );
+            GuiCommands.SetActive(displayState.NextButtonGroup, false);
             return null;
         }
 
