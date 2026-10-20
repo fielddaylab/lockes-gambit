@@ -38,7 +38,7 @@ namespace SpaceFab.UI {
         public LayoutOptions VerticalLayout = LayoutOptions.PreferredSize(4, 1);
 
         [Header("Masking")]
-        public Mask AnimatedMask;
+        public DitherFadeGroup AnimatedMask;
 
         [NonSerialized] public WikiPageType CurrentPageType;
         [NonSerialized] public StringHash32 CurrentMaterialId;
@@ -46,8 +46,6 @@ namespace SpaceFab.UI {
         [NonSerialized] public int CurrentObservationChipCount;
         [NonSerialized] public WikiPageChipSlot[] CurrentObservationChipSlots;
         [NonSerialized] public sbyte[] AssignedSlotIndices;
-
-        [NonSerialized] public AnimHandle AppearAnim;
 
         [NonSerialized] public float OriginalIllustrationHeight;
 
@@ -57,8 +55,7 @@ namespace SpaceFab.UI {
             CurrentObservationChipCount = 0;
             CurrentPageType = WikiPageType.Default;
 
-            AnimatedMask.enabled = false;
-            AnimatedMask.graphic.enabled = false;
+            AnimatedMask.SetAlpha(0);
 
             OriginalIllustrationHeight = Illustration.Target.rectTransform.sizeDelta.y;
         }
@@ -129,7 +126,7 @@ namespace SpaceFab.UI {
             }
 
             layout.LayoutRoot.gameObject.SetActive(true);
-            Anims.Replace(ref layout.AppearAnim, DissolveInAnimInstance, layout, 0);
+            DitherFade.DissolveIn(layout.AnimatedMask);
         }
 
         static private unsafe void PopulateMaterialPage(WikiPageLayout layout, WikiPageData pageData, WikiContent content) {
@@ -363,9 +360,8 @@ namespace SpaceFab.UI {
             layout.CurrentObservationChipCount = 0;
             layout.CurrentMaterialId = default;
 
-            layout.AnimatedMask.enabled = false;
-            layout.AnimatedMask.graphic.enabled = false;
-            Anims.Cancel(ref layout.AppearAnim);
+            layout.AnimatedMask.SetAlpha(0);
+            Anims.Cancel(ref layout.AnimatedMask.QuickAnim);
         }
 
         /// <summary>
@@ -459,33 +455,6 @@ namespace SpaceFab.UI {
         }
 
         #endregion // Research Updates
-
-        #region Animation
-
-        static private readonly DissolveInAnimation DissolveInAnimInstance = new DissolveInAnimation();
-
-        private sealed class DissolveInAnimation : LiteAnimator<WikiPageLayout> {
-            public override void InitAnimation(WikiPageLayout target, ref LiteAnimatorState state) {
-                state.ResetTime(0.44f);
-                target.AnimatedMask.enabled = true;
-                target.AnimatedMask.graphic.SetAlpha(0);
-                target.AnimatedMask.graphic.enabled = true;
-            }
-
-            public override void ResetAnimation(WikiPageLayout target, ref LiteAnimatorState state) {
-            }
-
-            public override void UpdateAnimation(WikiPageLayout target, ref LiteAnimatorState state, float deltaTime) {
-                if (state.IsLastFrame()) {
-                    target.AnimatedMask.enabled = false;
-                    target.AnimatedMask.graphic.enabled = false;
-                } else {
-                    target.AnimatedMask.graphic.SetAlpha(state.PercentProgress);
-                }
-            }
-        }
-
-        #endregion // Animation
 
         #region Handlers
 

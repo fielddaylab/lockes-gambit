@@ -34,7 +34,7 @@ namespace SpaceFab.Design
             LevelData levelData = DesignLevelUtility.GetActiveLevelData(contractState, designState);
             TestSuiteData suite = levelData.GetTestSuite();
 
-            Find.State(out SimulateUIState uiState, out ResultState resultState, out SimulateRunState simState);
+            Find.State(out SimulateUIState uiState, out DesignResultPanel resultState, out SimulateRunState simState);
 
             if (!uiState.VerdictsNeedRefreshing) { return; }
             if (!uiState.TableBuilt) { return; }

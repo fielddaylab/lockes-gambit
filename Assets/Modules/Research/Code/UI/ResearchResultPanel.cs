@@ -1,7 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using BeauRoutine;
 using BeauUtil;
 using BeauUtil.UI;
 using FieldDay;
+using FieldDay.Scenes;
 using FieldDay.SharedState;
 using FieldDay.UI;
 using FieldDay.UI.Widgets;
@@ -12,26 +16,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace SpaceFab.Research {
-    public sealed class ResearchResultPanel : SharedPanel {
-        public GuiButton BackButton;
-        public GuiButton NextButton;
+    public sealed class ResearchResultPanel : SharedStateComponent, IScenePreload, ISceneLateInitialize {
+        public ResultsPanelLayout PanelLayout;
         public SceneReference NextScene;
         public ContractRequirementTable Table;
-
-        public Image Background;
-        public Image HeadingBackground;
-        public TMP_Text HeadingText;
-
-        protected override void Awake() {
-            base.Awake();
-
-            BackButton.OnClick.AddListener(Cancel);
-            NextButton.OnClick.AddListener(Commit);
-        }
-
-        private void Start() {
-            Hide();
-        }
+        public RectTransform TableRoot;
 
         private void Commit() {
             Find.State<MinigameRequestExitState>().ExitRequestState = RequestState.Confirmed;
@@ -42,54 +31,47 @@ namespace SpaceFab.Research {
             Hide();
         }
 
-        // Safety net for the pushed priority: OnDisable fires both on Hide() (SetActive(false)) and
-        // on scene-teardown deactivation, and runs before OnDestroy invalidates the input layer, so
-        // PopPriority's not-destroyed assert still holds. This is what catches the Commit-then-exit
-        // path where Hide() never runs.
-        private void OnDisable() {
-            ReleasePriority();
-        }
-
-        // Pushes GUI input priority for this panel, at most once.
-        private void AcquirePriority() {
-            Input.TryPushPriority();
-        }
-
-        // Pops the priority pushed by AcquirePriority, if held. Skipped during shutdown (the GuiMgr
-        // stack is being torn down anyway and the layer may already be invalid).
-        private void ReleasePriority() {
-            Input.TryPopPriority();
-        }
-
-        public override void Show() {
-            base.Show();
-
-            AcquirePriority();
-            Input.SetInputOverride(null);
-
+        public void Show() {
             Find.State(out ChapterState chapterState, out ContractState contractState, out ResearchMinigameState researchState, out PlayerProgressState progressState);
+
+            ContractUIUtility.UpdateVisualsWithCompletion(Table, researchState.SandboxProperties);
+
+            bool allCorrect = contractState.ContractDefinition && ContractProgressUtility.IsContractSatisfied(progressState, researchState, contractState.ContractDefinition);
+
+            PanelLayout.HeaderText.SetText(allCorrect ? "Research Complete" : "Research Incomplete");
+            PanelLayout.HeaderBackground.color = allCorrect ? PanelLayout.CompleteHeaderColor : PanelLayout.IncompleteHeaderColor;
+
+            TableRoot.GetComponent<LayoutOffset>().ClearOffsets();
+
+            PanelLayout.Prepare();
+            PanelLayout.AnimationRoutine.Replace(this, DisplayRoutine(this));
+        }
+
+        public void Hide() {
+            PanelLayout.AnimationRoutine.Replace(this, PanelLayout.FadeOut());
+        }
+
+        public IEnumerator<WorkSlicer.Result?> Preload() {
+            PanelLayout.Contract.ContextBackButton.OnClick.Register(Cancel);
+            PanelLayout.Contract.ContextContinueButton.OnClick.Register(Commit);
+            yield return null;
+        }
+
+        public void LateInitialize() {
+            Find.State(out ChapterState chapterState, out ContractState contractState);
 
             ContractUIUtility.BuildRequirementData(Table, chapterState.ChapterIndex, contractState.ContractDefinition);
             ContractUIUtility.InitializeVisuals(Table);
-            ContractUIUtility.UpdateVisualsWithCompletion(Table, researchState.SandboxProperties);
-            Positioning.SetHeightDelta((RectTransform)Table.transform.parent, Table.Sizer.LastSize.y + 48);
-
-            if (Background == null || HeadingBackground == null || HeadingText == null) { return; }
-
-            Find.GlobalAsset(out ResultDisplayConfig config);
-            bool success = contractState.ContractDefinition && ContractProgressUtility.IsContractSatisfied(progressState, researchState, contractState.ContractDefinition);
-            Background.color = success ? config.SuccessBackgroundColor : config.FailureBackgroundColor;
-            HeadingText.text = success ? "RESEARCH COMPLETE" : "RESEARCH INCOMPLETE";
-            HeadingBackground.color = success ? config.SuccessHeaderColor : config.FailureHeaderColor;
         }
 
-        public override void Hide() {
-            base.Hide();
-
-            // base.Hide() deactivates the GameObject, which fires OnDisable -> ReleasePriority; this
-            // call is a guarded no-op in that case but keeps the Show/Hide pairing explicit.
-            ReleasePriority();
-            Input.SetInputOverride(false);
+        static private IEnumerator DisplayRoutine(ResearchResultPanel resultPanel) {
+            yield return resultPanel.PanelLayout.FadeIn();
+            yield return 0.1f;
+            yield return Routine.Combine(
+                resultPanel.PanelLayout.FadeInContextPanel(),
+                resultPanel.TableRoot.GetComponent<LayoutOffset>().Offset0To(new Vector2(0, 112), 0.3f).DelayBy(0.1f).Ease(Curve.Smooth) 
+                );
+            resultPanel.PanelLayout.Finish();
         }
     }
 }

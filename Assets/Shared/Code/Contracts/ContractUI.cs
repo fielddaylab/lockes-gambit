@@ -23,6 +23,10 @@ namespace SpaceFab {
         public Graphic DifficultyBackground;
         public TMP_Text DifficultyLabel;
 
+        [Header("Chip Diagram")]
+        public Graphic ChipDiagramEmpty;
+        public Graphic ChipDiagramFilled;
+
         [Header("Client")]
         public TMP_Text ClientText;
         public Image ClientIcon;
@@ -31,44 +35,50 @@ namespace SpaceFab {
         public ContractRequirementTable Requirements;
 
         [Header("Stats")]
-        public Image[] TimeIndicators;
-        public Image[] RevenueIndicators;
+        public GuiCounter TimeIndicators;
+        public GuiCounter RevenueIndicators;
 
         [Header("Buttons")]
         public GuiButton SelectContractButton;
+        public GuiButton ContextBackButton;
+        public GuiButton ContextContinueButton;
+        public GuiButton CloseButton;
         
         [Header("Animated")]
         public GameObject ApprovedStamp;
         public Image SignatureImage;
+        public DitherFadeGroup ContentsMask;
+        public DitherFadeGroup ApprovedStampMask;
+        public DitherFadeGroup ChipDiagramMask;
+        public DitherFadeGroup ContextContentsMask;
+
+        [Header("Context Panel")]
+        public Canvas ContextSubCanvas;
+        public RectTransform ContextPanel;
+        public CanvasGroup ContextFader;
+        public TMP_Text ContextHeader;
+        public TMP_Text ContextDescription;
 
         public void ClearElements()
         {
             Find.GlobalAsset<ContractMeterSpriteSet>(out ContractMeterSpriteSet spriteSet);
 
-            for (int i = 0; i < TimeIndicators.Length; i++) {
-                TimeIndicators[i].sprite = spriteSet.TimeEmpty;
-            }
-            for (int i = 0; i < RevenueIndicators.Length; i++) {
-                RevenueIndicators[i].sprite = spriteSet.RevenueEmpty;
-            }
+            TimeIndicators.ResetValue();
+            RevenueIndicators.ResetValue();
         }
 
         public void ShowDuration(int duration)
         {
             Find.GlobalAsset<ContractMeterSpriteSet>(out ContractMeterSpriteSet spriteSet);
 
-            for (int i = 0; i < duration; i++) {
-                TimeIndicators[i].sprite = spriteSet.TimeFilled;
-            }
+            TimeIndicators.SetValue(duration);
         }
 
         public void ShowProfit(int profit)
         {
             Find.GlobalAsset<ContractMeterSpriteSet>(out ContractMeterSpriteSet spriteSet);
-            
-            for (int i = 0; i < profit; i++) {
-                RevenueIndicators[i].sprite = spriteSet.RevenueFilled;
-            }
+
+            RevenueIndicators.SetValue(profit);
         }
 
         public void ShowRequirement(int chapterIndex, ContractDef contract)
@@ -77,11 +87,17 @@ namespace SpaceFab {
             ContractUIUtility.InitializeVisuals(Requirements);
             ContractUIUtility.UpdateVisualsWithCompletion(Requirements, Find.State<PlayerProgressState>().MaterialProperties);
         }
+
+        public void ShowDesignCompleted(bool completed) {
+            ChipDiagramEmpty.enabled = !completed;
+            ChipDiagramFilled.enabled = completed;
+            ChipDiagramMask.SetAlpha(1);
+        }
     }
 
     public static partial class ContractUtility
     {
-        public static void LoadContractData(ContractUI ui, int chapterIndex, ContractDef def)
+        public static void LoadContractUI(ContractUI ui, int chapterIndex, ContractDef def)
         {
             Find.GlobalAsset(out ContractUIAssetSet assets);
 

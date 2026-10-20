@@ -6,13 +6,14 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace FieldDay.UI.Widgets {
-    public sealed class GuiCounter : GuiWidget, IGuiDataWidget<int> {
-        public abstract class Style : GuiWidgetDataStyle<int>, IGuiWidgetRangedDataStyle<int> {
+    public sealed class GuiCounter : GuiWidget, IGuiDataWidget<int>, IGuiDataPreviewWidget<int> {
+        public abstract class Style : GuiWidgetDataStyle<int>, IGuiWidgetRangedDataStyle<int>, IGuiWidgetPreviewDataStyle<int> {
             public GuiCounter Widget { get; private set; }
             public override void Bind(GuiWidget source) {
                 Widget = (GuiCounter)source;
             }
             public virtual void SetRange(in GuiDataWidgetRange<int> range, GuiWidget source, GuiWidgetUpdateFlags flags) { }
+            public virtual void PopulatePreview(in GuiDataWidgetPreview<int> preview, GuiWidget source, GuiWidgetUpdateFlags flags) { }
             public override void UpdateState(GuiWidgetStateFlags state, GuiWidgetStateFlags changed, GuiWidget source, GuiWidgetUpdateFlags flags) { }
         }
 
@@ -21,6 +22,7 @@ namespace FieldDay.UI.Widgets {
         [SerializeField, Required] private Style m_Style;
 
         [NonSerialized] private int m_CurrentValue = -1;
+        [NonSerialized] private int m_PreviewValue = -1;
 
         protected override void Awake() {
             base.Awake();
@@ -49,13 +51,14 @@ namespace FieldDay.UI.Widgets {
         }
 
         public void SetValue(int value, GuiWidgetUpdateFlags flags = 0) {
-            if ((flags & GuiWidgetUpdateFlags.Force) == 0 && value == m_CurrentValue) {
+            if ((flags & GuiWidgetUpdateFlags.Force) == 0 && (value == m_CurrentValue && m_PreviewValue < 0)) {
                 return;
             }
 
             int lastValue = m_CurrentValue;
             value = Math.Clamp(value, 0, m_MaxValue);
             m_CurrentValue = value;
+            m_PreviewValue = -1;
 
             if (value < lastValue) {
                 flags |= GuiWidgetUpdateFlags.IsDecrease;
@@ -63,6 +66,13 @@ namespace FieldDay.UI.Widgets {
             } else if (value > lastValue) {
                 flags |= GuiWidgetUpdateFlags.IsIncrease;
                 flags &= ~GuiWidgetUpdateFlags.IsDecrease;
+            } else {
+                flags &= ~(GuiWidgetUpdateFlags.IsIncrease | GuiWidgetUpdateFlags.IsDecrease);
+            }
+
+            if (m_PreviewValue >= 0) {
+                m_PreviewValue = -1;
+                flags |= GuiWidgetUpdateFlags.PreviewEnd;
             }
 
             m_Style.Populate(value, this, flags);
@@ -81,6 +91,44 @@ namespace FieldDay.UI.Widgets {
             }
 
             TryUpdateState(this, state, flags);
+        }
+
+        public void SetPreview(int value, GuiWidgetUpdateFlags flags = 0) {
+            if ((flags & GuiWidgetUpdateFlags.Force) == 0 && (value == m_CurrentValue || value == m_PreviewValue)) {
+                return;
+            }
+
+            int lastValue = m_CurrentValue;
+            value = Math.Clamp(value, 0, m_MaxValue);
+            if (m_PreviewValue < 0) {
+                flags |= GuiWidgetUpdateFlags.PreviewStart;
+            } 
+            m_PreviewValue = value;
+
+            if (value < lastValue) {
+                flags |= GuiWidgetUpdateFlags.IsDecrease;
+                flags &= ~GuiWidgetUpdateFlags.IsIncrease;
+            } else if (value > lastValue) {
+                flags |= GuiWidgetUpdateFlags.IsIncrease;
+                flags &= ~GuiWidgetUpdateFlags.IsDecrease;
+            } else {
+                flags &= ~(GuiWidgetUpdateFlags.IsIncrease | GuiWidgetUpdateFlags.IsDecrease);
+            }
+
+            m_Style.PopulatePreview(new GuiDataWidgetPreview<int>(lastValue, value), this, flags);
+        }
+
+        public void ClearPreview(GuiWidgetUpdateFlags flags = 0) {
+            if ((flags & GuiWidgetUpdateFlags.Force) == 0 && m_PreviewValue < 0) {
+                return;
+            }
+
+            m_PreviewValue = -1;
+            if (m_PreviewValue >= 0) {
+                flags |= GuiWidgetUpdateFlags.PreviewEnd;
+            }
+
+            m_Style.PopulatePreview(new GuiDataWidgetPreview<int>(m_CurrentValue, m_CurrentValue), this, flags);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

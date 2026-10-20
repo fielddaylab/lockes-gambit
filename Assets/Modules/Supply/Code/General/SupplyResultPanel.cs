@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using BeauRoutine;
 using BeauUtil;
 using BeauUtil.UI;
 using FieldDay;
@@ -8,14 +10,17 @@ using FieldDay.UI.Widgets;
 using SpaceFab.Save;
 using SpaceFab.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SpaceFab.Supply {
     public sealed class SupplyResultPanel : SharedPanel {
         public GuiButton NextButton;
+        public ResultsPanelLayout PanelLayout;
         public SceneReference NextScene;
 
-        public Transform ShoppingListParent; // to copy the visuals from the shopping list to this
-        public Transform ListParent;
+        //public Transform ShoppingListParent; // to copy the visuals from the shopping list to this
+        //public Transform ListParent;
+        
 
         [Header("Ships")]
         public SupplyProgressMeterView MeterView;
@@ -74,7 +79,7 @@ namespace SpaceFab.Supply {
 
             minigameState.Cost = cost;
             minigameState.TotalCycles = time;
-            minigameState.Reliability = risk;
+            minigameState.Risk = risk;
 
             minigameState.FoundValidSolution = true;
 
@@ -88,6 +93,9 @@ namespace SpaceFab.Supply {
             Populate(minigameState);
 
             CopyShoppingList();
+
+            PanelLayout.Prepare();
+            PanelLayout.AnimationRoutine.Replace(this, DisplayRoutine(this));
         }
 
         private void Populate(SupplyMinigameState minigameState) {
@@ -96,11 +104,11 @@ namespace SpaceFab.Supply {
 
         private void CopyShoppingList()
         {
-            for (int i = 0; i < ShoppingListParent.childCount; i++)
-            {
-                GameObject requirement = ShoppingListParent.GetChild(i).gameObject;
-                Instantiate(requirement, ListParent);
-            }
+            // for (int i = 0; i < ShoppingListParent.childCount; i++)
+            // {
+            //     GameObject requirement = ShoppingListParent.GetChild(i).gameObject;
+            //     Instantiate(requirement, ListParent);
+            // }
         }
 
         public override void Hide() {
@@ -110,6 +118,15 @@ namespace SpaceFab.Supply {
             // call is a guarded no-op in that case but keeps the Show/Hide pairing explicit.
             ReleasePriority();
             Input.SetInputOverride(false);
+        }
+
+        static private IEnumerator DisplayRoutine(SupplyResultPanel resultPanel) {
+            yield return resultPanel.PanelLayout.FadeIn();
+            yield return 0.1f;
+            yield return Routine.Combine(
+                resultPanel.PanelLayout.FadeInContextPanel()
+            );
+            resultPanel.PanelLayout.Finish();
         }
     }
 }

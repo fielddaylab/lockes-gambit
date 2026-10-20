@@ -60,6 +60,10 @@ namespace SpaceFab.Narrative {
         }
 
         public override IEnumerator CompleteLine() {
+            if (ScriptUtility.IsSkippingCutscene()) {
+                yield break;
+            }
+
             if ((m_CurrentLineFlags & LineFlags.AutoContinue) != 0) {
                 yield return 0.2f;
                 yield break;
@@ -77,7 +81,7 @@ namespace SpaceFab.Narrative {
             m_NextButton.LayoutSizeGroup.Sync();
 
             m_NextButton.ConsumeClick();
-            while (!m_NextButton.ConsumeClick()) {
+            while (!ScriptUtility.IsSkippingCutscene() && !m_NextButton.ConsumeClick()) {
                 yield return null;
             }
             m_NextButton.gameObject.SetActive(false);

@@ -118,6 +118,11 @@ namespace UnityEngine.UI {
 
         #endregion // Events
 
+        public void ClearOffsets() {
+            ApplyOffset(default);
+            m_Offset0 = m_Offset1 = m_Offset2 = m_Offset3 = default;
+        }
+
         private void ApplyCurrentOffset() {
             ApplyOffset(m_Offset0 + m_Offset1 + m_Offset2 + m_Offset3);
         }

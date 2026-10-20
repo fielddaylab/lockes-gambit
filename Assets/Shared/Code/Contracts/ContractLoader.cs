@@ -7,16 +7,10 @@ using UnityEngine;
 namespace SpaceFab {
     [PreloadOrder(-99)]
     public sealed class ContractLoader : MonoBehaviour, IScenePreload {
-        public bool CurrentOnly;
-
         public IEnumerator<WorkSlicer.Result?> Preload() {
             Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState playerProgress);
 
-            if (CurrentOnly) {
-                ContractUtility.LoadCurrentContract(contractState, chapterState);
-            } else {
-                ContractUtility.LoadQueuedContract(contractState, chapterState, playerProgress);
-            }
+            ContractUtility.LoadCurrentContract(contractState, chapterState, ContractLoadAction.Default);
             while (contractState.LoadRoutine) {
                 yield return WorkSlicer.Result.HaltForFrame;
             }
