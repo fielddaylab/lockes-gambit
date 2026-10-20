@@ -75,12 +75,53 @@ namespace SpaceFab.Supply {
             int expectedDuration = ResolveExpectedDuration(contract);
             int minProfit = ResolveMinimumProfit(contract);
 
+            int timeCount = FillValidRange(layout.AggregateView.TimeCellHighlight, layout.AggregateView.TimeCells, expectedDuration, TimeEndPadding);
+            FillTimeCap(layout.AggregateView.TimeCellCap, timeCount);
+            FillValidRange(layout.AggregateView.CostCellHighlight, layout.AggregateView.CostCells, minProfit, CostEndPadding);
+
             // Aggregate "Result" panel.
             if (layout.AggregateView != null) {
                 FillUniform(layout.AggregateView.RiskCells, risk, sprites.RiskBase, sprites.RiskFilled, sprites.RiskColor);
                 FillAggregateTime(layout.AggregateView.TimeCells, time, expectedDuration, sprites);
                 FillAggregateCost(layout.AggregateView.CostCells, funds, cost, minProfit, sprites);
             }
+        }
+
+        private static int FillValidRange(RectTransform highlight, ProgressMeterCell[] cells, int validCount, float padding) {
+            if (highlight == null) {
+                return 0;
+            }
+            int count = cells != null ? Mathf.Min(validCount, cells.Length) : 0;
+            if (count <= 0) {
+                highlight.gameObject.SetActive(false);
+                return 0;
+            }
+            highlight.gameObject.SetActive(true);
+
+            RectTransform lastCell = cells[count - 1].BaseImage.rectTransform;
+            float lastRight = GetRightEdgeLocal(highlight, lastCell);
+            float left = highlight.rect.xMin;
+            highlight.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lastRight - left + padding);
+            return count;
+        }
+
+        private static void FillTimeCap(RectTransform cap, int count) {
+            if (cap == null) {
+                return;
+            }
+            Vector3 scale = cap.localScale;
+            float y = Mathf.Abs(scale.y);
+            scale.y = (count & 1) == 1 ? y : -y;
+            cap.localScale = scale;
+        }
+
+        private const float CostEndPadding = 3f;
+        private const float TimeEndPadding = -3f;
+
+        private static readonly Vector3[] s_Corners = new Vector3[4];
+        private static float GetRightEdgeLocal(RectTransform space, RectTransform target) {
+            target.GetWorldCorners(s_Corners);
+            return space.InverseTransformPoint(s_Corners[2]).x;
         }
 
         // Reads the active contract's payout via its asset wrapper (the funds the cost meter
