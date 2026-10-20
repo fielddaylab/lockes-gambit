@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SupplyPackAudio
   m_EditorClassIdentifier: 
   m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
-  m_NamedAssets:
-  - {fileID: 11400000, guid: 16806d8faa8f56045b7782935d31d9d3, type: 2}
+  m_NamedAssets: []
   m_LiteAssets: []

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level4_Diode
   m_EditorClassIdentifier: 
   m_title: Diode
+  m_description: Join N-Type and P-Type to create a Diode that blocks LO signals.
   m_allowedTools: 109
   m_gridConfig: {fileID: 11400000, guid: a2d8ab5c1cce14d368beed7d760e2d70, type: 2}
   m_testSuite: {fileID: 11400000, guid: 6a4522189071146a182b9353178d03f4, type: 2}

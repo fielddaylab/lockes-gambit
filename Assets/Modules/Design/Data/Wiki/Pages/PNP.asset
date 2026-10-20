@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: PNP
   m_EditorClassIdentifier: 
-  Title: PNP
+  Title: Enhancement Transistor (PNP)
   Icon: {fileID: 21300000, guid: cfdf9f5df16bc3943800c3a6c1cd7435, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 8c65f99121483db44a9b16f05577cc90, type: 3}
@@ -21,7 +21,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a2c15284a8b6e194f8047113e7f375a3, type: 3}
   - {fileID: 21300000, guid: 74ee7a2e467b07e46af05075ee8a91eb, type: 3}
   IllustrationFPS: 0.5
-  BodyText: If the gate on N receives a LO signal, a signal can pass from P to P.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: An Enhancement Transistor with a Gate on N-Type starts blocked, and opens
+    with a LO signal.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

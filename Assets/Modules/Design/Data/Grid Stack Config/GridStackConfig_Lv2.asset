@@ -23,17 +23,11 @@ MonoBehaviour:
     SubtypeLabel: 8
     Edges:
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 1
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     TransferType: 4
     DefaultInputState: 0
   - LayerIndex: 0
@@ -43,18 +37,40 @@ MonoBehaviour:
     SubtypeLabel: 0
     Edges:
     - EdgeState: 0
-      Eraseable: 0
-    - EdgeState: 0
-      Eraseable: 0
-    - EdgeState: 0
-      Eraseable: 0
-    - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 1
-      Eraseable: 0
+    - EdgeState: 0
+    - EdgeState: 0
     - EdgeState: 1
-      Eraseable: 0
-    TransferType: 1
+    - EdgeState: 0
+    TransferType: 4
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 1
+    ColumnIndex: 2
+    CellType: 2
+    SubtypeLabel: 0
+    Edges:
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 1
+    - EdgeState: 0
+    TransferType: 4
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 4
+    ColumnIndex: 3
+    CellType: 2
+    SubtypeLabel: 0
+    Edges:
+    - EdgeState: 0
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    TransferType: 4
     DefaultInputState: 0
   - LayerIndex: 0
     RowIndex: 4
@@ -63,17 +79,11 @@ MonoBehaviour:
     SubtypeLabel: 0
     Edges:
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 1
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
+    - EdgeState: 1
     - EdgeState: 0
-      Eraseable: 0
-    - EdgeState: 0
-      Eraseable: 0
     TransferType: 4
     DefaultInputState: 0
   - LayerIndex: 0
@@ -83,16 +93,10 @@ MonoBehaviour:
     SubtypeLabel: 128
     Edges:
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     - EdgeState: 1
-      Eraseable: 0
     - EdgeState: 0
-      Eraseable: 0
     TransferType: 4
     DefaultInputState: 0

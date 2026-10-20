@@ -66,11 +66,11 @@ $call   CloseWiki()
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
 $if MinigameHasValidSolution()
-    $call   HighlightElement(return-button)
+    $call   HighlightElement(research:complete-btn)
     {@PAL}  You've completed the Contract Requirements!\n\nPress <color=yellow>LEAVE</color> to leave the lab.
 $else
     $call   HighlightElement(research:primary-slot)
-    {@PAL}  Correct. Now find a sample that matches the other Property.
+    {@PAL}  Good! Now find a sample that meets the other requirement.
 $endif
 
 ::OnHypothesisIncorrectHypothesisMismatch
@@ -85,7 +85,7 @@ $call   CloseWiki()
 @when       result == "failure", reason == "observation_mismatch"
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
-{@PAL}  Your Property was incorrect.\n\nTry again.
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
 
 ::OnHypothesisIncorrectInvalidObservation
 @trigger    OnHypothesisSubmitted

@@ -1,6 +1,34 @@
 # basePath SupplyIntroCh4
 
-// TODO: Introduce multiple options and guide players to return to research if they
-// haven't discovered that gold is a conductor. (Copper is an unaffordable option in this level)
 
-// "You don't have enough money. Try going back to research to identify another conductor."
+:: StartBuilding
+@trigger    OnSupplySetupCompleted
+@when   !MinigameHasValidSolution()
+$call   PointElement(supply:planet_b)
+{@PAL}  We have a new source of boron on <color=yellow>Velos station</color>.\n\nFind the station and <color=yellow>HOVER</color> to see the cost.
+
+
+:: OnPlanetHovered
+@trigger    OnPlanetHovered
+@when   !MinigameHasValidSolution(), planet == "Planet_B", !temp:checkedPlanetB
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  This is cheaper but it comes with risk.\n\nRisk may cost extra time and money.
+$wait   2
+$call   OpenWikiTo("Routes", "Risk")
+$set    temp:checkedPlanetB = true
+
+
+:: NodeClicked
+@trigger    OnNodeClicked
+@when   !MinigameHasValidSolution(), node == "Planet_Cu"
+$call   CloseWiki()
+{@PAL}  This conductor is too expensive. <color=yellow>Choose</color> another.\n\nIf you don't see a cheaper option, <color=yellow>return</color> to RESEARCH to identify one.
+$set    temp:checkedPlanetCu = true
+
+
+:: NodeClickedAfterTryingCopper
+@trigger    OnNodeClicked
+@when   !MinigameHasValidSolution(), node != "Planet_Cu", temp:checkedPlanetB, temp:checkedPlanetCu
+@once
+{@PAL}  Build routes to fulfill the requirements.\n\nKeep the time and money low!

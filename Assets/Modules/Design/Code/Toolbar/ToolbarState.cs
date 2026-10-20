@@ -69,7 +69,7 @@ namespace SpaceFab.Design {
         // a row — any lingering hover focus is now outdated.
         public static void SelectTool(ToolModeState toolModeState, ToolbarState toolbarState, ToolbarButtonKind kind, ToolbarLayer row) {
             toolModeState.ActiveTool = ToolTypeForKind(kind);
-            if (row != ToolbarLayer.Erase) {
+            if (row != ToolbarLayer.Other) {
                 toolModeState.ActiveLayer = (StackLayer)row;
             }
             toolbarState.FocusedRow = row;
@@ -79,6 +79,21 @@ namespace SpaceFab.Design {
                 ScriptUtility.Trigger(DesignScriptTriggers.OnToolSelected, table);
             }
         }
+
+        public static void DeselectTool(ToolModeState toolModeState, ToolbarState toolbarState) {
+            toolModeState.ActiveTool = ToolType.None;
+            toolbarState.FocusedRow = ToolbarLayer.Other;
+            toolbarState.CurrentArrowAnchor = null;
+            if (toolbarState.SelectedToolPtr.gameObject.activeSelf) {
+                toolbarState.SelectedToolPtr.gameObject.SetActive(false);
+            }
+            UpdateToolbarRowHighlight(toolbarState);
+            using (var table = TempVarTable.Alloc()) {
+                table.Set("tool", "None");
+                ScriptUtility.Trigger(DesignScriptTriggers.OnToolSelected, table);
+            }
+        }
+
 
         // Clear-button handler. Sets the one-frame request flag. Downstream (deferred): the
         // confirmation-modal pipeline reads this, shows "Are you sure?", and on confirm routes
@@ -109,6 +124,31 @@ namespace SpaceFab.Design {
         }
 
         #endregion // Commands
+
+        #region Visuals
+        public static void UpdateToolbarRowHighlight(ToolbarState state) {
+            // 1. Row fade — full opacity on focused row, faded otherwise.
+            var rows = Find.Components<ToolbarRow>();
+            for (int i = 0; i < rows.Count; i++) {
+                ToolbarRow row = rows[i];
+                bool focused = row.Row == state.FocusedRow;
+                if (row.DeemphasizeGroup != null) {
+                    row.DeemphasizeGroup.alpha = focused ? 0f : 1;
+                }
+                if (row.DiagramGroup != null) {
+                    row.DiagramGroup.alpha = focused ? 1f : 0.4f;
+                }
+
+                if (focused && row.DiagramGroup) {
+                    state.SelectedLayerHighlight.position = row.DiagramGroup.transform.position;
+                }
+            }
+
+            state.SelectedLayerHighlight.gameObject.SetActive(state.FocusedRow != ToolbarLayer.Other);
+
+        }
+
+        #endregion // Visuals
 
         #region Kind Mapping
 
@@ -142,7 +182,7 @@ namespace SpaceFab.Design {
                 case ToolType.DrawPNodes:
                     return ToolbarLayer.Transistor;
                 case ToolType.Erase:
-                    return ToolbarLayer.Erase;
+                    return ToolbarLayer.Other;
                 default:
                     return fallback;
             }

@@ -154,15 +154,8 @@ namespace SpaceFab.Research {
 
                 if (confirmed) {
                     // More specific properties replace the base property icon
-                    if (label == MaterialPropertyLabel.HiTempConductor) {
-                        displayProperties.Remove(MaterialPropertyLabel.Conductor);
-                    }
-                    else if (label == MaterialPropertyLabel.LightEmittingSemiconductor ||
-                        label == MaterialPropertyLabel.HighMobilitySemiconductor ||
-                        label == MaterialPropertyLabel.HighVoltageSemiconductor ||
-                        label == MaterialPropertyLabel.HiTempSemiConductor)
-                    {
-                        displayProperties.Remove(MaterialPropertyLabel.Semiconductor);
+                    if (MaterialPropertyLabelUtility.TryGetBaseProperty(label, out MaterialPropertyLabel baseLabel)) {
+                        displayProperties.Remove(baseLabel);
                     }
                     
                     displayProperties.Add(label);

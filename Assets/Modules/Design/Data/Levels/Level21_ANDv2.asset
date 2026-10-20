@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level21_ANDv2
   m_EditorClassIdentifier: 
   m_title: AND v2
+  m_description: Logic Gates do logical operations with signals. AND outputs HI if
+    A <i>and</i> B are HI.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 2b4755dbe93114441852706373ee2743, type: 2}
   m_testSuite: {fileID: 11400000, guid: a8d8b2624ac9f9e4abf9bd8b3a16d47d, type: 2}

@@ -16,7 +16,7 @@ namespace FieldDay.Assets {
     /// Default asset package.
     /// </summary>
     [CreateAssetMenu(menuName = "Field Day/Asset Pack", order = -300)]
-    public sealed class AssetPack : AssetPackBase, IEditorOnlyData {
+    public sealed class AssetPack : AssetPackBase {
         public enum IncludeBehavior {
             IncludeSubfolders,
             DirectoryOnly,
@@ -200,10 +200,6 @@ namespace FieldDay.Assets {
                 Log.Msg("[AssetPack] Contents of pack '{0}' updated", pack.name);
                 EditorUtility.SetDirty(pack);
             }
-        }
-
-        void IEditorOnlyData.ClearEditorData(bool isDevelopmentBuild) {
-            m_FilterSearch = null;
         }
 
 #endif // UNITY_EDITOR

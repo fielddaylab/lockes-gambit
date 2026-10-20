@@ -110,7 +110,7 @@ namespace SpaceFab.Research {
                     obsTabOpen = contents.Tabs[wikiState.CurrentTabId].AssetId == "Observations";
                     // TODO: grey out button when obs tab is open
                 }
-                panel.AddObservationButton.gameObject.SetActive(hypoVm.SlotCount <= 3 && !hypoVm.VerifyButtonVisible && !hypoVm.HypothesisVerified);
+                panel.AddObservationButton.gameObject.SetActive(hypoVm.SlotCount <= 3 && !hypoVm.HypothesisVerified);
             }
 
             if (panel.AddPropertyButton != null) {
@@ -119,23 +119,21 @@ namespace SpaceFab.Research {
                     propsTabOpen = contents.Tabs[wikiState.CurrentTabId].AssetId == "Properties";
                     // TODO: grey out button when obs tab is open
                 }
-                panel.AddPropertyButton.gameObject.SetActive(hypoVm.SlotCount > 0 && !hypoVm.VerifyButtonVisible && !hypoVm.HypothesisVerified);
+                panel.AddPropertyButton.gameObject.SetActive(hypoVm.SlotCount > 0 && !hypoVm.HypothesisSelected && !hypoVm.HypothesisVerified);
             }
 
             ResearchUIAssets uiAssets = Find.GlobalAsset<ResearchUIAssets>();
             ActiveChamberKind chamberKind = ChamberInterfacerUtility.GetActiveChamber(interfacerState);
 
             if (panel.VoltageChamberButton != null) {
-                panel.VoltageChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Voltage
-                    ? uiAssets.VoltagePressed : uiAssets.VoltageNormal;
+                panel.VoltageChamberButton.Interactable = chamberKind != ActiveChamberKind.Voltage;
             }
             if (panel.ThermalChamberButton != null) {
                 if (interfacerState.LastUnlockedChamber < ActiveChamberKind.Thermal) {
                     SamplePanelInputUtility.LockChamberButton(panel, ActiveChamberKind.Thermal, uiAssets);
                 }
                 else {
-                    panel.ThermalChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Thermal
-                        ? uiAssets.ThermalPressed : uiAssets.ThermalNormal;
+                    panel.ThermalChamberButton.Interactable = chamberKind != ActiveChamberKind.Thermal;
                 }
             }
             if (panel.DopingChamberButton != null) {
@@ -143,8 +141,7 @@ namespace SpaceFab.Research {
                     SamplePanelInputUtility.LockChamberButton(panel, ActiveChamberKind.Doping, uiAssets);
                 }
                 else {
-                    panel.DopingChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Doping
-                        ? uiAssets.DopingPressed : uiAssets.DopingNormal;
+                    panel.DopingChamberButton.Interactable = chamberKind != ActiveChamberKind.Doping;
                 }
             }
 

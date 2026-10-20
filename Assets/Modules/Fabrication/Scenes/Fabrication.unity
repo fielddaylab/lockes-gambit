@@ -3889,7 +3889,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1904662656}
   - component: {fileID: 1904662655}
-  - component: {fileID: 1904662657}
   m_Layer: 0
   m_Name: Fabrication Assets
   m_TagString: Untagged
@@ -3912,10 +3911,11 @@ MonoBehaviour:
   m_Packs:
   - {fileID: 11400000, guid: 450a1aa5e925122438d019b05630515d, type: 2}
   - {fileID: 11400000, guid: 35a49fd885ee0434cb3480823562390c, type: 2}
-  - {fileID: 11400000, guid: 35a49fd885ee0434cb3480823562390c, type: 2}
   - {fileID: 11400000, guid: 7c190105b99806d40bd06e38a3f6e5a6, type: 2}
   - {fileID: 11400000, guid: 3a98e826e688ab548814ae7ee05059ae, type: 2}
   - {fileID: 11400000, guid: 71030d21d6d824aac897cbb16b18de32, type: 2}
+  - {fileID: 11400000, guid: b0e2845640afb2840ad30ef1b0b88467, type: 2}
+  - {fileID: 11400000, guid: 91dcd3ac60c74fd4e8bb2dd421251544, type: 2}
 --- !u!4 &1904662656
 Transform:
   m_ObjectHideFlags: 0
@@ -3931,22 +3931,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1904662657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904662654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79013ef6b98af0b4d9b5228746b3aba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EventId:
-    m_HashValue: 2734154260
-  PlaylistId:
-    m_HashValue: 0
 --- !u!120 &1938538705 stripped
 LineRenderer:
   m_CorrespondingSourceObject: {fileID: 2561715883389720815, guid: 338e5776d07785b40aa1a3c5ad36e4a1, type: 3}

@@ -10,8 +10,8 @@ $if IsLevelSolved(0) == true
     {@PAL}  If you modify your grid, you'll need to re-rerun all tests.
 $else
     $set temp:designTutorialStep = 0
-    $call   HighlightElement(design:n-transistor-tool-btn)
-    {@PAL}  You can build paths on two layers: semiconductor and metal.\n\nSelect <color=yellow>N-type dopant</color> and connect the output to the input.
+    $call   HighlightElement(design:tool-n)
+    {@PAL}  The grid has two layers: Metal and Semiconductor.\n\nUse an <color=#61B7CF>N-Type</color> path to complete the chip without adding more Metal.
 $endif
 
 
@@ -20,7 +20,7 @@ $endif
 @when       tool == "DrawNNodes", CurrLevelIndex() == 0, temp:designTutorialStep == 0
 $set    temp:designTutorialStep = 1
 $call   ReleaseAllHighlights()
-{@PAL}  Now click and drag to complete a connection between Input A and Output X.
+{@PAL}  The <color=#61B7CF>N-Type</color> path carries signals like Metal, but it goes on the bottom Semiconductor layer.\n\nDraw an <color=#61B7CF>N-Type</color> path to finish the chip.
 
 
 ::OnNTransistorDrawn
@@ -29,8 +29,8 @@ $call   ReleaseAllHighlights()
 $call   ReleaseAllHighlights()
 $if temp:designTutorialStep == 1
     $set temp:designTutorialStep = 2
-    $call   HighlightElement(design:via-tool-btn)
-    {@PAL}  Place a <color=yellow>Via</color> in a cell with both silicon and metal to connect the two layers.
+    $call   HighlightElement(design:tool-via)
+    {@PAL}  To connect Metal to Semiconductor, you'll need <color=yellow>Vias</color>.\n\nThey're like elevators, connecting the top floor to the bottom floor!
 $endif
 
 
@@ -45,15 +45,25 @@ $call   ReleaseAllHighlights()
 @trigger    OnClickReleased
 @when       CurrLevelIndex() == 0, temp:designTutorialStep == 3
 $set    temp:designTutorialStep = 4
-{@PAL}  Click <color=yellow>TEST</color> to verify.
+$set    temp:viaPlaced = true
+{@PAL}  <color=yellow>Vias</color> connect Metal to Semiconductor in the same space.\n\nWhen you're ready, click <color=yellow>TEST</color> to verify.
 
 
 ::TestIncorrect
 @trigger    OnSingleTestComplete
 @when       result == "failure", CurrLevelIndex() == 0
 $call   ReleaseAllHighlights()
-{@PAL}  The test failed.\n\nMake sure the Via touches both metal and semiconductor.
+$call   HighlightElement(design:tool-via)
+$set    temp:designTutorialStep = 2
+{@PAL}  The test failed...\n\nYou'll need <color=yellow>two Vias</color> to finish the circuit.\n\nMake sure they are in the same space as Metal and <color=#61B7CF>N-Type</color>.
 
+
+::TestWithoutVia
+@trigger    OnSingleTestComplete 
+@when       CurrLevelIndex() == 0, temp:viaPlaced == false
+$call   HighlightElement(design:tool-n)
+$set    temp:designTutorialStep = 2
+{@PAL}  The test failed...\n\nInputs and Outputs on the Metal layer can't connect directly to <color=#61B7CF>N-Type</color> on the Semiconductor layer.\n\nUse <color=yellow>Vias</color> to connect Metal to <color=#61B7CF>N-Type</color>!
 
 ::TestCorrect
 @trigger    OnSingleTestComplete
@@ -78,54 +88,71 @@ $set    temp:designTutorialStep = 5
 @trigger    OnDesignSetupComplete
 @when       CurrLevelIndex() == 1
 $set    temp:hintGiven = 0
+$set    temp:metalPlaced = false
+$set    temp:nTypePlaced = false
 $if IsLevelSolved(1) == true
     $set temp:designTutorialStep = 4
     {@PAL}  If you modify your grid, you'll need to re-rerun all tests.
 $else
     $set temp:designTutorialStep = 0
-    $call   HighlightElement(design:metal-tool-btn)
-    {@PAL}  The Verification table shows that <color=yellow>Output Y</color> must always be <color=yellow>HI</color>.\n\nConnect the <color=yellow>constant HI input</color> to output Y.
+    {@PAL}  This circuit has a Metal path that is always <color=#FF7441>HI.</color>\nIf <color=#FF7441>HI</color> mixes with <color=#8073C8>LO</color>, the signal will become <color=red>UNSTABLE!</color>\n<color=yellow>Cross under</color> the metal path to complete the chip.
 $endif
 
+//::OnToolChangedFromMetal
+//@trigger    OnToolSelected
+//@when   CurrLevelIndex() == 1, temp:designTutorialStep == 1, tool != "DrawMetal"
+//$set    temp:designTutorialStep = 0
+//$call   HighlightElement(design:tool-metal)
 
-::OnMetalToolSelected
+// ::OnToolUsed
+// @trigger    OnDragReleased
+// @when   CurrLevelIndex() == 1, temp:designTutorialStep == 1
+// $set    temp:designTutorialStep = 2
+
+::OnNTypeSelected
 @trigger    OnToolSelected
-@when       CurrLevelIndex() == 1, tool == "DrawMetal", temp:designTutorialStep == 0
-$set    temp:designTutorialStep = 1
-$call   ReleaseHighlight(design:metal-tool-btn)
-
-
-::OnToolChangedFromMetal
-@trigger    OnToolSelected
-@when   CurrLevelIndex() == 1, temp:designTutorialStep == 1, tool != "DrawMetal"
-$set    temp:designTutorialStep = 0
-$call   HighlightElement(design:metal-tool-btn)
-
-
-::OnMetalDrawn
-@trigger    OnDragReleased
-@when   CurrLevelIndex() == 1, temp:designTutorialStep == 1
+@when       CurrLevelIndex() == 1, tool == "DrawNNodes", temp:designTutorialStep < 4
 $set    temp:designTutorialStep = 2
-{@PAL}  The Verification table shows that <color=yellow>Output X</color> must be both <color=yellow>HI</color> and <color=yellow>LO</color>\n\nTry connecting the variable <color=yellow>Input A</color> to <color=yellow>Output X</color>  without crossing the circuit you just built.
-$call   HighlightElement(design:p-transistor-tool-btn)
 
-
-::OnPTransistorToolSelected
+::OnMetalSelected
 @trigger    OnToolSelected
-@when   CurrLevelIndex() == 1, temp:designTutorialStep == 2, tool == "DrawPNodes"
+@when       CurrLevelIndex() == 1, tool == "DrawMetal", temp:designTutorialStep < 4
 $set    temp:designTutorialStep = 3
-$call   ReleaseHighlight(design:p-transistor-tool-btn)
 
+::OnNTypeFirst
+@trigger OnDragReleased
+@when CurrLevelIndex() == 1, temp:designTutorialStep == 2
+$set    temp:nTypePlaced = true
+$call   HighlightElement(design:tool-metal)
+$call   HighlightElement(design:tool-via)
+$set    temp:designTutorialStep = 4
+{@PAL}  Use Metal and Vias to connect Inputs and Outputs on the top layer to <color=#61B7CF>N-type</color> on the bottom layer.
+
+::OnMetalFirst
+@trigger OnDragReleased
+@when CurrLevelIndex() == 1, temp:designTutorialStep == 3
+$set    temp:metalPlaced = true
+$call   HighlightElement(design:tool-n)
+$set    temp:designTutorialStep = 4
+{@PAL}  Look out! If that <color=#FF7441>HI</color> path connects to the Input, it could create an <color=red>UNSTABLE</color> signal!\n\nUse <color=#61B7CF>N-type</color> to cross under it without connecting.
+
+::OnSecondToolSelected
+@trigger    OnToolSelected
+@when       CurrLevelIndex() == 1, temp:designTutorialStep == 4
+$set    temp:designTutorialStep = 5
+$call   ReleaseAllHighlights()
 
 ::TestCorrectLv2
 @trigger    OnSingleTestComplete
-@when       result == "success"
+@when       result == "success", CurrLevelIndex == 1, temp:designTutorialStep < 6
 $call   ReleaseAllHighlights()
 $call   HighlightElement(design:input-a, false, 25)
+$set    temp:designTutorialStep = 6
 $if     IsInputInState("A", "LO")
-    {@PAL}  Correct!\n\nNow flip the switch on the input to change it from LO to HI.
+    {@PAL}  Yippee, no <color=red>UNSTABLE</color> signal!\n\nNow flip the switch on the input to change it to <color=#FF7441>HI.</color>.
 $else
-    {@PAL}  Correct!\n\nNow flip the switch on the input to change it from HI to LO.
+    {@PAL}  Correct! But there might still be an <color=red>UNSTABLE</color> signal...\n\nFlip the switch on the input to change it to <color=#8073C8>LO</color>.
+    $set temp:hintGiven = 2 // guess that if the player succeeds here but fails next, it might be because of UNSTABLE
 $endif
 
 
@@ -133,10 +160,16 @@ $endif
 @trigger    OnSingleTestComplete
 @when       result == "failure", CurrLevelIndex() == 1
 $call   ReleaseAllHighlights()
+$set temp:designTutorialStep = 4
 $if temp:hintGiven == 0
-    {@PAL}  HINT: Inputs and outputs are on the <color=yellow>metal layer</color>.
+    $call HighlightElement(design:tool-metal)
+    {@PAL}  <color=yellow>Hint:</color> Inputs and Outputs on the Metal layer can't connect directly to <color=#61B7CF>N-type</color> on the Semiconductor layer.\n\nUse <color=yellow>Metal</color> and <color=yellow>Vias</color> to connect them.
     $set temp:hintGiven = 1
 $elseif temp:hintGiven == 1
-    {@PAL}  HINT: Use a <color=yellow>via</color> to connect the metal and semiconductor layers.
+    $call HighlightElement(design:tool-via)
+    {@PAL}  <color=yellow>Hint:</color> Use <color=yellow>Vias</color> to connect the Metal and Semiconductor layers in one space.\n\nYou'll need <color=yellow>two Vias</color> for this chip!
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> Mixing LO and <color=#FF7441>HI</color> signals creates an <color=red>UNSTABLE</color> signal!\n\n<color=red>UNSTABLE</color> signals always fail tests.
     $set temp:hintGiven = 0
 $endif

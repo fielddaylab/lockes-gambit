@@ -25,9 +25,14 @@ namespace SpaceFab.Design.Visuals
         [Header("Vias")]
         public Sprite Via;
         public Sprite ViaBase;
+        public Sprite ViaHi;
+        public Sprite ViaLo;
+        public Sprite ViaUnstable;
 
         [Header("Gates")]
         public Sprite Gate;
+        public Sprite GateHi;
+        public Sprite GateLo;
 
         [Header("IO")]
         public Sprite InputConstantHigh;
@@ -67,38 +72,34 @@ namespace SpaceFab.Design.Visuals
     {
         public static Sprite LookupViaSprite(GridSpriteDB spriteDB, FlowState state)
         {
-            return spriteDB.Via;
-            //switch (state)
-            //{
-            //    case FlowState.Empty:
-            //        return spriteDB.Via;
-            //    case FlowState.Hi:
-            //        return spriteDB.ViaHigh;
-            //    case FlowState.Lo:
-            //        return spriteDB.ViaLow;
-            //    case FlowState.Unstable:
-            //        return spriteDB.ViaUnstable;
-            //    default:
-            //        return null;
-            //}
+            switch (state) {
+                case FlowState.Empty:
+                    return spriteDB.Via;
+                case FlowState.Hi:
+                    return spriteDB.ViaHi;
+                case FlowState.Lo:
+                    return spriteDB.ViaLo;
+                case FlowState.Unstable:
+                    return spriteDB.ViaUnstable;
+                default:
+                    return null;
+            }
         }
 
         public static Sprite LookupGateSprite(GridSpriteDB spriteDB, FlowState state)
         {
-            return spriteDB.Gate;
-            //switch (state)
-            //{
-            //    case FlowState.Empty:
-            //        return spriteDB.Gate;
-            //    case FlowState.Hi:
-            //        return spriteDB.GateHigh;
-            //    case FlowState.Lo:
-            //        return spriteDB.GateLow;
-            //    case FlowState.Unstable:
-            //        return spriteDB.GateUnstable;
-            //    default:
-            //        return null;
-            //}
+            switch (state) {
+                case FlowState.Empty:
+                    return spriteDB.Gate;
+                case FlowState.Hi:
+                    return spriteDB.GateHi;
+                case FlowState.Lo:
+                    return spriteDB.GateLo;
+                case FlowState.Unstable:
+                    return spriteDB.Gate;
+                default:
+                    return null;
+            }
         }
 
         // Tint colour applied to the input-toggle overlay's tinted renderers based on the

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level2_LowerLayer
   m_EditorClassIdentifier: 
   m_title: Lower Layer
+  m_description: Create a connection using the Semiconductor layer.
   m_allowedTools: 105
   m_gridConfig: {fileID: 11400000, guid: e6281162e1c454360b511fdb8aef78d8, type: 2}
   m_testSuite: {fileID: 11400000, guid: 8148aa15237fc4a2b827ae45bb9ea208, type: 2}

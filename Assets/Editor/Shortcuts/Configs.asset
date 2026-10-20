@@ -15,7 +15,9 @@ MonoBehaviour:
   SortOrder: 20
   IsLocked: 0
   ShowDuringContexts: 
-  HideDuringContexts: t:Writer
+  HideDuringContexts: 'role-writer
+
+    role-audio'
   ReadMe: Configuration objects.
   Items:
   - Object: {fileID: 11400000, guid: 8f2711ad6598b6c46887f6c2b6bcb2d5, type: 2}

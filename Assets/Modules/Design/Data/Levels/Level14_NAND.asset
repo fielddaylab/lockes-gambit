@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level14_NAND
   m_EditorClassIdentifier: 
   m_title: NAND
+  m_description: A "not-and" logic gate, the foundation of computers. Output HI unless
+    A and B are both HI.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 38ee69962e556433387ecf53db54dc00, type: 2}
   m_testSuite: {fileID: 11400000, guid: 14b76ae1edcf54f4c9a6b9efda3a0d16, type: 2}

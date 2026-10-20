@@ -20,9 +20,11 @@ namespace SpaceFab.Design
             float cellOffset = 0.5f;
             float xOffset = (DesignConsts.NUM_GRID_COLS - xDim) / 2;
             float yOffset = (DesignConsts.NUM_GRID_ROWS - yDim) / 2;
-            float shiftForTopLayer = 0;
+            float layerShift = 0;
             if (layerIndex == (int) StackLayer.Metal) {
-                shiftForTopLayer += 0.05f;
+                layerShift += VisualGridCellUtility.METAL_OFFSET;
+            } else if (layerIndex == (int) StackLayer.Transistor) {
+                layerShift += VisualGridCellUtility.SEMI_OFFSET;
             }
             for (int row = 0; row < yDim; row++)
             {
@@ -33,9 +35,9 @@ namespace SpaceFab.Design
                     cell.gameObject.name = "Cell Visual (" + col + ", " + row + ", " + layerIndex + ")";
                     SetCell(col, row, cell);
 
-                    if (shiftForTopLayer != 0) {
+                    if (layerShift != 0) {
                         foreach(var topLayer in cell.ShiftForMetalLayer) {
-                            topLayer.Translate(0, shiftForTopLayer, 0, Space.Self);
+                            topLayer.Translate(0, layerShift, 0, Space.Self);
                         }
                     }
                 }

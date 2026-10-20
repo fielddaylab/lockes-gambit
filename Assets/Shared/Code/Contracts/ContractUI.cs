@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using SpaceFab.Research;
 using FieldDay;
 using SpaceFab.UI;
+using FieldDay.UI.Widgets;
 
 namespace SpaceFab {
     public class ContractUI : MonoBehaviour
@@ -34,7 +35,7 @@ namespace SpaceFab {
         public Image[] RevenueIndicators;
 
         [Header("Buttons")]
-        public DynamicButton SelectContractButton;
+        public GuiButton SelectContractButton;
         
         [Header("Animated")]
         public GameObject ApprovedStamp;

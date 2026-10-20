@@ -85,11 +85,11 @@ MonoBehaviour:
     Position: {x: 3.83, y: 8.39}
   Hazards:
   - Name:
-      m_Source: 
-      m_HashValue: 3594195602
+      m_Source: Hazard_Patrol
+      m_HashValue: 2168302756
     Position: {x: 6.02, y: -3.52}
   - Name:
-      m_Source: 
+      m_Source: Hazard_Time
       m_HashValue: 2170266095
     Position: {x: -4.07, y: -0.93}
   Overrides:

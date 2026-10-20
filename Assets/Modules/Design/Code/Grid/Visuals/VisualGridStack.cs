@@ -1,3 +1,4 @@
+using BeauRoutine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,9 +34,18 @@ namespace SpaceFab.Design.Visuals
             visualGridStack.GridLayers[(int)StackLayer.Transistor].Destroy();
         }
 
-        public static void RefreshGridSize(SpriteRenderer gridRenderer, int xDim, int yDim)
+        public static void RefreshGridSize(SpriteRenderer gridRenderer, SpriteRenderer gridOutline, int xDim, int yDim)
         {
             gridRenderer.size = new Vector2(xDim + OUTLINE_WIDTH, yDim + OUTLINE_WIDTH);
+            gridOutline.size = new Vector2(xDim + OUTLINE_WIDTH + 0.1f, yDim + OUTLINE_WIDTH + 0.1f);
+        }
+
+        public static void SetOutlineVisible(VisualGridStackState visualState, bool active) {
+            if (active) {
+                visualState.GridTestOutline.SetAlpha(1f);
+            } else {
+                visualState.GridTestOutline.SetAlpha(0f);
+            }
         }
     }
 }

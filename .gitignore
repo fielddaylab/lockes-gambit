@@ -108,3 +108,7 @@ InitTestScene*.unity*
 node_modules/
 /.vscode
 /Assets/FieldDay/.doxy
+
+/Assets/StreamingAssets/__buildInfo.txt
+/Assets/StreamingAssets/__buildInfo.txt.meta
+/Assets/StreamingAssets/packs

@@ -1,5 +1,8 @@
+using BeauUtil;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEditorInternal;
@@ -21,25 +24,49 @@ namespace FieldDay.Editor {
             }
         }
 
+        [MenuItem("Field Day/Testing/Test Automated Build Script")]
         static public void AutomatedBuild() {
             IsAutomated = true;
             ManualStepControl = true;
             try {
-                LocateBuildConfiguration();
-                ProcessAssets(BuildTarget.WebGL);
-                BuildReport report = GeneratePlayerBuild(BuildTarget.WebGL);
-                // TODO: report out
+                Console.WriteLine("====================\nField Day build process begins here!\n====================");
+                BuildActionSettings settings = ExtractSettingsFromCommandLine();
+                LocateAndApplyBuildConfiguration();
+                ProcessAssets(settings);
+                BuildReport report = GeneratePlayerBuild(settings);
+                WriteReportToConsole(report);
+                ExitWithResult(report.summary.result);
             } finally {
                 IsAutomated = false;
                 ManualStepControl = false;
             }
         }
 
-        static public BuildPlayerOptions GetPlayerBuildOptions(BuildTarget buildTarget) {
+        #region Retrieval
+
+        static public BuildActionSettings ExtractSettingsFromCommandLine() {
+            BuildActionSettings settings;
+            settings.BuildTarget = BuildTarget.WebGL;
+            settings.BuildPath = "./build/WebGL/WebGL";
+
+            string[] commandLineArgs = Environment.GetCommandLineArgs();
+            for(int i = 0; i < commandLineArgs.Length; i++) {
+                if (commandLineArgs[i] == "-customBuildPath") {
+                    settings.BuildPath = commandLineArgs[++i];
+                } else if (commandLineArgs[i] == "-buildTarget") {
+                    settings.BuildTarget = Enum.Parse<BuildTarget>(commandLineArgs[++i]);
+                }
+            }
+
+            return settings;
+        }
+
+        static public BuildPlayerOptions GetPlayerBuildOptions(BuildActionSettings settings) {
             BuildPlayerOptions options = new BuildPlayerOptions();
 
-            options.target = buildTarget;
+            options.target = settings.BuildTarget;
             options.scenes = GetBuildScenes();
+            options.locationPathName = settings.BuildPath;
 
             return options;
         }
@@ -56,19 +83,79 @@ namespace FieldDay.Editor {
             return scenes.ToArray();
         }
 
-        static public BuildReport GeneratePlayerBuild(BuildTarget buildTarget) {
-            BuildPlayerOptions buildOptions = GetPlayerBuildOptions(buildTarget);
-            return BuildPipeline.BuildPlayer(buildOptions);
-        }
+        #endregion // Retrieval
 
-        static public void LocateBuildConfiguration() {
+        #region Steps
+
+        static public void LocateAndApplyBuildConfiguration() {
+            Console.WriteLine("== Locating build configuration ==");
             AdjustSettingsBuildProcessor.Execute();
         }
 
-        static public void ProcessAssets(BuildTarget buildTarget) {
+        static public void ProcessAssets(BuildActionSettings settings) {
+            Console.WriteLine("== Processing assets ==");
             BakeAssetsBuildPreprocessor.Execute();
             StripEditorDataBuildPreprocessor.Execute();
-            StreamedPacks.ExecuteCleanRebuildForPlatform(buildTarget);
+            Console.WriteLine("== Building streamed packs ==");
+            StreamedPacks.ExecuteCleanRebuildForPlatform(settings.BuildTarget);
         }
+
+        static public BuildReport GeneratePlayerBuild(BuildActionSettings settings) {
+            Console.WriteLine("== Building player ==");
+            BuildPlayerOptions buildOptions = GetPlayerBuildOptions(settings);
+            return BuildPipeline.BuildPlayer(buildOptions);
+        }
+
+        static public void WriteReportToConsole(BuildReport report) {
+            StringBuilder sb = new StringBuilder(2048);
+            BuildSummary summary = report.summary;
+            sb.Append("==========\nBuild Results\n==========\n")
+                .Append("\nDuration: ").AppendNoAlloc(summary.totalTime.TotalMinutes, 2).Append("min")
+                .Append("\nWarnings: ").AppendNoAlloc(summary.totalWarnings)
+                .Append("\nErrors: ").AppendNoAlloc(summary.totalErrors)
+                .Append("\nSize: ");
+            Unsafe.FormatBytes((long)summary.totalSize, sb);
+            sb.Append(" (").AppendNoAlloc(summary.totalSize).Append(" bytes)\n\n");
+            Console.WriteLine(sb.ToString());
+        }
+
+        static public void ExitWithResult(BuildResult result) {
+            switch(result) {
+                case BuildResult.Succeeded: {
+                    Console.WriteLine("Build succeeded!!");
+                    TryExit(0);
+                    break;
+                }
+                case BuildResult.Failed: {
+                    Console.WriteLine("Build failed :(");
+                    TryExit(101);
+                    break;
+                }
+                case BuildResult.Cancelled: {
+                    Console.WriteLine("Build was... cancelled?");
+                    TryExit(102);
+                    break;
+                }
+                case BuildResult.Unknown:
+                default: {
+                    Console.WriteLine("Build result is unknown :/");
+                    TryExit(103);
+                    break;
+                }
+            }
+        }
+
+        static private void TryExit(int exitCode) {
+            if (IsBatchModeRaw) {
+                EditorApplication.Exit(exitCode);
+            }
+        }
+
+        #endregion // Steps
+    }
+
+    public struct BuildActionSettings {
+        public BuildTarget BuildTarget;
+        public string BuildPath;
     }
 }
