@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Stepper
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Stepper
-  m_Icon: {fileID: 21300000, guid: 04be6752c65ebe04c8a761f2c29bb1df, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 21300000, guid: 51a43e0a098f6db43a55ba1bd179a414, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: The Stepper lines up a pattern over the chip so only selected areas are
+  Title: Mask Aligner
+  Icon: {fileID: 21300000, guid: d78eb03a49ba99d4d8bec568f340cd7f, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: ddc4fdf4b1fb7fd419ce019b7b53c93b, type: 3}
+  IllustrationFPS: 0.5
+  BodyText: The Stepper lines up a pattern over the chip so only selected areas are
     changed in the next step.
-  m_MaterialId:
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 1

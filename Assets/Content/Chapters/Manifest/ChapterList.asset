@@ -63,106 +63,128 @@ MonoBehaviour:
       m_HashValue: 2927225661
   ResidentData:
   - ResearchableMaterials:
-    - m_HashValue: 1571298950
     - m_HashValue: 3821421172
     - m_HashValue: 1163381446
+    ComicPackage:
+      m_HashValue: 1511344739
   - ResearchableMaterials:
-    - m_HashValue: 1571298950
     - m_HashValue: 3821421172
     - m_HashValue: 1163381446
-  - ResearchableMaterials:
     - m_HashValue: 1571298950
+    ComicPackage:
+      m_HashValue: 3357582356
+  - ResearchableMaterials:
     - m_HashValue: 3821421172
+    - m_HashValue: 1163381446
+    - m_HashValue: 1571298950
     - m_HashValue: 541320182
-    - m_HashValue: 1821685427
     - m_HashValue: 3317014541
-    - m_HashValue: 1163381446
+    ComicPackage:
+      m_HashValue: 581367781
   - ResearchableMaterials:
-    - m_HashValue: 1571298950
     - m_HashValue: 3821421172
-    - m_HashValue: 541320182
-    - m_HashValue: 1821685427
-    - m_HashValue: 3317014541
     - m_HashValue: 1163381446
+    - m_HashValue: 1571298950
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
+    ComicPackage:
+      m_HashValue: 1195206158
   - ResearchableMaterials:
-    - m_HashValue: 1571298950
     - m_HashValue: 3821421172
-    - m_HashValue: 541320182
-    - m_HashValue: 1821685427
-    - m_HashValue: 3317014541
     - m_HashValue: 1163381446
+    - m_HashValue: 1571298950
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
     - m_HashValue: 3774176290
+    ComicPackage:
+      m_HashValue: 1966180575
   - ResearchableMaterials:
-    - m_HashValue: 1571298950
     - m_HashValue: 3821421172
-    - m_HashValue: 541320182
-    - m_HashValue: 1821685427
-    - m_HashValue: 3317014541
     - m_HashValue: 1163381446
+    - m_HashValue: 1571298950
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
     - m_HashValue: 3774176290
     - m_HashValue: 466928580
+    ComicPackage:
+      m_HashValue: 1755614864
   - ResearchableMaterials:
-    - m_HashValue: 1571298950
     - m_HashValue: 3821421172
-    - m_HashValue: 541320182
-    - m_HashValue: 1821685427
-    - m_HashValue: 3317014541
     - m_HashValue: 1163381446
+    - m_HashValue: 1571298950
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
     - m_HashValue: 3774176290
     - m_HashValue: 466928580
     - m_HashValue: 527899933
+    ComicPackage:
+      m_HashValue: 2634903441
   - ResearchableMaterials:
-    - m_HashValue: 1571298950
     - m_HashValue: 3821421172
-    - m_HashValue: 541320182
-    - m_HashValue: 1821685427
-    - m_HashValue: 3317014541
     - m_HashValue: 1163381446
+    - m_HashValue: 1571298950
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
     - m_HashValue: 3774176290
     - m_HashValue: 466928580
     - m_HashValue: 527899933
+    ComicPackage:
+      m_HashValue: 3311712746
   - ResearchableMaterials:
     - m_HashValue: 3821421172
-    - m_HashValue: 541320182
-    - m_HashValue: 1821685427
-    - m_HashValue: 3317014541
     - m_HashValue: 1163381446
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
     - m_HashValue: 3774176290
     - m_HashValue: 466928580
     - m_HashValue: 336354447
     - m_HashValue: 2571817723
     - m_HashValue: 2929137943
+    ComicPackage:
+      m_HashValue: 1901685595
   - ResearchableMaterials:
     - m_HashValue: 3821421172
-    - m_HashValue: 541320182
-    - m_HashValue: 1821685427
-    - m_HashValue: 3317014541
     - m_HashValue: 1163381446
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
     - m_HashValue: 466928580
     - m_HashValue: 336354447
     - m_HashValue: 2571817723
     - m_HashValue: 2929137943
+    ComicPackage:
+      m_HashValue: 3267583365
   - ResearchableMaterials:
     - m_HashValue: 3821421172
-    - m_HashValue: 541320182
-    - m_HashValue: 1821685427
-    - m_HashValue: 3317014541
     - m_HashValue: 1163381446
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
     - m_HashValue: 466928580
     - m_HashValue: 527899933
     - m_HashValue: 336354447
     - m_HashValue: 2571817723
     - m_HashValue: 2929137943
     - m_HashValue: 296790427
+    ComicPackage:
+      m_HashValue: 1744353716
   - ResearchableMaterials:
     - m_HashValue: 3821421172
-    - m_HashValue: 1821685427
     - m_HashValue: 1163381446
+    - m_HashValue: 541320182
+    - m_HashValue: 3317014541
+    - m_HashValue: 1821685427
     - m_HashValue: 466928580
     - m_HashValue: 527899933
+    - m_HashValue: 336354447
     - m_HashValue: 2571817723
     - m_HashValue: 296790427
     - m_HashValue: 3747167047
-    - m_HashValue: 336354447
-    - m_HashValue: 541320182
-    - m_HashValue: 3317014541
+    ComicPackage:
+      m_HashValue: 2762381187

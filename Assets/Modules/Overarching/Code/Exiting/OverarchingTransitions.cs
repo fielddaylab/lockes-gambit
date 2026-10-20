@@ -1,5 +1,6 @@
 using BeauUtil;
 using FieldDay;
+using FieldDay.Scenes;
 using FieldDay.Scripting;
 using FieldDay.Systems;
 using SpaceFab.Save;
@@ -21,6 +22,10 @@ namespace SpaceFab.Overarching {
             GameLoop.ResumeUpdates(ScriptUtility.RuntimeUpdateMask);
             Game.Scenes.LoadMainScene(zone.Scene);
             Game.Events.Dispatch(GameEvents.OnMinigameLoad);
+            
+            SceneRequestContext loadContext = default;
+            loadContext.Set("PreserveMusic", true);
+            Game.Scenes.QueueMainLoadContext(loadContext);
         }
     }
 }

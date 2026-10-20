@@ -84,8 +84,10 @@ namespace SpaceFab.Supply {
                         Log.Msg("[SupplyBug] check at "+ i + " omitted from supply");
                         continue;
                     }
-                    success &= AddRow(layout, progressState, checks[i]);
-                    if (success) totalSuccess++;
+                    bool rowFulfilled = AddRow(layout, progressState, checks[i]);
+
+                    success &= rowFulfilled;
+                    if (rowFulfilled) totalSuccess++;
                     totalChecks++;
                     Log.Msg("[SupplyBug] added row. Success? " + success);
 

@@ -5,25 +5,21 @@
 $if temp:fabTutorialStep == 0
     $set temp:fabTutorialStep = 1
     $call HighlightElement(fab:generate-button)
-    {@PAL}  Press Space on your keyboard (or click the button on screen) to generate a new wafer.
+    {@PAL}  Welcome to the fabrication bay!\n\nThis chip only has a metal layer.\n\nYou will add it to the silicon wafer in 5 steps.
 $endif
 
 ::FirstMovement
 @trigger    OnFabAttempt
 $if temp:fabTutorialStep == 1
     $set temp:fabTutorialStep = 2
-    $call HighlightElement(fab:left-control-arrow)
-    $call HighlightElement(fab:right-control-arrow)
-    {@PAL}  Press the Arrows on your keyboard (or click the buttons on screen) to move the wafer to the FURNACE station.
+    {@PAL}  Find the station shown on the gray card.
 $endif
 
 ::ActivateFurnace
 @trigger    OnFabArriveAtStation
 @when       station == "station:furnace"
 $if temp:fabTutorialStep == 2
-    $call ReleaseHighlight(fab:left-control-arrow)
-    $call ReleaseHighlight(fab:right-control-arrow)
-    {@PAL}  Great. Now press the Space Bar to add the wafer to the FURANCE to apply an Oxide Layer.
+    {@PAL}  Press the Space to add the wafer, then bring the furnace to the right temperature.
 $endif
 
 ::GateFurnace
@@ -31,44 +27,32 @@ $endif
 @when       microgame == "station:furnace"
 $call       RequireMicrogamePrecision(0.9)
 
-::FirstStationCompleted
+::StationCompleted
 @trigger    OnFabMicrogameExited
-@boostScore 100
-@once
 $if temp:fabTutorialStep == 2
     $set temp:fabTutorialStep = 3
-    {@PAL}  Your speed and accuracy are important!
-    $wait 4
-    {@PAL}  Move to the next station. The panel shows the next station is SPIN COAT.
+    {@PAL}  Now follow the gray cards and finish the rest of the tasks.
 $endif
 
 ::GeneralStun
 @trigger    OnFabStunned
 $if temp:fabTutorialStep == 2
-    {@PAL}  That's the wrong step. Find the FURNACE station.
+    {@PAL}  That's the wrong step.\n\nFind the station shown on the gray card.
 $else temp:fabTutorialStep != 2
-    {@PAL}  That's not the right step. 
+    {@PAL}  That's not the right step.\n\nFind the station shown on the gray card.
 $endif 
 
-::ArriveAtSpinCoat
-@trigger    OnFabArriveAtStation
-@when       station == "station:resist"
+::MicrogameEntered
+@trigger    OnMicrogameEntered
 $if temp:fabTutorialStep == 3
-    $set temp:fabTutorialStep = 4
-    {@PAL}  Press Space to apply the photo resist in the SPIN COAT station.
-$endif 
+    $call MinigameDismissDialogue(Box)
+$endif
 
 ::GateSpinCoat
 @trigger    OnFabMicrogameCompleted
 @when       microgame == "station:resist"
 $call       RequireMicrogamePrecision(0.8)
 
-::SecondStationCompleted
-@trigger    OnFabMicrogameExited
-$if temp:fabTutorialStep == 4
-    $set temp:fabTutorialStep = 5
-    {@PAL}  Now finish the rest of the tasks!
-$endif
 
 ::GatePhotolithography
 @trigger    OnFabMicrogameCompleted

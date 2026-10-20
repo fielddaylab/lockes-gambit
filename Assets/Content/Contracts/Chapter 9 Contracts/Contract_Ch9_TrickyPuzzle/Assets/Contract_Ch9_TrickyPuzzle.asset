@@ -17,4 +17,5 @@ MonoBehaviour:
   m_GlobalAssets: []
   m_NamedAssets:
   - {fileID: 11400000, guid: eff55cca529714947a703a689bd09f40, type: 2}
+  - {fileID: 11400000, guid: ca514872dcfe3384a97b697cba3fe034, type: 2}
   m_LiteAssets: []

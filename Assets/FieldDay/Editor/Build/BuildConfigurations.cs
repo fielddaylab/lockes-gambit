@@ -150,6 +150,7 @@ namespace FieldDay.Editor {
         }
 
         static private void ApplyWebGLBuildOptions(ConfigOptions options, bool isBatch) {
+#if UNITY_WEBGL
             WebGLExceptionSupport exceptionSupport;
             if (options.Development) {
                 exceptionSupport = WebGLExceptionSupport.FullWithStacktrace;
@@ -182,6 +183,7 @@ namespace FieldDay.Editor {
                 debugSymbolMode = WebGLDebugSymbolMode.Off;
             }
             PlayerSettings.WebGL.debugSymbolMode = debugSymbolMode;
+#endif // UNITY_WEBGL
         }
 
         static private void ApplyAndroidBuildOptions(ConfigOptions options, bool isBatch) {

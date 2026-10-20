@@ -1,6 +1,7 @@
 using BeauUtil;
 using BeauUtil.UI;
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Components;
 using FieldDay.UI;
 using System;
@@ -23,11 +24,18 @@ namespace SpaceFab.Overarching
         [Required] public MinigameZoneOverlay Overlay;
 
         [NonSerialized] public MinigameZoneStatus CachedStatus;
+        [NonSerialized] public int CursorCount = 0;
 
         public void OnRegister() {
             Cursor.onClick.AddListener(HandleClick);
             Cursor.onPointerEnter.AddListener(HandlePointerEnter);
             Cursor.onPointerExit.AddListener(HandlePointerExit);
+
+            Overlay.AlternateCursor.onClick.AddListener(HandleClick);
+            Overlay.AlternateCursor.onPointerEnter.AddListener(HandlePointerEnter);
+            Overlay.AlternateCursor.onPointerExit.AddListener(HandlePointerExit);
+
+            CursorHint.CopyTooltips(Cursor, Overlay.AlternateCursor);
 
             Cursor.enabled = false;
         }
@@ -44,12 +52,17 @@ namespace SpaceFab.Overarching
 
         private void HandlePointerEnter()
         {
-            MinigameZonesUtility.SetHoverState(this, true);
+            if (CursorCount++ == 0) {
+                MinigameZonesUtility.SetHoverState(this, true);
+                Sfx.Play("Overarching.Zone.Hover");
+            }
         }
 
         private void HandlePointerExit()
         {
-            MinigameZonesUtility.SetHoverState(this, false);
+            if (CursorCount-- == 1) {
+                MinigameZonesUtility.SetHoverState(this, false);
+            }
         }
 
         #endregion // Pointer Handlers
@@ -73,11 +86,12 @@ namespace SpaceFab.Overarching
             zone.CachedStatus = status;
 
             zone.Cursor.enabled = status > MinigameZoneStatus.Locked;
-            
+            zone.Overlay.AlternateCursor.GetComponent<Collider>().enabled = status < MinigameZoneStatus.Completed;
+
             zone.Overlay.CompletedBadge.gameObject.SetActive(status == MinigameZoneStatus.Completed);
             zone.Overlay.HighlightFill.enabled = zone.Overlay.HighlightOutline.enabled = status > MinigameZoneStatus.Locked;
 
-            zone.Overlay.NameBadge.SetActive(status == MinigameZoneStatus.NotStarted | status == MinigameZoneStatus.InProgress);
+            zone.Overlay.NameBadge.SetActive(zone.CursorCount > 0 | status == MinigameZoneStatus.NotStarted | status == MinigameZoneStatus.InProgress);
             zone.Overlay.HighlightFill.color = status == MinigameZoneStatus.Completed ? zone.Overlay.NeutralColor : zone.Overlay.ThemeColor;
         }
 
@@ -87,6 +101,7 @@ namespace SpaceFab.Overarching
             zone.Overlay.HighlightOutline.color = hoverActive ? Color.white : Color.black;
             zone.Overlay.HighlightOutline.sortingOrder = hoverActive ? -2 : -4;
             zone.Overlay.NameFill.color = hoverActive ? zone.Overlay.ThemeColor : Color.black;
+            zone.Overlay.NameBadge.SetActive(hoverActive | zone.CachedStatus == MinigameZoneStatus.NotStarted | zone.CachedStatus == MinigameZoneStatus.InProgress);
 
             if (hoverActive) {
                 if (state.HoverZone != zone) {

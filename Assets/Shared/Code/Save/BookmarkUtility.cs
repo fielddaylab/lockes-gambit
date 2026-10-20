@@ -101,6 +101,7 @@ namespace SpaceFab.Save {
             }
 
             SpacefabGame.SaveBuffer.HandleChunks();
+            SpacefabGame.SaveBuffer.HandlePostLoad();
             save.ActiveBookmark = name;
 
             // Freeze the game for the transition, leaving only the script runtime alive, then kill the

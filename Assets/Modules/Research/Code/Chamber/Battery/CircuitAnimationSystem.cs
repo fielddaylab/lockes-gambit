@@ -39,7 +39,7 @@ namespace SpaceFab.Research
             foreach (CircuitRenderer circuit in Find.Components<CircuitRenderer>())
             {
                 AdvanceFlow(circuit, deltaTime);
-                RotateShines(circuit, deltaTime);
+                //RotateShines(circuit, deltaTime);
             }
         }
 

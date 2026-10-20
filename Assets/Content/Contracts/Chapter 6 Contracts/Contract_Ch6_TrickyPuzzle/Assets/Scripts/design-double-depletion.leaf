@@ -1,0 +1,21 @@
+# basePath DesignDoubleDepletion
+// Double Depletion
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL} Take a look at that Verification Table! Two outputs, and they need different signals.
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Check the Verification Table. When A is HI, block Y. When B is LO, block X.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> You will need two Gates. One closes with HI, one closes with LO.
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> A connects to X, but is blocked by LO B. B connects to Y, but is blocked by HI A.
+    $set temp:hintGiven = 0
+$endif

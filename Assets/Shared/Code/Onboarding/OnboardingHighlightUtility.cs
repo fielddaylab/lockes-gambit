@@ -18,7 +18,7 @@ namespace SpaceFab.Onboarding {
         // focus-locked elements receive clicks. margin < 0 means "use state.DefaultMargin".
         // attachToCanvas=true groups the highlight under HighlightCanvas instead of beside its
         // target. Idempotent on id — a second Show on an already-active id is a no-op.
-        public static void Show(OnboardingHighlightState highlightState, StringHash32 id, bool lockFocus, float margin, bool attachToCanvas) {
+        public static void Show(OnboardingHighlightState highlightState, StringHash32 id, bool lockFocus, float margin, bool attachToCanvas, HighlightStyle style) {
             Assert.NotNullOrDestroyed(highlightState);
 
             if (highlightState.ActiveById.ContainsKey(id)) {
@@ -46,7 +46,7 @@ namespace SpaceFab.Onboarding {
             }
 
             Highlight highlight = highlightState.Pool.Alloc();
-            highlight.Bind(tag, resolvedMargin, canvasRect);
+            highlight.Bind(tag, resolvedMargin, canvasRect, style);
             highlightState.ActiveById[id] = highlight;
 
             if (lockFocus) {

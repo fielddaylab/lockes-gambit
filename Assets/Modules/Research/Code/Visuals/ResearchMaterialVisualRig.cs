@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BeauUtil;
 using FieldDay;
 using FieldDay.Components;
@@ -88,32 +89,14 @@ namespace SpaceFab.Research {
 
             // 5. Property icons: Show confirmed properties
             if (rig.PropertyIcons != null && rig.PropertyIcons.Length > 0) {
-                PropertyIconSprites iconAssets = Find.GlobalAsset<PropertyIconSprites>();
+                ResearchObservationChipAssets iconAssets = Find.GlobalAsset<ResearchObservationChipAssets>();
+                
                 int iconIdx = 0;
-                for (int i = 0; i < material.Properties.Length; i++) {
-                    MaterialPropertyLabel label = material.Properties[i];
-                    bool confirmed = ResearchStateUtility.HasConfirmed(researchState, material.AssetId, label, StringHash32.Null);
-                    Sprite sprite = label switch {
-                        MaterialPropertyLabel.Conductor => iconAssets.ConductorIcon,
-                        MaterialPropertyLabel.Insulator => iconAssets.InsulatorIcon,
-                        MaterialPropertyLabel.Semiconductor => iconAssets.SemiconductorIcon,
-                        MaterialPropertyLabel.PDopantFor => iconAssets.PDopantIcon,
-                        MaterialPropertyLabel.NDopantFor => iconAssets.NDopantIcon,
-                        _ => null
-                    };
+                foreach (MaterialPropertyLabel label in GetDisplayProperties(researchState, material)) {
+                    if (iconIdx >= rig.PropertyIcons.Length) return;
 
-                    if (sprite == null) { continue; }
-
-                    // Check property confirmation with substrate context
-                    if (label == MaterialPropertyLabel.PDopantFor || label == MaterialPropertyLabel.NDopantFor) {
-                        foreach (MaterialAsset context in material.Contexts) {
-                            if (ResearchStateUtility.HasConfirmed(researchState, material.AssetId, label, context.AssetId)) {
-                                confirmed = true;
-                            }
-                        }
-                    }
-
-                    if (confirmed) {
+                    if (iconAssets.TryGetIcon(label, out Sprite sprite))
+                    {
                         rig.PropertyIcons[iconIdx].gameObject.SetActive(true);
                         rig.PropertyIcons[iconIdx].sprite = sprite;
                         iconIdx++;
@@ -142,6 +125,44 @@ namespace SpaceFab.Research {
                     sprite.sprite = null;
                 }
             }
+        }
+
+        // Returns the confirmed properties to display as icons. Naive properties are excluded and
+        // more specific properties replace their corresponding base property if confirmed.
+        private static HashSet<MaterialPropertyLabel> GetDisplayProperties(ResearchMinigameState researchState, MaterialAsset material)
+        {
+            HashSet<MaterialPropertyLabel> displayProperties = new HashSet<MaterialPropertyLabel>();
+
+            for (int i = 0; i < material.Properties.Length; i++) {
+                MaterialPropertyLabel label = material.Properties[i];
+
+                // Skip naive properties
+                if (label == MaterialPropertyLabel.ConductorNaive ||
+                    label == MaterialPropertyLabel.InsulatorNaive) {
+                    continue;
+                }
+
+                bool confirmed = ResearchStateUtility.HasConfirmed(researchState, material.AssetId, label, StringHash32.Null);
+                // Check property confirmation with substrate context
+                if (label == MaterialPropertyLabel.PDopantFor || label == MaterialPropertyLabel.NDopantFor) {
+                    foreach (MaterialAsset context in material.Contexts) {
+                        if (ResearchStateUtility.HasConfirmed(researchState, material.AssetId, label, context.AssetId)) {
+                            confirmed = true;
+                        }
+                    }
+                }
+
+                if (confirmed) {
+                    // More specific properties replace the base property icon
+                    if (MaterialPropertyLabelUtility.TryGetBaseProperty(label, out MaterialPropertyLabel baseLabel)) {
+                        displayProperties.Remove(baseLabel);
+                    }
+                    
+                    displayProperties.Add(label);
+                }
+            }
+
+            return displayProperties;
         }
     }
 }

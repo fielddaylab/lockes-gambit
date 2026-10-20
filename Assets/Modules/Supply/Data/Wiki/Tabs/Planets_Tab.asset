@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fabafaf51e5ce47abdfc28005f7b8b, type: 3}
   m_Name: Planets_Tab
   m_EditorClassIdentifier: 
-  m_Title: Planets
-  m_Icon: {fileID: 21300000, guid: de92b1cbbee52f34dac4961e9253c9da, type: 3}
-  m_Pages:
+  Title: Planets
+  Icon: {fileID: 21300000, guid: 86852443075c763429aadb5b37c7b6c3, type: 3}
+  Pages:
   - {fileID: 11400000, guid: e3d745f56f0e915428308c11616a1871, type: 2}
   - {fileID: 11400000, guid: 6951b42cc48232348a5b1dd1e6757b75, type: 2}
+  - {fileID: 11400000, guid: d8e83e6be5a749842a559fc137191f23, type: 2}
+  - {fileID: 11400000, guid: 76d4c0e0d2bc9dc4ba64576a3de7fa4b, type: 2}
+  - {fileID: 11400000, guid: a24f0a9e19416a1489cd9e08b31f1586, type: 2}

@@ -37,6 +37,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1420737200516501435, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+      propertyPath: DownYShift
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420737200516501435, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+      propertyPath: HoverYShift
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420737200516501435, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+      propertyPath: DisabledYShift
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420737200516501435, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
       propertyPath: DisabledTint.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -162,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5161275308998455219, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 6787585165383491076, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
       propertyPath: m_text

@@ -1,31 +1,129 @@
 # basePath Chapter1
-
-:: FirstContractOpen
+:: FirstContractOpenCh1
 @trigger    OnContractSelectOpen
 @cutscene
 @once
-{@PAL}      You only have one contract to choose from.
-$call   HighlightElement(overarching:costs-section, false, 25, true)
-{@PAL}      It looks like it will take this many days to complete.
+
+
+
+//changed this from employee to trainee while he still owns his ship.
+
+{@PAL}		As a trainee, you'll learn to operate four systems...
+{@PAL}		...all recently upgraded with Frontier Robotics automation systems...
+{@PAL}		...aboard this obsolete ship.
+{@Player}   Hey! She's got plenty of life left in her!
+{@Player}   ...I miss my old crew already.
+
+{@PAL}      The first “contract” is your orientation. 
+//Check - did I do this right? highlight should be arrow not button highlight
+//$call   HighlightElement(overarching:costs-section, false, 25, true)
+$call   PointElement(overarching:costs-section)
+{@PAL}      This is how long the contract should take.
 $call   ReleaseAllHighlights()
-$call   HighlightElement(overarching:profit-section, false, 25, true)
-{@PAL}      ...and you'll make this much money if you can deliver.
+//ChECK:  highlight should be arrow not button highlight
+//$call   HighlightElement(overarching:profit-section, false, 25, true)
+$call   PointElement(overarching:profit-section)
+{@PAL}      ...and this is what you'll be paid.
 $call   ReleaseAllHighlights()
+
+{@PAL}      You can chip away at that huge debt! 
 $call   HighlightElement(overarching:select-contract-btn)
 
-:: FirstContractAccept
-@trigger    OnContractAccept
+//{@Player}   P.A.L., I've been doing business with my team for years. 
+//{@PAL}      As the Personal Automation Liaison and I'm WAY more useful than human assistants.
+
+
+//EDIT - KACY 
+// Added line for PAL for better flow and to reinforce debt being centeral issue player has to tackle. 
+
+$call   UnlockWikiPage("Basic Conductor")
+$call   UnlockWikiPage("Basic Insulator")
+$call   LockWikiPage("Conductor") // only Basic Conductor is available in first chapter 
+$call   LockWikiPage("Insulator") // only Basic Insulator is available in first chapter 
+
+
+::FirstContractAcceptCh1
+@trigger    OnOverarchingLoaded
 @cutscene
 @once
-$call   ReleaseAllHighlights()
 
-:: BeforeSupplyChain
+$call   ReleaseAllHighlights()
+{@PAL}      As a trainee, you'll learn to operate four systems...
+{@PAL}      ...all recently upgraded aboard this obsolete ship.
+{@Player}   Hey! She's got plenty of life left in her!
+{@PAL}      Start with either the Research or Chip Design. 
+
+
+//written to stablish PAL is sure about something that he is later incorrect about - AI literacy thread.
+//TODO - this breaks the game if you do research after design because the game is calling this and before supply chain at the same time. 
+::AfterResearchCh1
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Research)
+@cutscene
+@once
+{@PAL}      Research complete! Conductor and insulator verified.
+{@Player}   You're sure?
+{@PAL}      Absolutely, Captain.
+
+//SUGGESTION - KACY 
+// If we do add this dialogue above in, maybe adding a few more lines to establish PAL and Locke's relationship further - Sarah: i think the comic has done a lot of this. 
+
+
+:: BeforeSupplyChainCh1
 @trigger    OnOverarchingLoaded
 @when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
 @cutscene
 @once
-{@Player}    P.A.L., why can’t I build the chip yet?
-{@PAL}       We are short on conductor materials.
-{@PAL}       Your station is too slow for supply runs, so you can hire faster ships.
-{@PAL}       The ship fee and materials cost come out of the contract payment.
-{@Player}    Wait, I don’t keep all the money? Better keep costs low.
+{@PAL}      You'll need materials before you start fabricating the microchips. 
+
+
+{@Player}	I'll call the Hauler company. 
+//phone dial 
+{@Quinn}    Oh... Locke! Hiya! Suprised to see your face, is Dorian sick? 
+{@Player}	It's a long story -- I'll tell you later. 
+//Sarah: I am going to have Quinn give him the nickname "cowboy" to thread the idea of the space western. :)
+{@Quinn}    Okay, <i>Cowboy.</i> Going off on your own, eh?
+{@Quinn}    Sounds fun. You can count on me to wrangle the haulers for you.
+
+//Sarah: kacy we can't add so many lines. I like these lines, but if we are going to bring in personality, we have to do it within the current line counts I have without losing content. Some of this has to remain more flat at the start of the game because so much onboarding is happening here. 
+//{@Quinn}    Ooo, the drama, the suspense, the mystique! Please do tell more.  
+//@{Player}	I'm planning the routes now, well, I'm running everthing. It's a long story -- I'll tell you later. 
+//{@Quinn}    Okay, Cap'. I’ve got you. But I'm holding you to it.
+//{@Quinn}    You decide where you want to get your materials. I’ll handle the haulers.
+//{@Player}   Sounds easy enough. Talk to you later.
+
+// EDIT - KACY (TO-DO)
+// Editing Quinn's dialogue to match her quippiness.
+
+
+
+
+
+//#region - After Supply Chain 
+
+::AfterSupplyChainCh1
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research), IsSolutionFoundFor(Supply)
+@cutscene
+@once
+
+{@PAL}      The haulers arrived. Quinn is quite efficient... for a human. 
+{@PAL} 		Ready to try out your state of the art automated Fab bay? 
+{@Player}   Um... I think so. I used to work there with Arken.
+{@PAL}     	OOOh, this will be soooo much faster than your human teammate. 
+
+
+
+
+//#region - Fabrication 
+::AfterFabricationCh1
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research), IsSolutionFoundFor(Supply), IsSolutionFoundFor(Fabrication)
+@cutscene
+@once
+
+
+{@PAL}      You finished the orientation! 
+{@PAL}      Positive.Affirmation.exe! 
+{@Player}	uhhhh...thanks.
+{@PAL} 	    Now submit your contract and Frontier will transfer payment into your account. 

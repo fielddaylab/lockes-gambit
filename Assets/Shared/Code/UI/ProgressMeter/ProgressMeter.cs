@@ -25,16 +25,12 @@ namespace SpaceFab {
         public ProgressMeterCell CycleCellPrefab;
         public ProgressMeterCell FundsCellPrefab;
 
-        public int CellCount = 30;
-
-        // Populated by ProgressMeterUtility (RebindCells / RebuildCells). Not serialized
-        // because the cell GameObjects under the row containers are the source of truth.
         [NonSerialized] public ProgressMeterCell[] CycleCells;
         [NonSerialized] public ProgressMeterCell[] FundsCells;
 
         public void OnRegister()
         {
-            ProgressMeterUtility.EnsureCellsBound(this);
+            ProgressMeterUtility.RebindCells(this);
             ProgressMeterUtility.TryRegisterMeter(this);
         }
 
@@ -49,7 +45,7 @@ namespace SpaceFab {
         // hierarchy root before container references resolved.
         [ContextMenu("Rebuild Progress Meter Cells")]
         private void RebuildCellsContextMenu() {
-            ProgressMeterUtility.RebuildCells(this);
+            // ProgressMeterUtility.RebuildCells(this);
         }
     }
 }

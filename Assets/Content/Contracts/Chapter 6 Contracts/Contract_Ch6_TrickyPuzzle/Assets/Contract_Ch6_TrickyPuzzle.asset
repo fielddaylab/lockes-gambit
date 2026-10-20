@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Contract_Ch6_TrickyPuzzle
   m_EditorClassIdentifier: 
   m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
   m_NamedAssets:
   - {fileID: 11400000, guid: b6b6156813ad1459da51d29deb46ec23, type: 2}
+  - {fileID: 11400000, guid: 4e694a6edc7803744a7e3abfb0c494d1, type: 2}
   m_LiteAssets: []

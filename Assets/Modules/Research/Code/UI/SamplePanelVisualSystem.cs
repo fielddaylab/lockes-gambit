@@ -38,7 +38,7 @@ namespace SpaceFab.Research {
             Find.State(
                 out ChamberInterfacerState interfacerState,
                 out HypothesisViewModelState hypoVm,
-                out WikiState wikiState
+                out WikiViewState wikiState
             );
             ResearchMinigameState researchState = Find.State<ResearchMinigameState>();
 
@@ -46,7 +46,7 @@ namespace SpaceFab.Research {
                 SamplePanelVisualUtility.Apply(panel, interfacerState, hypoVm, researchState, wikiState);
                 if (panel.CompleteButton != null) {
                     Find.State(out PlayerProgressState progressState, out ContractState contractState);
-                    panel.CompleteButton.gameObject.SetActive(ContractProgressUtility.IsContractSatisfied(progressState, researchState, contractState.ContractDefinition));
+                    panel.CompleteButton.gameObject.SetActive(contractState.ContractDefinition && ContractProgressUtility.IsContractSatisfied(progressState, researchState, contractState.ContractDefinition));
                 }
             }
 
@@ -80,7 +80,7 @@ namespace SpaceFab.Research {
             ChamberInterfacerState interfacerState,
             HypothesisViewModelState hypoVm,
             ResearchMinigameState researchState,
-            WikiState wikiState
+            WikiViewState wikiState
         ) {
             if (panel == null) {
                 return;
@@ -99,41 +99,41 @@ namespace SpaceFab.Research {
             // and filled-state paths regardless of where the button
             // sits in the panel hierarchy.
             if (panel.VerifyButton != null) {
-                panel.VerifyButton.gameObject.SetActive(hypoVm.VerifyButtonVisible);
+                panel.VerifyButton.gameObject.SetActive(hypoVm.VerifyButtonVisible && !hypoVm.HypothesisVerified);
             }
 
+            WikiContent contents = Find.State<WikiContent>();
+
             if (panel.AddObservationButton != null) {
-                var contents = Find.Components<WikiContent>();
                 bool obsTabOpen = false;
-                if (contents.Count != 0 && wikiState.Expanded) {
-                    obsTabOpen = contents[0].Tabs[wikiState.ActiveTabIndex].AssetId == "Observations";
+                if (wikiState.Expanded && wikiState.CurrentTabId >= 0) {
+                    obsTabOpen = contents.Tabs[wikiState.CurrentTabId].AssetId == "Observations";
+                    // TODO: grey out button when obs tab is open
                 }
-                panel.AddObservationButton.gameObject.SetActive(hypoVm.SlotCount <= 3 && !hypoVm.VerifyButtonVisible && !obsTabOpen);
+                panel.AddObservationButton.gameObject.SetActive(hypoVm.SlotCount <= 3 && !hypoVm.HypothesisVerified);
             }
 
             if (panel.AddPropertyButton != null) {
-                var contents = Find.Components<WikiContent>();
                 bool propsTabOpen = false;
-                if (contents.Count != 0 && wikiState.Expanded) {
-                    propsTabOpen = contents[0].Tabs[wikiState.ActiveTabIndex].AssetId == "Properties";
+                if (wikiState.Expanded && wikiState.CurrentTabId >= 0) {
+                    propsTabOpen = contents.Tabs[wikiState.CurrentTabId].AssetId == "Properties";
+                    // TODO: grey out button when obs tab is open
                 }
-                panel.AddPropertyButton.gameObject.SetActive(hypoVm.SlotCount > 0 && !hypoVm.VerifyButtonVisible && !propsTabOpen);
+                panel.AddPropertyButton.gameObject.SetActive(hypoVm.SlotCount > 0 && !hypoVm.HypothesisSelected && !hypoVm.HypothesisVerified);
             }
 
             ResearchUIAssets uiAssets = Find.GlobalAsset<ResearchUIAssets>();
             ActiveChamberKind chamberKind = ChamberInterfacerUtility.GetActiveChamber(interfacerState);
 
             if (panel.VoltageChamberButton != null) {
-                panel.VoltageChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Voltage
-                    ? uiAssets.VoltagePressed : uiAssets.VoltageNormal;
+                panel.VoltageChamberButton.Interactable = chamberKind != ActiveChamberKind.Voltage;
             }
             if (panel.ThermalChamberButton != null) {
                 if (interfacerState.LastUnlockedChamber < ActiveChamberKind.Thermal) {
                     SamplePanelInputUtility.LockChamberButton(panel, ActiveChamberKind.Thermal, uiAssets);
                 }
                 else {
-                    panel.ThermalChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Thermal
-                        ? uiAssets.ThermalPressed : uiAssets.ThermalNormal;
+                    panel.ThermalChamberButton.Interactable = chamberKind != ActiveChamberKind.Thermal;
                 }
             }
             if (panel.DopingChamberButton != null) {
@@ -141,8 +141,7 @@ namespace SpaceFab.Research {
                     SamplePanelInputUtility.LockChamberButton(panel, ActiveChamberKind.Doping, uiAssets);
                 }
                 else {
-                    panel.DopingChamberButton.Image.sprite = chamberKind == ActiveChamberKind.Doping
-                        ? uiAssets.DopingPressed : uiAssets.DopingNormal;
+                    panel.DopingChamberButton.Interactable = chamberKind != ActiveChamberKind.Doping;
                 }
             }
 
@@ -213,7 +212,7 @@ namespace SpaceFab.Research {
                 if (isDopingChamber)
                 {
                     bool substrateKnown = researchState.SandboxProperties.TryGetValue(primaryMaterial.AssetId, out var substrateRecord)
-                    && !MaterialPropertyRecordUtility.IsEmpty(substrateRecord);
+                        && !MaterialPropertyRecordUtility.IsEmpty(substrateRecord);
                     panel.SubstrateSprite.sprite = primaryMaterial.GemSprite;
                     if (substrateKnown) {
                         panel.SubstrateLabel.text = primaryMaterial.ShortName;
@@ -239,10 +238,11 @@ namespace SpaceFab.Research {
                     if (filled) {
                         MaterialPropertyLabel slotLabel = hypoVm.SlotLabels[i];
                         label = MaterialPropertyLabelDisplay.GetObservationName(slotLabel);
-                        type = MaterialObservationChamberLookup.GetChamberType(slotLabel);
+                        panel.SlotChips[i].SetProperty(label, ChipFillState.Filled, locked, slotLabel, useEmptyDashedSprite: true);
+                    } else {
+                        panel.SlotChips[i].SetState(label, ChipFillState.Empty, locked, type, useEmptyDashedSprite: true);
                     }
                     panel.SlotChips[i].gameObject.SetActive(filled);
-                    panel.SlotChips[i].SetState(label, filled ? ChipFillState.Filled : ChipFillState.Empty, locked, type, useEmptyDashedSprite: true);
                 }
             }
 
@@ -255,23 +255,11 @@ namespace SpaceFab.Research {
             ObservationType hypoType = ObservationType.Component;
             if (hypoFilled) {
                 MaterialPropertyLabel hypo = hypoVm.HypothesisLabel;
-                hypoLabel = MaterialPropertyLabelDisplay.GetPropertyName(hypo);
+                hypoLabel = MaterialPropertyLabelDisplay.GetPropertyName(hypo, hypoVm.HypothesisContext);
                 hypoType = MaterialObservationChamberLookup.GetChamberType(hypo);
-            }
-            if (hypoVm.HypothesisContext != StringHash32.Null)
-            {
-                MaterialAsset hypoContext = Find.NamedAsset<MaterialAsset>(hypoVm.HypothesisContext);
-                hypoLabel += " for " + hypoContext.ShortName; // TODO: only 'confirmed' semiconductors can be slotted -- always known
-            }
-            panel.HypothesisChip.SetState(hypoLabel, hypoFilled ? ChipFillState.Filled : ChipFillState.Empty, false, hypoType);
-
-            // 4. Picker overlay. Population + layout + resize happen
-            // once on chamber load (ObservationPickerLoadUtility);
-            // disabled-state refresh happens in
-            // ObservationPickerRefreshSystem when the viewmodel changes.
-            // Here we only mirror the transient PickerOpen flag.
-            if (panel.ChipPickerOverlay != null) {
-                panel.ChipPickerOverlay.SetActive(panel.PickerOpen);
+                panel.HypothesisChip.SetProperty(hypoLabel, ChipFillState.Confirmed, false, hypo);
+            } else {
+                panel.HypothesisChip.SetState(hypoLabel, ChipFillState.Empty, false, hypoType, true);
             }
         }
     }

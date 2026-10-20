@@ -27,7 +27,7 @@ namespace SpaceFab.Narrative {
         [Header("Close")]
         // Optional. When assigned, clicking dismisses the box. Leave null for dialogue that
         // can only be dismissed via the Leaf LeafMember API.
-        [SerializeField] private DynamicButton m_CloseButton;
+        [SerializeField] private GuiButton m_CloseButton;
 
         [Header("Button")]
         [SerializeField] private GuiButton m_PrimaryButton;
@@ -47,7 +47,7 @@ namespace SpaceFab.Narrative {
             m_VisiblityGroup.blocksRaycasts = false;
 
             if (m_CloseButton != null) {
-                m_CloseButton.onClick.AddListener(HandleCloseClicked);
+                m_CloseButton.OnClick.AddListener(HandleCloseClicked);
             }
 
             if (m_PrimaryButton != null) {
@@ -67,7 +67,7 @@ namespace SpaceFab.Narrative {
 
         private void OnDestroy() {
             if (m_CloseButton != null) {
-                m_CloseButton.onClick.RemoveListener(HandleCloseClicked);
+                m_CloseButton.OnClick.RemoveListener(HandleCloseClicked);
             }
 
             if (m_PrimaryButton != null) {

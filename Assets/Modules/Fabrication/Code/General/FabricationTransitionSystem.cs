@@ -1,5 +1,6 @@
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Debugging;
 using FieldDay.Music;
 using FieldDay.Systems;
 using SpaceFab.Fabrication.Sequence;
@@ -38,7 +39,11 @@ namespace SpaceFab.Fabrication {
                 sequenceState.Level = contractState.ContractAssets.FabricationLevel;
             }
             else {
-                Log.Warn("FabricationTransistionSystem] Tried to load contract assets but returned null!");
+                if (DebugFlags.LaunchedFromThisScene) {
+                    sequenceState.Level = transitionState.DEBUG_FabricationLevel;
+                } else {
+                    Log.Warn("FabricationTransistionSystem] Tried to load contract assets but returned null!");
+                }
             }
 
             Log.Msg("[FabricationTransitionSystem] Setup complete!");

@@ -19,13 +19,27 @@ namespace SpaceFab.Fabrication.Microgames
             Rigidbody.velocity = direction * Speed;
         }
 
+        // Spawns this particle already past the reflection point, as part of a shower burst.
+        public void InitializeAsShowerParticle(float angle, float speed)
+        {
+            InitialAngle = angle;
+            Vector2 direction = Quaternion.Euler(0, 0, InitialAngle) * Vector2.right;
+            Rigidbody.velocity = direction * speed;
+            Reflected = true;
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.name == "Mirror")
             {
-                Vector2 direction = Quaternion.Euler(0, 0, -InitialAngle) * Vector2.right;
-                Rigidbody.velocity = direction * Speed;
-                Reflected = true;
+                // Shower particles are spawned already-reflected, still overlapping the mirror's
+                // collider; without this guard each one immediately re-fires this branch and spawns
+                // another shower recursively at the same spot instead of flying away.
+                if (Reflected) { return; }
+
+                float reflectedAngle = -InitialAngle;
+                SputterMicrogameUtility.SpawnParticleShower(transform.position, reflectedAngle);
+                Destroy(this.gameObject);
             }
             else if (collision.gameObject.GetComponent<SputterBoxCollider>() == null)
             {

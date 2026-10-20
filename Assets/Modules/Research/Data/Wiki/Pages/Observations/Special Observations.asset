@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isPlanet: 0
   m_Title: Special
-  m_Icon: {fileID: 21300000, guid: 73e18866f7a235a419aecec675697f66, type: 3}
+  m_Icon: {fileID: 21300000, guid: 4dd866c4bff3da9448577c3d9383faf9, type: 3}
   m_IllustrationFrames: []
   m_IllustrationFPS: 0.5
   m_Body: 

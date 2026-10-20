@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Contract_Ch7-8_FancyMater
   m_EditorClassIdentifier: 
   m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
   m_NamedAssets:
   - {fileID: 11400000, guid: a7d66b92d17454e19812d67850fbdbdd, type: 2}
+  - {fileID: 11400000, guid: 21eef5fa89b593d4aaa20008e873bbdf, type: 2}
   m_LiteAssets: []

@@ -6,37 +6,24 @@ $if MinigameHasValidSolution()
     {@PAL}  You've already researched everything you need to!
 $else
     $call   LockChamber("Thermal")
-    $set    temp:needsToOpenWiki = true
-    {@PAL}  This contract specifies that we need to research a semiconductor. \n\nLet's open up the database!
-    $wait   1
-    $call   OpenWikiTo("Properties", "Semiconductor")
-    $wait   2
-    $call   CloseWiki()
+    {@PAL}  You now have access to the Thermal Chamber.\n\nIt shows how a material's properties change when heated.
+    $call   UnlockChamber("Thermal")
+    $call   HighlightElement(research:thermal-chamber-btn, false, -1, true)
 $endif
-
-
-::OnWikiClosed
-@trigger    OnWikiClosed
-@when       !MinigameHasValidSolution(), temp:needsToOpenWiki
-$call   ReleaseAllHighlights()
-$set    temp:needsToOpenWiki = false
-{@PAL}  Interesting. Semiconductors actually seem like insulators until we heat them up.
-$wait   1
-{@PAL}  We need to re-test our materials with the thermal chamber to see if our initial identifications were correct.
-$call   UnlockChamber("Thermal")
-$call   ReleaseAllHighlights()
-$call   HighlightElement(research:thermal-chamber-btn, false, -1, true)
 
 
 // Thermal Chamber
 ::OnThermalChamberSelected
 @trigger    OnChamberSwitched
-@when       !MinigameHasValidSolution(), research:chamberId == "Thermal"
+@when       !MinigameHasValidSolution()
 $call   ReleaseAllHighlights()
-$call   HighlightElement(research:increase-heat-btn)
-$set    temp:needsToIncreaseHeat = true
-$call   CloseWiki()
-{@PAL}  You’ll need to increase the heat of the chamber to see how it effects the electrical current of the sample.
+$if     research:chamberId == "Thermal"
+    $call   HighlightElement(research:increase-heat-btn)
+    $set    temp:needsToIncreaseHeat = true
+    $call   CloseWiki()
+    {@PAL}  Add a sample and increase the temperature to heat up your materials.
+$endif
+
 
 ::OnHeatIncreased
 @trigger    OnHeatIncreased
@@ -44,37 +31,59 @@ $call   CloseWiki()
 $call   ReleaseHighlight(research:increase-heat-btn)
 $set    temp:needsToIncreaseHeat = false
 $call   CloseWiki()
-{@PAL}  Now use your database to record your observation.\nMake sure you include all required observations for the property!
+{@PAL}  Now click <color=yellow>ADD OBSERVATION</color>.\n\nThis time you'll add a thermal observation.
 
 ::OnMaterialExploded
 @trigger    OnMaterialExploded
 $call   CloseWiki()
-{@PAL}  Be careful! Each material has its own temperature limit.\nIf you exceed it, the material will explode.
+{@PAL}  This material exploded because it can't handle <color=red>HIGH</color> heat.\n\nTry again with less heat.
 
 ::OnVerifyButtonShown
 @trigger    OnVerifyButtonShown
 @when   !MinigameHasValidSolution()
 $call   CloseWiki()
-{@PAL}  Let's check if your observations match the selected hypothesis.
+{@PAL}  Click <color=yellow>VERIFY</color> to check your results.
 
 ::OnHypothesisCorrect
 @trigger    OnHypothesisSubmitted
 @when   result == "success"
 $call   CloseWiki()
+$call   ReleaseAllHighlights()
 $if MinigameHasValidSolution()
     {@PAL}  Great. You've completed all research tasks! Let's return to the ship.
 $elseif research:primaryMaterial == "Silicon"
-    {@PAL}  Great. You've found a semiconductor! Try other samples with the thermal chamber to see if our initial identifications were correct.
+    {@PAL}  The Thermal Chamber confirmed that silicon conducts current when heated.\n\nIt's a semiconductor, not an insulator.
 $else
-    {@PAL}  Correct. Try other samples with the thermal chamber to see if our initial identifications were correct.
+    {@PAL}  Correct. Test your other samples.
 $endif
 
-::OnHypothesisIncorrect
+::OnHypothesisIncorrectHypothesisMismatch
 @trigger    OnHypothesisSubmitted
-@when   !MinigameHasValidSolution(), result == "failure"
+@when       result == "failure", reason == "hypothesis_mismatch"
+$call   ReleaseAllHighlights()
 $call   CloseWiki()
-$if     research:primaryMaterial == "Silicon"
-    {@PAL}  That doesn't seem right. Remember that semiconductors don't allow current to pass, and current increases when heat is applied.
-$else
-    {@PAL}  That doesn't seem right. Try changing the hypothesis or select a different observation.
-$endif
+{@PAL}  Your Property was incorrect.\n\nTry again.
+
+::OnHypothesisIncorrectObservationMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "observation_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
+
+::OnHypothesisIncorrectInvalidObservation
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "invalid_observation"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  One or more of your Observations were incorrect. Those are removed.\n\nTry again.
+
+:: CopperNaiveObservationFillIn
+@function	OnSlotFilled
+@when	research:primaryMaterial == "Copper", !HasConfirmedProperty("Copper", Conductor)
+$call AddResearchObservation("Copper", Conductive)
+
+:: SiliconNaiveObservationFillIn
+@function	OnSlotFilled
+@when	research:primaryMaterial == "Silicon", !HasConfirmedProperty("Silicon", Semiconductor)
+$call AddResearchObservation("Silicon", NonConductive)

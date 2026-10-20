@@ -63,6 +63,8 @@ Shader "SpaceFab/Simple Color Dither"
             #pragma target 3.0
             #pragma multi_compile_instancing
 			#pragma shader_feature_local_fragment _ FD_PREMULTIPLY_ALPHA
+			#pragma multi_compile_local _ UNITY_UI_CLIP_RECT
+            #pragma multi_compile_local_fragment _ UNITY_UI_ALPHACLIP
 
             #include "Assets/FieldDay/_Assets/Shaders/CGIncludes/UI.cginc"
             #include "Assets/FieldDay/_Assets/Shaders/CGIncludes/Dithering.cginc"
@@ -75,10 +77,10 @@ Shader "SpaceFab/Simple Color Dither"
                 half4 color = f.color;
     
                 UIRectClip(f.mask, color);
-                UIAlphaClip(color);
 
                 color.a = invstep(GetBayerThreshold8(screenPos.xy / _DitherScale), color.a);
     
+                UIAlphaClip(color);
                 PremultiplyAlpha(color);
                 return color;
             }

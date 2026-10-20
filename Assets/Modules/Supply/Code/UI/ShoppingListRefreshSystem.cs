@@ -28,19 +28,21 @@ namespace SpaceFab.Supply
 
             ShoppingListLayoutState layoutState = Find.State<ShoppingListLayoutState>();
 
-            if (layoutState.ListExpanded && layoutState.CollapseTransform.position.y != 0)
+            if (layoutState.ListExpanded && layoutState.IsCollapsedVisually)
             {
+                layoutState.IsCollapsedVisually = false;
                 MoveToPosition(layoutState, 0f);
             }
-            else if (!layoutState.ListExpanded && layoutState.CollapseTransform.position.y != layoutState.CollapseYValue)
+            else if (!layoutState.ListExpanded && !layoutState.IsCollapsedVisually)
             {
+                layoutState.IsCollapsedVisually = true;
                 MoveToPosition(layoutState, layoutState.CollapseYValue);
             }
         }
 
         private static void MoveToPosition(ShoppingListLayoutState layoutState, float targetY)
         {
-            float currentY = layoutState.CollapseTransform.position.y;
+            float currentY = layoutState.CollapseTransform.localPosition.y;
             if (Mathf.Abs(currentY - targetY) < 0.001f) return;
 
             layoutState.ToggleRoutine.Replace(GameLoop.Host,

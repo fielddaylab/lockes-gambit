@@ -17,7 +17,7 @@ namespace SpaceFab.Fabrication.Layout
         FullArrows,
         FullArrowsMinusMiddle,
         Mouse,
-        ADKeys
+        ADKeysAndSpace
     }
 
     [CreateAssetMenu(menuName = "SpaceFab/Fabrication/InstructionLookup")]
@@ -32,8 +32,6 @@ namespace SpaceFab.Fabrication.Layout
         public InstructionSet EtchInstructions;
 
         public InstructionSet IonInstructions;
-
-        public InstructionSet SputterInstructions;
 
         [Space(5)]
         [Header("Key Images")]
@@ -77,7 +75,6 @@ namespace SpaceFab.Fabrication.Layout
             else if (stationID == FabricationConsts.PHOTOLITHOGRAPHY_STATION_ID) return lookup.PhotolithographyInstructions;
             else if (stationID == FabricationConsts.ETCH_STATION_ID) return lookup.EtchInstructions;
             else if (stationID == FabricationConsts.ION_STATION_ID) return lookup.IonInstructions;
-            else if (stationID == FabricationConsts.SPUTTER_STATION_ID) return lookup.SputterInstructions;
             else return null;
         }
 

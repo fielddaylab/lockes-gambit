@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78093ac5e7fad463894f49b0b629d47c, type: 2}
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
-  m_title: Filter
+  m_title: Splitter
   m_description: This is where the contract is described
   m_client:
     m_Source: cm
@@ -29,6 +29,8 @@ MonoBehaviour:
   m_contractType: 0
   m_difficulty: 0
   m_unlocksBigBattery: 0
+  m_unlocksThermalChamber: 1
+  m_unlocksDopingChamber: 1
   StreamedPack:
     m_HashValue: 1148841139
   AssetSet:

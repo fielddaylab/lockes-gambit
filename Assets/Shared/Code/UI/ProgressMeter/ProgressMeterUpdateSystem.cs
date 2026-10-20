@@ -72,7 +72,7 @@ namespace SpaceFab {
                 }
 
                 // apply visual refresh
-                ProgressMeterUtility.EnsureCellsBound(meterState.ActiveMeter);
+                // ProgressMeterUtility.EnsureCellsBound(meterState.ActiveMeter);
                 ProgressMeterUtility.RefreshVisuals(meterState.ActiveMeter, meterState);
                 meterState.NeedsRefresh = false;
             }

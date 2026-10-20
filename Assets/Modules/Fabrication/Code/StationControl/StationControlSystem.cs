@@ -131,6 +131,8 @@ namespace SpaceFab.Fabrication.StationControl {
                 stationState.Phase = StationControlPhase.InMicrogame;
                 stationState.PhaseTimer = 0f;
 
+                ScriptUtility.Trigger(FabricationScriptTriggers.OnMicrogameEntered);
+
                 sequenceState.MoveAwayRequested = true;
             }
         }
@@ -251,7 +253,7 @@ namespace SpaceFab.Fabrication.StationControl {
                 Log.Msg("[StationControlSystem] exit timer elapsed; ExitingMicrogame -> AtStation");
 
                 // trigger leaf script here
-                ScriptUtility.Trigger(FabricationScriptTriggers.OnMicrogrameExited);
+                ScriptUtility.Trigger(FabricationScriptTriggers.OnMicrogameExited);
 
                 Game.Events.Dispatch(GameEvents.FabStationExit);
                 stationState.Phase = StationControlPhase.AtStation;

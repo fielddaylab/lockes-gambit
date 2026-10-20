@@ -1,11 +1,14 @@
+using BeauRoutine;
 using FieldDay;
 using FieldDay.HID;
 using FieldDay.UI;
 using SpaceFab.Materials;
 using SpaceFab.Onboarding;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static SpaceFab.Research.ResearchObservationChipAssets;
 
 namespace SpaceFab.Research {
     /// <summary>
@@ -21,11 +24,14 @@ namespace SpaceFab.Research {
     /// prefab.
     /// </summary>
     public class ResearchObservationChip : MonoBehaviour {
-        public Image Background;
         public TMP_Text LabelText;
         public Image Icon;
 
-        public GameObject LockedOverlay;
+        public Image[] BackgroundGraphics;
+        public Image[] OutlineGraphics;
+        public Graphic[] BackgroundTint;
+        public Graphic[] ContentTint;
+
         public CursorHint Click;
 
         // Onboarding highlight handle, left unassigned on the prefab. Chips are pool-allocated
@@ -39,7 +45,22 @@ namespace SpaceFab.Research {
 
         // Label color applied by the most recent SetState, so the
         // disabled visual can restore it when re-enabled.
-        private Color m_BaseLabelColor;
+        [NonSerialized] private ColorPalette2 m_LastAssignedPalette;
+        [NonSerialized] private Color m_LastAssignedIconColor;
+        [NonSerialized] private bool m_TintIcon;
+
+        public void SetProperty(string text, ChipFillState fillState, bool locked, MaterialPropertyLabel propertyLabel, bool useEmptyDashedSprite = false) {
+            ResearchObservationChipAssets assets = Find.GlobalAsset<ResearchObservationChipAssets>();
+            bool empty = fillState == ChipFillState.Empty;
+
+            ObservationType observationType = MaterialObservationChamberLookup.GetChamberType(propertyLabel);
+            ApplyShape(assets, observationType, fillState, useEmptyDashedSprite);
+            ApplyProperty(assets, propertyLabel);
+
+            LabelText.text = string.IsNullOrEmpty(text) ? string.Empty : text;
+
+            SetPickerChipDisabledVisual(!empty && locked);
+        }
 
         // Applies the chip's appearance from the global visual asset.
         // observationType selects the sprite set; fillState selects within
@@ -49,63 +70,14 @@ namespace SpaceFab.Research {
         // used by sample-panel slot chips to indicate "the hypothesis
         // requires a value here, but the player hasn't picked one yet."
         public void SetState(string text, ChipFillState fillState, bool locked, ObservationType observationType, bool useEmptyDashedSprite = false) {
-            ResearchObservationChipAssets asset = Find.GlobalAsset<ResearchObservationChipAssets>();
+            ResearchObservationChipAssets assets = Find.GlobalAsset<ResearchObservationChipAssets>();
             bool empty = fillState == ChipFillState.Empty;
 
-            if (LabelText != null) {
-                LabelText.text = string.IsNullOrEmpty(text) ? string.Empty : text;
-                if (asset != null) {
-                    LabelText.color = empty ? asset.LabelEmptyColor : asset.LabelFilledColor;
-                }
-                m_BaseLabelColor = LabelText.color;
-            }
+            ApplyShape(assets, observationType, fillState, useEmptyDashedSprite);
 
-            if (Background != null) {
-                Background.color = Color.white;
+            LabelText.text = string.IsNullOrEmpty(text) ? string.Empty : text;
 
-                Sprite sprite = null;
-                bool spriteOk = false;
-                if (asset != null) {
-                    if (empty && useEmptyDashedSprite && asset.EmptySlotSprite != null) {
-                        sprite = asset.EmptySlotSprite;
-                        spriteOk = true;
-                    } else {
-                        spriteOk = asset.TryGetSprite(observationType, fillState, out sprite);
-                    }
-                }
-                if (spriteOk) {
-                    Background.sprite = sprite;
-                    Background.enabled = true;
-
-                } else {
-                    // No sprite registered for this observation type yet —
-                    // hide the chip background so it doesn't render as a
-                    // default white square.
-                    Background.enabled = false;
-                }
-            }
-
-            // fill chip icon
-            if (Icon != null)
-            {
-                Icon.color = Color.white;
-                Sprite iconSprite = null;
-
-                // only add icons if the chip is not empty
-                if (asset != null && !empty && asset.TryGetIcon(observationType, out iconSprite))
-                {
-                    Icon.sprite = iconSprite;
-                    Icon.enabled = true;
-                }
-                else
-                {
-                    Icon.enabled = false;
-                }
-            }
-
-            if (LockedOverlay != null) {
-                LockedOverlay.SetActive(!empty && locked);
-            }
+            SetPickerChipDisabledVisual(!empty && locked);
         }
 
         // Applies the "already selected in the sample panel" greyed-out
@@ -117,16 +89,82 @@ namespace SpaceFab.Research {
         // SetState (wiki characteristics chips) must not toggle this.
         public void SetPickerChipDisabledVisual(bool disabled) {
             ResearchObservationChipAssets asset = Find.GlobalAsset<ResearchObservationChipAssets>();
-            if (asset == null) {
-                return;
+            ColorPalette2F palette = m_LastAssignedPalette;
+            Color iconTint = m_LastAssignedIconColor;
+            if (disabled) {
+                palette.Content *= asset.SelectedBlend;
+                palette.Background *= asset.SelectedBlend;
+                iconTint *= asset.SelectedBlend;
             }
 
-            if (Background != null) {
-                Background.color = disabled ? asset.ChipDisabledTint : Color.white;
+            if (!m_TintIcon) {
+                Icon.color = iconTint;
             }
-            if (LabelText != null) {
-                LabelText.color = disabled ? asset.LabelDisabledColor : m_BaseLabelColor;
+
+            UpdatePalette(palette);
+        }
+
+        public void ApplyUnselectableStyle() {
+            ResearchObservationChipAssets asset = Find.GlobalAsset<ResearchObservationChipAssets>();
+            ColorPalette2 palette = asset.UnselectablePalette;
+            UpdatePalette(palette);
+        }
+
+        public void SetAsSelected() {
+
+        }
+
+        private void UpdatePalette(ColorPalette2F palette) {
+            for(int i = 0; i < BackgroundTint.Length; i++) {
+                BackgroundTint[i].color = palette.Background;
             }
+            for (int i = 0; i < ContentTint.Length; i++) {
+                ContentTint[i].color = palette.Content;
+            }
+
+            if (m_TintIcon) {
+                Icon.SetColor(palette.Content);
+            }
+        }
+
+        public void ApplyShape(ResearchObservationChipAssets assets, ObservationType observationType, ChipFillState fillState, bool useEmptyDashedSprite) {
+            var shape = assets.GetShape(observationType);
+            bool isVisible = true;
+            Color iconColor = Color.white;
+
+            if (fillState == ChipFillState.Empty) {
+                isVisible = useEmptyDashedSprite;
+                shape = assets.GetEmptyShape(observationType);
+            } else if (observationType >= ObservationType.ConfirmedProperty && fillState != ChipFillState.Confirmed) {
+                shape.Palette = assets.UnidentifiedPropertyPalette;
+                iconColor = assets.UnidentifiedPropertyIconTint;
+            }
+
+            foreach (var graphic in BackgroundGraphics) {
+                graphic.enabled = isVisible;
+                graphic.sprite = shape.Fill;
+            }
+            foreach (var graphic in OutlineGraphics) {
+                graphic.enabled = isVisible;
+                graphic.sprite = shape.Outline;
+            }
+
+            Icon.enabled = isVisible;
+            LabelText.enabled = isVisible;
+
+            m_LastAssignedIconColor = Icon.color = iconColor;
+
+            Positioning.SetHeightDelta((RectTransform)transform, shape.Height);
+            Positioning.SetSizeDelta(Icon.rectTransform, shape.IconHeight, shape.IconHeight);
+            
+            m_LastAssignedPalette = shape.Palette;
+            m_TintIcon = observationType < ObservationType.ConfirmedProperty;
+            UpdatePalette(shape.Palette);
+        }
+
+        public void ApplyProperty(ResearchObservationChipAssets assets, MaterialPropertyLabel propertyType) {
+            Icon.enabled = assets.TryGetIcon(propertyType, out Sprite sprite);
+            Icon.sprite = sprite;
         }
     }
 }

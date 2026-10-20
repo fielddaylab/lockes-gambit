@@ -65,20 +65,18 @@ namespace SpaceFab.Narrative {
         /// </summary>
         public static void Invoke(DialogueButtonAction action) {
             switch (action) {
-                case DialogueButtonAction.OpenProperties:
-                    // WikiUtility.OpenTo resolves WikiState without a presence guard of its own, so
-                    // check here first (same contract as WikiScripting's Leaf members).
-                    if (!Game.SharedState.Has<WikiState>()) { return; }
-
-                    // Empty page id: open to the tab's remembered page, or its first unlocked one.
-                    // In a scene whose tab set has no Material Properties tab, the id is dropped by
-                    // the resolver and the wiki simply opens where it was.
-                    WikiUtility.OpenTo(MaterialPropertiesTabId, default);
+                case DialogueButtonAction.OpenProperties: {
+                    if (Game.SharedState.TryGet(out WikiViewState state)) {
+                        WikiUtility.OpenTo(state, MaterialPropertiesTabId, default);
+                    }
                     break;
-                case DialogueButtonAction.OpenObservations:
-                    if (!Game.SharedState.Has<WikiState>()) { return; }
-                    WikiUtility.OpenTo(MaterialObservationsTabId, default);
+                }
+                case DialogueButtonAction.OpenObservations: {
+                    if (Game.SharedState.TryGet(out WikiViewState state)) {
+                        WikiUtility.OpenTo(state, MaterialObservationsTabId, default);
+                    }
                     break;
+                }
                 default:
                     break;
             }

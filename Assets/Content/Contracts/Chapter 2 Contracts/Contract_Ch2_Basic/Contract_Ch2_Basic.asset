@@ -15,7 +15,9 @@ MonoBehaviour:
   m_requiredMaterialProperties:
   - {fileID: 11400000, guid: 6d66cd15838f54a4fb236b7a33f7ff29, type: 2}
   - {fileID: 11400000, guid: 2f285b257626f4df1a1a7f21403d89c8, type: 2}
-  m_omitFromSupplyRequirements: []
+  - {fileID: 11400000, guid: 48f18b58bb0e54eb399bf888debb2842, type: 2}
+  m_omitFromSupplyRequirements:
+  - {fileID: 11400000, guid: 48f18b58bb0e54eb399bf888debb2842, type: 2}
   m_title: Criss-Cross Chip
   m_description: Flip some inputs.
   m_client:

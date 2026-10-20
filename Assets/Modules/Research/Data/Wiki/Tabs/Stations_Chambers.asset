@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stations_Chambers
   m_EditorClassIdentifier: 
   m_Title: Stations/Chambers
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 21300000, guid: 0f8dccde3587f2b4ba2a15e1b3f568c8, type: 3}
   m_Pages:
   - {fileID: 11400000, guid: a443de496d37b444c81a9966a52f6d9f, type: 2}
   - {fileID: 11400000, guid: d79ba5d5bb567014b94c6a2d28694764, type: 2}

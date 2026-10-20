@@ -9,6 +9,7 @@ namespace SpaceFab.Supply {
 
         [Header("Display")]
         public Sprite BodyImage;
+        public Sprite BodyOutline;
 
         [Header("Icon")]
         public Sprite Icon;

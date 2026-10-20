@@ -54,7 +54,7 @@ namespace SpaceFab.Fabrication {
                     ProcessPreAttempt(modeState, onboardState, sequenceState, visualsState, fabState);
                     break;
                 case LevelMode.AttemptLeadIn:
-                    ProcessAttemptLeadIn(modeState, countdownState);
+                    ProcessAttemptLeadIn(modeState, countdownState, visualsState);
                     break;
                 case LevelMode.Attempt:
                     ProcessAttempt(modeState, sequenceState, interruptState, visualsState, fabState, stationState);
@@ -80,7 +80,7 @@ namespace SpaceFab.Fabrication {
             }
         }
 
-        static private void ProcessAttemptLeadIn(ModeState modeState, CountdownState countdownState)
+        static private void ProcessAttemptLeadIn(ModeState modeState, CountdownState countdownState, SequenceVisualsState visualsState)
         {
             // poll for leadin countdown completed
             if (countdownState.CountdownCompletedThisFrame)
@@ -92,6 +92,11 @@ namespace SpaceFab.Fabrication {
                 // update robot visual
                 RobotVisualsUtility.UpdateLayer(Find.State<RobotVisualsState>());
                 MicrogameCanvasUtility.HideStationInstructions(Find.State<MicrogameCanvasState>());
+
+                // show the layer instruction panel (rows were built during the lead-in reset)
+                if (visualsState.LayerInstructionPanel != null) {
+                    visualsState.LayerInstructionPanel.Show();
+                }
 
                 //trigger leaf script
                 ScriptUtility.Trigger(FabricationScriptTriggers.OnAttempt);

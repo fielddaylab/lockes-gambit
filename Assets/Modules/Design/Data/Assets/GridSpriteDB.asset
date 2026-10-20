@@ -21,20 +21,23 @@ MonoBehaviour:
   NSide: {fileID: 21300000, guid: 295945768a71e314d86071fab8472481, type: 3}
   PSide: {fileID: 21300000, guid: 1a6adfc6ac2bd394aa03916b29a0d84a, type: 3}
   InvertedOverlay: {fileID: 21300000, guid: 598d496783b3adb47a14ea514a4605fd, type: 3}
-  InvertedOverlayBase: {fileID: 21300000, guid: c9cb3f3cb69fc2841933aabc683be7f8, type: 3}
+  InvertedOverlayBase: {fileID: 21300000, guid: 598d496783b3adb47a14ea514a4605fd, type: 3}
   Via: {fileID: 21300000, guid: 1abbd0722d61d414488b13bdc09fbdcc, type: 3}
   ViaBase: {fileID: 21300000, guid: e4fc8657b7ddcba4ba0ec0ea630590ad, type: 3}
+  ViaHi: {fileID: 21300000, guid: 9b5b03ea6e85ada49ab1203d63ad9a23, type: 3}
+  ViaLo: {fileID: 21300000, guid: ed0b23e17e4612e40a3c452a681734ef, type: 3}
+  ViaUnstable: {fileID: 21300000, guid: f21cf33ea34738d47aefa3acf30c1fd4, type: 3}
   Gate: {fileID: 21300000, guid: 2bce72bed08ccfd48afbfdd8ba429c0f, type: 3}
-  IOInner: {fileID: 0}
-  IOOuter: {fileID: 0}
+  GateHi: {fileID: 21300000, guid: b9587eed50c58a349b763490fe33d4c5, type: 3}
+  GateLo: {fileID: 21300000, guid: c005463ba2b679c4ab01459bc83637a6, type: 3}
   InputConstantHigh: {fileID: 21300000, guid: ccd825c774947c347bff4107e50f33a8, type: 3}
   InputConstantLow: {fileID: 21300000, guid: 3cc91fe61cae8e34a8692df98f8a15e4, type: 3}
   FlowHiAbove: {fileID: 21300000, guid: 6e3cb9e654e0be14881cf55eb65ff679, type: 3}
   FlowLoAbove: {fileID: 21300000, guid: f9ee1447e10cd734fa83ea8cbcb8d96b, type: 3}
-  FlowUnstableAbove: {fileID: 21300000, guid: 711a3f4979bce9b4a9e10fcef9e5b84b, type: 3}
-  FlowHiBelow: {fileID: 21300000, guid: 5470c5cf47724d94cb91b78743f92178, type: 3}
-  FlowLoBelow: {fileID: 21300000, guid: 0000528798af3d742b42798ef503b719, type: 3}
-  FlowUnstableBelow: {fileID: 21300000, guid: 691f87bd2f7ba074db27fc2fd484b8e6, type: 3}
+  FlowUnstableAbove: {fileID: 21300000, guid: 1c01b7e2fffb99e4c83cd69cfdb0af25, type: 3}
+  FlowHiBelow: {fileID: 21300000, guid: 6e3cb9e654e0be14881cf55eb65ff679, type: 3}
+  FlowLoBelow: {fileID: 21300000, guid: f9ee1447e10cd734fa83ea8cbcb8d96b, type: 3}
+  FlowUnstableBelow: {fileID: 21300000, guid: 1c01b7e2fffb99e4c83cd69cfdb0af25, type: 3}
   InputToggleBackgroundHi: {fileID: 21300000, guid: e877ce26fc146df44af91033f10f79fe, type: 3}
   InputToggleBackgroundLow: {fileID: 21300000, guid: 1072ddcf57df7df4e8758d5554cfa721, type: 3}
   InputToggleArrow: {fileID: 21300000, guid: b8c34a44a51433b4d88043a596acd43e, type: 3}
@@ -44,7 +47,7 @@ MonoBehaviour:
   InputToggleHiTextColor: {r: 0.78823537, g: 0.25882354, b: 0.06666667, a: 1}
   OutputToggleBackground: {fileID: 21300000, guid: 38df8dd3b4a49334db9aaa6c19c1437e, type: 3}
   OutputArrow: {fileID: 21300000, guid: bfb6eb2cafb881543a5d7303288f375a, type: 3}
-  OutputEmptyColor: {r: 1, g: 1, b: 1, a: 1}
-  OutputEmptyTextColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
-  OutputUnstableColor: {r: 1, g: 0.26630434, b: 0, a: 1}
-  OutputUnstableTextColor: {r: 0.4339623, g: 0.115566045, b: 0, a: 1}
+  OutputEmptyColor: {r: 0.9647059, g: 0.89411765, b: 0.83137256, a: 1}
+  OutputEmptyTextColor: {r: 0.5882353, g: 0.5019608, b: 0.42745098, a: 1}
+  OutputUnstableColor: {r: 1, g: 0, b: 0, a: 1}
+  OutputUnstableTextColor: {r: 1, g: 0.7688679, b: 0.7824334, a: 1}

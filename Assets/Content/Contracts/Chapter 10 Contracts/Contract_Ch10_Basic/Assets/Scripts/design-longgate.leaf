@@ -1,0 +1,7 @@
+# basePath DesignLongGate
+// Long Gate
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+{@PAL}  <color=yellow>Hint:</color> You can use two Gates on a single transistor.

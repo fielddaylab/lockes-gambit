@@ -86,6 +86,9 @@ namespace SpaceFab.Research {
 
             if (!atomicView) {
                 ResearchMaterialVisualRigUtility.ApplyPropertiesToRig(instance.Rig, material, null);
+                MaterialAtomicViewUtility.Clear(instance.AtomicView);
+                MaterialAtomicViewUtility.Clear(instance.PolyelementalAtomicView.MaterialAtoms[0]);
+                MaterialAtomicViewUtility.Clear(instance.PolyelementalAtomicView.MaterialAtoms[1]);
             }
             else {
                 Find.State(out ResearchMinigameState researchState);

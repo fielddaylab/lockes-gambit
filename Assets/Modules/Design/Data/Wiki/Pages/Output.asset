@@ -12,12 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Output
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Output
-  m_Icon: {fileID: 21300000, guid: 178e0bc78a95d5143a61df295247845c, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 21300000, guid: fdb0de49db2efe14ca58754bc2d202bd, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: Outputs receive signals. They must match the Evaluation Table to proceed.
-  m_MaterialId:
+  Title: Output
+  Icon: {fileID: 21300000, guid: 4604d27db96d0e945868cc3ea8bed781, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: ba5fce11d67c483448b41dd7f64ab717, type: 3}
+  - {fileID: 21300000, guid: 78d0169ffe57e4a499d826ae622bbd2d, type: 3}
+  - {fileID: 21300000, guid: 9049be8e3edaa354e8523e25120d556a, type: 3}
+  - {fileID: 21300000, guid: ff8b36ffb3a773e4fba5c6ecc58503e8, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: Outputs receive signals. They must receive the signal shown in the Verification
+    Table for each case to complete the chip.
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 1

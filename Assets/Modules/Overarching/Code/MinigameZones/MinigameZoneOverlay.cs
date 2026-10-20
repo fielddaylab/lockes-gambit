@@ -27,6 +27,9 @@ namespace SpaceFab.Overarching {
         public Color ThemeColor;
         public Color NeutralColor;
 
+        [Header("Alternate Cursor")]
+        public CursorHint AlternateCursor;
+
         private void Awake() {
             
         }

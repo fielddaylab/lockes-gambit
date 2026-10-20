@@ -26,7 +26,7 @@ namespace SpaceFab.Research {
                 new SysPermissions()
                     .ReadShared<HypothesisViewModelState>()
                     .ReadShared<ChamberInterfacerState>()
-                    .ReadWriteShared<WikiState>()
+                    .ReadWriteShared<WikiViewState>()
             );
         }
 
@@ -34,7 +34,7 @@ namespace SpaceFab.Research {
             Find.State(
                 out HypothesisViewModelState viewModel,
                 out ChamberInterfacerState interfacerState,
-                out WikiState wikiState
+                out WikiViewState wikiState
             );
 
             bool changed = viewModel.HypothesisChangedThisFrame
@@ -44,7 +44,7 @@ namespace SpaceFab.Research {
                 return;
             }
 
-            WikiVisualsUtility.Invalidate(wikiState, WikiVisualDirty.PageContent);
+            WikiUtility.Invalidate(wikiState, WikiViewDirtyFlags.PageChips);
         }
     }
 }

@@ -1,0 +1,54 @@
+# basePath FabricationCharger
+
+::FirstWaferGeneration
+@trigger    OnFabPreAttempt
+$if temp:fabTutorialStep == 0
+    $set temp:fabTutorialStep = 1
+    $call HighlightElement(fab:generate-button)
+$endif
+
+::FirstMovement
+@trigger    OnFabAttempt
+$if temp:fabTutorialStep == 1
+    $set temp:fabTutorialStep = 2
+$endif
+
+::ActivateFurnace
+@trigger    OnFabArriveAtStation
+@when       station == "station:furnace"
+$if temp:fabTutorialStep == 2
+$endif
+
+::GateFurnace
+@trigger    OnFabMicrogameCompleted
+@when       microgame == "station:furnace"
+$call       RequireMicrogamePrecision(0.9)
+
+::StationCompleted
+@trigger    OnFabMicrogameExited
+$if temp:fabTutorialStep == 2
+    $set temp:fabTutorialStep = 3
+$endif
+
+::GeneralStun
+@trigger    OnFabStunned
+$if temp:fabTutorialStep == 2
+$else temp:fabTutorialStep != 2
+$endif 
+
+
+::GateSpinCoat
+@trigger    OnFabMicrogameCompleted
+@when       microgame == "station:resist"
+$call       RequireMicrogamePrecision(0.8)
+
+
+::GatePhotolithography
+@trigger    OnFabMicrogameCompleted
+@when       microgame == "station:photolithography"
+$call       RequireMicrogamePrecision(0.9)
+
+::GateEtch
+@trigger    OnFabMicrogameCompleted
+@when       microgame == "station:etch"
+$call       RequireMicrogamePrecision(0.9)

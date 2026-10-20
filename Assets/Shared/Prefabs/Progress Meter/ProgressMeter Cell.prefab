@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 14, y: 14}
+  m_SizeDelta: {x: 9.5, y: 23.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3340686959877115579
 MonoBehaviour:
@@ -53,6 +53,7 @@ MonoBehaviour:
   Rect: {fileID: 8817491800892740873}
   BaseImage: {fileID: 6358028402490028381}
   OverlayImage: {fileID: 1817740910923524450}
+  xMarkImage: {fileID: 0}
 --- !u!1 &7284137841464059756
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 661674077ddd6429f9d6734103398d17, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 84d1fdd26283d405bba7136c40601eed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

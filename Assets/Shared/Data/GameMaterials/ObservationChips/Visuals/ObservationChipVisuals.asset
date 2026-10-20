@@ -14,37 +14,137 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ObservationSprites:
   - ObservationType: 0
-    EmptyChip: {fileID: 21300000, guid: 498bc0e2ff8c3b24ebf4d37f66077e0a, type: 3}
-    FilledChip: {fileID: 21300000, guid: 9a8efb5610039524a90a7a089b4aca1e, type: 3}
-    ConfirmedChip: {fileID: 0}
-    ChipIcon: {fileID: 21300000, guid: 71b46c7fb7750e741b6f85aedc5edbd2, type: 3}
+    Background: {fileID: 21300000, guid: 15df62b4b68ae834e823de9d841a1779, type: 3}
+    Outline: {fileID: 21300000, guid: d2dc0ecc30fc69a4eb68e9adaf3751ab, type: 3}
+    BaseColorPalette:
+      Content:
+        serializedVersion: 2
+        rgba: 4278190080
+      Background:
+        serializedVersion: 2
+        rgba: 4287034614
+    Height: 30
+    IconHeight: 22
+    DefaultIcon: {fileID: 21300000, guid: b39076c174957844ea10ba48a069b5d2, type: 3}
   - ObservationType: 1
-    EmptyChip: {fileID: 21300000, guid: 717fc0b0465560744b70b21738e8a358, type: 3}
-    FilledChip: {fileID: 21300000, guid: 9864b985e94286a40b4f4e8f1598ba6a, type: 3}
-    ConfirmedChip: {fileID: 0}
-    ChipIcon: {fileID: 21300000, guid: bebde9c7118c9254a914fb282430fd73, type: 3}
+    Background: {fileID: 21300000, guid: 48780f1e527aab44d88940285db5df17, type: 3}
+    Outline: {fileID: 21300000, guid: 5c597097553e2cc4fb0bf522f2a211bc, type: 3}
+    BaseColorPalette:
+      Content:
+        serializedVersion: 2
+        rgba: 4278190080
+      Background:
+        serializedVersion: 2
+        rgba: 4282288109
+    Height: 30
+    IconHeight: 22
+    DefaultIcon: {fileID: 21300000, guid: e4b38526c87e71a49b9112645bf7c05d, type: 3}
   - ObservationType: 2
-    EmptyChip: {fileID: 21300000, guid: 498bc0e2ff8c3b24ebf4d37f66077e0a, type: 3}
-    FilledChip: {fileID: 21300000, guid: 8213528dea6b54422ae20da9de5acb7b, type: 3}
-    ConfirmedChip: {fileID: 0}
-    ChipIcon: {fileID: 21300000, guid: 7b8304c21f933a940bd61bb604c08a89, type: 3}
+    Background: {fileID: 21300000, guid: 8666dbf94cf13c5478c192d3da573689, type: 3}
+    Outline: {fileID: 21300000, guid: 3586ce4361c1e6e43999af84d8752661, type: 3}
+    BaseColorPalette:
+      Content:
+        serializedVersion: 2
+        rgba: 4278190080
+      Background:
+        serializedVersion: 2
+        rgba: 4291583410
+    Height: 30
+    IconHeight: 22
+    DefaultIcon: {fileID: 21300000, guid: 62a658bd9819cb04698e02338c0e348c, type: 3}
   - ObservationType: 3
-    EmptyChip: {fileID: 21300000, guid: 1a192e4a973ffdb4a977503dcc09dd65, type: 3}
-    FilledChip: {fileID: 21300000, guid: e8c495b22bc7f324fb5f1316eb315e9d, type: 3}
-    ConfirmedChip: {fileID: 0}
-    ChipIcon: {fileID: 21300000, guid: 57fde6a9b978df245926b1ec784875d2, type: 3}
+    Background: {fileID: 21300000, guid: 220063e741f50b1419dce0733c450307, type: 3}
+    Outline: {fileID: 21300000, guid: 75cb399cc4f34574185a6d43c4c615cc, type: 3}
+    BaseColorPalette:
+      Content:
+        serializedVersion: 2
+        rgba: 4278190080
+      Background:
+        serializedVersion: 2
+        rgba: 4287154816
+    Height: 30
+    IconHeight: 22
+    DefaultIcon: {fileID: 21300000, guid: 11c6bffe34bb4ab46a51b067a451cd26, type: 3}
   - ObservationType: 4
-    EmptyChip: {fileID: 0}
-    FilledChip: {fileID: 21300000, guid: 2afa2a4e8ca5f8d439a4a0e5eaea948c, type: 3}
-    ConfirmedChip: {fileID: 21300000, guid: 392a505f446c3974b8f8651a5563dc43, type: 3}
-    ChipIcon: {fileID: 0}
+    Background: {fileID: 21300000, guid: fbfdd40b110ae49488e0585a2b1014e1, type: 3}
+    Outline: {fileID: 21300000, guid: 3d5102b567e3f1b48a0486a9457e1fbd, type: 3}
+    BaseColorPalette:
+      Content:
+        serializedVersion: 2
+        rgba: 4278190080
+      Background:
+        serializedVersion: 2
+        rgba: 4294367861
+    Height: 38
+    IconHeight: 28
+    DefaultIcon: {fileID: 0}
   - ObservationType: 5
-    EmptyChip: {fileID: 21300000, guid: efe473d8347de7c4eb9dfd62099b6b74, type: 3}
-    FilledChip: {fileID: 21300000, guid: 2afa2a4e8ca5f8d439a4a0e5eaea948c, type: 3}
-    ConfirmedChip: {fileID: 21300000, guid: 392a505f446c3974b8f8651a5563dc43, type: 3}
-    ChipIcon: {fileID: 0}
-  m_LabelFilledColor: {r: 0, g: 0, b: 0, a: 1}
-  m_LabelEmptyColor: {r: 1, g: 1, b: 1, a: 1}
-  m_ChipDisabledTint: {r: 0.7, g: 0.7, b: 0.7, a: 1}
-  m_LabelDisabledColor: {r: 0, g: 0, b: 0, a: 0.4}
-  m_EmptySlotSprite: {fileID: 21300000, guid: 717fc0b0465560744b70b21738e8a358, type: 3}
+    Background: {fileID: 21300000, guid: fbfdd40b110ae49488e0585a2b1014e1, type: 3}
+    Outline: {fileID: 21300000, guid: 3d5102b567e3f1b48a0486a9457e1fbd, type: 3}
+    BaseColorPalette:
+      Content:
+        serializedVersion: 2
+        rgba: 4283197816
+      Background:
+        serializedVersion: 2
+        rgba: 4292080383
+    Height: 38
+    IconHeight: 28
+    DefaultIcon: {fileID: 0}
+  m_IconOverrides:
+  - Label: 8
+    Icon: {fileID: 21300000, guid: 7ae80bfeeea8c3b42930c5713ae2b45d, type: 3}
+  - Label: 9
+    Icon: {fileID: 21300000, guid: 74ab6130cf126094b9ab0caf6697c1e3, type: 3}
+  - Label: 7
+    Icon: {fileID: 21300000, guid: 62a658bd9819cb04698e02338c0e348c, type: 3}
+  - Label: 15
+    Icon: {fileID: 21300000, guid: c25fc175947917c41949d7bcb0fdbb3a, type: 3}
+  - Label: 14
+    Icon: {fileID: 21300000, guid: c25fc175947917c41949d7bcb0fdbb3a, type: 3}
+  - Label: 13
+    Icon: {fileID: 21300000, guid: 667e05a0ee505174bba7aa15bf1c3eed, type: 3}
+  - Label: 16
+    Icon: {fileID: 21300000, guid: 667e05a0ee505174bba7aa15bf1c3eed, type: 3}
+  - Label: 18
+    Icon: {fileID: 21300000, guid: d6c5e1452895cd649add58c786cff238, type: 3}
+  - Label: 19
+    Icon: {fileID: 21300000, guid: eaeba23a0ab00e0459c5dfbaba098703, type: 3}
+  - Label: 21
+    Icon: {fileID: 21300000, guid: c816bd921c0f61840b1a5b50490e22e9, type: 3}
+  - Label: 20
+    Icon: {fileID: 21300000, guid: 317a1c46010d2e04cad48bd548fca132, type: 3}
+  - Label: 22
+    Icon: {fileID: 21300000, guid: 8371d7184dfb92749aa9ae40839b3c2c, type: 3}
+  - Label: 23
+    Icon: {fileID: 21300000, guid: 1f108a5e10d33ae47a81928ca64724c0, type: 3}
+  - Label: 24
+    Icon: {fileID: 21300000, guid: a69228bc3bb10854b9f43d0883383597, type: 3}
+  - Label: 17
+    Icon: {fileID: 21300000, guid: b49e6e9ded1697d4282dad61a01e2d85, type: 3}
+  UnselectablePalette:
+    Content:
+      serializedVersion: 2
+      rgba: 4291743954
+    Background:
+      serializedVersion: 2
+      rgba: 4278916383
+  SelectedBlend: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+  UnidentifiedPropertyPalette:
+    Content:
+      serializedVersion: 2
+      rgba: 4283197816
+    Background:
+      serializedVersion: 2
+      rgba: 4292080383
+  UnidentifiedPropertyIconTint: {r: 0.9, g: 0.9, b: 0.623, a: 0.8509804}
+  UnknownPropertyIcon: {fileID: 21300000, guid: 11c6bffe34bb4ab46a51b067a451cd26, type: 3}
+  EmptyBackground: {fileID: 0}
+  EmptyOutline: {fileID: 0}
+  EmptyColorPalette:
+    Content:
+      serializedVersion: 2
+      rgba: 4286414205
+    Background:
+      serializedVersion: 2
+      rgba: 4281808695

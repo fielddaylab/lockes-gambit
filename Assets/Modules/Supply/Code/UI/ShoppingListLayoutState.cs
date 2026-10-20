@@ -4,6 +4,7 @@ using BeauUtil;
 using BeauUtil.UI;
 using FieldDay;
 using FieldDay.Scenes;
+using FieldDay.Scripting;
 using FieldDay.SharedState;
 using FieldDay.UI.Widgets;
 using SpaceFab.UI;
@@ -50,6 +51,7 @@ namespace SpaceFab.Supply {
         [NonSerialized] public List<ShoppingListRow> ActiveRows;
 
         [NonSerialized] public Routine ToggleRoutine;
+        [NonSerialized] public bool IsCollapsedVisually;
 
         // Contract the rows were last built for; lets a rebuild detect a
         // contract change without re-reading every requirement each frame.
@@ -67,7 +69,7 @@ namespace SpaceFab.Supply {
 
             ConfirmButton.OnClick.AddListener(() => {
                 Find.Panel<SupplyResultPanel>().Show();
-
+                ScriptUtility.Trigger(SupplyScriptTriggers.OnRoutesConfirmed);
             });
 
             return null;

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8d4ce805ac1ac4581172e8e407b18f, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  SortOrder: -1000
+  IsLocked: 1
+  ShowDuringContexts: []
+  HideDuringContexts: []
+  ReadMe: Welcome to the SpaceFab Unity project! Click on the "Boot" scene button
+    below and hit Play!
+  Items:
+  - Object: {fileID: 102900000, guid: 854763376e35d50489ad0e0e49c8473a, type: 3}
+    URL: 
+    CustomName: 
+  - Object: {fileID: 0}
+    URL: https://fielddaylab.wisc.edu/play/spacefab/ci/develop/
+    CustomName: Develop Build
+  - Object: {fileID: 0}
+    URL: https://tree.taiga.io/project/sjgagnon-spacefab/kanban
+    CustomName: Kanban
+  - Object: {fileID: 0}
+    URL: https://app.milanote.com/1SWH0J1pMSEcb5/space-fab
+    CustomName: Milanote
+  - Object: {fileID: 0}
+    URL: https://github.com/fielddaylab/spacefab/actions
+    CustomName: Github

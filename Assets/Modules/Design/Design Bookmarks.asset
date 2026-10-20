@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8d4ce805ac1ac4581172e8e407b18f, type: 3}
+  m_Name: Design Bookmarks
+  m_EditorClassIdentifier: 
+  SortOrder: -50
+  IsLocked: 0
+  ShowDuringContexts: scene-design
+  HideDuringContexts: 
+  ReadMe: 
+  Items:
+  - Object: {fileID: 5741709982962218228, guid: a7d22488aa785d040804d5210e820439, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 5741709982962218228, guid: e4b710c7d1a990343a45c652e83cfa6d, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 7491586742496098000, guid: 5e63d36db710719419baa63678ee62a5, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 7703755172934650838, guid: b5843d0c56b7c764c933a1ac3d54b4b0, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 11400000, guid: 7980e5c24cc20f24395644919681500e, type: 2}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 11400000, guid: 9610ea0bf14deab43926e8819860d7be, type: 2}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 11400000, guid: 4383873273a4636439b03312d8136bbd, type: 2}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 11400000, guid: 1d85baf4ab5d54e4b9dfaed77590a1c8, type: 2}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 3877037620776690958, guid: 455b5cf2b291ca54f96cb9bc437bcc30, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  ProjectSearchFilter: 

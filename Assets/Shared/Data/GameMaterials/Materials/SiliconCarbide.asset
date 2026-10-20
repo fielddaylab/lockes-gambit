@@ -20,5 +20,6 @@ MonoBehaviour:
   - C
   ValenceElectronCounts: 0400000004000000
   AtomicRadii: 6f00000041000000
+  SimpleAtomicRadii: 0200000002000000
   Properties: 111317
   Contexts: []

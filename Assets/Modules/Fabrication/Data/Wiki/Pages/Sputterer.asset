@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Sputterer
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Sputterer
-  m_Icon: {fileID: 21300000, guid: 3dd73ff47aaac054697e55a84a150997, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 21300000, guid: 7e8edeff49e986948bb7025feb386810, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: The Sputterer coats the chip with a thin layer of material by knocking
+  Title: Sputterer
+  Icon: {fileID: 21300000, guid: c701abf274fcb3c42b328d26c391596b, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 0c900d764ab925041b40a826da4944c9, type: 3}
+  IllustrationFPS: 0.5
+  BodyText: The Sputterer coats the chip with a thin layer of material by knocking
     particles off a target and onto the surface.
-  m_MaterialId:
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 1

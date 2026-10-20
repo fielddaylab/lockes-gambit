@@ -5,18 +5,24 @@
 $if MinigameHasValidSolution()
     {@PAL}  You've already researched everything you need to! You can continue your experiments to uncover new insights.
 $else
+    $call   LockChamber("Doping")
+    {@PAL}  You will use both a P-Type and an N-Type dopant to tune your semiconductor to make it useful in your chip.
+    $call   UnlockChamber("Doping")
     $call   HighlightElement(research:doping-chamber-btn, false, -1, true)
-    {@PAL}  We have a new property to discover: dopants!\nTo investigate this, you’ll need to use the doping chamber.
 $endif
 
 
 ::OnDopingChamberSelected
 @trigger    OnChamberSwitched
-@when       !MinigameHasValidSolution(), research:chamberId == "Doping"
+@when       !MinigameHasValidSolution()
 $call   ReleaseAllHighlights()
-$call   HighlightElement(research:primary-slot)
-$call   CloseWiki()
-{@PAL}  Only confirmed semiconductors are accepted as substrates.\n\nPlace a semiconductor to this slot.
+$if     research:chamberId == "Doping"
+    $call   CloseWiki()
+    $call   ResetCurrentChamber()
+    $call   HighlightElement(research:primary-slot)
+    {@PAL}  Your Doping Chamber is unlocked.\n\nAdd your semiconductor to this slot.
+$endif
+
 
 ::OnSubstrateFilled
 @trigger    OnSlotFilled
@@ -24,34 +30,34 @@ $call   CloseWiki()
 $call   ReleaseHighlight(research:primary-slot)
 $call   HighlightElement(research:secondary-slot)
 $call   CloseWiki()
-{@PAL}  Now you'll need to place a possible dopant.\nLook for a sample with a smaller atomic radius and a valence electron count that differs by one.
+{@PAL}  Place a sample with one more or one less electrons than the available holes.
+
 
 ::OnSubstrateExploded
-@trigger    OnMaterialExploded, explosionStyle == "TooBig", research:primaryMaterial == "null"
+@trigger    OnMaterialExploded
+@when   !MinigameHasValidSolution(), explosionStyle == "InvalidSubstrate"
 $call   CloseWiki()
-{@PAL}  That is not a confirmed semiconductor. Refer to the database if you need help.
+$call   ReleaseHighlight(research:secondary-slot)
+$call   HighlightElement(research:primary-slot)
+{@PAL}  That is not a confirmed semiconductor.
 
 
 ::OnDopantFilled
 @trigger    OnSlotFilled
 @when       !MinigameHasValidSolution(), research:chamberId == "Doping", slotType == "secondary"
 $call   CloseWiki()
-$if     research:secondaryMaterial == "Boron"
-    $call   ReleaseHighlight(research:secondary-slot)
-    {@PAL}  Great! Add observations and select a hypothesis to verify.
-$elseif research:secondaryMaterial == "Phosphorus"
-    $call   ReleaseHighlight(research:secondary-slot)
-    {@PAL}  Great! Add observations and select a hypothesis to verify.
+$call   ReleaseHighlight(research:secondary-slot)
+$if     research:secondaryMaterial == "Boron" // P type
+    {@PAL}  Great! Now add Observations and select a Property to verify.
+$elseif research:secondaryMaterial == "Phosphorus" // N type
+    {@PAL}  Great! Now add Observations and select a Property to verify.
 $endif
 
 ::OnDopantExploded
-@trigger    OnMaterialExploded, research:primaryMaterial != "null"
+@trigger    OnMaterialExploded
+@when   !MinigameHasValidSolution(), explosionStyle == "InvalidCombo"
 $call   CloseWiki()
-$if     explosionStyle == "Polyelemental"
-    {@PAL}  Polyelemental materials cannot be a dopant!\nLook for a sample with a smaller atomic radius and a valence electron count that differs by one.
-$else
-    {@PAL}  That sample doesn't fit!\nLook for a sample with a smaller atomic radius and a valence electron count that differs by one.
-$endif
+{@PAL}  That sample doesn't fit!\n\nChoose a sample with one more or one less electrons than the available holes.
 
 
 ::OnHypothesisCorrect
@@ -59,13 +65,31 @@ $endif
 @when   result == "success"
 $call   CloseWiki()
 $if MinigameHasValidSolution()
-    {@PAL}  Great. You've completed all research tasks! You can return to the ship, or continue your experiments to uncover new insights.
-$else
-    {@PAL}  Correct. Now see if you can complete the remaining requirement.
+    {@PAL}  Great. Let's return to the ship.
+$elseif research:propertyId == "NDopantFor"
+    {@PAL}  Correct. Now see if you can find the other dopant.
+$elseif research:propertyId == "PDopantFor"
+    {@PAL}  Correct. Now see if you can find the other dopant.
 $endif
 
-::OnHypothesisIncorrect
+
+::OnHypothesisIncorrectHypothesisMismatch
 @trigger    OnHypothesisSubmitted
-@when   !MinigameHasValidSolution(), result == "failure"
+@when       result == "failure", reason == "hypothesis_mismatch"
+$call   ReleaseAllHighlights()
 $call   CloseWiki()
-{@PAL}  That doesn't seem right. Try changing the hypothesis or select a different observation.
+{@PAL}  Your Property was incorrect.\n\nTry again.
+
+::OnHypothesisIncorrectObservationMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "observation_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
+
+::OnHypothesisIncorrectInvalidObservation
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "invalid_observation"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  One or more of your Observations were incorrect. Those are removed.\n\nTry again.

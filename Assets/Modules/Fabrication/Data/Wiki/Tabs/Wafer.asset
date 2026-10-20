@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Wafer
   m_EditorClassIdentifier: 
   m_Title: Wafer
-  m_Icon: {fileID: 21300000, guid: 694794406de66de438b02d6c052e0558, type: 3}
+  m_Icon: {fileID: 21300000, guid: 9ab6ccb54dee36f46b2ff91370ec8ad9, type: 3}
   m_Pages:
   - {fileID: 11400000, guid: c0980f70c7563a9449af20502e0d7d41, type: 2}

@@ -9,11 +9,8 @@ $else
     $call   UnlockWikiPage("Basic Insulator")
     $call   LockWikiPage("Conductor") // only Basic Conductor is available in first chapter 
     $call   LockWikiPage("Insulator") // only Basic Insulator is available in first chapter
-    $call   ReleaseAllHighlights()
-    $call   HighlightElement(research:sample-copper)
-    $call   HighlightElement(research:sample-SiliconDioxide)
-    $call   HighlightElement(research:sample-Silicon)
-    {@PAL}  Start by selecting a sample.
+    $call   PointElement(research:sample-silicon)
+    {@PAL}  Start by selecting a <color=yellow>SAMPLE</color> on the left.
 $endif
 
 
@@ -38,109 +35,29 @@ $call   HighlightElement(research:primary-slot)
 @when       slotType == "primary", !MinigameHasValidSolution()
 $call   ResetCurrentChamber()
 $call   ReleaseAllHighlights()
-//$call   ReleaseHighlight(research:primary-slot)
 $call   HighlightElement(research:increase-voltage-btn)
 $call   AddObsBtn->SetActive(false)
-$set    temp:addObsBtnActive = false
-$set    temp:slotFilled = true
-{@PAL}  Now add voltage and observe if anything happens.
+{@PAL}  INCREASE voltage and observe the electrical current.
 
 
 ::OnVoltageIncreased
 @trigger    OnVoltageIncreased
-@when       !MinigameHasValidSolution(), temp:slotFilled
-$call   ReleaseAllHighlights()
-//$call   ReleaseHighlight(research:increase-voltage-btn)
-$call   AddObsBtn->SetActive(true)
-$set    temp:addObsBtnActive = true
-$call   HighlightElement(research:add-observation-btn, false, -1, true)
-{@PAL}  Now add your observation.
-
-
-::OnWikiOpened
-@trigger    OnWikiOpened
-@when       !MinigameHasValidSolution()
-$set    temp:wikiOpen = true
-
-
-::OnWikiTabOpened
-@trigger    OnWikiTabOpened
-@when   !MinigameHasValidSolution(), research:observationCount == 0
-$call   ReleaseAllHighlights()
-$if     local:tabId != "Observations"
-    $call   HighlightElement(wiki:tab-observations, false, -1, true)
-$endif
-
-::OnWikiTabOpenedAfterObs
-@trigger    OnWikiTabOpened
-@when   !MinigameHasValidSolution(), research:observationCount > 0
-$call   ReleaseAllHighlights()
-$if     local:tabId != "Properties"
-    $call   HighlightElement(wiki:tab-properties, false, -1, true)
-$endif
-
-
-::OnObsAdded
-@trigger    OnObservationAdded
-@when   !MinigameHasValidSolution(), research:propertyId == "null"
-$call   ReleaseAllHighlights()
+@when       !MinigameHasValidSolution(), research:primaryMaterial != "null"
+$call   ReleaseHighlight(research:increase-voltage-btn)
 $call   CloseWiki()
-$call   HighlightElement(research:add-property-btn, false, -1, true)
-{@PAL}  Select a property that matches the selected observation as your hypothesis.
+{@PAL}  Now press <color=yellow>ADD OBSERVATION</color>.
 
-
-::OnObsRemoved
-@trigger    OnObservationRemoved
-@when   !MinigameHasValidSolution(), research:observationCount == 0
-$call   ReleaseAllHighlights()
-$if     !temp:wikiOpen
-    $call   HighlightElement(research:add-observation-btn, false, -1, true)
-$elseif     local:tabId != "Observations"
-    $call   HighlightElement(wiki:tab-observations, false, -1, true)
-$endif
-{@PAL}  Add an observation.
-
+::OnObservationAdded
+@trigger    OnObservationAdded
+@when       !MinigameHasValidSolution()
+$call   CloseWiki()
+{@PAL}  Choose a property that matches your observation.\n\nClick <color=yellow>ADD PROPERTY</color>.
 
 ::OnVerifyButtonShown
 @trigger    OnVerifyButtonShown
 @when   !MinigameHasValidSolution()
-$call   ReleaseAllHighlights()
 $call   CloseWiki()
-$call   HighlightElement(research:verify-observation-btn)
-{@PAL}  Select "Verify" to check if observation matches the selected hypothesis.
-
-
-::OnPropertyRemoved
-@trigger    OnPropertyRemoved
-@when   !MinigameHasValidSolution(), temp:addObsBtnActive, research:observationCount == 0
-$call   ReleaseAllHighlights()
-$if     !temp:wikiOpen
-    $call   HighlightElement(research:add-observation-btn, false, -1, true)
-$else
-    $call   HighlightElement(wiki:tab-observations, false, -1, true)
-$endif
-{@PAL}  Add an observation.
-
-
-::OnPropertyRemovedAfterObs
-@trigger    OnPropertyRemoved
-@when   !MinigameHasValidSolution(), temp:addObsBtnActive, research:observationCount > 0
-$call   ReleaseAllHighlights()
-$if     !temp:wikiOpen
-    $call   HighlightElement(research:add-observation-btn, false, -1, true)
-    $call   HighlightElement(research:hypothesis-slot, false, -1, true)
-$else
-    $call   HighlightElement(wiki:tab-properties, false, -1, true)
-$endif
-{@PAL}  Select a property that matches the selected observation as your hypothesis.
-
-
-::OnWikiClosed
-@trigger    OnWikiClosed
-@when   !MinigameHasValidSolution()
-$set    temp:wikiOpen = false
-$call   ReleaseHighlight(wiki:tab-observations)
-$call   ReleaseHighlight(wiki:tab-properties)
+{@PAL}  Click <color=yellow>VERIFY</color> to check your results.
 
 
 ::OnHypothesisCorrect
@@ -149,28 +66,30 @@ $call   ReleaseHighlight(wiki:tab-properties)
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
 $if MinigameHasValidSolution()
-    $call       HighlightElement(return-button)
-    {@PAL}  Correct. You've completed all research tasks! Press the complete button to return to the ship.
+    $call   HighlightElement(research:complete-btn)
+    {@PAL}  You've completed the Contract Requirements!\n\nPress <color=yellow>LEAVE</color> to leave the lab.
 $else
     $call   HighlightElement(research:primary-slot)
-    {@PAL}  Correct. Now see if you can find a sample that satisfies the other hypothesis.
+    {@PAL}  Good! Now find a sample that meets the other requirement.
 $endif
-$wait 1
-$call   OpenWikiToLastDiscovery()
-$wait 1.5
-$call   CloseWiki()
 
 ::OnHypothesisIncorrectHypothesisMismatch
 @trigger    OnHypothesisSubmitted
-@when       result == "failure", reason == "hypothesis_mismatch", !MinigameHasValidSolution()
+@when       result == "failure", reason == "hypothesis_mismatch"
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
-$call HighlightElement(research:hypothesis-slot)
-{@PAL}  Your hypothesis doesn't match the observation. Try changing the hypothesis or select a different observation.
+{@PAL}  Your Property was incorrect.\n\nTry again.
 
-::OnHypothesisIncorrectObservationError
+::OnHypothesisIncorrectObservationMismatch
 @trigger    OnHypothesisSubmitted
-@when       result == "failure", reason == "observation_incorrect", !MinigameHasValidSolution()
-$call ReleaseAllHighlights()
+@when       result == "failure", reason == "observation_mismatch"
+$call   ReleaseAllHighlights()
 $call   CloseWiki()
-{@PAL}  The observation is incorrect. Try a different observation or select another sample.
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
+
+::OnHypothesisIncorrectInvalidObservation
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "invalid_observation"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  One or more of your Observations were incorrect. Those are removed.\n\nTry again.

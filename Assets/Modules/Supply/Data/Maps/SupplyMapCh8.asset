@@ -15,6 +15,7 @@ MonoBehaviour:
   ShipIds:
   - m_HashValue: 4036650106
   - m_HashValue: 4019872487
+  - m_HashValue: 4003094868
   CameraBounds:
     serializedVersion: 2
     x: -16
@@ -23,47 +24,61 @@ MonoBehaviour:
     height: 24
   Positions:
   - Name:
+      m_Source: 
       m_HashValue: 1391791790
     Position: {x: -0.37, y: 0.01}
   - Name:
+      m_Source: 
       m_HashValue: 392540606
     Position: {x: 4.3, y: -2.81}
   - Name:
+      m_Source: 
       m_HashValue: 3566278674
     Position: {x: -0.84, y: -4.38}
   - Name:
+      m_Source: 
       m_HashValue: 1181591482
     Position: {x: 7.38, y: -5.84}
   - Name:
+      m_Source: 
       m_HashValue: 57385584
     Position: {x: 5.01, y: 1.66}
   - Name:
+      m_Source: 
       m_HashValue: 593577844
     Position: {x: -4.45, y: -1.24}
   - Name:
+      m_Source: 
       m_HashValue: 91235012
     Position: {x: -0.39, y: 5.71}
   - Name:
+      m_Source: 
       m_HashValue: 3801165340
     Position: {x: -5.23, y: 3.41}
   - Name:
+      m_Source: 
       m_HashValue: 1798506261
     Position: {x: 5.84, y: 5.11}
   - Name:
+      m_Source: 
       m_HashValue: 1616771497
     Position: {x: 7.45, y: -0.67}
   - Name:
+      m_Source: 
       m_HashValue: 241399131
     Position: {x: 3.16, y: -6.26}
   - Name:
+      m_Source: 
       m_HashValue: 3784387721
     Position: {x: -6.66, y: -4.61}
   Hazards:
   - Name:
-      m_HashValue: 4054517332
+      m_Source: Hazard_Comms
+      m_HashValue: 1884801063
     Position: {x: 4.07, y: 1.25}
   Overrides:
   - Name:
+      m_Source: 
       m_HashValue: 57385584
     Time: 2
     Cost: 2

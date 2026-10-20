@@ -427,7 +427,6 @@ namespace SpaceFab.Design {
                 case ToolType.DrawNNodes:
                     if (DrawUtility.CanDrawNode(gridStackState, toolModeState.ActiveLayer, cell, gridPos))
                     {
-                        cell.CellType = CellType.NTransistor;
                         DrawUtility.DragDrawNodeOfType(toolModeState, gridStackState, visualState, cell.CellType, gridPos);
                         SpacefabGame.Events.Dispatch(GameEvents.DesignGridModified, EvtArgs.Box((gridCoord, "NNodes")));
                     }
@@ -435,7 +434,6 @@ namespace SpaceFab.Design {
                 case ToolType.DrawPNodes:
                     // do not allow dragging onto inputs/outputs
                     if (DrawUtility.CanDrawNode(gridStackState, toolModeState.ActiveLayer, cell, gridPos)) {
-                        cell.CellType = CellType.PTransistor;
                         DrawUtility.DragDrawNodeOfType(toolModeState, gridStackState, visualState, cell.CellType, gridPos);
                         SpacefabGame.Events.Dispatch(GameEvents.DesignGridModified, EvtArgs.Box((gridCoord, "PNodes")));
                     }

@@ -12,9 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: N-Type
   m_EditorClassIdentifier: 
-  m_Title: N-Type
-  m_Icon: {fileID: 21300000, guid: a155db408243bf64bbc5346e2520fa4e, type: 3}
-  m_IllustrationFrames: []
-  m_IllustrationFPS: 0.5
-  m_Body: N-Type semiconductor conducts electrical signals in the lower Semiconductor
+  Title: N-Type
+  Icon: {fileID: 21300000, guid: ec2cee15c3211bd4484836bf6c52cb04, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: ad17d61407bb1214184c12227dc4765e, type: 3}
+  - {fileID: 21300000, guid: d2640dc149ae5eb4f956367d78fbe4f0, type: 3}
+  - {fileID: 21300000, guid: f3f92ee305597f148a8b4cb0292c339c, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: N-Type semiconductor conducts electrical signals in the bottom Semiconductor
     layer. It forms Diodes with P-Type.
+  MaterialId:
+    m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

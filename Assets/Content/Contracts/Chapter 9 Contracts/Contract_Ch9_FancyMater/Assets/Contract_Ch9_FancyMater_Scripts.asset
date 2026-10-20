@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2613736b2e35237448e4a0f57709855d, type: 3}
+  m_Name: Contract_Ch9_FancyMater_Scripts
+  m_EditorClassIdentifier: 
+  Bindings:
+  - Scope: 4
+    Script: {fileID: -1942890987711236906, guid: c4b47d7f7ce9166449fb510a51469bad, type: 3}
+  - Scope: 8
+    Script: {fileID: -1942890987711236906, guid: 075f85b13900c054b9a0a92b942ee50c, type: 3}
+  - Scope: 2
+    Script: {fileID: -1942890987711236906, guid: 48ebf5c0b36914b94bbf7feb5046ed90, type: 3}

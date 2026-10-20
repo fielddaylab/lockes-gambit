@@ -1,0 +1,18 @@
+# basePath DesignFastNAND
+// Fast NAND
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL} With a smaller NAND circuit, we can pack more logic into every computer!
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Use A and B to control Gates. Use constants to send signals to X.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> Make curving transistors to fit them in a smaller space. 
+    $set temp:hintGiven = 0
+$endif

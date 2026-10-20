@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Oxidation
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Oxidation
-  m_Icon: {fileID: 21300000, guid: 968c40cdf43d6c442aafc51446c7a455, type: 3}
-  m_IllustrationFrames:
+  Title: Oxidation
+  Icon: {fileID: 21300000, guid: 9ab6ccb54dee36f46b2ff91370ec8ad9, type: 3}
+  IllustrationFrames:
   - {fileID: 21300000, guid: e3e90774706be614eadc807e29fa800e, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: When heated, silicon forms a layer of insulating Silicon Dioxide, also
+  IllustrationFPS: 0.5
+  BodyText: When heated, silicon forms a layer of insulating Silicon Dioxide, also
     known as Quartz, which can be used like a stencil.
-  m_MaterialId:
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 1

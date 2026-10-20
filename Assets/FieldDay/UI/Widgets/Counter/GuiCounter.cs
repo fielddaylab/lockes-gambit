@@ -7,7 +7,11 @@ using UnityEngine;
 
 namespace FieldDay.UI.Widgets {
     public sealed class GuiCounter : GuiWidget, IGuiDataWidget<int> {
-        public abstract class Style : GuiWidgetStyle<int>, IGuiWidgetRangedDataStyle<int> {
+        public abstract class Style : GuiWidgetDataStyle<int>, IGuiWidgetRangedDataStyle<int> {
+            public GuiCounter Widget { get; private set; }
+            public override void Bind(GuiWidget source) {
+                Widget = (GuiCounter)source;
+            }
             public virtual void SetRange(in GuiDataWidgetRange<int> range, GuiWidget source, GuiWidgetUpdateFlags flags) { }
             public override void UpdateState(GuiWidgetStateFlags state, GuiWidgetStateFlags changed, GuiWidget source, GuiWidgetUpdateFlags flags) { }
         }

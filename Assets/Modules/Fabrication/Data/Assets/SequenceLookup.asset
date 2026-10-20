@@ -43,7 +43,7 @@ MonoBehaviour:
       m_Source: 
       m_HashValue: 0
     StationIconSprite: {fileID: 21300000, guid: 9f830cc135a5eab4db9ae26810996c2d, type: 3}
-    StationLabel: SPIN COAT
+    StationLabel: SPIN COATER
     InstructionLabel: Apply Photo Resist
   - StepId: 2
     StationId:
@@ -91,7 +91,7 @@ MonoBehaviour:
       m_Source: 
       m_HashValue: 0
     StationIconSprite: {fileID: 21300000, guid: 3dd73ff47aaac054697e55a84a150997, type: 3}
-    StationLabel: SPUTTER MACHINE
+    StationLabel: SPUTTERER
     InstructionLabel: Apply Metal Layer
   - StepId: 5
     StationId:
@@ -112,12 +112,18 @@ MonoBehaviour:
   m_Chunks:
   - Chunk: 0
     ChunkSprite: {fileID: 0}
+    ChunkSequenceBG: {fileID: 21300000, guid: e16c0e31bd394a247a60f54046386f47, type: 3}
+    ChunkSequenceHeaderBG: {fileID: 21300000, guid: 596637f7253cfb8419fb1e668e9dbc0e, type: 3}
     ChunkText: 
   - Chunk: 1
     ChunkSprite: {fileID: 0}
+    ChunkSequenceBG: {fileID: 21300000, guid: 6fb8cba0c834c9c4d9c2be67d23fcefa, type: 3}
+    ChunkSequenceHeaderBG: {fileID: 21300000, guid: 4580b22766d4d7f4d990ae7bcf698bb6, type: 3}
     ChunkText: 
   - Chunk: 2
     ChunkSprite: {fileID: 0}
+    ChunkSequenceBG: {fileID: 21300000, guid: d28ef0b7f53ce7d4aaa755815dfa89fa, type: 3}
+    ChunkSequenceHeaderBG: {fileID: 21300000, guid: 76b550aec52269f4b8feb14c4c8b6739, type: 3}
     ChunkText: 
   m_GlitchOverlaySprite: {fileID: 0}
   m_GlitchOverlayText: 

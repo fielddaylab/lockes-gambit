@@ -92,6 +92,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1823456704649198136, guid: 8bb3cf4d246f4ac44b59972730c6a434, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617426356642147290, guid: 8bb3cf4d246f4ac44b59972730c6a434, type: 3}
+      propertyPath: Input
+      value: 
+      objectReference: {fileID: 7815395490572355048}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -196,11 +204,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020711289955171844, guid: cd1458b82b6e44540aa9f7550f80d4ef, type: 3}
       propertyPath: m_SortingOrder
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6020711289955171844, guid: cd1458b82b6e44540aa9f7550f80d4ef, type: 3}
       propertyPath: m_PlaneDistance
       value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020711289955171844, guid: cd1458b82b6e44540aa9f7550f80d4ef, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1112968087
       objectReference: {fileID: 0}
     - target: {fileID: 6020711289955171844, guid: cd1458b82b6e44540aa9f7550f80d4ef, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

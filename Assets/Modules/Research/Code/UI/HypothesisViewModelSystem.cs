@@ -69,8 +69,7 @@ namespace SpaceFab.Research {
             // hypothesis viewmodel. The hypothesis input flags are listed
             // here because this system is their only consumer: nothing
             // else raises NeedsRebuild on their behalf.
-            bool slotChanged = interfacerState.SlotMaterialUpdatedThisFrame
-                && interfacerState.LastUpdatedKind == ChamberSlotKind.Primary;
+            bool slotChanged = interfacerState.SlotMaterialUpdatedThisFrame;
             bool hypothesisInput = inputState.HypothesisSelectedClickedThisFrame
                 || inputState.RemoveHypothesisClickedThisFrame;
             if (!viewModelState.NeedsRebuild && !slotChanged && !hypothesisInput) {
@@ -99,11 +98,11 @@ namespace SpaceFab.Research {
             // swapping the sample abandons a claim about the material that
             // just left the chamber.
             if (slotChanged || inputState.RemoveHypothesisClickedThisFrame) {
-                viewModelState.HypothesisSelected = false;
-                viewModelState.HypothesisContext = StringHash32.Null;
-
-                ScriptUtility.WriteVariable(new TableKeyPair("research", "propertyId"), "null");
-                ScriptUtility.Trigger(ResearchScriptTriggers.OnPropertyRemoved);
+                if (viewModelState.HypothesisSelected) {
+                    viewModelState.HypothesisSelected = false;
+                    viewModelState.HypothesisContext = StringHash32.Null;
+                    ScriptUtility.Trigger(ResearchScriptTriggers.OnPropertyRemoved);
+                }
             }
 
             // Dynamic labels need a substrate context, which only the
@@ -127,7 +126,7 @@ namespace SpaceFab.Research {
                     viewModelState.HypothesisLabel = label;
                     viewModelState.HypothesisContext = context;
 
-                    ScriptUtility.WriteVariable(new TableKeyPair("research", "propertyId"), label.ToString().ToLower());
+                    ScriptUtility.WriteVariable(new TableKeyPair("research", "propertyId"), label.ToString());
                     ScriptUtility.Trigger(ResearchScriptTriggers.OnPropertyAdded);
                 }
             }
@@ -193,8 +192,7 @@ namespace SpaceFab.Research {
                 }
             }
             viewModelState.HypothesisLeafCount = leafCount;
-            viewModelState.VerifyButtonVisible = viewModelState.HypothesisSelected
-                && slotCount > 0;
+            viewModelState.VerifyButtonVisible = viewModelState.HypothesisSelected && slotCount > 0;
 
             // 6. Frame-flag — any change drives the panel's LateUpdate render.
             viewModelState.HypothesisChangedThisFrame =

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9586435776c0f4c6aaa81941bb4ae57b, type: 3}
+  m_Name: ResultDisplayConfig
+  m_EditorClassIdentifier: 
+  SuccessBackgroundColor: {r: 0.4, g: 0.654902, b: 0.4862745, a: 1}
+  FailureBackgroundColor: {r: 0.8784314, g: 0.4, b: 0.25490198, a: 1}
+  SuccessHeaderColor: {r: 0.31764707, g: 0.62352943, b: 0.41960785, a: 1}
+  FailureHeaderColor: {r: 0.90588236, g: 0.3647059, b: 0.19215687, a: 1}
+  SuccessSectionColor: {r: 0.49803922, g: 0.8039216, b: 0.6039216, a: 1}
+  FailureSectionColor: {r: 0.95686275, g: 0.5882353, b: 0.4745098, a: 1}
+  StationRatingFilled: {fileID: 0}
+  StationRatingEmpty: {fileID: 0}

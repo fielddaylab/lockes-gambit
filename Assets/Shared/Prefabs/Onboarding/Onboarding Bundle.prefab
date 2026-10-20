@@ -182,7 +182,7 @@ MonoBehaviour:
     m_DefaultPoolRoot: {fileID: 8059385698352779269}
     m_DefaultSpawnRoot: {fileID: 0}
     m_ResetTransformOnAlloc: 1
-  DefaultMargin: 25
+  DefaultMargin: 16
 --- !u!1001 &1318761542243666702
 PrefabInstance:
   m_ObjectHideFlags: 0

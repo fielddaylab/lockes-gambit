@@ -16,17 +16,23 @@ MonoBehaviour:
   - m_HashValue: 2134678901
   - m_HashValue: 2413853744
   - m_HashValue: 1046738855
+  GlitchChances: []
   AvailableMaterials:
-  - m_HashValue: 1571298950
   - m_HashValue: 3821421172
-  - m_HashValue: 541320182
-  - m_HashValue: 1821685427
-  - m_HashValue: 3317014541
   - m_HashValue: 1163381446
+  - m_HashValue: 1571298950
+  - m_HashValue: 541320182
+  - m_HashValue: 3317014541
+  - m_HashValue: 1821685427
   - m_HashValue: 3774176290
   - m_HashValue: 466928580
   - m_HashValue: 527899933
   ExcludeFromResearch: []
+  UnlockSpecialProperties: 0
+  ComicPackage:
+    m_HashValue: 2634903441
   Script: {fileID: -1942890987711236906, guid: 69e61c28f258f42a89a022a880ca250c, type: 3}
   SkyboxMaterial: {fileID: 2100000, guid: 4e3dcd7423137994e8ded390696ecea2, type: 2}
   SkyboxRotation: 0
+  MusicPlaylist:
+    m_HashValue: 4246794208

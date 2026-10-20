@@ -1,0 +1,22 @@
+# basePath DesignBlueLED
+// Blue LED
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL} Diodes made from light-emitting semiconductors form LEDs!
+
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Check the Verification Table. Y should be HI if A or B are HI.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> You should use two diodes. This LED will be extra bright!
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> Check the Verification Table. Output X matches A.
+    $set temp:hintGiven = 0
+$endif

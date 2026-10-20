@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Machines
   m_EditorClassIdentifier: 
   m_Title: Machines
-  m_Icon: {fileID: 21300000, guid: 33b9dccb817ee1b4eabbfb9f4ebfc6a9, type: 3}
+  m_Icon: {fileID: 21300000, guid: 3222faac4d8a0b64f95e5b61f6a2b32a, type: 3}
   m_Pages:
   - {fileID: 11400000, guid: 5763a42f890fe1e44a92a15006d7cf77, type: 2}
   - {fileID: 11400000, guid: 16117e9f2a20acc49a027d54b80b2735, type: 2}

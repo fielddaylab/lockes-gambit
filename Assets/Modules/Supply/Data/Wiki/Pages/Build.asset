@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Build
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Build
-  m_Icon: {fileID: 21300000, guid: a334f95a14de05a4e88b54b1af5ce9ba, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 21300000, guid: c982ad8408597dd4c956a4c0457ffc70, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: "Build a Route: Select a ship, visit planets, then return to the station.
-    Ships can visit multiple planets until cargo capacity is full.\n Routes affect
-    risk, time and cost. Planets affect risk and cost. Ships affect time and cost."
-  m_MaterialId:
+  Title: Build
+  Icon: {fileID: 21300000, guid: 3cb62ede2982b8b49993afcc95c22dce, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 1a9cbb9d0c57af741a6697b99ddeba82, type: 3}
+  IllustrationFPS: 0.5
+  BodyText: 'To Build a route: Select a ship, visit planets, then return to the station.
+    Ships can visit multiple planets until cargo capacity is full.'
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 1

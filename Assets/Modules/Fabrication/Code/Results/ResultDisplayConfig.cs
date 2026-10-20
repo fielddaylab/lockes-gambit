@@ -1,9 +1,9 @@
 using FieldDay.Assets;
 using UnityEngine;
 
-namespace SpaceFab.Fabrication
+namespace SpaceFab.UI
 {
-    [CreateAssetMenu(menuName = "SpaceFab/Fabrication/Result Display Config")]
+    [CreateAssetMenu(menuName = "SpaceFab/UI/Result Display Config")]
     public class ResultDisplayConfig : GlobalAsset
     {
         public Color SuccessBackgroundColor;

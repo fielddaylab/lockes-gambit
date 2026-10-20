@@ -7,6 +7,7 @@ using FieldDay.Music;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
 using FieldDay.Systems;
+using SpaceFab.UI;
 using UnityEngine;
 
 namespace SpaceFab.Supply {
@@ -31,6 +32,7 @@ namespace SpaceFab.Supply {
 
         public IEnumerator<WorkSlicer.Result?> Preload() {
             Find.State(out SupplyChainMap map, out ChapterState chapterState, out SupplyMinigameState supplyState);
+            Find.State(out PlayerProgressState progressState);
 
             int chapterIndex = chapterState.ChapterIndex;
             if (DebugFlags.LaunchedFromThisScene) {
@@ -56,10 +58,20 @@ namespace SpaceFab.Supply {
 
             yield return null;
 
+            StringHash32 converterPageId = "ConversionNodes";
+
             foreach (var data in entry.Positions) {
                 SupplyRouteNode node = SupplyRouteUtility.GetNodeForId(data.Name);
                 node.transform.localPosition = data.Position;
                 node.gameObject.SetActive(true);
+
+                if (!node.WikiPage.IsEmpty) {
+                    WikiUtility.UnlockPage(progressState, node.WikiPage);
+                }
+
+                if (node.Type == SupplyRouteNodeType.Converter) {
+                    WikiUtility.UnlockPage(progressState, converterPageId);
+                }
             }
 
             foreach (var data in entry.Hazards) {

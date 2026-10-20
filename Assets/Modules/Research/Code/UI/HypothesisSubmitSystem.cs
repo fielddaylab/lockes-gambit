@@ -1,3 +1,4 @@
+using BeauRoutine;
 using BeauUtil;
 using FieldDay;
 using FieldDay.Scripting;
@@ -5,8 +6,11 @@ using FieldDay.Systems;
 using SpaceFab;
 using SpaceFab.Design;
 using SpaceFab.Materials;
+using SpaceFab.UI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SpaceFab.Research {
     /// <summary>
@@ -43,20 +47,17 @@ namespace SpaceFab.Research {
         private static void ProcessWork(float deltaTime) {
             Find.State(
                 out ResearchUIInputState inputState,
-                out HypothesisViewModelState viewModelState,
-                out ResearchMinigameState researchState
+                out ChamberInterfacerState interfacerState,
+                out HypothesisViewModelState viewModelState
             );
 
-            Find.State(
-                out PlayerProgressState progressState,
-                out ContractState contractState
-                );
-
-            if (!inputState.VerifyHypothesisClickedThisFrame) {
+            if (!inputState.VerifyHypothesisClickedThisFrame && !viewModelState.HypothesisVerified) {
                 return;
             }
 
-            Find.State(out ChamberInterfacerState interfacerState);
+            if (!viewModelState.HypothesisSelected) {
+                return;
+            }
 
             ResearchSlot slot = interfacerState.ActiveChamber == ActiveChamberKind.Doping ?
                 interfacerState.SecondarySlot : interfacerState.PrimarySlot;
@@ -65,73 +66,131 @@ namespace SpaceFab.Research {
                 return;
             }
 
-            if (!viewModelState.HypothesisSelected) {
-                return;
+            Find.State(
+                out ResearchMinigameState researchState,
+                out PlayerProgressState progressState,
+                out ContractState contractState,
+                out WikiViewState wikiState
+            );
+            ResearchSamplePanel panel = Find.FirstComponent<ResearchSamplePanel>();
+
+            if (inputState.VerifyHypothesisClickedThisFrame) {
+                ResearchUIAssets uiAssets = Find.GlobalAsset<ResearchUIAssets>();
+                viewModelState.VerifyRoutine.Replace(viewModelState, VerificationRoutine(panel, viewModelState, researchState, progressState, contractState, wikiState, slotted, uiAssets)).TryManuallyUpdate(0);
             }
+        }
 
-            // Pre-validate every non-locked pick against (a) the
-            // hypothesis's decomposed leaves and (b) the slotted
-            // material's ground-truth Properties array. Any pick that
-            // fails either check gets pruned now; the hypothesis is
-            // rejected (no confirm) if any pruning happens. This keeps
-            // Silicon + Conductive from confirming "Conductor" just
-            // because the observation evaluator's logic is satisfied —
-            // Conductive simply isn't true for Silicon.
+        private static IEnumerator VerificationRoutine(ResearchSamplePanel panel, HypothesisViewModelState viewModelState, ResearchMinigameState researchState, PlayerProgressState progressState, ContractState contractState, WikiViewState wikiState, MaterialAsset material, ResearchUIAssets config)
+        {
+            Game.Input.PauseAll();
 
-            bool anyPruned = PruneIncorrectPicks(researchState, slotted, viewModelState, out string failureReason);
+            viewModelState.HypothesisVerified = true;
+            panel.Lines.color = config.ProcessingColor;
+            panel.ResultText.text = "Verifying...";
+            panel.ResultText.color = config.ProcessingColor;
+
+            panel.LoadingBar.SetActive(true);
+            panel.FilledBar.fillAmount = 0;
+
+            yield return 0.25f;
+
+            yield return panel.FilledBar.FillTo(1f, 2f).Ease(Curve.QuadInOut);
+
+            yield return 0.5f;
+
+            string failureReason = null;
+            bool anyPruned = PruneInvalidObservations(researchState, material, viewModelState);
             if (anyPruned) {
-                viewModelState.HypothesisSelected = false;
                 HypothesisViewModelUtility.RequestRebuild(viewModelState);
-
-                using (var table = TempVarTable.Alloc()) {
-                    table.Set("result", "failure");
-                    table.Set("reason", failureReason ?? "observation_incorrect");
-                    ScriptUtility.Trigger(ResearchScriptTriggers.OnHypothesisSubmitted, table);
-                }
-                return;
+                failureReason = "invalid_observation";
             }
 
-            bool success = ResearchInventoryUtility.TryConfirmHypothesis(researchState, progressState, contractState, slotted.AssetId, viewModelState.HypothesisLabel, viewModelState.HypothesisContext);
+            yield return 0.5f;
+
+            bool validHypothesis = ValidateProperty(material, viewModelState);
+            if (failureReason == null && !validHypothesis) {
+                failureReason = "hypothesis_mismatch";
+            }
+
+            bool hasRequiredObs = EvaluateObservations(viewModelState);
+            if (failureReason == null && !hasRequiredObs) {
+                failureReason = "observation_mismatch";
+            }
+
+            bool success = !anyPruned && hasRequiredObs && validHypothesis;
             if (success) {
-                // A new property bit flipped (or the property was already
-                // confirmed and the call was idempotent). Either way the
-                // viewmodel's IsFulfilled / SatisfiedMask depends on the
-                // record state — request a rebuild so the visual updates
-                // next LateUpdate.
-                HypothesisViewModelUtility.RequestRebuild(viewModelState);
+                if (ResearchInventoryUtility.TryConfirmHypothesis(researchState, progressState, contractState, material.AssetId, viewModelState.HypothesisLabel, viewModelState.HypothesisContext)) {
+                    HypothesisViewModelUtility.RequestRebuild(viewModelState);
+                    WikiUtility.OpenTo(Find.State<WikiViewState>(), "Materials_Tab", material.AssetId);
+                }
+                else {
+                    success = false;
+                }
             }
-            else {
-                viewModelState.HypothesisSelected = false;
-            }
+
+            yield return 0.25f;
+
+            panel.Lines.color = success ? config.SuccessColor : config.FailureColor;
+            panel.ResultIcon.gameObject.SetActive(true);
+            panel.ResultIcon.sprite = success ? config.SuccessIcon : config.FailureIcon;
+            panel.ResultText.text = success ? "Verified" : "Material not verified";
+            panel.ResultText.color = success ? config.SuccessColor : config.FailureColor;
+            panel.LoadingBar.SetActive(false);
+
+            yield return 2f;
+
+            panel.Lines.color = config.DefaultColor;
+            panel.ResultIcon.gameObject.SetActive(false);
+            panel.ResultText.text = "";
 
             using (var table = TempVarTable.Alloc()) {
                 var resultStr = success ? "success" : "failure";
                 table.Set("result", resultStr);
                 if (!success) {
-                    table.Set("reason", failureReason ?? "hypothesis_mismatch");
+                    // "invalid_observation": observation does not match the material
+                    // "observation_mismatch": observation does not match the hypothesis and/or does not have all required observations for the hypothesis
+                    // "hypothesis_mismatch": hypothesis does not match the material
+                    table.Set("reason", failureReason);
                 }
                 ScriptUtility.Trigger(ResearchScriptTriggers.OnHypothesisSubmitted, table);
             }
+
+            viewModelState.HypothesisVerified = false;
+            Game.Input.ResumeAll();
         }
 
-        // For each non-locked slot, prune it if the (label, context) is
-        // either not on the hypothesis's decomposed leaves OR not
-        // actually true for the slotted material. "Actually true" means
-        // the observation appears in the decomposition of some persistent
-        // property in MaterialAsset.Properties — see
-        // MaterialPropertyDefinitionUtility.IsObservationTrueForProperties.
-        // Leaves are the union across every registered definition for the
-        // selected label, so a pick supporting any alternate satisfaction
-        // path survives. Returns true if any removal happened. Locked
-        // slots are ancestor-confirmed (not in researchState.Observations)
-        // and can't be removed; they remain regardless.
-        private static bool PruneIncorrectPicks(ResearchMinigameState researchState, MaterialAsset material, HypothesisViewModelState viewModelState, out string failureReason) {
+        // Checks if the hypothesis property matches the material. If the property does not
+        // match the material, it is removed from the hypothesis slot. Otherwise, it remains.
+        private static bool ValidateProperty(MaterialAsset material, HypothesisViewModelState viewModelState)
+        {
+            MaterialPropertyLabel[] validProperties = material.Properties;
+            for (int i = 0; i < validProperties.Length; i++) {
+                if (validProperties[i] == viewModelState.HypothesisLabel) {
+                    if (validProperties[i] != MaterialPropertyLabel.PDopantFor && validProperties[i] != MaterialPropertyLabel.NDopantFor) {
+                        return true;
+                    }
+                    
+                    for (int c = 0; c < material.Contexts.Length; c++) {
+                        if (viewModelState.SlotContexts[0] == material.Contexts[c].AssetId) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+
+            viewModelState.HypothesisSelected = false;
+            HypothesisViewModelUtility.RequestRebuild(viewModelState);
+            return false;
+        }
+
+        // Checks if observations match the material. Any observations that
+        // do not match the material are removed from the slot.
+        private static bool PruneInvalidObservations(ResearchMinigameState researchState, MaterialAsset material, HypothesisViewModelState viewModelState)
+        {
             int slotCount = viewModelState.SlotCount;
-            List<MaterialObservationEntry> leaves = DecomposeAllDefinitions(viewModelState.HypothesisLabel);
-            int leafCount = leaves.Count;
-            MaterialPropertyLabel[] trueProperties = material.Properties;
+            MaterialPropertyLabel[] validProperties = material.Properties;
             bool anyRemoved = false;
-            string foundReason = null;
 
             for (int i = 0; i < slotCount; i++) {
                 bool locked = (viewModelState.SlotLockedMask & (1u << i)) != 0;
@@ -139,34 +198,62 @@ namespace SpaceFab.Research {
 
                 MaterialPropertyLabel slotLabel = viewModelState.SlotLabels[i];
                 StringHash32 slotContext = viewModelState.SlotContexts[i];
-
                 bool isDopant = MaterialObservationChamberLookup.GetChamberType(slotLabel) == ObservationType.Dopant;
-                StringHash32[] contextIds = isDopant ? new StringHash32[material.Contexts.Length] : new StringHash32[] {StringHash32.Null};
-                if (isDopant)
-                {
-                    for (int c = 0; c < material.Contexts.Length; c++)
-                    {
+
+                StringHash32[] contextIds = isDopant ? new StringHash32[material.Contexts.Length] : new StringHash32[] { StringHash32.Null };
+
+                if (isDopant) {
+                    for (int c = 0; c < material.Contexts.Length; c++) {
                         contextIds[c] = material.Contexts[c].AssetId;
                     }
                 }
 
-                bool onLeaf = LeafMatches(leaves, leafCount, slotLabel, null);
-                bool materialHasIt = MaterialPropertyDefinitionUtility.IsObservationTrueForProperties(trueProperties, slotLabel, slotContext, contextIds);
-                if (onLeaf && materialHasIt) continue;
-
-                // Determine if removal was hypothesis mismatch error or observation error
-                if (!onLeaf && materialHasIt) {
-                    if (foundReason == null) foundReason = "hypothesis_mismatch";
-                } else {
-                    if (foundReason == null) foundReason = "observation_incorrect";
-                }
-
-                if (ResearchInventoryUtility.RemoveObservation(researchState, material.AssetId, slotLabel, slotContext)) {
-                    anyRemoved = true;
+                bool valid = MaterialPropertyDefinitionUtility.IsObservationTrueForProperties(validProperties, slotLabel, slotContext, contextIds);
+                if (!valid) {
+                    if (ResearchInventoryUtility.RemoveObservation(
+                        researchState, material.AssetId, slotLabel, slotContext)) {
+                        anyRemoved = true;
+                    }
                 }
             }
-            failureReason = foundReason;
             return anyRemoved;
+        }
+
+        // Checks if the property has all necessary observations. If not
+        // all necessary observations are present, verification fails.
+        // Any observations that are not required by the property become greyed out.
+        private static bool EvaluateObservations(HypothesisViewModelState viewModelState)
+        {
+            List<MaterialObservationEntry> leaves = DecomposeAllDefinitions(viewModelState.HypothesisLabel);
+            int leafCount = leaves.Count;
+            int slotCount = viewModelState.SlotCount;
+
+            bool hasMissingObs = false;
+
+            List<MaterialPropertyLabel> matched = new();
+            for (int i = 0; i < slotCount; i++) {
+                MaterialPropertyLabel label = viewModelState.SlotLabels[i];
+
+                bool onLeaf = LeafMatches(leaves, leafCount, label, StringHash32.Null);
+                if (onLeaf) {
+                    matched.Add(label);
+                } else {
+                    foreach (var panel in Find.Components<ResearchSamplePanel>()) {
+                        if (panel == null || !panel.PickerOpen) continue;
+                        // TODO: change sprite for greyed out chips
+                    }
+                }
+            }
+
+            for (int i = 0; i < leafCount; i++) {
+                var leaf = leaves[i];
+                if (!matched.Contains(leaf.Label)) {
+                    hasMissingObs = true;
+                    break;
+                }
+            }
+
+            return !hasMissingObs;
         }
 
         // True if some leaf matches (label, context).

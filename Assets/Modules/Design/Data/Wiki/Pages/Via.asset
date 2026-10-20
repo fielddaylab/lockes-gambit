@@ -12,10 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Via
   m_EditorClassIdentifier: 
-  m_Title: Via
-  m_Icon: {fileID: 21300000, guid: cda69e771631a8e41aed7713dd8e98a2, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 21300000, guid: 556888cad35a04f4faa75580480d44cf, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: Vias connect the Metal layer to the Semiconductor layer, passing signals
-    between them.
+  Title: Via
+  Icon: {fileID: 21300000, guid: 6d755e4c668eee24fbf2a0a7a524fc7e, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 956b2a98244378c4cb70a48188e472a1, type: 3}
+  - {fileID: 21300000, guid: 775be72d9d7537944ad5e0b13ebd0b20, type: 3}
+  - {fileID: 21300000, guid: 6945067086207814597c6cf455d73f84, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: Vias connect the Metal layer to the bottom Semiconductor layer, passing
+    signals between them.
+  MaterialId:
+    m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

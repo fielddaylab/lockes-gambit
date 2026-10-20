@@ -4,6 +4,7 @@ using FieldDay;
 using UnityEngine;
 using SpaceFab.UI;
 using System;
+using FieldDay.UI.Widgets;
 
 namespace SpaceFab.Design {
     /// <summary>
@@ -39,7 +40,7 @@ namespace SpaceFab.Design {
 
         // The dynamic button component on this button's GameObject (assigned in inspector).
         // Its onClick / onPointerEnter / onPointerExit events drive the one-frame flags below.
-        public DynamicButton DynamicButton;
+        public GuiButton DynamicButton;
 
         [Header("Visuals")]
         // RectTransform the selection arrow should snap to when this button is selected.
@@ -62,16 +63,16 @@ namespace SpaceFab.Design {
 
         public void OnRegister() {
             if (DynamicButton == null) { return; }
-            DynamicButton.onClick.AddListener(HandleClick);
-            DynamicButton.onPointerEnter.AddListener(HandlePointerEnter);
-            DynamicButton.onPointerExit.AddListener(HandlePointerExit);
+            DynamicButton.OnClick.AddListener(HandleClick);
+            DynamicButton.CursorHint.onPointerEnter.AddListener(HandlePointerEnter);
+            DynamicButton.CursorHint.onPointerExit.AddListener(HandlePointerExit);
         }
 
         public void OnDeregister() {
             if (DynamicButton == null) { return; }
-            DynamicButton.onClick.RemoveListener(HandleClick);
-            DynamicButton.onPointerEnter.RemoveListener(HandlePointerEnter);
-            DynamicButton.onPointerExit.RemoveListener(HandlePointerExit);
+            DynamicButton.OnClick.RemoveListener(HandleClick);
+            DynamicButton.CursorHint.onPointerEnter.RemoveListener(HandlePointerEnter);
+            DynamicButton.CursorHint.onPointerExit.RemoveListener(HandlePointerExit);
         }
 
         #region Pointer Handlers

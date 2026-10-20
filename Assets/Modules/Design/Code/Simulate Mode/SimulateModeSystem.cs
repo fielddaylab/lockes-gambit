@@ -34,8 +34,7 @@ namespace SpaceFab.Design
         }
 
         // Top-level phase dispatch. Cancel is checked first and wins over any other request.
-        static private void ProcessWork(float deltaTime)
-        {
+        static private void ProcessWork(float deltaTime) {
             Find.State(
                 out SimulateRunState runState,
                 out SimulateGraphState graphState,
@@ -53,14 +52,12 @@ namespace SpaceFab.Design
             );
 
             // Universal high-priority request: Cancel beats everything except Cancelling itself.
-            if (runState.Phase != SimulatePhase.Cancelling && runState.CancelRequested)
-            {
+            if (runState.Phase != SimulatePhase.Cancelling && runState.CancelRequested) {
                 EnterCancelling(runState);
                 return;
             }
 
-            switch (runState.Phase)
-            {
+            switch (runState.Phase) {
                 case SimulatePhase.Idle:
                     ProcessIdle(runState, uiState, designState);
                     break;

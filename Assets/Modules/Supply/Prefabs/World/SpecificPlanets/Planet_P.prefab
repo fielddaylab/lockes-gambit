@@ -43,18 +43,10 @@ PrefabInstance:
     - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6115b57d3ba4304418af9e71491da8e9, type: 3}
+      objectReference: {fileID: 21300000, guid: 9c0b7bed49ce1e542994dffbb4579a83, type: 3}
     - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
-      propertyPath: m_Color.b
-      value: 0.4764151
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
-      propertyPath: m_Color.g
+      propertyPath: m_WasSpriteAssigned
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
-      propertyPath: m_Color.r
-      value: 0.5231546
       objectReference: {fileID: 0}
     - target: {fileID: 6139377420993714670, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Id.m_Source
@@ -104,13 +96,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Time
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: WikiPage.m_HashValue
+      value: 906243118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: MaterialType.m_HashValue
       value: 541320182
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: Tooltip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: TooltipHeader
+      value: Phosphorus
       objectReference: {fileID: 0}
     - target: {fileID: 8792477959654819082, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: TooltipHeader

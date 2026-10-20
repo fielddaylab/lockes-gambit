@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
+  m_Name: JuzaHahnStation
+  m_EditorClassIdentifier: 
+  Title: Juza-Hahn Station
+  Icon: {fileID: 21300000, guid: 5525b15f5b4195244812011735aa65c6, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: cf6f812b6d63ab24e8e0f464f689ddd8, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 0.75
+  CaptionText: 
+  BodyText: Juza-Hahn Station Frontier Robotics military and energy operation, an
+    integral station the Frontier Robotics Peace Authority (FRPA), the major policing
+    entity in all of Ausrine.
+  MaterialId:
+    m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

@@ -22,6 +22,11 @@ namespace FieldDay.Localization {
             m_Entries = new Dictionary<uint, string>(capacity);
         }
 
+        public LocDb(Dictionary<uint, string> premadeEntries) {
+            Assert.NotNull(premadeEntries);
+            m_Entries = premadeEntries;
+        }
+
         /// <summary>
         /// Attempts to retrieve the entry for the given localization id.
         /// </summary>
@@ -36,9 +41,11 @@ namespace FieldDay.Localization {
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [Il2CppSetOption(Option.NullChecks, false)]
-        public string Find(LocId id) {
+        public string Find(LocId id, string defaultText) {
             string text;
-            m_Entries.TryGetValue(GetKey(id), out text);
+            if (!m_Entries.TryGetValue(GetKey(id), out text)) {
+                text = defaultText;
+            }
             return text;
         }
 

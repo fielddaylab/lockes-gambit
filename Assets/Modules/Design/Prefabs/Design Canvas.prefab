@@ -46,6 +46,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2494471310861649893}
     m_Modifications:
+    - target: {fileID: 1020198316639334251, guid: 4d1ef1806342a2f44b7d3b90e65c66ea, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 48
+      objectReference: {fileID: 0}
     - target: {fileID: 1743397502244653520, guid: 4d1ef1806342a2f44b7d3b90e65c66ea, type: 3}
       propertyPath: m_Name
       value: Eraser Toolbar
@@ -56,7 +60,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6673354229829966755, guid: 4d1ef1806342a2f44b7d3b90e65c66ea, type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6673354229829966755, guid: 4d1ef1806342a2f44b7d3b90e65c66ea, type: 3}
       propertyPath: m_AnchorMax.x
@@ -112,11 +116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6673354229829966755, guid: 4d1ef1806342a2f44b7d3b90e65c66ea, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -40
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 6673354229829966755, guid: 4d1ef1806342a2f44b7d3b90e65c66ea, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 100
+      value: 83
       objectReference: {fileID: 0}
     - target: {fileID: 6673354229829966755, guid: 4d1ef1806342a2f44b7d3b90e65c66ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -246,14 +250,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2494471310861649893}
     m_Modifications:
+    - target: {fileID: 358836409248060236, guid: b5843d0c56b7c764c933a1ac3d54b4b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 513660050278589968, guid: b5843d0c56b7c764c933a1ac3d54b4b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943837975571720775, guid: b5843d0c56b7c764c933a1ac3d54b4b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171269631719101457, guid: b5843d0c56b7c764c933a1ac3d54b4b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7703755172934650838, guid: b5843d0c56b7c764c933a1ac3d54b4b0, type: 3}
       propertyPath: m_Name
       value: Toolbar
       objectReference: {fileID: 0}
-    - target: {fileID: 8486819376802073771, guid: b5843d0c56b7c764c933a1ac3d54b4b0, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b8aadbf46fdd1294e90f5b34ac5bdc00, type: 3}
     - target: {fileID: 8758150650378821080, guid: b5843d0c56b7c764c933a1ac3d54b4b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0

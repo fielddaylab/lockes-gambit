@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fabafaf51e5ce47abdfc28005f7b8b, type: 3}
   m_Name: Properties
   m_EditorClassIdentifier: 
-  m_Title: Properties
-  m_Icon: {fileID: 21300000, guid: d64bd05b2970ab041a992fe16a4eca82, type: 3}
-  m_Pages:
+  Title: Properties
+  Icon: {fileID: 21300000, guid: 360bf6606dd90774a81ea0d46d6cc985, type: 3}
+  Pages:
   - {fileID: 11400000, guid: 3c1f8a4e26b04d1f9a7c5e08d4b21f60, type: 2}
   - {fileID: 11400000, guid: 5b27d0c9184e4a63b8f1c62d3ae95174, type: 2}
   - {fileID: 11400000, guid: 530ceeab3e4549f42a9d561631e723cb, type: 2}
   - {fileID: 11400000, guid: dec6254d003f0bf4ea111c1a8b320223, type: 2}
   - {fileID: 11400000, guid: 46fdb465fe3ecdf44b2c9a5a5e34e010, type: 2}
-  - {fileID: 11400000, guid: b53f0657e1334004bb5468d8d3738cfb, type: 2}
-  - {fileID: 11400000, guid: dfee700424e9fee479912a5f78bd4493, type: 2}
-  - {fileID: 11400000, guid: 7e94b16a5cd8437dab30f7195c2e6d83, type: 2}
   - {fileID: 11400000, guid: 9a05e3f74b1c48d2ae6708b31d9fc425, type: 2}
   - {fileID: 11400000, guid: 1d6c92b850fa4e07993a4c5b7e08af31, type: 2}
+  - {fileID: 11400000, guid: dfee700424e9fee479912a5f78bd4493, type: 2}
+  - {fileID: 11400000, guid: 7e94b16a5cd8437dab30f7195c2e6d83, type: 2}
+  - {fileID: 11400000, guid: b53f0657e1334004bb5468d8d3738cfb, type: 2}
   - {fileID: 11400000, guid: 4eeb1a88f6a638f4e91886dae468fe95, type: 2}
   - {fileID: 11400000, guid: 733790a546d33064abb114387b75c8bc, type: 2}

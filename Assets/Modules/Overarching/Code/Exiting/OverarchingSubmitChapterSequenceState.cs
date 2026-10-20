@@ -2,6 +2,7 @@ using BeauRoutine;
 using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.SharedState;
+using FieldDay.UI.Widgets;
 using SpaceFab.Save;
 using SpaceFab.UI;
 using System.Collections;
@@ -22,7 +23,7 @@ namespace SpaceFab.Overarching
     public class OverarchingSubmitChapterSequenceState : SharedStateComponent, IRegistrationCallbacks
     {
         public OverarchingSubmitChapterPhase Phase;
-        public DynamicButton SubmitButton;
+        public GuiButton SubmitButton;
 
         public void OnDeregister()
         {
@@ -30,7 +31,7 @@ namespace SpaceFab.Overarching
 
         public void OnRegister()
         {
-            SubmitButton.onClick.AddListener(() => {
+            SubmitButton.OnClick.AddListener(() => {
                 OverarchingTransitions.AdvanceContract();
                 });
 

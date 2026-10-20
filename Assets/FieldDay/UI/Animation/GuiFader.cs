@@ -126,8 +126,7 @@ namespace FieldDay.UI.Animation {
             }
 
             public override unsafe void UpdateAnimation(GuiFader target, ref LiteAnimatorState state, float deltaTime) {
-                state.CurrentTime -= deltaTime;
-                float percent = 1 - Math.Max(0, state.CurrentTime / state.Duration);
+                float percent = state.PercentProgress;
 
                 target.Graphic.color = Color.LerpUnclamped(state.Registers.A.Color(0), state.Registers.A.Color(1), state.Easing.Evaluate(percent));
 

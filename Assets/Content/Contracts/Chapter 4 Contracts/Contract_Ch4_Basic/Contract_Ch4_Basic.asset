@@ -29,6 +29,8 @@ MonoBehaviour:
   m_contractType: 0
   m_difficulty: 0
   m_unlocksBigBattery: 0
+  m_unlocksThermalChamber: 1
+  m_unlocksDopingChamber: 1
   StreamedPack:
     m_HashValue: 312831301
   AssetSet:

@@ -35,9 +35,6 @@ namespace FieldDay.UI {
         #endregion // Inspector
 
         // TODO: implement localization keys
-        [NonSerialized] public StringBuilder DynamicHeader;
-        [NonSerialized] public StringBuilder DynamicContent;
-        [NonSerialized] public StringBuilder DynamicFooter;
         [NonSerialized] public CursorTooltipContentDelegate DynamicBuilder;
 
         [NonSerialized] public long LastUpdatedTimestamp = 0;
@@ -68,9 +65,6 @@ namespace FieldDay.UI {
             }
 
             return !string.IsNullOrEmpty(hint.Tooltip) || !string.IsNullOrEmpty(hint.TooltipHeader) || !string.IsNullOrEmpty(hint.TooltipFooter)
-                || (hint.DynamicHeader != null && hint.DynamicHeader.Length > 0)
-                || (hint.DynamicContent != null && hint.DynamicContent.Length > 0)
-                || (hint.DynamicFooter != null && hint.DynamicContent.Length > 0)
                 || (hint.DynamicBuilder != null);
         }
 
@@ -88,10 +82,6 @@ namespace FieldDay.UI {
             contents.Header = hint.TooltipHeader;
             contents.Contents = hint.Tooltip;
             contents.Footer = hint.TooltipFooter;
-
-            contents.DynamicHeader = hint.DynamicHeader;
-            contents.DynamicContents = hint.DynamicContent;
-            contents.DynamicFooter = hint.DynamicFooter;
 
             contents.DynamicBuilder = hint.DynamicBuilder;
         }
@@ -265,6 +255,27 @@ namespace FieldDay.UI {
         }
 
         #endregion // Locks
+    
+        /// <summary>
+        /// Copies tooltip data from one CursorHint to another.
+        /// </summary>
+        static public void CopyTooltips(CursorHint src, CursorHint dest) {
+            Assert.NotNullOrDestroyed(src);
+            Assert.NotNullOrDestroyed(dest);
+            Assert.False(src == dest);
+
+            dest.CursorType = src.CursorType;
+            
+            dest.Tooltip = src.Tooltip;
+            dest.TooltipHeader = src.TooltipHeader;
+            dest.TooltipFooter = src.TooltipFooter;
+
+            dest.DynamicBuilder = src.DynamicBuilder;
+            
+            // TODO: copy localization keys
+            
+            dest.MarkDirty();
+        }
     }
 
     public struct CursorTooltipContents {
@@ -275,10 +286,6 @@ namespace FieldDay.UI {
         public LocId LocHeader;
         public LocId LocContents;
         public LocId LocFooter;
-
-        public StringBuilder DynamicHeader;
-        public StringBuilder DynamicContents;
-        public StringBuilder DynamicFooter;
 
         public CursorTooltipContentDelegate DynamicBuilder;
     }

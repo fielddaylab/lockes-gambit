@@ -16,8 +16,7 @@ namespace FieldDay.UI.Animation {
         }
 
         static private void PrepareState(ref LiteAnimatorState state, Color color, float duration, float delay, Curve easing) {
-            state.Duration = duration;
-            state.CurrentTime = duration + delay;
+            state.ResetTimeWithDelay(duration, delay);
             state.Registers.A.Color() = color;
             state.Easing = easing;
         }

@@ -58,6 +58,11 @@ namespace SpaceFab.Fabrication.Microgames
         public static void EnterBegin()
         {
             Find.State(out EtchMicrogameState state, out SequenceState sequence);
+            if (state.Pattern != null)
+            {
+                GameObject.Destroy(state.Pattern.gameObject);
+                state.Pattern = null;
+            }   
 
             // Setup pattern
             // int patternIndex = sequence.Level.PatternIndex;
@@ -92,8 +97,13 @@ namespace SpaceFab.Fabrication.Microgames
         {
             Find.State(out EtchMicrogameState state);
 
-            state.Phase = EtchMicrogamePhase.Active;
+            // state.Phase = EtchMicrogamePhase.Active;
             state.InputAccepted = true;
+
+            if (state.PreviewVisibleCount >= state.CachedPreviewPoints.Count)
+            {
+                state.Phase = EtchMicrogamePhase.Active;
+            }
 
             Vector2 start = state.CachedPreviewPoints[0];
             state.PlayerPoints.Add(start);
@@ -112,9 +122,10 @@ namespace SpaceFab.Fabrication.Microgames
             state.Phase = EtchMicrogamePhase.Exiting;
             if (!completedNormally) { return; }
 
-            GameObject.Destroy(state.Pattern.gameObject);
-
             MicrogameUtility.CommitStepPrecision(ComputePrecision());
+
+            GameObject.Destroy(state.Pattern.gameObject);
+            state.Pattern = null;
 
             state.EtchUI.SetActive(false);
             MicrogameCanvasUtility.HideStationInstructions(canvasState);
@@ -136,6 +147,12 @@ namespace SpaceFab.Fabrication.Microgames
 
             state.PlayerPoints.Clear();
             state.PlayerBeam.positionCount = 0;
+
+            if (state.Pattern != null)
+            {
+                GameObject.Destroy(state.Pattern.gameObject);
+                state.Pattern = null;
+            }
         }
 
         // Side-effect-free precision query for the precision gate, read before ExitBegin commits.

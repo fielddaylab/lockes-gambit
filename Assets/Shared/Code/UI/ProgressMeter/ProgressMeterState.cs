@@ -1,4 +1,5 @@
 using BeauUtil;
+using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.SharedState;
 using SpaceFab.Fabrication;
@@ -38,7 +39,6 @@ namespace SpaceFab {
     /// without rescanning the scene each frame.
     /// </summary>
     public class ProgressMeterState : SharedStateComponent, IRegistrationCallbacks {
-        public int CellCount;
         public CycleCellState[] CycleStates;
         public FundsCellState[] FundsStates;
         public int CurrentDayIdx;
@@ -76,16 +76,13 @@ namespace SpaceFab {
 
         // Resizes state arrays to match the view's CellCount without rebuilding cells.
         public static void EnsureStateMatchesMeter(ProgressMeterState state, ProgressMeter meter) {
-            int count = Mathf.Max(0, meter == null ? 0 : meter.CellCount);
-            if (state.CellCount == count
-                && state.CycleStates != null && state.CycleStates.Length == count
-                && state.FundsStates != null && state.FundsStates.Length == count) {
+            if (state.CycleStates != null && state.CycleStates.Length == meter.CycleCells.Length
+                && state.FundsStates != null && state.FundsStates.Length == meter.FundsCells.Length) {
                 return;
             }
 
-            state.CellCount = count;
-            Array.Resize(ref state.CycleStates, count);
-            Array.Resize(ref state.FundsStates, count);
+            Array.Resize(ref state.CycleStates, meter.CycleCells.Length);
+            Array.Resize(ref state.FundsStates, meter.FundsCells.Length);
         }
 
         // OnEnable hook for the view. No-ops outside play mode and when the state has
@@ -118,13 +115,9 @@ namespace SpaceFab {
         // Updates both state and view to a new cell count, rebuilding cell GameObjects.
         public static void SetCellCount(ProgressMeterState state, ProgressMeter meter, int count) {
             count = Mathf.Max(0, count);
-            if (meter != null) {
-                meter.CellCount = count;
-            }
-            state.CellCount = count;
             Array.Resize(ref state.CycleStates, count);
             Array.Resize(ref state.FundsStates, count);
-            RebuildCells(meter);
+            // RebuildCells(meter);
             state.NeedsRefresh = true;
         }
 
@@ -249,19 +242,21 @@ namespace SpaceFab {
                 return;
             }
 
-            int count = Mathf.Min(meter.CycleCellContainer.childCount, meter.FundsCellContainer.childCount);
-            meter.CycleCells = new ProgressMeterCell[count];
-            meter.FundsCells = new ProgressMeterCell[count];
+            meter.CycleCells = new ProgressMeterCell[meter.CycleCellContainer.childCount];
+            meter.FundsCells = new ProgressMeterCell[meter.FundsCellContainer.childCount];
 
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < meter.CycleCellContainer.childCount; i++) {
                 meter.CycleCells[i] = meter.CycleCellContainer.GetChild(i).GetComponent<ProgressMeterCell>();
+            }
+
+            for (int i = 0; i < meter.FundsCellContainer.childCount; i++) {
                 meter.FundsCells[i] = meter.FundsCellContainer.GetChild(i).GetComponent<ProgressMeterCell>();
             }
 
             // Re-apply layout so cell positions and container/row/root widths track the
             // current cell prefab dimensions even when the prefab was authored against a
             // different cell size.
-            LayoutMeter(meter);
+            // LayoutMeter(meter);
         }
 
         /// <summary>
@@ -269,26 +264,26 @@ namespace SpaceFab {
         /// the row containers already hold the correct number of cells (cheap, non-destructive);
         /// falls back to RebuildCells otherwise.
         /// </summary>
-        public static void EnsureCellsBound(ProgressMeter meter) {
-            if (meter == null) { return; }
+        // public static void EnsureCellsBound(ProgressMeter meter) {
+        //     if (meter == null) { return; }
 
-            bool arraysOk = meter.CycleCells != null
-                && meter.FundsCells != null
-                && meter.CycleCells.Length == meter.CellCount
-                && meter.FundsCells.Length == meter.CellCount;
-            if (arraysOk) { return; }
+        //     bool arraysOk = meter.CycleCells != null
+        //         && meter.FundsCells != null
+        //         && meter.CycleCells.Length == meter.CellCount
+        //         && meter.FundsCells.Length == meter.CellCount;
+        //     if (arraysOk) { return; }
 
-            bool childrenMatch = meter.CycleCellContainer != null
-                && meter.FundsCellContainer != null
-                && meter.CycleCellContainer.childCount == meter.CellCount
-                && meter.FundsCellContainer.childCount == meter.CellCount;
-            if (childrenMatch) {
-                RebindCells(meter);
-                return;
-            }
+        //     bool childrenMatch = meter.CycleCellContainer != null
+        //         && meter.FundsCellContainer != null
+        //         && meter.CycleCellContainer.childCount == meter.CellCount
+        //         && meter.FundsCellContainer.childCount == meter.CellCount;
+        //     if (childrenMatch) {
+        //         RebindCells(meter);
+        //         return;
+        //     }
 
-            RebuildCells(meter);
-        }
+        //     RebuildCells(meter);
+        // }
 
         /// <summary>
         /// Tears down and rebuilds the cell GameObjects under both row containers.
@@ -296,45 +291,45 @@ namespace SpaceFab {
         /// "Rebuild Progress Meter Cells" inspector context menu). Runs inline; no
         /// deferral, since callers fire it explicitly rather than from OnValidate.
         /// </summary>
-        public static void RebuildCells(ProgressMeter meter) {
-            if (meter == null
-                || meter.CycleCellPrefab == null
-                || meter.FundsCellPrefab == null
-                || meter.CycleCellContainer == null
-                || meter.FundsCellContainer == null) {
-                return;
-            }
+//         public static void RebuildCells(ProgressMeter meter) {
+//             if (meter == null
+//                 || meter.CycleCellPrefab == null
+//                 || meter.FundsCellPrefab == null
+//                 || meter.CycleCellContainer == null
+//                 || meter.FundsCellContainer == null) {
+//                 return;
+//             }
 
-            int desired = Mathf.Max(0, meter.CellCount);
+//             int desired = Mathf.Max(0, meter.CellCount);
 
-            // 1. Clear any existing cells under each row container.
-            ClearChildren(meter.CycleCellContainer);
-            ClearChildren(meter.FundsCellContainer);
+//             // 1. Clear any existing cells under each row container.
+//             // ClearChildren(meter.CycleCellContainer);
+//             // ClearChildren(meter.FundsCellContainer);
 
-            // 2. Allocate runtime cell-reference arrays sized to the desired count.
-            meter.CycleCells = new ProgressMeterCell[desired];
-            meter.FundsCells = new ProgressMeterCell[desired];
+//             // 2. Allocate runtime cell-reference arrays sized to the desired count.
+//             meter.CycleCells = new ProgressMeterCell[desired];
+//             meter.FundsCells = new ProgressMeterCell[desired];
 
-            // 3. Instantiate fresh cell prefabs into each row, store back-references.
-            //    At edit time, register each created GameObject with Undo so the prefab
-            //    stage / scene gets marked dirty (Unity does not auto-detect scripted
-            //    Instantiate as a prefab modification — without this, exiting prefab
-            //    mode silently discards the new cells).
-            for (int i = 0; i < desired; i++) {
-                meter.CycleCells[i] = (ProgressMeterCell)UnityEngine.Object.Instantiate(meter.CycleCellPrefab, meter.CycleCellContainer);
-                meter.FundsCells[i] = (ProgressMeterCell)UnityEngine.Object.Instantiate(meter.FundsCellPrefab, meter.FundsCellContainer);
-#if UNITY_EDITOR
-                if (!Application.isPlaying) {
-                    UnityEditor.Undo.RegisterCreatedObjectUndo(meter.CycleCells[i].gameObject, "Rebuild Progress Meter Cells");
-                    UnityEditor.Undo.RegisterCreatedObjectUndo(meter.FundsCells[i].gameObject, "Rebuild Progress Meter Cells");
-                }
-#endif
-            }
+//             // 3. Instantiate fresh cell prefabs into each row, store back-references.
+//             //    At edit time, register each created GameObject with Undo so the prefab
+//             //    stage / scene gets marked dirty (Unity does not auto-detect scripted
+//             //    Instantiate as a prefab modification — without this, exiting prefab
+//             //    mode silently discards the new cells).
+//             for (int i = 0; i < desired; i++) {
+//                 meter.CycleCells[i] = (ProgressMeterCell)UnityEngine.Object.Instantiate(meter.CycleCellPrefab, meter.CycleCellContainer);
+//                 meter.FundsCells[i] = (ProgressMeterCell)UnityEngine.Object.Instantiate(meter.FundsCellPrefab, meter.FundsCellContainer);
+// #if UNITY_EDITOR
+//                 if (!Application.isPlaying) {
+//                     UnityEditor.Undo.RegisterCreatedObjectUndo(meter.CycleCells[i].gameObject, "Rebuild Progress Meter Cells");
+//                     UnityEditor.Undo.RegisterCreatedObjectUndo(meter.FundsCells[i].gameObject, "Rebuild Progress Meter Cells");
+//                 }
+// #endif
+//             }
 
-            // 4. Drive cell positions, cell container widths, row widths, and meter root
-            //    width from the cell prefab's RectTransform — replaces ContentSizeFitter.
-            LayoutMeter(meter);
-        }
+        //     // 4. Drive cell positions, cell container widths, row widths, and meter root
+        //     //    width from the cell prefab's RectTransform — replaces ContentSizeFitter.
+        //     // LayoutMeter(meter);
+        // }
 
         /// <summary>
         /// Pushes ProgressMeterState into the view: applies overlay sprites for each cell,
@@ -354,14 +349,14 @@ namespace SpaceFab {
             }
 
             int cycleLen = state.CycleStates == null ? 0 : state.CycleStates.Length;
-            int cycleCount = Mathf.Min(meter.CycleCells.Length, cycleLen);
-            for (int i = 0; i < cycleCount; i++) {
+            Assert.True(cycleLen == meter.CycleCells.Length);
+            for (int i = 0; i < cycleLen; i++) {
                 ApplyCycleCell(meter.CycleCells[i], state.CycleStates[i], sprites);
             }
 
             int fundsLen = state.FundsStates == null ? 0 : state.FundsStates.Length;
-            int fundsCount = Mathf.Min(meter.FundsCells.Length, fundsLen);
-            for (int i = 0; i < fundsCount; i++) {
+            Assert.True(fundsLen == meter.FundsCells.Length);
+            for (int i = 0; i < fundsLen; i++) {
                 ApplyFundsCell(meter.FundsCells[i], state.FundsStates[i], sprites);
             }
         }
@@ -390,114 +385,114 @@ namespace SpaceFab {
         /// meter root. Heights of rows and root are author-controlled; only widths and
         /// the cell container's height are computed.
         /// </summary>
-        private static void LayoutMeter(ProgressMeter meter) {
-            if (meter == null || meter.CycleCellPrefab == null || meter.FundsCellPrefab == null) { return; }
+        // private static void LayoutMeter(ProgressMeter meter) {
+        //     if (meter == null || meter.CycleCellPrefab == null || meter.FundsCellPrefab == null) { return; }
 
-            // 1. Position and size cells; size each cell container exactly to its cells.
-            RectTransform cellPrefabRect = meter.CycleCellPrefab.transform as RectTransform;
-            if (cellPrefabRect == null) { return; }
-            Vector2 cellSize = cellPrefabRect.rect.size;
-            LayoutCellRow(meter.CycleCells, meter.CycleCellContainer, cellSize, meter.CycleCellLayout);
+        //     // 1. Position and size cells; size each cell container exactly to its cells.
+        //     RectTransform cellPrefabRect = meter.CycleCellPrefab.transform as RectTransform;
+        //     if (cellPrefabRect == null) { return; }
+        //     Vector2 cellSize = cellPrefabRect.rect.size;
+        //     LayoutCellRow(meter.CycleCells, meter.CycleCellContainer, cellSize, meter.CycleCellLayout);
 
-            cellPrefabRect = meter.FundsCellPrefab.transform as RectTransform;
-            if (cellPrefabRect == null) { return; }
-            cellSize = cellPrefabRect.rect.size;
-            LayoutCellRow(meter.FundsCells, meter.FundsCellContainer, cellSize, meter.FundsCellLayout);
+        //     cellPrefabRect = meter.FundsCellPrefab.transform as RectTransform;
+        //     if (cellPrefabRect == null) { return; }
+        //     cellSize = cellPrefabRect.rect.size;
+        //     LayoutCellRow(meter.FundsCells, meter.FundsCellContainer, cellSize, meter.FundsCellLayout);
 
-            // 2. Size each row (cell container's parent) to fit title + cell container.
-            float cycleRowWidth = SizeRowFromCellContainer(meter.CycleCellContainer, meter.CycleRowTitle, meter.CycleCells.Length);
-            float fundsRowWidth = SizeRowFromCellContainer(meter.FundsCellContainer, meter.FundsRowTitle, meter.FundsCells.Length);
+        //     // 2. Size each row (cell container's parent) to fit title + cell container.
+        //     float cycleRowWidth = SizeRowFromCellContainer(meter.CycleCellContainer, meter.CycleRowTitle, meter.CycleCells.Length);
+        //     float fundsRowWidth = SizeRowFromCellContainer(meter.FundsCellContainer, meter.FundsRowTitle, meter.FundsCells.Length);
 
-            // 3. Size the meter root to fit the wider of the two rows.
-            SizeRootWidthToMaxRow(meter, Mathf.Max(cycleRowWidth, fundsRowWidth));
-        }
+        //     // 3. Size the meter root to fit the wider of the two rows.
+        //     SizeRootWidthToMaxRow(meter, Mathf.Max(cycleRowWidth, fundsRowWidth));
+        // }
 
         // Anchors each cell to the container's top-left and positions it at i * cellWidth.
         // Sizes the container's width to count * cellWidth and its height to cellHeight.
-        private static void LayoutCellRow(ProgressMeterCell[] cells, RectTransform container, Vector2 cellSize, HorizontalLayoutGroup layoutGroup) {
-            if (cells == null || container == null) { return; }
+        // private static void LayoutCellRow(ProgressMeterCell[] cells, RectTransform container, Vector2 cellSize, HorizontalLayoutGroup layoutGroup) {
+        //     if (cells == null || container == null) { return; }
 
-            Vector2 topLeft = new Vector2(0f, 1f);
-            for (int i = 0; i < cells.Length; i++) {
-                if (cells[i] == null) { continue; }
-                RectTransform cellRect = cells[i].transform as RectTransform;
-                if (cellRect == null) { continue; }
-                cellRect.anchorMin = topLeft;
-                cellRect.anchorMax = topLeft;
-                cellRect.pivot = topLeft;
-                cellRect.sizeDelta = cellSize;
-                cellRect.anchoredPosition = new Vector2(i * cellSize.x, 0f);
-            }
+        //     Vector2 topLeft = new Vector2(0f, 1f);
+        //     for (int i = 0; i < cells.Length; i++) {
+        //         if (cells[i] == null) { continue; }
+        //         RectTransform cellRect = cells[i].transform as RectTransform;
+        //         if (cellRect == null) { continue; }
+        //         cellRect.anchorMin = topLeft;
+        //         cellRect.anchorMax = topLeft;
+        //         cellRect.pivot = topLeft;
+        //         cellRect.sizeDelta = cellSize;
+        //         cellRect.anchoredPosition = new Vector2(i * cellSize.x, 0f);
+        //     }
 
-            layoutGroup.ForceRebuild();
+        //     layoutGroup.ForceRebuild();
 
-            float margin = 10;
-            Vector2 size = container.sizeDelta;
-            size.x = cells.Length * cellSize.x + margin;
-            size.y = cellSize.y;
-            container.sizeDelta = size;
-        }
+        //     float margin = 10;
+        //     Vector2 size = container.sizeDelta;
+        //     size.x = cells.Length * cellSize.x + margin;
+        //     size.y = cellSize.y;
+        //     container.sizeDelta = size;
+        // }
 
         // Sizes the cell container's parent (the row) to width = title width + cell
         // container width. Height is left as authored. Returns the new row width so the
         // caller can size the meter root.
-        private static float SizeRowFromCellContainer(RectTransform cellContainer, TMP_Text title, int numCells) {
-            if (cellContainer == null) { return 0f; }
-            RectTransform rowRect = cellContainer.parent as RectTransform;
-            if (rowRect == null) { return 0f; }
+        // private static float SizeRowFromCellContainer(RectTransform cellContainer, TMP_Text title, int numCells) {
+        //     if (cellContainer == null) { return 0f; }
+        //     RectTransform rowRect = cellContainer.parent as RectTransform;
+        //     if (rowRect == null) { return 0f; }
 
-            float titleWidth = 0f;
-            if (title != null) {
-                RectTransform titleRect = title.transform as RectTransform;
-                if (titleRect != null) {
-                    titleWidth = titleRect.rect.width;
-                }
-            }
+        //     float titleWidth = 0f;
+        //     if (title != null) {
+        //         RectTransform titleRect = title.transform as RectTransform;
+        //         if (titleRect != null) {
+        //             titleWidth = titleRect.rect.width;
+        //         }
+        //     }
 
-            float rowWidth = titleWidth + cellContainer.rect.width + (numCells - 1) * GetHorizontalLayoutGroupSpacing(cellContainer);
-            Vector2 size = rowRect.sizeDelta;
-            size.x = rowWidth;
-            rowRect.sizeDelta = size;
-            return rowWidth;
-        }
+        //     float rowWidth = titleWidth + cellContainer.rect.width + (numCells - 1) * GetHorizontalLayoutGroupSpacing(cellContainer);
+        //     Vector2 size = rowRect.sizeDelta;
+        //     size.x = rowWidth;
+        //     rowRect.sizeDelta = size;
+        //     return rowWidth;
+        // }
 
         // Returns the HorizontalLayoutGroup.spacing on the given container, or 0 if no
         // such component is present. Lets row sizing track whatever inter-cell gap the
         // user authored on the prefab.
-        private static float GetHorizontalLayoutGroupSpacing(RectTransform container) {
-            if (container == null) { return 0f; }
-            HorizontalLayoutGroup hlg = container.GetComponent<HorizontalLayoutGroup>();
-            return hlg != null ? hlg.spacing : 0f;
-        }
+        // private static float GetHorizontalLayoutGroupSpacing(RectTransform container) {
+        //     if (container == null) { return 0f; }
+        //     HorizontalLayoutGroup hlg = container.GetComponent<HorizontalLayoutGroup>();
+        //     return hlg != null ? hlg.spacing : 0f;
+        // }
 
         // Sizes the meter root's width to fit the widest row. Height is left as authored.
-        private static void SizeRootWidthToMaxRow(ProgressMeter meter, float maxRowWidth) {
-            RectTransform rootRect = meter.transform as RectTransform;
-            if (rootRect == null) { return; }
-            Vector2 size = rootRect.sizeDelta;
-            size.x = maxRowWidth;
-            rootRect.sizeDelta = size;
-        }
+        // private static void SizeRootWidthToMaxRow(ProgressMeter meter, float maxRowWidth) {
+        //     RectTransform rootRect = meter.transform as RectTransform;
+        //     if (rootRect == null) { return; }
+        //     Vector2 size = rootRect.sizeDelta;
+        //     size.x = maxRowWidth;
+        //     rootRect.sizeDelta = size;
+        // }
 
         // Destroys all children of the given container. At runtime uses Object.Destroy.
         // At edit time uses Undo.DestroyObjectImmediate so the destruction is registered
         // on the undo stack and dirties the prefab stage / scene — DestroyImmediate alone
         // does not, so prefab-mode changes get silently discarded on exit.
-        private static void ClearChildren(RectTransform container) {
-            for (int i = container.childCount - 1; i >= 0; i--) {
-                GameObject child = container.GetChild(i).gameObject;
-                if (child.name.Equals("Inset BG")) { continue; }
-                if (Application.isPlaying) {
-                    UnityEngine.Object.Destroy(child);
-                } else {
-#if UNITY_EDITOR
-                    UnityEditor.Undo.DestroyObjectImmediate(child);
-#else
-                    UnityEngine.Object.DestroyImmediate(child);
-#endif
-                }
-            }
-        }
+//         private static void ClearChildren(RectTransform container) {
+//             for (int i = container.childCount - 1; i >= 0; i--) {
+//                 GameObject child = container.GetChild(i).gameObject;
+//                 if (child.name.Equals("Inset BG")) { continue; }
+//                 if (Application.isPlaying) {
+//                     UnityEngine.Object.Destroy(child);
+//                 } else {
+// #if UNITY_EDITOR
+//                     UnityEditor.Undo.DestroyObjectImmediate(child);
+// #else
+//                     UnityEngine.Object.DestroyImmediate(child);
+// #endif
+//                 }
+//             }
+//         }
 
         // Applies a CycleCellState to the cell's overlay image. EMPTY hides the overlay.
         private static void ApplyCycleCell(ProgressMeterCell cell, CycleCellState cellState, ProgressMeterSpriteSet sprites) {

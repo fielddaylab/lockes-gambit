@@ -1,0 +1,24 @@
+# basePath DesignNand
+// NAND
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL} NAND, or “Not AND” gates are the foundation of every computer. I have billions!\nOutput HI unless A and B are both HI.
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Use A and B to control Gates. Use constants to send signals to X.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> If both A and B are HI, send LO to X. You can use two gates on one transistor to detect this.
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> If A is LO, allow LO to flow to X. If B is LO, allow LO to flow to X.
+    $set temp:hintGiven = 3
+$elseif temp:hintGiven == 3
+    {@PAL}  <color=yellow>Hint:</color> Use separate Gates for A LO and B LO to prevent Unstable signals.
+    $set temp:hintGiven = 0
+$endif

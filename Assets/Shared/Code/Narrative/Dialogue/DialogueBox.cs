@@ -109,7 +109,7 @@ namespace SpaceFab.Narrative {
             if (m_InputLayer.IsInputEnabled() && Game.Input.IsMouseDown(0)) {
                 return 0.1f;
             }
-            return 0.6f;
+            return 0.4f;
         }
 
         #region Animations

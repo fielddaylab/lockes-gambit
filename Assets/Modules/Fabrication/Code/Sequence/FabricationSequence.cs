@@ -1,5 +1,6 @@
 using BeauUtil;
 using FieldDay.Assets;
+using SpaceFab.Fabrication.LayerInstructions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,6 +46,9 @@ namespace SpaceFab.Fabrication.Sequence
         [SerializeField] private FabricationStep[] m_Steps;
         public FabricationStep[] Steps => m_Steps;
 
+        // Layer row visuals (icon + BG per chunk) shown on the Layer Instruction Panel.
+        [SerializeField] private LayerInstruction m_LayerInstruction;
+        public LayerInstruction LayerInstruction => m_LayerInstruction;
 
         // Time thresholds for excellent & great, great & good fabrication total cycles. Each value
         // represents the average time for every station

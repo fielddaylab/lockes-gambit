@@ -36,17 +36,17 @@ namespace SpaceFab.Supply
         {
             Vector2 adjust = default;
             float moveSpeed = deltaTime * cameraState.MovementSpeed;
-            if (Game.Input.IsKeyDown(KeyCode.A))
+            if (Game.Input.IsKeyDown(KeyCode.A) || Game.Input.IsKeyDown(KeyCode.LeftArrow))
             {
                 adjust.x -= 1;
             }
-            if (Game.Input.IsKeyDown(KeyCode.D)) {
+            if (Game.Input.IsKeyDown(KeyCode.D) || Game.Input.IsKeyDown(KeyCode.RightArrow)) {
                 adjust.x += 1;
             }
-            if (Game.Input.IsKeyDown(KeyCode.S)) {
+            if (Game.Input.IsKeyDown(KeyCode.S) || Game.Input.IsKeyDown(KeyCode.DownArrow)) {
                 adjust.y -= 1;
             }
-            if (Game.Input.IsKeyDown(KeyCode.W)) {
+            if (Game.Input.IsKeyDown(KeyCode.W) || Game.Input.IsKeyDown(KeyCode.UpArrow)) {
                 adjust.y += 1;
             }
 
@@ -71,7 +71,7 @@ namespace SpaceFab.Supply
 
             cameraState.TargetPosition = targetPos;
 
-            DebugDraw.AddPoint(cameraState.TargetPosition, 0.05f, Color.red);
+            //DebugDraw.AddPoint(cameraState.TargetPosition, 0.05f, Color.red);
 
             currentPos = Vector2.LerpUnclamped(currentPos, targetPos, TweenUtil.Lerp(cameraState.InterpolationStrength, 1, deltaTime));
             currentPos = Geom.Constrain(currentPos, frameSize, region);

@@ -1,0 +1,49 @@
+# basePath Chapter9 
+
+::OnContractSelectOpenCh9
+@trigger 
+@cutscene 
+@once 
+
+
+
+::BeforeSupplyChainCh9
+@trigger 
+@when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design)
+@cutscene 
+@once 
+
+//incoming call
+{@Ovill}    Hi Locke. We've had reports of some... uh... unauthorized activity...
+{@Ovill}    The... Boron... ppp... PIRATES are charging tolls along our supply routes!
+
+//incoming call - interruption of current call
+{@Callie}   Pirates? Oh, how terrifying.
+{@Ovill}    How-how did you get this frequency?! This is an encrypted channel!
+{@Callie}   Why, it is I...
+{@Ovill}    Here we go...
+{@Callie}   Callie Lee! The Space Pirate Queen of Velos Station!
+{@Player}   Hey Callie. 
+{@Ovill}    This isn't funny! They're taking credits from any shipment that crosses their territory!
+{@Ovill}    That's you too, Locke!
+{@Callie}   Sounds like a toll to me.
+{@Ovill}    It's extortion!
+{@Callie}   When Frontier does it, they call it a service fee.
+
+//end call
+
+
+::AfterFabrication 
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research), IsSolutionFoundFor(Supply), IsSolutionFoundFor(Fabrication)
+@cutscene
+@once
+
+{@MAL}      Time to submiiiiiiiiiiiiiiiiiii-
+{@MAL}      Hi CaptiAin, howwww are you doing today?
+{@Player}   ...
+{@Player}   Keela's hack is making a mess of everything.
+{@Player}   P... M.A.L., after this contract, we need to make a detour. 
+{@Player}	Time to have a chat with Keela. 
+//should leave player questioning if he is going to find Keela to bug her.  
+{@MAL}      Great idea, Captain!

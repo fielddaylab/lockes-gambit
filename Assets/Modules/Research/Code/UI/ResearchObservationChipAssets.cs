@@ -1,8 +1,10 @@
+using FieldDay;
 using FieldDay.Assets;
 using SpaceFab.Materials;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SpaceFab.Research {
     /// <summary>
@@ -30,93 +32,148 @@ namespace SpaceFab.Research {
     public class ResearchObservationChipAssets : GlobalAsset
     {
         [Serializable]
-        public struct ObservationSpritePair
+        public struct ObservationStyle
         {
             public ObservationType ObservationType;
-            public Sprite EmptyChip; // empty slot -- only shape, no color
-            public Sprite FilledChip; // shape and color
-            public Sprite ConfirmedChip; // shape and green + checkmark
-            public Sprite ChipIcon; // left icon for different type
+            public Sprite Background;
+            public Sprite Outline;
+            public ColorPalette2 BaseColorPalette;
+            public float Height; // height of chip
+            public float IconHeight;
+            public Sprite DefaultIcon;
         }
 
-        [SerializeField] private ObservationSpritePair[] m_ObservationSprites;
-        [SerializeField] private Color m_LabelFilledColor = Color.black;
-        [SerializeField] private Color m_LabelEmptyColor = new Color(0f, 0f, 0f, 0.5f);
+        [Serializable]
+        public struct ObservationSpriteOverride {
+            public MaterialPropertyLabel Label;
+            public Sprite Icon;
+        }
 
-        // Greyed-out styling for chips whose observation/property is
-        // already selected in the sample panel. The tint multiplies the
-        // background sprite; the label color replaces the filled/empty
-        // color outright.
-        [SerializeField] private Color m_ChipDisabledTint = new Color(0.7f, 0.7f, 0.7f, 1f);
-        [SerializeField] private Color m_LabelDisabledColor = new Color(0f, 0f, 0f, 0.4f);
+        [SerializeField] private ObservationStyle[] m_ObservationSprites;
+        [SerializeField] private ObservationSpriteOverride[] m_IconOverrides;
 
-        // Generic dashed-outline sprite used for sample-panel slots
-        // that exist (the active hypothesis page has a leaf for them)
-        // but haven't been satisfied yet. Shared across all
-        // ObservationTypes — slot-empty visuals don't carry type info.
-        [SerializeField] private Sprite m_EmptySlotSprite;
+        public ColorPalette2 UnselectablePalette;
+        public Color SelectedBlend;
 
-        private Dictionary<ObservationType, ObservationSpritePair> m_Lookup;
+        [Header("Property Chips")]
+        public ColorPalette2 UnidentifiedPropertyPalette;
+        public Color UnidentifiedPropertyIconTint;
+        public Sprite UnknownPropertyIcon;
 
-        public Color LabelFilledColor => m_LabelFilledColor;
-        public Color LabelEmptyColor => m_LabelEmptyColor;
-        public Color ChipDisabledTint => m_ChipDisabledTint;
-        public Color LabelDisabledColor => m_LabelDisabledColor;
+        [Header("Empty Chip")]
+        public Sprite EmptyBackground;
+        public Sprite EmptyOutline;
+        public ColorPalette2 EmptyColorPalette;
 
-        public Sprite EmptySlotSprite => m_EmptySlotSprite;
+        private ObservationStyle[] m_StyleLookup;
+        private Sprite[] m_IconLookup;
 
         public override void Mount()
         {
-            int count = m_ObservationSprites != null ? m_ObservationSprites.Length : 0;
-            m_Lookup = new Dictionary<ObservationType, ObservationSpritePair>(count);
-            for (int i = 0; i < count; i++)
-            {
-                m_Lookup[m_ObservationSprites[i].ObservationType] = m_ObservationSprites[i];
+            m_StyleLookup = new ObservationStyle[(int) ObservationType.Component + 1];
+            foreach(var component in m_ObservationSprites) {
+                m_StyleLookup[(int)component.ObservationType] = component;
+            }
+
+            m_IconLookup = new Sprite[(int) MaterialPropertyLabel.HighMobilitySemiconductor + 1];
+            foreach(var iconOverride in m_IconOverrides) {
+                m_IconLookup[(int)iconOverride.Label] = iconOverride.Icon;
+            }
+
+            for(int i = 0; i < m_IconLookup.Length; i++) {
+                if (m_IconLookup[i]) {
+                    continue;
+                }
+                ObservationType obsType = MaterialObservationChamberLookup.GetChamberType((MaterialPropertyLabel) i);
+                Sprite icon = m_StyleLookup[(int)obsType].DefaultIcon;
+                m_IconLookup[i] = icon;
             }
         }
 
         public override void Unmount()
         {
-            m_Lookup = null;
+            m_StyleLookup = null;
+            m_IconLookup = null;
         }
 
         /// <summary>
-        /// Resolves the chip sprite for (observationType, fillState).
-        /// Returns false when no entry is registered for the type, or
-        /// when the registered entry has a null sprite — chip callers
-        /// hide the Image in that case.
+        /// Retrieves the shape sprites for the given observation type.
         /// </summary>
-        public bool TryGetSprite(ObservationType observationType, ChipFillState fillState, out Sprite sprite)
-        {
-            if (m_Lookup != null && m_Lookup.TryGetValue(observationType, out var pair))
-            {
-                switch (fillState)
-                {
-                    case ChipFillState.Confirmed:
-                        sprite = pair.ConfirmedChip;
-                        break;
-                    case ChipFillState.Filled:
-                        sprite = pair.FilledChip;
-                        break;
-                    default:
-                        sprite = pair.EmptyChip;
-                        break;
-                }
-                return sprite != null;
+        public ObservationChipShape GetShape(ObservationType observationType) {
+            if (m_StyleLookup != null) {
+                var style = m_StyleLookup[(int)observationType];
+                ObservationChipShape shape;
+                shape.Fill = style.Background;
+                shape.Outline = style.Outline;
+                shape.Height = style.Height;
+                shape.IconHeight = style.IconHeight;
+                shape.Palette = style.BaseColorPalette;
+                return shape;
+            } else {
+                return default;
             }
-            sprite = null;
-            return false;
         }
 
-        public bool TryGetIcon(ObservationType observationType, out Sprite sprite)
-        {
-            if (m_Lookup != null && m_Lookup.TryGetValue(observationType, out var pair))
-            {
-                sprite = pair.ChipIcon;
-                return sprite != null;
+        /// <summary>
+        /// Retrieves the shape sprites for the given observation type.
+        /// </summary>
+        public ObservationChipShape GetEmptyShape(ObservationType observationType) {
+            if (m_StyleLookup != null) {
+                var style = m_StyleLookup[(int)observationType];
+                ObservationChipShape shape;
+                shape.Fill = EmptyBackground;
+                shape.Outline = EmptyOutline;
+                shape.Height = style.Height;
+                shape.IconHeight = style.IconHeight;
+                shape.Palette = EmptyColorPalette;
+                return shape;
+            } else {
+                return default;
             }
-            sprite = null;
-            return false;
         }
+
+        /// <summary>
+        /// Retrieves the default color palette for the 
+        /// </summary>
+        public ColorPalette2 GetColorPalette(ObservationType observationType) {
+            if (m_StyleLookup != null) {
+                var style = m_StyleLookup[(int)observationType];
+                return style.BaseColorPalette;
+            }
+            return default;
+        }
+
+        /// <summary>
+        /// Attempts to retrieve the default icon for the given property type.
+        /// </summary>
+        public bool TryGetIcon(ObservationType observationType, out Sprite sprite)  {
+            if (m_StyleLookup != null) {
+                sprite = m_StyleLookup[(int)observationType].DefaultIcon;
+            } else {
+                sprite = null;
+            }
+            return sprite != null;
+        }
+
+        /// <summary>
+        /// Attempts to retrieve the icon for the given property label.
+        /// </summary>
+        public bool TryGetIcon(MaterialPropertyLabel propertyLabel, out Sprite sprite) {
+            if (m_IconLookup != null) {
+                sprite = m_IconLookup[(int)propertyLabel];
+            } else {
+                sprite = null;
+            }
+
+            return sprite != null;
+        }
+    }
+
+    public struct ObservationChipShape {
+        public Sprite Fill;
+        public Sprite Outline;
+        public ColorPalette2 Palette;
+        public float Height;
+        public float IconHeight;
     }
 }

@@ -28,6 +28,7 @@ namespace FieldDay.UI {
 
         [NonSerialized] private Sprite m_DefaultSprite;
         [NonSerialized] private Sprite m_CurrentSprite;
+        [NonSerialized] private Material m_DefaultMaterial;
         [NonSerialized] private Vector2 m_DefaultSpriteSize;
         [NonSerialized] private Vector2 m_OriginalSizeDelta;
 
@@ -35,6 +36,7 @@ namespace FieldDay.UI {
             m_DefaultSprite = m_Sprite.sprite;
             m_DefaultSpriteSize = m_DefaultSprite.rect.size;
             m_OriginalSizeDelta = m_Position.sizeDelta;
+            m_DefaultMaterial = m_Sprite.material;
         }
 
         private void OnEnable() {
@@ -133,6 +135,19 @@ namespace FieldDay.UI {
                 newSize.y = m_OriginalSizeDelta.y * size.y / m_DefaultSpriteSize.y;
                 m_Position.sizeDelta = newSize;
             }
+
+            Color tint = Color.white;
+            Material material = m_DefaultMaterial;
+
+            if (type != null) {
+                tint = type.Tint;
+                if (type.MaterialOverride) {
+                    material = type.MaterialOverride;
+                }
+            }
+
+            m_Sprite.color = tint;
+            m_Sprite.material = material;
 
             float scale;
             if (type) {

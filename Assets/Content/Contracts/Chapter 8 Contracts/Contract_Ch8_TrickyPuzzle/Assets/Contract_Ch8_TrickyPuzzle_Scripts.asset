@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2613736b2e35237448e4a0f57709855d, type: 3}
+  m_Name: Contract_Ch8_TrickyPuzzle_Scripts
+  m_EditorClassIdentifier: 
+  Bindings:
+  - Scope: 4
+    Script: {fileID: -1942890987711236906, guid: 095c9c4ecf196c945bf408ca450aae3a, type: 3}
+  - Scope: 8
+    Script: {fileID: -1942890987711236906, guid: 66bf066c08467e645b3c73aa4622030a, type: 3}

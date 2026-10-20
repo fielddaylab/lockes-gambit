@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Patterns_Tab
   m_EditorClassIdentifier: 
   m_Title: Patterns
-  m_Icon: {fileID: 21300000, guid: 01870cff19e909d41a4f25890ad68eb3, type: 3}
+  m_Icon: {fileID: 21300000, guid: 32c30137d83232b4b8d8f4787bc48ff1, type: 3}
   m_Pages:
   - {fileID: 11400000, guid: c288e37093040384ab5d6c805df774d2, type: 2}
   - {fileID: 11400000, guid: 4d8b471c2570f1c4bbbff5b3c6eb6e15, type: 2}

@@ -16,6 +16,7 @@ namespace SpaceFab.UI {
 
         public HypothesisViewModelState ViewModel;
         public ChamberInterfacerState InterfacerState;
+        public ResearchMinigameState MinigameState;
     }
 
     /// <summary>
@@ -27,18 +28,9 @@ namespace SpaceFab.UI {
     public static class WikiResearchContextUtility {
         public static WikiResearchContext Resolve() {
             WikiResearchContext context = default;
-            if (!Game.SharedState.Has<HypothesisViewModelState>()
-                || !Game.SharedState.Has<ChamberInterfacerState>()) {
-                return context;
-            }
-
-            Find.State(
-                out HypothesisViewModelState viewModel,
-                out ChamberInterfacerState interfacerState
-            );
-            context.Present = true;
-            context.ViewModel = viewModel;
-            context.InterfacerState = interfacerState;
+            context.Present = Game.SharedState.TryGet(out context.ViewModel)
+                && Game.SharedState.TryGet(out context.InterfacerState)
+                && Game.SharedState.TryGet(out context.MinigameState);
             return context;
         }
     }

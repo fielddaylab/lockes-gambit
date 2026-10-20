@@ -3,6 +3,7 @@ using BeauUtil.Variants;
 using FieldDay;
 using FieldDay.Components;
 using FieldDay.Scripting;
+using FieldDay.UI;
 using SpaceFab.Materials;
 using System;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace SpaceFab.Research {
         public Collider2D Region;
         public Transform Root;
         public ResearchMaterialVisualRig Rig;
+        public CursorHint Cursor;
 
         // Drag-drop policy flags. AllowLift gates clicking the slot itself to
         // pull its current material back into a drag. AllowSwap gates dropping
@@ -38,6 +40,7 @@ namespace SpaceFab.Research {
         [NonSerialized] public Routine ExplosionRoutine;
 
         public void OnRegister() {
+            Cursor.enabled = false;
         }
 
         public void OnDeregister() {
@@ -82,11 +85,13 @@ namespace SpaceFab.Research {
             if (slot.Rig != null) {
                 if (material == null) {
                     ResearchMaterialVisualRigUtility.ClearRig(slot.Rig);
+                    slot.Cursor.enabled = false;
                 } else {
                     // The slot rig's label is hidden in the chamber
                     // prefab — pass null for researchState since the
                     // known/unknown distinction only affects the label.
                     ResearchMaterialVisualRigUtility.ApplyPropertiesToRig(slot.Rig, material, null);
+                    slot.Cursor.enabled = true;
 
                     if (kind == ChamberSlotKind.Primary) {
                         ScriptUtility.WriteVariable(new TableKeyPair("research", "primaryMaterial"), material.AssetId);

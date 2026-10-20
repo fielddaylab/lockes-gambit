@@ -72,14 +72,6 @@ namespace SpaceFab
 
             Debug.Log("[MinigameLoadExitSystem] Exporting state...");
 
-            // Snap the shared wiki closed before the scene tears down, so the next minigame loads
-            // with the panel collapsed regardless of how the player left this one.
-            Find.State(
-                out WikiState wikiState,
-                out WikiLayoutState wikiLayout
-                );
-            WikiUtility.ForceCollapse(wikiState, wikiLayout);
-
             interfacer.MinigameState.MergeState();
             interfacer.MinigameState.ExportState(ref saveStates);
             SaveUtility.Save(SaveSlot.Main);
@@ -98,14 +90,14 @@ namespace SpaceFab
                 // so the default no-reload-if-loaded path would be a no-op. Force a fresh load
                 // so the re-import lands on the next first-unsolved level.
                 Game.Scenes.LoadMainScene(reloadTarget, true);
-
-                SceneRequestContext loadContext = default;
-                loadContext.Set("PreserveMusic", true);
-                Game.Scenes.QueueMainLoadContext(loadContext);
             } else {
                 Game.Events.Dispatch(GameEvents.OnMinigameExit);
                 Game.Scenes.LoadMainScene(globalSceneConfig.ReturnScene);
             }
+
+            SceneRequestContext loadContext = default;
+            loadContext.Set("PreserveMusic", true);
+            Game.Scenes.QueueMainLoadContext(loadContext);
         }
     }
 }

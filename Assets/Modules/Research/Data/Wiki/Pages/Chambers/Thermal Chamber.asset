@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Thermal Chamber
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Thermal Chamber
-  m_Icon: {fileID: 21300000, guid: d127ede71a1a70041a40f557c3dddbfc, type: 3}
-  m_IllustrationFrames:
-  - {fileID: -2697522952519470549, guid: 0229e21b6f578fb458d4ecbd616cdf72, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: The Thermal Chamber is used to observe materials at different temperatures.
-  m_MaterialId:
+  Title: Thermal Chamber
+  Icon: {fileID: 21300000, guid: 5c83d2fb20faa7643845c4a71ef32c5b, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: c2f93c96ccde1b446bf47a3ba860e8f7, type: 3}
+  IllustrationFPS: 0.5
+  BodyText: The Thermal Chamber is used to observe materials at different temperatures.
+  MaterialId:
     m_HashValue: 0
-  m_IsObservationPage: 0
-  m_ObservationType: 0
-  m_PropertyCheck: {fileID: 0}
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

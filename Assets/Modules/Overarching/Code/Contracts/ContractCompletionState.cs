@@ -27,6 +27,10 @@ namespace SpaceFab.Overarching
 
     public static class ContractCompletionUtility
     {
+        static public IEnumerator MoveContractToPosition(float y, float alpha) {
+            yield return null;
+        }
+
         public static IEnumerator LoadFromPrevChapterRoutine(ContractCompletionState completionState, ChapterState chapterState)
         {
             if (chapterState.ChapterIndex <= 0) {

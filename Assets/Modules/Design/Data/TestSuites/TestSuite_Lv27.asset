@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2b5b6395503174db99560628ec866b, type: 3}
+  m_Name: TestSuite_Lv27
+  m_EditorClassIdentifier: 
+  ColumnMask: 255
+  Rows:
+  - InputA: 1
+    InputB: 2
+    OutputX: 1
+    OutputY: 0
+  - InputA: 1
+    InputB: 1
+    OutputX: 0
+    OutputY: 1
+  - InputA: 2
+    InputB: 2
+    OutputX: 2
+    OutputY: 0
+  - InputA: 2
+    InputB: 1
+    OutputX: 0
+    OutputY: 2

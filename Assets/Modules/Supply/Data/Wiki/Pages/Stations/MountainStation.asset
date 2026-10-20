@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
+  m_Name: MountainStation
+  m_EditorClassIdentifier: 
+  Title: Mountain Station
+  Icon: {fileID: 21300000, guid: d25958558a27ad447819efb309b813a7, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: a6e5f7cb953c8504f98dfcc7e5d0ff4c, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 0.75
+  CaptionText: 
+  BodyText: Mountain Station is the first employee owned orbiting station. While
+    FR robots still work at the station, human workers hold a strong influence in
+    accordance to Wayward Compact.
+  MaterialId:
+    m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

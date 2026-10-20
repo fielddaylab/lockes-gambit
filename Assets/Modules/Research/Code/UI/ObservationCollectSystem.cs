@@ -76,6 +76,10 @@ namespace SpaceFab.Research {
                         return;
                     }
 
+                    if (MaterialObservationChamberLookup.GetChamberType(inputState.ChipPickerSelectionLabel) != ObservationType.Dopant) {
+                        return;
+                    }
+
                     if (ResearchInventoryUtility.AddObservation(researchState, secondarySlottedId, inputState.ChipPickerSelectionLabel, slottedId)) {
                         viewModelDirty = true;
                         using (var table = TempVarTable.Alloc())

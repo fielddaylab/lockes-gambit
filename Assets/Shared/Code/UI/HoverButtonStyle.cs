@@ -1,5 +1,6 @@
 using BeauRoutine;
 using BeauUtil;
+using BeauUtil.Debugger;
 using FieldDay.UI;
 using FieldDay.UI.Animation;
 using FieldDay.UI.Widgets;
@@ -17,7 +18,7 @@ namespace SpaceFab.UI {
             //PopAnim.Play(button.LayoutOffset, PopAnim.Default);
         }
 
-        public override void UpdateInteractionState(GuiWidgetInteractableState state, GuiWidget source, GuiWidgetUpdateFlags flags) {
+        public override void UpdateInteractionState(GuiWidgetInteractableState state, GuiWidget source, GuiWidgetUpdateFlags flags) {            
             float y = 0;
             Color tint = Color.white;
 

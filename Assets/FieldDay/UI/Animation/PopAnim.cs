@@ -18,8 +18,7 @@ namespace FieldDay.UI.Animation {
         }
 
         static private void PrepareState(ref LiteAnimatorState state, Vector2 offsetAmt, float duration, float delay, Curve easing) {
-            state.Duration = duration;
-            state.CurrentTime = duration + delay;
+            state.ResetTimeWithDelay(duration, delay);
             state.Registers.A.Float2() = offsetAmt;
             state.Easing = easing;
         }

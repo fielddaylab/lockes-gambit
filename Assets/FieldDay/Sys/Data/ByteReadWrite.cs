@@ -105,7 +105,6 @@ namespace FieldDay.Data {
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe void WriteBuffer(in ByteWriter writer) {
-            // TODO: Assert that buffer does not overlap with this buffer
             Assert.False((Head - Written < (writer.Head - writer.Written + writer.Capacity))
                 && (writer.Head - writer.Written) < (Head - Written + Capacity), "Cannot copy overlapping buffers");
             WriteBuffer(writer.GetData());

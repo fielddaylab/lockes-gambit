@@ -31,9 +31,11 @@ namespace SpaceFab.Research
             MaterialPropertyLabel.HeatActivated,
             MaterialPropertyLabel.HeatDeactivated,
             MaterialPropertyLabel.HeatUnaffected,
-            MaterialPropertyLabel.HeatVulnerable,
             MaterialPropertyLabel.HeatResistant
         };
+
+        public float PrimarySlotY;
+
         [NonSerialized] public bool HeatChangedThisFrame;
 
         // Sound played when no current

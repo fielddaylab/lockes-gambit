@@ -1,0 +1,26 @@
+# basePath DesignCh6
+// Depletion 2
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+    {@PAL} Gates work on N-type too. With a LO signal, they flip N-type to P-Type.
+
+::TwoInputs
+@trigger    OnSingleTestComplete
+@when       result == "success"
+{@PAL} There are two Inputs now! Flip them both to run all four tests.
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Check the Verification Table. When B is LO, block signals from reaching the output.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> A reaches the output, and B controls the gate.
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> Use Vias to connect semiconductor back to the inputs and outputs on the metal layer.
+    $set temp:hintGiven = 0
+$endif

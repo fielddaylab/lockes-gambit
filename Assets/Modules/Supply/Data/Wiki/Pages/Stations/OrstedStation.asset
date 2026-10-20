@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
+  m_Name: OrstedStation
+  m_EditorClassIdentifier: 
+  Title: Orsted Station
+  Icon: {fileID: 21300000, guid: 98243201328c822488643892d4e768a5, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 90d6686d2e57a854fa99ef9eea6d5913, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 0.75
+  CaptionText: 
+  BodyText: Orsted is Frontier Robotics' white-collar prison station, where prisoners
+    must work desk jobs to serve their sentence. Forsch residents consider being
+    sentenced to Orsted an end to one's career.
+  MaterialId:
+    m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

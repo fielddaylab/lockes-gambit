@@ -1,6 +1,7 @@
 using System;
 using BeauRoutine;
 using FieldDay;
+using FieldDay.Animation;
 using FieldDay.UI;
 using FieldDay.UI.Widgets;
 using SpaceFab.Fabrication;
@@ -13,9 +14,11 @@ namespace SpaceFab.Supply {
         public Image SpeedIcon;
         public Image ShipIcon;
         public Image[] ShipBody;
+        public Image[] ShipOutline;
         public RectTransform[] Slots;
         public Image[] SlotMaterials;
         public TMP_Text ShipName;
+        public Image Flash;
 
         [Header("Links")]
         public Image LineLayer;
@@ -24,6 +27,7 @@ namespace SpaceFab.Supply {
 
         [NonSerialized] public int ShipIndex;
         [NonSerialized] public Vector2 TargetPos;
+        [NonSerialized] public AnimHandle Anim;
 
         protected override void OnDisable() {
             LineLayer.gameObject.SetActive(false);
@@ -51,6 +55,12 @@ namespace SpaceFab.Supply {
             foreach(var bodySprite in row.ShipBody) {
                 Positioning.SetWidthDelta(bodySprite.rectTransform, bodySize);
                 bodySprite.sprite = shipAsset.BodyImage;
+            }
+            foreach (var outlineSprite in row.ShipOutline) {
+                Positioning.SetWidthDelta(outlineSprite.rectTransform, bodySize);
+                outlineSprite.sprite = shipAsset.BodyOutline;
+                outlineSprite.color = shipAsset.IconColor;
+                outlineSprite.enabled = false;
             }
 
             ShipListPanel.SpeedIconConfig speedIcon = panel.SpeedIcons[shipAsset.Speed];
@@ -83,9 +93,15 @@ namespace SpaceFab.Supply {
             if (active) {
                 row.StatsLayer.gameObject.SetActive(true);
                 row.Style.Style.MarginLower.y = 52;
+                foreach(var outline in row.ShipOutline) {
+                    outline.enabled = false;
+                }
             } else {
                 row.Style.Style.MarginLower.y = 0;
                 row.StatsLayer.gameObject.SetActive(false);
+                foreach (var outline in row.ShipOutline) {
+                    outline.enabled = true;
+                }
             }
         }
     }

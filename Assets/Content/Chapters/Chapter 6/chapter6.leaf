@@ -1,0 +1,38 @@
+# basePath Chapter6
+
+::FirstContractOpenCh6
+@trigger    OnContractSelectOpen
+@cutscene
+@once 
+
+
+{@Player}   P.A.L., any updates on what's happening at Kalvis?
+{@PAL}      Frontier Robotics reports a minor disruption to mining operations on Cu-6355-29.
+{@PAL}      Production has resumed and output remains within acceptable parameters!
+{@Player}   That's not what I'm hearing.
+{@PAL}      Worker safety is a top priority! Winkler Station has transitioned to a fully autonomous workforce.
+{@PAL}      With no human workers, workplace injuries have been reduced to zero!
+{@Player}   ...Right.
+{@PAL}      Shall we get back to work? You have three contracts to choose from.
+
+
+::BeforeSupplyChainCh6
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
+@cutscene 
+@once 
+
+{@Player}	Hey Xavier, do you have any leads on new sources for semiconductors?
+{@Xavier}   Hey... uh... Locke...
+{@Xavier}   Right. Winkler Station just opened up with germanium!
+{@Xavier}   First fully autonomous station in my sector. Profits are gonna soar!
+{@Xavier}   Workers reassigned. Ah, the beauty of automation!
+{@Xavier}   Soon the only people we'll need are people like us.
+{@Player}   Like us?
+{@Xavier}   Managers! We have the good life, eh?
+
+// hang up
+
+{@Player}   ...does Frontier want to make everything autonomous?
+
+

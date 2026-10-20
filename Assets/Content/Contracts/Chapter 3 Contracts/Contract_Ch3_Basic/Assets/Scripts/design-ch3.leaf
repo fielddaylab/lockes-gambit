@@ -1,0 +1,21 @@
+# basePath DesignCh3
+// Diode
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL}  Where N-Type and P-Type meet, they form a Diode that only HI signals can pass through.
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> The inputs and outputs are on the metal layer, so you'll need Vias to connect the two layers.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> Make sure your Diode connects back to the output with a Via.
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> Make sure your Vias touch both metal and semiconductor.
+    $set temp:hintGiven = 0
+$endif

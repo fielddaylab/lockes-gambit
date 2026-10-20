@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4be90a9d33d3784caac2e5eb4b5636c, type: 3}
   m_Name: DefinitiveMaterialOrdering
   m_EditorClassIdentifier: 
+  m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets:
   - {fileID: 11400000, guid: 5158c04b2896ff64b92484961936a03a, type: 2}
   m_NamedAssets: []

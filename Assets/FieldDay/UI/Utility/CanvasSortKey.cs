@@ -16,11 +16,7 @@ namespace FieldDay.UI {
 
         private const int RenderTypeBits = 2;
         private const int RenderTypeMask = (1 << RenderTypeBits) - 1;
-        private const int RenderTypeOffset = PlaneDistanceOffset + PlaneDistanceBits;
-
-        private const int PlaneDistanceBits = 12;
-        private const int PlaneDistanceMask = (1 << PlaneDistanceBits) - 1;
-        private const int PlaneDistanceOffset = SortingLayerOffset + SortingLayerBits;
+        private const int RenderTypeOffset = SortingLayerOffset + SortingLayerBits;
 
         private const int SortingLayerBits = 8;
         private const int SortingLayerMask = (1 << SortingLayerBits) - 1;
@@ -28,7 +24,11 @@ namespace FieldDay.UI {
 
         private const int SortingOrderBits = 16;
         private const int SortingOrderMask = (1 << SortingOrderBits) - 1;
-        private const int SortingOrderOffset = 0;
+        private const int SortingOrderOffset = PlaneDistanceOffset + PlaneDistanceBits;
+
+        private const int PlaneDistanceBits = 12;
+        private const int PlaneDistanceMask = (1 << PlaneDistanceBits) - 1;
+        private const int PlaneDistanceOffset = 0;
 
         public readonly ulong RawValue;
 

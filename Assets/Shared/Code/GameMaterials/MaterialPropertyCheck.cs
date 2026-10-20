@@ -18,7 +18,7 @@ namespace SpaceFab.Materials
         HeatActivated,
         HeatDeactivated,
         HeatUnaffected,
-        HeatVulnerable,
+        DEPRECATED_HeatVulnerable,
         HeatResistant,
 
         AtomicRadiusCompliant,
@@ -88,7 +88,7 @@ namespace SpaceFab.Materials
     {
         public static ObservationType GetChamberType(MaterialPropertyLabel label)
         {
-            if (label < MaterialPropertyLabel.HeatActivated)
+            if (label < MaterialPropertyLabel.HeatActivated || label == MaterialPropertyLabel.VoltageResistant)
             {
                 return ObservationType.Electrical;
             }

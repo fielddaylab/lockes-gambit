@@ -44,7 +44,7 @@ namespace SpaceFab.Design
 
         static public readonly ActionEvent OnUpdated = new ActionEvent(16);
 
-        public bool Lookup(EdgeState[] inEdges, out AssembledPathData pathData)
+        public bool Lookup(EdgeState[] inEdges, out AssembledPathData pathData, bool suppressEdgeless = false)
         {
             // TODO: convert inEdges from 6 to 4
             int lookup = 0;
@@ -54,6 +54,17 @@ namespace SpaceFab.Design
                 {
                     lookup += 1 << i;
                 }
+            }
+            // if suppress edgeless and all edges disconnected, 
+            if (suppressEdgeless && lookup >= 0b1111) {
+                // use an empty sprite instead
+                pathData = new AssembledPathData() {
+                    Sprite = m_ErrorSprite,
+                    Rotation = Quaternion.identity,
+                    Scale = Vector3.one,
+                    Turns = 0
+                };
+                return true;
             }
 
             RotationEntry rotData = m_RotationEntries[lookup];

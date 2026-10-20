@@ -30,10 +30,6 @@ MonoBehaviour:
       m_HashValue: 57385584
     Position: {x: -4.17, y: -4.41}
   - Name:
-      m_Source: Planet_P
-      m_HashValue: 3801165340
-    Position: {x: 1.86, y: -2.73}
-  - Name:
       m_Source: Planet_SiO2Converter
       m_HashValue: 241399131
     Position: {x: -3.87, y: 1.81}

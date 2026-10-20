@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8d4ce805ac1ac4581172e8e407b18f, type: 3}
+  m_Name: UI Prefabs
+  m_EditorClassIdentifier: 
+  SortOrder: 20
+  IsLocked: 0
+  ShowDuringContexts: 
+  HideDuringContexts: 'role-writer
+
+    role-audio'
+  ReadMe: Important UI prefabs
+  Items:
+  - Object: {fileID: 4113217339503403467, guid: 0ed7604c68709e34ca58483f51e1cf0f, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 387483060091562675, guid: 6d94a6ff69d197247862f909aeedd431, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 8009370429197515178, guid: a0bac6cbba6ff514e8ebbc8bde509d87, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 1483081977996295771, guid: 2139e596b66bec84fadc906ebe2968d7, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 7858774295019505386, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 6210911571537687538, guid: 12194cea89d380a4d8a5da9093fdaeb5, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 5228638197193639289, guid: 266bf0f38fbc4c543a6f473f479f81ed, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 7727346863187816193, guid: e90520d1cacc618479ed8099ba3e5050, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  ProjectSearchFilter: 

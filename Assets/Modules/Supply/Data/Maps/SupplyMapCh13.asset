@@ -24,84 +24,107 @@ MonoBehaviour:
     height: 24
   Positions:
   - Name:
+      m_Source: 
       m_HashValue: 1391791790
     Position: {x: -0.37, y: 0.01}
   - Name:
+      m_Source: 
       m_HashValue: 543539177
     Position: {x: 2.19, y: 5.18}
   - Name:
+      m_Source: 
       m_HashValue: 392540606
     Position: {x: 3.26, y: -7.6}
   - Name:
+      m_Source: 
       m_HashValue: 3566278674
     Position: {x: -6.45, y: -4.55}
   - Name:
+      m_Source: 
       m_HashValue: 57385584
     Position: {x: 1.78, y: -2.77}
   - Name:
+      m_Source: 
       m_HashValue: 3424252818
     Position: {x: 4.82, y: 2.02}
   - Name:
+      m_Source: 
       m_HashValue: 593577844
     Position: {x: -0.47, y: -4.72}
   - Name:
+      m_Source: 
       m_HashValue: 91235012
     Position: {x: -2.86, y: 6.84}
   - Name:
+      m_Source: 
       m_HashValue: 3801165340
     Position: {x: -7.32, y: 0.65}
   - Name:
+      m_Source: 
       m_HashValue: 620920570
     Position: {x: -3.67, y: 2.83}
   - Name:
+      m_Source: 
       m_HashValue: 2684372210
     Position: {x: 9.36, y: 1.11}
   - Name:
+      m_Source: 
       m_HashValue: 1616771497
     Position: {x: 9.01, y: -5.69}
   - Name:
+      m_Source: 
       m_HashValue: 241399131
     Position: {x: -7.09, y: -8.09}
   - Name:
+      m_Source: 
       m_HashValue: 460151471
     Position: {x: 7.75, y: 5.44}
   - Name:
+      m_Source: 
       m_HashValue: 3784387721
     Position: {x: 3.83, y: 8.39}
   Hazards:
   - Name:
+      m_Source: 
       m_HashValue: 3594195602
     Position: {x: 6.02, y: -3.52}
   - Name:
+      m_Source: 
       m_HashValue: 2170266095
     Position: {x: -4.07, y: -0.93}
   Overrides:
   - Name:
+      m_Source: 
       m_HashValue: 392540606
     Time: 2
     Cost: 3
     Risk: 1
   - Name:
+      m_Source: 
       m_HashValue: 3566278674
     Time: 2
     Cost: 3
     Risk: 0
   - Name:
+      m_Source: 
       m_HashValue: 57385584
     Time: 3
     Cost: 3
     Risk: 1
   - Name:
+      m_Source: 
       m_HashValue: 593577844
     Time: 2
     Cost: 3
     Risk: 1
   - Name:
+      m_Source: 
       m_HashValue: 241399131
     Time: 1
     Cost: 1
     Risk: 1
   - Name:
+      m_Source: 
       m_HashValue: 3784387721
     Time: 1
     Cost: 2

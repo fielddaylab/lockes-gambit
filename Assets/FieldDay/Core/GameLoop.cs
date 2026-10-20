@@ -825,11 +825,13 @@ namespace FieldDay {
         }
 
         private void OnApplicationFocus(bool focus) {
+            Log.Msg("[GameLoop] Application focus state updated to {0}", focus);
             s_AppFocusState = focus;
             OnFocusStateChanged.Invoke(focus);
         }
 
         private void OnApplicationPause(bool pause) {
+            Log.Msg("[GameLoop] Application pause state updated to {0}", pause);
             s_AppPauseState = pause;
             OnPauseStateChanged.Invoke(pause);
         }

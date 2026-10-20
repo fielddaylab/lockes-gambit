@@ -1,4 +1,5 @@
 using BeauRoutine;
+using BeauRoutine.Extensions;
 using FieldDay;
 using FieldDay.Audio;
 using FieldDay.Scripting;
@@ -19,10 +20,11 @@ namespace SpaceFab.Research {
         Default,
         VoltageBreakdown,
         TooBig,
-        InvalidCombo,
+        // InvalidCombo,
         TemperatureBreakdownHot,
-        TemperatureBreakdownCold,
-        Polyelemental,
+        // TemperatureBreakdownCold,
+        // Polyelemental,
+        InvalidSubstrate
     }
 
     /// <summary>
@@ -99,14 +101,26 @@ namespace SpaceFab.Research {
                 yield return rigT.MoveTo(startY + 0.1f, 0.27f, Axis.Y, Space.Self).Wave(Wave.Function.Sin, 6);
             }
 
-            // 4. Burst VFX + SFX. The sfx key is shared across styles for
-            // now; per-style audio will land when the audio bank does.
-            if (vfxPool != null && vfxPool.ExplosionEffectPool != null && slot.Rig != null) {
-                ResearchVfxUtility.PlayFromPool(vfxPool.ExplosionEffectPool, slot.Rig.transform);
+            if (style == ExplosionStyle.InvalidSubstrate) {
+                Vector2 originalPosition = slot.Rig.transform.position;
+                KinematicAnimation animation = new() {
+                    Velocity = new Vector3Range(new Vector3(-8f, 8f, 0f)),
+                    Gravity = new Vector3Range(new Vector3(0f, -10f, 0f))
+                };
+                yield return Routine.Inline(animation.Simulate(slot.Rig.transform, 0.5f));
+                slot.Rig.transform.position = originalPosition;
             }
-            Sfx.Play("Research.Gem.Explode");
 
-            yield return 0.05f;
+            else {
+                // 4. Burst VFX + SFX. The sfx key is shared across styles for
+                // now; per-style audio will land when the audio bank does.
+                if (vfxPool != null && vfxPool.ExplosionEffectPool != null && slot.Rig != null) {
+                    ResearchVfxUtility.PlayFromPool(vfxPool.ExplosionEffectPool, slot.Rig.transform);
+                }
+                Sfx.Play("Research.Gem.Explode");
+
+                yield return 0.05f;
+            }
 
             // 5. Restore material then clear the slot. FillInSlot null fires
             // the standard frame-flag, which the owning chamber picks up

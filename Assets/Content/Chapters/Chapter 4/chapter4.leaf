@@ -1,0 +1,90 @@
+
+# basePath Chapter4
+
+::FirstContractOpenCh4 
+@trigger    OnContractSelectOpen
+@cutscene
+@once 
+
+
+// New optional research sample- Gold
+{@PAL}		You have a call coming in Captain. Ready to get back to work?
+//incoming call
+{@Xavier}    Locke! Did you hear about the slowdowns at Kalvis? Copper prices are through the roof!
+{@Xavier}    Terrible news for Kalvis. Golden opportunity for you.
+{@Xavier}    Which is why I'm sending you a little sample, straight from the Planet of Gold and Golden Opportunities.
+{@Player}    Blaze and the others are doing the best they can. It's not their fault Frontier's bots used cheap parts.
+{@Player}	Frontier has a monopoly on the mining technology in this star system. 
+{@Xavier}    Well, here in the <i>competently</i> managed, Frontier-supported Ralston system, our bots are humming along...
+
+
+//end call
+
+::BeforeSupplyChainCh4
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design)
+@cutscene 
+@once 
+
+//quinn will introduce the idea that the hauling region you need is . She wants you to connect to callie to make sure she's willing to deal with you since you are frontier now. 
+
+//incoming call from quinn
+{@Quinn}    I know someone who can beat those Frosch boron prices. By a lot.
+{@Quinn}    But working with Callie can be a little... risky.
+{@Quinn}	... so, try not to offend her.
+
+//end call
+
+//call callie
+
+{@Callie}   A'hoy! 
+{@Callie}   Be blessed in my presence mere corpo-lackey! Or as I like to call ye, Clackey!
+{@Callie}  	It is I, the Boron Space Pirate Queen of Velos Station! 
+{@Player}  	Nice to meet you... Callie. 
+{@Callie}   ...all ships with Frontier bots are marked for pillaging!
+{@Callie}   Holler if you need some goods, Clackey. 
+//end call
+
+{@Player}  	Hey! I'm not a Clackey- aaaand she hung up. 
+
+
+
+//deleted convo with blaze
+//incoming call
+
+//{@Blaze}     Hi Locke!
+//{@Blaze}     Hey, if you're around for the Kalvis Festival, you should stop by.
+//{@Player}    Well... I'm not sure how Mara would feel about that.
+//{@Blaze}     What are you talking about? We'd love to see you.
+//{@Player}    Thanks. Maybe I will.
+
+//{@Blaze}     Oh! Quinn said you were looking for boron.
+//{@Player}    Yeah. Frontier has it at Lussac, but it's expensive.
+//{@Blaze}     Right... well, there is another option.
+//{@Player}    Why do I not like the sound of that?
+//{@Blaze}     Ha! Velos Station. Callie can sell it to you for half the price. 
+//{@Player}    Wait. Velos? The pirate station?
+//{@Blaze}     That's the one.
+//{@Player}    ...What's the catch?
+//{@Blaze}     They're pirates, Locke.
+
+//phone hangs up
+
+//{@PAL} 		I would advise caution in regards to the new boron source. 
+//{@Pal}		Callie is considered a high-risk supplier.
+
+::AfterSupplyChainCh4 
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
+@trigger
+@once 
+
+{@Player} 	I've noticed some glitches with the fab robots Pal. 
+{@PAL}		02819b2a4f92b2a08e97c4affea1bda0733c57d2657555b12f5473f26c7b07f9332b7ff6d3a0983e25cccbc7e276d9cb6b3ea6726a9370235dc5f0113a70d6bcf0534c154e729b8ca8e8d992ede646f66c9088ee656498a76e0ee32495a8bf1021d82b7f5483b1d9c25d4ce47dba9efda8131bee5cfc3424c012c2f590c9732777
+{@Player}	Maybe Quinn was right about Frontier Robotic's hardware. Quantity over quality.
+{@PAL}    <color=red>SYSTEM ERROR:</color> If fabrication systems malfunction, consult the <color=yellow>Reference Guide</color>.
+
+//cut  and replace with thing about the robot breakdown
+//{@Player}    The Kalvis Festival sounds fun...
+//{@PAL}       Another "holiday." Kalvis has had quite a few production delays lately. Unreliable.
+//{@Player}    Yeah... but we both know it wasn't a festival that caused the others.

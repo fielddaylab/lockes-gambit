@@ -36,6 +36,7 @@ namespace SpaceFab.Fabrication.Layout
         public InstructionLookup InstructionsLookup;
         public Image KeyImageDisplay;
         public TextMeshProUGUI m_InstructionTMP, m_SubtitleTMP;
+        public Image SputterInstruction;
 
         public void OnDeregister()
         {
@@ -66,27 +67,40 @@ namespace SpaceFab.Fabrication.Layout
             state.InstructionsGroup.alpha = 1f;
             state.InstructionsGroup.blocksRaycasts = true;
 
-            InstructionSet uiInstructions = InstructionLookupUtility.LookupInstructions(stationID, state.InstructionsLookup);
+            if (stationID == FabricationConsts.SPUTTER_STATION_ID)
+            {   
+                state.SputterInstruction.gameObject.SetActive(true);
 
-            // Resolve the station's key image to a single shared Image, instead of toggling
-            // a dedicated GameObject per key type.
-            Sprite keyImage = InstructionLookupUtility.LookupKeyImage(uiInstructions.UIKey, state.InstructionsLookup);
-            state.KeyImageDisplay.sprite = keyImage;
-            state.KeyImageDisplay.enabled = keyImage != null;
-
-            // Resize the shared Image to the swapped sprite's native dimensions so key images of
-            // differing sizes aren't stretched to a single fixed rect.
-            if (keyImage != null)
-            {
-                state.KeyImageDisplay.SetNativeSize();
+                state.KeyImageDisplay.enabled = false;
+                state.m_InstructionTMP.text = string.Empty;
+                state.m_SubtitleTMP.text = string.Empty;
             }
+            else
+            {
+                state.SputterInstruction.gameObject.SetActive(false);
+                InstructionSet uiInstructions = InstructionLookupUtility.LookupInstructions(stationID, state.InstructionsLookup);
 
-            state.m_InstructionTMP.text = uiInstructions.Instruction;
-            state.m_SubtitleTMP.text = uiInstructions.Subtitle;
+                // Resolve the station's key image to a single shared Image, instead of toggling
+                // a dedicated GameObject per key type.
+                Sprite keyImage = InstructionLookupUtility.LookupKeyImage(uiInstructions.UIKey, state.InstructionsLookup);
+                state.KeyImageDisplay.sprite = keyImage;
+                state.KeyImageDisplay.enabled = keyImage != null;
+
+                // Resize the shared Image to the swapped sprite's native dimensions so key images of
+                // differing sizes aren't stretched to a single fixed rect.
+                if (keyImage != null)
+                {
+                    state.KeyImageDisplay.SetNativeSize();
+                }
+
+                state.m_InstructionTMP.text = uiInstructions.Instruction;
+                state.m_SubtitleTMP.text = uiInstructions.Subtitle;
+            }
         }
 
         public static void HideStationInstructions(MicrogameCanvasState state)
         {
+            state.SputterInstruction.gameObject.SetActive(false);
             state.FaderGroup.alpha = 0f;
             state.FaderGroup.blocksRaycasts = false;
 

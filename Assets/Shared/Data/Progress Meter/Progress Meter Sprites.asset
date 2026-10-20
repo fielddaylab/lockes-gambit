@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871f134680f5b7d4ca4d8cd98c893ced, type: 3}
   m_Name: Progress Meter Sprites
   m_EditorClassIdentifier: 
-  CycleBase: {fileID: 21300000, guid: 776c4fbba954f4f49a8f5564615ad5c8, type: 3}
-  CycleFilled: {fileID: 21300000, guid: d70ce8c9ec45f3e4cbc2ee6effb7c66d, type: 3}
+  CycleBase: {fileID: 21300000, guid: 661674077ddd6429f9d6734103398d17, type: 3}
+  CycleFilled: {fileID: 21300000, guid: 84d1fdd26283d405bba7136c40601eed, type: 3}
   CyclePendingColor: {r: 1, g: 1, b: 1, a: 1}
   CycleConfirmedColor: {r: 0.18823531, g: 0.6784314, b: 0.8117648, a: 1}
   FundsBase: {fileID: 0}

@@ -14,5 +14,7 @@ namespace FieldDay.HID {
         [Space]
         public float DefaultScale = 1;
         public float HeldScaleOverride = 0;
+        public Material MaterialOverride;
+        public Color32 Tint = Color.white;
     }
 }

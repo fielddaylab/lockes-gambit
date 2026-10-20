@@ -1,0 +1,21 @@
+# basePath DesignNMOS
+// NMOS
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL} Use both doping types to make a transistor that starts blocked, and opens with the right signal.
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Check the Verification Table. When A is HI, let signal through to X.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> Use alternating “N-P-N” semiconductor to make a to make a blocked gate, opened by HI.
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> A controls the gate, and B reaches the output.
+    $set temp:hintGiven = 0
+$endif

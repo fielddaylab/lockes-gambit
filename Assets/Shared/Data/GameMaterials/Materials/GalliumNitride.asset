@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fa937c2c803464d8f0eaff2033531d, type: 3}
   m_Name: GalliumNitride
   m_EditorClassIdentifier: 
-  DisplayName: GalliumNitride
+  DisplayName: Gallium Nitride
   ShortName: GaN
   GemSprite: {fileID: 21300000, guid: b9eafbd6db59c954ab4a5fdcea850d7c, type: 3}
   ConstituentElementNames:
@@ -20,5 +20,6 @@ MonoBehaviour:
   - N
   ValenceElectronCounts: 0300000005000000
   AtomicRadii: 8800000038000000
+  SimpleAtomicRadii: 0300000003000000
   Properties: 11131716
   Contexts: []

@@ -1,0 +1,24 @@
+# basePath DesignAndv2
+// And v2
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL} Logic Gates make computers possible! They never have empty outputs.\nAND outputs HI only if A and B are HI.
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Use A and B to control Gates. Use constants to send signals to X.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> If both A and B are HI, allow HI to flow to X. You can use a transistor with two Gates.
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> If A is LO, allow LO to flow to X. If B is LO, allow LO to flow X.
+    $set temp:hintGiven = 3
+$elseif temp:hintGiven == 3
+    {@PAL}  <color=yellow>Hint:</color> Use separate gates for A LO and B LO to prevent Unstable signals.
+    $set temp:hintGiven = 0
+$endif

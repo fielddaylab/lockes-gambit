@@ -1,0 +1,32 @@
+# basePath ResearchIntroCh4
+
+::IntroSelectTrace
+@trigger    OnSetupComplete
+$call   PointElement(research:contract-requirement)
+{@PAL}  There is more than one option available in your samples to fulfill this requirement.
+
+::OnSlotFilled
+@trigger    OnSlotFilled
+$call   ReleaseHighlight(research:contract-requirement)
+
+
+::OnHypothesisIncorrectHypothesisMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "hypothesis_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  Your Property was incorrect.\n\nTry again.
+
+::OnHypothesisIncorrectObservationMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "observation_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
+
+::OnHypothesisIncorrectInvalidObservation
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "invalid_observation"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  One or more of your Observations were incorrect. Those are removed.\n\nTry again.

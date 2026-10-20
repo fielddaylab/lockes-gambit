@@ -1,6 +1,8 @@
 ﻿using System;
 using FieldDay;
 using FieldDay.SharedState;
+using FieldDay.UI;
+using FieldDay.UI.Widgets;
 using SpaceFab.Design.Visuals;
 using SpaceFab.UI;
 using TMPro;
@@ -16,9 +18,10 @@ namespace SpaceFab.Design
         public CanvasGroup ResultsGroup;
         public TextMeshProUGUI TitleText;
         public TextMeshProUGUI SummaryText;
-        public DynamicButton DismissButton;
-        public DynamicButton RetryButton;
+        public GuiButton DismissButton;
+        public GuiButton RetryButton;
         public SimTableLayout Table;
+        public CanvasInputLayer Input;
 
         // One-frame intent flag: the player clicked "Continue" on a passing results panel. Consumed
         // by DesignContinueSystem, which decides whether to advance to the next level (reload the
@@ -37,13 +40,13 @@ namespace SpaceFab.Design
             if (DismissButton != null)
             {
                 DismissButton.gameObject.SetActive(true);
-                DismissButton.onClick.AddListener(OnDismissClicked);
+                DismissButton.OnClick.AddListener(OnDismissClicked);
             }
 
             if (RetryButton != null)
             {
                 RetryButton.gameObject.SetActive(true);
-                RetryButton.onClick.AddListener(OnRetryClicked);
+                RetryButton.OnClick.AddListener(OnRetryClicked);
             }
         }
 
@@ -51,12 +54,12 @@ namespace SpaceFab.Design
         {
             if (DismissButton != null)
             {
-                DismissButton.onClick.RemoveListener(OnDismissClicked);
+                DismissButton.OnClick.RemoveListener(OnDismissClicked);
             }
 
             if (RetryButton != null)
             {
-                RetryButton.onClick.RemoveListener(OnRetryClicked);
+                RetryButton.OnClick.RemoveListener(OnRetryClicked);
             }
         }
 
@@ -126,7 +129,11 @@ namespace SpaceFab.Design
             resultState.ResultsGroup.alpha = isEnabled ? 1f : 0f;
             resultState.ResultsGroup.blocksRaycasts = isEnabled;
             resultState.ResultsGroup.interactable = isEnabled;
-            //resultState.CopyRequested = true;
+            if (isEnabled) {
+                resultState.Input.TryPushPriority();
+            } else {
+                resultState.Input.TryPopPriority();
+            }
         }
 
         public static void ShowResults(ResultState resultState, bool allCorrect)

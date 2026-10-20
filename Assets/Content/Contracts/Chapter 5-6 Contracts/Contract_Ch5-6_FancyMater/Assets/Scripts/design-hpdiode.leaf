@@ -1,0 +1,20 @@
+# basePath DesignHPDiode
+// Depletion
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Use a Diode to block LO signal.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> Diodes allow signal to flow from P to N only. Make it point to the output.
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> Use Vias to connect semiconductor back to the inputs and outputs on the metal layer.
+    $set temp:hintGiven = 0
+$endif

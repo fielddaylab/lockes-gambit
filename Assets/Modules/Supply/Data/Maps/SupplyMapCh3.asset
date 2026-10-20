@@ -23,27 +23,31 @@ MonoBehaviour:
     height: 24
   Positions:
   - Name:
+      m_Source: Home
       m_HashValue: 1391791790
     Position: {x: -0.37, y: 0.01}
   - Name:
-      m_HashValue: 392540606
-    Position: {x: 4.91, y: 1.68}
-  - Name:
+      m_Source: 
       m_HashValue: 1181591482
     Position: {x: 5.04, y: -5.09}
   - Name:
+      m_Source: Planet_Cu
       m_HashValue: 57385584
     Position: {x: -5.19, y: -1.46}
   - Name:
+      m_Source: Planet_P
       m_HashValue: 3801165340
     Position: {x: 2.88, y: -1.92}
   - Name:
+      m_Source: 
       m_HashValue: 1161631464
     Position: {x: -4.24, y: 2.72}
   - Name:
+      m_Source: 
       m_HashValue: 1616771497
     Position: {x: 0.32, y: 3.46}
   - Name:
+      m_Source: 
       m_HashValue: 241399131
     Position: {x: -1.52, y: -4.61}
   Hazards: []

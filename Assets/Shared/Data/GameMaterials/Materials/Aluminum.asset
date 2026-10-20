@@ -18,5 +18,6 @@ MonoBehaviour:
   ConstituentElementNames: []
   ValenceElectronCounts: 03000000
   AtomicRadii: 76000000
+  SimpleAtomicRadii: 03000000
   Properties: 10
   Contexts: []

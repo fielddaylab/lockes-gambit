@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0706af4c126b34f88b210125a2c875b9, type: 3}
   m_Name: Fabrication_Ch6_FancyMater
   m_EditorClassIdentifier: 
-  m_sequence: {fileID: 11400000, guid: 27fcaf7c2c8b34daea4736e6cfacb51e, type: 2}
+  m_sequence: {fileID: 0}
+  m_sequenceId:
+    m_HashValue: 3028137004
   m_GlitchChance: 0.2
   m_PatternIndex: 2

@@ -40,7 +40,7 @@ namespace SpaceFab.Design {
                     // TODO: load base level
                     // Build the visual grid to match the logical grid's dimensions
                     VisualGridStackUtility.Init(ref visualState.VisualGridStack, gridStackState.GridStack.LayerDims.X, gridStackState.GridStack.LayerDims.Y, visualState.CellVisualsPrefab, visualState.CellVisualsContainer);
-                    VisualGridStackUtility.RefreshGridSize(visualState.GridRenderer, gridStackState.GridStack.LayerDims.X, gridStackState.GridStack.LayerDims.Y);
+                    VisualGridStackUtility.RefreshGridSize(visualState.GridRenderer, visualState.GridTestOutline, gridStackState.GridStack.LayerDims.X, gridStackState.GridStack.LayerDims.Y);
                     // Alloc one input-toggle overlay per Input cell from the pool, positioned at
                     // its cell. Frees any leftover overlays from a prior level entry first.
                     InputToggleUtility.SpawnInputOverlays(gridStackState, visualState, pools);

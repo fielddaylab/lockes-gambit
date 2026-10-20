@@ -9,7 +9,7 @@ using SpaceFab.Materials;
 using System;
 using UnityEngine;
 using BeauPools;
-
+using SpaceFab.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -33,6 +33,9 @@ namespace SpaceFab.Supply {
         public CursorHint Cursor;
         public SupplyRouteNodeRenderer Renderer;
         public SupplyRouteNodeInfoDisplay InfoPopup;
+
+        [Header("Links")]
+        [AssetName(typeof(WikiPageData), true)] public StringHash32 WikiPage;
 
         [NonSerialized] public StringHash32 Id;
         [NonSerialized] public int Index;

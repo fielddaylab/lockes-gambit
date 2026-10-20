@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfb41291a9df764ea8382b0100074c2, type: 3}
+  m_Name: GridStackConfig_Lv27
+  m_EditorClassIdentifier: 
+  LayerDims:
+    X: 6
+    Y: 6
+  Cells:
+  - LayerIndex: 0
+    RowIndex: 4
+    ColumnIndex: 0
+    CellType: 1
+    SubtypeLabel: 8
+    Edges: []
+    TransferType: 0
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 2
+    ColumnIndex: 0
+    CellType: 1
+    SubtypeLabel: 16
+    Edges: []
+    TransferType: 0
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 4
+    ColumnIndex: 5
+    CellType: 5
+    SubtypeLabel: 128
+    Edges: []
+    TransferType: 0
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 2
+    ColumnIndex: 5
+    CellType: 5
+    SubtypeLabel: 256
+    Edges: []
+    TransferType: 0
+    DefaultInputState: 0

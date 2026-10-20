@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Doping Chamber
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Doping Chamber
-  m_Icon: {fileID: 21300000, guid: a21271153662ee94b9c05f99c55cfad2, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 181942833539103692, guid: a6e8404536c528f4bba116dd549a0e02, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: The Doping Chamber adds impurities to a Semiconductor, changing it into
-    N-Type or P-Type material.
-  m_MaterialId:
+  Title: Doping Chamber
+  Icon: {fileID: 21300000, guid: f895bf4b6ef7a6f4385c5dda1fb6815e, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: a16e5b72f5373b143902090e71d9fa69, type: 3}
+  IllustrationFPS: 0.5
+  BodyText: The Doping Chamber adds impurities (dopants) to a semiconductor, changing
+    it into an N-type or P-type material.
+  MaterialId:
     m_HashValue: 0
-  m_IsObservationPage: 0
-  m_ObservationType: 0
-  m_PropertyCheck: {fileID: 0}
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

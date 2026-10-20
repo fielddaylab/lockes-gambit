@@ -1,3 +1,4 @@
+using BeauRoutine;
 using BeauUtil;
 using FieldDay.SharedState;
 using SpaceFab.Materials;
@@ -30,6 +31,7 @@ namespace SpaceFab.Research {
         // === Hypothesis selection ===
 
         [NonSerialized] public bool HypothesisSelected;
+        [NonSerialized] public bool HypothesisVerified;
 
         // Valid only while HypothesisSelected.
         [NonSerialized] public MaterialPropertyLabel HypothesisLabel;
@@ -64,6 +66,8 @@ namespace SpaceFab.Research {
         // invalidates the viewmodel. HypothesisViewModelSystem clears it
         // once it has recomputed.
         [NonSerialized] public bool NeedsRebuild;
+
+        [NonSerialized] public Routine VerifyRoutine;
 
         public void OnRegister() {
             SlotLabels = new MaterialPropertyLabel[MaxObservationSlots];

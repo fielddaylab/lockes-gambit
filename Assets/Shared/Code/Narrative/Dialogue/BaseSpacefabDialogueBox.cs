@@ -194,7 +194,7 @@ namespace SpaceFab.Narrative {
         #region ITypewriterModule
 
         protected virtual float GetActiveTypingDelayMultiplier() {
-            return 0.6f;
+            return 0.4f;
         }
 
         void ITypewriterModule.GetTypewriterParameters(out float delayMultiplier, out TypewriterTimingTable timingTable) {

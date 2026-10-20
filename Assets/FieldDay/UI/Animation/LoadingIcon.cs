@@ -93,7 +93,6 @@ namespace FieldDay.UI.Animation {
             }
 
             public override void UpdateAnimation(LoadingIcon target, ref LiteAnimatorState state, float deltaTime) {
-                state.CurrentTime -= deltaTime;
                 float percent = state.PercentProgress;
 
                 target.m_FadeGroup.alpha = 1 - percent;

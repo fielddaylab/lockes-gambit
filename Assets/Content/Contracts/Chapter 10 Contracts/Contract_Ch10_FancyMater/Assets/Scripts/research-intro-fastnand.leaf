@@ -1,0 +1,59 @@
+# basePath ResearchIntroFastNAND
+
+::IntroSelectTrace
+@trigger    OnSetupComplete
+$if MinigameHasValidSolution()
+    {@PAL}  You've already researched everything you need to!\n\nYou can continue your experiments to uncover new insights.
+$else
+    {@PAL}  <color=yellow>High Mobility Semiconductors</color> allow electrical signals to move through them very quickly.
+$endif
+
+
+::OnHighMobilityPlayed
+@trigger    OnHighMobilityPlayed
+@when     !MinigameHasValidSolution()
+$call   CloseWiki()
+$if     research:primaryMaterial == "GalliumArsenide"
+    {@PAL}  Great. Electrons are moving easily through this material.\n\nAdd your observations and verify it.
+$elseif research:primaryMaterial == "Germanium"
+    {@PAL}  Great. Electrons are moving easily through this material.\n\nAdd your observations and verify it.
+$endif
+
+
+::OnHypothesisCorrect
+@trigger    OnHypothesisSubmitted
+@when     result == "success"
+$call   CloseWiki()
+$if MinigameHasValidSolution()
+    {@PAL}  Great. Let's return to the ship, or continue your experiments to uncover new insights.
+$elseif     research:propertyId == "HighMobilitySemiconductor"
+    {@PAL}  Now find the dopants for this semiconductor.
+$elseif     research:primaryMaterial == "GalliumArsenide"
+    {@PAL}  Now find the other dopant.
+$elseif     research:primaryMaterial == "Germanium"
+    {@PAL}  Now find the other dopant.
+$else
+    {@PAL}  Try completing the contract requirements.
+$endif
+
+
+::OnHypothesisIncorrectHypothesisMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "hypothesis_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  Your Property was incorrect.\n\nTry again.
+
+::OnHypothesisIncorrectObservationMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "observation_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
+
+::OnHypothesisIncorrectInvalidObservation
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "invalid_observation"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  One or more of your Observations were incorrect. Those are removed.\n\nTry again.

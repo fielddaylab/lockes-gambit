@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Delete
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Delete
-  m_Icon: {fileID: 21300000, guid: 4ac59727244248b49a52b03f3b08b18e, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 21300000, guid: c793f412f3590db4abe5651beb8f03ef, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: 'Delete a Route: To delete a route, select it and press Backspace, or double-click
-    the route.'
-  m_MaterialId:
+  Title: Delete
+  Icon: {fileID: 21300000, guid: b78d0b0c64989ad49a496ac4386403a3, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 383a3aba3cfb46e4bb8ff1e31dda0a34, type: 3}
+  IllustrationFPS: 0.5
+  BodyText: 'To Delete a route: select the ship that created it, then click the route,
+    press Backspace, or double click the route.'
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 1

@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1398bc1de578a4d4d83d26a66d9e07f5, type: 3}
   m_Name: ResearchUIAssets
   m_EditorClassIdentifier: 
-  VoltageNormal: {fileID: 21300000, guid: 36f473bf3144d40f3ba8a2bb17bc1266, type: 3}
-  VoltagePressed: {fileID: 21300000, guid: 40f3b648c4eea41318e3bbbc6a82447d, type: 3}
-  ThermalNormal: {fileID: 21300000, guid: b70dd674f58d242cdbd2ec882399e1ce, type: 3}
-  ThermalPressed: {fileID: 21300000, guid: da9f46ab8793c4bb0869559767c1ebe6, type: 3}
-  DopingNormal: {fileID: 21300000, guid: 6c6bf227070f34a9d9f14841f72148f8, type: 3}
-  DopingPressed: {fileID: 21300000, guid: 2f6092b33edd7476990ca8df19e29853, type: 3}
-  LockedChamber: {fileID: 21300000, guid: a829dd896787349199403607eecca4cc, type: 3}
+  VoltageButton: {fileID: 21300000, guid: 4b0ce24fa733f4cbab4251cbc3856464, type: 3}
+  ThermalButton: {fileID: 21300000, guid: 68e156c0f1aa349a893bb9bcbbb4be77, type: 3}
+  DopingButton: {fileID: 21300000, guid: a239d494be46049e2997ead15a3c8c15, type: 3}
+  LockedChamberButton: {fileID: 21300000, guid: 569d38e9aecd14a22b0371b99aca35da, type: 3}
   ButtonUp: {fileID: 21300000, guid: 403c4a7975e864f30a879482ba7fc2e8, type: 3}
   ButtonDown: {fileID: 21300000, guid: c82658f14c99f439fb4f2ee8b248fe43, type: 3}
   PropertyPageObservationChipsClickable: 0
+  DefaultColor: {r: 0.70980394, g: 0.6901961, b: 0.64705884, a: 1}
+  SuccessColor: {r: 0.039215688, g: 1, b: 0.3137255, a: 1}
+  FailureColor: {r: 0.99215686, g: 0.34117648, b: 0.08235294, a: 1}
+  ProcessingColor: {r: 0.039215688, g: 1, b: 0.8784314, a: 1}
+  SuccessIcon: {fileID: 21300000, guid: 32b76cc3c1402d94fa2ea4b09936d0ac, type: 3}
+  FailureIcon: {fileID: 21300000, guid: 6640efae2529fe8429faecfdde39c82c, type: 3}

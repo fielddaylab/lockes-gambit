@@ -37,6 +37,10 @@ namespace SpaceFab.Fabrication.Sequence
             // Reset wins: rebuild both cards and clear all pending flags.
             if (visualsState.ResetRequested) {
                 SequenceVisualsUtility.RebuildAllCards(visualsState, sequenceState);
+                if (visualsState.LayerInstructionPanel != null) {
+                    FabricationSequence sequence = sequenceState.Level != null ? sequenceState.Level.Sequence : null;
+                    visualsState.LayerInstructionPanel.Initialize(sequence, sequenceState.CurrentStepIndex);
+                }
                 visualsState.ResetRequested = false;
                 visualsState.AdvanceRequested = false;
                 visualsState.CompletionRequested = false;

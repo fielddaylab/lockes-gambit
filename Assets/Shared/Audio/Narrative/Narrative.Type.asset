@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Narrative.Type
   m_EditorClassIdentifier: 
   Samples:
-  - {fileID: 8300000, guid: 805232997f0a282449b3d239faf516d9, type: 3}
+  - {fileID: 8300000, guid: f9070a141deea0c48bac22fe1105e324, type: 3}
   Stream: 
   PreloadSamples: 1
   UnloadAfterPlayback: 0
-  VolumeMultiplier: 0.6
+  VolumeMultiplier: 0.3
   Volume:
     Base: 1
     ModifierMin: 0
     ModifierMax: 0
   Pitch:
-    Base: 0.45
+    Base: 1
     ModifierMin: 0
     ModifierMax: 0.1
   Pan:

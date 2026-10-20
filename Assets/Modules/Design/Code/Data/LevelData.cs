@@ -37,11 +37,13 @@ namespace SpaceFab.Design
     public class LevelData : NamedAsset
     {
         [SerializeField] private string m_title;
+        [SerializeField, TextArea] private string m_description;
         [SerializeField] private ToolTypeFlags m_allowedTools;
         [SerializeField] private GridStackConfig m_gridConfig;
         [SerializeField] private TestSuiteData m_testSuite;
 
         public string GetTitle() { return m_title; }
+        public string GetDescription() { return m_description; }
         public ToolTypeFlags GetAllowedTools() { return m_allowedTools; }
         public GridStackConfig GetGridConfig() { return m_gridConfig; }
         public TestSuiteData GetTestSuite() { return m_testSuite; }
@@ -50,11 +52,13 @@ namespace SpaceFab.Design
     public class LevelDataCopy
     {
         [SerializeField] private string m_title;
+        [SerializeField] private string m_description;
         [SerializeField] private ToolTypeFlags m_allowedTools;
         [SerializeField] private GridStackConfig m_gridConfig;
         [SerializeField] private TestSuiteData m_testSuite;
 
         public string GetTitle() { return m_title; }
+        public string GetDescription() { return m_description; }
         public ToolTypeFlags GetAllowedTools() { return m_allowedTools; }
         public GridStackConfig GetGridConfig() { return m_gridConfig; }
         public TestSuiteData GetTestSuite() { return m_testSuite; }
@@ -63,6 +67,7 @@ namespace SpaceFab.Design
         public void LoadData(LevelData data)
         {
             m_title = data.GetTitle();
+            m_description = data.GetDescription();
             m_allowedTools = data.GetAllowedTools();
             m_gridConfig = data.GetGridConfig();
             m_testSuite = data.GetTestSuite();

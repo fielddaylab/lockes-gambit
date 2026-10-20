@@ -1,8 +1,10 @@
 using BeauUtil;
+using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.Debugging;
 using FieldDay.Scenes;
 using SpaceFab.Save;
+using SpaceFab.UI;
 
 namespace SpaceFab.Design
 {
@@ -80,6 +82,95 @@ namespace SpaceFab.Design
             // the global lookup by the active minigame's id, point the exit pipeline at it, and kick
             // the pipeline. The Exiting phase exports + saves before the reload.
             MinigameUtility.Exit(Game.Scenes.MainScene());
+        }
+
+        public static void PopulateDescriptionPanel(SimulateUIState uiState, LevelData levelData) {
+            Assert.NotNull(uiState.TitleText);
+            Assert.NotNull(uiState.DescriptionText);   
+            uiState.TitleText.text = levelData.GetTitle();
+            uiState.DescriptionText.text = levelData.GetDescription();
+        }
+
+        public static void ApplyWikiPageUnlocks(PlayerProgressState playerProgress, LevelData levelData) {
+            ToolTypeFlags tools = levelData.GetAllowedTools();
+
+            bool hasN = false;
+            bool hasP = false;
+            bool hasGate = false;
+            bool hasVia = false;
+
+            if ((tools & ToolTypeFlags.METAL) != 0) {
+                WikiUtility.UnlockPage(playerProgress, "Metal");
+            }
+            if ((tools & ToolTypeFlags.NNODE) != 0) {
+                WikiUtility.UnlockPage(playerProgress, "N-Type");
+                hasN = true;
+            }
+            if ((tools & ToolTypeFlags.PNODE) != 0) {
+                WikiUtility.UnlockPage(playerProgress, "P-Type");
+                hasP = true;
+            }
+            if ((tools & ToolTypeFlags.VIA) != 0) {
+                WikiUtility.UnlockPage(playerProgress, "Via");
+                hasVia = true;
+            }
+            if ((tools & ToolTypeFlags.GATE) != 0) {
+                WikiUtility.UnlockPage(playerProgress, "Gate");
+                hasGate = true;
+            }
+
+            foreach(var cellConfig in levelData.GetGridConfig().Cells) {
+                switch (cellConfig.CellType) {
+                    case CellType.PTransistor: {
+                        if (!hasP) {
+                            WikiUtility.UnlockPage(playerProgress, "P-Type");
+                            hasP = true;
+                        }
+                        break;
+                    }
+                    case CellType.NTransistor: {
+                        if (!hasN) {
+                            WikiUtility.UnlockPage(playerProgress, "N-Type");
+                            hasN = true;
+                        }
+                        break;
+                    }
+                }
+
+                switch (cellConfig.TransferType) {
+                    case TransferType.GateAbove:
+                    case TransferType.GateBelow: {
+                        if (!hasGate) {
+                            WikiUtility.UnlockPage(playerProgress, "Gate");
+                            hasGate = true;
+                        }
+                        break;
+                    }
+                    case TransferType.Via: {
+                        if (!hasVia) {
+                            WikiUtility.UnlockPage(playerProgress, "Via");
+                            hasVia = true;
+                        }
+                        break;
+                    }
+                }
+
+                const InputOutputNodeTypeFlags constantsMask = InputOutputNodeTypeFlags.VPLUS | InputOutputNodeTypeFlags.VMINUS;
+
+                if ((cellConfig.SubtypeLabel & constantsMask) != 0) {
+                    WikiUtility.UnlockPage(playerProgress, "Constants");
+                }
+            }
+
+            if (hasN & hasP) {
+                WikiUtility.UnlockPage(playerProgress, "Diode");
+            }
+
+            if (hasGate) {
+                WikiUtility.UnlockPage(playerProgress, "PNP");
+                WikiUtility.UnlockPage(playerProgress, "NPN");
+                WikiUtility.UnlockPage(playerProgress, "Transistor");
+            }
         }
     }
 }

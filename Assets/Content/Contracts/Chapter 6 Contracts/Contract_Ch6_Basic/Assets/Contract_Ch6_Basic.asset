@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Contract_Ch6_Basic
   m_EditorClassIdentifier: 
   m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
   m_NamedAssets:
   - {fileID: 11400000, guid: 69ed47c8fbd80493aad4b5be3db653cd, type: 2}
+  - {fileID: 11400000, guid: 71dd71d176601844c876182a6ca7b2c4, type: 2}
   m_LiteAssets: []

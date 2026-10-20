@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2133937865
   m_SortingLayer: 12
-  m_SortingOrder: 6
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 632a600e2d57bf647b26c1d6b622bed3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724ec33a55a81436eb45ad5eb4a1f153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 5681170190247854703}
   TravelDistance: 0
   FlowSegmentIndex: 0
-  FadeProgress: -1
+  Sprite: {fileID: 5681170190247854703}

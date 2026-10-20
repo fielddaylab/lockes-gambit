@@ -273,6 +273,7 @@ MonoBehaviour:
   CompletedBadge: {fileID: 1991091558418240711}
   ThemeColor: {r: 0, g: 0, b: 0, a: 1}
   NeutralColor: {r: 0, g: 0, b: 0, a: 1}
+  AlternateCursor: {fileID: 7344384738478693847}
 --- !u!1001 &2505173333928045325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -347,6 +348,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8515034442747191150, guid: d95f13d9e75b5114e92098ddedd4a343, type: 3}
   m_PrefabInstance: {fileID: 2505173333928045325}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7344384738478693847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5127443687971583706, guid: d95f13d9e75b5114e92098ddedd4a343, type: 3}
+  m_PrefabInstance: {fileID: 2505173333928045325}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a59a59fc4e9a014c8fbb22f00e5eeff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &7543684373409876686 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5365094646840893891, guid: d95f13d9e75b5114e92098ddedd4a343, type: 3}

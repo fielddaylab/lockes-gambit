@@ -1,0 +1,21 @@
+# basePath DesignIrLed
+// IR LED
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL}  Diodes made from light-emitting semiconductors form LEDs!
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Check the Verification Table. X is empty when A is LO.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> Use both layers to cross signals without interfering.
+    $set temp:hintGiven = 2
+$elseif temp:hintGiven == 2
+    {@PAL}  <color=yellow>Hint:</color> Use Vias to connect the semiconductor layer back to inputs and outputs on the metal layer.
+    $set temp:hintGiven = 0
+$endif

@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Risk
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Risk
-  m_Icon: {fileID: 21300000, guid: 61eddd7b62a997940a6712ab55ccc507, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 21300000, guid: bb40a2864f691e1459311154698d5329, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: 'Risk Level affects the outcome of the route by increasing the time or
-    cost of the route. '
-  m_MaterialId:
+  Title: Risk
+  Icon: {fileID: 21300000, guid: df3898bc4d3ed574e9a228e04553f21e, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: a2c02af80e5499e4196eb997b2841cc8, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: Risk Level may affect the outcome of the route by increasing the chances
+    that your routes will take longer and/or cost more.
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 1

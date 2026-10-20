@@ -1,5 +1,6 @@
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Debugging;
 using FieldDay.Systems;
 using SpaceFab.Fabrication.Layout;
 using SpaceFab.Fabrication.Movement;
@@ -58,7 +59,15 @@ namespace SpaceFab.Fabrication {
 
                 // reset sequence
                 Log.Msg("[AttemptLeadInSystem] Resetting sequence");
-                FabricationLevel level = contractState.ContractAssets.FabricationLevel;
+                FabricationLevel level;
+                if (contractState.ContractAssets) {
+                    level = contractState.ContractAssets.FabricationLevel;
+                } else if (DebugFlags.LaunchedFromThisScene) {
+                    level = Find.State<FabricationTransitionState>().DEBUG_FabricationLevel;
+                } else {
+                    Assert.Fail("Level is not present!");
+                    level = null;
+                }
                 SequenceUtility.ResetSequence(sequenceState, level, SequenceVisualsState);
 
                 // show visual

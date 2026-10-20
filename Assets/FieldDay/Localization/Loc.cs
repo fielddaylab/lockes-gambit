@@ -97,7 +97,7 @@ namespace FieldDay.Localization {
                         }
                         idx += 3;
                     } else if (c == '.') {
-                        if ((idx + 2 == pathLen) || ((idx + 3) < pathLen && buff[idx + 3] == '.')) {
+                        if ((idx + 3 == pathLen) || ((idx + 3) < pathLen && buff[idx + 3] == '.')) {
                             // two character extension
                             if (buff[idx + 1] == checkA && buff[idx + 2] == checkB) {
                                 return true;
@@ -140,7 +140,7 @@ namespace FieldDay.Localization {
                     }
                     idx += 3;
                 } else if (c == '.') {
-                    if ((idx + 2 == pathLen) || ((idx + 3) < pathLen && path[idx + 3] == '.')) {
+                    if ((idx + 3 == pathLen) || ((idx + 3) < pathLen && path[idx + 3] == '.')) {
                         // two character extension
                         if (path[idx + 1] == checkA && path[idx + 2] == checkB) {
                             return true;
@@ -181,7 +181,7 @@ namespace FieldDay.Localization {
                     }
                     idx += 3;
                 } else if (c == '.') {
-                    if ((idx + 2 == pathLength) || ((idx + 3) < pathLength && path[idx + 3] == '.')) {
+                    if ((idx + 3 == pathLength) || ((idx + 3) < pathLength && path[idx + 3] == '.')) {
                         // two character extension
                         if (path[idx + 1] == checkA && path[idx + 2] == checkB) {
                             return true;
@@ -242,7 +242,7 @@ namespace FieldDay.Localization {
                     }
                     idx += 3;
                 } else if (c == '.') {
-                    if ((idx + 2 == pathLen) || ((idx + 3) < pathLen && buff[idx + 3] == '.')) {
+                    if ((idx + 3 == pathLen) || ((idx + 3) < pathLen && buff[idx + 3] == '.')) {
                         // two character extension
                         if (buff[idx + 1] == checkA && buff[idx + 2] == checkB) {
                             buff[idx + 1] = newA;
@@ -312,7 +312,7 @@ namespace FieldDay.Localization {
                     }
                     idx += 3;
                 } else if (c == '.') {
-                    if ((idx + 2 == pathLen) || ((idx + 3) < pathLen && path[idx + 3] == '.')) {
+                    if ((idx + 3 == pathLen) || ((idx + 3) < pathLen && path[idx + 3] == '.')) {
                         // two character extension
                         if (path[idx + 1] == checkA && path[idx + 2] == checkB) {
                             path[idx + 1] = newA;
@@ -368,7 +368,7 @@ namespace FieldDay.Localization {
                     }
                     idx += 3;
                 } else if (c == '.') {
-                    if ((idx + 2 == pathLen) || ((idx + 3) < pathLen && path[idx + 3] == '.')) {
+                    if ((idx + 3 == pathLen) || ((idx + 3) < pathLen && path[idx + 3] == '.')) {
                         // two character extension
                         if (path[idx + 1] == checkA && path[idx + 2] == checkB) {
                             path[idx + 1] = newA;
@@ -387,11 +387,20 @@ namespace FieldDay.Localization {
 
         #region Loading
 
+        static internal void ClearSettings() {
+            s_IsLoaded = false;
+            s_DefaultLang = default;
+            s_CurrentLang = default;
+            s_CurrentLangFeatures = default;
+        }
+
         static internal void MarkLoading() {
             s_IsLoaded = false;
         }
 
-        static internal void MarkLoaded() {
+        static internal void SetLoadedLanguage(LanguageId newLanguage) {
+            s_CurrentLang = newLanguage;
+            s_CurrentLangFeatures = Languages.GetFeatures(newLanguage);
             s_IsLoaded = true;
         }
 

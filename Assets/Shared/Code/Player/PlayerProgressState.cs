@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace SpaceFab
 {
-    public class PlayerProgressState : SharedStateComponent, ISaveStateChunkObject, IRegistrationCallbacks
+    public class PlayerProgressState : SharedStateComponent, ISaveStateChunkObject, IRegistrationCallbacks, ISaveStatePostLoad
     {
         #region Save State
 
@@ -22,6 +22,7 @@ namespace SpaceFab
         [NonSerialized] public bool BigBatteryUnlocked;
         [NonSerialized] public bool ThermalChamberUnlocked;
         [NonSerialized] public bool DopingChamberUnlocked;
+        [NonSerialized] public bool SpecialPropertiesUnlocked;
 
         // Tracks whether the one-shot wiki initial-unlocks pass has
         // already run for this save. OverarchingStartupSequenceSystem
@@ -55,6 +56,7 @@ namespace SpaceFab
             MaterialProperties = new Dictionary<StringHash32, MaterialPropertyRecord>();
             UnlockedWikiPages ??= new HashSet<StringHash32>();
             SpacefabGame.SaveBuffer.RegisterHandler("PlayerProgressState", this);
+            SpacefabGame.SaveBuffer.RegisterPostLoad(this);
         }
 
         #region Interfaces
@@ -81,8 +83,20 @@ namespace SpaceFab
             // version gate. When SaveVersion is fixed, move into a
             // versioned slot.
             BigBatteryUnlocked = reader.Read<bool>();
-            ThermalChamberUnlocked = reader.Read<bool>();
-            DopingChamberUnlocked = reader.Read<bool>();
+            if (consts.Version >= 1) {
+                ThermalChamberUnlocked = reader.Read<bool>();
+                DopingChamberUnlocked = reader.Read<bool>();
+            } else {
+                ThermalChamberUnlocked = false;
+                DopingChamberUnlocked = false;
+            }
+
+            if (consts.Version >= 2) {
+                SpecialPropertiesUnlocked = reader.Read<bool>();
+            } else {
+                SpecialPropertiesUnlocked = false;
+            }
+
             InitialUnlocksApplied = reader.Read<bool>();
             
         }
@@ -107,7 +121,26 @@ namespace SpaceFab
             writer.Write(BigBatteryUnlocked);
             writer.Write(ThermalChamberUnlocked);
             writer.Write(DopingChamberUnlocked);
+            writer.Write(SpecialPropertiesUnlocked);
             writer.Write(InitialUnlocksApplied);
+        }
+
+        void ISaveStatePostLoad.PostLoad(SaveStateChunkConsts consts) {
+            var chapterState = Find.State<ChapterState>();
+            if (consts.Version < 1) {
+                if (chapterState.ChapterIndex >= 1) {
+                    ThermalChamberUnlocked = true;
+                }
+                if (chapterState.ChapterIndex >= 2) {
+                    DopingChamberUnlocked = true;
+                }
+            }
+            if (consts.Version < 2) {
+                // UPGRADE
+                if (chapterState.ChapterIndex >= 8) {
+                    SpecialPropertiesUnlocked = true;
+                }
+            }
         }
 
         #endregion // Interfaces
@@ -247,43 +280,6 @@ namespace SpaceFab
                     state.MaterialProperties[materialOrder.GetId(i)] = record;
                 }
             }
-        }
-
-        /// <summary>
-        /// Applies the WikiInitialUnlocksConfig page-id list on first
-        /// startup per save. Short-circuits when the save has already
-        /// had its initial-unlock pass run (the InitialUnlocksApplied
-        /// flag is persisted), so this is a one-shot per save —
-        /// editing the config afterwards only affects fresh saves.
-        /// Missing config and empty/null id arrays are treated as
-        /// no-ops (still sets the flag so the system doesn't keep
-        /// checking the asset forever). UnlockPage itself
-        /// short-circuits per-id duplicates via HashSet.Add.
-        ///
-        /// Called from OverarchingStartupSequenceSystem on entry to
-        /// the Overarching scene; could be called from any startup
-        /// site that runs once per save after the save buffer has
-        /// been read.
-        /// </summary>
-        public static void TryApplyInitialWikiUnlocks(PlayerProgressState progressState)
-        {
-            if (progressState == null || progressState.InitialUnlocksApplied)
-            {
-                return;
-            }
-            WikiInitialUnlocksConfig config = Find.GlobalAsset<WikiInitialUnlocksConfig>();
-            if (config != null)
-            {
-                StringHash32[] ids = config.InitialUnlockedPages;
-                if (ids != null)
-                {
-                    for (int i = 0; i < ids.Length; i++)
-                    {
-                        WikiUtility.UnlockPage(progressState, ids[i]);
-                    }
-                }
-            }
-            progressState.InitialUnlocksApplied = true;
         }
     }
 }

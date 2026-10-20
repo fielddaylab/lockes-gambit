@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level26_Filter
   m_EditorClassIdentifier: 
   m_title: Filter
+  m_description: '!DEPRECATED!'
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 46e944b8c110249f8abf2b0ca73e1fde, type: 2}
   m_testSuite: {fileID: 11400000, guid: ffcafd57d504e4836849b55540ed9c29, type: 2}

@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using BeauRoutine;
 using BeauUtil;
 using BeauUtil.UI;
 using FieldDay;
+using FieldDay.Animation;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
 using FieldDay.UI;
+using FieldDay.UI.Animation;
 using FieldDay.UI.Widgets;
 using FieldDay.World;
 using UnityEngine;
@@ -21,7 +24,6 @@ namespace SpaceFab.Supply {
 
         public LayoutSizeGroup Layout;
         public LayoutOptions VerticalLayoutOptions;
-        public float SelectedRowOffset;
 
         [Header("Row Config")]
         public ShipListRow[] Rows;
@@ -40,20 +42,25 @@ namespace SpaceFab.Supply {
 
         private void OnRouteStarted(SupplyRouteEventArgs evtArgs) {
             SelectedRow = Rows[evtArgs.RouteIndex];
-            SelectedRow.LayoutOffset.Offset0 = new Vector2(SelectedRowOffset, 0);
+            Anims.Replace(ref SelectedRow.Anim, SupplyChainUtility.ShipRowToOnAnimInstance, SelectedRow, 0);
             SelectedRow.CursorHint.TooltipFooter = "<sprite name=\"MouseLeft\"> Cancel";
             SelectedRow.CursorHint.MarkDirty();
+            FlashAnim.Play(SelectedRow.Flash, Color.white.WithAlpha(0.5f), FlashAnim.Default);
             SupplyChainUtility.SetShipRowStatsActive(SelectedRow, true);
-            SupplyChainUtility.SyncShipRowPositions(SelectedRow);
             SupplyChainUtility.ReflowShipList(this, true);
+            PopAnim.Play(SelectedRow.LayoutOffset, PopAnim.Default);
         }
 
         private void OnRouteEnded(SupplyRouteEventArgs evtArgs) {
             SelectedRow.CursorHint.TooltipFooter = "<sprite name=\"MouseLeft\"> Draw Route";
             SelectedRow.CursorHint.MarkDirty();
-            SelectedRow.LayoutOffset.Offset0 = default;
+            Anims.Replace(ref SelectedRow.Anim, SupplyChainUtility.ShipRowToOffAnimInstance, SelectedRow, 0);
+            if (evtArgs.Stats.Time <= 0) {
+                FlashAnim.Play(SelectedRow.Flash, Color.black, FlashAnim.Default);
+            } else {
+                FlashAnim.Play(SelectedRow.Flash, Color.white.WithAlpha(0.5f), FlashAnim.Default);
+            }
             SupplyChainUtility.SetShipRowStatsActive(SelectedRow, evtArgs.Stats.Time > 0);
-            SupplyChainUtility.SyncShipRowPositions(SelectedRow);
             SelectedRow = null;
             SupplyChainUtility.ReflowShipList(this, true);
         }
@@ -107,6 +114,46 @@ namespace SpaceFab.Supply {
                     table.Set("ship", row.ShipIndex);
                     ScriptUtility.Trigger(SupplyScriptTriggers.OnShipSelected, table);
                 }
+            }
+        }
+
+        static public readonly ShipRowToOnAnim ShipRowToOnAnimInstance = new ShipRowToOnAnim();
+        static public readonly ShipRowToOffAnim ShipRowToOffAnimInstance = new ShipRowToOffAnim();
+
+        public sealed class ShipRowToOnAnim : LiteAnimator<ShipListRow> {
+            public override void InitAnimation(ShipListRow target, ref LiteAnimatorState state) {
+                state.ResetTime(0.25f);
+                state.Easing = BeauRoutine.Curve.CubeOut;
+                state.Registers.X.Float() = target.LayoutOffset.Offset0.x;
+                state.Registers.Y.Float() = 140f;
+            }
+
+            public override void ResetAnimation(ShipListRow target, ref LiteAnimatorState state) {
+                
+            }
+
+            public override void UpdateAnimation(ShipListRow target, ref LiteAnimatorState state, float deltaTime) {
+                float eased = state.Easing.Evaluate(state.PercentProgress);
+                target.LayoutOffset.Offset0 = new Vector2(Mathf.LerpUnclamped(state.Registers.X.Float(), state.Registers.Y.Float(), eased), 0);
+                SupplyChainUtility.SyncShipRowPositions(target);
+            }
+        }
+
+        public sealed class ShipRowToOffAnim : LiteAnimator<ShipListRow> {
+            public override void InitAnimation(ShipListRow target, ref LiteAnimatorState state) {
+                state.ResetTime(0.15f);
+                state.Easing = BeauRoutine.Curve.CubeOut;
+                state.Registers.X.Float() = target.LayoutOffset.Offset0.x;
+            }
+
+            public override void ResetAnimation(ShipListRow target, ref LiteAnimatorState state) {
+
+            }
+
+            public override void UpdateAnimation(ShipListRow target, ref LiteAnimatorState state, float deltaTime) {
+                float eased = state.Easing.Evaluate(state.PercentProgress);
+                target.LayoutOffset.Offset0 = new Vector2(state.Registers.X.Float() * (1 - eased), 0);
+                SupplyChainUtility.SyncShipRowPositions(target);
             }
         }
     }

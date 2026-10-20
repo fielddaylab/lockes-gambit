@@ -1984,6 +1984,9 @@ namespace FieldDay.Scenes {
                         m_QueuedMainTransitionArgs = default;
                         m_MainSceneTransition.Replace(wait);
                     }
+                    m_MainSceneLoadProcess = default;
+                } else {
+                    m_AdditionalSceneLoadProcess = default;
                 }
 
                 Game.Events.Dispatch(SceneUtils.Events.Ready);

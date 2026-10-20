@@ -21,9 +21,8 @@ namespace SpaceFab.Research
 
         public MaterialAtom SubstrateAtom;
         public MaterialAtom DopantAtom;
-        public GameObject EmptyState;
+        public TextMeshPro EmptyState;
         
-
         // Observation chips the player can add while this chamber is active.
         // Read by the chip-picker UI (Tier 4).
         public MaterialPropertyLabel[] AvailableObservations = new MaterialPropertyLabel[]
@@ -37,11 +36,10 @@ namespace SpaceFab.Research
         public readonly float Voltage = 1f;
         public readonly float Temperature = 0f;
 
-        // Toggle for polyelemental substrates
-        public GameObject Toggle;
-        public ResearchSpriteButton[] ElementToggle;
-        public TMP_Text[] ElementToggleLabel;
+        // Index of element with the biggest atomic radius. Set as 0 if a substrate is not polyelemental.
         public int HostElementIndex;
+
+        public float PrimarySlotY;
 
         [NonSerialized] public bool AtomicViewChangedThisFrame;
 
@@ -60,25 +58,12 @@ namespace SpaceFab.Research
                 SampleHolder.SetActive(false);
             }
 
-            if (ElementToggle != null) {
-                if (ElementToggle[0] != null) {
-                    ElementToggle[0].Cursor.onClick.AddListener(() => HandleToggle(0));
-                }
-                if (ElementToggle[1] != null) {
-                    ElementToggle[1].Cursor.onClick.AddListener(() => HandleToggle(1));
-                }
-            }
-
             NoCurrentWarningPlayed = false;
             Root.SetActive(false);
         }
 
         public void OnDeregister()
         {
-        }
-
-        public void HandleToggle(int index) {
-            DopingChamberUtility.SetHostElementIndex(this, index);
         }
     }
 
@@ -94,19 +79,6 @@ namespace SpaceFab.Research
             state.HostElementIndex = 0;
             state.AtomicViewChangedThisFrame = true;
             state.Root.SetActive(true);
-        }
-
-        public static void SetHostElementIndex(DopingChamberState state, int index)
-        {
-            if (state == null) {
-                return;
-            }
-            if (state.HostElementIndex == index) {
-                return;
-            }
-
-            state.HostElementIndex = index;
-            state.AtomicViewChangedThisFrame = true;
         }
     }
 }

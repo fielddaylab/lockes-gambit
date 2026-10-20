@@ -1,0 +1,14 @@
+# basePath DesignCharger
+// High Power Charger
+
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Check the Verification Table. X is empty if B is LO. Otherwise, it inverts A.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> If A is HI, allow LO to pass. If A is LO, allow HI to pass.
+    $set temp:hintGiven = 0
+$endif

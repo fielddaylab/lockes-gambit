@@ -42,12 +42,24 @@ namespace SpaceFab.Fabrication.Sequence
                 out SequenceVisualsState visualsState
                 );
 
-            // 1. Start the recap if AdvanceStep raised the flag this frame.
+            // 1. Start the recap if AdvanceStep raised the flag this frame. If the completed step
+            //    moves the sequence to a new chunk, the layer instruction panel plays instead.
             if (recapState.RecapRequested)
             {
                 recapState.RecapRequested = false;
                 recapState.RecapInProgress = true;
-                recapState.RecapRoutine.Replace(CompletionRecapUtility.PlayRecap(recapState, sequenceState, recapState.RecapJustCompletedIndex));
+
+                int justCompleted = recapState.RecapJustCompletedIndex;
+                FabricationStep[] steps = sequenceState.Level != null ? sequenceState.Level.Sequence.Steps : null;
+                var layerPanel = visualsState.LayerInstructionPanel;
+                if (layerPanel != null && layerPanel.IsChunkChange(steps, justCompleted))
+                {
+                    recapState.RecapRoutine.Replace(layerPanel.ChunkChangeRoutine(steps, justCompleted));
+                }
+                else
+                {
+                    recapState.RecapRoutine.Replace(CompletionRecapUtility.PlayRecap(recapState, sequenceState, justCompleted));
+                }
             }
 
             // 2. While the routine is alive, hold the exit timer. When the routine finishes,

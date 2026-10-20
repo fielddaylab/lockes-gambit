@@ -1,5 +1,6 @@
 using FieldDay;
 using FieldDay.SharedState;
+using SpaceFab.Fabrication.Sequence;
 using SpaceFab.Save;
 using System;
 using System.Collections;
@@ -26,6 +27,11 @@ namespace SpaceFab.Fabrication
 
         public void OnDeregister()
         {
+            foreach(var asset in Find.NamedAssets<ContractAssetSet>()) {
+                if (asset.FabricationLevel) {
+                    asset.FabricationLevel.ClearCachedReferences();
+                }
+            }
         }
 
         public void OnRegister()

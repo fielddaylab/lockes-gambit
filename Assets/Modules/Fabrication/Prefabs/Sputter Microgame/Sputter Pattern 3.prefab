@@ -428,9 +428,9 @@ MonoBehaviour:
   - {fileID: 2219250180236398091}
   - {fileID: 1671737734937720433}
   - {fileID: 1679560925757690211}
-  ProjectilePrefab: {fileID: 3094212148526174108, guid: c61174905d0f142a188512153c41f42a, type: 3}
   m_FilledSlots: 0
   m_TotalSlots: 0
+  FillThreshold: 1
 --- !u!212 &131169637601620033
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ SpriteRenderer:
   m_SortingLayer: 9
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ee864a8053c66134684b8844c3d528e6, type: 3}
-  m_Color: {r: 0.24313726, g: 0.73333335, b: 0.9098039, a: 1}
+  m_Color: {r: 0.22352941, g: 0.22352941, b: 0.22352941, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

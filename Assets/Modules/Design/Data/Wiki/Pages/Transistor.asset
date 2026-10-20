@@ -12,8 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Transistor
   m_EditorClassIdentifier: 
-  m_Title: Transistor
-  m_Icon: {fileID: 0}
-  m_IllustrationFrames: []
-  m_IllustrationFPS: 0.5
-  m_Body: A Transistor is formed by PNP or NPN with a Gate in the middle.
+  Title: Depletion Transistor
+  Icon: {fileID: 21300000, guid: 567cb13957ab048468d927a6d94e6efc, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 745d34b947c18274d810d156a0907d10, type: 3}
+  - {fileID: 21300000, guid: d5ab548a82b47374eaef7779e6d59378, type: 3}
+  - {fileID: 21300000, guid: 5df19fc7d89dc7948802643a7797436e, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: 'Place a Gate on a semiconductor path to make a Depletion Transistor.
+    It starts open, and closes with the right signal. '
+  MaterialId:
+    m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

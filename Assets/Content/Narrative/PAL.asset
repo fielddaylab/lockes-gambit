@@ -15,7 +15,7 @@ MonoBehaviour:
   DisplayName: P.A.L.
   DialogueTint:
     serializedVersion: 2
-    rgba: 4291815503
+    rgba: 4294639360
   NonMinigamePortrait: {fileID: 21300000, guid: a1b23a1c26d49074da1d0f1443baede9, type: 3}
   MinigamePortrait: {fileID: 21300000, guid: 9b5352b068673a14a9f6d8650f416e76, type: 3}
   CharacterTypeEvent:

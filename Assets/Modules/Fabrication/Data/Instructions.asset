@@ -32,10 +32,6 @@ MonoBehaviour:
     UIKey: 4
     Instruction: MOUSE
     Subtitle: to sputter pattern
-  SputterInstructions:
-    UIKey: 5
-    Instruction: KEYS
-    Subtitle: to aim particles
   KeyImages:
   - Key: 0
     Sprite: {fileID: 21300000, guid: 35dd9cc110111b24197b52d7fd1818f5, type: 3}
@@ -47,5 +43,3 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: d19cd68be2e06e34aa7b29baf13e382a, type: 3}
   - Key: 4
     Sprite: {fileID: 21300000, guid: 402c6f5bf4e67834089dfbd474a9e67f, type: 3}
-  - Key: 5
-    Sprite: {fileID: 21300000, guid: 2d2462110654ee34a91455627ab9d0b0, type: 3}

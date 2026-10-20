@@ -1,3 +1,4 @@
+using BeauRoutine;
 using FieldDay;
 using FieldDay.Components;
 using SpaceFab.Design.Visuals;
@@ -29,11 +30,15 @@ namespace SpaceFab.Design
     {
         private const int FLOW_SORT_ORDER = 500;
         private const int GATE_SORT_ORDER = 300;
-        private const int SECONDARY_SORT_ORDER = 15;
+        private const int SECONDARY_SORT_ORDER = 25;
         private const int METAL_SORT_ORDER = 200;
         private const int VIA_SORT_ORDER = 210;
         private const int TRANSISTOR_SORT_ORDER = 0;
 
+        private const float PATH_FLOW_ALPHA = 0.4f; //alpha of path sprite when a flow pattern shows
+
+        public const float METAL_OFFSET = 0.18f;
+        public const float SEMI_OFFSET = -0.1f;
         // Per-cell flow state now lives in SimulateRunScratch rather than on GridCell. Callers
         // pass the pre-fetched scratch + cellIndex so this helper doesn't repeat the Find.State
         // lookup for every cell on the grid. During Tool mode, scratch may be null (Simulate
@@ -45,23 +50,28 @@ namespace SpaceFab.Design
                 : FlowState.Empty;
             // visualCell.FlowIndicator.sortingOrder = FLOW_SORT_ORDER;
             visualCell.FlowIndicator.sortingOrder = layerIndex == 0 ? METAL_SORT_ORDER : TRANSISTOR_SORT_ORDER;
-             visualCell.FlowIndicator.sortingOrder += 1;
+            visualCell.FlowIndicator.sortingOrder -= 1;
+            Vector2 flowSize = visualCell.FlowIndicator.size;
+            float pathAlpha = flow == FlowState.Empty ? 1f : PATH_FLOW_ALPHA;
+            visualCell.PathRenderer.SetAlpha(pathAlpha);
+            foreach (var r in visualCell.DirRenderers) { r.SetAlpha(pathAlpha); };
 
-            switch (flow)
-            {
-                case (FlowState.Hi):
-                    UpdateHiFlow(visualCell, cell, layerIndex, spriteDB);
-                    break;
-                case (FlowState.Lo):
-                    UpdateLoFlow(visualCell, cell, layerIndex, spriteDB);
-                    break;
-                case (FlowState.Unstable):
-                    UpdateUnstableFlow(visualCell, cell, layerIndex, spriteDB);
-                    break;
-                default:
-                    UpdateDefaultFlow(visualCell, cell, layerIndex, spriteDB);
-                    break;
-            }
+            switch (flow) {
+                    case (FlowState.Hi):
+                        UpdateHiFlow(visualCell, cell, layerIndex, spriteDB);
+                        break;
+                    case (FlowState.Lo):
+                        UpdateLoFlow(visualCell, cell, layerIndex, spriteDB);
+                        break;
+                    case (FlowState.Unstable):
+                        UpdateUnstableFlow(visualCell, cell, layerIndex, spriteDB);
+                        break;
+                    default:
+                        UpdateDefaultFlow(visualCell, cell, layerIndex, spriteDB);
+                        break;
+                }
+
+            visualCell.FlowIndicator.size = flowSize;
         }
 
         private static void UpdateHiFlow(VisualGridCell visualCell, GridCell cell, int layerIndex, GridSpriteDB spriteDB)
@@ -120,13 +130,16 @@ namespace SpaceFab.Design
                 // lookup via for flow state
                 var sprite = GridSpriteDBUtility.LookupViaSprite(spriteDB, flow);
                 visualCell.TransferRenderer.sprite = sprite;
+                visualCell.TransferRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
                 visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
             }
             else if (cell.TransferType == TransferType.GateAbove)
             {
                 var sprite = GridSpriteDBUtility.LookupGateSprite(spriteDB, flow);
                 visualCell.TransferRenderer.sprite = sprite;
-                visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
+                visualCell.TransferRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
+                // remove base for gate to clarify that signals aren't sent thru gates
+                //visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
             }
         }
 
@@ -150,26 +163,31 @@ namespace SpaceFab.Design
             // Render according to cell data
             switch (cellData.CellType)
             {
+                case CellType.Input:
+                case CellType.Output:
+                    spriteDB.MetalLibrary.Lookup(EdgeUtility.CondenseEdges(cellData.Edges), out pathData, true);
+                    lookedUpEdge = true;
+                    break;
                 case CellType.Metal:
                     spriteDB.MetalLibrary.Lookup(EdgeUtility.CondenseEdges(cellData.Edges), out pathData);
                     lookedUpEdge = true;
-                    break;
+                    break;              
                 case CellType.NTransistor:
                     RenderNTransistor(visualCell, ref cellData, ref pathData, ref lookedUpEdge, scratch, cellIndex, layerIndex, col, row, spriteDB);
                     break;
                 case CellType.PTransistor:
                     RenderPTransistor(visualCell, ref cellData, ref pathData, ref lookedUpEdge, scratch, cellIndex, layerIndex, col, row, spriteDB);
                     break;
-                case CellType.Input:
-                    visualCell.PathRenderer.sprite = spriteDB.IOOuter;
-                    visualCell.SubRenderer.sprite = spriteDB.IOInner;
-                    // visualCell.TextRenderer.SetText(cellData.SubtypeLabel);
-                    break;
-                case CellType.Output:
-                    visualCell.PathRenderer.sprite = spriteDB.IOOuter;
-                    visualCell.SubRenderer.sprite = spriteDB.IOInner;
-                    // visualCell.TextRenderer.SetText(cellData.SubtypeLabel);
-                    break;
+                //case CellType.Input:
+                //    visualCell.PathRenderer.sprite = spriteDB.IOOuter;
+                //    visualCell.SubRenderer.sprite = spriteDB.IOInner;
+                //    // visualCell.TextRenderer.SetText(cellData.SubtypeLabel);
+                //    break;
+                //case CellType.Output:
+                //    visualCell.PathRenderer.sprite = spriteDB.IOOuter;
+                //    visualCell.SubRenderer.sprite = spriteDB.IOInner;
+                //    // visualCell.TextRenderer.SetText(cellData.SubtypeLabel);
+                //    break;
                 default:
                     break;
             }
@@ -177,14 +195,14 @@ namespace SpaceFab.Design
             switch (cellData.SubtypeLabel)
             {
                 case InputOutputNodeTypeFlags.VPLUS:
-                    visualCell.PathRenderer.sprite = spriteDB.IOOuter;
                     visualCell.SubRenderer.sprite = spriteDB.InputConstantHigh;
                     visualCell.SubRenderer.transform.localScale = Vector3.one * 0.75f;
+                    visualCell.SubRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
                     break;
                 case InputOutputNodeTypeFlags.VMINUS:
-                    visualCell.PathRenderer.sprite = spriteDB.IOOuter;
                     visualCell.SubRenderer.sprite = spriteDB.InputConstantLow;
                     visualCell.SubRenderer.transform.localScale = Vector3.one * 0.75f;
+                    visualCell.SubRenderer.transform.localPosition = new Vector3(0, METAL_OFFSET, 0);
                     break;
                 default:
                     break;
@@ -202,7 +220,8 @@ namespace SpaceFab.Design
                     break;
                 case TransferType.GateAbove:
                     visualCell.TransferRenderer.sprite = GridSpriteDBUtility.LookupGateSprite(spriteDB, FlowState.Empty);
-                    visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
+                    // remove base for gate to clarify that signals aren't sent thru gates
+                    //visualCell.SecondaryTransferRenderer.sprite = spriteDB.ViaBase;
                     break;
                 default:
                     break;
@@ -210,9 +229,9 @@ namespace SpaceFab.Design
 
             visualCell.PathRenderer.sortingOrder = layerIndex == 0 ? METAL_SORT_ORDER : TRANSISTOR_SORT_ORDER;
             visualCell.ShadowPathRenderer.sortingOrder = TRANSISTOR_SORT_ORDER + 20;
-            visualCell.PathOverlayRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 3;
-            visualCell.PathOverlayBaseRenderer.sortingOrder = visualCell.PathOverlayRenderer.sortingOrder - 1;
-            visualCell.SubRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder - 10;
+            //visualCell.PathOverlayRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 3;
+            visualCell.PathOverlayBaseRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 3;
+            visualCell.SubRenderer.sortingOrder = visualCell.PathRenderer.sortingOrder + 10;
             foreach (var r in visualCell.DirRenderers) { r.sortingOrder = visualCell.PathRenderer.sortingOrder + 5; }
             visualCell.TransferRenderer.sortingOrder = cellData.TransferType == TransferType.Via ? VIA_SORT_ORDER : GATE_SORT_ORDER;
             visualCell.SecondaryTransferRenderer.sortingOrder = SECONDARY_SORT_ORDER;
@@ -247,6 +266,10 @@ namespace SpaceFab.Design
             return SimulateRunScratchUtility.GetCellTempTransform(scratch, cellIndex);
         }
 
+        private static void RenderMetalIO(VisualGridCell visualCell, ref GridCell cellData, ref PathLibrary.AssembledPathData pathData, ref bool lookedUpEdge, SimulateRunScratch scratch, int cellIndex, int layerIndex, int col, int row, GridSpriteDB spriteDB) {
+            // if North metal edge connected to Input, Output, or Constant, draw a half-length metal path over i/o
+        }
+
         private static void RenderNTransistor(VisualGridCell visualCell, ref GridCell cellData, ref PathLibrary.AssembledPathData pathData, ref bool lookedUpEdge, SimulateRunScratch scratch, int cellIndex, int layerIndex, int col, int row, GridSpriteDB spriteDB)
         {
             var condensedEdges = EdgeUtility.CondenseEdges(cellData.Edges);
@@ -259,7 +282,7 @@ namespace SpaceFab.Design
             {
                 if (selfTempTransform == CellType.PTransistor)
                 {
-                    visualCell.PathOverlayRenderer.sprite = spriteDB.InvertedOverlay;
+                    //visualCell.PathOverlayRenderer.sprite = spriteDB.InvertedOverlay;
                     visualCell.PathOverlayBaseRenderer.sprite = spriteDB.InvertedOverlayBase;
                     visualCell.PathOverlayRenderer.color = spriteDB.PColor;
                     visualCell.PathOverlayBaseRenderer.color = spriteDB.NColor;
@@ -320,7 +343,7 @@ namespace SpaceFab.Design
             {
                 if (selfTempTransform == CellType.NTransistor)
                 {
-                    visualCell.PathOverlayRenderer.sprite = spriteDB.InvertedOverlay;
+                    //visualCell.PathOverlayRenderer.sprite = spriteDB.InvertedOverlay;
                     visualCell.PathOverlayBaseRenderer.sprite = spriteDB.InvertedOverlayBase;
                     visualCell.PathOverlayRenderer.color = spriteDB.NColor;
                     visualCell.PathOverlayBaseRenderer.color = spriteDB.PColor;

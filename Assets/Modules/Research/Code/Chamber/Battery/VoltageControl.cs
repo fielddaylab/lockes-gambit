@@ -96,7 +96,10 @@ namespace SpaceFab.Research
             control.VoltageIndex++;
             ApplyChange(control, config);
 
-            ScriptUtility.Trigger(ResearchScriptTriggers.OnVoltageIncreased);
+            using (var table = TempVarTable.Alloc()) {
+                table.Set("voltage", control.VoltageIndex);
+                ScriptUtility.Trigger(ResearchScriptTriggers.OnVoltageIncreased, table);
+            }
         }
 
         // Bumps the voltage index down by one. No-op at the lower magnitude

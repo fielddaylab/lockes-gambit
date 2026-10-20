@@ -158,21 +158,24 @@ namespace FieldDay.UI {
         }
 
         private void UpdateContents(CursorTooltipContents contents, CursorHint context) {
+            StringBuilder dynamicHeader = null,
+                dynamicFooter = null,
+                dynamicContent = null;
             if (contents.DynamicBuilder != null) {
                 CursorTooltipBuildState buildState;
                 buildState.Contents = m_ContentBuilder;
                 buildState.Footer = m_FooterBuilder;
                 buildState.Header = m_HeaderBuilder;
                 if (contents.DynamicBuilder(context, ref buildState)) {
-                    contents.DynamicFooter = buildState.Footer;
-                    contents.DynamicHeader = buildState.Header;
-                    contents.DynamicContents = buildState.Contents;
+                    dynamicFooter = buildState.Footer;
+                    dynamicHeader = buildState.Header;
+                    dynamicContent = buildState.Contents;
                 }
             }
 
-            PopulateContentField(m_Header, contents.Header, contents.DynamicHeader, contents.LocHeader);
-            PopulateContentField(m_Text, contents.Contents, contents.DynamicContents, contents.LocContents);
-            PopulateContentField(m_Footer, contents.Footer, contents.DynamicFooter, contents.LocFooter);
+            PopulateContentField(m_Header, contents.Header, dynamicHeader, contents.LocHeader);
+            PopulateContentField(m_Text, contents.Contents, dynamicContent, contents.LocContents);
+            PopulateContentField(m_Footer, contents.Footer, dynamicFooter, contents.LocFooter);
         }
 
         static private void PopulateContentField(TMP_Text textDisplay, string constantText, StringBuilder dynamicText, LocId locText) {

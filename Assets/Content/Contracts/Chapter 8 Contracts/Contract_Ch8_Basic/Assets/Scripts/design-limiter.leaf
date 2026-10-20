@@ -1,0 +1,18 @@
+# basePath DesignLimiter
+// Limiter
+
+::Intro
+@trigger    OnDesignSetupComplete
+$set temp:hintGiven = 0
+{@PAL}  This circuit should act like the opposite of a Diode… Only LO can pass.
+
+::Hints
+@trigger    OnSingleTestComplete
+@when       result == "failure"
+$if temp:hintGiven == 0
+    {@PAL}  <color=yellow>Hint:</color> Check the Verification Table. Only LO should reach output X.
+    $set temp:hintGiven = 1
+$elseif temp:hintGiven == 1
+    {@PAL}  <color=yellow>Hint:</color> When A is LO, allow its own signal to pass.
+    $set temp:hintGiven = 0
+$endif

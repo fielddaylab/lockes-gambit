@@ -17,7 +17,16 @@ namespace SpaceFab.Onboarding {
         [LeafMember("HighlightElement")]
         public static void Leaf_HighlightElement(string id, bool lockFocus = false, float margin = -1f, bool attachToCanvas = false) {
             OnboardingHighlightState highlightState = Find.State<OnboardingHighlightState>();
-            OnboardingHighlightUtility.Show(highlightState, NormalizeId(id), lockFocus, margin, attachToCanvas);
+            OnboardingHighlightUtility.Show(highlightState, NormalizeId(id), lockFocus, margin, attachToCanvas, HighlightStyle.Corner);
+        }
+
+        // Summon an arrow highlight on the ElementTag with id `id`. Uses the same focus,
+        // margin, and canvas attachment behavior as HighlightElement, but displays an arrow
+        // instead of the default corner highlight.
+        [LeafMember("PointElement")]
+        public static void Leaf_PointElement(string id, bool lockFocus = false, float margin = -1f, bool attachToCanvas = false) {
+            OnboardingHighlightState highlightState = Find.State<OnboardingHighlightState>();
+            OnboardingHighlightUtility.Show(highlightState, NormalizeId(id), lockFocus, margin, attachToCanvas, HighlightStyle.Arrow);
         }
 
         // Release a single highlight by id. No-op if no highlight is active for that id.

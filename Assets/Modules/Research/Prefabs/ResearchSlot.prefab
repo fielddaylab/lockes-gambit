@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3986363150842357682}
   - component: {fileID: 8579117913987635}
   - component: {fileID: 1301278793089183734}
+  - component: {fileID: 1680022614664876903}
   m_Layer: 20
   m_Name: ResearchSlot
   m_TagString: Untagged
@@ -51,6 +52,7 @@ MonoBehaviour:
   Region: {fileID: 8579117913987635}
   Root: {fileID: 2731764934151807371}
   Rig: {fileID: 4807135311958792246}
+  Cursor: {fileID: 1680022614664876903}
   AllowLift: 1
   AllowSwap: 1
 --- !u!212 &3986363150842357682
@@ -168,6 +170,26 @@ MonoBehaviour:
   RectTransform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 8579117913987635}
+--- !u!114 &1680022614664876903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661240849518676373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a59a59fc4e9a014c8fbb22f00e5eeff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AlwaysFireClickEvents: 0
+  AcceptedMouseButtons: 1
+  CursorType:
+    m_HashValue: 2152495914
+  Flags: 0
+  TooltipHeader: 
+  Tooltip: 
+  TooltipFooter: 
 --- !u!1001 &6595267697403963334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,6 +198,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2731764934151807371}
     m_Modifications:
+    - target: {fileID: 3292708311143665810, guid: 2e20f8b1e4b2d8b4d85ecb418e6b3699, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3292708311143665810, guid: 2e20f8b1e4b2d8b4d85ecb418e6b3699, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3292708311143665810, guid: 2e20f8b1e4b2d8b4d85ecb418e6b3699, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 3292708311143665810, guid: 2e20f8b1e4b2d8b4d85ecb418e6b3699, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

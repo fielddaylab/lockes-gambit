@@ -36,6 +36,8 @@ namespace SpaceFab.Research
         // Root of battery chamber's GameObject hierarchy; used to toggle visibility on activation/deactivation.
         public GameObject Root;
 
+        public float PrimarySlotY;
+
         // Runtime ref to the instantiated meter rig's ChamberBattery.
         // Assigned by ResearchTransitionSystem after Instantiate; null
         // until then. VoltageUtility reads VoltageLevelSlots.Length off

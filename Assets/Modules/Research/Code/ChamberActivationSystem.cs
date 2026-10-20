@@ -38,38 +38,30 @@ namespace SpaceFab.Research
 
             ActiveChamberKind activeChamber = ChamberInterfacerUtility.GetActiveChamber(interfacer);
             ResearchPools pools = Find.State<ResearchPools>();
+            float primarySlotY = -0.26f;
 
-            switch (activeChamber)
-            {
+            switch (activeChamber) {
                 case ActiveChamberKind.Voltage:
                     BatteryChamberUtility.ResetState(batteryChamber);
+                    primarySlotY = batteryChamber.PrimarySlotY;
                     if (pools != null) {
-                        foreach (var samplePanel in Find.Components<ResearchSamplePanel>()) {
-                            ObservationPickerLoadUtility.LoadFor(samplePanel, pools, interfacer, batteryChamber.AvailableObservations);
-                            break;
-                        }
                     }
                     break;
                 case ActiveChamberKind.Thermal:
                     ThermalChamberUtility.ResetState(thermalChamber);
+                    primarySlotY = thermalChamber.PrimarySlotY;
                     if (pools != null) {
-                        foreach (var samplePanel in Find.Components<ResearchSamplePanel>()) {
-                            ObservationPickerLoadUtility.LoadFor(samplePanel, pools, interfacer, thermalChamber.AvailableObservations);
-                            break;
-                        }
                     }
                     break;
                 case ActiveChamberKind.Doping:
                     DopingChamberUtility.ResetState(dopingChamber);
+                    primarySlotY = dopingChamber.PrimarySlotY;
                     if (pools != null) {
-                        foreach (var samplePanel in Find.Components<ResearchSamplePanel>()) {
-                            // In doping chamber, picker chips are loaded when substrate changes
-                            SamplePanelInputUtility.FreeAllPickerChips(samplePanel, pools);
-                            break;
-                        }
                     }
                     break;
             }
+
+            Positioning.SetLocalY(interfacer.PrimarySlot.transform, primarySlotY);
 
             ResearchSlotUtility.FillInSlot(interfacer, ChamberInterfacerUtility.GetSlot(interfacer, ChamberSlotKind.Secondary), ChamberSlotKind.Secondary, null);
             ChamberInterfacerUtility.SetReceptive(interfacer, ChamberSlotKind.Primary, activeChamber != ActiveChamberKind.None);

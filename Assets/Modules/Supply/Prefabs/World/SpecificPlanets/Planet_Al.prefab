@@ -39,18 +39,10 @@ PrefabInstance:
     - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8eb90109baa0712479eab12f7d2602bb, type: 3}
+      objectReference: {fileID: 21300000, guid: dd69950f1966ea248b4f15159588146a, type: 3}
     - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
-      propertyPath: m_Color.b
+      propertyPath: m_WasSpriteAssigned
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
-      propertyPath: m_Color.g
-      value: 0.48584908
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
-      propertyPath: m_Color.r
-      value: 0.49955976
       objectReference: {fileID: 0}
     - target: {fileID: 6139377420993714670, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Id.m_Source
@@ -100,9 +92,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969157722188741103, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: WikiPage.m_HashValue
+      value: 1183375278
+      objectReference: {fileID: 0}
     - target: {fileID: 7488334245896658445, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: MaterialType.m_HashValue
       value: 2571817723
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: Tooltip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: TooltipHeader
+      value: Aluminum
       objectReference: {fileID: 0}
     - target: {fileID: 8792477959654819082, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: TooltipHeader

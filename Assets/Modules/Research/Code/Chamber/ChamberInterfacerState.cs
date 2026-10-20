@@ -3,6 +3,7 @@ using FieldDay.SharedState;
 using FieldDay.UI;
 using SpaceFab.Materials;
 using System;
+using UnityEngine;
 
 namespace SpaceFab.Research {
     /// <summary>

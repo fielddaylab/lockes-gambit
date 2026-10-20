@@ -12,10 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: NPN
   m_EditorClassIdentifier: 
-  m_Title: NPN
-  m_Icon: {fileID: 0}
-  m_IllustrationFrames: []
-  m_IllustrationFPS: 0.5
-  m_Body: If the gate on P receives a HI signal, a signal can pass from N to N.
-  m_MaterialId:
+  Title: Enhancement Transistor (NPN)
+  Icon: {fileID: 21300000, guid: 22e6c0f1d094df548955767736e5ad20, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 70338bf7a63aa4d419254c3dc8859206, type: 3}
+  - {fileID: 21300000, guid: 70338bf7a63aa4d419254c3dc8859206, type: 3}
+  - {fileID: 21300000, guid: 70338bf7a63aa4d419254c3dc8859206, type: 3}
+  - {fileID: 21300000, guid: f0657494e3ebb954496c1b181be7c3b9, type: 3}
+  - {fileID: 21300000, guid: 6bdabbee26a624e40b7ece217c608c3f, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: An Enhancement Transistor with a Gate on P-Type starts blocked, and opens
+    with a HI signal.
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

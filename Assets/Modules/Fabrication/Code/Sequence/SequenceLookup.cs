@@ -79,6 +79,8 @@ namespace SpaceFab.Fabrication.Sequence
     {
         public SequenceChunk Chunk;
         public Sprite ChunkSprite;
+        public Sprite ChunkSequenceBG;
+        public Sprite ChunkSequenceHeaderBG;
         public string ChunkText;
     }
 

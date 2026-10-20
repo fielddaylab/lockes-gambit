@@ -63,7 +63,7 @@ namespace FieldDay.Data {
         private const uint MaxRunLength = (1 << 10) + MinRunLength - 1; // 1023 + 4 bytes forward
         private const uint DefaultRunLengthThreshold = 64;
 
-        private const uint SafeStackBufferSize = 64 * Unsafe.KiB;
+        private const uint SafeStackBufferSize = 48 * Unsafe.KiB;
 
         private const uint MinSizeForCompression = 128;
 

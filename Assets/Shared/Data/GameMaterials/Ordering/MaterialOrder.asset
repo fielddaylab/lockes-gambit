@@ -50,14 +50,14 @@ MonoBehaviour:
     DynamicMask_NDopant: 0
   - StaticMask: 528
     DynamicMask_PDopant: 0
-    DynamicMask_NDopant: 0
+    DynamicMask_NDopant: 48
   - StaticMask: 8
     DynamicMask_PDopant: 0
     DynamicMask_NDopant: 0
   - StaticMask: 8
     DynamicMask_PDopant: 48
     DynamicMask_NDopant: 0
-  - StaticMask: 8
+  - StaticMask: 4
     DynamicMask_PDopant: 0
     DynamicMask_NDopant: 3144
   - StaticMask: 18
@@ -69,10 +69,10 @@ MonoBehaviour:
   - StaticMask: 6
     DynamicMask_PDopant: 0
     DynamicMask_NDopant: 0
-  - StaticMask: 4
+  - StaticMask: 0
     DynamicMask_PDopant: 0
     DynamicMask_NDopant: 0
-  - StaticMask: 8
+  - StaticMask: 0
     DynamicMask_PDopant: 0
     DynamicMask_NDopant: 0
   - StaticMask: 40
@@ -83,8 +83,8 @@ MonoBehaviour:
   - Boron
   - Copper
   - Diamond
-  - GalliumArsenide
-  - GalliumNitride
+  - Gallium Arsenide
+  - Gallium Nitride
   - Germanium
   - Gold
   - Magnesium
@@ -92,6 +92,6 @@ MonoBehaviour:
   - Silicon
   - Silicon Carbide
   - Silicon Dioxide
-  - Silicon Nitride
-  - Silver
+  - 
+  - 
   - Tungsten

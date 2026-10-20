@@ -1,10 +1,84 @@
 # basePath Chapter2
 
-:: FirstContractOpen
+:: FirstContractOpenCh2
 @trigger    OnContractSelectOpen
 @cutscene
 @once
+
+{@Player}	P.A.L. did you get the fab bay cleaned up? 
+{@PAL}		The fab bay is in perfect condition, as always. 
+{@PAL}		...at least as perfect as it can be on a near obsolete ship.
+//{@Player}	You are blaming MY ship for your mess?!
+
+
+{@Dorian}	Hey! I've got to head out. Good to see you!
+{@Player}   I wish everyone else from our old crew felt that way. 
+{@Player}	Don't they understand that I need this job so I don't lose the ship? 
+
+// EDIT - KACY 
+// Minor changes with Dorian's dialogue. 
+
 $call   LockWikiPage("Basic Conductor") // Basic Conductor is replaced with the full version after first chapter 
 $call   LockWikiPage("Basic Insulator") // Basic Insulator is replaced with the full version after first chapter 
 $call   UnlockWikiPage("Conductor")
 $call   UnlockWikiPage("Insulator")
+
+::AfterResearchCh2 
+
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Research)
+@cutscene 
+@once
+{@Player}   P.A.L., turns out that material wasn't an insulator. It's a semiconductor.
+{@PAL}      Exactly! Great work, Captain.
+{@Player}   Exactly? You verified it as an insulator before.
+{@PAL}      You're absolutely right. Your research clearly shows that it's a semiconductor.
+{@Player}   But you seemed pretty sure before.
+{@PAL}      Absolutely! And now we have the correct answer.
+{@Player}   ...It's weird how you just keep agreeing with me.
+
+
+::BeforeSupplyChainCh2
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
+@cutscene
+@once
+
+//introduce the idea of the refining station. pick up at wayward and refine at frosch
+{@Player}   Hmmm... looks like I'll need a semiconductor material...
+{@Player}   I don't see any in this sector.
+{@PAL}      You can make one!
+{@PAL}      You can get silicon dioxide at Frosch and have the haulers take it to a refinery.
+{@Player}   A two step process? That sounds pricey.
+
+//cut ?conversation with Taryn and Ovill arguing over who gets to source for Locke. This isn't relevant till level 3 when they can use multiple options.
+
+
+
+::AfterSupplyChainCh2
+@trigger OnOverarchingLoaded
+@when   IsSolutionFoundFor(Design), IsSolutionFoundFor(Research), IsSolutionFoundFor(Supply)
+@cutscene 
+@once
+
+
+//call coming in from Quinn
+{@Quinn}    Why do you have Frontier's bots on the Constantine?
+{@Player}   Oh, hey Quinn. Well... ship repairs put me in some serious debt. 
+{@Player}	Can't afford my old crew, so I need the bots to run Fabrication.
+{@Quinn}    Oooof. Bad luck. Watch out Cowboy. Frontier builds those bots cheap. 
+{@Quinn}		Always needing new parts.
+//end call
+
+
+
+::AfterFabricationCh2 
+@trigger OnOverarchingLoaded
+@when   IsSolutionFoundFor(Design), IsSolutionFoundFor(Research), IsSolutionFoundFor(Supply), IsSolutionFoundFor(Fabrication)
+@cutscene 
+@once
+
+
+{@PAL}      Quinn is incorrect in her assessment of Frontier Robotics. 
+{@PAL}		We have a stellar reputation! 
+{@Player}	Were you listening to my call? 

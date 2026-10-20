@@ -134,6 +134,14 @@ namespace UnityEngine.UI {
             }
         }
 
+        public void BeginLayoutChanges() {
+            ApplyOffset(default);
+        }
+
+        public void EndLayoutChanges() {
+            ApplyCurrentOffset();
+        }
+
         #region ILayout
 
         float ILayoutElement.minWidth { get { return -1; } }
@@ -147,7 +155,7 @@ namespace UnityEngine.UI {
         int ILayoutElement.layoutPriority { get { return -10000; } }
 
         void ILayoutElement.CalculateLayoutInputHorizontal() {
-            ApplyOffset(default(Vector2));
+            BeginLayoutChanges();
         }
 
         void ILayoutElement.CalculateLayoutInputVertical() {
@@ -159,7 +167,7 @@ namespace UnityEngine.UI {
         }
 
         void ILayoutController.SetLayoutVertical() {
-            ApplyCurrentOffset();
+            EndLayoutChanges();
         }
 
         #endregion // ILayout

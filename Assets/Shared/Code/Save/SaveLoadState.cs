@@ -220,6 +220,7 @@ namespace SpaceFab.Save
             {
                 SpacefabGame.SaveBuffer.Read();
                 SpacefabGame.SaveBuffer.HandleChunks();
+                SpacefabGame.SaveBuffer.HandlePostLoad();
             }
             Game.Scenes.ReloadMainScene();
         }
@@ -242,6 +243,7 @@ namespace SpaceFab.Save
                         {
                             bSuccess = SpacefabGame.SaveBuffer.Read();
                             SpacefabGame.SaveBuffer.HandleChunks();
+                            SpacefabGame.SaveBuffer.HandlePostLoad();
                         }
                     }
 

@@ -217,7 +217,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1112968087
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &3195307894338544261
 MonoBehaviour:
@@ -822,15 +822,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943192689760791763, guid: 46df936f41574694087f27b7d3fc0778, type: 3}
       propertyPath: m_text
-      value: "Return to Ship\r"
+      value: leave
       objectReference: {fileID: 0}
     - target: {fileID: 2943192689760791763, guid: 46df936f41574694087f27b7d3fc0778, type: 3}
       propertyPath: m_fontSize
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2943192689760791763, guid: 46df936f41574694087f27b7d3fc0778, type: 3}
       propertyPath: m_fontSizeBase
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4876061022524100863, guid: 46df936f41574694087f27b7d3fc0778, type: 3}
       propertyPath: m_Pivot.x

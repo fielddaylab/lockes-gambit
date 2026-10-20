@@ -52,15 +52,15 @@ namespace SpaceFab.Fabrication {
                 // compute total cycles based on buckets
                 int stationNum = sequenceState.StepRuntime.Length;
                 FabricationSequence fabSequence = sequenceState.Level.Sequence;
-                float Coefficient = contractState.ContractAssets.fabCoefficient;
+                float Coefficient = contractState.ContractAssets?.fabCoefficient ?? 1;
 
                 float bucket1 = stationNum * fabSequence.bucketThreshold1 * Coefficient;
                 float bucket2 = stationNum * fabSequence.bucketthreshold2 * Coefficient;
 
                 float elapsedTime = TimeStateUtility.GetElapsed(timeState);
-                if (elapsedTime <= bucket1) { fabState.TotalCycles = 2; }
-                else if (elapsedTime <= bucket2) { fabState.TotalCycles = 3; }
-                else { fabState.TotalCycles = 4; }
+                if (elapsedTime <= bucket1) { fabState.TotalCycles = 1; }
+                else if (elapsedTime <= bucket2) { fabState.TotalCycles = 2; }
+                else { fabState.TotalCycles = 3; }
                 
                 float accuracy = WaferStateUtility.GetAggregatedPrecision(waferState);
                 fabState.Precision = accuracy;

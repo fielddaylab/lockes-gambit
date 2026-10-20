@@ -2,38 +2,37 @@
 
 ::IntroSelectTrace
 @trigger    OnDesignSetupComplete
-@when       CurrLevelIndex() == 0
 $if IsLevelSolved(0) == true
     $set temp:designTutorialStep = 4
     {@PAL}  If you modify your grid, you'll need to re-rerun all tests.
 $else
     $set temp:designTutorialStep = 0
-    $call   HighlightElement(design:metal-tool-btn)
-    {@PAL} Select the Metal Tool.
+    $call   HighlightElement(design:tool-metal)
+    {@PAL}  This chip needs a connection between Input A and Output X on the metal layer. \n\nSelect the <color=yellow>Metal Tool</color>.
 $endif
 
 
 ::DrawConnection
 @trigger    OnToolSelected
-@when       tool == "DrawMetal", CurrLevelIndex() == 0, temp:designTutorialStep == 0
+@when       tool == "DrawMetal", temp:designTutorialStep == 0
 $set temp:designTutorialStep = 1
 $call   ReleaseAllHighlights()
 $call   HighlightElement(design:input-a, false, 25)
 {@PAL} Now click and drag to draw a connection between Input A and Output X.
 
 
+
 ::TestConnectionDrag
 @trigger    OnDragReleased
-@when       CurrLevelIndex() == 0
 $call   HighlightElement(design:test-btn)
 $if temp:designTutorialStep == 1
     $set temp:designTutorialStep = 2
     $call   ReleaseHighlight(design:input-a)
-    {@PAL}  Test your connection.
+    {@PAL}  Click <color=yellow>TEST</color> to verify.
 $elseif temp:designTutorialStep == 2
     $call   ReleaseHighlight(design:input-a)
     // player has dragged again on the grid, potentially after running a single test
-    {@PAL}  Test your connection.
+    {@PAL}  Click <color=yellow>TEST</color> to verify.
 $elseif temp:designTutorialStep == 3
     // player has already tested at least one case before modifying the grid
     {@PAL} You'll have to re-run all tests whenever you modify the grid.
@@ -45,45 +44,41 @@ $endif
 
 ::TestConnectionClick
 @trigger    OnClickReleased
-@when       CurrLevelIndex() == 0, temp:designTutorialStep == 1
-{@PAL}  You'll need to click and DRAG to form a solid path.
+@when       temp:designTutorialStep == 1
+{@PAL}  <color=yellow>Click and drag</color> to form a solid path on the Metal Layer. 
 
 
 ::TestIncorrect
 @trigger    OnSingleTestComplete
-@when       result == "failure", CurrLevelIndex() == 0, temp:designTutorialStep != 0
+@when       result == "failure", temp:designTutorialStep != 0
 // only show this after the player knows how to select the trace tool
 $call   ReleaseHighlight(design:test-btn)
-{@PAL}  This line is incorrect. Make sure Input A is fully connected with Output X.
+{@PAL}  The test failed.\n\nMake sure Input A is fully connected with Output X.
 
 
 ::TestCorrect
 @trigger    OnSingleTestComplete
-@when       result == "success", CurrLevelIndex() == 0
-$if temp:designTutorialStep < 4
-    $call   ReleaseAllHighlights()
-    $call   HighlightElement(design:input-a, false, 25)
-    $if     IsInputInState("A", "LO")
-        {@PAL}  Correct! Tap the input to switch it from LO (Low) to HI (High).
-    $else
-        {@PAL}  Correct! Tap the input to switch it from HI (High) to LO (Low).
-    $endif
+@when       result == "success", temp:designTutorialStep < 4
+$call   ReleaseAllHighlights()
+$call   HighlightElement(design:input-a, false, 25)
+$if     IsInputInState("A", "LO")
+    {@PAL}  Correct!\n\nNow flip the switch on the input to change it from LO to HI.
+$else
+    {@PAL}  Correct!\n\nNow flip the switch on the input to change it from HI to LO.
 $endif
 
 
 ::InputSwitch
 @trigger    OnInputToggled
-@when       CurrLevelIndex() == 0, temp:designTutorialStep >= 2, temp:designTutorialStep <= 3
+@when       temp:designTutorialStep >= 2, temp:designTutorialStep <= 3
 $call   ReleaseHighlight(design:input-a)
 $call   HighlightElement(design:test-btn)
 $set temp:designTutorialStep = 3
-{@PAL}  You'll need to test every case.
-
+{@PAL}  Click <color=yellow>TEST</color> again.
 
 
 ::AllTestsPassed
 @trigger    OnAllTestsComplete
-@when       CurrLevelIndex() == 0
 $call   ReleaseAllHighlights()
-{@PAL}  It looks like all test cases passed!
+{@PAL}  All test cases passed!
 $set    temp:designTutorialStep = 4

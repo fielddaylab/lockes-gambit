@@ -1,0 +1,74 @@
+# basePath ResearchIntroHpDiode
+
+::IntroSelectTrace
+@trigger    OnSetupComplete
+$if MinigameHasValidSolution()
+    {@PAL}  You've already researched everything you need to!\n\nYou can continue your experiments to uncover new insights.
+$else
+    {@PAL}  The battery capacity has been increased.\n\nNow you can test for <color=yellow>Hi-Voltage Semiconductors</color>.\n\nTest a new sample.
+$endif
+
+
+::OnSlotFilled
+@trigger    OnSlotFilled
+@when     !temp:semiconductorFound
+$call   CloseWiki()
+{@PAL}  Increase the voltage to max voltage.
+
+
+::OnVoltageIncreased
+@trigger    OnVoltageIncreased
+@when     !temp:semiconductorFound, voltage == 3, !temp:semiconductorFound
+$call   CloseWiki()
+$if research:primaryMaterial == "SiliconCarbide"
+    {@PAL}  It didn't explode!\n\nAdd observations and verify it.
+$elseif research:primaryMaterial == "Gold"
+    {@PAL}  It didn't explode, but it's not a semiconductor.\n\nTry another sample.
+$endif
+
+
+::OnSubstrateExploded
+@trigger    OnMaterialExploded
+@when   !temp:semiconductorFound, explosionStyle == "VoltageBreakdown"
+$call   CloseWiki()
+{@PAL}  Well, looks like it couldn't stand high voltage.\n\nTry another sample.
+
+
+::OnHypothesisCorrect
+@trigger    OnHypothesisSubmitted
+@when     result == "success"
+$if MinigameHasValidSolution()
+$call   CloseWiki()
+    {@PAL}  Great. You can return to the ship, or continue your experiments to uncover new insights.
+$elseif     research:propertyId == "HighVoltageSemiconductor"
+    $set    temp:semiconductorFound = true
+    {@PAL}  Now find the dopants for this semiconductor.
+$elseif   research:propertyId == "NDopantFor"
+    {@PAL}  Correct. Now see if you can find the other dopant.
+$elseif   research:propertyId == "PDopantFor"
+    {@PAL}  Correct. Now see if you can find the other dopant.
+$else
+    {@PAL}  Try completing the contract requirements.
+$endif
+
+
+::OnHypothesisIncorrectHypothesisMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "hypothesis_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  Your Property was incorrect.\n\nTry again.
+
+::OnHypothesisIncorrectObservationMismatch
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "observation_mismatch"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  You are missing one or more of the observations.\n\nTry again.
+
+::OnHypothesisIncorrectInvalidObservation
+@trigger    OnHypothesisSubmitted
+@when       result == "failure", reason == "invalid_observation"
+$call   ReleaseAllHighlights()
+$call   CloseWiki()
+{@PAL}  One or more of your Observations were incorrect. Those are removed.\n\nTry again.

@@ -1,0 +1,38 @@
+# basePath Chapter5
+
+::FirstContractOpenCh5 
+@trigger    OnContractSelectOpen
+@cutscene
+@once 
+//todo need a bridge between end of comic with keela not picking up the phone. 
+
+{@Player}   	Hey Pal... did Keela call me back?
+{@PAL}      	No. 
+{@PAL}      	But, good news, business is picking up. 
+{@PAL} 			You have two companies offering you contracts. 
+{@PAL}			Scroll through the contracts. You can switch anytime, but you'll have to start over.
+
+
+::BeforeSupplyChainCh5
+@trigger    OnOverarchingLoaded
+@when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
+@cutscene 
+@once 
+
+{@Quinn}    Hey, Cowboy.
+{@Quinn}    We're haulin' through space that cuts through pirate territory.
+{@Quinn}    Its near Velos. Callie's neighborhood.
+{@Quinn}	Callie's been taunting ol'Ovill over in Forsch. He'll be takin' blood pressure meds soon. 
+{@Player}	Are your haulers on good terms with her? 
+{@Quinn}  	 Well, she is a pirate. 
+
+
+::AfterSupplyChainCh5
+@trigger	    OnOverarchingLoaded 
+@when 	        IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
+{@Player} 	P.A.L., Fabrication is going to be… not glitched this time, right? 
+{@PAL}      Frontier's automation is the most widely used technology in the system!
+{@Player}   That doesn't mean it works.
+{@Player}   Do we have any other options?
+{@PAL}	Frontier Robotics has acquired all competing manufacturers. Standardization benefits everyone!
+{@Player}   Arken used to do this manually and our microchips were the highest quality around!

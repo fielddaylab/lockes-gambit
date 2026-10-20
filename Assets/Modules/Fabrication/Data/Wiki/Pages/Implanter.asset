@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Implanter
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Implanter
-  m_Icon: {fileID: 21300000, guid: 1f87f57ecfc1d5249a0d19af5da9f8d6, type: 3}
-  m_IllustrationFrames:
-  - {fileID: 21300000, guid: 761385517424d89409078ed3a54cb1b3, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: The Ion Implanter shoots tiny charged particles into the chip to change
+  Title: Ion Implanter
+  Icon: {fileID: 21300000, guid: c0af5d3c0f25bb7429dc146a0738c2a4, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 12c6efacfe2b9f44ea041283802ebd2d, type: 3}
+  IllustrationFPS: 0.5
+  BodyText: The Ion Implanter shoots tiny charged particles into the chip to change
     how selected areas behave.
-  m_MaterialId:
+  MaterialId:
     m_HashValue: 0
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 1

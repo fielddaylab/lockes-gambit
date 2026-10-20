@@ -4,13 +4,14 @@ using BeauUtil.UI;
 using FieldDay;
 using FieldDay.SharedState;
 using FieldDay.UI;
+using FieldDay.UI.Widgets;
 using SpaceFab.Save;
 using SpaceFab.UI;
 using UnityEngine;
 
 namespace SpaceFab.Supply {
     public sealed class SupplyResultPanel : SharedPanel {
-        public DynamicButton NextButton;
+        public GuiButton NextButton;
         public SceneReference NextScene;
 
         public Transform ShoppingListParent; // to copy the visuals from the shopping list to this
@@ -23,7 +24,7 @@ namespace SpaceFab.Supply {
         protected override void Awake() {
             base.Awake();
 
-            NextButton.onClick.AddListener(Commit);
+            NextButton.OnClick.AddListener(Commit);
         }
 
         private void Start() {

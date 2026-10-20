@@ -102,7 +102,7 @@ namespace SpaceFab.Research
             float current = MaterialPhysicsUtility.GetCurrent(profile, voltage, batteryChamber.Temperature);
             if (current == 0 && voltage != 0) Sfx.Play(Find.State<BatteryChamberState>().NoCurrentSFX);
             CircuitUtility.SetLightStrength(batteryChamber.Circuit, current);
-            CircuitUtility.SetFlowStrength(batteryChamber.Circuit, current);
+            CircuitUtility.SetFlowStrength(batteryChamber.Circuit, current, profile.IsHighMobility, profile.IsLightEmitting);
         }
     }
 }

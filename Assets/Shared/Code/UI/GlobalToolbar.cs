@@ -21,6 +21,10 @@ namespace SpaceFab
         public GuiButton ReturnButton;
         public GuiButton PauseButton;
 
+        [Header("Icons")]
+        public Sprite DefaultPauseIcon;
+        public Sprite SettingsPauseIcon;
+
         #endregion // Inspector
 
         [NonSerialized] public Vector2 ReturnPosition;
@@ -57,8 +61,10 @@ namespace SpaceFab
                 ReturnButton.gameObject.SetActive(config.ReturnScene.IsValid);
                 if (!config.ReturnScene.IsValid) {
                     PauseButton.Rect.anchoredPosition = ReturnPosition;
+                    PauseButton.ImageGraphic.sprite = SettingsPauseIcon;
                 } else {
                     PauseButton.Rect.anchoredPosition = PausePosition;
+                    PauseButton.ImageGraphic.sprite = DefaultPauseIcon;
                 }
             } else {
                 Canvas.enabled = false;

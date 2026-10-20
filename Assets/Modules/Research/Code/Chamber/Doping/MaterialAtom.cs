@@ -16,6 +16,17 @@ namespace SpaceFab.Research
     }
 
     public static class MaterialAtomicViewUtility {
+
+        static public float EvaluateAtomScale_Old(int atomicRadius) {
+            return 0.6f + 0.4f * atomicRadius / 200f;
+        }
+
+        // simplifying down to 4 sizes for clarity
+        static public float EvaluateAtomScale(int simpleAtomicRadius) {
+            Assert.True(simpleAtomicRadius >= 1 && simpleAtomicRadius <= 4);
+            return 0.6f + 0.2f * (simpleAtomicRadius - 1);
+        }
+
         public static void RenderMaterialAtom(MaterialAtom atom, MaterialAsset material, ResearchMinigameState researchState, int elementIndex = 0) {
             Assert.False(atom == null);
             Assert.False(atom.ElectronSprites == null);
@@ -40,6 +51,9 @@ namespace SpaceFab.Research
                 SpriteRenderer electron = atom.ElectronSprites[i];
                 electron.SetAlpha(i < material.ValenceElectronCounts[elementIndex] ? 1f : 0f);
             }
+
+            float dopantScale = EvaluateAtomScale(material.SimpleAtomicRadii[elementIndex]);
+            atom.MaterialSprite.transform.localScale = new Vector3(dopantScale, dopantScale, dopantScale);
         }
 
         public static void Clear(MaterialAtom atom) {

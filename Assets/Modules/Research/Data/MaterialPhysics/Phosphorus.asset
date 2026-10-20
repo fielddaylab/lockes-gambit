@@ -15,8 +15,8 @@ MonoBehaviour:
   MaterialId:
     m_Source: Phosphorus
     m_HashValue: 541320182
-  BaseConduction: 0.725
-  HeatedConduction: 0.18125
+  BaseConduction: 0.001
+  HeatedConduction: 0.001
   MaxTemperature: 0.66
   MaxVoltage: 0.66
   IsHighMobility: 0
