@@ -1,14 +1,15 @@
 using BeauUtil;
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Scripting;
 using FieldDay.SharedState;
+using Leaf.Runtime;
 using SpaceFab.Fabrication;
 using SpaceFab.Save;
 using SpaceFab.Supply;
 using System;
-using TMPro;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SpaceFab {
     /// <summary>
@@ -45,6 +46,8 @@ namespace SpaceFab {
         public bool NeedsRefresh;
         public ProgressMeter ActiveMeter;
 
+        public UiGoalFlag[] UiGoalFlags;
+
         public void OnRegister() {
             CycleStates = Array.Empty<CycleCellState>();
             FundsStates = Array.Empty<FundsCellState>();
@@ -63,6 +66,12 @@ namespace SpaceFab {
     /// hold references only — every mutation, rebuild, and refresh routes through here.
     /// </summary>
     public static class ProgressMeterUtility {
+
+        public const float FUND_UNIT_WIDTH = 16; // local spacing of fund units (unit + space), for setting goal stem position 
+        public const int METER_FUNDS_CAPACITY = 40; // maximum funds, used for "wrapping around" endgame goals 
+        // not the cleanest, but using consts here to set default values
+        public const float GOAL_STEM_WIDTH = 4f;
+        public const float GOAL_STEM_X = 4f;
         #region View Lifecycle
 
         // Caches the view on the state, sizes state arrays to match the view's CellCount,
@@ -98,11 +107,9 @@ namespace SpaceFab {
         // at this meter so a stale view does not get pushed to.
         public static void TryUnregisterMeter(ProgressMeter meter) {
             if (!Application.isPlaying) { return; }
-            if (Game.SharedState.Has<ProgressMeterState>())
-            {
+            if (Game.SharedState.Has<ProgressMeterState>()) {
                 ProgressMeterState meterState = Find.State<ProgressMeterState>();
-                if (meterState.ActiveMeter == meter)
-                {
+                if (meterState.ActiveMeter == meter) {
                     meterState.ActiveMeter = null;
                 }
             }
@@ -148,19 +155,15 @@ namespace SpaceFab {
         }
 
         // Sets all states at given cycle and beyond (inclusive) to EMPTY
-        public static void ClearCycleStateFrom(ProgressMeterState state, int idx)
-        {
-            for (int i = idx; i < state.CycleStates.Length; i++)
-            {
+        public static void ClearCycleStateFrom(ProgressMeterState state, int idx) {
+            for (int i = idx; i < state.CycleStates.Length; i++) {
                 SetCycleCellState(state, i, CycleCellState.EMPTY);
             }
         }
 
         // Sets all states at given fund and beyond (inclusive) to EMPTY
-        public static void ClearFundStateFrom(ProgressMeterState state, int idx)
-        {
-            for (int i = idx; i < state.FundsStates.Length; i++)
-            {
+        public static void ClearFundStateFrom(ProgressMeterState state, int idx) {
+            for (int i = idx; i < state.FundsStates.Length; i++) {
                 SetFundsCellState(state, i, FundsCellState.EMPTY);
             }
         }
@@ -169,19 +172,15 @@ namespace SpaceFab {
 
         #region Cells: Bind, Rebuild, Refresh
 
-        public static int CalculatePendingCycleCells(ProgressMeter meter, MinigameSaveStates saveStates)
-        {
+        public static int CalculatePendingCycleCells(ProgressMeter meter, MinigameSaveStates saveStates) {
             // rely on most-specific context (minigame) first, then broader context (save state) as fallback
             int numFabricationCycles = 0;
 
             // get numCycles from Fabrication context
-            if (Game.SharedState.Has<FabricationMinigameState>())
-            {
+            if (Game.SharedState.Has<FabricationMinigameState>()) {
                 var fabState = Find.State<FabricationMinigameState>();
                 numFabricationCycles = fabState.TotalCycles;
-            }
-            else
-            {
+            } else {
                 // else rely on Fabrication Save State
                 numFabricationCycles = saveStates.Fabrication.FinalizedTotalCycles;
             }
@@ -189,13 +188,10 @@ namespace SpaceFab {
 
             int numSupplyCycles = 0;
             // get numCycles from SupplyChain context
-            if (Game.SharedState.Has<SupplyMinigameState>())
-            {
+            if (Game.SharedState.Has<SupplyMinigameState>()) {
                 var supplyState = Find.State<SupplyMinigameState>();
                 numSupplyCycles = supplyState.TotalCycles;
-            }
-            else
-            {
+            } else {
                 // else rely on SupplyChain save state
                 numSupplyCycles = saveStates.Supply.FinalizedTotalCycles;
             }
@@ -204,19 +200,15 @@ namespace SpaceFab {
             return numFabricationCycles + numSupplyCycles;
         }
 
-        public static void CalculatePendingFundsCells(ProgressMeter meter, MinigameSaveStates saveStates, int contractPayout, out int pendingReceivedCount, out int pendingSpentCount)
-        {
+        public static void CalculatePendingFundsCells(ProgressMeter meter, MinigameSaveStates saveStates, int contractPayout, out int pendingReceivedCount, out int pendingSpentCount) {
             // rely on most-specific context (minigame) first, then broader context (save state) as fallback
             int supplyCosts = 0;
 
             // get funds from SupplyChain context
-            if (Game.SharedState.Has<SupplyMinigameState>())
-            {
+            if (Game.SharedState.Has<SupplyMinigameState>()) {
                 var supplyState = Find.State<SupplyMinigameState>();
                 supplyCosts = supplyState.Cost;
-            }
-            else
-            {
+            } else {
                 // else rely on SupplyChain save state
                 supplyCosts = saveStates.Supply.FinalizedCost;
             }
@@ -291,40 +283,40 @@ namespace SpaceFab {
         /// "Rebuild Progress Meter Cells" inspector context menu). Runs inline; no
         /// deferral, since callers fire it explicitly rather than from OnValidate.
         /// </summary>
-//         public static void RebuildCells(ProgressMeter meter) {
-//             if (meter == null
-//                 || meter.CycleCellPrefab == null
-//                 || meter.FundsCellPrefab == null
-//                 || meter.CycleCellContainer == null
-//                 || meter.FundsCellContainer == null) {
-//                 return;
-//             }
+        //         public static void RebuildCells(ProgressMeter meter) {
+        //             if (meter == null
+        //                 || meter.CycleCellPrefab == null
+        //                 || meter.FundsCellPrefab == null
+        //                 || meter.CycleCellContainer == null
+        //                 || meter.FundsCellContainer == null) {
+        //                 return;
+        //             }
 
-//             int desired = Mathf.Max(0, meter.CellCount);
+        //             int desired = Mathf.Max(0, meter.CellCount);
 
-//             // 1. Clear any existing cells under each row container.
-//             // ClearChildren(meter.CycleCellContainer);
-//             // ClearChildren(meter.FundsCellContainer);
+        //             // 1. Clear any existing cells under each row container.
+        //             // ClearChildren(meter.CycleCellContainer);
+        //             // ClearChildren(meter.FundsCellContainer);
 
-//             // 2. Allocate runtime cell-reference arrays sized to the desired count.
-//             meter.CycleCells = new ProgressMeterCell[desired];
-//             meter.FundsCells = new ProgressMeterCell[desired];
+        //             // 2. Allocate runtime cell-reference arrays sized to the desired count.
+        //             meter.CycleCells = new ProgressMeterCell[desired];
+        //             meter.FundsCells = new ProgressMeterCell[desired];
 
-//             // 3. Instantiate fresh cell prefabs into each row, store back-references.
-//             //    At edit time, register each created GameObject with Undo so the prefab
-//             //    stage / scene gets marked dirty (Unity does not auto-detect scripted
-//             //    Instantiate as a prefab modification — without this, exiting prefab
-//             //    mode silently discards the new cells).
-//             for (int i = 0; i < desired; i++) {
-//                 meter.CycleCells[i] = (ProgressMeterCell)UnityEngine.Object.Instantiate(meter.CycleCellPrefab, meter.CycleCellContainer);
-//                 meter.FundsCells[i] = (ProgressMeterCell)UnityEngine.Object.Instantiate(meter.FundsCellPrefab, meter.FundsCellContainer);
-// #if UNITY_EDITOR
-//                 if (!Application.isPlaying) {
-//                     UnityEditor.Undo.RegisterCreatedObjectUndo(meter.CycleCells[i].gameObject, "Rebuild Progress Meter Cells");
-//                     UnityEditor.Undo.RegisterCreatedObjectUndo(meter.FundsCells[i].gameObject, "Rebuild Progress Meter Cells");
-//                 }
-// #endif
-//             }
+        //             // 3. Instantiate fresh cell prefabs into each row, store back-references.
+        //             //    At edit time, register each created GameObject with Undo so the prefab
+        //             //    stage / scene gets marked dirty (Unity does not auto-detect scripted
+        //             //    Instantiate as a prefab modification — without this, exiting prefab
+        //             //    mode silently discards the new cells).
+        //             for (int i = 0; i < desired; i++) {
+        //                 meter.CycleCells[i] = (ProgressMeterCell)UnityEngine.Object.Instantiate(meter.CycleCellPrefab, meter.CycleCellContainer);
+        //                 meter.FundsCells[i] = (ProgressMeterCell)UnityEngine.Object.Instantiate(meter.FundsCellPrefab, meter.FundsCellContainer);
+        // #if UNITY_EDITOR
+        //                 if (!Application.isPlaying) {
+        //                     UnityEditor.Undo.RegisterCreatedObjectUndo(meter.CycleCells[i].gameObject, "Rebuild Progress Meter Cells");
+        //                     UnityEditor.Undo.RegisterCreatedObjectUndo(meter.FundsCells[i].gameObject, "Rebuild Progress Meter Cells");
+        //                 }
+        // #endif
+        //             }
 
         //     // 4. Drive cell positions, cell container widths, row widths, and meter root
         //     //    width from the cell prefab's RectTransform — replaces ContentSizeFitter.
@@ -365,13 +357,11 @@ namespace SpaceFab {
 
         #region Display
 
-        public static void Show(ProgressMeter meter)
-        {
+        public static void Show(ProgressMeter meter) {
             meter.gameObject.SetActive(true);
         }
 
-        public static void Hide(ProgressMeter meter)
-        {
+        public static void Hide(ProgressMeter meter) {
             meter.gameObject.SetActive(false);
         }
 
@@ -478,21 +468,21 @@ namespace SpaceFab {
         // At edit time uses Undo.DestroyObjectImmediate so the destruction is registered
         // on the undo stack and dirties the prefab stage / scene — DestroyImmediate alone
         // does not, so prefab-mode changes get silently discarded on exit.
-//         private static void ClearChildren(RectTransform container) {
-//             for (int i = container.childCount - 1; i >= 0; i--) {
-//                 GameObject child = container.GetChild(i).gameObject;
-//                 if (child.name.Equals("Inset BG")) { continue; }
-//                 if (Application.isPlaying) {
-//                     UnityEngine.Object.Destroy(child);
-//                 } else {
-// #if UNITY_EDITOR
-//                     UnityEditor.Undo.DestroyObjectImmediate(child);
-// #else
-//                     UnityEngine.Object.DestroyImmediate(child);
-// #endif
-//                 }
-//             }
-//         }
+        //         private static void ClearChildren(RectTransform container) {
+        //             for (int i = container.childCount - 1; i >= 0; i--) {
+        //                 GameObject child = container.GetChild(i).gameObject;
+        //                 if (child.name.Equals("Inset BG")) { continue; }
+        //                 if (Application.isPlaying) {
+        //                     UnityEngine.Object.Destroy(child);
+        //                 } else {
+        // #if UNITY_EDITOR
+        //                     UnityEditor.Undo.DestroyObjectImmediate(child);
+        // #else
+        //                     UnityEngine.Object.DestroyImmediate(child);
+        // #endif
+        //                 }
+        //             }
+        //         }
 
         // Applies a CycleCellState to the cell's overlay image. EMPTY hides the overlay.
         private static void ApplyCycleCell(ProgressMeterCell cell, CycleCellState cellState, ProgressMeterSpriteSet sprites) {
@@ -569,5 +559,127 @@ namespace SpaceFab {
         }
 
         #endregion // Internal
+
+        #region Goals
+
+        // initialize a specified goal flag with a specific goal asset
+        public static void InitializeGoalFlag(UiGoalFlag goalFlag, ProgressGoal goal) {
+            int uiFundsCells = goal.TargetFunds;
+            if (uiFundsCells > METER_FUNDS_CAPACITY) {
+                uiFundsCells %= METER_FUNDS_CAPACITY;
+            }
+            if (uiFundsCells > goalFlag.maxFundsCells) {
+                Log.Error("[ProgressMeterUtility] Funds target {0} above requested flag! Skipping...", uiFundsCells);
+                return;
+            }
+            goalFlag.targetFunds = goal.TargetFunds;
+            goalFlag.uiTargetFunds = uiFundsCells;
+            goalFlag.NameText.text = goal.Name;
+            goalFlag.Icon.sprite = goal.Icon;
+            PositionGoalStem(goalFlag);
+            SetGoalVisible(goalFlag, true);
+        }
+
+        [LeafMember("ActivateGoal")]
+        public static void ActivateGoal(StringHash32 id, bool overrideActive = false) {
+            foreach (ProgressGoal goalAsset in Find.GlobalAsset<GoalList>().Goals) {
+                if (goalAsset.Id.Equals(id)) {
+                    UiGoalFlag uiFlag = PickUIFlagByTarget(Find.State<ProgressMeterState>(), goalAsset.TargetFunds, overrideActive);
+                    InitializeGoalFlag(uiFlag, goalAsset);
+                } else {
+                    Log.Error("[ProgressMeterUtility] Goal flag with id {0} not found! Skipping...", id);
+                }
+            }
+        }
+
+        // find a ui flag based on the target funds
+        public static UiGoalFlag PickUIFlagByTarget(ProgressMeterState meter, int uiFundsCells, bool overrideActive = false) {
+            if (uiFundsCells > METER_FUNDS_CAPACITY) {
+                uiFundsCells %= METER_FUNDS_CAPACITY;
+            }
+            foreach (UiGoalFlag flag in meter.UiGoalFlags) {
+                // skip flags in use unless override is on
+                if (!overrideActive && flag.CurrentGoalId != null) { continue; }
+                // only need to check max bound, can stretch to the left
+                if (uiFundsCells <= flag.maxFundsCells) {
+                    return flag;
+                } else { continue; }
+            }
+            Log.Error("[ProgressMeterUtility] No goal flag found to show funds target {0}! Skipping...", uiFundsCells);
+            return null;
+        }
+
+        // process goals with a coroutine, so we can handle one leaf thread at a time
+        public static IEnumerator ProcessGoals() {
+            Find.State(out ProgressMeterState meterState, out PlayerProgressState playerState);
+
+            for (int i = 0; i < meterState.UiGoalFlags.Length; i++) {
+                if (meterState.UiGoalFlags[i].CurrentGoalId == null) {
+                    continue;
+                }
+                if (playerState.Funds >= meterState.UiGoalFlags[i].targetFunds) {
+                    SetGoalCompleted(meterState.UiGoalFlags[i]);
+                    using (TempVarTable table = TempVarTable.Alloc()) {
+                        table.Set("goalId", meterState.UiGoalFlags[i].CurrentGoalId);
+                        var Thread = ScriptUtility.Trigger(ScriptTriggers.OnGoalCompleted, table);
+                        do {
+                            yield return null;
+                        } while (Thread.IsRunning());
+                    }
+                }
+            }
+        }
+
+        public static void SetGoalCompleted(UiGoalFlag goal) {
+            PlayerProgressUtility.UpdateGoalCompletion(goal.CurrentGoalId);
+            SetGoalVisible(goal, false);
+            SpacefabGame.Events.Dispatch(GameEvents.CompleteGoalFlag, EvtArgs.Box(goal.Id));
+        }
+
+        public static void PositionGoalStem(UiGoalFlag goal) {
+            //number of units to move over
+            if (goal.uiTargetFunds >= goal.minFundsCells) {
+                float setX = goal.uiTargetFunds - goal.minFundsCells;
+                //times the width of each unit
+                setX *= FUND_UNIT_WIDTH;
+                setX += GOAL_STEM_X;
+                goal.Stem.anchoredPosition = new Vector2(setX, 0);
+                goal.Stem.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, GOAL_STEM_WIDTH);
+            } else {
+                // below min, set width to shift stem
+                float setWidth = goal.minFundsCells - goal.uiTargetFunds;
+                setWidth *= FUND_UNIT_WIDTH;
+                setWidth += GOAL_STEM_WIDTH;
+                goal.Stem.anchoredPosition = new Vector2(GOAL_STEM_X, 0);
+                goal.Stem.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, setWidth);
+            }          
+        }
+
+        // TODO: fancy animation?
+        public static void SetGoalVisible(UiGoalFlag goal, bool active) {
+            if (!active) {
+                goal.CurrentGoalId = null;
+                goal.targetFunds = -1;
+                goal.uiTargetFunds = -1;
+            }
+            goal.Fader.alpha = active ? 1f : 0f;
+        }
+
+        public static void InitializeGoalsFromProgress(PlayerProgressState state) {
+            ProgressGoal[] goals = Find.GlobalAsset<GoalList>().Goals;
+            // if no goals completed, activate the first one
+            if (state.LastCompletedGoalIndex < 0) {
+                ActivateGoal(goals[0].Id);
+                return;
+            }
+            // otherwise, start from the goal after the last completed.
+            int nextGoalIdx = state.LastCompletedGoalIndex + 1;
+            for (int i = nextGoalIdx; i < goals.Length; i++) {
+                ActivateGoal(goals[i].Id);
+            }
+                      
+        }
+
+        #endregion //Goals
     }
 }

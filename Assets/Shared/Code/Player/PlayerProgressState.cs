@@ -39,6 +39,7 @@ namespace SpaceFab
         // are exposed. Account-scoped, so it persists across minigames.
         [NonSerialized] public HashSet<StringHash32> UnlockedWikiPages;
 
+        [NonSerialized] public int LastCompletedGoalIndex = -1;
         #endregion // Save State
 
         [NonSerialized] public Dictionary<StringHash32, MaterialPropertyRecord> MaterialProperties;
@@ -99,6 +100,9 @@ namespace SpaceFab
 
             InitialUnlocksApplied = reader.Read<bool>();
             
+            if (consts.Version >= 5) {
+                LastCompletedGoalIndex = reader.Read<int>();
+            }
         }
 
         public void Write(object self, ref ByteWriter writer, SaveStateChunkConsts consts)
@@ -121,6 +125,7 @@ namespace SpaceFab
             writer.Write(DopingChamberUnlocked);
             writer.Write(SpecialPropertiesUnlocked);
             writer.Write(InitialUnlocksApplied);
+            writer.Write(LastCompletedGoalIndex);
         }
 
         void ISaveStatePostLoad.PostLoad(SaveStateChunkConsts consts) {
@@ -278,6 +283,28 @@ namespace SpaceFab
                     state.MaterialProperties[materialOrder.GetId(i)] = record;
                 }
             }
+        }
+
+        public static void UpdateGoalCompletion(StringHash32 goalId) {
+            PlayerProgressState progress = Find.State<PlayerProgressState>();
+            int goalIndex = -1;
+            // for save: convert the last goal id into an index
+            ProgressGoal[] goals = Find.GlobalAsset<GoalList>().Goals;
+            for (int i = 0; i < goals.Length; i++) {
+                if (goals[i].Id.Equals(goalId)) {
+                    goalIndex = i;
+                }
+            }
+            progress.LastCompletedGoalIndex = goalIndex;
+        }
+
+        // for load: convert the goal index into an id
+        public static StringHash32 GetGoalId(int idx) {
+            ProgressGoal[] goals = Find.GlobalAsset<GoalList>().Goals;
+            if (idx >= 0 && idx < goals.Length) {
+                return goals[idx].Id;
+            }
+            return null;
         }
     }
 }
