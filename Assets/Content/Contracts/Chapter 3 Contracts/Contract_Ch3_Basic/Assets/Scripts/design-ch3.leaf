@@ -4,11 +4,14 @@
 ::Intro
 @trigger    OnDesignSetupComplete
 $set temp:hintGiven = 0
-{@PAL}  Where N-Type and P-Type meet, they form a Diode that only HI signals can pass through.
+{@PAL}  Where N-Type and P-Type meet, they form a <color=yellow>Diode</color> that only <color=#FF7441>HI</color> signals can pass through.
+$wait   1.5
+$call   OpenWikiTo("Patterns", "Diode")
 
 ::Hints
 @trigger    OnSingleTestComplete
 @when       result == "failure"
+$call   CloseWiki()
 $if temp:hintGiven == 0
     {@PAL}  <color=yellow>Hint:</color> The inputs and outputs are on the metal layer, so you'll need Vias to connect the two layers.
     $set temp:hintGiven = 1

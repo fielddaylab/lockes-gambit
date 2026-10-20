@@ -246,9 +246,9 @@ namespace SpaceFab.UI {
                     ContextIndex = -1
                 };
 
-                string labelText = content.ResearchContext.Present
-                    ? ResearchWikiInputUtility.GetObservationChipText(label, content.ResearchContext.InterfacerState)
-                    : MaterialPropertyLabelDisplay.GetObservationName(label);
+                string labelText = //content.ResearchContext.Present && (label == MaterialPropertyLabel.ValenceOneLessThan || label == MaterialPropertyLabel.ValenceOneMoreThan)
+                    //? ResearchWikiInputUtility.GetObservationChipText(label, content.ResearchContext.InterfacerState)
+                    MaterialPropertyLabelDisplay.GetObservationName(label);
 
                 chip.SetProperty(labelText, ChipFillState.Filled, false, label);
                 chip.Tag.SetId(WikiElementTagUtility.ObservationTypeObservationId(pageData.ObservationType, label));
@@ -297,9 +297,9 @@ namespace SpaceFab.UI {
                         ContextIndex = -1
                     };
 
-                    string labelText = content.ResearchContext.Present
-                        ? ResearchWikiInputUtility.GetObservationChipText(label, content.ResearchContext.InterfacerState)
-                        : MaterialPropertyLabelDisplay.GetObservationName(label);
+                    string labelText = //content.ResearchContext.Present
+                        //? ResearchWikiInputUtility.GetObservationChipText(label, content.ResearchContext.InterfacerState)
+                        MaterialPropertyLabelDisplay.GetObservationName(label);
 
                     chip.SetProperty(labelText, ChipFillState.Filled, false, label);
                     chip.ApplyUnselectableStyle();

@@ -336,8 +336,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 722916304974639941, guid: d3ff843d762a43c468353c65e057671b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 58374659}
   m_SourcePrefab: {fileID: 100100000, guid: d3ff843d762a43c468353c65e057671b, type: 3}
+--- !u!224 &58374657 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5928597642303788935, guid: d3ff843d762a43c468353c65e057671b, type: 3}
+  m_PrefabInstance: {fileID: 58374656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &58374658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 722916304974639941, guid: d3ff843d762a43c468353c65e057671b, type: 3}
+  m_PrefabInstance: {fileID: 58374656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &58374659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58374658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4854730e970a4abb8b0d80ce8c5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id:
+    m_Source: design:test-btn
+    m_HashValue: 499934326
+  RectTransform: {fileID: 58374657}
+  SpriteRenderer: {fileID: 0}
+  Collider: {fileID: 0}
 --- !u!114 &66654152 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8649862502748724614, guid: d3ff843d762a43c468353c65e057671b, type: 3}

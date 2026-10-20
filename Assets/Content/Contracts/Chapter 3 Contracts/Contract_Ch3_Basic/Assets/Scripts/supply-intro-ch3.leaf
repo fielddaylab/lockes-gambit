@@ -34,5 +34,6 @@ $call   ReleaseHighlight(supply:planet_p_alt)
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
 $call   PointElement(supply:time-meter)
-{@PAL}  All your ships travel at the same time. The one that takes the longest determines your total time.\n\nThis is called a bottleneck.
-// TODO: open time pages
+{@PAL}  All your ships travel at the same time. The one that takes the longest determines your total time.\n\nThis is called a <color=yellow>bottleneck</color>.
+$wait   2
+$call   OpenWikiTo("Routes", "Time")
