@@ -114,12 +114,11 @@ namespace SpaceFab.UI {
 
         void ISceneLateInitialize.LateInitialize() {
             Find.State(out ChapterState chapterState, out ContractState contractState);
+
             ContractUtility.LoadContractUI(Contract, chapterState.ChapterIndex, contractState.ContractDefinition);
-
-            Contract.SignatureImage.enabled = true;
-            Contract.SignatureImage.fillAmount = 1;
-
-            Contract.ShowDesignCompleted(Find.State<MinigameSaveStates>().Design.FoundValidSolution);
+            if (contractState.ContractDefinition) {
+                ContractUtility.ApplyContractProgressToUI(Contract, contractState.ContractDefinition);
+            }
         }
     }
 }

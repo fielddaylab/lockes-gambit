@@ -58,7 +58,6 @@ namespace FieldDay.UI.Widgets {
             int lastValue = m_CurrentValue;
             value = Math.Clamp(value, 0, m_MaxValue);
             m_CurrentValue = value;
-            m_PreviewValue = -1;
 
             if (value < lastValue) {
                 flags |= GuiWidgetUpdateFlags.IsDecrease;

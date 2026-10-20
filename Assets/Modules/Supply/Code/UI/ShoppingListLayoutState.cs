@@ -71,7 +71,7 @@ namespace SpaceFab.Supply {
             });
 
             ConfirmButton.OnClick.AddListener(() => {
-                Find.Panel<SupplyResultPanel>().Show();
+                Find.State<SupplyResultPanel>().Show();
                 ScriptUtility.Trigger(SupplyScriptTriggers.OnRoutesConfirmed);
             });
 

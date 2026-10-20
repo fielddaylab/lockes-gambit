@@ -50,6 +50,8 @@ namespace SpaceFab.Overarching {
         public RiskInlayPanel RiskPanel;
         public Color SafeColor;
         public Color HazardColor;
+        public GuiCounter RiskTimeMeter;
+        public GuiCounter RiskCostMeter;
         [AudioEvent] public StringHash32[] RouletteTickSounds;
 
         [NonSerialized] public Routine AnimationRoutine;
@@ -128,6 +130,7 @@ namespace SpaceFab.Overarching {
                         string hazardHeader = chapterState.ChapterDefinition.HazardHeader;
                         RiskPanel.SetText(hazardHeader, hazardDescription);
                     }
+
                     break;
                 }
             }

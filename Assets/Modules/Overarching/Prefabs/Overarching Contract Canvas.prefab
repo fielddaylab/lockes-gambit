@@ -1810,6 +1810,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1005347126531236613, guid: 457761a83764ddf4a9dc186263f48b68, type: 3}
   m_PrefabInstance: {fileID: 1150038124520304312}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &593396648966751500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 561237530543025076, guid: 457761a83764ddf4a9dc186263f48b68, type: 3}
+  m_PrefabInstance: {fileID: 1150038124520304312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be49b58eb1fbc44080a922f380f3840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2482222771286365612 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3280698473730063124, guid: 457761a83764ddf4a9dc186263f48b68, type: 3}
@@ -1830,6 +1841,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4413356973298332825 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3659919461852437025, guid: 457761a83764ddf4a9dc186263f48b68, type: 3}
+  m_PrefabInstance: {fileID: 1150038124520304312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be49b58eb1fbc44080a922f380f3840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4734492638451014650 stripped
@@ -2188,6 +2210,8 @@ MonoBehaviour:
   RiskPanel: {fileID: 5122798203979043324}
   SafeColor: {r: 0.31764707, g: 0.62352943, b: 0.41960785, a: 1}
   HazardColor: {r: 0.96862745, g: 0.5176471, b: 0.38431373, a: 1}
+  RiskTimeMeter: {fileID: 4413356973298332825}
+  RiskCostMeter: {fileID: 593396648966751500}
   RouletteTickSounds:
   - m_HashValue: 2297598015
   - m_HashValue: 2280820396

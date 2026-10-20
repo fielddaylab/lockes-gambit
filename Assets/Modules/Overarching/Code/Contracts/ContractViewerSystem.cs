@@ -115,20 +115,16 @@ namespace SpaceFab.Overarching {
             StringHash32 contractId = chapterState.ChapterDefinition.AvailableContracts[contractIndex];
             ContractDef definition = Find.NamedAsset<ContractDef>(contractId);
 
-            ContractUtility.LoadContractUI(layout.Contract, chapterState.ChapterIndex, definition);
-
             bool isCurrentContract = chapterState.LastSelectedContractIndex == contractIndex;
+
+            ContractUtility.LoadContractUI(layout.Contract, chapterState.ChapterIndex, definition);
 
             if (isCurrentContract) {
                 layout.Contract.SelectContractButton.gameObject.SetActive(false);
-                layout.Contract.SignatureImage.enabled = true;
-
-                layout.Contract.ShowDesignCompleted(Find.State<MinigameSaveStates>().Design.FoundValidSolution);
+                ContractUtility.ApplyContractProgressToUI(layout.Contract, definition);
             } else {
                 layout.Contract.SelectContractButton.gameObject.SetActive(true);
-                layout.Contract.SignatureImage.enabled = false;
-
-                layout.Contract.ShowDesignCompleted(false);
+                ContractUtility.ApplyNoProgressToUI(layout.Contract, definition);
             }
 
             int localIndex = GetFilteredIndex(view, contractIndex);
@@ -169,7 +165,11 @@ namespace SpaceFab.Overarching {
             content.Flags = 0;
             content.ButtonA = new PopupRequestButton() {
                 ResponseId = "no",
-                Label = "No"
+                Label = "No",
+                Tint = new ColorPalette2() {
+                    Background = ColorBank.Wheat,
+                    Content = ColorBank.Black
+                }
             };
             content.ButtonB = new PopupRequestButton() {
                 ResponseId = "yes",
@@ -277,9 +277,9 @@ namespace SpaceFab.Overarching {
             Find.GlobalAsset(out ChapterManifest chapterManifest);
             int[] hazardChances = chapterManifest.HazardChances;
             Find.State(out MinigameSaveStates minigameStates, out ChapterState chapterState, out ContractState contractState, out PlayerProgressState playerProgress);
-            int time = minigameStates.Supply.FinalizedTotalCycles + minigameStates.Fabrication.FinalizedTotalCycles;
-            int profit = contractState.ContractDefinition.Payout() - minigameStates.Supply.FinalizedCost; // TODO: fab cost from precision
-            int risk = minigameStates.Supply.FinalizedRisk;
+            int time = MinigameSaveUtility.CurrentTime(minigameStates);
+            int profit = contractState.ContractDefinition.Payout() - MinigameSaveUtility.CurrentCosts(minigameStates);
+            int risk = MinigameSaveUtility.CurrentRisk(minigameStates);
             int visualRisk = risk;
 
             if (!forceFailure && risk > 0 && risk < 9) {
@@ -311,10 +311,10 @@ namespace SpaceFab.Overarching {
 
             int finalValue = (9 * 2) + riskSlot;
 
-            if (RNG.Instance.Chance(0.8f)) {
+            if (RNG.Instance.Chance(0.6f)) {
                 finalValue += 9;
             }
-            if (encounteredHazard | RNG.Instance.Chance(0.5f)) {
+            if (visualRisk > 0 | RNG.Instance.Chance(0.5f)) {
                 finalValue += 9;
             }
 
@@ -352,6 +352,11 @@ namespace SpaceFab.Overarching {
 
             yield return 0.5f;
 
+            if (encounteredHazard) {
+                layout.RiskCostMeter.SetValue(chapterState.ChapterDefinition.HazardCost);
+                layout.RiskTimeMeter.SetValue(chapterState.ChapterDefinition.HazardTime);
+            }
+
             using (var t = TempVarTable.Alloc()) {
                 t.Set("EncounteredHazard", encounteredHazard);
                 var thread = ScriptUtility.Trigger("AfterContractEvaluation", t);
@@ -361,6 +366,10 @@ namespace SpaceFab.Overarching {
             }
 
             yield return riskStyle.Highlight.FadeTo(0, 0.2f);
+
+            yield return 0.25f;
+            yield return TimeMeterStyle.DrainIntoMeter(layout.RiskTimeMeter, layout.Contract.TimeIndicators);
+            yield return MoneyMeterStyle.DrainIntoMeter(layout.RiskCostMeter, layout.Contract.RevenueIndicators);
         }
 
         #endregion // Routines

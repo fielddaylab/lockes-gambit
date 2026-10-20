@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using FieldDay.UI.Widgets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,14 @@ namespace SpaceFab.UI {
             for (int i = Math.Max(ExpectedSlots, data); i < Slots.Length; i++) {
                 Slots[i].enabled = hasEmpty;
                 Slots[i].sprite = EmptySlot;
+            }
+        }
+
+        static public IEnumerator DrainIntoMeter(GuiCounter src, GuiCounter dst) {
+            while (src.Value > 0) {
+                src.SetValue(src.Value - 1);
+                dst.SetValue(dst.Value - 1);
+                yield return 0.2f;
             }
         }
     }

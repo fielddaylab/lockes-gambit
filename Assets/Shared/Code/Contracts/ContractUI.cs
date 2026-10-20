@@ -5,6 +5,8 @@ using SpaceFab.Research;
 using FieldDay;
 using SpaceFab.UI;
 using FieldDay.UI.Widgets;
+using SpaceFab.Save;
+using System;
 
 namespace SpaceFab {
     public class ContractUI : MonoBehaviour
@@ -35,7 +37,9 @@ namespace SpaceFab {
         public ContractRequirementTable Requirements;
 
         [Header("Stats")]
+        public TMP_Text TimeLabel;
         public GuiCounter TimeIndicators;
+        public TMP_Text RevenueLabel;
         public GuiCounter RevenueIndicators;
 
         [Header("Buttons")]
@@ -61,23 +65,19 @@ namespace SpaceFab {
 
         public void ClearElements()
         {
-            Find.GlobalAsset<ContractMeterSpriteSet>(out ContractMeterSpriteSet spriteSet);
-
             TimeIndicators.ResetValue();
             RevenueIndicators.ResetValue();
         }
 
         public void ShowDuration(int duration)
         {
-            Find.GlobalAsset<ContractMeterSpriteSet>(out ContractMeterSpriteSet spriteSet);
-
+            ((TimeMeterStyle) TimeIndicators.Styler).SetExpectedSlots(0);
             TimeIndicators.SetValue(duration);
         }
 
         public void ShowProfit(int profit)
         {
-            Find.GlobalAsset<ContractMeterSpriteSet>(out ContractMeterSpriteSet spriteSet);
-
+            ((MoneyMeterStyle) RevenueIndicators.Styler).SetExpectedSlots(0);
             RevenueIndicators.SetValue(profit);
         }
 
@@ -135,6 +135,36 @@ namespace SpaceFab {
                 }
                 ui.TypeLabel.SetText(typeConfig.Label);
             }
+        }
+
+        static public void ApplyContractProgressToUI(ContractUI ui, ContractDef def) {
+            Find.State(out MinigameSaveStates minigameStates);
+
+            ui.ShowDesignCompleted(minigameStates.Design.FoundValidSolution);
+
+            ui.SignatureImage.enabled = true;
+            ui.SignatureImage.fillAmount = 1;
+
+            ui.TimeLabel.SetText("Time");
+
+            TimeMeterStyle timeStyle = (TimeMeterStyle) ui.TimeIndicators.Styler;
+            MoneyMeterStyle moneyStyle = (MoneyMeterStyle) ui.RevenueIndicators.Styler;
+
+            timeStyle.SetExpectedSlots(def.ExpectedDuration());
+            moneyStyle.SetExpectedSlots(def.Payout());
+
+            int currentDuration = MinigameSaveUtility.CurrentTime(minigameStates);
+            int currentCost = MinigameSaveUtility.CurrentCosts(minigameStates);
+
+            ui.RevenueIndicators.SetValue(def.Payout() - currentCost, GuiWidgetUpdateFlags.Initialization);
+            ui.TimeIndicators.SetValue(currentDuration, GuiWidgetUpdateFlags.Initialization);
+        }
+
+        static public void ApplyNoProgressToUI(ContractUI ui, ContractDef def) {
+            ui.SignatureImage.enabled = false;
+            ui.ShowDesignCompleted(false);
+
+            ui.TimeLabel.SetText("Expected Time");
         }
     }
 }
