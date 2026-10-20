@@ -1034,6 +1034,11 @@ MonoBehaviour:
   Recursive: 0
   DestroyGameObject: 1
   IgnoreAnimators: 1
+--- !u!212 &472059433 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6846559877433022659, guid: 338e5776d07785b40aa1a3c5ad36e4a1, type: 3}
+  m_PrefabInstance: {fileID: 699037342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &513888589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2207,7 +2212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa1fd4731f4e344d8a4f7b632160a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG_FabricationLevel: {fileID: 11400000, guid: 33ef3b115eb4340949bc068108164e7b, type: 2}
+  DEBUG_FabricationLevel: {fileID: 11400000, guid: 38a047663027349d790b55a8307ece43, type: 2}
   DEBUG_StationConfig: {fileID: 11400000, guid: 722373c8e26982040aa5e116a191f69f, type: 2}
 --- !u!114 &879438738
 MonoBehaviour:
@@ -3843,6 +3848,7 @@ MonoBehaviour:
   TrajectoryPreview: {fileID: 1623754861}
   ProjectilePrefab: {fileID: 2698297420162295257, guid: c61174905d0f142a188512153c41f42a, type: 3}
   sputerHitImg: {fileID: 950167258}
+  MirrorHighlight: {fileID: 472059433}
   IsTrajectoryDisplayed: 0
   FlashTime: 0.18
 --- !u!1 &1899582895
