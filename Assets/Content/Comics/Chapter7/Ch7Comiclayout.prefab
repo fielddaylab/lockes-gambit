@@ -1184,7 +1184,7 @@ Transform:
   m_GameObject: {fileID: 5132204065179741456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.13, y: -18.98, z: 0}
+  m_LocalPosition: {x: 26.13, y: -18.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2357,47 +2357,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[0]
-      value: 082084e4577cf79d5fdc74cafb26de68
+      value: ac7e3ccbde0de13b0250d761289ed4c6
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[1]
-      value: de6c06a490a2a777353c9deb28ad12e4
+      value: 65b754ed6e130918241eeec6b6f5462e
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[2]
-      value: 567cc2226d31c4327b83e034972d5128
+      value: cd93c9ff23a546df4c7b32fc466c9296
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[3]
-      value: a1d6f439bae18af81aa30add0ff1233e
+      value: d27f9f68da24f3ae8ed60ff231192a34
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[4]
-      value: 72ddd520781c4091a4cdf0fc0e0dc648
+      value: a55931a3f3f3c6a6c9ff586850c8a7d2
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[5]
-      value: 35ef3aea8d09162d0c5832f21deeb489
+      value: 9ec47f07ec7e47f3b79ec352a649466b
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[6]
-      value: 7235f1e0384cad5e4c4ab976f6ebb80e
+      value: ef933324464c21bd85d8be5c112619f4
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[7]
-      value: 43ed8c64298d9ed574d82ec3a31cd594
+      value: 27c2a7dd8dc29564c3a75e2c428c8a4f
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[8]
-      value: b45bbe68c56bbb7328040ab58943d8f1
+      value: 7333636517c5a4ccd361ca2c69fc7748
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[9]
-      value: 89031a190321f508496f94e501419e2e
+      value: 4f3e16923db63707d07262c73ddec653
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[10]
-      value: 7161a8b9015cbb639aa55712b291325a
+      value: 79dc4455d71e3ee2dd5f62f020aa50be
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[11]
@@ -2446,6 +2446,10 @@ PrefabInstance:
     - target: {fileID: 8307515485380065297, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_Name
       value: Ch7Comiclayout
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307515485380065297, guid: d2982777c8102c148b7a490afc74929c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
