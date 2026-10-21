@@ -163,7 +163,6 @@ namespace FieldDay.Scripting {
                 
                 DebugFlags.BlockTimeControl();
                 Game.Input.PauseAll();
-
                 
                 handle.GetThread().Pause();
 

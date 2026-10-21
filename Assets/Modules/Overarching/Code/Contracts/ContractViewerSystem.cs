@@ -227,13 +227,15 @@ namespace SpaceFab.Overarching {
                 yield return null;
             }
 
+            Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState progressState, out MinigameSaveStates saveStates);
+
             yield return 0.1f;
 
             yield return layout.FadeInContextPanel();
             yield return 1;
 
             using (var t = TempVarTable.Alloc()) {
-                t.Set("risk", MinigameSaveUtility.CurrentRisk(Find.State<MinigameSaveStates>()));
+                t.Set("risk", MinigameSaveUtility.CurrentRisk(saveStates));
                 var trigger = ScriptUtility.Trigger("BeforeContractEvaluation", t);
                 do {
                     yield return null;
@@ -263,9 +265,7 @@ namespace SpaceFab.Overarching {
             yield return layout.Fader.FadeTo(0, 0.3f);
             yield return 0.5f;
 
-            Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState progressState, out MinigameSaveStates minigameStates);
-
-            ContractUtility.ApplyCompletedContractState(contractState, progressState, Find.State<MinigameSaveStates>());
+            ContractUtility.ApplyCompletedContractState(contractState, progressState, saveStates);
             Find.State<ProgressMeterState>().NeedsRefresh = true;
             
             yield return 0.25f;
@@ -279,7 +279,8 @@ namespace SpaceFab.Overarching {
 
             yield return 0.25f;
 
-            ChapterUtility.LoadNextChapter(chapterState, progressState, contractState, minigameStates);
+            ContractUtility.WipeContractState(contractState, progressState, chapterState, saveStates);
+            ChapterUtility.LoadNextChapter(chapterState, progressState, contractState, saveStates);
         }
 
         static private IEnumerator EvaluateRisk(OverarchingContractLayout layout, bool forceFailure) {

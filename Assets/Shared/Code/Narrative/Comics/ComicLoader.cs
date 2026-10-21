@@ -109,7 +109,8 @@ namespace SpaceFab.Comic {
         }
 
         protected override void OnSceneUnload() {
-            ScriptUtility.OnCutsceneEnd.Deregister(Finish);
+            ScriptUtility.OnCutsceneEnd.Deregister(QueueFinish);
+
             Game.Scenes.DeregisterLoadDependency(this);
             if (!PackageId.IsEmpty) {
                 Game.Assets.UnloadStreamedPackage(PackageId);

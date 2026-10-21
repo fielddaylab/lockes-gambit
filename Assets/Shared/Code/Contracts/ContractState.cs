@@ -174,6 +174,16 @@ namespace SpaceFab
                 contractPayout = contractState.ContractDefinition.Payout();
             }
             progressState.Funds += contractPayout - MinigameSaveUtility.CurrentCosts(saveStates);
+
+            progressState.CompletedContractIds.Add(contractState.ContractId);
+        }
+
+        static public void WipeContractState(ContractState contractState, PlayerProgressState progressState, ChapterState chapterState, MinigameSaveStates saveStates) {
+            MinigameSaveUtility.ClearMinigameState(saveStates);
+            progressState.CompletedContractIds.Add(contractState.ContractId);
+            chapterState.LastSelectedContractIndex = -1;
+
+            SaveUtility.Save(SaveSlot.Main);
         }
 
         #endregion // Player Progress

@@ -41,22 +41,10 @@ namespace SpaceFab.Narrative {
         // Tracks whether AnimateToOn pushed m_InputLayer onto GuiMgr's priority stack. We can't
         // rely on m_IsVisible because AnimateToOff clears that flag before the pop actually runs,
         // and we need OnDisable to know whether a defensive pop is owed.
-        [NonSerialized] private bool m_PriorityPushed;
 
         private void Start() {
             m_VisiblityGroup.gameObject.SetActive(false);
             m_InputLayer = IInputLayer.Find(this);
-        }
-
-        // Safety net: if the box is disabled or destroyed while a dialogue is mid-flight, the
-        // normal OnThreadReleased -> AnimateToOff -> PopPriority chain never runs and GuiMgr is
-        // left with a stale PriorityRecord that disables every layer below it.
-        protected override void OnDisable() {
-            if (m_PriorityPushed && m_InputLayer != null) {
-                Game.Gui?.PopPriority(m_InputLayer);
-                m_PriorityPushed = false;
-            }
-            base.OnDisable();
         }
 
         public override IEnumerator CompleteLine() {
@@ -138,8 +126,7 @@ namespace SpaceFab.Narrative {
             Positioning.SetWidthDelta(m_FoldOutTransform, m_FoldOutWidthCollapsed);
 
             m_VisiblityGroup.gameObject.SetActive(true);
-            Game.Gui.PushPriority(m_InputLayer);
-            m_PriorityPushed = true;
+            m_InputLayer.TryPushPriority();
             yield return null;
 
             yield return m_FoldOutTransform.AnchorPosTo(m_FoldOutYPosDefault, 0.2f, Axis.Y).Ease(Curve.BackOut);
@@ -161,10 +148,7 @@ namespace SpaceFab.Narrative {
             m_IsVisible = false;
 
             m_VisiblityGroup.blocksRaycasts = false;
-            if (m_PriorityPushed) {
-                Game.Gui.PopPriority(m_InputLayer);
-                m_PriorityPushed = false;
-            }
+            m_InputLayer.TryPopPriority();
 
             yield return m_FoldOutTransform.AnchorPosTo(m_FoldOutYPosOffscreen, 0.2f, Axis.Y).Ease(Curve.BackIn);
 

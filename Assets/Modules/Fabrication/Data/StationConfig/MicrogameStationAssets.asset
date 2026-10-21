@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IncludeMode: 0
   m_FilterSearch: 
-  m_GlobalAssets:
-  - {fileID: 11400000, guid: a03fa00f45421404ca1a7feea39a2e5c, type: 2}
+  m_GlobalAssets: []
   m_NamedAssets: []
   m_LiteAssets: []
