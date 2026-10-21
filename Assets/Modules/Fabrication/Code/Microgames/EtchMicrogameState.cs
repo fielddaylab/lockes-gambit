@@ -37,6 +37,7 @@ namespace SpaceFab.Fabrication.Microgames
         [NonSerialized] public List<Vector2> PlayerPoints = new();
         [NonSerialized] public List<Vector2> CachedPreviewPoints;
         [NonSerialized] public Vector2 Direction;
+        [NonSerialized] public int TurnCount;
 
         [NonSerialized] public int PreviewVisibleCount;
         [NonSerialized] public float PreviewProgress;
@@ -90,6 +91,7 @@ namespace SpaceFab.Fabrication.Microgames
             
             state.PlayerPoints.Clear();
             state.PlayerBeam.positionCount = 0;
+            state.TurnCount = 0;
         }
 
         public static void EnterComplete()
@@ -146,6 +148,7 @@ namespace SpaceFab.Fabrication.Microgames
 
             state.PlayerPoints.Clear();
             state.PlayerBeam.positionCount = 0;
+            state.TurnCount = 0;
 
             if (state.Pattern != null)
             {
