@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: GoalList
   m_EditorClassIdentifier: 
   Goals:
-  - Name: Buy Ship
+  - Name: Pay Debt
     Id:
       m_Source: Goal1
       m_HashValue: 3189596901
     TargetFunds: 40
     Icon: {fileID: 21300000, guid: 58d1730d6d00344489e14944374a964d, type: 3}
-  - Name: Help Keela
+  - Name: Disposal Fee
     Id:
       m_Source: Goal2
       m_HashValue: 3139264044
     TargetFunds: 54
-    Icon: {fileID: 21300000, guid: d094e125ae59df14b9453172e70655fb, type: 3}
+    Icon: {fileID: 21300000, guid: a5eeac7db08619144a82181f49fc7382, type: 3}
   - Name: Nav Computer
     Id:
       m_Source: Goal3

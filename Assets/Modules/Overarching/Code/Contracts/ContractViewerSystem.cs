@@ -265,6 +265,8 @@ namespace SpaceFab.Overarching {
 
             // TODO: animate time and money into progress bar
 
+            yield return ProgressMeterUtility.ProcessGoals();
+
             var completedThread = ScriptUtility.Trigger("OnChapterEnd");
             do {
                 yield return null;

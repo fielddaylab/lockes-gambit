@@ -19,7 +19,6 @@
 
 
 ::BeforeSupplyChainCh10
-
 @trigger 	OnOverarhcing 
 @when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design)
 @cutscene 
@@ -45,8 +44,6 @@
 @when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
 @cutscene 
 @once
-
-
 //reminder of money due threat and now its coming from dorian. 
 {@MAL}      C-Captain! Y0u h@ve a l-letter from... Fr0ntier Robotics!
 {@Player}   Of course I do. Let's see...
@@ -56,4 +53,18 @@
 {@Player}      "We appreciate your continued partnership!"
 {@Player}	Partnership? Yeah, right.
 
-
+::DisposalFee10
+@trigger    OnGoalCompleted
+@when       goalId == "Goal1"
+@cutscene
+@once
+{@Player}   PAID IN FULL! That's the last of the upgrade fees.
+{@Player}   I'm broke, <i>again</i>, but at least I own my ship, free and clear.
+$call ActivateGoal("Goal2")
+{@Player}   ...
+{@Player}   YOU HAVE <b>GOT</b>...
+{@Player}   TO BE <b>KIDDING</b> ME.
+{@Player}   "Unauthorized disposal of company property?" They're charging me for those robots!
+{@Player}   "Per Section 14, Subsection C, any additional fees or penalties incurred under the original agreement shall be added to the outstanding debt..."
+{@Player}   "...and remain secured against the Constantine until paid in full."
+{@Player}   So until I pay this, Frontier can still take my ship?!

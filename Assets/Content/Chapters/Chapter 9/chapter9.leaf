@@ -47,3 +47,19 @@
 {@Player}	Time to have a chat with Keela. 
 //should leave player questioning if he is going to find Keela to bug her.  
 {@MAL}      Great idea, Captain!
+
+::DisposalFee09
+@trigger    OnGoalCompleted
+@when       goalId == "Goal1"
+@cutscene
+@once
+
+{@Player}   That's it! I've got enough to pay off Frontier!
+{@Player}   <i>Gulp.</i> And now I'm broke again. But I'm a free man!
+{@Player}   Wait, what's this? An invoice from Frontier Robotics?
+$call ActivateGoal("Goal2")
+{@Player}   A charge for "Unauthorized disposal of company property..."
+{@Player}   "Per Section 14, Subsection C, any additional fees or penalties incurred under the original agreement shall be added to the outstanding debt..."
+{@Player}   "...and remain secured against the Constantine until paid in full."
+{@Player}   So until I pay this, Frontier can still take my ship?!
+{@Player}   <i>Sigh...</i> Back to work.

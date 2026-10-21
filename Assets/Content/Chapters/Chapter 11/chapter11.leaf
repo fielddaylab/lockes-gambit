@@ -44,10 +44,7 @@
 @when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research), IsSolutionFoundFor(Supply)
 @cutscene 
 @once
-
-
 // Locke calls Blaze
-
 {@Player}   Hey Blaze, did you hear about Dorian?
 {@Blaze}    I couldn't believe it! I heard he and <i>Callie</i> grew up together!
 {@Player}   Seriously?!!
@@ -59,42 +56,20 @@
 {@Player}   ...It's a little late for that.
 
 
-//At the end of level 11: must be able to pay off in one level with easy contract. 
+::DisposalFee11
+@trigger    OnGoalCompleted
+@when       goalId == "Goal1"
+@cutscene
+@once
 
-// After contract is paid IF PLAYER HAS PAID OFF DEBT for the first time:
-
-//{@Player} That's it! I've got enough to pay off Frontier!
-
-//show money clearing
-
-//{@Player} *gulp.* And now I'm broke again, but I'm a free man!
-
-//{@Player} Wait... what is this? An invoice from Frontier Robotics? 
-//Show new red flag on money/timeline: Unauthorized Equipment Disposal
-
-//{@Player} Oh blast. They're charging me for the "Unauthorized disposal of company property..."
-
-//{@Player} Let's see... "Per Section 14, subsection C, any additional fees or penalties incurred under the original agreement shall be added to the outstanding debt and remain secured against the Constantine until paid in full."
-
-//{@Player} So until I pay this, Frontier can still take my ship?!
-
-//or...At the end of level 11 After contract is paid IF PLAYER HAS JUST PAID OFF THE SYSTEM UPGRADE INVOICE:
-
-//{@Player} PAID IN FULL! That's the last of the upgrade fees.
-
-//show money clearing 
-//{@Player} I'm broke...AGAIN... but at least I own my ship free and clear.
-
-//Show new red flag on money/timeline: Unauthorized Equipment Disposal
-
-//{@Player} YOU... HAVE...GOT...TO... 
-//{@Player}BE...KIDDING... 
-//{@Player}ME!!!!...  
-//{@Player} "Unauthorized disposal of company property..." Oh blast. They're charging me for those robots! 
-//{@Player} Let's see... "Per Section 14, subsection C, any additional fees or penalties incurred under the original agreement shall be added to the outstanding debt and remain secured against the Constantine until paid in full."
-
-//{@Player} I think they have got me with their stupid lawyers. 
-
-//{@Player} They still could come take my ship.
-
+{@Player}   PAID IN FULL! That's the last of the upgrade fees.
+{@Player}   I'm broke, <i>again</i>, but at least I own my ship, free and clear.
+$call ActivateGoal("Goal2")
+{@Player}   ...
+{@Player}   YOU HAVE <b>GOT</b>...
+{@Player}   TO BE <b>KIDDING</b> ME.
+{@Player}   "Unauthorized disposal of company property?" They're charging me for those robots!
+{@Player}   "Per Section 14, Subsection C, any additional fees or penalties incurred under the original agreement shall be added to the outstanding debt..."
+{@Player}   "...and remain secured against the Constantine until paid in full."
+{@Player}   So until I pay this, Frontier can still take my ship?!
 
