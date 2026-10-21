@@ -61,8 +61,8 @@ MonoBehaviour:
     Text: Central Mining Corp, a subsidiary of Expanse Materials. Contract to source
       and extract necessary materials for semiconductor production.
   - Id:
-      m_Source: 'cm1 '
-      m_HashValue: 2230392028
+      m_Source: cm1
+      m_HashValue: 3381793044
     Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
     Text: PAL-World - Auserine's leading choice for any common good at a low-low
       price.
@@ -87,8 +87,8 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
     Text: 'FRA Logisitics - Protect, preserve, persevere, we are the FRA" '
   - Id:
-      m_Source: 'cm6 '
-      m_HashValue: 1592695411
+      m_Source: cm6
+      m_HashValue: 3365015425
     Icon: {fileID: 21300000, guid: 6b5634efdbadbaa40a9d4b3d9713d4a0, type: 3}
     Text: Blair Assembly Co. - A manufacturer for workers, by workers
   - Id:

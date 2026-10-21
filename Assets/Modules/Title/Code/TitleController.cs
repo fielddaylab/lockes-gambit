@@ -324,13 +324,17 @@ namespace SpaceFab.Title
             //SpacefabGame.Events.Dispatch(GameEvents.TitleNewGameClicked);
             SpacefabGame.Events.Dispatch(GameEvents.TitleProfileStarting, PlayCodeInput.text);
 
+            Find.State(out ChapterState chapterState);
+            if (chapterState.LastSelectedContractIndex < 0) {
+                ComicScripting.LoadComicForChapter(chapterState.ChapterIndex);
+            } else {
+                Game.Scenes.LoadMainScene(ContinueGameScene);
+            }
+
             if (CurrentPage == PageId.NewGame) {
-                ComicScripting.LoadComicForChapter(0);
                 Game.Scenes.GetQueuedLoadContext(out SceneRequestContext context);
                 context.Set("QueueSave", true);
                 Game.Scenes.QueueMainLoadContext(context);
-            } else {
-                Game.Scenes.LoadMainScene(ContinueGameScene);
             }
         }
 
