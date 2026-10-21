@@ -86,6 +86,9 @@ namespace SpaceFab.Fabrication.Microgames
                 state.Direction = Vector2.right;
 
             float beamSpeed = 1.875f; //1.5f;
+            if (Game.Input.IsKeyDown(KeyCode.Space)) {
+                beamSpeed = 2.375f;
+            }
             Vector2 current = state.PlayerPoints[state.PlayerPoints.Count - 1];
             Vector2 next = current + (Vector2)(state.Direction * beamSpeed * deltaTime);
 
