@@ -7,7 +7,7 @@
 
 {@MAL}      Hi-hi-hi-ello Cap-p-p-tain! 
 {@Player}   P.A.L... you look...
-{@MAL}      Whose P.A.L.? I'm M-M-M.A.L.!
+{@MAL}      Who's P.A.L.? I'm M-M-M.A.L.!
 {@MAL}      Your trusty-trust-tru-5%$@*-!@3#
 {@MAL}      Hi Captain, how can I help you t-today!
 {@Player}   Keela really messed you up huh? 
@@ -22,7 +22,7 @@
 @once
 //Incoming call
 {@Ovill}    Frontier Headquarters?
-{@Locke}	Nope, it's me, Locke.  
+{@Player}	Nope, it's me, Locke.  
 {@Ovill}    Oh shoot. Things have been a mess all morning. 
 {@Ovill}    All of our P.A.L. systems and communication networks are shot! 
 //End call

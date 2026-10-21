@@ -19,8 +19,8 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
   CaptionText: 
-  BodyText: Goldschmidt Station acts as Frontier Robotics main source of radioactive
-    resistant components, making it a vital station for Frontier's robot worker manufacturing.
+  BodyText: Goldschmidt Station acts as Frontier Robotics' main source of radiation-resistant
+    components, making it a vital station for Frontier's robot worker manufacturing.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

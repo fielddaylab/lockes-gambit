@@ -84,7 +84,7 @@ $call   ReleaseAllHighlights()
 @cutscene
 @once
 
-{@PAL}      We have fully automated the photolithography equipment in the Fab bay. 
+{@PAL}      We have fully automated the photolithography equipment in the Fabrication bay. 
 {@Player}   Huh. I wonder what Arken would think? This is his station. 
 {@PAL}     	OOOh! This will be soooo much faster than your human teammate. 
 

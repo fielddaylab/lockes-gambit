@@ -51,12 +51,12 @@
 ::AfterSupplyChainCh4 
 @trigger    OnOverarchingLoaded
 @when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
-@trigger
+@cutscene
 @once 
 
 {@Player} 	I was just looking at the photolithography equipment in the Fab bay. 
 {@Player}	I noticed some glitches with the bots, P.A.L.
-{@PAL}		02819b2a4f92b2a08e97c4affea1bda0733c57d2657555b12f5473f26c7b07f9332b7ff6d3a0983e25cccbc7e276d9cb6b3ea6726a9370235dc5f0113a70d6bcf0534c154e729b8ca8e8d992ede646f66c9088ee656498a76e0ee32495a8bf1021d82b7f5483b1d9c25d4ce47dba9efda8131bee5cfc3424c012c2f590c9732777
+{@PAL}		02819b2a4f92b2a08e97c4affea1bda0733c57d2657555b12f5473f26c7b07f9332b7ff6d3a0983e25cccbc7e276d9cb6b3ea6726a9370235dc5f0113a70d6bcf0534c154e729b8ca8e8d992ede646f66c9088ee656498a76e0ee32
 {@Player}	You okay there, bro?
 {@PAL}    <color=red>SYSTEM ERROR:</color> If fabrication systems malfunction, consult the <color=yellow>Reference Guide</color>.
 
