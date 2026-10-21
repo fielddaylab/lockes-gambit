@@ -18,10 +18,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3cddbe78d735acc4092c945cd0bc5524, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
-  CaptionText: 
-  BodyText: The Boron Space Pirates are a former blue-collar prison station who revolted
-    against the Frontier Robotic Authority. They are led by Callie Lee, and are known
-    as the anarchists within the Ausrine system.
+  CaptionText: Supplier Contact - Callie
+  BodyText: Velos is a former blue-collar prison station, now home revolted against
+    the Frontier Robotics Peace Authority. They are led by Callie Lee, and are known
+    as anarchists within the Ausrine system.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

@@ -35,7 +35,7 @@
 @cutscene 
 @once 
 
-{@Locke}    Howzit, Quinn?
+{@Player}    Howzit, Quinn?
 {@Quinn}    Howdy! We've been haulin' through space that cuts through pirate territory.
 {@Player}   You were working near Velos? Callie's neighborhood?
 {@Quinn}    Yeah. And Callie's been taunting ol' Ovill over on Frosch.
@@ -49,9 +49,11 @@
 ::AfterSupplyChainCh5
 @trigger	    OnOverarchingLoaded 
 @when 	        IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
+@cutscene
+@once
 
 {@Player}   Hey, bro, are those fabrication glitches fixed yet?
-{@PAL}      Yes! Everything is in ERR_0x004F#@%//NULL// perfect shape!
+{@PAL}      Yes! Everything is in ERR_0x004F#@%NULL perfect shape!
 {@Player}   Oh boy. I can't afford production issues.
 {@Player}   Maybe I could ask Arken to come take a look.
 {@PAL}      Frontier Robotics uses proprietary software. 

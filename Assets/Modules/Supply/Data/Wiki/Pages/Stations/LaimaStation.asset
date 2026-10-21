@@ -19,9 +19,9 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
   CaptionText: 
-  BodyText: Laima Station is the Kalvis sector's first station outside of the one's
-    inherited after their independence. It serves as a milestone of Kalvis' drive
-    despite it being the underdog in Auserine.
+  BodyText: Laima Station is the Kalvis sector's first station outside of the since
+    their independence. It serves as a milestone of Kalvis' drive despite it being
+    the underdog in Ausrine.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

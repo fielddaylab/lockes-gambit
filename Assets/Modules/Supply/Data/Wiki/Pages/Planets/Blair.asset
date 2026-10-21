@@ -18,12 +18,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2e598c4e95b875b44b175363c5150835, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
-  CaptionText: 
+  CaptionText: Supplier Contact - Arken
   BodyText: Blair is an isolationist mining colony that remained largely untouched
-    by Fautomation until recently. Frontier Robotics is rapidly expanding its presence
+    by automation until recently. Frontier Robotics is rapidly expanding its presence
     in the colony's mines, prompting growing concerns. As strikes spread across the
     system, Blair has begun forging closer ties with other mining planets and stations.
-
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0
