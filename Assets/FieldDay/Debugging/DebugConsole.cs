@@ -44,8 +44,6 @@ namespace FieldDay.Debugging {
 
         #endregion // Events
 
-#if DEVELOPMENT
-
         private enum StepState {
             Uninitialized,
             Queued,
@@ -74,6 +72,8 @@ namespace FieldDay.Debugging {
         [SerializeField] private CanvasGroup m_QuickMenuInput = null;
 
         #endregion // Inspector
+
+#if DEVELOPMENT
 
         [NonSerialized] private float m_TimeScale = 1;
         [NonSerialized] private bool m_Paused;
