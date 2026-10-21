@@ -10150,7 +10150,7 @@ MonoBehaviour:
   Id:
     m_Source: supply:shopping-list
     m_HashValue: 3072335655
-  RectTransform: {fileID: 0}
+  RectTransform: {fileID: 417450219}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
 --- !u!1001 &7015587884658692674
