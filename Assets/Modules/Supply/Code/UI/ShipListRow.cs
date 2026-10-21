@@ -30,8 +30,8 @@ namespace SpaceFab.Supply {
         [NonSerialized] public AnimHandle Anim;
 
         protected override void OnDisable() {
-            LineLayer.gameObject.SetActive(false);
-            StatsLayer.gameObject.SetActive(false);
+            LineLayer?.gameObject.SetActive(false);
+            StatsLayer?.gameObject.SetActive(false);
             
             base.OnDisable();
         }
@@ -77,7 +77,7 @@ namespace SpaceFab.Supply {
 
             row.CursorHint.TooltipHeader = shipAsset.DisplayName;
 
-            row.LineLayer.color = shipAsset.LineColor;
+            if (row.LineLayer != null) row.LineLayer.color = shipAsset.LineColor;
 
             row.ShipName.SetText(shipAsset.DisplayName);
             row.ShipName.color = shipAsset.Colors.Content;
