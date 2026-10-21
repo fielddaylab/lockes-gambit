@@ -108,7 +108,7 @@ namespace SpaceFab
         public static readonly StringHash32 StartSelectContract = "overarching:start-change-contract";
         public static readonly StringHash32 ConfirmSelectContract = "overarching:confirm-change-contract";
         public static readonly StringHash32 CancelSelectContract = "overarching:cancel-change-contract";
-        public static readonly StringHash32 CompleteGoalFlag = "overarching:complete-goal-flag";
+        public static readonly StringHash32 CompleteGoal = "overarching:complete-goal";
 
         // Supply: Route Drawing
         public static readonly StringHash32 SupplyRouteDrawingOpen = "supply:route-drawing-open";

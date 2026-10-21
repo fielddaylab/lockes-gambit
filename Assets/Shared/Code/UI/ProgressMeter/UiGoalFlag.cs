@@ -28,7 +28,7 @@ namespace SpaceFab {
         }
 
         public void OnRegister() {
-            ProgressMeterUtility.SetGoalVisible(this, false);
+            ProgressMeterUtility.SetFlagVisible(this, false);
         }
     }
 }

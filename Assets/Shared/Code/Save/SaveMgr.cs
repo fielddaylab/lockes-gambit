@@ -17,7 +17,9 @@ namespace SpaceFab.Save
         // v2: Added "unlocked special properties" to PlayerProgressState
         // v3: removed "recently completed contract" from PlayerProgressState
         // v4: changed "finalized precision" to "finalized cost"
-        public const int SaveVersion = 4;
+        // v5: added "last goal index" for progress meter goal flags
+        // v6: added "active goal indices" for more flexible goal number
+        public const int SaveVersion = 6;
 
         private struct ChunkRecord
         {

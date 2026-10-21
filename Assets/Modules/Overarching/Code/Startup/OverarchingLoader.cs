@@ -13,7 +13,8 @@ namespace SpaceFab.Overarching
     public class OverarchingLoader : SceneController, IScenePreload
     {
         protected override IEnumerator<WorkSlicer.Result?> OnScenePreload() {
-            ProgressMeterUtility.InitializeGoalsFromProgress(Find.State<PlayerProgressState>());
+            Find.State(out PlayerProgressState progress, out ProgressMeterState meter);
+            ProgressMeterUtility.InitializeGoalsFromProgress(progress, meter);
             return base.OnScenePreload();
         }
 

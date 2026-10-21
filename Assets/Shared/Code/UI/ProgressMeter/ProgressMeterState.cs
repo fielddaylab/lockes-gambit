@@ -1,6 +1,7 @@
 using BeauUtil;
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Assets;
 using FieldDay.Scripting;
 using FieldDay.SharedState;
 using Leaf.Runtime;
@@ -580,33 +581,71 @@ namespace SpaceFab {
         #region Goals
 
         // initialize a specified goal flag with a specific goal asset
-        public static void InitializeGoalFlag(UiGoalFlag goalFlag, ProgressGoal goal) {
+        public static bool TryInitializeGoal(UiGoalFlag goalFlag, ProgressGoal goal) {
+            if (goalFlag == null) {
+                Log.Error("[ProgressMeterUtility] Tried to initialize null flag for goal '{0}', skipping", goal.Name);
+                return false;
+            }
+
             int uiFundsCells = goal.TargetFunds;
             if (uiFundsCells > METER_FUNDS_CAPACITY) {
                 uiFundsCells %= METER_FUNDS_CAPACITY;
             }
             if (uiFundsCells > goalFlag.maxFundsCells) {
                 Log.Error("[ProgressMeterUtility] Funds target {0} above requested flag! Skipping...", uiFundsCells);
-                return;
+                return false;
             }
             goalFlag.targetFunds = goal.TargetFunds;
             goalFlag.uiTargetFunds = uiFundsCells;
             goalFlag.NameText.text = goal.Name;
             goalFlag.Icon.sprite = goal.Icon;
             PositionGoalStem(goalFlag);
-            SetGoalVisible(goalFlag, true);
+            SetFlagVisible(goalFlag, true);
+            Find.State(out PlayerProgressState progress);
+            if (goalFlag.CurrentGoalId != null) {
+                // flag is currently active - it must have been overridden.
+                // so set its original goal inactive first
+                Find.State(out progress);
+            }
+            return true;
         }
 
         [LeafMember("ActivateGoal")]
         public static void ActivateGoal(StringHash32 id, bool overrideActive = false) {
-            foreach (ProgressGoal goalAsset in Find.GlobalAsset<GoalList>().Goals) {
-                if (goalAsset.Id.Equals(id)) {
-                    UiGoalFlag uiFlag = PickUIFlagByTarget(Find.State<ProgressMeterState>(), goalAsset.TargetFunds, overrideActive);
-                    InitializeGoalFlag(uiFlag, goalAsset);
-                } else {
-                    Log.Error("[ProgressMeterUtility] Goal flag with id {0} not found! Skipping...", id);
+            ProgressGoal goalAsset =  FindGoalAsset(id, out int idx);
+            if (idx < 0) {
+                Log.Error("[ProgressMeterUtility] Goal asset with id {0} not found! Skipping...", id);
+                return;
+            }
+            UiGoalFlag uiFlag = PickUIFlagByTarget(Find.State<ProgressMeterState>(), goalAsset.TargetFunds, overrideActive);
+            if (TryInitializeGoal(uiFlag, goalAsset)) {
+                PlayerProgressUtility.SetGoalActive(Find.State<PlayerProgressState>(), idx, true);
+            }
+        }
+
+        public static void ActivateGoal(ProgressMeterState meter, PlayerProgressState progress, GoalList list, int idx, bool overrideActive = false) {
+            if (idx < 0) {
+                Log.Error("[ProgressMeterUtility] Goal asset with index {0} not found! Skipping...", idx);
+                return;
+            }
+            ProgressGoal goalAsset = list.Goals[idx];
+            UiGoalFlag uiFlag = PickUIFlagByTarget(meter, goalAsset.TargetFunds, overrideActive);
+            if (TryInitializeGoal(uiFlag, goalAsset)) {
+                PlayerProgressUtility.SetGoalActive(progress, idx, true);
+            }
+        }
+
+        public static ProgressGoal FindGoalAsset(StringHash32 goalId, out int idx) {
+            ProgressGoal[] goals = Find.GlobalAsset<GoalList>().Goals;
+            for (int i = 0; i < goals.Length; i++) {
+                if (goals[i].Id.Equals(goalId)) {
+                    idx = i;
+                    return goals[i];
                 }
             }
+            idx = -1;
+            Log.Error("[ProgressMeterUtility] Goal asset with id {0} not found! Skipping...", goalId);
+            return new ProgressGoal();
         }
 
         // find a ui flag based on the target funds
@@ -625,32 +664,69 @@ namespace SpaceFab {
             Log.Error("[ProgressMeterUtility] No goal flag found to show funds target {0}! Skipping...", uiFundsCells);
             return null;
         }
+        
+        public static UiGoalFlag FindFlagWithGoal(ProgressMeterState meter, StringHash32 goalId) {
+            foreach (UiGoalFlag flag in meter.UiGoalFlags) {
+                if (flag.CurrentGoalId.Equals(goalId)) {
+                    return flag;
+                }
+            }
+            Log.Error("[ProgressMeterUtility] No goal flag found displaying goalId {0}! Skipping...", goalId);
+            return null;
+        }
 
-        // process goals with a coroutine, so we can handle one leaf thread at a time
+        //[Obsolete]
+        //// process goals with a coroutine, so we can handle one leaf thread at a time
+        //public static IEnumerator ProcessGoals() {
+        //    Find.State(out ProgressMeterState meterState, out PlayerProgressState playerState);
+
+        //    // check each goal flag...
+        //    for (int i = 0; i < meterState.UiGoalFlags.Length; i++) {
+        //        if (meterState.UiGoalFlags[i].CurrentGoalId == null) {
+        //            // skip ones with no assigned goal
+        //            continue;
+        //        }
+        //        if (playerState.Funds >= meterState.UiGoalFlags[i].targetFunds) {
+        //            SetGoalCompleted(meterState.UiGoalFlags[i]);
+        //            using (TempVarTable table = TempVarTable.Alloc()) {
+        //                table.Set("goalId", meterState.UiGoalFlags[i].CurrentGoalId);
+        //                var Thread = ScriptUtility.Trigger(ScriptTriggers.OnGoalCompleted, table);
+        //                do {
+        //                    yield return null;
+        //                } while (Thread.IsRunning());
+        //            }
+        //        }
+        //    }
+        //}
+
         public static IEnumerator ProcessGoals() {
-            Find.State(out ProgressMeterState meterState, out PlayerProgressState playerState);
-
-            for (int i = 0; i < meterState.UiGoalFlags.Length; i++) {
-                if (meterState.UiGoalFlags[i].CurrentGoalId == null) {
-                    continue;
-                }
-                if (playerState.Funds >= meterState.UiGoalFlags[i].targetFunds) {
-                    SetGoalCompleted(meterState.UiGoalFlags[i]);
-                    using (TempVarTable table = TempVarTable.Alloc()) {
-                        table.Set("goalId", meterState.UiGoalFlags[i].CurrentGoalId);
-                        var Thread = ScriptUtility.Trigger(ScriptTriggers.OnGoalCompleted, table);
-                        do {
-                            yield return null;
-                        } while (Thread.IsRunning());
-                    }
-                }
+            // expensive to find these in an enumerator?
+            Find.State(out PlayerProgressState progress);
+            Find.GlobalAsset(out GoalList list);
+            for (int i = 0; i< list.Goals.Length; i++) {
+                // if goal not set active, skip
+                if (!progress.ActiveGoalIndices.IsSet(i)) { continue; };
+                // if below target funds, skip
+                if (progress.Funds < list.Goals[i].TargetFunds) { continue; }   
+                
+                CompleteGoal(list.Goals[i].Id, i);
+                using (TempVarTable table = TempVarTable.Alloc()) {
+                    table.Set("goalId", list.Goals[i].Id);
+                    var Thread = ScriptUtility.Trigger(ScriptTriggers.OnGoalCompleted, table);
+                    do {
+                        yield return null;
+                    } while (Thread.IsRunning());                  
+                }             
             }
         }
 
-        public static void SetGoalCompleted(UiGoalFlag goal) {
-            PlayerProgressUtility.UpdateGoalCompletion(goal.CurrentGoalId);
-            SetGoalVisible(goal, false);
-            SpacefabGame.Events.Dispatch(GameEvents.CompleteGoalFlag, EvtArgs.Box(goal.Id));
+        public static void CompleteGoal(StringHash32 goalId, int goalIdx) {
+            Find.State(out PlayerProgressState progress,
+                       out ProgressMeterState meter);
+            progress.LastCompletedGoalIndex = goalIdx;
+            PlayerProgressUtility.SetGoalActive(progress, goalIdx, false);
+            SetFlagVisible(FindFlagWithGoal(meter, goalId), false);
+            SpacefabGame.Events.Dispatch(GameEvents.CompleteGoal, EvtArgs.Box(goalId));
         }
 
         public static void PositionGoalStem(UiGoalFlag goal) {
@@ -673,7 +749,7 @@ namespace SpaceFab {
         }
 
         // TODO: fancy animation?
-        public static void SetGoalVisible(UiGoalFlag goal, bool active) {
+        public static void SetFlagVisible(UiGoalFlag goal, bool active) {
             if (!active) {
                 goal.CurrentGoalId = null;
                 goal.targetFunds = -1;
@@ -682,19 +758,33 @@ namespace SpaceFab {
             goal.Fader.alpha = active ? 1f : 0f;
         }
 
-        public static void InitializeGoalsFromProgress(PlayerProgressState state) {
-            ProgressGoal[] goals = Find.GlobalAsset<GoalList>().Goals;
-            // if no goals completed, activate the first one
-            if (state.LastCompletedGoalIndex < 0) {
-                ActivateGoal(goals[0].Id);
+        //public static void InitializeGoalsFromProgress(PlayerProgressState state) {
+        //    ProgressGoal[] goals = Find.GlobalAsset<GoalList>().Goals;
+        //    // if no goals completed, activate the first one
+        //    if (state.LastCompletedGoalIndex < 0) {
+        //        ActivateGoal(goals[0].Id);
+        //        return;
+        //    }
+        //    // otherwise, start from the goal after the last completed, and activate the rest
+        //    int nextGoalIdx = state.LastCompletedGoalIndex + 1;
+        //    for (int i = nextGoalIdx; i < goals.Length; i++) {
+        //        ActivateGoal(goals[i].Id);
+        //    }
+                      
+        //}
+
+        // instead of initializing either 1 or all goals - read a bitset of active goals
+        public static void InitializeGoalsFromProgress(PlayerProgressState progress, ProgressMeterState meter) {
+            if (progress.ActiveGoalIndices.Count == progress.NumActiveGoals) {
+                // if we have the right number of goals, skip it :)
                 return;
             }
-            // otherwise, start from the goal after the last completed.
-            int nextGoalIdx = state.LastCompletedGoalIndex + 1;
-            for (int i = nextGoalIdx; i < goals.Length; i++) {
-                ActivateGoal(goals[i].Id);
+            Find.GlobalAsset(out GoalList list);
+            for (int i = 0; i < list.Goals.Length; i++) {
+                if (progress.ActiveGoalIndices[i]) {
+                    ActivateGoal(meter, progress, list, i);
+                }
             }
-                      
         }
 
         #endregion //Goals
