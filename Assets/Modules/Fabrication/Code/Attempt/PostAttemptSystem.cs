@@ -63,6 +63,14 @@ namespace SpaceFab.Fabrication {
                 float accuracy = WaferStateUtility.GetAggregatedPrecision(waferState);
                 fabState.Precision = accuracy;
 
+                if (accuracy <= 0.75f) {
+                    fabState.TotalCost = 2;
+                } else if (accuracy <= 0.875f) {
+                    fabState.TotalCost = 1;
+                } else {
+                    fabState.TotalCost = 0;
+                }
+
                 // display results
                 Log.Msg("[PostAttemptSystem] displaying results");
                 Find.State<FabResultsPanel>().Show();
