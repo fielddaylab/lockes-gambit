@@ -49,15 +49,20 @@ namespace SpaceFab.Fabrication.Microgames
 
             float rotateSpeed = 120f;
             if (Game.Input.IsKeyDown(FabricationConsts.Left0) ||
-                Game.Input.IsKeyDown(FabricationConsts.Left1))
-            {
+                Game.Input.IsKeyDown(FabricationConsts.Left1)) {
                 state.PhotomaskAngle += rotateSpeed * deltaTime;
             }
 
             if (Game.Input.IsKeyDown(FabricationConsts.Right0) ||
-                Game.Input.IsKeyDown(FabricationConsts.Right1))
-            {
+                Game.Input.IsKeyDown(FabricationConsts.Right1)) {
                 state.PhotomaskAngle -= rotateSpeed * deltaTime;
+            }
+
+            if (Game.Input.IsKeyDown(FabricationConsts.Down0) ||
+                Game.Input.IsKeyDown(FabricationConsts.Down1)) {
+                state.FallSpeed = 1.5f;
+            } else {
+                state.FallSpeed = 0.5f;
             }
 
             state.PhotomaskAngle %= 360f;

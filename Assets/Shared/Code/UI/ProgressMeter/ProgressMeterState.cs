@@ -5,6 +5,7 @@ using FieldDay.Scripting;
 using FieldDay.SharedState;
 using Leaf.Runtime;
 using SpaceFab.Fabrication;
+using SpaceFab.Overarching;
 using SpaceFab.Save;
 using SpaceFab.Supply;
 using System;
@@ -43,7 +44,7 @@ namespace SpaceFab {
         public CycleCellState[] CycleStates;
         public FundsCellState[] FundsStates;
         public int CurrentDayIdx;
-        public bool NeedsRefresh;
+        [NonSerialized] public bool NeedsRefresh;
         public ProgressMeter ActiveMeter;
 
         public UiGoalFlag[] UiGoalFlags;
@@ -176,6 +177,13 @@ namespace SpaceFab {
             // rely on most-specific context (minigame) first, then broader context (save state) as fallback
             int numFabricationCycles = 0;
 
+            if (Game.SharedState.Has<ContractViewState>()) {
+                var viewState = Find.State<ContractViewState>();
+                if (viewState.CurrentMode == OverarchingContractMode.Complete) {
+                    return 0;
+                }
+            }
+
             // get numCycles from Fabrication context
             if (Game.SharedState.Has<FabricationMinigameState>()) {
                 var fabState = Find.State<FabricationMinigameState>();
@@ -203,6 +211,15 @@ namespace SpaceFab {
         public static void CalculatePendingFundsCells(ProgressMeter meter, MinigameSaveStates saveStates, int contractPayout, out int pendingReceivedCount, out int pendingSpentCount) {
             // rely on most-specific context (minigame) first, then broader context (save state) as fallback
             int supplyCosts = 0;
+
+            if (Game.SharedState.Has<ContractViewState>()) {
+                var viewState = Find.State<ContractViewState>();
+                if (viewState.CurrentMode == OverarchingContractMode.Complete) {
+                    pendingReceivedCount = 0;
+                    pendingSpentCount = 0;
+                    return;
+                }
+            }
 
             // get funds from SupplyChain context
             if (Game.SharedState.Has<SupplyMinigameState>()) {

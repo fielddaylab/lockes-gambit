@@ -165,6 +165,17 @@ namespace SpaceFab
             SaveUtility.Save(SaveSlot.Main);
         }
 
+        static public void ApplyCompletedContractState(ContractState contractState, PlayerProgressState progressState, MinigameSaveStates saveStates) {
+            // save elapsed cycles and funds
+            progressState.ElapsedCycles += MinigameSaveUtility.CurrentTime(saveStates);
+
+            int contractPayout = 0;
+            if (contractState.ContractDefinition) {
+                contractPayout = contractState.ContractDefinition.Payout();
+            }
+            progressState.Funds += contractPayout - MinigameSaveUtility.CurrentCosts(saveStates);
+        }
+
         #endregion // Player Progress
     }
 }

@@ -263,7 +263,12 @@ namespace SpaceFab.Overarching {
             yield return layout.Fader.FadeTo(0, 0.3f);
             yield return 0.5f;
 
-            // TODO: animate time and money into progress bar
+            Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState progressState, out MinigameSaveStates minigameStates);
+
+            ContractUtility.ApplyCompletedContractState(contractState, progressState, Find.State<MinigameSaveStates>());
+            Find.State<ProgressMeterState>().NeedsRefresh = true;
+            
+            yield return 0.25f;
 
             yield return ProgressMeterUtility.ProcessGoals();
 
@@ -274,7 +279,6 @@ namespace SpaceFab.Overarching {
 
             yield return 0.25f;
 
-            Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState progressState, out MinigameSaveStates minigameStates);
             ChapterUtility.LoadNextChapter(chapterState, progressState, contractState, minigameStates);
         }
 

@@ -166,16 +166,6 @@ namespace SpaceFab
 
         public static void LoadNextChapter(ChapterState chapterState, PlayerProgressState progressState, ContractState contractState, MinigameSaveStates saveStates)
         {
-            // save elapsed cycles and funds
-            progressState.ElapsedCycles += saveStates.Fabrication.FinalizedTotalCycles;
-            progressState.ElapsedCycles += saveStates.Supply.FinalizedTotalCycles;
-
-            int contractPayout = 0;
-            if (contractState.ContractDefinition) {
-                contractPayout = contractState.ContractDefinition.Payout();
-            }
-            progressState.Funds += contractPayout - saveStates.Supply.FinalizedCost;
-
             // advance chapter
             chapterState.ChapterIndex++;
 
