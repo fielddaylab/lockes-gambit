@@ -21,12 +21,11 @@ $call   PointElement(overarching:profit-section)
 {@PAL}      ...and this is what you'll be paid.
 $call   ReleaseAllHighlights()
 
-{@PAL} 		Let's chip away at your debt to  Greyson Industries!
+{@PAL} 		Let's <i>chip</i> away at your debt to Greyson Industries!
+$call   ActivateGoal("Goal1")
 {@Player} 	Greyson Industries? What's that?
 {@PAL} 		Frontier Robotics is owned by the Greyson family.
 $call   HighlightElement(overarching:select-contract-btn)
-
-
 
 $call   UnlockWikiPage("Basic Conductor")
 $call   UnlockWikiPage("Basic Insulator")
@@ -40,7 +39,7 @@ $call   LockWikiPage("Insulator") // only Basic Insulator is available in first 
 @once
 
 $call   ReleaseAllHighlights()
-{@PAL}      Start with either the Research or Chip Design. 
+{@PAL}      Start with either Research or Chip Design. 
 
 
 //written to stablish PAL is sure about something that he is later incorrect about - AI literacy thread.

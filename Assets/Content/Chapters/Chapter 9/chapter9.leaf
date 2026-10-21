@@ -1,9 +1,9 @@
 # basePath Chapter9 
 
-::OnContractSelectOpenCh9
-@trigger 
-@cutscene 
-@once 
+// ::OnContractSelectOpenCh9
+// @trigger 
+// @cutscene 
+// @once 
 
 
 
