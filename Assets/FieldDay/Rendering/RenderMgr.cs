@@ -256,10 +256,12 @@ namespace FieldDay.Rendering {
                 m_FallbackCamera.gameObject.SetActive(m_UsingFallback);
             }
 
+#if DEVELOPMENT
             if (config.DebugClearColor == Color.clear) {
                 config.DebugClearColor = ColorBank.Magenta;
             }
             s_DebugCameraClearColor = config.DebugClearColor;
+#endif // DEVELOPMENT
 
             if (config.LetterboxColor == Color.clear) {
                 m_LetterboxColor = Color.black;
