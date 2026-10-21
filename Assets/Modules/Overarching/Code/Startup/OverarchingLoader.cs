@@ -1,3 +1,4 @@
+using BeauUtil;
 using FieldDay;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
@@ -9,8 +10,13 @@ using UnityEngine;
 
 namespace SpaceFab.Overarching
 {
-    public class OverarchingLoader : SceneController
+    public class OverarchingLoader : SceneController, IScenePreload
     {
+        protected override IEnumerator<WorkSlicer.Result?> OnScenePreload() {
+            ProgressMeterUtility.InitializeGoalsFromProgress(Find.State<PlayerProgressState>());
+            return base.OnScenePreload();
+        }
+
         protected override void OnSceneReady() {
             Find.State(out ChapterState chapterState, out ContractViewState view);
             if (chapterState.LastSelectedContractIndex < 0) {
