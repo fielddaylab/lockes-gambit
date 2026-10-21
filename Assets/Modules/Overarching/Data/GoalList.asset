@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72907b4f2a12834fb57d4017a0e2ce1, type: 3}
+  m_Name: GoalList
+  m_EditorClassIdentifier: 
+  Goals:
+  - Name: Buy Ship
+    Id:
+      m_Source: Goal1
+      m_HashValue: 3189596901
+    TargetFunds: 40
+    Icon: {fileID: 21300000, guid: 58d1730d6d00344489e14944374a964d, type: 3}
+  - Name: Help Keela
+    Id:
+      m_Source: Goal2
+      m_HashValue: 3139264044
+    TargetFunds: 54
+    Icon: {fileID: 21300000, guid: d094e125ae59df14b9453172e70655fb, type: 3}
+  - Name: Nav Computer
+    Id:
+      m_Source: Goal3
+      m_HashValue: 3156041663
+    TargetFunds: 65
+    Icon: {fileID: 21300000, guid: e6a8cbbedf7176541aee3bb25e67bb70, type: 3}
+  - Name: Repair Ship
+    Id:
+      m_Source: Goal4
+      m_HashValue: 3105708806
+    TargetFunds: 77
+    Icon: {fileID: 21300000, guid: e6a8cbbedf7176541aee3bb25e67bb70, type: 3}

@@ -135,6 +135,9 @@ namespace SpaceFab.Comic {
 
         [LeafMember("ComicNextButton")]
         static public IEnumerator Leaf_NextButton([BindThread] ScriptThread thread) {
+            if (ScriptUtility.IsSkippingCutscene()) {
+                return null;
+            }
             bool predictEnd = LeafRuntime.PredictEnd(thread);
             return ComicsUtility.DisplayAndWaitForNextButton(predictEnd ? "Close" : "Next");
         }
@@ -145,6 +148,21 @@ namespace SpaceFab.Comic {
             Game.Scenes.QueueMainLoadContext(new SceneRequestContext() {
                 Task = comicId
             });
+        }
+
+        [LeafMember("ComicLoadForChapter")]
+        static public void LoadComicForChapter(int chapterIndex) {
+            Find.GlobalAsset(out ChapterManifest manifest);
+            Game.Scenes.LoadMainScene(SceneReference.FromName("ComicScene"), true);
+            Game.Scenes.QueueMainLoadContext(new SceneRequestContext() {
+                Task = manifest.ResidentData[chapterIndex].ComicPackage
+            });
+        }
+
+        [LeafMember("ComicLoadForCurrentChapter")]
+        static public void LoadComicForCurrentChapter() {
+            Find.State(out ChapterState chapterState);
+            LoadComicForChapter(chapterState.ChapterIndex);
         }
     }
 }

@@ -7,8 +7,8 @@ $if IsLevelSolved(0) == true
     {@PAL}  If you modify your grid, you'll need to re-rerun all tests.
 $else
     $set temp:designTutorialStep = 0
-    $call   HighlightElement(design:metal-tool-btn)
-    {@PAL}  This chip needs a connection between Input A and Output X on the metal layer. \n\nSelect the <color=yellow>Metal Tool</color>.
+    $call   HighlightElement(design:tool-metal)
+    {@PAL}  This chip needs a connection between Input A and Output X on the metal layer.\n\nSelect the <color=yellow>Metal Tool</color>.
 $endif
 
 
@@ -18,7 +18,7 @@ $endif
 $set temp:designTutorialStep = 1
 $call   ReleaseAllHighlights()
 $call   HighlightElement(design:input-a, false, 25)
-{@PAL} Now click and drag to draw a connection between Input A and Output X.
+{@PAL}  Now click and drag to draw a connection between Input A and Output X.
 
 
 
@@ -45,7 +45,7 @@ $endif
 ::TestConnectionClick
 @trigger    OnClickReleased
 @when       temp:designTutorialStep == 1
-{@PAL}  Click and drag to form a solid path on the Metal Layer. 
+{@PAL}  <color=yellow>Click and drag</color> to form a solid path on the Metal Layer. 
 
 
 ::TestIncorrect

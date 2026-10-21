@@ -15,7 +15,9 @@ MonoBehaviour:
   SortOrder: 20
   IsLocked: 0
   ShowDuringContexts: 
-  HideDuringContexts: t:Writer
+  HideDuringContexts: 'role-writer
+
+    role-audio'
   ReadMe: Important UI prefabs
   Items:
   - Object: {fileID: 4113217339503403467, guid: 0ed7604c68709e34ca58483f51e1cf0f, type: 3}
@@ -39,6 +41,18 @@ MonoBehaviour:
     MenuPath: 
     CustomName: 
   - Object: {fileID: 6210911571537687538, guid: 12194cea89d380a4d8a5da9093fdaeb5, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 5228638197193639289, guid: 266bf0f38fbc4c543a6f473f479f81ed, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 7727346863187816193, guid: e90520d1cacc618479ed8099ba3e5050, type: 3}
+    URL: 
+    MenuPath: 
+    CustomName: 
+  - Object: {fileID: 8618631155860822680, guid: ea185a722f921254e93e4e17a1c779fd, type: 3}
     URL: 
     MenuPath: 
     CustomName: 

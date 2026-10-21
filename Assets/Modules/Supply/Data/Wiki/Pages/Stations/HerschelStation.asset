@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: HerschelStation
   m_EditorClassIdentifier: 
   Title: Herschel Station
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
-  IllustrationFrames: []
+  Icon: {fileID: 21300000, guid: 61c7093b6c1c1cc4f8ef6ee853a1bb4e, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: 98527b896c944f6409c2a0c9455e8c6b, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
+  CaptionText: 
   BodyText: Herschel Station was the first site of protests during The Revolt. It
     has become a beacon of worker rights and equity within the Kalvis Sector and
     throughout the system.

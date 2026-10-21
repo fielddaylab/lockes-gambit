@@ -30,9 +30,6 @@ namespace SpaceFab.Fabrication
         public void OnDeregister()
         {
             ResultsTransitionRoutine.Stop();
-
-            RetryButton.OnClick.RemoveAllListeners();
-            ContinueButton.OnClick.RemoveAllListeners();
         }
 
         public void OnRegister()

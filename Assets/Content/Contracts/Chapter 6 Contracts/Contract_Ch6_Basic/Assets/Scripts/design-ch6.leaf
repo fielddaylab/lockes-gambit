@@ -4,7 +4,7 @@
 ::Intro
 @trigger    OnDesignSetupComplete
 $set temp:hintGiven = 0
-    {@PAL} Gates work on N-type too. With a LO signal, they flip N-type to P-Type.
+{@PAL} Gates work on N-type too. With a LO signal, they flip N-type to P-Type.
 
 ::TwoInputs
 @trigger    OnSingleTestComplete

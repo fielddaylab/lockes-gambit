@@ -270,6 +270,7 @@ MonoBehaviour:
   BulbShines:
   - {fileID: 711586506356725449}
   AnimSpeedMultiplier: 1
+  HighMobilityParticles: {fileID: 0}
 --- !u!1 &2211017208973619267
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +297,7 @@ Transform:
   m_GameObject: {fileID: 2211017208973619267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 0.52, z: 0}
+  m_LocalPosition: {x: -0.06, y: 0.54, z: 0}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -511,7 +512,7 @@ Transform:
   m_GameObject: {fileID: 2825397926812422657}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.52, z: 0}
+  m_LocalPosition: {x: -0.06, y: 1.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1210,7 +1211,7 @@ MonoBehaviour:
   Root: {fileID: 7576376653351747665}
   SubstrateAtom: {fileID: 1099987963829235032}
   DopantAtom: {fileID: 7509356532144791990}
-  EmptyState: {fileID: 8918686274110502201}
+  EmptyState: {fileID: 5560355265553397607}
   AvailableObservations: 070809
   HostElementIndex: 0
   PrimarySlotY: -0.38
@@ -1326,7 +1327,7 @@ Transform:
   m_GameObject: {fileID: 6247015088360188682}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1574,13 +1575,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8918686274110502201}
-  m_LocalRotation: {x: -0, y: -0, z: -0.002885947, w: 0.9999958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 291579829643203624}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.331}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}

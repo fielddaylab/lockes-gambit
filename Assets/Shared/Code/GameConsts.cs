@@ -108,6 +108,7 @@ namespace SpaceFab
         public static readonly StringHash32 StartSelectContract = "overarching:start-change-contract";
         public static readonly StringHash32 ConfirmSelectContract = "overarching:confirm-change-contract";
         public static readonly StringHash32 CancelSelectContract = "overarching:cancel-change-contract";
+        public static readonly StringHash32 CompleteGoalFlag = "overarching:complete-goal-flag";
 
         // Supply: Route Drawing
         public static readonly StringHash32 SupplyRouteDrawingOpen = "supply:route-drawing-open";
@@ -130,6 +131,8 @@ namespace SpaceFab
         // name, the same id UnlockWikiPage is keyed by.
         public static readonly StringHash32 OnWikiPageOpened =      "OnWikiPageOpened";
         public static readonly StringHash32 OnOverarchingLoaded =   "OnOverarchingLoaded";
+
+        public static readonly StringHash32 OnGoalCompleted =       "OnGoalCompleted";
     }
 
     public static class UpdateMasks

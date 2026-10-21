@@ -25,26 +25,100 @@ MonoBehaviour:
     TransferType: 0
     DefaultInputState: 0
   - LayerIndex: 0
-    RowIndex: 5
-    ColumnIndex: 2
-    CellType: 1
-    SubtypeLabel: 2
-    Edges: []
-    TransferType: 0
-    DefaultInputState: 1
-  - LayerIndex: 0
     RowIndex: 3
     ColumnIndex: 5
     CellType: 5
     SubtypeLabel: 128
-    Edges: []
+    Edges:
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    TransferType: 0
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 5
+    ColumnIndex: 3
+    CellType: 1
+    SubtypeLabel: 2
+    Edges:
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    TransferType: 0
+    DefaultInputState: 1
+  - LayerIndex: 0
+    RowIndex: 4
+    ColumnIndex: 3
+    CellType: 2
+    SubtypeLabel: 0
+    Edges:
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    TransferType: 0
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 3
+    ColumnIndex: 3
+    CellType: 2
+    SubtypeLabel: 0
+    Edges:
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    TransferType: 0
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 2
+    ColumnIndex: 3
+    CellType: 2
+    SubtypeLabel: 0
+    Edges:
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    TransferType: 0
+    DefaultInputState: 0
+  - LayerIndex: 0
+    RowIndex: 1
+    ColumnIndex: 3
+    CellType: 2
+    SubtypeLabel: 0
+    Edges:
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
     TransferType: 0
     DefaultInputState: 0
   - LayerIndex: 0
     RowIndex: 0
     ColumnIndex: 3
-    CellType: 5
-    SubtypeLabel: 256
-    Edges: []
+    CellType: 2
+    SubtypeLabel: 2
+    Edges:
+    - EdgeState: 1
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
+    - EdgeState: 0
     TransferType: 0
-    DefaultInputState: 0
+    DefaultInputState: 1

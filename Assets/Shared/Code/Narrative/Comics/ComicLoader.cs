@@ -19,6 +19,8 @@ namespace SpaceFab.Comic {
         [NonSerialized] public StringHash32 ComicId;
         [NonSerialized] public LeafThreadHandle ThreadHandle;
 
+        [NonSerialized] public bool QueuedCredits;
+
         protected override IEnumerator<WorkSlicer.Result?> OnScenePreload() {
             Game.Scenes.GetLoadContext(this, out SceneRequestContext context);
             StringHash32 name = StringHash32.First(context.Task.Name, Game.IsDevBuild ? DEBUG_FallbackManifest : default);
@@ -26,6 +28,13 @@ namespace SpaceFab.Comic {
                 PackageId = name;
                 Game.Assets.LoadStreamedPackage(name);
             }
+
+            if (context.Get("UnloadChapter", false).AsBool()) {
+                ChapterUtility.UnloadChapterData(Find.State<ChapterState>());
+            }
+
+            QueuedCredits = context.Get("QueueCredits", false).AsBool();
+
             return null;
         }
 
@@ -80,10 +89,17 @@ namespace SpaceFab.Comic {
         }
 
         private void Finish() {
-            Game.Scenes.LoadMainScene(NextScene);
-            Game.Scenes.QueueMainLoadContext(new SceneRequestContext() {
-                Entrance = ComicId
-            });
+            if (QueuedCredits) {
+                Game.Scenes.LoadMainScene(SceneReference.FromName("Credits"));
+            } else {
+                Game.Scenes.LoadMainScene(NextScene);
+            }
+
+            SceneRequestContext requestContext = default;
+            requestContext.Entrance = ComicId;
+            requestContext.Set("PreserveMusic", true);
+
+            Game.Scenes.QueueMainLoadContext(requestContext);
         }
 
         protected override void OnSceneUnload() {

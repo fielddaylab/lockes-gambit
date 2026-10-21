@@ -6,6 +6,7 @@ using FieldDay.Systems;
 using SpaceFab;
 using SpaceFab.Design;
 using SpaceFab.Materials;
+using SpaceFab.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,17 +69,18 @@ namespace SpaceFab.Research {
             Find.State(
                 out ResearchMinigameState researchState,
                 out PlayerProgressState progressState,
-                out ContractState contractState
+                out ContractState contractState,
+                out WikiViewState wikiState
             );
             ResearchSamplePanel panel = Find.FirstComponent<ResearchSamplePanel>();
 
             if (inputState.VerifyHypothesisClickedThisFrame) {
                 ResearchUIAssets uiAssets = Find.GlobalAsset<ResearchUIAssets>();
-                viewModelState.VerifyRoutine.Replace(viewModelState, VerificationRoutine(panel, viewModelState, researchState, progressState, contractState, slotted, uiAssets)).TryManuallyUpdate(0);
+                viewModelState.VerifyRoutine.Replace(viewModelState, VerificationRoutine(panel, viewModelState, researchState, progressState, contractState, wikiState, slotted, uiAssets)).TryManuallyUpdate(0);
             }
         }
 
-        private static IEnumerator VerificationRoutine(ResearchSamplePanel panel, HypothesisViewModelState viewModelState, ResearchMinigameState researchState, PlayerProgressState progressState, ContractState contractState, MaterialAsset material, ResearchUIAssets config)
+        private static IEnumerator VerificationRoutine(ResearchSamplePanel panel, HypothesisViewModelState viewModelState, ResearchMinigameState researchState, PlayerProgressState progressState, ContractState contractState, WikiViewState wikiState, MaterialAsset material, ResearchUIAssets config)
         {
             Game.Input.PauseAll();
 
@@ -90,7 +92,7 @@ namespace SpaceFab.Research {
             panel.LoadingBar.SetActive(true);
             panel.FilledBar.fillAmount = 0;
 
-            yield return 0.3f;
+            yield return 0.25f;
 
             yield return panel.FilledBar.FillTo(1f, 2f).Ease(Curve.QuadInOut);
 
@@ -103,11 +105,6 @@ namespace SpaceFab.Research {
                 failureReason = "invalid_observation";
             }
 
-            bool hasRequiredObs = EvaluateObservations(viewModelState);
-            if (failureReason == null && !hasRequiredObs) {
-                failureReason = "observation_mismatch";
-            }
-
             yield return 0.5f;
 
             bool validHypothesis = ValidateProperty(material, viewModelState);
@@ -115,17 +112,23 @@ namespace SpaceFab.Research {
                 failureReason = "hypothesis_mismatch";
             }
 
+            bool hasRequiredObs = EvaluateObservations(viewModelState);
+            if (failureReason == null && !hasRequiredObs) {
+                failureReason = "observation_mismatch";
+            }
+
             bool success = !anyPruned && hasRequiredObs && validHypothesis;
             if (success) {
                 if (ResearchInventoryUtility.TryConfirmHypothesis(researchState, progressState, contractState, material.AssetId, viewModelState.HypothesisLabel, viewModelState.HypothesisContext)) {
                     HypothesisViewModelUtility.RequestRebuild(viewModelState);
+                    WikiUtility.OpenTo(Find.State<WikiViewState>(), "Materials_Tab", material.AssetId);
                 }
                 else {
                     success = false;
                 }
             }
 
-            yield return 0.5f;
+            yield return 0.25f;
 
             panel.Lines.color = success ? config.SuccessColor : config.FailureColor;
             panel.ResultIcon.gameObject.SetActive(true);

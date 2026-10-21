@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Wolfram
   m_EditorClassIdentifier: 
-  Title: Wolfrom
-  Icon: {fileID: 21300000, guid: 80e033f37358ec543ad1b5d7d8eef2c4, type: 3}
+  Title: Wolfram
+  Icon: {fileID: 21300000, guid: d8943fb26be36544a9baaeae49b2abf5, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 3b78daf9109b96d4e8ed6cf0cc7b3989, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
-  CaptionText: Supplier Contact - Mai
+  CaptionText: 
   BodyText: A steelworks planet, Wolfram is clouded in a choking smog but holds the
     grit common among steelworkers. Recent protests have increased Frontier security,
     however, many believe Wolfram to be a powder-keg of change.

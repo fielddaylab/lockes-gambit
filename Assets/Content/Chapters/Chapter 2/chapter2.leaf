@@ -8,15 +8,18 @@
 {@Player}	P.A.L. did you get the fab bay cleaned up? 
 {@PAL}		The fab bay is in perfect condition, as always. 
 {@PAL}		...at least as perfect as it can be on a near obsolete ship.
-//{@Player}	You are blaming MY ship for your mess?!
+{@Player}	You are blaming MY ship for your mess?!
+{@PAL}		No, no! My mistake! Everything's cleaned up now!
 
 
 {@Dorian}	Hey! I've got to head out. Good to see you!
-{@Player}   I wish everyone else from our old crew felt that way. 
-{@Player}	Don't they understand that I need this job so I don't lose the ship? 
+{@PAL}		Goodbye, Captain Black!
+{@Player}	He only wishes he was a captain! 
+{@Dorian}	Well, I'm the one in charge now!
+{@Player}   I guess so...Hey, Dorian?  
+{@Player}	Do you think the rest of the crew will understand that I didn't want to replace them?
+{@Player}	I had to... to keep from losing my ship.
 
-// EDIT - KACY 
-// Minor changes with Dorian's dialogue. 
 
 $call   LockWikiPage("Basic Conductor") // Basic Conductor is replaced with the full version after first chapter 
 $call   LockWikiPage("Basic Insulator") // Basic Insulator is replaced with the full version after first chapter 
@@ -51,7 +54,6 @@ $call   UnlockWikiPage("Insulator")
 {@PAL}      You can get silicon dioxide at Frosch and have the haulers take it to a refinery.
 {@Player}   A two step process? That sounds pricey.
 
-//cut ?conversation with Taryn and Ovill arguing over who gets to source for Locke. This isn't relevant till level 3 when they can use multiple options.
 
 
 
@@ -63,13 +65,15 @@ $call   UnlockWikiPage("Insulator")
 
 
 //call coming in from Quinn
-{@Quinn}    Why do you have Frontier's bots on the Constantine?
-{@Player}   Oh, hey Quinn. Well... ship repairs put me in some serious debt. 
-{@Player}	Can't afford my old crew, so I need the bots to run Fabrication.
-{@Quinn}    Oooof. Bad luck. Watch out Cowboy. Frontier builds those bots cheap. 
-{@Quinn}		Always needing new parts.
+
+{@Quinn}    Hey, Cowboy! How are Frontier's bots treating you?
+{@Player}   We've had a few problems, but I'm figuring it out.
+{@Quinn}   	I've heard rumors that Frontier uses cheap components in those bots.
+{@Quinn}	Apparently, they break down a lot. 
 //end call
 
+{@PAL}		Our robots actually have a stellar reputation! 
+{@Player}	Hey P.A.L., Were you listening to my call? 
 
 
 ::AfterFabricationCh2 
@@ -78,7 +82,3 @@ $call   UnlockWikiPage("Insulator")
 @cutscene 
 @once
 
-
-{@PAL}      Quinn is incorrect in her assessment of Frontier Robotics. 
-{@PAL}		We have a stellar reputation! 
-{@Player}	Were you listening to my call? 

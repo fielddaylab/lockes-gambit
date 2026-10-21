@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level7_HighPowerDiode
   m_EditorClassIdentifier: 
   m_title: High Power Diode
+  m_description: Using a High-Voltage Semiconductor, this Diode can handle high power
+    HI signals.
   m_allowedTools: 111
   m_gridConfig: {fileID: 11400000, guid: e4525421a9ec94fe38646a4b5f8520e6, type: 2}
   m_testSuite: {fileID: 11400000, guid: 188ab4c2a678f4db4922d78fd04bd5ab, type: 2}

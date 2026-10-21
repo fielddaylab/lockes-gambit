@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: MountainStation
   m_EditorClassIdentifier: 
   Title: Mountain Station
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
-  IllustrationFrames: []
+  Icon: {fileID: 21300000, guid: d25958558a27ad447819efb309b813a7, type: 3}
+  IllustrationFrames:
+  - {fileID: 21300000, guid: a6e5f7cb953c8504f98dfcc7e5d0ff4c, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
+  CaptionText: 
   BodyText: Mountain Station is the first employee owned orbiting station. While
     FR robots still work at the station, human workers hold a strong influence in
     accordance to Wayward Compact.

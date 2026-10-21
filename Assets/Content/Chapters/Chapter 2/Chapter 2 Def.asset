@@ -21,8 +21,14 @@ MonoBehaviour:
   - m_HashValue: 1571298950
   ExcludeFromResearch: []
   UnlockSpecialProperties: 0
+  ComicPackage:
+    m_HashValue: 3357582356
   Script: {fileID: -1942890987711236906, guid: b81d2649e3a8e4f378937607370ab525, type: 3}
   SkyboxMaterial: {fileID: 2100000, guid: 4e3dcd7423137994e8ded390696ecea2, type: 2}
   SkyboxRotation: 0
   MusicPlaylist:
     m_HashValue: 3236101567
+  HazardHeader: 
+  HazardDescription: 
+  CumulativeMinProfit: 3
+  CumulativeMaxTime: 7

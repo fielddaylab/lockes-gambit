@@ -1,3 +1,4 @@
+using BeauRoutine;
 using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.Music;
@@ -16,6 +17,7 @@ namespace SpaceFab.Design {
         public SuiteHeader[] InputHeaders;
         public SuiteHeader[] OutputHeaders;
         public SuiteRowV2[] Rows;
+        public RectTransform RowHighlight;
 
         [Header("Interactions")]
         public GuiButton TestButton;
@@ -234,6 +236,10 @@ namespace SpaceFab.Design {
                     break;
                 }
             }
+        }
+        static public void SetRowHighlighted(SimTableLayout layout, InputToggleState toggleState) {
+            RectTransform parentTransform = (RectTransform)layout.Rows[toggleState.LastMatchedRowIndex].transform;
+            layout.RowHighlight.localPosition = parentTransform.localPosition;
         }
 
         static public void SetRowPending(SimTableLayout layout, SuiteRowV2 row, SuiteVisualConfig config) {

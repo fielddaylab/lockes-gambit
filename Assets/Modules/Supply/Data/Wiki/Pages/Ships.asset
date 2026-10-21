@@ -15,16 +15,18 @@ MonoBehaviour:
   Title: Ships
   Icon: {fileID: 21300000, guid: 25fad445b86469e469e3a713fb2b64e5, type: 3}
   IllustrationFrames:
-  - {fileID: 21300000, guid: 53bd7128933aff441a617b67d9ce7780, type: 3}
+  - {fileID: 21300000, guid: a34346aabbc7af64bb43e5ad5d6b0bb7, type: 3}
   IllustrationFPS: 0.5
-  BodyText: '1: Engine Power
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: '1. Engine Speed: Faster haulers take long routes with less time.
 
-    2: Cargo Capacity
+    2.
+    Cargo Capacity
 
-    3: Cargo Loaded
+    3. Cargo Loaded
 
-    4:
-    Vessel ID'
+    4. Hauler ID'
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

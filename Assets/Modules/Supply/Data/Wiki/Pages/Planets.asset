@@ -13,18 +13,20 @@ MonoBehaviour:
   m_Name: Planets
   m_EditorClassIdentifier: 
   Title: Planets
-  Icon: {fileID: 21300000, guid: 790ba57cb9a4602478cd954a1e03ae0f, type: 3}
+  Icon: {fileID: 21300000, guid: ab233415b326fad4fa56d4e27aef3985, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 97db4a19437d3e746846ab4f89083c88, type: 3}
   IllustrationFPS: 0.5
-  BodyText: '1: Planet Material
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: '1: Planet material
 
     2: Production Cost
 
     3: Production Time
 
     4:
-    Risk Level'
+    Risk delays and extra cost'
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

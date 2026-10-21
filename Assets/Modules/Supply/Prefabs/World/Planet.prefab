@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 8.683007, y: 8.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3687948971506205187
@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  Time: 1
   Cost: 2
   Risk: 0
+  Time: 1
   MaterialType:
     m_HashValue: 1163381446
   ConversionInputType:
@@ -145,6 +145,8 @@ MonoBehaviour:
   Cursor: {fileID: 1683349872946723301}
   Renderer: {fileID: 2809890985908838907}
   InfoPopup: {fileID: 7742464704568207431}
+  WikiPage:
+    m_HashValue: 0
 --- !u!114 &2809890985908838907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +311,10 @@ PrefabInstance:
     - target: {fileID: 1975859876592938199, guid: 00ae3a4afe299fd4089393a5c990b2bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6950982471180621614, guid: 00ae3a4afe299fd4089393a5c990b2bd, type: 3}
+      propertyPath: Tooltip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7171904083242372109, guid: 00ae3a4afe299fd4089393a5c990b2bd, type: 3}
       propertyPath: m_Name

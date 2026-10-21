@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Stations
   m_EditorClassIdentifier: 
   Title: Stations
-  Icon: {fileID: 21300000, guid: 11eb2118b7b48944ca536e5d2baf800e, type: 3}
+  Icon: {fileID: 21300000, guid: 26102969c9f561241a80fc61a5a2c97c, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: af796f6e264c36e4e96ede81a714fea0, type: 3}
   IllustrationFPS: 0.5
-  BodyText: '1: Planet Material
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: '1: Station Material
 
     2: Production Cost
 

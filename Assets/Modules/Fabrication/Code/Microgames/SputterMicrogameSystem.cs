@@ -46,6 +46,7 @@ namespace SpaceFab.Fabrication.Microgames
             if (!state.InputAccepted)
                 return;
 
+            SputterMicrogameUtility.ShowMirrorHighlight(deltaTime);
             float angle = state.SputterHeadAnchor.eulerAngles.z;
             float rotationSpeed = 15f;
 
@@ -67,7 +68,7 @@ namespace SpaceFab.Fabrication.Microgames
             RaycastHit2D hit = Physics2D.Raycast(startPosition, direction, 100f, ~(1 << 2));
 
             SpriteRenderer hitEffect = state.sputerHitImg;
-            hitEffect.enabled = state.IsTrajectoryDisplayed;
+            hitEffect.enabled = state.IsTrajectoryDisplayed && hit.collider.name == "Mirror";
             state.TrajectoryPreview.enabled = state.IsTrajectoryDisplayed;
             state.TrajectoryPreview.SetPosition(0, startPosition);
             state.TrajectoryPreview.SetPosition(1, hit.point);
@@ -88,7 +89,10 @@ namespace SpaceFab.Fabrication.Microgames
             {
                 //state.TrajectoryPreview.enabled = true;
                 state.FlashTime -= Frame.DeltaTime;
-                hitEffect.enabled = true;
+                if (hit.collider.name == "Mirror")
+                {
+                    hitEffect.enabled = true;
+                }
 
                 if (state.FlashTime <= 0f)
                 {
@@ -102,6 +106,10 @@ namespace SpaceFab.Fabrication.Microgames
             {
                 direction = Quaternion.Euler(0, 0, -angle) * Vector2.right;
                 hit = Physics2D.Raycast(hit.point + direction * 0.01f, direction, 100f, ~(1 << 2));
+                if (state.IsTrajectoryDisplayed)
+                {
+                    state.MirrorHighlight.enabled = false;
+                }
             }
 
             if (state.SputterPattern.CompletelyFilled)

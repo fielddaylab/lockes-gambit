@@ -18,6 +18,6 @@ namespace SpaceFab.Design {
     public enum ToolbarLayer : byte {
         Metal = 0,
         Transistor = 1,
-        Erase = 2
+        Other = 2
     }
 }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level15_CompactNAND
   m_EditorClassIdentifier: 
   m_title: Compact NAND
+  m_description: A tiny NAND with Diamond's special properties could make for a powerful
+    supercomputer!
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 87b3877c4e8a2407b8e2a5a1570a8864, type: 2}
   m_testSuite: {fileID: 11400000, guid: ec0169ef95edc47688bb58da60187ba4, type: 2}

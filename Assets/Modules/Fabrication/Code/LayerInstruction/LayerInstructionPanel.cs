@@ -10,8 +10,9 @@ namespace SpaceFab.Fabrication.LayerInstructions
 {
     /// <summary>
     /// View component for the Layer Instruction Panel. Shows one row per layer authored on the
-    /// sequence's Layer Instruction asset. Shown briefly when the lead-in countdown ends, and in
-    /// place of the completion recap when a completed step moves the sequence to a new chunk.
+    /// sequence's Layer Instruction asset. Held on screen during PreAttempt until the player presses
+    /// Start, shown briefly when a reset's lead-in countdown ends, and in place of the completion
+    /// recap when a completed step moves the sequence to a new chunk.
     /// </summary>
     public class LayerInstructionPanel : BatchedComponent
     {
@@ -86,6 +87,23 @@ namespace SpaceFab.Fabrication.LayerInstructions
             m_introRoutine.Replace(this, ShowAndHide());
         }
 
+        // Fades the panel in and leaves it up until Hide (used in PreAttempt). No-op if Initialize
+        // built no rows.
+        public void ShowAndHold()
+        {
+            if (m_rows.Count == 0) {
+                return;
+            }
+            m_introRoutine.Replace(this, FadeIn());
+        }
+
+        // Stops any show routine and hides the panel immediately.
+        public void Hide()
+        {
+            m_introRoutine.Stop();
+            SetVisible(false);
+        }
+
         // True if this panel has rows and the step after completedIndex is on a different chunk.
         // The final step returns false, so the sequence's last step still plays the normal recap.
         public bool IsChunkChange(FabricationStep[] steps, int completedIndex)
@@ -116,6 +134,13 @@ namespace SpaceFab.Fabrication.LayerInstructions
             Group.alpha = visible ? 1f : 0f;
             Group.interactable = visible;
             Group.blocksRaycasts = visible;
+        }
+
+        private IEnumerator FadeIn()
+        {
+            SetVisible(true);
+            Group.alpha = 0f;
+            yield return Group.FadeTo(1f, FadeSeconds);
         }
 
         private IEnumerator ShowAndHide()

@@ -16,6 +16,8 @@ namespace SpaceFab.Fabrication
 
         [Header("-- DEBUG --")]
         public FabricationLevel DEBUG_FabricationLevel;
+        public MicrogameStationConfig DEBUG_StationConfig;
+
 
 #if UNITY_EDITOR
         void IEditorOnlyData.ClearEditorData(bool isDevelopmentBuild) {

@@ -288,6 +288,19 @@ namespace FieldDay.UI.Widgets {
     }
 
     /// <summary>
+    /// Widget add/remove preview.
+    /// </summary>
+    public struct GuiDataWidgetPreview<TValue> {
+        public readonly TValue Current;
+        public readonly TValue Preview;
+
+        public GuiDataWidgetPreview(in TValue current, in TValue preview) {
+            Current = current;
+            Preview = preview;
+        }
+    }
+
+    /// <summary>
     /// Indicates that a widget contains a value of some type.
     /// </summary>
     public interface IGuiDataWidget {
@@ -302,5 +315,13 @@ namespace FieldDay.UI.Widgets {
     public interface IGuiDataWidget<TValue> : IGuiDataWidget {
         TValue Value { get; }
         void SetValue(TValue value, GuiWidgetUpdateFlags flags = 0);
+    }
+
+    /// <summary>
+    /// Indicates that a widget can preview a specific value.
+    /// </summary>
+    public interface IGuiDataPreviewWidget<TValue> : IGuiDataWidget<TValue> {
+        void SetPreview(TValue value, GuiWidgetUpdateFlags flags = 0);
+        void ClearPreview(GuiWidgetUpdateFlags flags = 0);
     }
 }

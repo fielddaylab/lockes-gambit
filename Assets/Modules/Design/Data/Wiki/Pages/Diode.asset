@@ -12,17 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Diode
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Diode
-  m_Icon: {fileID: 21300000, guid: 1f7db89319a69c54695c24b2efe5afec, type: 3}
-  m_IllustrationFrames:
+  Title: Diode
+  Icon: {fileID: 21300000, guid: 1f7db89319a69c54695c24b2efe5afec, type: 3}
+  IllustrationFrames:
   - {fileID: 21300000, guid: 3b56c824fd269d946bed5dbaa434e83a, type: 3}
   - {fileID: 21300000, guid: c5a13df059f84e4468cef648668f954a, type: 3}
-  m_IllustrationFPS: 0.5
-  m_Body: A Diode is formed from N-Type connected to P-Type. It only allows HIGH
-    signals, flowing from P to N.
-  m_MaterialId:
+  - {fileID: 21300000, guid: a117aef7f1f2e59478493c4c6b06368d, type: 3}
+  - {fileID: 21300000, guid: 50a8aa3feaca4204191b82b1fe03142c, type: 3}
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: A Diode is formed by connecting P-Type and N-Type. It only allows HI
+    signals, and only flowing from P to N.
+  MaterialId:
     m_HashValue: 0
-  m_IsObservationPage: 0
-  m_ObservationType: 0
-  m_PropertyCheck: {fileID: 0}
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

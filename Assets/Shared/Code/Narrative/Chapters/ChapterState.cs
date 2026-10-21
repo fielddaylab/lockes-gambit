@@ -8,6 +8,7 @@ using FieldDay.Music;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
 using FieldDay.SharedState;
+using SpaceFab.Comic;
 using SpaceFab.Design;
 using SpaceFab.Save;
 using System;
@@ -177,9 +178,21 @@ namespace SpaceFab
 
             // advance chapter
             chapterState.ChapterIndex++;
-            progressState.RecentlyCompletedContract = contractState.ContractId;
-            SaveUtility.Save(SaveSlot.Main);
-            Game.Scenes.ReloadMainScene();
+
+            Find.GlobalAsset(out ChapterManifest chapterManifest);
+
+            ContractUtility.UnloadContractData(contractState);
+
+            if (chapterState.ChapterIndex >= chapterManifest.Chapters.Length) {
+                ComicScripting.LoadComic(chapterManifest.EpilogueComicPackage);
+                Game.Scenes.GetQueuedLoadContext(out SceneRequestContext context);
+                context.Set("QueueCredits", true);
+                context.Set("UnloadChapter", true);
+                Game.Scenes.QueueMainLoadContext(context);
+            } else {
+                SaveUtility.Save(SaveSlot.Main);
+                ComicScripting.LoadComicForCurrentChapter();
+            }
         }
     }
 }

@@ -15,15 +15,15 @@ $endif
 @when       !MinigameHasValidSolution()
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
-{@PAL}  You will need a Conductor for this contract.
 $if     !temp:wikiOpened
+    $call   PointElement(supply:shopping-list)
+    {@PAL}  You will need a Conductor for this contract.
     $wait   2
     $call   OpenWikiTo("Materials", "Copper")
     $set    temp:wikiOpened = true
 $else
     {@PAL}  Select a segment to <color=red>DELETE</color> and build a new route.
 $endif
-//TODO add highlight pointer to contract
 
 
 :: FirstNodeClicked
@@ -42,7 +42,7 @@ $call   ReleaseAllHighlights()
 $call   CloseWiki()
 $if IsMaterialCollected("Copper")
     $call   HighlightElement(supply:confirm-btn)
-    {@PAL}  Click <color=yellow>CONFIRM ROUTES</color> to commit your supply routes./n/n To modify your route, click on a segment to <color=red>DELETE</color>.
+    {@PAL}  Click <color=yellow>CONFIRM ROUTES</color> to commit your supply routes.\n\nTo modify your route, click on a segment to <color=red>DELETE</color>.
 $else
     {@PAL}  Uh-oh, this material wasn't a Conductor.\n\nTo modify your route, click on the <color=yellow>HAULER</color>.
     $wait   2

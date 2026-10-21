@@ -1,4 +1,5 @@
 using BeauUtil;
+using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.Debugging;
 using FieldDay.Scenes;
@@ -81,6 +82,13 @@ namespace SpaceFab.Design
             // the global lookup by the active minigame's id, point the exit pipeline at it, and kick
             // the pipeline. The Exiting phase exports + saves before the reload.
             MinigameUtility.Exit(Game.Scenes.MainScene());
+        }
+
+        public static void PopulateDescriptionPanel(SimulateUIState uiState, LevelData levelData) {
+            Assert.NotNull(uiState.TitleText);
+            Assert.NotNull(uiState.DescriptionText);   
+            uiState.TitleText.text = levelData.GetTitle();
+            uiState.DescriptionText.text = levelData.GetDescription();
         }
 
         public static void ApplyWikiPageUnlocks(PlayerProgressState playerProgress, LevelData levelData) {
