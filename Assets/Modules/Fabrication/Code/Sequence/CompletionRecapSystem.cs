@@ -56,7 +56,7 @@ namespace SpaceFab.Fabrication.Sequence
                 {
                     recapState.RecapRoutine.Replace(layerPanel.ChunkChangeRoutine(steps, justCompleted));
                 }
-                else
+                else if (recapState.RecapEnabled)
                 {
                     recapState.RecapRoutine.Replace(CompletionRecapUtility.PlayRecap(recapState, sequenceState, justCompleted));
                 }

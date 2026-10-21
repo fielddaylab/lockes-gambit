@@ -60,6 +60,8 @@ namespace SpaceFab.Fabrication.Sequence
         // re-arm StationControlState.ExitTimerExternalHold (which holds the exit phase open).
         [NonSerialized] public bool RecapInProgress;
 
+        public bool RecapEnabled = true;
+
         public void OnRegister()
         {
             RecapRequested = false;
