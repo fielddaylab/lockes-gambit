@@ -21,7 +21,6 @@ namespace SpaceFab.Fabrication {
                 new SysUpdate(GameLoopPhase.Update, 0, UpdateMasks.PostAttemptMask),
                 new SysPermissions()
                     .ReadWriteShared<ModeState>()
-                    .ReadWriteShared<ResultDisplayState>()
                     .ReadWriteShared<FabricationMinigameState>()
                     .ReadShared<TimeState>()
                     .ReadShared<WaferState>()
@@ -32,7 +31,6 @@ namespace SpaceFab.Fabrication {
         static private void ProcessWork(float deltaTime) {
             Find.State(
                 out ModeState modeState,
-                out ResultDisplayState displayState,
                 out SequenceState sequenceState,
                 out ContractState contractState
                 );
@@ -67,7 +65,7 @@ namespace SpaceFab.Fabrication {
 
                 // display results
                 Log.Msg("[PostAttemptSystem] displaying results");
-                displayState.DisplayRequestedThisFrame = true;
+                Find.State<FabResultsPanel>().Show();
             }
         }
     }

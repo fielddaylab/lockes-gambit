@@ -8,16 +8,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace SpaceFab.UI {
-    [RequireComponent(typeof(Mask), typeof(MaskableGraphic))]
+    [RequireComponent(typeof(Mask), typeof(MaskableGraphic), typeof(CanvasGroup))]
     public sealed class DitherFadeGroup : MonoBehaviour, IBaked {
         [NonSerialized] public Mask Mask;
         [NonSerialized] public MaskableGraphic Graphic;
+        [NonSerialized] public CanvasGroup CanvasGroup;
 
         [NonSerialized] public AnimHandle QuickAnim;
 
         public void SetAlpha(float alpha) {
             this.CacheComponent(ref Mask);
             this.CacheComponent(ref Graphic);
+            this.EnsureComponent(ref CanvasGroup);
 
             bool enabled = alpha < 1;
             Mask.enabled = Graphic.enabled = enabled;
@@ -25,6 +27,8 @@ namespace SpaceFab.UI {
             Color graphicColor = Graphic.color;
             graphicColor.a = alpha;
             Graphic.color = graphicColor;
+
+            CanvasGroup.alpha = alpha > 0 ? 1 : 0;
         }
 
         private void OnDisable() {
