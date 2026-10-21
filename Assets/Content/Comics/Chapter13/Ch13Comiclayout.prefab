@@ -5240,15 +5240,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[2]
-      value: d8e79c4859631301584419a1bf74ea89
+      value: b10dc07d327155242601954e0242e9b4
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[3]
-      value: c47649a48e59f72904743d39c827066d
+      value: e9b5f319b13a24a6fb755dd581ac457a
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[4]
-      value: 743680d3b878cecdc58bda8e3742d871
+      value: 772a9b0eae33a7a664f452c05ad75515
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[5]
@@ -5260,11 +5260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[7]
-      value: 740a99ef9eb72b06cc88ac0f9c530839
+      value: 41d6d9f048897d4fde17113004c648e3
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[8]
-      value: 1b04f0f0a20b78c8612a10e60b294d96
+      value: 9a75df42bf853ce691814b34d7cc888c
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[9]
@@ -5337,6 +5337,10 @@ PrefabInstance:
     - target: {fileID: 8307515485380065297, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_Name
       value: Ch13Comiclayout
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307515485380065297, guid: d2982777c8102c148b7a490afc74929c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

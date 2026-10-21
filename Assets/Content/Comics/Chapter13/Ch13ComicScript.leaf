@@ -36,6 +36,9 @@ $ComicOpenSpawnPanel(4, 1)
 $call ComicNextButton()
 
 $ComicOpenSpawnPanel(5, 1)
+
+
+$ComicOpenSpawnPanel(6, 1)
 $call ComicNextButton()
 
 // page 2
@@ -52,6 +55,9 @@ $ComicOpenSpawnPanel(1, 0.5)
 $call ComicNextButton()
 
 $ComicOpenSpawnPanel(2, 0.5)
+$call ComicNextButton()
+
+$ComicOpenSpawnPanel(3, 0.5)
 $call ComicNextButton()
 
 // page 3
@@ -106,6 +112,10 @@ $call ComicNextButton()
 
 $ComicOpenSpawnPanel(2, 0.5)
 $call ComicNextButton()
+
+$ComicOpenSpawnPanel(3, 0.5)
+$call ComicNextButton()
+
 
 // page 6
 
