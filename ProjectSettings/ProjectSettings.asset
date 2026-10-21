@@ -283,8 +283,8 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   chromeosInputEmulation: 1
-  AndroidMinifyRelease: 0
-  AndroidMinifyDebug: 1
+  AndroidMinifyRelease: 1
+  AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 1
   AndroidAppBundleSizeToValidate: 150
   m_BuildTargetIcons: []
@@ -678,11 +678,11 @@ PlayerSettings:
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
   webGLMemorySize: 32
-  webGLExceptionSupport: 3
+  webGLExceptionSupport: 1
   webGLNameFilesAsHashes: 0
   webGLShowDiagnostics: 0
   webGLDataCaching: 1
-  webGLDebugSymbols: 1
+  webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
   webGLTemplate: PROJECT:FieldDay
@@ -708,10 +708,10 @@ PlayerSettings:
   scriptingBackend: {}
   il2cppCompilerConfiguration:
     Standalone: 0
-    WebGL: 0
+    WebGL: 2
   il2cppCodeGeneration:
     Standalone: 1
-    WebGL: 1
+    WebGL: 0
   managedStrippingLevel:
     EmbeddedLinux: 1
     GameCoreScarlett: 1
@@ -723,7 +723,7 @@ PlayerSettings:
     Stadia: 1
     Standalone: 2
     VisionOS: 1
-    WebGL: 2
+    WebGL: 3
     Windows Store Apps: 1
     XboxOne: 1
     iPhone: 1

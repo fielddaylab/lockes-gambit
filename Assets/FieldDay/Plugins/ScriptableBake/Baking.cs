@@ -651,6 +651,26 @@ namespace ScriptableBake {
             return null;
         }
 
+#if USING_BEAUUTIL
+
+        /// <summary>
+        /// Finds the asset with the given name and type.
+        /// </summary>
+        static public TAsset FindAsset<TAsset>(BeauUtil.StringHash32 nameHash) where TAsset : UnityEngine.Object {
+            foreach (var path in AssetPaths(SearchFilter(typeof(TAsset)))) {
+                foreach (var obj in AssetDatabase.LoadAllAssetsAtPath(path)) {
+                    TAsset asset = obj as TAsset;
+                    if (asset && asset.name == nameHash) {
+                        return asset;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+#endif // USING_BEAUUTIL
+
         /// <summary>
         /// Finds all assets with the given type.
         /// </summary>
