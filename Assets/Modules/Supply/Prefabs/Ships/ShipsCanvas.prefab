@@ -494,6 +494,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1415826598026924232}
     m_Modifications:
+    - target: {fileID: 504016762534185565, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
+      propertyPath: Tooltip
+      value: 'Travels along routes to gather materials.\n<b>Speed: 3</b>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 504016762534185565, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
+      propertyPath: TooltipHeader
+      value: Hauler B
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373551314509532648, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
+      propertyPath: Tooltip
+      value: 'Travels along routes to gather materials.\n<b>Speed: 2</b>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373551314509532648, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
+      propertyPath: TooltipHeader
+      value: Hauler A
+      objectReference: {fileID: 0}
     - target: {fileID: 1467810797355140762, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
       propertyPath: m_Name
       value: Panel
@@ -501,6 +517,14 @@ PrefabInstance:
     - target: {fileID: 2056068357822711169, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -148.10999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442994032115495559, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
+      propertyPath: Tooltip
+      value: 'Travels along routes to gather materials.\n<b>Speed: 1</b>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442994032115495559, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
+      propertyPath: TooltipHeader
+      value: Hauler C
       objectReference: {fileID: 0}
     - target: {fileID: 2827306729075227721, guid: 6c6439a90834e964389a26c51c61763b, type: 3}
       propertyPath: m_AnchoredPosition.y

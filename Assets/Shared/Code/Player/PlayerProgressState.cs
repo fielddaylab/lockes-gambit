@@ -1,15 +1,12 @@
 using BeauUtil;
+using BeauUtil.Debugger;
 using FieldDay;
-using FieldDay.Assets;
 using FieldDay.Data;
 using FieldDay.SharedState;
 using SpaceFab.Materials;
 using SpaceFab.Save;
-using SpaceFab.UI;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace SpaceFab
 {
@@ -39,6 +36,9 @@ namespace SpaceFab
         // are exposed. Account-scoped, so it persists across minigames.
         [NonSerialized] public HashSet<StringHash32> UnlockedWikiPages;
 
+        [NonSerialized] public int NumActiveGoals;
+        [NonSerialized] public BitSet32 ActiveGoalIndices;
+        [NonSerialized] public int LastCompletedGoalIndex = -1;
         #endregion // Save State
 
         [NonSerialized] public Dictionary<StringHash32, MaterialPropertyRecord> MaterialProperties;
@@ -98,7 +98,13 @@ namespace SpaceFab
             }
 
             InitialUnlocksApplied = reader.Read<bool>();
-            
+
+            if (consts.Version >= 5) {
+                LastCompletedGoalIndex = reader.Read<int>();
+            }
+            if (consts.Version >= 6) {
+                ActiveGoalIndices = reader.Read<BitSet32>();
+            }
         }
 
         public void Write(object self, ref ByteWriter writer, SaveStateChunkConsts consts)
@@ -121,6 +127,8 @@ namespace SpaceFab
             writer.Write(DopingChamberUnlocked);
             writer.Write(SpecialPropertiesUnlocked);
             writer.Write(InitialUnlocksApplied);
+            writer.Write(LastCompletedGoalIndex);
+            writer.Write(ActiveGoalIndices);
         }
 
         void ISaveStatePostLoad.PostLoad(SaveStateChunkConsts consts) {
@@ -278,6 +286,24 @@ namespace SpaceFab
                     state.MaterialProperties[materialOrder.GetId(i)] = record;
                 }
             }
+        }
+        public static void SetGoalActive(PlayerProgressState progress, int goalIndex, bool active) {
+            progress.ActiveGoalIndices[goalIndex] = active;
+            progress.NumActiveGoals += active ? 1 : -1;
+            if (progress.NumActiveGoals < 0) {
+                Log.Error("[PlayerProgressState] Negative active goals!? Something has gone wrong!! Setting to zero...");
+                progress.NumActiveGoals = 0;
+            }
+        }
+
+        // for load: convert the goal index into an id
+        [Obsolete]
+        public static StringHash32 GetGoalId(int idx) {
+            ProgressGoal[] goals = Find.GlobalAsset<GoalList>().Goals;
+            if (idx >= 0 && idx < goals.Length) {
+                return goals[idx].Id;
+            }
+            return null;
         }
     }
 }

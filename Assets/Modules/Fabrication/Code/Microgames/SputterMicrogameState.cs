@@ -65,8 +65,8 @@ namespace SpaceFab.Fabrication.Microgames
     public static class SputterMicrogameUtility
     {
         // Tunables for the particle shower spawned when a pulse reflects off the target.
-        private const int ShowerParticleCount = 8;
-        private const float ShowerSpreadAngle = 25f;
+        private const int ShowerParticleCount = 6;
+        private const float ShowerSpreadAngle = 15f;
         private const float ShowerParticleSpeed = 5f;
         private const float ShowerAngleJitter = 2f;
 

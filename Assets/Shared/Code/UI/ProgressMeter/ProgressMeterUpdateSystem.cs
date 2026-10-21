@@ -38,6 +38,11 @@ namespace SpaceFab {
                 // Update pending cycles
                 int numPendingCycles = ProgressMeterUtility.CalculatePendingCycleCells(meterState.ActiveMeter, saveStates);
                 int fabCycles = Mathf.Max(0, saveStates.Fabrication.FinalizedTotalCycles);
+
+                if (Game.SharedState.TryGet(out ContractViewState viewState) && viewState.CurrentMode == OverarchingContractMode.Complete) {
+                    fabCycles = 0;
+                }
+
                 int filledEnd = progressState.ElapsedCycles + fabCycles;
 
                 int pendingEnd = progressState.ElapsedCycles + Mathf.Max(fabCycles, numPendingCycles);

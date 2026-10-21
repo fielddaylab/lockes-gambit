@@ -590,8 +590,8 @@ namespace FieldDay.Scenes {
         /// Unloads all scenes with the given tag.
         /// </summary>
         public void UnloadScenesByTag(StringHash32 tag) {
-            Assert.False(m_MainSceneLoadProcess.Exists(), "Cannot unload by tag during main scene loading");
             if (m_MainScene != null && m_MainScene.SceneTag == tag) {
+                Assert.False(m_MainSceneLoadProcess.Exists(), "Cannot unload main scene by tag during main scene loading");
                 m_UnloadQueue.PushBack(new UnloadSceneArgs() {
                     Data = m_MainScene,
                     Options = 0,

@@ -18,10 +18,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78093ac5e7fad463894f49b0b629d47c, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Depletion II
-  m_description: This is where the contract is described
+  m_description: "\uF0A7We need faster 3-D food printers for our synth-meat labs
+    across the Forsch Sector."
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm4
+    m_HashValue: 3331460187
   m_payout: 12
   m_expectedDuration: 5
   m_expectedProfit: 3

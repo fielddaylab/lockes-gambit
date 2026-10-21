@@ -19,10 +19,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Limiter
-  m_description: This is where the contract is described
+  m_description: "\uF0A7These limiter chips will help us spread the good word of
+    Frontier in all of our shopping centers!"
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm1
+    m_HashValue: 3381793044
   m_payout: 13
   m_expectedDuration: 6
   m_expectedProfit: 5

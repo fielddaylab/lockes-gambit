@@ -26,9 +26,9 @@ namespace SpaceFab.Fabrication.Microgames
         public static MicrogameStationConfig GetStationConfig()
         {
             Find.State(out ContractState contractState);
-            if (contractState.ContractAssets != null && contractState.ContractAssets.StationConfig != null)
+            if (contractState.ContractAssets != null && !contractState.ContractAssets.StationConfigId.IsEmpty)
             {
-                return contractState.ContractAssets.StationConfig;
+                return Find.NamedAsset<MicrogameStationConfig>(contractState.ContractAssets.StationConfigId);
             }
             if (DebugFlags.LaunchedFromThisScene)
             {

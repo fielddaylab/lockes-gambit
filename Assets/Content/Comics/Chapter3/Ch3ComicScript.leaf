@@ -10,7 +10,7 @@
 @function   ComicPreload
 $call ComicPreloadPage(0)
 $call ComicSnapCamera("Camera")
-$call MusicPreload("Comic.Music.Serious")
+$call MusicPreload("Comic.Music.HomeAmongStars")
 
 :: Execute
 @trigger    ComicExecute
@@ -18,20 +18,14 @@ $call MusicPreload("Comic.Music.Serious")
 
 // page 1
 
-$call MusicLoop("Comic.Music.Serious")
+$call MusicLoop("Comic.Music.HomeAmongStars")
 $call ComicOpenPage(0)
 
 $call ComicPreloadNextPage()
 $ComicOpenSpawnPanel(0, 0.5)
-$call ComicNextButton()
-
 $ComicOpenSpawnPanel(1, 0.5)
-$call ComicNextButton()
-
 $ComicOpenSpawnPanel(2, 0.5)
 $ComicOpenSpawnPanel(3, 1)
-$call ComicNextButton()
-
 $ComicOpenSpawnPanel(4, 1)
 $ComicOpenSpawnPanel(5, 1)
 $call ComicNextButton()
@@ -43,19 +37,16 @@ $call ComicPanCameraAsync("Camera", 1)
 $wait 0.5
 
 $ComicOpenSpawnPanel(0, 0.5)
+
 $call ComicUnloadPreviousPage()
-$call ComicNextButton()
-
 $call ComicPreloadNextPage()
-$ComicOpenSpawnPanel(1, 0.5)
-$call ComicNextButton()
 
+$ComicOpenSpawnPanel(1, 0.5)
 $ComicOpenSpawnPanel(2, 1)
-$ComicOpenSpawnPanel(3, 0.5)
 $call ComicNextButton()
+$ComicOpenSpawnPanel(3, 0.5)
 
 $ComicOpenSpawnPanel(4, 1)
-$call ComicNextButton()
 $ComicOpenSpawnPanel(5, 1)
 $call ComicNextButton()
 
@@ -66,18 +57,15 @@ $call ComicSnapCamera("Camera")
 $call ComicUnloadPreviousPage()
 
 $ComicOpenSpawnPanel(0, 1)
+$call ComicNextButton()
 $ComicOpenSpawnPanel(1, 1)
-$call ComicNextButton()
 $ComicOpenSpawnPanel(2, 0.5)
-$call ComicNextButton()
 
 $call ComicPreloadNextPage()
 
 $ComicOpenSpawnPanel(3, 0.5)
-$call ComicNextButton()
 $ComicOpenSpawnPanel(4, 0.5)
 $ComicOpenSpawnPanel(5, 1)
-$call ComicNextButton()
 $ComicOpenSpawnPanel(6, 0.5)
 $call ComicNextButton()
 $wait 1
@@ -89,15 +77,13 @@ $call ComicPanCameraAsync("Camera", 0.5)
 $wait 0.2
 
 $ComicOpenSpawnPanel(0, 1)
-$call ComicNextButton()
 
 $call ComicUnloadPreviousPage()
+
 $ComicOpenSpawnPanel(1, 1)
 $ComicOpenSpawnPanel(2, 1)
 $call ComicPreloadNextPage()
 $ComicOpenSpawnPanel(3, 0.5)
-$call ComicNextButton()
-
 $ComicOpenSpawnPanel(4, 0.5)
 $ComicOpenSpawnPanel(5, 0.5)
 $call ComicNextButton()
@@ -110,16 +96,18 @@ $call ComicPanCameraAsync("Camera", 1)
 $wait 0.5
 
 $ComicOpenSpawnPanel(0, 0.5)
+
 $call ComicUnloadPreviousPage()
-$call ComicNextButton()
 
-$call ComicPreloadNextPage()
 $ComicOpenSpawnPanel(1, 0.5)
-$call ComicNextButton()
-
 $ComicOpenSpawnPanel(2, 0.5)
 $ComicOpenSpawnPanel(3, 1)
 $call ComicNextButton()
-
 $ComicOpenSpawnPanel(4, 1)
+$call ComicNextButton()
+$ComicOpenSpawnPanel(5, 1)
+
+$ComicOpenSpawnPanel(6, 1)
+$call ComicNextButton()
+$ComicOpenSpawnPanel(7, 0.5)
 $call ComicNextButton()

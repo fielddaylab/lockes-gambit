@@ -3,10 +3,12 @@ using FieldDay;
 using FieldDay.Assets;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
+using FieldDay.UI;
 using Leaf.Runtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace SpaceFab.Comic {
     public sealed class ComicLoader : SceneController, ISceneLoadDependency {
@@ -19,6 +21,8 @@ namespace SpaceFab.Comic {
         [NonSerialized] public StringHash32 ComicId;
         [NonSerialized] public LeafThreadHandle ThreadHandle;
 
+        [NonSerialized] public bool QueuedCredits;
+
         protected override IEnumerator<WorkSlicer.Result?> OnScenePreload() {
             Game.Scenes.GetLoadContext(this, out SceneRequestContext context);
             StringHash32 name = StringHash32.First(context.Task.Name, Game.IsDevBuild ? DEBUG_FallbackManifest : default);
@@ -26,6 +30,15 @@ namespace SpaceFab.Comic {
                 PackageId = name;
                 Game.Assets.LoadStreamedPackage(name);
             }
+            Find.State(
+                out ComicDisplayState displayState
+            );
+            GuiCommands.SetActive(displayState.NextButtonGroup, false);
+
+            ChapterUtility.UnloadChapterData(Find.State<ChapterState>());
+
+            QueuedCredits = context.Get("QueueCredits", false).AsBool();
+
             return null;
         }
 
@@ -80,14 +93,23 @@ namespace SpaceFab.Comic {
         }
 
         private void Finish() {
-            Game.Scenes.LoadMainScene(NextScene);
-            Game.Scenes.QueueMainLoadContext(new SceneRequestContext() {
-                Entrance = ComicId
-            });
+            if (QueuedCredits) {
+                Game.Scenes.LoadMainScene(SceneReference.FromName("Credits"));
+            } else {
+                Game.Scenes.LoadMainScene(NextScene);
+            }
+
+            SceneRequestContext requestContext = default;
+            requestContext.Entrance = ComicId;
+            requestContext.Set("PreserveMusic", true);
+            requestContext.Set("FromComic", true);
+
+            Game.Scenes.QueueMainLoadContext(requestContext);
         }
 
         protected override void OnSceneUnload() {
-            ScriptUtility.OnCutsceneEnd.Deregister(Finish);
+            ScriptUtility.OnCutsceneEnd.Deregister(QueueFinish);
+
             Game.Scenes.DeregisterLoadDependency(this);
             if (!PackageId.IsEmpty) {
                 Game.Assets.UnloadStreamedPackage(PackageId);

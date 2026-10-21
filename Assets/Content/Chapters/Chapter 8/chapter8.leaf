@@ -7,7 +7,7 @@
 
 {@MAL}      Hi-hi-hi-ello Cap-p-p-tain! 
 {@Player}   P.A.L... you look...
-{@MAL}      Whose P.A.L.? I'm M-M-M.A.L.!
+{@MAL}      Who's P.A.L.? I'm M-M-M.A.L.!
 {@MAL}      Your trusty-trust-tru-5%$@*-!@3#
 {@MAL}      Hi Captain, how can I help you t-today!
 {@Player}   Keela really messed you up huh? 
@@ -20,14 +20,11 @@
 @when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
 @cutscene 
 @once
-//too long - needs to be cut ore moved around. 
 //Incoming call
-{@Ovill}    Locke! 
-{@Xavier}   We're using a proxy channel outside of Frontier's network.
+{@Ovill}    Frontier Headquarters?
+{@Player}	Nope, it's me, Locke.  
+{@Ovill}    Oh shoot. Things have been a mess all morning. 
 {@Ovill}    All of our P.A.L. systems and communication networks are shot! 
-{@Ovill}    I... I-... 
-{@Xavier}   What my hyperventilating friend here is trying to say...
-{@Xavier}   ...is that you need to keep doing business with suppliers loyal to Frontier. 
 //End call
 
 
@@ -35,11 +32,11 @@
 
 // calling quinn
 {@Player}   So you're my new hauler coordinator? Hi, I'm Locke...
-{@Quinn}    Still just me Cowboy. 
+{@Quinn}    Still just me, Cowboy. 
 {@Player}	...Sorry, bot dial. Having some issues here. 
 {@Quinn}	 Later!—
 {@Quinn}	 Wait... Laima Station just opened up for sourcing.
-{@Quinn}	It's out of the way, but that might be a good thing with all the trouble 'round Kalvis.
+{@Quinn}	It's out of the way, but that might be a good option with all the trouble 'round Kalvis.
 
 
 
@@ -53,5 +50,5 @@
 //locke worries that P...MAL won't be a help to him in fab. 
 {@Player}   I'm not sure you're going to be much help in the fab bay.
 {@MAL}      L0o0o—cke, I-I @m in t0p sh@—sh@pe! N0 n0—n0 w0rr!3s.
-{@Player}   Yeah... I think I'm going to trust myself on this one.
+{@Player}   Yeah... I think I'm going to trust myself more on this one.
 

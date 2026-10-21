@@ -42,7 +42,7 @@ MonoBehaviour:
   - StaticMask: 848
     DynamicMask_PDopant: 0
     DynamicMask_NDopant: 0
-  - StaticMask: 400
+  - StaticMask: 656
     DynamicMask_PDopant: 0
     DynamicMask_NDopant: 0
   - StaticMask: 464

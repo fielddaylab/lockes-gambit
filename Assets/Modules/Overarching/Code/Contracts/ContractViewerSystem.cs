@@ -227,15 +227,20 @@ namespace SpaceFab.Overarching {
                 yield return null;
             }
 
+            Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState progressState, out MinigameSaveStates saveStates);
+
             yield return 0.1f;
 
             yield return layout.FadeInContextPanel();
             yield return 1;
 
-            var trigger = ScriptUtility.Trigger("BeforeContractEvaluation");
-            do {
-                yield return null;
-            } while (trigger.IsRunning());
+            using (var t = TempVarTable.Alloc()) {
+                t.Set("risk", MinigameSaveUtility.CurrentRisk(saveStates));
+                var trigger = ScriptUtility.Trigger("BeforeContractEvaluation", t);
+                do {
+                    yield return null;
+                } while (trigger.IsRunning());
+            }
             yield return 0.25f;
 
             bool forceFailure = DebugInput.IsDown(KeyCode.F);
@@ -260,7 +265,12 @@ namespace SpaceFab.Overarching {
             yield return layout.Fader.FadeTo(0, 0.3f);
             yield return 0.5f;
 
-            // TODO: animate time and money into progress bar
+            ContractUtility.ApplyCompletedContractState(contractState, progressState, saveStates);
+            Find.State<ProgressMeterState>().NeedsRefresh = true;
+            
+            yield return 0.25f;
+
+            yield return ProgressMeterUtility.ProcessGoals();
 
             var completedThread = ScriptUtility.Trigger("OnChapterEnd");
             do {
@@ -269,8 +279,8 @@ namespace SpaceFab.Overarching {
 
             yield return 0.25f;
 
-            Find.State(out ChapterState chapterState, out ContractState contractState, out PlayerProgressState progressState, out MinigameSaveStates minigameStates);
-            ChapterUtility.LoadNextChapter(chapterState, progressState, contractState, minigameStates);
+            ContractUtility.WipeContractState(contractState, progressState, chapterState, saveStates);
+            ChapterUtility.LoadNextChapter(chapterState, progressState, contractState, saveStates);
         }
 
         static private IEnumerator EvaluateRisk(OverarchingContractLayout layout, bool forceFailure) {
@@ -358,7 +368,10 @@ namespace SpaceFab.Overarching {
             }
 
             using (var t = TempVarTable.Alloc()) {
-                t.Set("EncounteredHazard", encounteredHazard);
+                t.Set("risk", visualRisk);
+                t.Set("encounteredHazard", encounteredHazard);
+                t.Set("timeLost", encounteredHazard ? chapterState.ChapterDefinition.HazardTime : 0);
+                t.Set("moneyLost", encounteredHazard ? chapterState.ChapterDefinition.HazardCost : 0);
                 var thread = ScriptUtility.Trigger("AfterContractEvaluation", t);
                 do {
                     yield return null;

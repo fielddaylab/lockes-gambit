@@ -493,6 +493,7 @@ namespace FieldDay.HID {
         /// Pauses all raycasts and devices.
         /// </summary>
         public void PauseAll() {
+            // Log.Warn("!! PAUSING INPUT {0} !!", m_EventPauseCounter);
             PauseRaycasts();
             PauseDevices();
         }
@@ -503,6 +504,7 @@ namespace FieldDay.HID {
         public void ResumeAll() {
             ResumeDevices();
             ResumeRaycasts();
+            // Log.Warn("!! RESUMING INPUT {0} !!", m_EventPauseCounter);
         }
 
         #endregion // Pausing

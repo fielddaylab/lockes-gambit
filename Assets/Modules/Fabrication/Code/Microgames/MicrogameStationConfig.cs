@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SpaceFab.Fabrication
 {
     [CreateAssetMenu(menuName = "SpaceFab/Fabrication/Station Config")]
-    public class MicrogameStationConfig : ScriptableObject
+    public class MicrogameStationConfig : NamedAsset
     {
         public Sprite[] PhotolithographyMasks;
         public Sprite[] PhotolithographyOutlines;

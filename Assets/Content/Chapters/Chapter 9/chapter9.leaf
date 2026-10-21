@@ -1,9 +1,9 @@
 # basePath Chapter9 
 
-::OnContractSelectOpenCh9
-@trigger 
-@cutscene 
-@once 
+// ::OnContractSelectOpenCh9
+// @trigger 
+// @cutscene 
+// @once 
 
 
 
@@ -14,17 +14,17 @@
 @once 
 
 //incoming call
-{@Ovill}    Hi Locke. We've had reports of some... uh... unauthorized activity...
-{@Ovill}    The... Boron... ppp... PIRATES are charging tolls along our supply routes!
+{@Ovill}    Locke! Have you heard? The... Boron... ppp... PIRATES are ...
 
 //incoming call - interruption of current call
 {@Callie}   Pirates? Oh, how terrifying.
-{@Ovill}    How-how did you get this frequency?! This is an encrypted channel!
+{@Ovill}    What?! Who is this?
 {@Callie}   Why, it is I...
-{@Ovill}    Here we go...
+{@Player}   Here we go...
 {@Callie}   Callie Lee! The Space Pirate Queen of Velos Station!
-{@Player}   Hey Callie. 
-{@Ovill}    This isn't funny! They're taking credits from any shipment that crosses their territory!
+{@Player}   Hey, Callie. Or should I call you Cordelia?
+{@Callie}	Cordelia is long gone. I'm Callie now.
+{@Ovill}    This isn't funny! They're charging tolls on every shipment that crosses their territory!
 {@Ovill}    That's you too, Locke!
 {@Callie}   Sounds like a toll to me.
 {@Ovill}    It's extortion!
@@ -42,8 +42,24 @@
 {@MAL}      Time to submiiiiiiiiiiiiiiiiiii-
 {@MAL}      Hi CaptiAin, howwww are you doing today?
 {@Player}   ...
-{@Player}   Keela's hack is making a mess of everything.
+{@Player}   Keela's hack is complicating things.
 {@Player}   P... M.A.L., after this contract, we need to make a detour. 
 {@Player}	Time to have a chat with Keela. 
 //should leave player questioning if he is going to find Keela to bug her.  
 {@MAL}      Great idea, Captain!
+
+::DisposalFee09
+@trigger    OnGoalCompleted
+@when       goalId == "Goal1"
+@cutscene
+@once
+
+{@Player}   That's it! I've got enough to pay off Frontier!
+{@Player}   <i>Gulp.</i> And now I'm broke again. But I'm a free man!
+{@Player}   Wait, what's this? An invoice from Frontier Robotics?
+$call ActivateGoal("Goal2")
+{@Player}   A charge for "Unauthorized disposal of company property..."
+{@Player}   "Per Section 14, Subsection C, any additional fees or penalties incurred under the original agreement shall be added to the outstanding debt..."
+{@Player}   "...and remain secured against the Constantine until paid in full."
+{@Player}   So until I pay this, Frontier can still take my ship?!
+{@Player}   <i>Sigh...</i> Back to work.

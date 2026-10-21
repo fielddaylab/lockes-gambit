@@ -48,6 +48,34 @@ namespace FieldDay.Music {
         }
 
         /// <summary>
+        /// Sets the current playlist from a music asset.
+        /// </summary>
+        static public bool QueuePlaylistFromAsset(MusicAsset asset) {
+            if (asset == null) {
+                return SetPlaylistIdAndClear(null, -1);
+            }
+
+            if (SetPlaylistId(asset.AssetId)) {
+                ClearFutureQueue();
+                SetRepeatMode(asset.Repeat);
+
+                if (!asset.IntroTrackId.IsEmpty) {
+                    QueueTrack(asset.IntroTrackId, MusicTrackFlags.PlayOnce);
+                }
+
+                for (int i = 0; i < asset.FullTracks.Length; i++) {
+                    QueueTrack(asset.FullTracks[i], i > 0 || !asset.SeamlessIntroTransition ? asset.Transition : default);
+                }
+
+                Play();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Sets the current playlist from a music asset id.
         /// </summary>
         static public bool SetPlaylistFromAssetId(StringHash32 assetId, float fadeOut = -1) {
@@ -56,6 +84,17 @@ namespace FieldDay.Music {
             }
 
             return SetPlaylistFromAsset(Find.NamedAsset<MusicAsset>(assetId), fadeOut);
+        }
+
+        /// <summary>
+        /// Queues a playlist from a music asset id.
+        /// </summary>
+        static public bool QueuePlaylistFromAssetId(StringHash32 assetId) {
+            if (assetId.IsEmpty) {
+                return QueuePlaylistFromAsset(null);
+            }
+
+            return QueuePlaylistFromAsset(Find.NamedAsset<MusicAsset>(assetId));
         }
     }
 }

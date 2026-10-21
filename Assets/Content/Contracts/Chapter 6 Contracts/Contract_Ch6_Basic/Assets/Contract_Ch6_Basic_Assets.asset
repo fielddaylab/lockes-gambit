@@ -16,5 +16,7 @@ MonoBehaviour:
   DesignLevels:
   - {fileID: 11400000, guid: 4a0969ae705f24f389ad8e6d657f51d8, type: 2}
   FabricationLevel: {fileID: 11400000, guid: d0ada8234b60a4c98b7b9e371478eb62, type: 2}
-  StationConfig: {fileID: 11400000, guid: 8194741d601bd4eeaba1aff2c6575903, type: 2}
+  StationConfigId:
+    m_HashValue: 847119777
+  StationConfig: {fileID: 0}
   fabCoefficient: 1

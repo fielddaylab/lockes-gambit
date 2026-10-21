@@ -119,7 +119,7 @@ namespace SpaceFab.Supply {
                         }
                     }
                 } else if (hover.MousePosition.HasValue) {
-                    SupplyRouteUtility.SetDrawingHoverAction(draw, routeData.NodeCount < 2 ? SupplyRouteDrawAction.DeleteRouteAuto : SupplyRouteDrawAction.CompleteRouteAuto, 0);
+                   SupplyRouteUtility.SetDrawingHoverAction(draw, routeData.NodeCount < 2 ? SupplyRouteDrawAction.DeleteRouteAuto : SupplyRouteDrawAction.CompleteRouteAuto, 0);
                 } else {
                     SupplyRouteUtility.SetDrawingHoverAction(draw, SupplyRouteDrawAction.None, 0);
                 }

@@ -398,7 +398,7 @@ namespace FieldDay.Music {
         /// <summary>
         /// Stops playing the current track and clears the queue.
         /// </summary>
-        static public void ClearQueue(float fadeOut = -1) {
+        static public void ClearQueueAndStop(float fadeOut = -1) {
             if (fadeOut >= 0) {
                 Stop(fadeOut);
             } else {
@@ -412,6 +412,22 @@ namespace FieldDay.Music {
             }
 
             music.TrackQueue.Clear();
+        }
+
+        /// <summary>
+        /// Clears all songs not currently playing.
+        /// </summary>
+        static public void ClearFutureQueue() {
+            Find.State(out MusicPlayerState music);
+
+            int limit = music.PlaybackState == MusicPlaybackState.Stopped ? 0 : 1;
+            while (music.TrackQueue.Count > limit) {
+                music.IdAllocator.Free(music.TrackQueue.PopBack().Id);
+            }
+
+            if (music.TrackQueue.Count > 0) {
+                music.TrackQueue[0].Flags |= MusicTrackFlags.PlayOnce;
+            }
         }
 
         #endregion // Queue
@@ -514,7 +530,7 @@ namespace FieldDay.Music {
         /// </summary>
         static public bool SetPlaylistIdAndClear(StringHash32 id, float fadeOut = -1) {
             if (SetPlaylistId(id)) {
-                ClearQueue(fadeOut);
+                ClearQueueAndStop(fadeOut);
                 return true;
             }
 
@@ -550,7 +566,7 @@ namespace FieldDay.Music {
             }
 
             if (clearQueue) {
-                ClearQueue();
+                ClearQueueAndStop();
             }
         }
 

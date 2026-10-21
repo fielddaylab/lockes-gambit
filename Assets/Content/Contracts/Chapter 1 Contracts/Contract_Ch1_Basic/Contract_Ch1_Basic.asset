@@ -18,10 +18,11 @@ MonoBehaviour:
   m_omitFromSupplyRequirements:
   - {fileID: 11400000, guid: 11e34deaa990d3e4e8b4879a1798a4af, type: 2}
   m_title: Connect Chip
-  m_description: This is a Test
+  m_description: "We\u2019re looking for a simple and cheap microchip in high quantity
+    for our autonomous cashiers!"
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm1
+    m_HashValue: 3381793044
   m_payout: 3
   m_expectedDuration: 3
   m_expectedProfit: 1

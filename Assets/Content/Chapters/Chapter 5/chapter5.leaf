@@ -4,13 +4,29 @@
 @trigger    OnContractSelectOpen
 @cutscene
 @once 
-//todo need a bridge between end of comic with keela not picking up the phone. 
 
-{@Player}   	Hey Pal... did Keela call me back?
-{@PAL}      	No. 
-{@PAL}      	But, good news, business is picking up. 
-{@PAL} 			You have two companies offering you contracts. 
-{@PAL}			Scroll through the contracts. You can switch anytime, but you'll have to start over.
+{@Player}   Hey, P.A.L... did Keela call me back?
+{@PAL}      No.
+{@PAL}      But business is picking up! 
+{@PAL}      Two clients are asking for microchips from us!
+
+//TODO onboard scroll through the contracts - add highlights
+//$call   PointElement(overarching:CONTRACT-SCROLL-ELEMENT)
+{@PAL}      Take a look at the contracts and pick one!
+//$call   ReleaseAllHighlights()
+
+//TODO onboard difficulty level - add highlight
+//$call   PointElement(overarching:CONTRACT-DIFFICULTY-ELEMENT)
+{@PAL}      Here's the difficulty rating...
+//$call   ReleaseAllHighlights()
+
+//once they choose the contract
+//TODO onboard switch contracts - add highlight
+{@PAL}      ...but you can switch contracts at any time.
+//$call   PointElement(overarching:CONTRACT-SELECTOR-ELEMENT)
+{@PAL}      Just click here to see your other options.
+//$call   ReleaseAllHighlights()
+```
 
 
 ::BeforeSupplyChainCh5
@@ -19,20 +35,26 @@
 @cutscene 
 @once 
 
-{@Quinn}    Hey, Cowboy.
-{@Quinn}    We're haulin' through space that cuts through pirate territory.
-{@Quinn}    Its near Velos. Callie's neighborhood.
-{@Quinn}	Callie's been taunting ol'Ovill over in Forsch. He'll be takin' blood pressure meds soon. 
-{@Player}	Are your haulers on good terms with her? 
-{@Quinn}  	 Well, she is a pirate. 
+{@Player}    Howzit, Quinn?
+{@Quinn}    Howdy! We've been haulin' through space that cuts through pirate territory.
+{@Player}   You were working near Velos? Callie's neighborhood?
+{@Quinn}    Yeah. And Callie's been taunting ol' Ovill over on Frosch.
+{@Quinn}    Locke, did you know that those two go way, way back? 
+{@Player}   Are you saying they grew up together? Callie, from Frosch?!
+{@Quinn}    That's right! Though Ovill wasn't exactly part of Callie's social circle.
+{@Player}   Callie? Rich? What even happened?
+{@Quinn}    Now that's a story I'd like to hear!
 
 
 ::AfterSupplyChainCh5
 @trigger	    OnOverarchingLoaded 
 @when 	        IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
-{@Player} 	P.A.L., Fabrication is going to be… not glitched this time, right? 
-{@PAL}      Frontier's automation is the most widely used technology in the system!
-{@Player}   That doesn't mean it works.
-{@Player}   Do we have any other options?
-{@PAL}	Frontier Robotics has acquired all competing manufacturers. Standardization benefits everyone!
-{@Player}   Arken used to do this manually and our microchips were the highest quality around!
+@cutscene
+@once
+
+{@Player}   Hey, bro, are those fabrication glitches fixed yet?
+{@PAL}      Yes! Everything is in ERR_0x004F#@%NULL perfect shape!
+{@Player}   Oh boy. I can't afford production issues.
+{@Player}   Maybe I could ask Arken to come take a look.
+{@PAL}      Frontier Robotics uses proprietary software. 
+{@PAL}		Sorry, but only authorized technicians can service our systems!

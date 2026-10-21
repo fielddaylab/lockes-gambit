@@ -233,7 +233,7 @@ namespace FieldDay.Vox {
         /// Returns if the given request is valid.
         /// </summary>
         static public bool IsValid(VoxRequestHandle id) {
-            return Requests.RequestIdGenerator.IsValid(id.m_Id);
+            return id.IsValid && Requests.RequestIdGenerator.IsValid(id.m_Id);
         }
 
         /// <summary>

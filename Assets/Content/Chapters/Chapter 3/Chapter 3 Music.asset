@@ -15,9 +15,9 @@ MonoBehaviour:
   IntroTrackId:
     m_HashValue: 0
   FullTracks:
-  - m_HashValue: 2450712950
-  - m_HashValue: 3170807226
-  - m_HashValue: 3867547049
+  - m_HashValue: 3817527782
+  - m_HashValue: 3030655664
+  - m_HashValue: 2688305056
   SeamlessIntroTransition: 0
   Transition:
     FadeOut: 0.5

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4be90a9d33d3784caac2e5eb4b5636c, type: 3}
   m_Name: ComicAudio
   m_EditorClassIdentifier: 
+  m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
-  m_NamedAssets:
-  - {fileID: 11400000, guid: fd9d72371bcbba44487315f257639b33, type: 2}
-  - {fileID: 11400000, guid: b752e7daef2fba34eb34095b25609e55, type: 2}
+  m_NamedAssets: []
   m_LiteAssets: []
