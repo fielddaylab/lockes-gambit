@@ -35,9 +35,7 @@ namespace SpaceFab.Comic {
             );
             GuiCommands.SetActive(displayState.NextButtonGroup, false);
 
-            if (context.Get("UnloadChapter", false).AsBool()) {
-                ChapterUtility.UnloadChapterData(Find.State<ChapterState>());
-            }
+            ChapterUtility.UnloadChapterData(Find.State<ChapterState>());
 
             QueuedCredits = context.Get("QueueCredits", false).AsBool();
 
@@ -104,6 +102,7 @@ namespace SpaceFab.Comic {
             SceneRequestContext requestContext = default;
             requestContext.Entrance = ComicId;
             requestContext.Set("PreserveMusic", true);
+            requestContext.Set("FromComic", true);
 
             Game.Scenes.QueueMainLoadContext(requestContext);
         }
