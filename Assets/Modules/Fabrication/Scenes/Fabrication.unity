@@ -585,11 +585,9 @@ GameObject:
   - component: {fileID: 392984983}
   - component: {fileID: 392984981}
   - component: {fileID: 392984975}
-  - component: {fileID: 392984977}
   - component: {fileID: 392984978}
   - component: {fileID: 392984979}
   - component: {fileID: 392984980}
-  - component: {fileID: 392984982}
   - component: {fileID: 392984986}
   - component: {fileID: 392984985}
   - component: {fileID: 392984984}
@@ -597,7 +595,6 @@ GameObject:
   - component: {fileID: 392984989}
   - component: {fileID: 392984990}
   - component: {fileID: 392984991}
-  - component: {fileID: 392984992}
   - component: {fileID: 392984993}
   - component: {fileID: 392984994}
   - component: {fileID: 392984995}
@@ -646,18 +643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3feaae11df5293489b018ec1d7a4f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &392984977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392984972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc20c7a717b06e40b9882b58f992480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &392984978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,18 +689,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54574b4d8563f4c4d810259ad622b5fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &392984982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392984972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd9af8dd98ec8b541a0e5adf51acf632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &392984983
@@ -812,18 +785,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42f491b2f0c94d246a65cfcf8ca5956d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &392984992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392984972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315f92ba4c2c1304ab64ebcff766e7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &392984993
@@ -2078,10 +2039,8 @@ GameObject:
   - component: {fileID: 879438731}
   - component: {fileID: 879438738}
   - component: {fileID: 879438739}
-  - component: {fileID: 879438740}
   - component: {fileID: 879438741}
   - component: {fileID: 879438742}
-  - component: {fileID: 879438744}
   - component: {fileID: 879438745}
   - component: {fileID: 879438746}
   - component: {fileID: 879438747}
@@ -2229,18 +2188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56664028c93fdbb42b238393b99dbdfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &879438740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879438728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de50138dcc2842545966d288b3d15582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &879438741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2270,36 +2217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658d600c5aadaae4889f4df32d7aaa73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &879438744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879438728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71b2f4f9fea4f044b9ab774df8714187, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisplayRequestedThisFrame: 0
-  ResultsGroup: {fileID: 0}
-  Background: {fileID: 0}
-  StationDisplayRow: {fileID: 0}
-  RetryButton: {fileID: 0}
-  ContinueButton: {fileID: 0}
-  InputLayer: {fileID: 0}
-  Heading: {fileID: 0}
-  Accuracy: {fileID: 0}
-  Time: {fileID: 0}
-  ProductionTime: {fileID: 0}
-  StationResults:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &879438745
 MonoBehaviour:
   m_ObjectHideFlags: 0
