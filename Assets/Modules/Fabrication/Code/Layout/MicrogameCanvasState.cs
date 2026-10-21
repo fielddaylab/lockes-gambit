@@ -37,6 +37,7 @@ namespace SpaceFab.Fabrication.Layout
         public Image KeyImageDisplay;
         public TextMeshProUGUI m_InstructionTMP, m_SubtitleTMP;
         public Image SputterInstruction;
+        public Image AlignerInstruction;
 
         public void OnDeregister()
         {
@@ -75,9 +76,19 @@ namespace SpaceFab.Fabrication.Layout
                 state.m_InstructionTMP.text = string.Empty;
                 state.m_SubtitleTMP.text = string.Empty;
             }
+            else if (stationID == FabricationConsts.PHOTOLITHOGRAPHY_STATION_ID)
+            {
+                state.SputterInstruction.gameObject.SetActive(false);
+                state.KeyImageDisplay.enabled = false;
+                state.m_InstructionTMP.text = string.Empty;
+                state.m_SubtitleTMP.text = string.Empty;
+
+                state.AlignerInstruction.gameObject.SetActive(true);
+            }
             else
             {
                 state.SputterInstruction.gameObject.SetActive(false);
+                state.AlignerInstruction.gameObject.SetActive(false);
                 InstructionSet uiInstructions = InstructionLookupUtility.LookupInstructions(stationID, state.InstructionsLookup);
 
                 // Resolve the station's key image to a single shared Image, instead of toggling
@@ -101,6 +112,7 @@ namespace SpaceFab.Fabrication.Layout
         public static void HideStationInstructions(MicrogameCanvasState state)
         {
             state.SputterInstruction.gameObject.SetActive(false);
+            state.AlignerInstruction.gameObject.SetActive(false);
             state.FaderGroup.alpha = 0f;
             state.FaderGroup.blocksRaycasts = false;
 

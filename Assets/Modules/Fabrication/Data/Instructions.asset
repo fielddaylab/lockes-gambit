@@ -22,8 +22,8 @@ MonoBehaviour:
     Subtitle: to apply photoresist
   PhotolithographyInstructions:
     UIKey: 3
-    Instruction: ARROWS
-    Subtitle: to align pattern
+    Instruction: KEYS
+    Subtitle: to move around
   EtchInstructions:
     UIKey: 2
     Instruction: ARROWS
