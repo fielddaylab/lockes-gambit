@@ -288,6 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 140047781198919995}
   - component: {fileID: 3724837408022806318}
+  - component: {fileID: 4884665393311316775}
   m_Layer: 5
   m_Name: Risk Contract Box
   m_TagString: Untagged
@@ -333,6 +334,7 @@ MonoBehaviour:
   Background: {fileID: 6179163357148052590}
   Title: {fileID: 4911797052348641704}
   Description: {fileID: 2534407922644640828}
+  Meter: {fileID: 2113596885407433499}
   SafePalette:
     Content:
       serializedVersion: 2
@@ -347,10 +349,27 @@ MonoBehaviour:
     Background:
       serializedVersion: 2
       rgba: 4279837744
-  Meter: {fileID: 2113596885407433499}
-  DefaultRiskDescription: Risks encountered may increase final cost or delay production.
   DefaultNoRiskHeader: No Known Risks
+  DefaultRiskDescription: Risks encountered may increase final cost or delay production.
   DefaultNoRiskDescription: Supply chain contains no known risks.
+--- !u!114 &4884665393311316775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347290123727895673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4854730e970a4abb8b0d80ce8c5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id:
+    m_Source: overarching:results-risk-box
+    m_HashValue: 1341131503
+  RectTransform: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  Collider: {fileID: 0}
 --- !u!1 &3028009095413784879
 GameObject:
   m_ObjectHideFlags: 0
