@@ -67,7 +67,6 @@ $call   ReleaseAllHighlights()
 //phone dial 
 {@Quinn}    Oh... Locke! Hiya! Suprised to see your face, where's Dorian? 
 {@Player}	It's a long story -- I'll tell you later. 
-//Sarah: I am going to have Quinn give him the nickname "cowboy" to thread the idea of the space western. :)
 {@Quinn}    Okay, <i>Cowboy.</i> Going off on your own, eh?
 {@Quinn}    Sounds fun. You can count on me to wrangle the haulers for you.
 
@@ -84,9 +83,11 @@ $call   ReleaseAllHighlights()
 @cutscene
 @once
 
-{@PAL}      We have fully automated the photolithography equipment in the Fab bay. 
-{@Player}   Huh. I wonder what Arken would think? This is his station. 
-{@PAL}     	OOOh! This will be soooo much faster than your human teammate. 
+
+{@PAL}      The photolithography equipment is now fully automated.  
+{@Player}   I wonder what Arken would think? The Fab Bay is his station. 
+{@PAL}     The bots will be much faster than your human teammate! 
+
 
 
 
