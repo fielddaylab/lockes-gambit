@@ -19,9 +19,9 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
   CaptionText: 
-  BodyText: Juza-Hahn Station Frontier Robotics military and energy operation, an
-    integral station the Frontier Robotics Peace Authority (FRPA), the major policing
-    entity in all of Ausrine.
+  BodyText: Juza-Hahn Station is Frontier Robotics' military and energy operation,
+    an integral station in the Frontier Robotics Peace Authority (FRPA), the major
+    policing entity in all of Ausrine.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

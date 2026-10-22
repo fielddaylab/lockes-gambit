@@ -21,7 +21,7 @@ MonoBehaviour:
   CaptionText: 
   BodyText: A steelworks planet, Wolfram is clouded in a choking smog but holds the
     grit common among steelworkers. Recent protests have increased Frontier security,
-    however, many believe Wolfram to be a powder-keg of change.
+    but many believe Wolfram to be a powder-keg of change.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0
