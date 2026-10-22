@@ -26,5 +26,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f52fcfe9005062c45947bf5a12486446, type: 2}
   - {fileID: 11400000, guid: f878c956946fb5c4aa816ef2fc7a69d1, type: 2}
   - {fileID: 11400000, guid: 5f580ab63f50582419ba6552e98a6347, type: 2}
+  - {fileID: 11400000, guid: 8d0e667b8c1b2ff42b77f921b25b4548, type: 2}
   - {fileID: 11400000, guid: e3ca5eac57f007e4abe88e8b7de86144, type: 2}
   m_LiteAssets: []

@@ -725,7 +725,10 @@ namespace SpaceFab {
                        out ProgressMeterState meter);
             progress.LastCompletedGoalIndex = goalIdx;
             PlayerProgressUtility.SetGoalActive(progress, goalIdx, false);
-            SetFlagVisible(FindFlagWithGoal(meter, goalId), false);
+            var flag = FindFlagWithGoal(meter, goalId);
+            if (flag) {
+                SetFlagVisible(flag, false);
+            }
             SpacefabGame.Events.Dispatch(GameEvents.CompleteGoal, EvtArgs.Box(goalId));
         }
 

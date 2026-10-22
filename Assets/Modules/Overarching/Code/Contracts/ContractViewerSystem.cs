@@ -257,8 +257,10 @@ namespace SpaceFab.Overarching {
             layout.Contract.ApprovedStamp.transform.localScale = new Vector3(2, 2, 2);
             yield return Routine.Combine(
                 Tween.ZeroToOne(layout.Contract.ApprovedStampMask.SetAlpha, 0.2f),
-                layout.Contract.ApprovedStamp.transform.ScaleTo(1, 0.3f, Axis.XYZ).Ease(Curve.CubeOut)
+                layout.Contract.ApprovedStamp.transform.ScaleTo(1, 0.3f, Axis.XYZ).Ease(Curve.CubeIn)
                 );
+
+            Sfx.Play("Contract.Completion.Stamp");
 
             yield return 0.8f;
 
