@@ -27,7 +27,9 @@ namespace SpaceFab.Supply
         {
             Find.State(out SupplyCameraControlState cameraState);
 
-            UpdateTarget(cameraState, deltaTime);
+            if (cameraState.WorldInput.IsInputEnabled()) {
+                UpdateTarget(cameraState, deltaTime);
+            }
 
             ProcessLerp(cameraState, deltaTime);
         }

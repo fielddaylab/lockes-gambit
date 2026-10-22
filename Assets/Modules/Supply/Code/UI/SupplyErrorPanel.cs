@@ -1,10 +1,13 @@
+using System;
 using BeauUtil;
 using BeauUtil.Debugger;
 using BeauUtil.UI;
 using FieldDay;
 using FieldDay.SharedState;
+using FieldDay.UI;
 using FieldDay.UI.Widgets;
 using SpaceFab.Materials;
+using SpaceFab.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +17,8 @@ namespace SpaceFab.Supply {
         public ShipListRow Ship;
         public GameObject DuplicatePanel, UnidentifiedPanel, NotRequiredPanel, DopantPanel;
         public GuiButton CloseButton;
+        public CanvasInputLayer Input;
+        public Canvas Canvas;
 
         void IRegistrationCallbacks.OnRegister() {
             SpacefabGame.Events.Register<SupplyRouteEventArgs>(GameEvents.SupplyRouteDrawingClose, OnRouteEnded);
@@ -24,6 +29,10 @@ namespace SpaceFab.Supply {
         void IRegistrationCallbacks.OnDeregister() {
             Game.Events.DeregisterAllForContext(this);
             CloseButton.OnClick.Deregister(OnCloseClicked);
+
+            if (Input.TryPopPriority()) {
+                PopupUtility.PopState();
+            }
         }
 
         private void OnCloseClicked(PointerListener.EventData evt) {
@@ -225,9 +234,21 @@ namespace SpaceFab.Supply {
         }
 
         private void SetVisible(bool visible) {
+            if (visible) {
+                if (Input.TryPushPriority()) {
+                    PopupUtility.PushState();
+                }
+            } else {
+                if (Input.TryPopPriority()) {
+                    PopupUtility.PopState();
+                }
+            }
+
             PopupGroup.alpha = visible ? 1 : 0;
             PopupGroup.interactable = visible;
             PopupGroup.blocksRaycasts = visible;
+            Canvas.enabled = visible;
+            Input.SetInputOverride(visible ? null : false);
         }
     }
 }
