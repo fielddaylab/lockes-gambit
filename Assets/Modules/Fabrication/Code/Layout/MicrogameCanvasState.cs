@@ -76,7 +76,7 @@ namespace SpaceFab.Fabrication.Layout
                 state.m_InstructionTMP.text = string.Empty;
                 state.m_SubtitleTMP.text = string.Empty;
             }
-            else if (stationID == FabricationConsts.PHOTOLITHOGRAPHY_STATION_ID)
+            else if (stationID == FabricationConsts.PHOTOLITHOGRAPHY_STATION_ID || stationID == FabricationConsts.ETCH_STATION_ID)
             {
                 state.SputterInstruction.gameObject.SetActive(false);
                 state.KeyImageDisplay.enabled = false;
