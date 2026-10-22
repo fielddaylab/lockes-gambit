@@ -81,7 +81,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -9.2015}
-  m_SizeDelta: {x: 154.7998, y: 18.403}
+  m_SizeDelta: {x: 250, y: 18.403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2147061312825059572
 CanvasRenderer:
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 504a7f784eb951041a2f58ae05f392ca, type: 2}
   m_Color: {r: 1, g: 0.972549, b: 0.8784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fd668171a693946499dd3e880396a355, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0efd878f6115a874fac52516ed341df4, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 3
 --- !u!1 &1733921854489052470
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +437,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -9.2015}
-  m_SizeDelta: {x: 115.7228, y: 18.403}
+  m_SizeDelta: {x: 250, y: 18.403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3092973298963935672
 CanvasRenderer:
@@ -675,7 +675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1392408583263789263}
   - component: {fileID: 7035774525815685200}
-  - component: {fileID: 8613830490700783063}
+  - component: {fileID: 48499089442397962}
   m_Layer: 5
   m_Name: Fader
   m_TagString: Untagged
@@ -711,7 +711,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2309582400630249603}
   m_CullTransparentMesh: 1
---- !u!114 &8613830490700783063
+--- !u!114 &48499089442397962
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -720,10 +720,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2309582400630249603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a3ee03a5fada3942b82c53c377b7113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 2ca97227dafd0d14c85f9205b757f7fd, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 0.83137256}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -731,16 +731,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_Outline: 0
+  m_Thickness: 1
 --- !u!1 &2922841949949493551
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +768,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -9.2015}
-  m_SizeDelta: {x: 154.7998, y: 18.403}
+  m_SizeDelta: {x: 250, y: 18.403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1907656397246751227
 CanvasRenderer:
@@ -1525,7 +1517,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -9.2015}
-  m_SizeDelta: {x: 154.7998, y: 18.403}
+  m_SizeDelta: {x: 250, y: 18.403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5648374515353157633
 CanvasRenderer:
@@ -1920,6 +1912,14 @@ PrefabInstance:
     - target: {fileID: 1550815017602110724, guid: fdae4dcde43c8884096465e5798fb555, type: 3}
       propertyPath: m_Name
       value: Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851546304362190295, guid: fdae4dcde43c8884096465e5798fb555, type: 3}
+      propertyPath: Id.m_Source
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851546304362190295, guid: fdae4dcde43c8884096465e5798fb555, type: 3}
+      propertyPath: Id.m_HashValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4146231085167008885, guid: fdae4dcde43c8884096465e5798fb555, type: 3}
       propertyPath: m_IsActive

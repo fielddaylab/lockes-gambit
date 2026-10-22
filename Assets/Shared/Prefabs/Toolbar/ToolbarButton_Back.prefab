@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToolbarButton_Back
       objectReference: {fileID: 0}
+    - target: {fileID: 126495916456541605, guid: 353bccb26004c5944ba1f3d1dd7b25b1, type: 3}
+      propertyPath: TooltipHeader
+      value: Return to Ship
+      objectReference: {fileID: 0}
     - target: {fileID: 4082357056613187121, guid: 353bccb26004c5944ba1f3d1dd7b25b1, type: 3}
       propertyPath: m_Sprite
       value: 

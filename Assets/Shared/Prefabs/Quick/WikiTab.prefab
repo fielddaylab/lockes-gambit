@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 42
       objectReference: {fileID: 0}
+    - target: {fileID: 5536700068324429044, guid: cf652b02f9277e44d90256fa3eb6ed51, type: 3}
+      propertyPath: TooltipHeader
+      value: Toggle Wiki
+      objectReference: {fileID: 0}
     - target: {fileID: 7626399211877559487, guid: cf652b02f9277e44d90256fa3eb6ed51, type: 3}
       propertyPath: m_Color.b
       value: 0.87843144
