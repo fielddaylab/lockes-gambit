@@ -18,14 +18,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78093ac5e7fad463894f49b0b629d47c, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Depletion II
-  m_description: "\uF0A7We need faster 3-D food printers for our synth-meat labs
-    across the Forsch Sector."
+  m_description: Our synth-meat printers won't stop making an endless hot dog. We
+    need a chip to close the signal!
   m_client:
     m_Source: cm4
     m_HashValue: 3331460187
   m_payout: 12
   m_expectedDuration: 5
-  m_expectedProfit: 3
   m_minimumProfit: 3
   m_contractType: 0
   m_difficulty: 0

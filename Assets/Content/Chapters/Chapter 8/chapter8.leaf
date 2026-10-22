@@ -5,11 +5,11 @@
 @cutscene 
 @once 
 
-{@MAL}      Hi-hi-hi-ello Cap-p-p-tain! 
+{@MAL}      Hi-hÏ¨hi-Êllo Cªþ»¶-tain! 
 {@Player}   P.A.L... you look...
-{@MAL}      Who's P.A.L.? I'm M-M-M.A.L.!
-{@MAL}      Your trusty-trust-tru-5%$@*-!@3#
-{@MAL}      Hi Captain, how can I help you t-today!
+{@MAL}      Who's P.A.L.? I'm M¹M¬M.Å.L.!
+{@MAL}      Your trusty-trust-tru-5%$@*-!@ÏÐÑëìÄÅÆýþÿðñ©
+{@MAL}      Hi Captain, how can I help you t-†Ø¤day!
 {@Player}   Keela really messed you up huh? 
 
 
@@ -26,9 +26,7 @@
 {@Ovill}    Oh shoot. Things have been a mess all morning. 
 {@Ovill}    All of our P.A.L. systems and communication networks are shot! 
 //End call
-
-
-{@MAL} 	N3\/\/ hAul3r d3t3ct3d! Calling now...
+{@MAL} 	Néêë3w hAuler Ðet3ct‰ð! Calling now...
 
 // calling quinn
 {@Player}   So you're my new hauler coordinator? Hi, I'm Locke...
@@ -46,9 +44,16 @@
 @when       IsSolutionFoundFor(SupplyChain)
 @cutscene 
 @once
-
 //locke worries that P...MAL won't be a help to him in fab. 
 {@Player}   I'm not sure you're going to be much help in the fab bay.
-{@MAL}      L0o0o—cke, I-I @m in t0p sh@—sh@pe! N0 n0—n0 w0rr!3s.
+{@MAL}      L-o0oçcke!Ï IëÜ @m in t0p sØ@—Þh@™e! N0 n0¡nÐ w0rr!Es.
 {@Player}   Yeah... I think I'm going to trust myself more on this one.
 
+::AfterFabrication
+@trigger
+@when       IsSolutionFoundFor(Fabrication)
+@cutscene 
+@once 
+
+{@MAL}      <color=yellow>Hint: Hint: Hint: Hint: Hint: Hint: Hint: Hint:</color> 
+{@Player}   Alright, that's enough. Let's turn this one in.

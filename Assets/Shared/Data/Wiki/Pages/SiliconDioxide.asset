@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: SiliconDioxide
   m_EditorClassIdentifier: 
-  m_Title: Silicon Dioxide (SiO2)
-  m_Icon: {fileID: 0}
-  m_IllustrationFrames: []
-  m_IllustrationFPS: 0.5
-  m_Body: 
-  m_MaterialId:
+  Title: Quartz (SiO2)
+  Icon: {fileID: 0}
+  IllustrationFrames: []
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: 
+  MaterialId:
     m_HashValue: 1571298950
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 0}
+  IsUnlockedByDefault: 0

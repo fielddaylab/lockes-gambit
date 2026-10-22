@@ -26,7 +26,6 @@
 //$call   PointElement(overarching:CONTRACT-SELECTOR-ELEMENT)
 {@PAL}      Just click here to see your other options.
 //$call   ReleaseAllHighlights()
-```
 
 
 ::BeforeSupplyChainCh5
@@ -35,7 +34,7 @@
 @cutscene 
 @once 
 
-{@Player}    Howzit, Quinn?
+{@Player}   Howzit, Quinn?
 {@Quinn}    Howdy! We've been haulin' through space that cuts through pirate territory.
 {@Player}   You were working near Velos? Callie's neighborhood?
 {@Quinn}    Yeah. And Callie's been taunting ol' Ovill over on Frosch.

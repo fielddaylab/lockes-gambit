@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Ships
   m_EditorClassIdentifier: 
-  Title: Ships
+  Title: Haulers
   Icon: {fileID: 21300000, guid: 25fad445b86469e469e3a713fb2b64e5, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: a34346aabbc7af64bb43e5ad5d6b0bb7, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: '1. Engine Speed: Faster haulers take long routes with less time.
+  BodyText: '1. <b>Speed.</b> Faster haulers take long routes in less Time.
 
     2.
-    Cargo Capacity
+    <b>Material</b> cargo capacity
 
-    3. Cargo Loaded
+    3. <b>Material</b> cargo loaded
 
-    4. Hauler ID'
+    4. Hauler
+    logo'
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

@@ -18,15 +18,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78093ac5e7fad463894f49b0b629d47c, type: 2}
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
-  m_title: PMOS
-  m_description: Our AI agents suggested that we expand our customer service potential
-    with more AI agents, so that means more processors.
+  m_title: Enhancement Gate
+  m_description: Our advisor bots suggested that we expand our customer service potential
+    with more advisor bots. So that means more processors!
   m_client:
     m_Source: cm2
     m_HashValue: 3432125901
   m_payout: 12
   m_expectedDuration: 6
-  m_expectedProfit: 3
   m_minimumProfit: 3
   m_contractType: 0
   m_difficulty: 0

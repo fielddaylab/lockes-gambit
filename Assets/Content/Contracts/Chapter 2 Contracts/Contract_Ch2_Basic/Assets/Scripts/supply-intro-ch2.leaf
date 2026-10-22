@@ -4,7 +4,7 @@
 @trigger    OnSupplySetupCompleted
 @when   !MinigameHasValidSolution()
 $call   PointElement(supply:planet_sio2converter)
-{@PAL}  You need a semiconductor, so you'll need to take the silicon dioxide to the refining station.
+{@PAL}  You need a semiconductor, so you'll need to take the quartz to a refining station.
 
 
 :: NodeClicked
@@ -27,7 +27,7 @@ $endif
 $call   ReleaseAllHighlights()
 $call   CloseWiki()
 $if !IsMaterialCollected("Silicon")
-    {@PAL}  You need a semiconductor, so you'll need to take the silicon dioxide to the refining station.
+    {@PAL}  You need a semiconductor, so you'll need to take the quartz to a refining station.
 $elseif !IsMaterialCollected("Copper")
     {@PAL}	Use the <color=yellow>WASD</color> or <color=yellow>Arrow</color> keys to move around and find other planets.
 $else

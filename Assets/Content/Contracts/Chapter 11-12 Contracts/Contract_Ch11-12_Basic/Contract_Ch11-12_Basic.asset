@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Splitter
-  m_description: "\uF0A7We\u2019re looking into expanding our network output, and
+  m_description: "We\u2019re looking into expanding our network output, and
     hopefully then we can compete with Frontier."
   m_client:
     m_Source: cm10

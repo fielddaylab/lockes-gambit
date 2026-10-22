@@ -17,7 +17,10 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: ac29bbca52cc2dc489530c04175f7ce9, type: 3}
   IllustrationFPS: 0.5
-  BodyText: 'Use the furnace to apply the oxide layer. '
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: The Furnace covers the surface of the wafer in an insulating Oxide layer,
+    used like a stencil for the next steps.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

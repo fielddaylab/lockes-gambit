@@ -21,10 +21,10 @@ $call   PointElement(overarching:profit-section)
 {@PAL}      ...and this is what you'll be paid.
 $call   ReleaseAllHighlights()
 
-{@PAL} 		Let's <i>chip</i> away at your debt to Greyson Industries!
+{@PAL} 		Let's <i>chip</i> away at your debt to the Greysons!
 $call   ActivateGoal("Goal1")
-{@Player} 	Greyson Industries? What's that?
-{@PAL} 		Frontier Robotics is owned by the Greyson family.
+{@Player} 	Greysons?
+{@PAL} 		Why, the kind, generous, magnanimous founding family of Frontier Robotics, of course!
 $call   HighlightElement(overarching:select-contract-btn)
 
 $call   UnlockWikiPage("Basic Conductor")
@@ -49,7 +49,7 @@ $call   ReleaseAllHighlights()
 @cutscene
 @once
 {@PAL}      Research complete! Conductor and insulator verified.
-{@Player}   You're sure?
+{@Player}   You're sure? I could've sworn-
 {@PAL}      Absolutely, Captain.
 
 
@@ -62,13 +62,13 @@ $call   ReleaseAllHighlights()
 {@PAL}      You'll need to order materials before you start fabricating the microchips. 
 
 
-{@Player}	P.A.L., call the hauler corrdinator for me?
+{@Player}	P.A.L., call the hauler coordinator for me?
 //phone dial 
-{@Quinn}    Oh... Locke! Hiya! Suprised to see your face, where's Dorian? 
-{@Player}	It's a long story -- I'll tell you later. 
+{@Quinn}    Oh... Locke! Hiya! Surprised to see your face. Where's Dorian? 
+{@Player}	It's a long story... I'll tell you later. 
 //Sarah: I am going to have Quinn give him the nickname "cowboy" to thread the idea of the space western. :)
 {@Quinn}    Okay, <i>Cowboy.</i> Going off on your own, eh?
-{@Quinn}    Sounds fun. You can count on me to wrangle the haulers for you.
+{@Quinn}    Sounds fun. Well, you can count on me to wrangle those haulers for you.
 
 
 
@@ -83,9 +83,10 @@ $call   ReleaseAllHighlights()
 @cutscene
 @once
 
-{@PAL}      We have fully automated the photolithography equipment in the Fabrication bay. 
+{@PAL}      Next is the Fabrication bay.
+{@PAL}      We've fully upgraded the Constantine's photolithography equipment! 
 {@Player}   Huh. I wonder what Arken would think? This is his station. 
-{@PAL}     	OOOh! This will be soooo much faster than your human teammate. 
+{@PAL}     	OOOh! Our new systems will be <i>much</i> faster than your human teammate.
 
 
 
@@ -101,5 +102,5 @@ $call   ReleaseAllHighlights()
 {@PAL}      You finished the orientation! 
 {@Player}	Bro, thanks for all the help. 
 {@PAL}      Positive.Affirmation.exe! 
-{@Player}	uhhhh...thanks.
+{@Player}	Uhhhh... thanks.
 {@PAL} 	    Now submit your contract for payment. 

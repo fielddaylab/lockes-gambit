@@ -19,14 +19,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Heat-Resistant NMOS
-  m_description: "\uF0A7Our hope is for a strong and reliable NMOS processor for
-    our robotic  health assistants to reach in less hospitable zones."
+  m_description: "Our robotic health assistants are working around the clock
+    in inhospitable zones. We need a switch that can handle the heat."
   m_client:
     m_Source: cm8
     m_HashValue: 3264349711
   m_payout: 15
   m_expectedDuration: 5
-  m_expectedProfit: 4
   m_minimumProfit: 4
   m_contractType: 1
   m_difficulty: 1

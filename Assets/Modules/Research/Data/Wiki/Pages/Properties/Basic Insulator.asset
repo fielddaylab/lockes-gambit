@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Basic Insulator
   m_EditorClassIdentifier: 
-  Title: Insulator
+  Title: Insulator?
   Icon: {fileID: 21300000, guid: c25fc175947917c41949d7bcb0fdbb3a, type: 3}
   IllustrationFrames: []
   IllustrationFPS: 0.5
-  BodyText: A first look at insulators - a material that blocks current is enough
-    to call it one.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: If a material blocks current flow... It's probably an insulator, right?
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

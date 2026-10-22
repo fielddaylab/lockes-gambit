@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: AND
-  m_description: "\uF0A7FR Pharma innovates, which is why we hope to establish data
+  m_description: "FR Pharma innovates, which is why we hope to establish data
     centers for our autonomous receptionists. "
   m_client:
     m_Source: cm3

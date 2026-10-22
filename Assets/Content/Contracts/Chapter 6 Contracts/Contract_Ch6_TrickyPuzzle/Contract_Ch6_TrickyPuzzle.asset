@@ -19,15 +19,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Double Depletion
-  m_description: "\uF0A7Art. That\u2019s what we need\u2026 well we need lighting
-    fixture components for the festival\u2026 but it\u2019s all in the spirit of
-    \u2026 art."
+  m_description: "Art. That\u2019s what we need\u2026 Well, we need a light-show
+    control chip for the festival\u2026 but it\u2019s all in the spirit of ART!"
   m_client:
     m_Source: cm9
     m_HashValue: 3247572092
   m_payout: 13
   m_expectedDuration: 5
-  m_expectedProfit: 4
   m_minimumProfit: 4
   m_contractType: 2
   m_difficulty: 2

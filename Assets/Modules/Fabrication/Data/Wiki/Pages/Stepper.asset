@@ -17,8 +17,10 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: ddc4fdf4b1fb7fd419ce019b7b53c93b, type: 3}
   IllustrationFPS: 0.5
-  BodyText: The Stepper lines up a pattern over the chip so only selected areas are
-    changed in the next step.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: The Mask Aligner lines up a stencil over the wafer to develop photoresist
+    in the design's pattern.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

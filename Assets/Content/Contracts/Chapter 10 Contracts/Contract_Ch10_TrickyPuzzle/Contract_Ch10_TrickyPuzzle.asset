@@ -19,14 +19,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: NOR
-  m_description: We're expanding patient data storage for our AI Doctors to better
+  m_description: We're expanding patient data storage for our med-bots to better
     diagnose patients.
   m_client:
     m_Source: cm3
     m_HashValue: 3415348282
   m_payout: 15
   m_expectedDuration: 6
-  m_expectedProfit: 6
   m_minimumProfit: 6
   m_contractType: 2
   m_difficulty: 2

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Basic Conductor
   m_EditorClassIdentifier: 
-  Title: Conductor
+  Title: Conductor?
   Icon: {fileID: 21300000, guid: 667e05a0ee505174bba7aa15bf1c3eed, type: 3}
   IllustrationFrames: []
   IllustrationFPS: 0.5
-  BodyText: A first look at conductors - a material that lets current pass is enough
-    to call it one.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: If a material allows current flow... It's probably a conductor, right?
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0
