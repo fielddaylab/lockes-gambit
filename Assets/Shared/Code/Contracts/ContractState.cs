@@ -77,6 +77,9 @@ namespace SpaceFab
             while (Game.Assets.IsLoadingStreamedPackage(definition.StreamedPack)) {
                 yield return null;
             }
+
+            Log.Msg("[ContractState] Loaded contract '{0}'", contractState.ContractId);
+
             ContractAssetSet assetSet = Find.NamedAsset<ContractAssetSet>(definition.AssetSet);
 
             contractState.ContractDefinition = definition;
@@ -95,6 +98,8 @@ namespace SpaceFab
             if (contractState.ContractId.IsEmpty) {
                 return false;
             }
+
+            Log.Msg("[ContractState] Unloaded contract '{0}'", contractState.ContractId);
 
             ScriptDBUtility.Unload(contractState.ContractScriptHandle);
             Game.Assets.UnloadStreamedPackage(contractState.ContractDefinition.StreamedPack);

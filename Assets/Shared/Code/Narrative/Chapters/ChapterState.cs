@@ -96,6 +96,8 @@ namespace SpaceFab
                 yield return null;
             }
 
+            Log.Msg("[ChapterState] Loaded chapter '{0}'", chapterState.ChapterId);
+
             ChapterDef chapterAsset = Find.NamedAsset<ChapterDef>(loadInfo.ChapterId);
             chapterState.ChapterDefinition = chapterAsset;
             chapterState.ChapterScriptHandle = ScriptDBUtility.Load(chapterAsset.Script);
@@ -112,6 +114,8 @@ namespace SpaceFab
             if (chapterState.ChapterId.IsEmpty) {
                 return false;
             }
+
+            Log.Msg("[ChapterState] Unloaded chapter '{0}'", chapterState.ChapterId);
 
             ScriptDBUtility.Unload(chapterState.ChapterScriptHandle);
             MusicPlayer.ClearQueueAndStop(0);

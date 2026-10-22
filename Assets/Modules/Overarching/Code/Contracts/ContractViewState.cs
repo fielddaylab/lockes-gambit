@@ -42,11 +42,11 @@ namespace SpaceFab.Overarching {
     }
 
     static public partial class ContractViewUtility {
-        static public void ApplyContract(int contractIndex) {
+        static public void ApplyContract(int chapterContractIndex) {
             Find.State(out ChapterState chapterState, out ContractState contractState);
-            chapterState.LastSelectedContractIndex = contractIndex;
-            SpacefabGame.Events.Dispatch(GameEvents.StartSelectContract, contractIndex.ToStringLookup());
-            ContractUtility.LoadContractData(contractState, contractIndex, ContractLoadAction.ResetContractProgress);
+            chapterState.LastSelectedContractIndex = chapterContractIndex;
+            SpacefabGame.Events.Dispatch(GameEvents.StartSelectContract, chapterContractIndex.ToStringLookup());
+            ContractUtility.LoadContractData(contractState, chapterState.ChapterDefinition.AvailableContracts[chapterContractIndex], ContractLoadAction.ResetContractProgress);
         }
 
         static public void RebuildAvailableContracts(ContractViewState view, PlayerProgressState playerProgress, ChapterState chapterState) {

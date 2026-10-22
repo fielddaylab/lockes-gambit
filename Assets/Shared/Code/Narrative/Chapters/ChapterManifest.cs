@@ -47,7 +47,7 @@ namespace SpaceFab {
             using (PooledList<StringHash32> materialIds = PooledList<StringHash32>.Create()) {
                 for (int i = 0; i < Chapters.Length; i++) {
 
-                    ChapterDef chapter = Baking.FindAsset<ChapterDef>(Chapters[i].ChapterId.ToDebugString());
+                    ChapterDef chapter = Baking.FindAsset<ChapterDef>(Chapters[i].ChapterId);
                     Assert.NotNullOrDestroyed(chapter);
 
                     materialIds.AddRange(chapter.AvailableMaterials);

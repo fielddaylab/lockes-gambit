@@ -174,6 +174,7 @@ namespace SpaceFab.Fabrication.StationControl {
                 Log.Msg("[StationControlSystem] microgame cancelled; InMicrogame -> ExitingMicrogame; MicrogameMask suspended");
                 Game.Events.Dispatch(GameEvents.FabMicrogameCancelled);
                 stationState.Phase = StationControlPhase.ExitingMicrogame;
+                OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, true);
                 stationState.PhaseTimer = 0f;
             }
         }
@@ -225,6 +226,7 @@ namespace SpaceFab.Fabrication.StationControl {
             Log.Msg("[StationControlSystem] microgame accepted; -> ExitingMicrogame");
             //Game.Events.Dispatch(GameEvents.FabMicrogameCompleted);
             stationState.Phase = StationControlPhase.ExitingMicrogame;
+            OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, true);
             stationState.PhaseTimer = 0f;
         }
 
@@ -274,6 +276,7 @@ namespace SpaceFab.Fabrication.StationControl {
             stationState.PhaseTimer += deltaTime;
             if (stationState.PhaseTimer >= stationState.StunDuration) {
                 RobotUtility.RemoveStun(robotState, visualsState);
+                OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, true);
                 Log.Msg("[StationControlSystem] stun timer elapsed; Stunned -> {0}", stationState.PostStunPhase);
                 Game.Events.Dispatch(GameEvents.FabStunEnd);
                 stationState.Phase = stationState.PostStunPhase;

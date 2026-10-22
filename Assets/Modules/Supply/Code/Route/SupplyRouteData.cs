@@ -74,6 +74,7 @@ namespace SpaceFab.Supply {
         public byte HazardMask;
         public byte MaterialCount;
         public fixed uint MaterialHashes[SupplyRouteData.MaxCapacity];
+        public static byte MaxTime = 6;
     }
 
     public unsafe struct SupplyRouteRenderInfo {
@@ -245,7 +246,7 @@ namespace SpaceFab.Supply {
             Assert.True(cost <= byte.MaxValue, "Cost overflow");
 
             stats.Risk = (byte)risk;
-            stats.Time = (byte)time;
+            stats.Time = Math.Min((byte)time, SupplyRouteStats.MaxTime);
             stats.Cost = (byte)cost;
             stats.Flags = resultFlags;
             stats.MaterialCount = (byte) materialCount;

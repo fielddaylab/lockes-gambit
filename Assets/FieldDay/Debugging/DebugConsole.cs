@@ -1,6 +1,6 @@
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if (UNITY_EDITOR && !IGNORE_UNITY_EDITOR) || DEVELOPMENT_BUILD
 #define DEVELOPMENT
-#endif // UNITY_EDITOR || DEVELOPMENT_BUILD
+#endif // (UNITY_EDITOR && !IGNORE_UNITY_EDITOR) || DEVELOPMENT_BUILD
 
 using System;
 using System.Diagnostics;
@@ -44,8 +44,6 @@ namespace FieldDay.Debugging {
 
         #endregion // Events
 
-#if DEVELOPMENT
-
         private enum StepState {
             Uninitialized,
             Queued,
@@ -74,6 +72,8 @@ namespace FieldDay.Debugging {
         [SerializeField] private CanvasGroup m_QuickMenuInput = null;
 
         #endregion // Inspector
+
+#if DEVELOPMENT
 
         [NonSerialized] private float m_TimeScale = 1;
         [NonSerialized] private bool m_Paused;

@@ -125,6 +125,7 @@ namespace SpaceFab.Fabrication {
                 Log.Msg("[ModeTransitionSystem] Attempt completed. Moving to PostAttempt Mode");
                 ModeUtility.SetNewMode(modeState, LevelMode.PostAttempt);
                 Debug.Log("Fab minigame completed");
+                OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, false);
                 SpacefabGame.Events.Dispatch(GameEvents.FabCompleted);
 
                 GameLoop.SuspendUpdates(UpdateMasks.AttemptMask);

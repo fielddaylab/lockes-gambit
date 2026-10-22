@@ -257,8 +257,10 @@ namespace SpaceFab.Overarching {
             layout.Contract.ApprovedStamp.transform.localScale = new Vector3(2, 2, 2);
             yield return Routine.Combine(
                 Tween.ZeroToOne(layout.Contract.ApprovedStampMask.SetAlpha, 0.2f),
-                layout.Contract.ApprovedStamp.transform.ScaleTo(1, 0.3f, Axis.XYZ).Ease(Curve.CubeOut)
+                layout.Contract.ApprovedStamp.transform.ScaleTo(1, 0.3f, Axis.XYZ).Ease(Curve.CubeIn)
                 );
+
+            Sfx.Play("Contract.Completion.Stamp");
 
             yield return 0.8f;
 
@@ -321,11 +323,13 @@ namespace SpaceFab.Overarching {
 
             int finalValue = (9 * 2) + riskSlot;
 
-            if (RNG.Instance.Chance(0.6f)) {
-                finalValue += 9;
-            }
-            if (visualRisk > 0 | RNG.Instance.Chance(0.5f)) {
-                finalValue += 9;
+            if (visualRisk > 0) {
+                if (RNG.Instance.Chance(0.6f)) {
+                    finalValue += 9;
+                }
+                if (RNG.Instance.Chance(0.25f + visualRisk * 02f)) {
+                    finalValue += 9;
+                }
             }
 
             RiskMeterStyle riskStyle = (RiskMeterStyle) layout.RiskPanel.Meter.Styler;
@@ -378,8 +382,12 @@ namespace SpaceFab.Overarching {
                 } while (thread.IsRunning());
             }
 
-            yield return riskStyle.Highlight.FadeTo(0, 0.2f);
+            if (encounteredHazard) {
+                playerProgress.Funds -= chapterState.ChapterDefinition.HazardCost;
+                playerProgress.ElapsedCycles += chapterState.ChapterDefinition.HazardTime;
+            }
 
+            yield return riskStyle.Highlight.FadeTo(0, 0.2f);
             yield return 0.25f;
             yield return TimeMeterStyle.DrainIntoMeter(layout.RiskTimeMeter, layout.Contract.TimeIndicators);
             yield return MoneyMeterStyle.DrainIntoMeter(layout.RiskCostMeter, layout.Contract.RevenueIndicators);
