@@ -83,16 +83,18 @@ namespace SpaceFab.Supply {
             row.ShipName.color = shipAsset.Colors.Content;
         }
 
+        private const int StatsDistance = 8;
+
         static public void SyncShipRowPositions(ShipListRow row) {
             Vector2 anchorPos = row.Rect.anchoredPosition;
             row.LineLayer.rectTransform.anchoredPosition = anchorPos;
-            Positioning.SetOffsetY(row.StatsLayer.Rect, anchorPos.y);
+            Positioning.SetOffsetY(row.StatsLayer.Rect, anchorPos.y - StatsDistance);
         }
 
         static public void SetShipRowStatsActive(ShipListRow row, bool active) {
             if (active) {
                 row.StatsLayer.gameObject.SetActive(true);
-                row.Style.Style.MarginLower.y = 52;
+                row.Style.Style.MarginLower.y = 52 + StatsDistance;
                 foreach(var outline in row.ShipOutline) {
                     outline.enabled = false;
                 }

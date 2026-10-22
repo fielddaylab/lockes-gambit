@@ -15,10 +15,6 @@ namespace SpaceFab.Design.Visuals
         public GameObject CellVisualsPrefab;
         public Transform CellVisualsContainer;
 
-        [Header("PuzzleDescription")]
-        public TMP_Text PuzzleTitleText;
-        public TMP_Text PuzzleDescriptionText;
-
         // TODO: set to true when:
         // LayoutChanged
         // Visual Feedback Routine

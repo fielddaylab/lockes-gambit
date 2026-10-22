@@ -28,7 +28,7 @@ namespace SpaceFab
         public bool UnlockSpecialProperties;
 
         [Header("Assets")]
-        [StreamedPackId] public StringHash32 ComicPackage;
+        [StreamedPackId("*Comic*")] public StringHash32 ComicPackage;
         public LeafAsset Script;
         public Material SkyboxMaterial;
         public float SkyboxRotation;

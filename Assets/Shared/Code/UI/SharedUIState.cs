@@ -30,7 +30,7 @@ namespace SpaceFab
 
         public static void Init(SharedUIState ui)
         {
-            ui.LoadIcon.Group.gameObject.SetActive(false);
+            ui.LoadIcon.gameObject.SetActive(false);
             SetSaveIconVisible(ui.SaveIcon, false);
         }
 
@@ -65,7 +65,7 @@ namespace SpaceFab
             //uiState.FaderGroup.alpha = 1;
 
             // TODO: begin loading animation
-            uiState.SaveIcon.SavingText.SetText("Saving...");
+            uiState.SaveIcon.SavingText.SetText("Saving");
             yield return FadeInSaveIcon(uiState, 0.25f);
         }
 
@@ -73,7 +73,7 @@ namespace SpaceFab
         {
             // TODO: switch to loading complete animation
             yield return 0.5f;
-            uiState.SaveIcon.SavingText.SetText("Saved!");
+            uiState.SaveIcon.SavingText.SetText("Saved");
             yield return FadeOutSaveIcon(uiState, 0.5f);
         }
 
@@ -81,7 +81,7 @@ namespace SpaceFab
         {
             // TODO: switch to loading error animation
             yield return 0.5f;
-            uiState.SaveIcon.SavingText.SetText("Save Failed!");
+            uiState.SaveIcon.SavingText.SetText("Failed");
             yield return FadeOutSaveIcon(uiState, 0.5f);
         }
 

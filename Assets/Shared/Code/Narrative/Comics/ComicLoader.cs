@@ -8,14 +8,13 @@ using Leaf.Runtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace SpaceFab.Comic {
     public sealed class ComicLoader : SceneController, ISceneLoadDependency {
         public SceneReference NextScene;
         
         [Header("-- DEBUG --")]
-        [AssetName(typeof(StreamedPack))] public StringHash32 DEBUG_FallbackManifest;
+        [StreamedPackId("*Comic*")] public StringHash32 DEBUG_FallbackManifest;
 
         [NonSerialized] public StringHash32 PackageId;
         [NonSerialized] public StringHash32 ComicId;

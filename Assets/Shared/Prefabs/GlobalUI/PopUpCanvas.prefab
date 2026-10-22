@@ -370,7 +370,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Leave Game? why would you leave?
+  m_text: Leave Game?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ecd4ee2a0dd453d40b6ae24ceedcd014, type: 2}
   m_sharedMaterial: {fileID: 2063795413171510144, guid: ecd4ee2a0dd453d40b6ae24ceedcd014, type: 2}

@@ -81,6 +81,8 @@ namespace SpaceFab
             }
         }
 
+        static public bool IsSceneInGame { get { return s_IsInGame; } }
+
         [InvokeOnBoot]
         static private void OnBoot() {
             Game.Scenes.LoadPersistentScene(SceneReference.FromName("PersistentUI"));

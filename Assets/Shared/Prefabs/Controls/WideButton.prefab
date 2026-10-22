@@ -53,8 +53,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: f7122e1f658491340a2fb026127f9f84, type: 2}
     - target: {fileID: 3539750417565351040, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3539750417565351040, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3539750417565351040, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 42
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3539750417565351040, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3831710365006796672, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
       propertyPath: Background.Array.size
@@ -216,6 +228,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2063795413171510144, guid: ecd4ee2a0dd453d40b6ae24ceedcd014, type: 2}
+    - target: {fileID: 6787585165383491076, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6787585165383491076, guid: a9dc6942db3f84042aba8fb3ac3f06ed, type: 3}
       propertyPath: m_characterSpacing
       value: 5

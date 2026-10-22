@@ -21,6 +21,7 @@ namespace FieldDay.UI {
         [NonSerialized] protected bool m_InputEnabled;
         [NonSerialized] protected bool m_IsPushed;
         [NonSerialized] protected bool m_PushQueued;
+        [NonSerialized] protected bool m_IsRegistered;
 
         protected virtual void Awake() {
             m_Mask.GroupId = m_GroupId;
@@ -36,6 +37,7 @@ namespace FieldDay.UI {
         }
 
         void IRegistrationCallbacks.OnRegister() {
+            m_IsRegistered = true;
             Game.Gui.RegisterInputLayer(this);
             if (m_PushQueued && !m_IsPushed) {
                 m_IsPushed = true;
@@ -49,6 +51,7 @@ namespace FieldDay.UI {
                 m_IsPushed = false;
             }
             Game.Gui.DeregisterInputLayer(this);
+            m_IsRegistered = false;
         }
 
         public InputLayerMask InputMask {
@@ -64,7 +67,7 @@ namespace FieldDay.UI {
             if (!m_IsPushed) {
                 m_IsPushed = true;
                 m_PushQueued = true;
-                if (isActiveAndEnabled) {
+                if (m_IsRegistered) {
                     Game.Gui.PushPriority(this);
                 }
                 return true;
@@ -77,7 +80,7 @@ namespace FieldDay.UI {
             if (m_IsPushed) {
                 m_IsPushed = false;
                 m_PushQueued = false;
-                if (isActiveAndEnabled) {
+                if (m_IsRegistered) {
                     Game.Gui.PopPriority(this);
                 }
                 return true;

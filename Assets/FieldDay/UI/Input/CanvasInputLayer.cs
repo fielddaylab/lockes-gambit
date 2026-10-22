@@ -16,5 +16,14 @@ namespace FieldDay.UI {
             this.CacheComponent(ref m_Canvas);
             m_Mask.SortKey = CanvasSortKey.Create(m_Canvas);
         }
+
+        public void UpdateSorting() {
+            this.CacheComponent(ref m_Canvas);
+            CanvasSortKey prevSortKey = m_Mask.SortKey;
+            m_Mask.SortKey = CanvasSortKey.Create(m_Canvas);
+            if (m_Mask.SortKey.RawValue != prevSortKey.RawValue && m_IsRegistered) {
+                Game.Gui.ForceUpdate(this);
+            }
+        }
     }
 }

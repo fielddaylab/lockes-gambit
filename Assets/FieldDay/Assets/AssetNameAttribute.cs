@@ -55,7 +55,20 @@ namespace FieldDay.Assets {
         private uint m_CachedCacheKey;
 #endif // UNITY_EDITOR 
 
-        public AssetNameAttribute(Type assetType, bool useDropdown = false) {
+        public AssetNameAttribute(Type assetType) {
+            if (assetType == null) {
+                throw new ArgumentNullException("assetType");
+            }
+            AssetType = assetType;
+            order = -10;
+
+#if UNITY_EDITOR
+            UseDropdown = GetType().GetMethod("Predicate", BindingFlags.NonPublic | BindingFlags.Instance).DeclaringType != typeof(AssetNameAttribute);
+            UseDropdown |= GetType().GetMethod("Name", BindingFlags.NonPublic | BindingFlags.Instance).DeclaringType != typeof(AssetNameAttribute);
+#endif // UNITY_EDITOR
+        }
+
+        public AssetNameAttribute(Type assetType, bool useDropdown) {
             if (assetType == null) {
                 throw new ArgumentNullException("assetType");
             }
@@ -64,10 +77,6 @@ namespace FieldDay.Assets {
 
 #if UNITY_EDITOR
             UseDropdown = useDropdown;
-            if (!UseDropdown) {
-                UseDropdown = GetType().GetMethod("Predicate", BindingFlags.NonPublic | BindingFlags.Instance).DeclaringType != typeof(AssetNameAttribute);
-                UseDropdown |= GetType().GetMethod("Name", BindingFlags.NonPublic | BindingFlags.Instance).DeclaringType != typeof(AssetNameAttribute);
-            }
 #endif // UNITY_EDITOR
         }
     }

@@ -31,7 +31,7 @@ namespace SpaceFab {
         [Range(0, 100)] public int[] HazardChances = new int[9];
 
         [Header("Epilogue")]
-        [StreamedPackId] public StringHash32 EpilogueComicPackage;
+        [StreamedPackId("*Comic*")] public StringHash32 EpilogueComicPackage;
 
 #if UNITY_EDITOR
 

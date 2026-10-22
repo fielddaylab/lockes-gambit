@@ -41,7 +41,7 @@ namespace SpaceFab.Research {
             // preview still tracks world position so it doesn't freeze.
             Camera cam = Game.Rendering.PrimaryCamera;
             Vector2 worldPos = Vector2.zero;
-            bool worldValid = cam != null;
+            bool worldValid = cam != null && dragState.Raycaster.enabled;
             if (worldValid) {
                 Vector3 worldPos3 = cam.ScreenToWorldPoint(Input.mousePosition);
                 worldPos = new Vector2(worldPos3.x, worldPos3.y);
