@@ -729,7 +729,7 @@ namespace SpaceFab {
             if (flag) {
                 SetFlagVisible(flag, false);
             }
-            SpacefabGame.Events.Dispatch(GameEvents.CompleteGoal, EvtArgs.Box(goalId));
+            SpacefabGame.Events.Dispatch(GameEvents.CompleteGoal, EvtArgs.Create(goalId));
         }
 
         public static void PositionGoalStem(UiGoalFlag goal) {
