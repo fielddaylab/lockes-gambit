@@ -125,7 +125,20 @@ namespace SpaceFab
             }
 
             return new LoadingScreenFlavorSet() {
-                Text = "FRONTIER ROBOTICS: A GRAYSON INDUSTRIES COMPANY",
+                Text = RNG.Instance.Choose(
+                    "FRA Logistics: \"Protect, preserve, persevere, we are the FRA.\"",
+                    "\"Building up protection for the future, ensuring Auserine's safety starts here. FRA Logistics.\"",
+                    "Frontier Food Services: \"The finest lab-grown food in all of Auserine!\"",
+                    "\"The cornerstone for all food production within Frontier Robotics Space. Frontier Food Services.\"",
+                    "FR Pharma: \"For a healthier and more productive Auserine.\"",
+                    "\"FR Pharma serves you, through medical, pharmaceutical, and emergency service needs.\"",
+                    "PAL-World: \"Save Creds. Live Longer.\"",
+                    "\"Pally-World is Auserine's leading choice for any common good for a low-low price.\"",
+                    "Frontline Insurance: \"We're on the Frontline so you don't have to!\"",
+                    "\"The best and only insurance ompany in all of Auserine. Frontline Insurance.\"",
+                    "\"Frontier founders were the first to set foot on Frosch, paving the way for Frontier Robotics and the future of the Auserine system!\"\n<align=\"right\">- Oscar Grayson",
+                    "\"When you look up into the sky to see what the future holds, the smog stares right back at ya.\" - Common Saying on Wolfram"
+                ),
                 Image = uiState.LoadIcon.DefaultFlavorImage,
                 Material = null
             };
