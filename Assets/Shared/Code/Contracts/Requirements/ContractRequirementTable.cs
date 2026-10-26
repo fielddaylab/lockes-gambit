@@ -9,6 +9,7 @@ using SpaceFab.Materials;
 using SpaceFab.Research;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -39,8 +40,8 @@ namespace SpaceFab {
         
         public struct MaterialColumn {
             public StringHash32 MaterialId;
-            public StringHash32 DopantN;
-            public StringHash32 DopantP;
+            public StringHash32[] DopantN;
+            public StringHash32[] DopantP;
         }
 
         [Flags]
@@ -262,8 +263,10 @@ namespace SpaceFab {
             return tempBuffer;
         }
 
-        static private StringHash32 FindDopantId(TempReferenceBuffer<MaterialAsset> materialSet, MaterialAsset baseMaterial, MaterialPropertyLabel dopantType) {
+        static private StringHash32[] FindDopantId(TempReferenceBuffer<MaterialAsset> materialSet, MaterialAsset baseMaterial, MaterialPropertyLabel dopantType) {
             Assert.True(dopantType == MaterialPropertyLabel.NDopantFor || dopantType == MaterialPropertyLabel.PDopantFor);
+
+            List<StringHash32> dopants = new();
             for(int i = 0; i < materialSet.Count; i++) {
                 MaterialAsset material = materialSet[i];
                 if (material == baseMaterial) {
@@ -274,15 +277,15 @@ namespace SpaceFab {
                     if (material.Properties[j] == dopantType) {
                         foreach(var context in material.Contexts) {
                             if (context == baseMaterial) {
-                                return material.AssetId;
+                                dopants.Add(material.AssetId);
                             }
                         }
                     }
                 }
             }
 
-            Assert.Fail("No dopant {1} specified for material {0} even though required by material requirement table", baseMaterial.name, dopantType);
-            return null;
+            Assert.False(dopants.Count == 0, "No dopant {1} specified for material {0} even though required by material requirement table", baseMaterial.name, dopantType);
+            return dopants.ToArray();
         }
 
         static private bool HasAllProperties(MaterialAsset material, ContractRequirementTable.PropertyLabelList properties) {
@@ -515,7 +518,7 @@ namespace SpaceFab {
                     bool hasN = true;
 
                     if ((rowData.Dopants & ContractRequirementTable.DopantRows.N) != 0) {
-                        hasN = hasPrimary && HasDiscoveredDopantProperty(recordMap, columnData.DopantN, MaterialPropertyLabel.NDopantFor, materialId);
+                        hasN = hasPrimary && columnData.DopantN.Any(dopant => HasDiscoveredDopantProperty(recordMap, dopant, MaterialPropertyLabel.NDopantFor, materialId));
                         rowN.Slots[columnIndex].sprite = hasN ? table.FilledSlotIcon : table.UnfilledSlotIcon;
                         rowN.SlotConnections[columnIndex].color = hasN ? table.RowTextFilledColor : table.RowTextFilledColor;
                         
@@ -523,7 +526,7 @@ namespace SpaceFab {
                         hasAnyN |= hasN;
                     }
                     if ((rowData.Dopants & ContractRequirementTable.DopantRows.P) != 0) {
-                        bool hasP = hasPrimary && HasDiscoveredDopantProperty(recordMap, columnData.DopantP, MaterialPropertyLabel.PDopantFor, materialId);
+                        bool hasP = hasPrimary && columnData.DopantP.Any(dopant => HasDiscoveredDopantProperty(recordMap, dopant, MaterialPropertyLabel.PDopantFor, materialId));
                         rowP.Slots[columnIndex].sprite = hasP ? table.FilledSlotIcon : table.UnfilledSlotIcon;
                         rowP.SlotConnections[columnIndex].color = hasP && hasN ? table.RowTextFilledColor : table.RowTextFilledColor;
 
