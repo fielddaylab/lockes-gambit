@@ -31,6 +31,7 @@ namespace SpaceFab.Supply {
         {
             MaterialIcon.color = isChecked ? Color.white : UncheckedUIColor;
             MaterialLabel.color = isChecked ? Color.white : UncheckedUIColor;
+            SecondaryLabel.color = isChecked ? Color.white : UncheckedUIColor;
             Checkmark.enabled = isChecked;
             Fill.enabled = isChecked;
         }

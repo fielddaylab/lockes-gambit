@@ -89,7 +89,7 @@ namespace SpaceFab.Supply {
                     }
 
                     MaterialPropertyLabelUtility.TryGetBaseProperty(checks[i].Label, out MaterialPropertyLabel baseLabel);
-                    bool rowFulfilled = false;
+                    bool rowFulfilled = true;
                     bool isSubtype = baseLabel == MaterialPropertyLabel.Semiconductor && checks[i].Label != MaterialPropertyLabel.Semiconductor;
                     if (isSubtype) {
                         semiconductorLabels.Add(checks[i]);
@@ -101,16 +101,18 @@ namespace SpaceFab.Supply {
                         }
                     } else {
                         rowFulfilled = AddRow(layout, progressState, checks[i]);
+                        success &= rowFulfilled;
+                        if (rowFulfilled) totalSuccess++;
+                        Log.Msg("[SupplyBug] added row. Success? " + success);
                     }
 
-                    success &= rowFulfilled;
-                    if (rowFulfilled) totalSuccess++;
                     totalChecks++;
-                    Log.Msg("[SupplyBug] added row. Success? " + success);
                 }
 
                 if (semiconductorRowIndex > -1) {
-                    SetSemiconductorRow(layout, progressState, semiconductorLabels.ToArray(), semiconductorRowIndex);
+                    bool rowFulfilled = SetSemiconductorRow(layout, progressState, semiconductorLabels.ToArray(), semiconductorRowIndex);
+                    if (rowFulfilled) totalSuccess++;
+                    success &= rowFulfilled;
                 }
 
                 layout.ShoppingListLabel.text = $"Material Requirements {totalSuccess}/{totalChecks}";
