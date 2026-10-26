@@ -22,6 +22,7 @@ namespace SpaceFab.Supply {
         public Image MaterialIcon;
         public Image Checkmark;
         public TMP_Text MaterialLabel;
+        public TMP_Text SecondaryLabel;
 
         public Color UncheckedUIColor;
         public Sprite DefaultIcon;
@@ -42,6 +43,7 @@ namespace SpaceFab.Supply {
             // }
 
             MaterialLabel.text = name;
+            SecondaryLabel.text = "";
         }
 
         // Sets the slot to a gathered material's icon, or clears it. The

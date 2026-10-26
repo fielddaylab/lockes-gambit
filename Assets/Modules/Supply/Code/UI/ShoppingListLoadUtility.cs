@@ -5,6 +5,7 @@ using FieldDay;
 using SpaceFab.Materials;
 using SpaceFab.Research;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace SpaceFab.Supply {
@@ -77,6 +78,8 @@ namespace SpaceFab.Supply {
                 bool success = true;
                 int totalSuccess = 0;
                 int totalChecks = 0;
+                int semiconductorRowIndex = -1;
+                List<MaterialPropertyCheck> semiconductorLabels = new();
                 Log.Msg("[SupplyBug] num checks: " + checks.Length);
                 for (int i = 0; i < checks.Length; i++) {
                     if (IsOmittedFromSupply(checks[i], omitted))
@@ -84,14 +87,32 @@ namespace SpaceFab.Supply {
                         Log.Msg("[SupplyBug] check at "+ i + " omitted from supply");
                         continue;
                     }
-                    bool rowFulfilled = AddRow(layout, progressState, checks[i]);
+
+                    MaterialPropertyLabelUtility.TryGetBaseProperty(checks[i].Label, out MaterialPropertyLabel baseLabel);
+                    bool rowFulfilled = false;
+                    bool isSubtype = baseLabel == MaterialPropertyLabel.Semiconductor && checks[i].Label != MaterialPropertyLabel.Semiconductor;
+                    if (isSubtype) {
+                        semiconductorLabels.Add(checks[i]);
+                        if (semiconductorRowIndex > -1) {
+                            continue;
+                        } else {
+                            semiconductorRowIndex = totalChecks;
+                            AddRow(layout, progressState, new MaterialPropertyCheck() { Label = MaterialPropertyLabel.Semiconductor });
+                        }
+                    } else {
+                        rowFulfilled = AddRow(layout, progressState, checks[i]);
+                    }
 
                     success &= rowFulfilled;
                     if (rowFulfilled) totalSuccess++;
                     totalChecks++;
                     Log.Msg("[SupplyBug] added row. Success? " + success);
-
                 }
+
+                if (semiconductorRowIndex > -1) {
+                    SetSemiconductorRow(layout, progressState, semiconductorLabels.ToArray(), semiconductorRowIndex);
+                }
+
                 layout.ShoppingListLabel.text = $"Material Requirements {totalSuccess}/{totalChecks}";
                 bool confirmActive = success && routes.TempRouteIndex < 0;
                 Log.Msg("[SupplyBug] confirm active? " + confirmActive);
@@ -163,17 +184,6 @@ namespace SpaceFab.Supply {
             // Property chip: name + sprite bucket. Dynamic dopant labels get
             // the comparison element appended ("N-TYPE DOPANT for <NAME>").
             string label = MaterialPropertyLabelDisplay.GetPropertyName(check.Label);
-            if (MaterialPropertyLabelUtility.IsDynamic(check.Label)) {
-                if (check.InComparisonTo.IsEmpty)
-                {
-                    // do nothing
-                }
-                else
-                {
-                    MaterialAsset context = Find.NamedAsset<MaterialAsset>(check.InComparisonTo);
-                    label = label + " for " + context.DisplayName;
-                }
-            }
             ObservationType type = MaterialObservationChamberLookup.GetChamberType(check.Label);
             row.SetProperty(label, type);
 
@@ -181,6 +191,51 @@ namespace SpaceFab.Supply {
             // the requirement, rendered with that material's view sprite.
             s_FulfillScratch.Clear();
             ContractProgressUtility.FindFulfillingMaterials(progress, s_CollectedScratch, check, s_FulfillScratch);
+            row.SetSlot(s_FulfillScratch.Count > 0 ? ResolveMaterialIcon(s_FulfillScratch[0]) : null);
+            return s_FulfillScratch.Count > 0;
+        }
+
+        /// <summary>
+        /// Configures a semiconductor shopping list row by displaying the required subtype labels
+        /// and finding a collected material that satisfies all checks.
+        /// Returns true if a fulfilling material is found; otherwise, returns false.
+        /// </summary>
+        private static bool SetSemiconductorRow(ShoppingListLayoutState layout, PlayerProgressState progress, MaterialPropertyCheck[] checks, int rowIndex) {
+            ShoppingListRow row = layout.Rows[rowIndex];
+            RectTransform rect = row.MaterialLabel.rectTransform;
+            rect.anchoredPosition = new Vector2 (rect.anchoredPosition.x, -5f);
+            
+            StringBuilder subLabelBuilder = new();
+            for (int i = 0; i < checks.Length; i++) {
+                if (i > 0) {
+                    subLabelBuilder.Append(", ");
+                }
+                switch (checks[i].Label) {
+                    case MaterialPropertyLabel.HiTempConductor:
+                    case MaterialPropertyLabel.HiTempSemiConductor: {
+                        subLabelBuilder.Append("Hi-Temp");
+                        break;
+                    }
+                    case MaterialPropertyLabel.HighMobilitySemiconductor: {
+                        subLabelBuilder.Append("Hi-Mobility");
+                        break;
+                    }
+                    case MaterialPropertyLabel.HighVoltageSemiconductor: {
+                        subLabelBuilder.Append("Hi-Voltage");
+                        break;
+                    }
+                    case MaterialPropertyLabel.LightEmittingSemiconductor: {
+                        subLabelBuilder.Append("Light-Emitting");
+                        break;
+                    }
+                }
+            }
+            row.SecondaryLabel.text = subLabelBuilder.ToString();
+
+            // Slot: first collected material whose confirmed record satisfies
+            // the requirement, rendered with that material's view sprite.
+            s_FulfillScratch.Clear();
+            ContractProgressUtility.FindFulfillingMaterials(progress, s_CollectedScratch, checks, s_FulfillScratch);
             row.SetSlot(s_FulfillScratch.Count > 0 ? ResolveMaterialIcon(s_FulfillScratch[0]) : null);
             return s_FulfillScratch.Count > 0;
         }
