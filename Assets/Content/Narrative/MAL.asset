@@ -15,10 +15,10 @@ MonoBehaviour:
   DisplayName: MAL
   DialogueTint:
     serializedVersion: 2
-    rgba: 3684408
+    rgba: 4294639360
   NonMinigamePortrait: {fileID: 0}
-  MinigamePortrait: {fileID: 0}
+  MinigamePortrait: {fileID: 21300000, guid: 38068dfb64ebfd0428f7a733b0ce71b2, type: 3}
   CharacterTypeEvent:
-    m_HashValue: 0
+    m_HashValue: 2289341433
   DefaultQuip:
-    m_HashValue: 0
+    m_HashValue: 3063412975
