@@ -19,14 +19,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: High-Power Diode
-  m_description: "\uF0A7\tWe\u2019re hoping to use these chips to increase harvest
-    output for the Kalvis festival, it\u2019s gonna draw crowds!"
+  m_description: "We\u2019re running harvesters at high power for the Kalvis festival,
+    we'll need to upgrade their diodes to handle it!"
   m_client:
     m_Source: cm7
     m_HashValue: 3348237806
   m_payout: 14
   m_expectedDuration: 5
-  m_expectedProfit: 4
   m_minimumProfit: 4
   m_contractType: 1
   m_difficulty: 1

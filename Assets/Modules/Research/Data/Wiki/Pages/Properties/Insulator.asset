@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Insulator
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Insulator
-  m_Icon: {fileID: 21300000, guid: c25fc175947917c41949d7bcb0fdbb3a, type: 3}
-  m_IllustrationFrames: []
-  m_IllustrationFPS: 0.5
-  m_Body: Insulators block electrical signals and prevent signals from passing between
+  Title: Insulator
+  Icon: {fileID: 21300000, guid: c25fc175947917c41949d7bcb0fdbb3a, type: 3}
+  IllustrationFrames: []
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: Insulators block electrical current,  prevent signals from passing between
     materials.
-  m_MaterialId:
+  MaterialId:
     m_HashValue: 0
-  m_IsObservationPage: 0
-  m_ObservationType: 0
-  m_PropertyCheck: {fileID: 11400000, guid: 48f18b58bb0e54eb399bf888debb2842, type: 2}
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 11400000, guid: 48f18b58bb0e54eb399bf888debb2842, type: 2}
+  IsUnlockedByDefault: 0

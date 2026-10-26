@@ -19,8 +19,8 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: Risk Level increases the chance that your routes will take longer and/or
-    cost more than expected.
+  BodyText: Each Risk increases the chances that your routes will run into an unexpected
+    problem, taking longer or costing more than expected.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

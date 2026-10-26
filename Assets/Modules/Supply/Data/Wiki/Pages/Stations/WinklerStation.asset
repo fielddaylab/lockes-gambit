@@ -20,8 +20,7 @@ MonoBehaviour:
   IllustrationImageScale: 0.75
   CaptionText: 
   BodyText: Winkler Station is Frontier Robotics' first fully robot-operated station,
-    serving as a model for Frontier Robotics' aspiration to a fully automated workforce
-    system-wide.
+    serving as a model for Frontier's aspiration to a fully automated workforce system-wide.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

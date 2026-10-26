@@ -19,15 +19,9 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: 'Total Route Time (per ship)
-
-    = Bottleneck production time + Travel
-    time
-
-
-    Total Completion Time
-
-    = Longest route time (Bottleneck)'
+  BodyText: Each Hauler route has to wait for its slowest supplier. A route's <b>Time</b>
+    spent is equal to the slowest supplier - the <i>bottleneck</i> - plus travel
+    time.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

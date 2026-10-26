@@ -17,8 +17,10 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: 2884a955f4e207249b62a3cce6bd5a35, type: 3}
   IllustrationFPS: 0.5
-  BodyText: The Plasma Etcher removes exposed material from the chip using charged
-    gas.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: The Plasma Etcher removes exposed photoresist and oxide from the wafer
+    using charged gas.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

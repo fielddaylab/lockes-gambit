@@ -18,15 +18,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78093ac5e7fad463894f49b0b629d47c, type: 2}
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
-  m_title: Double Diode Contract
-  m_description: "We\u2019re looking for double diode microchips to speed up our
-    food packaging production! Auserine isn\u2019t going to feed itself!"
+  m_title: Double Diode
+  m_description: "We need two diodes in one chip to streamline our food packaging
+    equipment. Ausrine isn't going to feed itself!"
   m_client:
     m_Source: cm4
     m_HashValue: 3331460187
   m_payout: 12
   m_expectedDuration: 4
-  m_expectedProfit: 3
   m_minimumProfit: 3
   m_contractType: 0
   m_difficulty: 0

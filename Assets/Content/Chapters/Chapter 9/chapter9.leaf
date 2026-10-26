@@ -39,14 +39,14 @@
 @cutscene
 @once
 
-{@MAL}      Time to submiiiiiiiiiiiiiiiiiii-
-{@MAL}      Hi CaptiAin, howwww are you doing today?
+{@MAL}      Time to submiiiîîîi½iòí Ï;™´ö±ii‡™iý
+{@MAL}      Hi CªptiÆïn, hoüw‰ww are you doing today?
 {@Player}   ...
 {@Player}   Keela's hack is complicating things.
-{@Player}   P... M.A.L., after this contract, we need to make a detour. 
+{@Player}   P- M.A.L., after this contract, we need to make a detour. 
 {@Player}	Time to have a chat with Keela. 
 //should leave player questioning if he is going to find Keela to bug her.  
-{@MAL}      Great idea, Captain!
+{@MAL}      Gr¨£at id¤a, Caµ¶tÃin!
 
 ::DisposalFee09
 @trigger    OnGoalCompleted

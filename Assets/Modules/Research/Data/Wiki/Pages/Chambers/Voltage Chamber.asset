@@ -17,7 +17,10 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: 1b539f0a20ae8414f8c9273cf318abb5, type: 3}
   IllustrationFPS: 0.5
-  BodyText: The Voltage Chamber is used to observe materials at different electricity.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: The Voltage Chamber is used to run electrical current through materials
+    and observe their properties.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

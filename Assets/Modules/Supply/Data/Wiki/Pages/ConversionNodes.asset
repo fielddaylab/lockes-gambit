@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: ConversionNodes
   m_EditorClassIdentifier: 
-  Title: Conversion Locations
+  Title: Refineries
   Icon: {fileID: 21300000, guid: df3898bc4d3ed574e9a228e04553f21e, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: a2c02af80e5499e4196eb997b2841cc8, type: 3}
   IllustrationFPS: 0.5
-  BodyText: These locations convert raw materials into their refined forms.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: Refinery suppliers convert raw materials in the same route into their
+    refined forms.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

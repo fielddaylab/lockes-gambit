@@ -19,14 +19,14 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: '1: Planet material
+  BodyText: '1: <b>Material</b> supplied
 
-    2: Production Cost
+    2: <b>Cost</b> of production
 
-    3: Production Time
+    3:
+    <b>Time</b> to produce
 
-    4:
-    Risk delays and extra cost'
+    4: <b>Risk</b> of unexpected delay or cost'
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

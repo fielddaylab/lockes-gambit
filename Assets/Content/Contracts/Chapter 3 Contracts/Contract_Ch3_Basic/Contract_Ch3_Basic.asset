@@ -19,14 +19,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Diode
-  m_description: We at FR Pharma desire a high quantity of fast-charging diode chips
-    that can withstand the power draw of our medical technology.
+  m_description: We at FR Pharma desire a high quantity of diodes to regulate signals
+    in our medical devices.
   m_client:
     m_Source: cm3
     m_HashValue: 3415348282
   m_payout: 11
   m_expectedDuration: 4
-  m_expectedProfit: 2
   m_minimumProfit: 2
   m_contractType: 0
   m_difficulty: 0

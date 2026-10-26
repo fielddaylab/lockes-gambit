@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Long Gate
-  m_description: "\uF0A7Everyone loves synth-chicken, which is why we need more conveyor
+  m_description: "Everyone loves synth-chicken, which is why we need more conveyor
     belt machines, which is why we need your chips. "
   m_client:
     m_Source: cm4

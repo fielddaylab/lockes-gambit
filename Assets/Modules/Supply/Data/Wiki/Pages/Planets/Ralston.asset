@@ -19,9 +19,9 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
   CaptionText: 
-  BodyText: The system's most affluent live here or at least own a second home. The
-    corporate mega-plexes are a stark contrast to the homes of the  service and mining
-    workers who serve their affluent clientele.
+  BodyText: The system's most affluent live here - or at least own a second home.
+    The corporate mega-plexes are a stark contrast to the homes of the service and
+    mining workers who serve their affluent clientele.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

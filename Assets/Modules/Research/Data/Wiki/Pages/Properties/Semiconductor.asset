@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Semiconductor
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: Semiconductor
-  m_Icon: {fileID: 21300000, guid: b49e6e9ded1697d4282dad61a01e2d85, type: 3}
-  m_IllustrationFrames: []
-  m_IllustrationFPS: 0.5
-  m_Body: Semiconductors can conduct electrical signals under high heat.
-  m_MaterialId:
+  Title: Semiconductor
+  Icon: {fileID: 21300000, guid: b49e6e9ded1697d4282dad61a01e2d85, type: 3}
+  IllustrationFrames: []
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: Semiconductors are less conductive than Conductors, but their conductivity
+    can be altered, making them useful for devices.
+  MaterialId:
     m_HashValue: 0
-  m_IsObservationPage: 0
-  m_ObservationType: 0
-  m_PropertyCheck: {fileID: 11400000, guid: 2f285b257626f4df1a1a7f21403d89c8, type: 2}
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 11400000, guid: 2f285b257626f4df1a1a7f21403d89c8, type: 2}
+  IsUnlockedByDefault: 0

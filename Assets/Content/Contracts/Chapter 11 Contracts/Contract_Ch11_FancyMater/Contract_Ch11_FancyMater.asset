@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Blue LED
-  m_description: "\uF0A7We\u2019re holding an annual Creator\u2019s Coalition Summit
+  m_description: "We\u2019re holding an annual Creator\u2019s Coalition Summit
     and are in dire need of some quality Blue LEDs for our lighting designers!"
   m_client:
     m_Source: cm9

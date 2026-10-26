@@ -19,9 +19,9 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
   CaptionText: Supplier Contact - Blaze
-  BodyText: A forested and mountainous planet, Kalvis is the capital of it's aptly
-    named sector. It belongs to a hard-working class people who value community and
-    a hardy work attitude.
+  BodyText: A forested and mountainous planet, Kalvis is the capital of its aptly
+    named sector. It belongs to a hard-working people who value community and a hardy
+    work attitude.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

@@ -17,8 +17,10 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: a16e5b72f5373b143902090e71d9fa69, type: 3}
   IllustrationFPS: 0.5
-  BodyText: The Doping Chamber adds impurities (dopants) to a semiconductor, changing
-    it into an N-type or P-type material.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: The Doping Chamber adds impurities (dopants) to a semiconductor to tune
+    its electrical properties.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

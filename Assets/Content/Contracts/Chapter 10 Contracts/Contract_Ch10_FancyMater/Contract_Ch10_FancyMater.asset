@@ -19,14 +19,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Fast NAND
-  m_description: Frontier Robotics has become unreliable, we need independent flash
+  m_description: Frontier Robotics has become unreliable, we need independent data
     storage for our own workstations.
   m_client:
     m_Source: cm6
     m_HashValue: 3365015425
   m_payout: 17
   m_expectedDuration: 6
-  m_expectedProfit: 5
   m_minimumProfit: 6
   m_contractType: 1
   m_difficulty: 1

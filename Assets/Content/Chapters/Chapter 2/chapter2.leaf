@@ -51,7 +51,7 @@ $call   UnlockWikiPage("Insulator")
 {@Player}   Hmmm... looks like I'll need a semiconductor material...
 {@Player}   I don't see any in this sector.
 {@PAL}      You can make one!
-{@PAL}      You can get silicon dioxide at Frosch and have the haulers take it to a refinery.
+{@PAL}      You can get quartz at Frosch and have the haulers take it to a refinery.
 {@Player}   A two step process? That sounds pricey.
 
 
@@ -62,18 +62,15 @@ $call   UnlockWikiPage("Insulator")
 @when   IsSolutionFoundFor(Design), IsSolutionFoundFor(Research), IsSolutionFoundFor(Supply)
 @cutscene 
 @once
-
-
 //call coming in from Quinn
-
 {@Quinn}    Hey, Cowboy! How are Frontier's bots treating you?
 {@Player}   We've had a few problems, but I'm figuring it out.
 {@Quinn}   	I've heard rumors that Frontier uses cheap components in those bots.
 {@Quinn}	Apparently, they break down a lot. 
+{@Quinn}	Maybe you can make some better chips for 'em, eh?
 //end call
-
 {@PAL}		Our robots actually have a stellar reputation! 
-{@Player}	Hey P.A.L., Were you listening to my call? 
+{@Player}	Hey P.A.L., were you listening to my call? 
 
 
 // ::AfterFabricationCh2 

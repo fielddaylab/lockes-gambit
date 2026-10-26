@@ -17,8 +17,10 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: 12c6efacfe2b9f44ea041283802ebd2d, type: 3}
   IllustrationFPS: 0.5
-  BodyText: The Ion Implanter shoots tiny charged particles into the chip to change
-    how selected areas behave.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: The Ion Implanter shoots charged dopants into the wafer to create n-type
+    and p-type regions.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0
