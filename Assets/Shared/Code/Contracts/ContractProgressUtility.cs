@@ -1,7 +1,9 @@
 using BeauUtil;
+using FieldDay;
 using SpaceFab.Materials;
 using SpaceFab.Research;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SpaceFab
 {
@@ -307,15 +309,7 @@ namespace SpaceFab
         /// </summary>
         public static bool IsContractSatisfied(PlayerProgressState progress, ContractDef contract)
         {
-            MaterialPropertyCheck[] checks = contract.RequiredMaterialProperties();
-            for (int i = 0; i < checks.Length; i++)
-            {
-                if (!HasAnyFulfillingMaterial(progress, checks[i]))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return ContractRequirementResolver.IsSatisfied(Find.State<ContractState>().CachedRequirements, progress.MaterialProperties) > ContractRequirementResolver.Satisfaction.NotSatisfied; 
         }
 
         /// <summary>
@@ -324,51 +318,7 @@ namespace SpaceFab
         /// </summary>
         public static bool IsContractSatisfied(PlayerProgressState progress, ResearchMinigameState sandbox, ContractDef contract)
         {
-            MaterialPropertyCheck[] checks = contract.RequiredMaterialProperties();
-            for (int i = 0; i < checks.Length; i++)
-            {
-                if (!HasAnyFulfillingMaterial(progress, sandbox, checks[i]))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Slot-by-slot view for UIs that render the contract's requirements
-        /// list with per-slot tick marks. Caller-allocates output. Does NOT
-        /// clear output - callers that want a fresh list should clear before
-        /// calling. Appends one ContractSlotStatus per MaterialPropertyCheck
-        /// in the contract.
-        /// </summary>
-        public static void EnumerateContractStatus(PlayerProgressState progress, ContractDef contract, IList<ContractSlotStatus> output)
-        {
-            MaterialPropertyCheck[] checks = contract.RequiredMaterialProperties();
-            for (int i = 0; i < checks.Length; i++)
-            {
-                output.Add(new ContractSlotStatus {
-                    Check = checks[i],
-                    IsFulfilled = HasAnyFulfillingMaterial(progress, checks[i]),
-                });
-            }
-        }
-
-        /// <summary>
-        /// Sandbox-aware slot-by-slot view. Used by the Research minigame's
-        /// own checklist UI so slots tick live as the player confirms
-        /// properties this session.
-        /// </summary>
-        public static void EnumerateContractStatus(PlayerProgressState progress, ResearchMinigameState sandbox, ContractDef contract, IList<ContractSlotStatus> output)
-        {
-            MaterialPropertyCheck[] checks = contract.RequiredMaterialProperties();
-            for (int i = 0; i < checks.Length; i++)
-            {
-                output.Add(new ContractSlotStatus {
-                    Check = checks[i],
-                    IsFulfilled = HasAnyFulfillingMaterial(progress, sandbox, checks[i]),
-                });
-            }
+            return ContractRequirementResolver.IsSatisfied(Find.State<ContractState>().CachedRequirements, sandbox.SandboxProperties) > ContractRequirementResolver.Satisfaction.NotSatisfied; 
         }
 
         #endregion // Whole-contract queries

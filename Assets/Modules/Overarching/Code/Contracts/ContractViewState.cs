@@ -5,6 +5,7 @@ using BeauRoutine;
 using BeauUtil;
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Collections;
 using FieldDay.Scenes;
 using FieldDay.SharedState;
 using SpaceFab.Design;
@@ -24,11 +25,16 @@ namespace SpaceFab.Overarching {
         [NonSerialized] public OverarchingContractMode QueuedMode;
         [NonSerialized] public bool ChangedContract;
 
+        [NonSerialized] public ContractRequirementResolver.RequirementsTable TempRequirementsTable;
+
         [NonSerialized] public RingBuffer<int> AvailableContractIndices = new RingBuffer<int>(8);
 
         [NonSerialized] public Routine ProcessRoutine;
 
         IEnumerator<WorkSlicer.Result?> IScenePreload.Preload() {
+            TempRequirementsTable.Columns = new WorkList<ContractRequirementResolver.MaterialColumn>(16);
+            TempRequirementsTable.Rows = new WorkList<ContractRequirementResolver.MaterialRow>(3);
+
             Find.State(out PlayerProgressState playerProgress, out ChapterState chapterState);
             ContractViewUtility.RebuildAvailableContracts(this, playerProgress, chapterState);
             return null;

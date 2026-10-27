@@ -117,6 +117,7 @@ namespace SpaceFab.UI {
 
             ContractUtility.LoadContractUI(Contract, chapterState.ChapterIndex, contractState.ContractDefinition);
             if (contractState.ContractDefinition) {
+                ContractUtility.LoadContractRequirementsToUI(Contract, contractState.ContractDefinition);
                 ContractUtility.ApplyContractProgressToUI(Contract, contractState.ContractDefinition);
             }
         }

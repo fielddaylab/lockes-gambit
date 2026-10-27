@@ -11,17 +11,16 @@
 {@PAL}      Two clients are asking for microchips from us!
 
 //TODO onboard scroll through the contracts - add highlights
-//$call   PointElement(overarching:CONTRACT-SCROLL-ELEMENT)
+$call   HighlightElement(overarching:next-contract-btn)
 {@PAL}      Take a look at the contracts and pick one!
-//$call   ReleaseAllHighlights()
 
 //TODO onboard difficulty level - add highlight
-//$call   PointElement(overarching:CONTRACT-DIFFICULTY-ELEMENT)
+$call   PointElement(overarching:contract-difficulty)
 {@PAL}      Here's the difficulty rating...
-//$call   ReleaseAllHighlights()
 
 //once they choose the contract
 //TODO onboard switch contracts - add highlight
+$call   ReleaseAllHighlights()
 {@PAL}      ...but you can switch contracts at any time.
 //$call   PointElement(overarching:CONTRACT-SELECTOR-ELEMENT)
 {@PAL}      Just click here to see your other options.

@@ -2,6 +2,7 @@
 
 ::FirstWaferGeneration
 @trigger    OnFabPreAttempt
+@when   !MinigameHasValidSolution()
 $if temp:fabTutorialStep == 0
     $set temp:fabTutorialStep = 1
     $call HighlightElement(fab:generate-button)

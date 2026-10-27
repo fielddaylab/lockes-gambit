@@ -3,6 +3,7 @@ using BeauUtil;
 using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.Assets;
+using FieldDay.Collections;
 using FieldDay.Data;
 using FieldDay.Scenes;
 using FieldDay.Scripting;
@@ -23,6 +24,8 @@ namespace SpaceFab
         [NonSerialized] public ContractAssetSet ContractAssets;
         [NonSerialized] public UniqueId16 ContractScriptHandle;
 
+        [NonSerialized] public ContractRequirementResolver.RequirementsTable CachedRequirements;
+
         [NonSerialized] public Routine LoadRoutine;
 
         public bool IsLoaded(SceneLoadFence fence) {
@@ -35,6 +38,9 @@ namespace SpaceFab
 
         public void OnRegister()
         {
+            CachedRequirements.Rows = new WorkList<ContractRequirementResolver.MaterialRow>(3);
+            CachedRequirements.Columns = new WorkList<ContractRequirementResolver.MaterialColumn>(16);
+
             Game.Scenes.RegisterLoadDependency(this);
         }
     }
@@ -86,6 +92,8 @@ namespace SpaceFab
             contractState.ContractAssets = assetSet;
             contractState.ContractScriptHandle = ScriptDBUtility.Load(assetSet.Script);
 
+            ContractRequirementResolver.BuildRequirements(ref contractState.CachedRequirements, Find.State<ChapterState>().ChapterIndex, definition);
+
             switch (loadAction) {
                 case ContractLoadAction.ResetContractProgress: {
                     ResetProgress(contractState, Find.State<PlayerProgressState>());
@@ -103,6 +111,11 @@ namespace SpaceFab
 
             ScriptDBUtility.Unload(contractState.ContractScriptHandle);
             Game.Assets.UnloadStreamedPackage(contractState.ContractDefinition.StreamedPack);
+
+            contractState.CachedRequirements.Columns?.Clear();
+            contractState.CachedRequirements.Rows?.Clear();
+            contractState.CachedRequirements.DefaultRows = 0;
+            contractState.CachedRequirements.HasExtendedRow = false;
 
             contractState.LoadRoutine.Stop();
             contractState.ContractDefinition = null;

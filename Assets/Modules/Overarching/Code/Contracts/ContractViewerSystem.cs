@@ -117,7 +117,9 @@ namespace SpaceFab.Overarching {
 
             bool isCurrentContract = chapterState.LastSelectedContractIndex == contractIndex;
 
+            ContractRequirementResolver.BuildRequirements(ref view.TempRequirementsTable, chapterState.ChapterIndex, definition);
             ContractUtility.LoadContractUI(layout.Contract, chapterState.ChapterIndex, definition);
+            ContractUtility.LoadContractRequirementsToUI(view.TempRequirementsTable, layout.Contract, definition);
 
             if (isCurrentContract) {
                 layout.Contract.SelectContractButton.gameObject.SetActive(false);

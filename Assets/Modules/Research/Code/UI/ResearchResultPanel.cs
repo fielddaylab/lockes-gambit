@@ -34,7 +34,7 @@ namespace SpaceFab.Research {
         public void Show() {
             Find.State(out ChapterState chapterState, out ContractState contractState, out ResearchMinigameState researchState, out PlayerProgressState progressState);
 
-            ContractUIUtility.UpdateVisualsWithCompletion(Table, researchState.SandboxProperties);
+            ContractUIUtility.UpdateVisualsWithCompletion(contractState.CachedRequirements, Table, researchState.SandboxProperties);
 
             bool allCorrect = contractState.ContractDefinition && ContractProgressUtility.IsContractSatisfied(progressState, researchState, contractState.ContractDefinition);
 
@@ -60,8 +60,7 @@ namespace SpaceFab.Research {
         public void LateInitialize() {
             Find.State(out ChapterState chapterState, out ContractState contractState);
 
-            ContractUIUtility.BuildRequirementData(Table, chapterState.ChapterIndex, contractState.ContractDefinition);
-            ContractUIUtility.InitializeVisuals(Table);
+            ContractUIUtility.InitializeVisuals(contractState.CachedRequirements, Table);
         }
 
         static private IEnumerator DisplayRoutine(ResearchResultPanel resultPanel) {

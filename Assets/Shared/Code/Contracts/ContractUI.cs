@@ -7,6 +7,7 @@ using SpaceFab.UI;
 using FieldDay.UI.Widgets;
 using SpaceFab.Save;
 using System;
+using BeauUtil.Debugger;
 
 namespace SpaceFab {
     public class ContractUI : MonoBehaviour
@@ -81,13 +82,6 @@ namespace SpaceFab {
             RevenueIndicators.SetValue(profit);
         }
 
-        public void ShowRequirement(int chapterIndex, ContractDef contract)
-        {
-            ContractUIUtility.BuildRequirementData(Requirements, chapterIndex, contract);
-            ContractUIUtility.InitializeVisuals(Requirements);
-            ContractUIUtility.UpdateVisualsWithCompletion(Requirements, Find.State<PlayerProgressState>().MaterialProperties);
-        }
-
         public void ShowDesignCompleted(bool completed) {
             ChipDiagramEmpty.enabled = !completed;
             ChipDiagramFilled.enabled = completed;
@@ -113,7 +107,6 @@ namespace SpaceFab {
                 ui.ClearElements();
                 ui.ShowDuration(def.ExpectedDuration());
                 ui.ShowProfit(def.Payout());
-                ui.ShowRequirement(chapterIndex, def);
 
                 var clientConfig = ContractUIUtility.GetClientInfo(assets, def.ClientId());
                 var difficultyConfig = assets.Difficulties[(int)def.Difficulty()];
@@ -135,6 +128,28 @@ namespace SpaceFab {
                 }
                 ui.TypeLabel.SetText(typeConfig.Label);
             }
+        }
+
+        public static void LoadContractRequirementsToUI(ContractUI ui, ContractDef def)
+        {
+            if (!def) {
+                return;
+            }
+
+            Find.State(out ContractState contractState);
+
+            ContractUIUtility.InitializeVisuals(contractState.CachedRequirements, ui.Requirements);
+            ContractUIUtility.UpdateVisualsWithCompletion(contractState.CachedRequirements, ui.Requirements, Find.State<PlayerProgressState>().MaterialProperties);
+        }
+
+        public static void LoadContractRequirementsToUI(in ContractRequirementResolver.RequirementsTable resolverTable, ContractUI ui, ContractDef def)
+        {
+            if (!def) {
+                return;
+            }
+
+            ContractUIUtility.InitializeVisuals(resolverTable, ui.Requirements);
+            ContractUIUtility.UpdateVisualsWithCompletion(resolverTable, ui.Requirements, Find.State<PlayerProgressState>().MaterialProperties);
         }
 
         static public void ApplyContractProgressToUI(ContractUI ui, ContractDef def) {

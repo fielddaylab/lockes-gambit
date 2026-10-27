@@ -54,7 +54,7 @@ namespace SpaceFab.Research {
                 return;
             }
 
-            ContractUIUtility.UpdateVisualsWithCompletion(panel.Table, researchState.SandboxProperties);
+            ContractUIUtility.UpdateVisualsWithCompletion(Find.State<ContractState>().CachedRequirements, panel.Table, researchState.SandboxProperties);
         }
     }
 }

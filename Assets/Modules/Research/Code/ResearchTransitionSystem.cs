@@ -84,8 +84,7 @@ namespace SpaceFab.Research {
             HypothesisViewModelUtility.RequestRebuild(hypothesisViewModelState);
 
             // Initialize requirements display
-            ContractUIUtility.BuildRequirementData(requirementsPanel.Table, chapterState.ChapterIndex, contractState.ContractDefinition);
-            ContractUIUtility.InitializeVisuals(requirementsPanel.Table);
+            ContractUIUtility.InitializeVisuals(Find.State<ContractState>().CachedRequirements, requirementsPanel.Table);
             Positioning.SetHeightDelta(requirementsPanel.Bounds, requirementsPanel.Table.Sizer.LastSize.y + requirementsPanel.HeightPadding);
 
             // Init Battery Chamber. Instantiate the meter rig variant for
