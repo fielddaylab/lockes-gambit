@@ -258,6 +258,40 @@ namespace SpaceFab
             return count;
         }
 
+        /// <summary>
+        /// Player-knowledge enumeration over a caller-provided set of material IDs.
+        /// Appends every ID whose confirmed record satisfies all checks.
+        /// Returns the number of IDs appended this call. Does NOT clear output.
+        /// </summary>
+        public static int FindFulfillingMaterials(PlayerProgressState progress, IReadOnlyCollection<StringHash32> materialIds, IReadOnlyCollection<MaterialPropertyCheck> checks, ICollection<StringHash32> output)
+        {
+            if (progress == null || progress.MaterialProperties == null || materialIds == null) return 0;
+            int count = 0;
+            foreach (StringHash32 id in materialIds)
+            {
+                if (!progress.MaterialProperties.TryGetValue(id, out var record))
+                    continue;
+
+                bool satisfiesAll = true;
+                foreach (MaterialPropertyCheck check in checks)
+                {
+                    if (!SatisfiesCheck(record, check))
+                    {
+                        satisfiesAll = false;
+                        break;
+                    }
+                }
+
+                if (satisfiesAll)
+                {
+                    output.Add(id);
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
         #endregion // Supply-style queries (caller-provided material set)
 
         #region Whole-contract queries

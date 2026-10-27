@@ -264,6 +264,8 @@ namespace SpaceFab {
 
         static private StringHash32 FindDopantId(TempReferenceBuffer<MaterialAsset> materialSet, MaterialAsset baseMaterial, MaterialPropertyLabel dopantType) {
             Assert.True(dopantType == MaterialPropertyLabel.NDopantFor || dopantType == MaterialPropertyLabel.PDopantFor);
+
+            List<StringHash32> dopants = new();
             for(int i = 0; i < materialSet.Count; i++) {
                 MaterialAsset material = materialSet[i];
                 if (material == baseMaterial) {
@@ -281,7 +283,7 @@ namespace SpaceFab {
                 }
             }
 
-            Assert.Fail("No dopant {1} specified for material {0} even though required by material requirement table", baseMaterial.name, dopantType);
+            Assert.False(dopants.Count == 0, "No dopant {1} specified for material {0} even though required by material requirement table", baseMaterial.name, dopantType);
             return null;
         }
 
