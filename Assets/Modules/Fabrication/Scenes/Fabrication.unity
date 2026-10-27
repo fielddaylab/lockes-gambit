@@ -2164,7 +2164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa1fd4731f4e344d8a4f7b632160a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG_FabricationLevel: {fileID: 11400000, guid: 38a047663027349d790b55a8307ece43, type: 2}
+  DEBUG_FabricationLevel: {fileID: 11400000, guid: 1d55436a90c784eca95ec26282d6a55f, type: 2}
   DEBUG_StationConfig: {fileID: 11400000, guid: 722373c8e26982040aa5e116a191f69f, type: 2}
 --- !u!114 &879438738
 MonoBehaviour:
