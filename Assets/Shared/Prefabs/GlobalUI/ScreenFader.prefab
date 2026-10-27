@@ -135,7 +135,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278848010
   TransitionMix:
-    m_HashValue: 0
+    m_HashValue: 2138313543
+  InGameMinWaitTime: 4
   HalftoneDirection: 0
   MaxHalftoneTilt: 0.6
   HalftoneMoveDistance: 0.5

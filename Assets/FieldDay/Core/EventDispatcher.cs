@@ -7,6 +7,7 @@ using BeauUtil.Debugger;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using TinyIL;
@@ -556,6 +557,20 @@ namespace FieldDay {
         static public EvtArgs Box<T>(T data) where T : struct {
             return BoxedConverter<T>.Create(data);
         }
+
+        #region Overloads
+
+        [Obsolete("This should use EvtArgs.Create instead", true)]
+        static public EvtArgs Box(StringHash32 data) {
+            throw new InvalidOperationException("StringHash32 should be sent through Create");
+        }
+
+        [Obsolete("This should use EvtArgs.Create instead", true)]
+        static public EvtArgs Box(StringHash64 data) {
+            throw new InvalidOperationException("StringHash64 should be sent through Create");
+        }
+
+        #endregion // Overloads
 
         #endregion // Constructors
 

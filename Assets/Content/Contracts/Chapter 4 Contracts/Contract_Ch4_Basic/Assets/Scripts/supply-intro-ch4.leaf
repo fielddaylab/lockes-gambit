@@ -30,4 +30,5 @@ $set    temp:checkedPlanetCu = true
 :: NodeClickedAfterTryingCopper
 @trigger    OnNodeClicked
 @when   !MinigameHasValidSolution(), node != "Planet_Cu", temp:checkedPlanetB, temp:checkedPlanetCu
+@once
 {@PAL}  Build routes to fulfill the requirements.\n\nKeep the time and money low!

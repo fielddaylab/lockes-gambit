@@ -139,18 +139,19 @@ namespace SpaceFab.Research
             bool validRadius = dopant.ConstituentElementNames.Length <= 1 && substrate.SimpleAtomicRadii[index] > dopant.SimpleAtomicRadii[0];
             bool validElectronDiff = Mathf.Abs(substrate.ValenceElectronCounts[index] - dopant.ValenceElectronCounts[0]) == 1;
 
-            if (validRadius && validElectronDiff) {
-                float dopedCurrent = MaterialPhysicsUtility.GetCurrent(profile, dopingChamber.Voltage, 1f);
-                CircuitUtility.SetLightStrength(dopingChamber.Circuit, dopedCurrent);
-                CircuitUtility.SetFlowStrength(dopingChamber.Circuit, dopedCurrent, profile.IsHighMobility, profile.IsLightEmitting);
-
+            if (validRadius) {
                 // Auto-populate 'Atom fits' chip
                 if (ResearchInventoryUtility.AddObservation(researchState, dopant.AssetId, MaterialPropertyLabel.AtomicRadiusCompliant, substrate.AssetId)) {
                     Find.State(out HypothesisViewModelState viewModelState);
                     HypothesisViewModelUtility.RequestRebuild(viewModelState);
                 }
-            }
-            else if (!validRadius) {
+
+                if (validElectronDiff) {
+                    float dopedCurrent = MaterialPhysicsUtility.GetCurrent(profile, dopingChamber.Voltage, 1f);
+                    CircuitUtility.SetLightStrength(dopingChamber.Circuit, dopedCurrent);
+                    CircuitUtility.SetFlowStrength(dopingChamber.Circuit, dopedCurrent, profile.IsHighMobility, profile.IsLightEmitting);
+                }
+            } else {
                 ResearchExplosionUtility.ExplodeSlot(
                     explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Secondary,
                     ExplosionStyle.TooBig, delay: 1f);

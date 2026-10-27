@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fa937c2c803464d8f0eaff2033531d, type: 3}
   m_Name: SiliconDioxide
   m_EditorClassIdentifier: 
-  DisplayName: Silicon Dioxide
+  DisplayName: Quartz
   ShortName: SiO2
   GemSprite: {fileID: 21300000, guid: e26b5d8a0a3127541ad5592610272606, type: 3}
   ConstituentElementNames:

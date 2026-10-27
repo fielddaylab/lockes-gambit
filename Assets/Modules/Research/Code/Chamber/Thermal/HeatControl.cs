@@ -85,7 +85,10 @@ namespace SpaceFab.Research
             control.HeatIndex++;
             ApplyChange(control, config);
 
-            ScriptUtility.Trigger(ResearchScriptTriggers.OnHeatIncreased);
+            using (var table = TempVarTable.Alloc()) {
+                table.Set("heat", control.HeatIndex);
+                ScriptUtility.Trigger(ResearchScriptTriggers.OnHeatIncreased, table);
+            }
         }
 
         // Bumps the voltage index down by one. No-op at the lower magnitude

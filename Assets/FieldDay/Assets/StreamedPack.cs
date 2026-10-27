@@ -65,7 +65,23 @@ namespace FieldDay.Assets {
     }
 
     public sealed class StreamedPackIdAttribute : AssetNameAttribute {
+        private readonly string m_Filter;
+        
         public StreamedPackIdAttribute()
-            : base(typeof(StreamedPack)) { }
+            : base(typeof(StreamedPack), false) { }
+
+        public StreamedPackIdAttribute(string filter)
+            : base(typeof(StreamedPack), !string.IsNullOrEmpty(filter))
+        {
+            m_Filter = filter;
+        }
+
+        protected internal override bool Predicate(UnityEngine.Object obj) {
+            if (string.IsNullOrEmpty(m_Filter)) {
+                return true;
+            }
+
+            return WildcardMatch.Match(obj.name, m_Filter);
+        }
     }
 }

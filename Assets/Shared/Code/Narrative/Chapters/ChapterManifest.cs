@@ -27,6 +27,12 @@ namespace SpaceFab {
         public Entry[] Chapters;
         public ExportedData[] ResidentData;
 
+        [Header("Hazards")]
+        [Range(0, 100)] public int[] HazardChances = new int[9];
+
+        [Header("Epilogue")]
+        [StreamedPackId("*Comic*")] public StringHash32 EpilogueComicPackage;
+
 #if UNITY_EDITOR
 
         int IBaked.Order { get { return 0; } }
@@ -41,7 +47,7 @@ namespace SpaceFab {
             using (PooledList<StringHash32> materialIds = PooledList<StringHash32>.Create()) {
                 for (int i = 0; i < Chapters.Length; i++) {
 
-                    ChapterDef chapter = Baking.FindAsset<ChapterDef>(Chapters[i].ChapterId.ToDebugString());
+                    ChapterDef chapter = Baking.FindAsset<ChapterDef>(Chapters[i].ChapterId);
                     Assert.NotNullOrDestroyed(chapter);
 
                     materialIds.AddRange(chapter.AvailableMaterials);

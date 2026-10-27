@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Constants
   m_EditorClassIdentifier: 
-  Title: Input
+  Title: Constant
   Icon: {fileID: 21300000, guid: 5010a35c9569b4b4b8627cdfdb414704, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 0a86bf489197c0d40991dcbfcc9e2b59, type: 3}
   IllustrationFPS: 0.5
-  BodyText: Constants are similar to inputs but they are always either HI or LO.
-    You cannot change them.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: Constants act like Inputs that are always either HI or LO. You cannot
+    change them.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

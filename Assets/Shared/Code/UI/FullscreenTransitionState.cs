@@ -45,6 +45,7 @@ namespace SpaceFab
         public float DefaultTransitionTime = 0.3f;
         public Color32 DefaultColor = Color.black;
         [AudioMixStateRef] public StringHash32 TransitionMix;
+        public float InGameMinWaitTime = 3f;
 
         [Header("Halftone")]
         public HalftoneAxis HalftoneDirection;
@@ -61,6 +62,8 @@ namespace SpaceFab
         [NonSerialized] public float CurrentTransitionSpeed;
         [NonSerialized] public float CurrentTransitionDelay;
         [NonSerialized] public Color32 CurrentColor;
+
+        [NonSerialized] public float LoadMinTimeMarker;
 
         public void OnDeregister() {
             CameraHelper.RemoveOnPreCull(this);
@@ -230,11 +233,22 @@ namespace SpaceFab
             }
 
             FadeOut(fullscreen, mode, fullscreen.DefaultTransitionTime, FullscreenTransitionFlags.FlipHalftoneAxis);
-            return WaitToComplete(fullscreen);
+            while(!IsTransitionDone(fullscreen)) {
+                yield return null;
+            }
+            if (SpacefabGame.IsSceneInGame) {
+                fullscreen.LoadMinTimeMarker = Time.time + Math.Max(fullscreen.InGameMinWaitTime, SpacefabGame.TransitionState.DequeueWaitTime());
+            } else {
+                fullscreen.LoadMinTimeMarker = -1;
+            }
         }
 
         static private IEnumerator HandleScenePreReady(Scene scene, StringHash32 tag, MainSceneTransitionParameters transitionArgs) {
-            yield break;
+            Find.State(out FullscreenTransitionState fullscreen);
+            while (Time.time < fullscreen.LoadMinTimeMarker) {
+                yield return null;
+            }
+            yield return SpacefabGame.TransitionState.FadeOutLoadingScreen();
         }
 
         static private IEnumerator HandleSceneLoaded(Scene scene, StringHash32 tag, MainSceneTransitionParameters transitionArgs) {

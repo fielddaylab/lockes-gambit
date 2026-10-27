@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: High Electron Mobility
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: High Electron Mobility
-  m_Icon: {fileID: 21300000, guid: a69228bc3bb10854b9f43d0883383597, type: 3}
-  m_IllustrationFrames: []
-  m_IllustrationFPS: 0.5
-  m_Body: High Electron Mobility materials allow electrical signals to move through
-    them very quickly.
-  m_MaterialId:
+  Title: High Electron Mobility
+  Icon: {fileID: 21300000, guid: a69228bc3bb10854b9f43d0883383597, type: 3}
+  IllustrationFrames: []
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: High Electron Mobility semiconductors allow electrical signals to move
+    through them very quickly, for rapid-switching microchips.
+  MaterialId:
     m_HashValue: 0
-  m_IsObservationPage: 0
-  m_ObservationType: 0
-  m_PropertyCheck: {fileID: 11400000, guid: 7ee64d40de0274399a995e2495b5cf64, type: 2}
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 11400000, guid: 7ee64d40de0274399a995e2495b5cf64, type: 2}
+  IsUnlockedByDefault: 0

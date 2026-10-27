@@ -19,13 +19,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: AND
-  m_description: This is where the contract is described
+  m_description: "FR Pharma innovates, which is why we hope to establish data
+    centers for our autonomous receptionists. "
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm3
+    m_HashValue: 3415348282
   m_payout: 14
   m_expectedDuration: 6
   m_expectedProfit: 6
+  m_minimumProfit: 6
   m_contractType: 2
   m_difficulty: 2
   m_unlocksBigBattery: 0

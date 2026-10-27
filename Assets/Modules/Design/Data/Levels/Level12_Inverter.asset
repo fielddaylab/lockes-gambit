@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level12_Inverter
   m_EditorClassIdentifier: 
   m_title: Inverter
+  m_description: Use HI and LO constants to send the opposite of the input.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 1a4b09119900f496bab6519f9c6b210a, type: 2}
   m_testSuite: {fileID: 11400000, guid: e82d3bb7167fb44419a5f57e8bef42f8, type: 2}

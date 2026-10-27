@@ -10,7 +10,6 @@ namespace SpaceFab
     public class SaveIcon : BatchedComponent
     {
         public CanvasGroup Group;
-        public Image Icon;
         public TMP_Text SavingText;
     }
 }

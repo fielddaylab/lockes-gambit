@@ -37,6 +37,7 @@ namespace SpaceFab.Fabrication.Microgames
         [NonSerialized] public List<Vector2> PlayerPoints = new();
         [NonSerialized] public List<Vector2> CachedPreviewPoints;
         [NonSerialized] public Vector2 Direction;
+        [NonSerialized] public int TurnCount;
 
         [NonSerialized] public int PreviewVisibleCount;
         [NonSerialized] public float PreviewProgress;
@@ -65,11 +66,10 @@ namespace SpaceFab.Fabrication.Microgames
             }   
 
             // Setup pattern
-            // int patternIndex = sequence.Level.PatternIndex;
             int patternIndex = sequence.Level.GetPatternIndex(sequence);
+            MicrogameStationConfig stationConfig = MicrogameUtility.GetStationConfig();
 
-            Find.GlobalAsset(out MicrogameStationConfig config);
-            state.Pattern = GameObject.Instantiate(config.EtchPatterns[patternIndex], state.EtchUI.transform).GetComponent<EtchPatternData>();
+            state.Pattern = GameObject.Instantiate(stationConfig.EtchPatterns[patternIndex], state.EtchUI.transform).GetComponent<EtchPatternData>();
             
             // Cache preview points
             state.CachedPreviewPoints = new();
@@ -91,6 +91,7 @@ namespace SpaceFab.Fabrication.Microgames
             
             state.PlayerPoints.Clear();
             state.PlayerBeam.positionCount = 0;
+            state.TurnCount = 0;
         }
 
         public static void EnterComplete()
@@ -147,6 +148,7 @@ namespace SpaceFab.Fabrication.Microgames
 
             state.PlayerPoints.Clear();
             state.PlayerBeam.positionCount = 0;
+            state.TurnCount = 0;
 
             if (state.Pattern != null)
             {

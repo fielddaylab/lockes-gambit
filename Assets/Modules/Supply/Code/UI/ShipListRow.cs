@@ -30,8 +30,8 @@ namespace SpaceFab.Supply {
         [NonSerialized] public AnimHandle Anim;
 
         protected override void OnDisable() {
-            LineLayer.gameObject.SetActive(false);
-            StatsLayer.gameObject.SetActive(false);
+            LineLayer?.gameObject.SetActive(false);
+            StatsLayer?.gameObject.SetActive(false);
             
             base.OnDisable();
         }
@@ -77,22 +77,24 @@ namespace SpaceFab.Supply {
 
             row.CursorHint.TooltipHeader = shipAsset.DisplayName;
 
-            row.LineLayer.color = shipAsset.LineColor;
+            if (row.LineLayer != null) row.LineLayer.color = shipAsset.LineColor;
 
             row.ShipName.SetText(shipAsset.DisplayName);
             row.ShipName.color = shipAsset.Colors.Content;
         }
 
+        private const int StatsDistance = 8;
+
         static public void SyncShipRowPositions(ShipListRow row) {
             Vector2 anchorPos = row.Rect.anchoredPosition;
             row.LineLayer.rectTransform.anchoredPosition = anchorPos;
-            Positioning.SetOffsetY(row.StatsLayer.Rect, anchorPos.y);
+            Positioning.SetOffsetY(row.StatsLayer.Rect, anchorPos.y - StatsDistance);
         }
 
         static public void SetShipRowStatsActive(ShipListRow row, bool active) {
             if (active) {
                 row.StatsLayer.gameObject.SetActive(true);
-                row.Style.Style.MarginLower.y = 52;
+                row.Style.Style.MarginLower.y = 52 + StatsDistance;
                 foreach(var outline in row.ShipOutline) {
                     outline.enabled = false;
                 }

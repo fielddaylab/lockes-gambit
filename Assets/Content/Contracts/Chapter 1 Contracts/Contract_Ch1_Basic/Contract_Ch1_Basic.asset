@@ -17,14 +17,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 11e34deaa990d3e4e8b4879a1798a4af, type: 2}
   m_omitFromSupplyRequirements:
   - {fileID: 11400000, guid: 11e34deaa990d3e4e8b4879a1798a4af, type: 2}
-  m_title: Connect Chip
-  m_description: This is a Test
+  m_title: Orientation
+  m_description: Create a simple connector chip to acquaint you with the Constantine's
+    upgraded chip fabrication facilities.
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm1
+    m_HashValue: 3381793044
   m_payout: 3
   m_expectedDuration: 3
-  m_expectedProfit: 1
+  m_minimumProfit: 1
   m_contractType: 0
   m_difficulty: 0
   m_unlocksBigBattery: 0

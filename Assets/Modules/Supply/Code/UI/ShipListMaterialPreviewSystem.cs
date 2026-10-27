@@ -1,4 +1,4 @@
-using System;
+using BeauRoutine.Internal;
 using BeauUtil;
 using BeauUtil.Debugger;
 using FieldDay;
@@ -7,6 +7,7 @@ using FieldDay.UI;
 using FieldDay.UI.Widgets;
 using SpaceFab.Materials;
 using SpaceFab.Research;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +43,8 @@ namespace SpaceFab.Supply {
                 for(int i = routeStats.MaterialCount; i < row.SlotMaterials.Length; i++) {
                     row.SlotMaterials[i].enabled = false;
                 }
+
+                routeStats.Time = Math.Min(routeStats.Time, SupplyRouteStats.MaxTime);
 
                 row.StatsLayer.Cost.SetValue(routeStats.Cost);
                 row.StatsLayer.Time.SetValue(routeStats.Time);
@@ -82,6 +85,8 @@ namespace SpaceFab.Supply {
                 for(int i = totalMaterials; i < row.SlotMaterials.Length; i++) {
                     row.SlotMaterials[i].enabled = false;
                 }
+
+                previewStats.Time = Math.Min(previewStats.Time, SupplyRouteStats.MaxTime);
 
                 row.StatsLayer.Cost.SetValue(previewStats.Cost);
                 row.StatsLayer.Time.SetValue(previewStats.Time);

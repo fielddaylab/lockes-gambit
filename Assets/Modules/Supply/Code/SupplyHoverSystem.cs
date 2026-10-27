@@ -69,7 +69,6 @@ namespace SpaceFab.Supply {
                         using (TempVarTable table = TempVarTable.Alloc())
                         {
                             table.Set("planet", hoverState.Node.Id);
-                            Debug.LogError(hoverState.Node.Id.ToDebugString());
                             ScriptUtility.Trigger(SupplyScriptTriggers.OnPlanetHovered, table);
                         }
                     }

@@ -105,16 +105,16 @@ namespace SpaceFab.Research {
                 failureReason = "invalid_observation";
             }
 
-            bool hasRequiredObs = EvaluateObservations(viewModelState);
-            if (failureReason == null && !hasRequiredObs) {
-                failureReason = "observation_mismatch";
-            }
-
             yield return 0.5f;
 
             bool validHypothesis = ValidateProperty(material, viewModelState);
             if (failureReason == null && !validHypothesis) {
                 failureReason = "hypothesis_mismatch";
+            }
+
+            bool hasRequiredObs = EvaluateObservations(viewModelState);
+            if (failureReason == null && !hasRequiredObs) {
+                failureReason = "observation_mismatch";
             }
 
             bool success = !anyPruned && hasRequiredObs && validHypothesis;
@@ -137,7 +137,7 @@ namespace SpaceFab.Research {
             panel.ResultText.color = success ? config.SuccessColor : config.FailureColor;
             panel.LoadingBar.SetActive(false);
 
-            yield return 3f;
+            yield return 2f;
 
             panel.Lines.color = config.DefaultColor;
             panel.ResultIcon.gameObject.SetActive(false);

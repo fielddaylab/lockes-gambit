@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level3_Underpass
   m_EditorClassIdentifier: 
   m_title: Underpass
+  m_description: Use the Semiconductor layer to connect without creating an unstable
+    signal.
   m_allowedTools: 109
   m_gridConfig: {fileID: 11400000, guid: d7232ddc3148346b9911e393c96a59dc, type: 2}
   m_testSuite: {fileID: 11400000, guid: d6145f58a9e6b42de815c73b793f2572, type: 2}

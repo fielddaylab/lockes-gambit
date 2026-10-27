@@ -1,6 +1,9 @@
 {
     "name": "ScriptableBake",
-    "references": [],
+    "rootNamespace": "",
+    "references": [
+        "BeauUtil"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
@@ -8,6 +11,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.beauprime.beauutil",
+            "expression": "0.11.0",
+            "define": "USING_BEAUUTIL"
+        }
+    ],
     "noEngineReferences": false
 }

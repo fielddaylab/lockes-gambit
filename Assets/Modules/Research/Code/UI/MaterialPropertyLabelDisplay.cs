@@ -14,18 +14,18 @@ namespace SpaceFab.Research {
         // a label hasn't been given a friendly string yet.
         public static string GetObservationName(MaterialPropertyLabel label) {
             switch (label) {
-                case MaterialPropertyLabel.Conductive: return "Conducts electricity";
-                case MaterialPropertyLabel.NonConductive: return "Prevents current flow";
-                case MaterialPropertyLabel.HeatActivated: return "Heat increases current";
-                case MaterialPropertyLabel.HeatDeactivated: return "Heat decreases current";
-                case MaterialPropertyLabel.HeatUnaffected: return "Current unchanged by heat";
-                case MaterialPropertyLabel.HeatResistant: return "Resists HIGH heat";
+                case MaterialPropertyLabel.Conductive: return           "Current flows";
+                case MaterialPropertyLabel.NonConductive: return        "Current doesn't flow";
+                case MaterialPropertyLabel.HeatActivated: return        "Heat increases current";
+                case MaterialPropertyLabel.HeatDeactivated: return      "Heat decreases current";
+                case MaterialPropertyLabel.HeatUnaffected: return       "Current unchanged by heat";
+                case MaterialPropertyLabel.HeatResistant: return        "Resists HIGH heat";
                 case MaterialPropertyLabel.AtomicRadiusCompliant: return "Atom fits";
-                case MaterialPropertyLabel.LightEmitting: return "Emits light when active";
-                case MaterialPropertyLabel.HighMobility: return "High electron mobility";
-                case MaterialPropertyLabel.VoltageResistant: return "Withstands extreme voltage";
-                case MaterialPropertyLabel.ValenceOneLessThan: return "1 less valence electron";
-                case MaterialPropertyLabel.ValenceOneMoreThan: return "1 more valence electron";
+                case MaterialPropertyLabel.LightEmitting: return        "Emits light when active";
+                case MaterialPropertyLabel.HighMobility: return         "High electron mobility";
+                case MaterialPropertyLabel.VoltageResistant: return     "Withstands high voltage";
+                case MaterialPropertyLabel.ValenceOneLessThan: return   "1 fewer valence electron";
+                case MaterialPropertyLabel.ValenceOneMoreThan: return   "1 more valence electron";
                 default: return label.ToString();
             }
         }

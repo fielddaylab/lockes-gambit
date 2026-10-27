@@ -9,6 +9,7 @@ using BeauRoutine;
 using FieldDay.UI.Widgets;
 using System;
 using BeauUtil.Debugger;
+using TMPro;
 
 namespace SpaceFab.Design
 {
@@ -23,6 +24,9 @@ namespace SpaceFab.Design
         #region Inspector
 
         public SimTableLayout TableLayout;
+        [Header("Puzzle Description")]
+        public TMP_Text TitleText;
+        public TMP_Text DescriptionText;
 
         #endregion // Inspector
 
@@ -210,14 +214,15 @@ namespace SpaceFab.Design
         public static void ShowResultsPanel(SimulateUIState uiState, bool allCorrect)
         {
             uiState.ResultsPanelVisible = true;
-            ResultStateUtility.ShowResults(Find.State<ResultState>(), allCorrect);
+            ResultStateUtility.PopulateResultsTable();
+            ResultStateUtility.ShowResults(Find.State<DesignResultPanel>(), allCorrect);
         }
 
         // Hides the results panel. Called on Dismiss or on a fresh Play from SuiteComplete.
         public static void HideResultsPanel(SimulateUIState uiState)
         {
-            // TODO: deactivate the results panel GameObject. Set ResultsPanelVisible = false.
             uiState.ResultsPanelVisible = false;
+            ResultStateUtility.HideResults(Find.State<DesignResultPanel>());
         }
 
         #region Helpers

@@ -28,12 +28,22 @@ namespace SpaceFab
         public bool UnlockSpecialProperties;
 
         [Header("Assets")]
-        [StreamedPackId] public StringHash32 ComicPackage;
+        [StreamedPackId("*Comic*")] public StringHash32 ComicPackage;
         public LeafAsset Script;
         public Material SkyboxMaterial;
         public float SkyboxRotation;
 
         [Header("Playlists")]
         [AssetName(typeof(MusicAsset))] public StringHash32 MusicPlaylist;
+
+        [Header("Hazards")]
+        public string HazardHeader;
+        [TextArea(2, 4)] public string HazardDescription;
+        public int HazardCost;
+        public int HazardTime;
+
+        [Header("Metrics")]
+        public int CumulativeMinProfit;
+        public int CumulativeMaxTime;
     }
 }

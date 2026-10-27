@@ -20,7 +20,7 @@ namespace SpaceFab
         public BaseRaycasterInputLayer InputLayer;
         
         [Header("Buttons")]
-        public GuiButton HelperButton;
+        //public GuiButton HelperButton;
         public GuiButton WikiButton;
 
         #endregion // Inspector
@@ -37,7 +37,7 @@ namespace SpaceFab
         private void OnSceneLateEnable() {
             bool visible = false;
             if (Game.SharedState.TryGet(out GlobalUISceneConfig config)) {
-                HelperButton.gameObject.SetActive(config.DisplayHelper);
+                //HelperButton.gameObject.SetActive(config.DisplayHelper);
                 WikiButton.gameObject.SetActive(config.DisplayWiki);
                 if (config.DisplayWiki) {
                     WikiButton.OnClick.AddListener(OnCollapsedWikiClicked);

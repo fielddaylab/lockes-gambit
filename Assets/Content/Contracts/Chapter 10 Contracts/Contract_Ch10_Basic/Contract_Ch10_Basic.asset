@@ -19,13 +19,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Long Gate
-  m_description: This is where the contract is described
+  m_description: "Everyone loves synth-chicken, which is why we need more conveyor
+    belt machines, which is why we need your chips. "
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm4
+    m_HashValue: 3331460187
   m_payout: 14
   m_expectedDuration: 6
   m_expectedProfit: 5
+  m_minimumProfit: 5
   m_contractType: 0
   m_difficulty: 0
   m_unlocksBigBattery: 0

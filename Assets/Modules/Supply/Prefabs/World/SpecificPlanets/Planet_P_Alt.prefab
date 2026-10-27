@@ -40,6 +40,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f698bce9ebad24e47b0afb7e5a747b65, type: 3}
+    - target: {fileID: 5762547994963964593, guid: 2479505f42e77544ab55898a175383cc, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6139377420993714670, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Id.m_Source
       value: supply:planet_p_alt
@@ -122,7 +126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: Tooltip
-      value: This station will sell you P.
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8668137901328009715, guid: 2479505f42e77544ab55898a175383cc, type: 3}
       propertyPath: TooltipHeader

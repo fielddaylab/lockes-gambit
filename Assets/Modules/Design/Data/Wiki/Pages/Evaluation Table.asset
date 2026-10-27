@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: Evaluation Table
   m_EditorClassIdentifier: 
-  Title: Evaluation Table
+  Title: Verification Table
   Icon: {fileID: 21300000, guid: b7bed548f7b86e5468a68068c67a0fc0, type: 3}
   IllustrationFrames:
   - {fileID: 21300000, guid: 973624da8e9091948a120d7b20a9b733, type: 3}
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: The Evaluation Table shows when the combinations of inputs match the
-    desired outputs
+  BodyText: Each row of the Verification Table shows a state of Inputs, and the Outputs
+    that they must produce. Test each one to finish a chip.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

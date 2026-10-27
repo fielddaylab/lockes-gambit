@@ -20,13 +20,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: High-Power Charger
-  m_description: This is where the contract is described
+  m_description: "Our food needs to be kept in specialized environmental containers
+    so we need chips with high power to keep it all fresh! "
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm7
+    m_HashValue: 3348237806
   m_payout: 18
   m_expectedDuration: 6
-  m_expectedProfit: 5
+  m_minimumProfit: 5
   m_contractType: 1
   m_difficulty: 1
   m_unlocksBigBattery: 1

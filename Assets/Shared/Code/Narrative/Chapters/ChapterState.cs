@@ -96,6 +96,8 @@ namespace SpaceFab
                 yield return null;
             }
 
+            Log.Msg("[ChapterState] Loaded chapter '{0}'", chapterState.ChapterId);
+
             ChapterDef chapterAsset = Find.NamedAsset<ChapterDef>(loadInfo.ChapterId);
             chapterState.ChapterDefinition = chapterAsset;
             chapterState.ChapterScriptHandle = ScriptDBUtility.Load(chapterAsset.Script);
@@ -113,8 +115,10 @@ namespace SpaceFab
                 return false;
             }
 
+            Log.Msg("[ChapterState] Unloaded chapter '{0}'", chapterState.ChapterId);
+
             ScriptDBUtility.Unload(chapterState.ChapterScriptHandle);
-            MusicPlayer.ClearQueue(0);
+            MusicPlayer.ClearQueueAndStop(0);
             MusicPlayer.SetPlaylistId(null);
 
             var loadInfo = GetLoadInfo(chapterState.ChapterId);
@@ -134,8 +138,14 @@ namespace SpaceFab
 
         static private void HandleMusicPlayer() {
             Find.State(out ChapterState chapterState);
+
             if (chapterState.ChapterDefinition) {
-                MusicPlayer.SetPlaylistFromAssetId(chapterState.ChapterDefinition.MusicPlaylist);
+                Game.Scenes.GetLoadContext(out SceneRequestContext context);
+                if (context.Get("PreserveMusic").AsBool()) {
+                    MusicPlayer.QueuePlaylistFromAssetId(chapterState.ChapterDefinition.MusicPlaylist);
+                } else {
+                    MusicPlayer.SetPlaylistFromAssetId(chapterState.ChapterDefinition.MusicPlaylist);
+                }
             }
         }
 
@@ -166,21 +176,23 @@ namespace SpaceFab
 
         public static void LoadNextChapter(ChapterState chapterState, PlayerProgressState progressState, ContractState contractState, MinigameSaveStates saveStates)
         {
-            // save elapsed cycles and funds
-            progressState.ElapsedCycles += saveStates.Fabrication.FinalizedTotalCycles;
-            progressState.ElapsedCycles += saveStates.Supply.FinalizedTotalCycles;
-
-            int contractPayout = 0;
-            if (contractState.ContractDefinition) {
-                contractPayout = contractState.ContractDefinition.Payout();
-            }
-            progressState.Funds += contractPayout - saveStates.Supply.FinalizedCost;
-
             // advance chapter
             chapterState.ChapterIndex++;
-            progressState.RecentlyCompletedContract = contractState.ContractId;
-            SaveUtility.Save(SaveSlot.Main);
-            ComicScripting.LoadComicForCurrentChapter();
+
+            Find.GlobalAsset(out ChapterManifest chapterManifest);
+
+            ContractUtility.UnloadContractData(contractState);
+            MusicPlayer.ClearQueueAndStop(3);
+
+            if (chapterState.ChapterIndex >= chapterManifest.Chapters.Length) {
+                ComicScripting.LoadComic(chapterManifest.EpilogueComicPackage);
+                Game.Scenes.GetQueuedLoadContext(out SceneRequestContext context);
+                context.Set("QueueCredits", true);
+                Game.Scenes.QueueMainLoadContext(context);
+            } else {
+                SaveUtility.Save(SaveSlot.Main);
+                ComicScripting.LoadComicForCurrentChapter();
+            }
         }
     }
 }

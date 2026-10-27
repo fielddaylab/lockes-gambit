@@ -122,6 +122,8 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: a69228bc3bb10854b9f43d0883383597, type: 3}
   - Label: 17
     Icon: {fileID: 21300000, guid: b49e6e9ded1697d4282dad61a01e2d85, type: 3}
+  - Label: 6
+    Icon: {fileID: 21300000, guid: 6ff7fc6c4f5230940aa10d8cc98fa526, type: 3}
   UnselectablePalette:
     Content:
       serializedVersion: 2

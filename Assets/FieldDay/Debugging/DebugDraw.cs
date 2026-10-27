@@ -32,8 +32,6 @@ namespace FieldDay.Debugging {
     /// </summary>
     [DefaultExecutionOrder(32000)]
     public sealed class DebugDraw : MonoBehaviour {
-#if DEVELOPMENT
-
         #region Types
 
         [Serializable]
@@ -50,6 +48,8 @@ namespace FieldDay.Debugging {
             Disabled,
             DisableInBuildOnly
         }
+
+#if DEVELOPMENT
 
         private struct DrawParams {
             public Color32 Color;
@@ -210,15 +210,21 @@ namespace FieldDay.Debugging {
             }
         }
 
+#endif // DEVELOPMENT
+
         #endregion // Types
 
         #region Buffers
+
+#if DEVELOPMENT
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         private struct DebugVertexFormat {
             [VertexAttr(VertexAttribute.Position)] public Vector3 Position;
             [VertexAttr(VertexAttribute.Color)] public Color32 Color;
         }
+
+#endif // DEVELOPMENT
 
         #endregion // Buffers
 
@@ -246,6 +252,8 @@ namespace FieldDay.Debugging {
         };
 
         #endregion // Inspector
+
+#if DEVELOPMENT
 
         [NonSerialized] private Mesh m_MainMesh;
         [NonSerialized] private Mesh m_OverlayMesh;

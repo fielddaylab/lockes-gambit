@@ -19,8 +19,8 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 1
   CaptionText: 
-  BodyText: The Resist spreads a thin, even layer of material across the chip by
-    spinning it at high speed.
+  BodyText: The Spin Coater spreads a thin, even layer of material across the wafer
+    by spinning it at high speed.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

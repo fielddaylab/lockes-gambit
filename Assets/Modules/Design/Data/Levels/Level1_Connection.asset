@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11040acf09980e54286911b24c1ffece, type: 3}
   m_Name: Level1_Connection
   m_EditorClassIdentifier: 
-  m_title: Connection
+  m_title: Connector Chip
+  m_description: A simple connector that sends signals from input to output.
   m_allowedTools: 100
   m_gridConfig: {fileID: 11400000, guid: d6c7f0f98dfbd994391df3fc537f4306, type: 2}
   m_testSuite: {fileID: 11400000, guid: 372a5a1d4ae63524a9f60959368a8bad, type: 2}

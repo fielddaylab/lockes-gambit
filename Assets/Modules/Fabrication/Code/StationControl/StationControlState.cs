@@ -2,18 +2,11 @@ using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.Scripting;
 using FieldDay.SharedState;
-using FieldDay.Systems;
 using Leaf.Runtime;
-using SpaceFab.Fabrication.Layout;
-using SpaceFab.Fabrication.Movement;
 using SpaceFab.Fabrication.Robot;
 using SpaceFab.Fabrication.Sequence;
 using SpaceFab.Fabrication.Stations;
-using SpaceFab.Narrative;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace SpaceFab.Fabrication.StationControl {
     /// <summary>
@@ -62,6 +55,7 @@ namespace SpaceFab.Fabrication.StationControl {
         public float EnterMicrogameDuration = 0.5f;
         public float ExitMicrogameDuration = 0.5f;
         public float StunDuration = 1.5f;
+        public float CompletionHoldDuration = 0.5f;
 
         // One-frame flags, cleared by StationControlFlagRefreshSystem in LateUpdate.
         [NonSerialized] public bool MicrogameCompletedThisFrame;
@@ -183,6 +177,7 @@ namespace SpaceFab.Fabrication.StationControl {
             }
             stationState.ActiveInterfacer = interfacer;
             MicrogameStationInterfacerUtility.BeginEnter(interfacer);
+            OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, false);
             stationState.PhaseTimer = 0f;
             stationState.Phase = StationControlPhase.EnteringMicrogame;
             Log.Msg("[StationControlUtility] RequestActivate accepted; AtStation -> EnteringMicrogame");
@@ -275,6 +270,7 @@ namespace SpaceFab.Fabrication.StationControl {
             stationState.PhaseTimer = 0f;
             stationState.Phase = StationControlPhase.Stunned;
             RobotUtility.ApplyStun(robotState, visualsState);
+            OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, false);
             Log.Msg("[StationControlUtility] TriggerStun; -> Stunned, PostStunPhase = {0}", returnPhase);
 
             ScriptUtility.Trigger(FabricationScriptTriggers.OnStunned);

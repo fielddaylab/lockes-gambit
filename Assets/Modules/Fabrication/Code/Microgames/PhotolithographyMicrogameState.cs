@@ -1,3 +1,4 @@
+using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.SharedState;
 using SpaceFab.Fabrication.Layout;
@@ -62,9 +63,10 @@ namespace SpaceFab.Fabrication.Microgames
             // int patternIndex = sequence.Level.PatternIndex;
             int patternIndex = sequence.Level.GetPatternIndex(sequence);
 
-            Find.GlobalAsset(out MicrogameStationConfig config);
-            state.PhotomaskSprite.sprite = config.PhotolithographyMasks[patternIndex];
-            state.OutlineSprite.sprite = config.PhotolithographyOutlines[patternIndex];
+            MicrogameStationConfig stationConfig = MicrogameUtility.GetStationConfig();
+
+            state.PhotomaskSprite.sprite = stationConfig.PhotolithographyMasks[patternIndex];
+            state.OutlineSprite.sprite = stationConfig.PhotolithographyOutlines[patternIndex];
 
             // Set angle by chunk type
             switch (sequence.Level.Sequence.Steps[sequence.CurrentStepIndex].Chunk)

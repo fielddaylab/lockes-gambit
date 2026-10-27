@@ -4,48 +4,38 @@
 @trigger OnContractSelectOpen
 @cutscene 
 @once 
-//saying goodbye to arkan, learning about mountain station employee owned 
-//todo could add sad news that velos station is gone? - Sarah: Isn't velos gone in level 11? 
-{@Arken}    Hey, don't look so grim, buddy. It's not all bad.
-{@Arken}    Mountain Station just opened up for sourcing. 
-{@Arken}	First employee-owned station in the system and we get a say in how--and if--the bots are used.
-{@Player}   Huh. That'd be really nice. 
-{@Arken}	Remember what I told you...
+//saying goodbye to Arken 
+{@Arken}    Hey, don't look so grim, buddy.
+{@Player}   It's just a lot to get my head around. I've known Dorian for a long time.
+
+{@Player}   I was really hoping to talk to Keela.
+{@Player}   I feel like... if we could talk things out, like we used to...
+{@Player}	...I could make sense of all this.
+{@Player}   Man, I miss the good old days.
+{@Arken}    Back when Dorian Greyson was still Dorian Black?
 
 //end call
 
 
 
-//{@MAL}      Isn't g-g-g-great to hear your best-friend be promoted to CEO?
-//{@Player}   Did you know M.A.L.?
-//{@MAL}      Kn-n-n-ow what? 
-//{@Player}   That Dorian was heir to Frontier Robotics? 
-//{@MAL}      My-my records indica------
-//{@MAL}      I have n000 recoll3ction iN my Arch1ves. 
-//{@Player}   ...right. 
-
 ::BeforeSupplyChainCh10
-
 @trigger 	OnOverarhcing 
 @when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design)
 @cutscene 
 @once 
 
-{@Quinn}    Hey Cowboy. Got another hauler available for you.
+{@Quinn}    Hey, Cowboy! I gotta 'nother hauler for ya.
 {@Player}   Great. I could use some good news.
 {@Quinn}    Well... it's fully automated.
 {@Quinn}    And ...it's slow.
 {@Player}   Of course it is.
-{@Quinn}    Hey, another ship means fewer bottlenecks. Sometimes having an extra hauler matters more than having a fast one.
-{@Player}   I'll take it.
 
 //spreading hazards causing delays from more inspections
-{@Quinn}    You'll need it. Frontier's stopping ships along so many of the routes now.
-{@Quinn}	They're lookin' for pirates
-{@Player}   Callie's people?
-{@Quinn}    Among others. Inspections are backing everybody up.
-{@Player}   So more delays.
-{@Quinn}    Yep. Keep an eye on your routes.
+{@Quinn}    You'll need it to cut down on bottlenecks. Frontier's stopping ships along so many of routes now.
+{@Quinn}	They're lookin' for pirates and outlaws.
+{@Player}   I bet I know who they are looking for! 
+{@Quinn}    Good luck finding her.
+{@Player}	Tell me about it. 
 
 
 
@@ -54,14 +44,27 @@
 @when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
 @cutscene 
 @once
-
-
 //reminder of money due threat and now its coming from dorian. 
-{@MAL}      C-Captain! Y0u h@ve a l-letter from... Fr0ntier Robotics!
-{@Player}   Of course I do.
+{@MAL}      ©-Captæin! Y0u h@ve a l-l€tter f¿om... Fr0ntier Robotic§!
+{@Player}   Of course I do. Let's see...
 
-{@MAL}      "Captain Locke Sawyer: This is a reminder that your final payment deadline for the Constance is approaching."
-{@MAL}      "Failure to meet your financial obligation by the specified date will result in repossession of the vessel by Frontier Robotics."
-{@MAL}      "We appreciate your continued partnership!"
+{@Player}      "Captain Locke Sawyer: This is a reminder that your final payment deadline for the Constantine is approaching."
+{@Player}      "Failure to meet your financial obligation by the specified date will result in repossession of the vessel by Frontier Robotics."
+{@Player}      "We appreciate your continued partnership!"
+{@Player}	Partnership? Yeah, right.
 
-
+::DisposalFee10
+@trigger    OnGoalCompleted
+@when       goalId == "Goal1"
+@cutscene
+@once
+{@Player}   PAID IN FULL! That's the last of the upgrade fees.
+{@Player}   I'm broke, <i>again</i>, but at least I own my ship, free and clear.
+$call ActivateGoal("Goal2")
+{@Player}   ...
+{@Player}   YOU HAVE <b>GOT</b>...
+{@Player}   TO BE <b>KIDDING</b> ME.
+{@Player}   "Unauthorized disposal of company property?" They're charging me for those robots!
+{@Player}   "Per Section 14, Subsection C, any additional fees or penalties incurred under the original agreement shall be added to the outstanding debt..."
+{@Player}   "...and remain secured against the Constantine until paid in full."
+{@Player}   So until I pay this, Frontier can still take my ship?!

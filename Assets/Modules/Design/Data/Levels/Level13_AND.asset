@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level13_AND
   m_EditorClassIdentifier: 
   m_title: AND
+  m_description: '!DEPRECATED!'
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: 474286306584741489498ff3fb3364a7, type: 2}
   m_testSuite: {fileID: 11400000, guid: b5f66c8a782704cd1855c99de2ced4c5, type: 2}

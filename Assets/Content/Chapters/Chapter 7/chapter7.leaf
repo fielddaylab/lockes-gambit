@@ -38,41 +38,7 @@
 
 //no answer
 
-{@PAL}		We have a contract to fulfill Captain.  
-
-::AfterResearchCh7
-@trigger    OnOverarchingLoaded
-@when       IsSolutionFoundFor(Research)
-@cutscene 
-@once
-
-//call Keela
-//ringing...
-//ringing...
-//no answer
-
-{@Player}   ...Keela.
- 
-
-::BeforeSupplyChainCh7
-@trigger    OnOverarchingLoaded
-@when       IsSolutionFoundFor(Design), IsSolutionFoundFor(Research)
-@cutscene 
-@once
-
-//call Mai  
-
-
-{@Player}   Hey, is this Wolfram? Is that factory planet up and running?
-{@Mai}      Factory planet? You know people actually live here, right?
-{@Player}   Oh. Sorry...
-{@Mai}      We've been here for generations! And our factories are worker-owned.
-{@Player}   So you don't use Frontier tech?
-{@Mai}      *Sigh*... I wish. Frontier owns the rights to all the mining tech.
-{@Mai}      But YES, we're up and running.
-//end call
-
-{@Player}   Worker-owned? Sounds exhausting. I like being in charge of my own ship.
+{@PAL}		We have a contract to fulfill, Captain.  
 
 
 ::AfterSupplyChain
@@ -80,6 +46,13 @@
 @when       IsSolutionFoundFor(Research), IsSolutionFoundFor(Design), IsSolutionFoundFor(Supply)
 @cutscene 
 @once 
+
+//call Keela
+//ringing...
+//ringing...
+//no answer
+
+{@Player}   Keela...
 
 
 ::AfterFabrication
@@ -91,7 +64,7 @@
 //call mara 
 {@Player}   Mara! How's Blaze?
 {@Mara}     He's alright. Frustrated, but alright.
-{@Mara}		But already prepping for the winter festival. The Long Night Festival. 
+{@Mara}		Already prepping for the winter festival. The Long Night Festival. 
 {@Player}	What's that?
 {@Mara}	At dusk, everyone extinguishes their lights. An old miner's lamp is lit at the mine entrance, and people pass the light from lamp to lamp until the whole settlement is illuminated.
 {@Player}   Wow, that sounds beautiful.  And the strike?

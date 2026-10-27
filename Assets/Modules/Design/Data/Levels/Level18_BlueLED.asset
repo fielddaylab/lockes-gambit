@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level18_BlueLED
   m_EditorClassIdentifier: 
   m_title: Blue LED
+  m_description: This Light-Emitting Diode is vivid blue, with two diodes for extra
+    brightness.
   m_allowedTools: 111
   m_gridConfig: {fileID: 11400000, guid: 2e8dfe5a62f5a4527b571ae53ea109c5, type: 2}
   m_testSuite: {fileID: 11400000, guid: f2df66a6ecc282844a4da2dc42dfee96, type: 2}

@@ -59,7 +59,7 @@ namespace SpaceFab.Fabrication.StationControl {
                     ProcessInMicrogame(stationState);
                     break;
                 case StationControlPhase.ResolvingCompletion:
-                    ProcessResolvingCompletion(stationState);
+                    ProcessResolvingCompletion(stationState, deltaTime);
                     break;
                 case StationControlPhase.AwaitingRetry:
                     // Frozen, waiting on StationControlUtility.RestartMicrogame (driven by the restart
@@ -148,6 +148,9 @@ namespace SpaceFab.Fabrication.StationControl {
         static private void ProcessInMicrogame(StationControlState stationState) {
             if (stationState.MicrogameCompletedThisFrame) {
                 GameLoop.SuspendUpdates(UpdateMasks.MicrogameMask);
+                stationState.Phase = StationControlPhase.ResolvingCompletion;
+                stationState.PhaseTimer = 0f;
+
                 bool hasMicrogame = stationState.ActiveInterfacer != null && stationState.ActiveInterfacer.Microgame != null;
                 stationState.LastMicrogamePrecision = hasMicrogame ? stationState.ActiveInterfacer.Microgame.GetResultPrecision() : 1f;
                 stationState.LastRawMicrogamePrecision = hasMicrogame ? stationState.ActiveInterfacer.Microgame.GetRawResultPrecision() : 1f;
@@ -171,12 +174,14 @@ namespace SpaceFab.Fabrication.StationControl {
                 Log.Msg("[StationControlSystem] microgame cancelled; InMicrogame -> ExitingMicrogame; MicrogameMask suspended");
                 Game.Events.Dispatch(GameEvents.FabMicrogameCancelled);
                 stationState.Phase = StationControlPhase.ExitingMicrogame;
+                OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, true);
                 stationState.PhaseTimer = 0f;
             }
         }
 
         // Re-runs the precision gate each frame while a gate node is still running without a verdict.
-        static private void ProcessResolvingCompletion(StationControlState stationState) {
+        static private void ProcessResolvingCompletion(StationControlState stationState, float deltaTime) {
+            stationState.PhaseTimer += deltaTime;
             ResolveCompletion(stationState);
         }
 
@@ -187,9 +192,12 @@ namespace SpaceFab.Fabrication.StationControl {
         //     finished without a verdict) -> Proceed exactly as the pre-gate behavior; otherwise wait in
         //     ResolvingCompletion for the still-running gate node. Safe to call repeatedly.
         static private void ResolveCompletion(StationControlState stationState) {
+            bool holdElapsed = stationState.PhaseTimer >= stationState.CompletionHoldDuration;
             switch (stationState.CompletionVerdict) {
                 case MicrogameExitVerdict.Proceed:
-                    ProceedToExit(stationState);
+                    if (holdElapsed) {
+                        ProceedToExit(stationState);
+                    }
                     break;
                 case MicrogameExitVerdict.Retry:
                     stationState.Phase = StationControlPhase.AwaitingRetry;
@@ -198,11 +206,11 @@ namespace SpaceFab.Fabrication.StationControl {
                     Game.Events.Dispatch(GameEvents.FabMicrogameRetryRequired);
                     break;
                 default: // Pending
-                    if (!stationState.CompletionScriptHandle.IsRunning()) {
+                    if (!stationState.CompletionScriptHandle.IsRunning() && holdElapsed) {
                         ProceedToExit(stationState);
-                    } else if (stationState.Phase != StationControlPhase.ResolvingCompletion) {
-                        stationState.Phase = StationControlPhase.ResolvingCompletion;
-                        stationState.PhaseTimer = 0f;
+                    // } else if (stationState.Phase != StationControlPhase.ResolvingCompletion) {
+                    //     stationState.Phase = StationControlPhase.ResolvingCompletion;
+                    //     stationState.PhaseTimer = 0f;
                     }
                     break;
             }
@@ -218,6 +226,7 @@ namespace SpaceFab.Fabrication.StationControl {
             Log.Msg("[StationControlSystem] microgame accepted; -> ExitingMicrogame");
             //Game.Events.Dispatch(GameEvents.FabMicrogameCompleted);
             stationState.Phase = StationControlPhase.ExitingMicrogame;
+            OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, true);
             stationState.PhaseTimer = 0f;
         }
 
@@ -267,6 +276,7 @@ namespace SpaceFab.Fabrication.StationControl {
             stationState.PhaseTimer += deltaTime;
             if (stationState.PhaseTimer >= stationState.StunDuration) {
                 RobotUtility.RemoveStun(robotState, visualsState);
+                OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, true);
                 Log.Msg("[StationControlSystem] stun timer elapsed; Stunned -> {0}", stationState.PostStunPhase);
                 Game.Events.Dispatch(GameEvents.FabStunEnd);
                 stationState.Phase = stationState.PostStunPhase;

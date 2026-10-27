@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TitleAudioPack
   m_EditorClassIdentifier: 
   m_IncludeMode: 0
+  m_FilterSearch: 
   m_GlobalAssets: []
-  m_NamedAssets:
-  - {fileID: 11400000, guid: 3d4ce7beccc00624e85d4766a7a6c3de, type: 2}
+  m_NamedAssets: []
   m_LiteAssets: []

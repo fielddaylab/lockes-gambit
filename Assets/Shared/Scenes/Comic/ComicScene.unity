@@ -172,7 +172,7 @@ MonoBehaviour:
     m_ScenePath: Assets/Modules/Overarching/Scenes/Overarching.unity
     m_GUID: e7f14cd189ad9e747a51a3c21ee45e32
   DEBUG_FallbackManifest:
-    m_HashValue: 3267583365
+    m_HashValue: 1744353716
 --- !u!114 &122367486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,6 +417,10 @@ PrefabInstance:
     - target: {fileID: 2888324319165292133, guid: 3d915541ee8314e4393844d1f2eec9c1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3143394367997152360, guid: 3d915541ee8314e4393844d1f2eec9c1, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3697406585824129828, guid: 3d915541ee8314e4393844d1f2eec9c1, type: 3}
       propertyPath: m_AnchorMax.y

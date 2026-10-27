@@ -19,7 +19,7 @@ namespace FieldDay.Music {
         static public void MusicLoop(StringHash32 musicId) {
             if (musicId.IsEmpty) {
                 MusicPlayer.SetPlaylistId(null);
-                MusicPlayer.ClearQueue();
+                MusicPlayer.ClearQueueAndStop();
             } else if (Game.Assets.TryGetNamed(musicId, out MusicAsset playlist)) {
                 MusicPlayer.SetPlaylistFromAsset(playlist);
                 MusicPlayer.SetRepeatMode(MusicRepeatMode.RepeatAll);
@@ -31,7 +31,7 @@ namespace FieldDay.Music {
 
         [LeafMember("MusicStop")]
         static public void MusicStop(float fadeOut = -1) {
-            MusicPlayer.ClearQueue(fadeOut);
+            MusicPlayer.ClearQueueAndStop(fadeOut);
         }
 
         [LeafMember("MusicPreload")]

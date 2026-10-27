@@ -10,7 +10,7 @@
 @function   ComicPreload
 $call ComicPreloadPage(0)
 $call ComicSnapCamera("Camera")
-$call MusicPreload("Comic.Music.Serious")
+$call MusicPreload("Music.RobotsDontNeedUnions")
 
 :: Execute
 @trigger    ComicExecute
@@ -18,7 +18,7 @@ $call MusicPreload("Comic.Music.Serious")
 
 // page 1
 
-$call MusicLoop("Comic.Music.Serious")
+$call MusicLoop("Music.RobotsDontNeedUnions")
 $call ComicOpenPage(0)
 
 $call ComicPreloadNextPage()

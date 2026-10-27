@@ -1,4 +1,6 @@
+using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Debugging;
 using SpaceFab.Fabrication.Sequence;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +21,21 @@ namespace SpaceFab.Fabrication.Microgames
         {
             Find.State(out WaferState waferState, out SequenceState sequenceState);
             WaferStateUtility.SetStepPrecision(waferState, sequenceState.CurrentStepIndex, precision);
+        }
+
+        public static MicrogameStationConfig GetStationConfig()
+        {
+            Find.State(out ContractState contractState);
+            if (contractState.ContractAssets != null && !contractState.ContractAssets.StationConfigId.IsEmpty)
+            {
+                return Find.NamedAsset<MicrogameStationConfig>(contractState.ContractAssets.StationConfigId);
+            }
+            if (DebugFlags.LaunchedFromThisScene)
+            {
+                return Find.State<FabricationTransitionState>().DEBUG_StationConfig;
+            }
+            Log.Error("[MicrogameUtility] No station config available for the active contract");
+            return null;
         }
     }
 }

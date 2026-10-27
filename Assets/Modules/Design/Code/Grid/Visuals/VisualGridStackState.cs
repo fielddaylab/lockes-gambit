@@ -3,13 +3,14 @@ using FieldDay.SharedState;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace SpaceFab.Design.Visuals
 {
-    public class VisualGridStackState : SharedStateComponent, IRegistrationCallbacks
-    {
+    public class VisualGridStackState : SharedStateComponent, IRegistrationCallbacks {
         public SpriteRenderer GridRenderer;
+        public SpriteRenderer GridTestOutline;
         public VisualGridStack VisualGridStack;
         public GameObject CellVisualsPrefab;
         public Transform CellVisualsContainer;

@@ -17,8 +17,10 @@ MonoBehaviour:
   IllustrationFrames:
   - {fileID: 21300000, guid: e3e90774706be614eadc807e29fa800e, type: 3}
   IllustrationFPS: 0.5
-  BodyText: When heated, silicon forms a layer of insulating Silicon Dioxide, also
-    known as Quartz, which can be used like a stencil.
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: When heated, silicon forms a layer of insulating Quartz, which can be
+    used like a stencil.
   MaterialId:
     m_HashValue: 0
   IsObservationPage: 0

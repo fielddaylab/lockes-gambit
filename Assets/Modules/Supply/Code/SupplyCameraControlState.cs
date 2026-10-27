@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BeauUtil;
 using FieldDay;
 using FieldDay.SharedState;
+using FieldDay.UI;
 using UnityEngine;
 
 namespace SpaceFab.Supply 
@@ -13,6 +14,7 @@ namespace SpaceFab.Supply
         [Header("Components")]
         public Camera Camera;
         public Transform CameraPosition;
+        public PhysicsInputLayer WorldInput;
 
         [Header("Configuration")]
         public Rect Region;

@@ -76,22 +76,34 @@ namespace SpaceFab.Fabrication.Microgames
             if (!state.InputAccepted)
                 return;
 
+            Vector2 newDirection = state.Direction;
             if (Game.Input.IsKeyDown(FabricationConsts.Up0) || Game.Input.IsKeyDown(FabricationConsts.Up1))
-                state.Direction = Vector2.up;
+                newDirection = Vector2.up;
             else if (Game.Input.IsKeyDown(FabricationConsts.Down0) || Game.Input.IsKeyDown(FabricationConsts.Down1))
-                state.Direction = Vector2.down;
+                newDirection = Vector2.down;
             else if (Game.Input.IsKeyDown(FabricationConsts.Left0) || Game.Input.IsKeyDown(FabricationConsts.Left1))
-                state.Direction = Vector2.left;
+                newDirection= Vector2.left;
             else if (Game.Input.IsKeyDown(FabricationConsts.Right0) || Game.Input.IsKeyDown(FabricationConsts.Right1))
-                state.Direction = Vector2.right;
+                newDirection = Vector2.right;
+
+            if (newDirection != state.Direction) {
+                state.TurnCount++;
+                state.Direction = newDirection;
+            }
+
+            bool hitTurnCap = state.TurnCount > state.CachedPreviewPoints.Count * 2;
 
             float beamSpeed = 1.875f; //1.5f;
+            if (Game.Input.IsKeyDown(KeyCode.Space)) {
+                beamSpeed = 2.375f;
+            }
             Vector2 current = state.PlayerPoints[state.PlayerPoints.Count - 1];
             Vector2 next = current + (Vector2)(state.Direction * beamSpeed * deltaTime);
 
             float waferRadius = 2.8f;
+            bool hitEdge = next.sqrMagnitude > waferRadius * waferRadius;
 
-            if (next.sqrMagnitude > waferRadius * waferRadius)
+            if (hitTurnCap || hitEdge)
             {
                 Find.State(out StationControlState stationState);
                 MicrogameStationInterfacerUtility.SignalCompleted(stationState.ActiveInterfacer);

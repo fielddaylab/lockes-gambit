@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11040acf09980e54286911b24c1ffece, type: 3}
   m_Name: Level16_IRLED
   m_EditorClassIdentifier: 
-  m_title: IR LED
+  m_title: Infrared LED
+  m_description: This Light-Emitting Diode emits invisible infrared, for nightvision
+    and remote controls.
   m_allowedTools: 111
   m_gridConfig: {fileID: 11400000, guid: 5ba04006425f04a568103b3a5ba02f4b, type: 2}
   m_testSuite: {fileID: 11400000, guid: b2a39b55988ea8c4c9ab020ef2042231, type: 2}

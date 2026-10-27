@@ -18,13 +18,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Depletion Gate
-  m_description: This is where the contract is described
+  m_description: "Our authority bots' regulator chips have burned out. We need
+    a gate that can close signals, fast!"
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm5
+    m_HashValue: 3314682568
   m_payout: 12
   m_expectedDuration: 5
-  m_expectedProfit: 3
+  m_minimumProfit: 3
   m_contractType: 0
   m_difficulty: 0
   m_unlocksBigBattery: 0

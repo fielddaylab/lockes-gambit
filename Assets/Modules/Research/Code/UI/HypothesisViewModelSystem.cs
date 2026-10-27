@@ -126,7 +126,7 @@ namespace SpaceFab.Research {
                     viewModelState.HypothesisLabel = label;
                     viewModelState.HypothesisContext = context;
 
-                    ScriptUtility.WriteVariable(new TableKeyPair("research", "propertyId"), label.ToString().ToLower());
+                    ScriptUtility.WriteVariable(new TableKeyPair("research", "propertyId"), label.ToString());
                     ScriptUtility.Trigger(ResearchScriptTriggers.OnPropertyAdded);
                 }
             }

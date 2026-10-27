@@ -78,7 +78,7 @@ namespace SpaceFab.Fabrication.Microgames
 
         public int ProcessWork()
         {
-            if (Input.GetMouseButton(0))
+            if (Game.Input.IsMouseDown(0))
             {
                 Vector2 mousePosition = Game.Rendering.PrimaryCamera.ScreenToWorldPoint(Input.mousePosition);
                 RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
@@ -123,6 +123,7 @@ namespace SpaceFab.Fabrication.Microgames
         {
             DefaultInstancedMeshParams* paramBuffer = stackalloc DefaultInstancedMeshParams[512]; 
             RenderParams renderParams = new RenderParams(IonMaterial);
+            renderParams.layer = LayerMasks.Default_Index;
             Mesh mesh = IonMesh;
             var instanceHelper = new InstancedMeshBuffer<DefaultInstancedMeshParams>(paramBuffer, 512, renderParams, mesh);
             

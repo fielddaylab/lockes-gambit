@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mixes:
   - Bus:
-      m_HashValue: 3137079997
+      m_HashValue: 3570248045
     Volume: 0
     Pitch: 1
     Pan: 1

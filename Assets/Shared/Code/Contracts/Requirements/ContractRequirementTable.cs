@@ -6,6 +6,7 @@ using FieldDay.Collections;
 using FieldDay.UI;
 using FieldDay.UI.Widgets;
 using SpaceFab.Materials;
+using SpaceFab.Research;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -263,6 +264,8 @@ namespace SpaceFab {
 
         static private StringHash32 FindDopantId(TempReferenceBuffer<MaterialAsset> materialSet, MaterialAsset baseMaterial, MaterialPropertyLabel dopantType) {
             Assert.True(dopantType == MaterialPropertyLabel.NDopantFor || dopantType == MaterialPropertyLabel.PDopantFor);
+
+            List<StringHash32> dopants = new();
             for(int i = 0; i < materialSet.Count; i++) {
                 MaterialAsset material = materialSet[i];
                 if (material == baseMaterial) {
@@ -280,7 +283,7 @@ namespace SpaceFab {
                 }
             }
 
-            Assert.Fail("No dopant {1} specified for material {0} even though required by material requirement table", baseMaterial.name, dopantType);
+            Assert.False(dopants.Count == 0, "No dopant {1} specified for material {0} even though required by material requirement table", baseMaterial.name, dopantType);
             return null;
         }
 
@@ -323,6 +326,8 @@ namespace SpaceFab {
             }
             table.ExtendedRow.gameObject.SetActive(false);
 
+            Find.GlobalAsset(out ResearchObservationChipAssets chipAssets);
+
             using (PooledStringBuilder labelBuilder = PooledStringBuilder.Create())
             using (PooledStringBuilder subLabelBuilder = PooledStringBuilder.Create()) {
                 for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++) {
@@ -335,7 +340,7 @@ namespace SpaceFab {
                     labelBuilder.Builder.Clear();
                     subLabelBuilder.Builder.Clear();
 
-                    GenerateLabel(rowData.Properties, labelBuilder, subLabelBuilder, out MaterialPropertyLabel baseProperty, out Sprite icon);
+                    GenerateLabel(rowData.Properties, labelBuilder, subLabelBuilder, out MaterialPropertyLabel baseProperty, chipAssets, out Sprite icon);
                     AssignSubRowLabel(subRowVisuals, labelBuilder, subLabelBuilder, icon, table.SubLabelOffsetY);
 
                     int usedDopantRows = 0;
@@ -376,7 +381,7 @@ namespace SpaceFab {
             table.Sizer.VerticalLayout(table.Spacing, 0);
         }
 
-        static private unsafe void GenerateLabel(ContractRequirementTable.PropertyLabelList properties, StringBuilder labelBuilder, StringBuilder subLabelBuilder, out MaterialPropertyLabel basePropertyOutput, out Sprite icon) {
+        static private unsafe void GenerateLabel(ContractRequirementTable.PropertyLabelList properties, StringBuilder labelBuilder, StringBuilder subLabelBuilder, out MaterialPropertyLabel basePropertyOutput, ResearchObservationChipAssets chipAssets, out Sprite icon) {
             labelBuilder.Clear();
             subLabelBuilder.Clear();
 
@@ -467,8 +472,7 @@ namespace SpaceFab {
                 }
             }
 
-            // TODO: implement icon
-            icon = null;
+            chipAssets.TryGetIcon(basePropertyOutput, out icon);
         }
 
 

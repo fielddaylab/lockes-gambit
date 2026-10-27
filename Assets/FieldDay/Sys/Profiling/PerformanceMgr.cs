@@ -284,6 +284,7 @@ namespace FieldDay.Perf {
             if (boostMode != m_BoostMode) {
                 m_BoostMode = boostMode;
                 Log.Msg("[PerformanceMgr] Boost mode set to {0}", boostMode == PerfBoostMode.Boost ? "ON" : "OFF");
+                Application.backgroundLoadingPriority = boostMode == PerfBoostMode.Boost ? ThreadPriority.Normal : ThreadPriority.Low;
                 // TODO: adjust settings to speed up loading time
             }
         }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level19_NOR
   m_EditorClassIdentifier: 
   m_title: NOR
+  m_description: The NOR logic gate outputs HI only if neither A <i>nor</i> B is
+    HI.
   m_allowedTools: -1
   m_gridConfig: {fileID: 11400000, guid: dd03b222a1f13468b9ae02db8ed748aa, type: 2}
   m_testSuite: {fileID: 11400000, guid: d662fd293ffa06741994164a55a8771b, type: 2}

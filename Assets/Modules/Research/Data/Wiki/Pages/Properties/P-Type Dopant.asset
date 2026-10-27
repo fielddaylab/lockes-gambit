@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542328d11c09ec4a8a6c8c0b18d8b98, type: 3}
   m_Name: P-Type Dopant
   m_EditorClassIdentifier: 
-  m_isPlanet: 0
-  m_Title: P-Type Dopant
-  m_Icon: {fileID: 21300000, guid: 317a1c46010d2e04cad48bd548fca132, type: 3}
-  m_IllustrationFrames: []
-  m_IllustrationFPS: 0.5
-  m_Body: A P-Type dopant fits inside another material and leaves it short an electron,
-    which is always measured against the sample it is doping.
-  m_MaterialId:
+  Title: P-Type Dopant
+  Icon: {fileID: 21300000, guid: 317a1c46010d2e04cad48bd548fca132, type: 3}
+  IllustrationFrames: []
+  IllustrationFPS: 0.5
+  IllustrationImageScale: 1
+  CaptionText: 
+  BodyText: A P-Type dopant fits inside a semiconductor and leaves it short one electron,
+    leaving one empty "hole."
+  MaterialId:
     m_HashValue: 0
-  m_IsObservationPage: 0
-  m_ObservationType: 0
-  m_PropertyCheck: {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
+  IsObservationPage: 0
+  ObservationType: 0
+  PropertyCheck: {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
+  IsUnlockedByDefault: 0

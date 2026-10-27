@@ -730,6 +730,7 @@ namespace FieldDay.UI {
         public void DeregisterInputLayer(IInputLayer inputLayer) {
             Assert.NotNullOrDestroyed(inputLayer);
             Assert.True(m_InputLayers.Contains(inputLayer), "Already deregistered");
+            Assert.False(GetPriorityRecordIndex(inputLayer) >= 0, "Input layer is still on priority stack");
             m_InputLayers.FastRemove(inputLayer);
             inputLayer.UpdateInputEnabled(false);
 
@@ -770,7 +771,20 @@ namespace FieldDay.UI {
         /// Forces an input layer to recalculate its enabled state.
         /// </summary>
         public void ForceUpdate(IInputLayer layer) {
-            bool enabled = EvaluateInputLayer(layer.InputMask, m_CurrentInputPriority, m_CurrentFocusGroups, m_CurrentFrozenGroups);
+            int recordIndex = GetPriorityRecordIndex(layer);
+
+            InputLayerMask mask = layer.InputMask;
+
+            if (recordIndex >= 0) {
+                ref PriorityRecord record = ref m_InputPriorityStack[recordIndex];
+                if (mask.SortKey.RawValue != record.Sort.RawValue) {
+                    record.Sort = mask.SortKey;
+                    Log.Msg("[GuiMgr] Updating sort key for active priority layer '{0}'", AssetUtility.NameOf(layer));
+                    UpdatePriorityStackSorting();
+                }
+            }
+            
+            bool enabled = EvaluateInputLayer(mask, m_CurrentInputPriority, m_CurrentFocusGroups, m_CurrentFrozenGroups);
             layer.UpdateInputEnabled(enabled);
         }
 
@@ -778,9 +792,27 @@ namespace FieldDay.UI {
         /// Pushes the priority of the given layer.
         /// All layers below this will be disabled.
         /// </summary>
-        public void PushPriority(IInputLayer layer) {
+        public bool PushPriority(IInputLayer layer) {
             Assert.NotNullOrDestroyed(layer);
+            Assert.True(m_InputLayers.Contains(layer), "Layer not registered");
+
             CanvasSortKey sortKey = layer.InputMask.SortKey;
+            int contextId = UnityHelper.Id(layer as UnityEngine.Object);
+
+            bool found = false;
+            for (int i = m_InputPriorityStack.Count; i-- > 0;) {
+                PriorityRecord record = m_InputPriorityStack[i];
+                if (record.Sort.RawValue == sortKey.RawValue
+                    && record.ContextId == contextId) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                return false;
+            }
+
             m_InputPriorityStack.PushBack(new PriorityRecord() {
                 Sort = sortKey,
                 ContextId = UnityHelper.Id(layer as UnityEngine.Object)
@@ -792,33 +824,35 @@ namespace FieldDay.UI {
                 m_CurrentInputPriority = sortKey;
                 m_InputLayersDirty = true;
             }
+
+            return true;
         }
 
         /// <summary>
         /// Pops the priority of the given layer.
         /// </summary>
-        public void PopPriority(IInputLayer layer) {
+        public bool PopPriority(IInputLayer layer) {
             Assert.NotNullOrDestroyed(layer);
+            Assert.True(m_InputLayers.Contains(layer), "Layer not registered");
+
             CanvasSortKey sortKey = layer.InputMask.SortKey;
             int contextId = UnityHelper.Id(layer as UnityEngine.Object);
 
-            bool found = false;
-            for(int i = m_InputPriorityStack.Count; i-- > 0;) {
-                PriorityRecord record = m_InputPriorityStack[i];
-                if (record.Sort.RawValue == sortKey.RawValue
-                    && record.ContextId == contextId) {
-                    m_InputPriorityStack.RemoveAt(i);
-                    found = true;
-                    break;
-                }
+            int recordIndex = GetPriorityRecordIndex(sortKey, contextId);
+
+            if (recordIndex < 0) {
+                return false;
             }
 
-            if (!found) {
-                return;
-            }
+            m_InputPriorityStack.FastRemoveAt(recordIndex);
 
             Log.Msg("[GuiMgr] Popped input layer '{0}' from stack with priority {1}", AssetUtility.NameOf(layer), sortKey);
 
+            UpdatePriorityStackSorting();
+            return true;
+        }
+
+        private void UpdatePriorityStackSorting() {
             CanvasSortKey largestSortKey = default;
             for (int i = m_InputPriorityStack.Count; i-- > 0;) {
                 CanvasSortKey check = m_InputPriorityStack[i].Sort;
@@ -833,8 +867,26 @@ namespace FieldDay.UI {
             }
         }
 
+        private int GetPriorityRecordIndex(IInputLayer layer) {
+            CanvasSortKey sortKey = layer.InputMask.SortKey;
+            int contextId = UnityHelper.Id(layer as UnityEngine.Object);
+            return GetPriorityRecordIndex(sortKey, contextId);
+        }
+
+        private int GetPriorityRecordIndex(CanvasSortKey sortKey, int contextId) {
+            for (int i = m_InputPriorityStack.Count; i-- > 0;) {
+                PriorityRecord record = m_InputPriorityStack[i];
+                if (record.Sort.RawValue == sortKey.RawValue
+                    && record.ContextId == contextId) {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
         /// <summary>
-        /// Freezes input for the given input gruop.
+        /// Freezes input for the given input group.
         /// </summary>
         public void PauseInputGroup(StringHash32 groupId) {
             if (m_CurrentFrozenGroups.Add(groupId)) {
@@ -843,7 +895,7 @@ namespace FieldDay.UI {
         }
 
         /// <summary>
-        /// Resumes input for the given input gruop.
+        /// Resumes input for the given input group.
         /// </summary>
         public void ResumeInputGroup(StringHash32 groupId) {
             if (m_CurrentFrozenGroups.Remove(groupId)) {
@@ -852,7 +904,7 @@ namespace FieldDay.UI {
         }
 
         /// <summary>
-        /// Focuses input for the given input gruop.
+        /// Focuses input for the given input group.
         /// </summary>
         public void FocusInputGroup(StringHash32 groupId) {
             if (m_CurrentFocusGroups.Add(groupId)) {
@@ -861,7 +913,7 @@ namespace FieldDay.UI {
         }
 
         /// <summary>
-        /// Unfocuses input for the given input gruop.
+        /// Unfocuses input for the given input group.
         /// </summary>
         public void UnfocusInputGroup(StringHash32 groupId) {
             if (m_CurrentFocusGroups.Remove(groupId)) {

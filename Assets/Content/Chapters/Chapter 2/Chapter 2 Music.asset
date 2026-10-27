@@ -16,8 +16,8 @@ MonoBehaviour:
     m_HashValue: 0
   FullTracks:
   - m_HashValue: 3272839980
-  - m_HashValue: 2472019933
-  - m_HashValue: 3107410092
+  - m_HashValue: 2450712950
+  - m_HashValue: 354004098
   SeamlessIntroTransition: 0
   Transition:
     FadeOut: 0.5

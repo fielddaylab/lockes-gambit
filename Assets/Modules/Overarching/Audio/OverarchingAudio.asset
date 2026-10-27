@@ -17,5 +17,15 @@ MonoBehaviour:
   m_GlobalAssets: []
   m_NamedAssets:
   - {fileID: 11400000, guid: 18cb989d1cb230f4fb83fb2c31558121, type: 2}
+  - {fileID: 11400000, guid: de2c787bf0ba416469c1e38c5e0581ee, type: 2}
+  - {fileID: 11400000, guid: 55f6bfbf959a2294e8b03f78dc92bed5, type: 2}
+  - {fileID: 11400000, guid: b18cc89f7ca611b4da5134f917b8e5ab, type: 2}
+  - {fileID: 11400000, guid: d563125ab1e20614abc4049ba92980e4, type: 2}
+  - {fileID: 11400000, guid: 267907c9b95b28d469c3befb7ef7a01c, type: 2}
+  - {fileID: 11400000, guid: 0971c8528dc227649a2b4834e1774482, type: 2}
+  - {fileID: 11400000, guid: f52fcfe9005062c45947bf5a12486446, type: 2}
+  - {fileID: 11400000, guid: f878c956946fb5c4aa816ef2fc7a69d1, type: 2}
+  - {fileID: 11400000, guid: 5f580ab63f50582419ba6552e98a6347, type: 2}
+  - {fileID: 11400000, guid: 8d0e667b8c1b2ff42b77f921b25b4548, type: 2}
   - {fileID: 11400000, guid: e3ca5eac57f007e4abe88e8b7de86144, type: 2}
   m_LiteAssets: []

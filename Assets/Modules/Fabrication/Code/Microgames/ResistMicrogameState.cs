@@ -84,6 +84,7 @@ namespace SpaceFab.Fabrication.Microgames
             state.IsActive = true;
             // TODO: play intro; spawn dropper; begin left-right sweep.
             state.ResistUI.SetActive(true);
+            state.SpreadingGraphic.gameObject.SetActive(false);
 
             // init and show game UI
             state.Phase = ResistMicrogamePhase.Entering;

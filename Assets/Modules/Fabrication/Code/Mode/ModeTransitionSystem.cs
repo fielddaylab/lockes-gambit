@@ -75,6 +75,14 @@ namespace SpaceFab.Fabrication {
             if (Input.GetKeyDown(FabricationConsts.Activate) || onboardState.IsGeneratePressed)
             {
                 OnboardingStateUtility.HideGenerateButton();
+
+                // hide the layer instruction panel shown during PreAttempt; it was just seen, so
+                // don't show it again when this first countdown ends
+                if (visualsState.LayerInstructionPanel != null) {
+                    visualsState.LayerInstructionPanel.Hide();
+                }
+                visualsState.SkipLayerPanelAfterCountdown = true;
+
                 Log.Msg("[ModeTransitionSystem] received input for new wafer -- entering Attempt Mode");
                 TransitionToAttemptLeadIn(modeState, sequenceState, visualsState, fabState);
             }
@@ -93,10 +101,12 @@ namespace SpaceFab.Fabrication {
                 RobotVisualsUtility.UpdateLayer(Find.State<RobotVisualsState>());
                 MicrogameCanvasUtility.HideStationInstructions(Find.State<MicrogameCanvasState>());
 
-                // show the layer instruction panel (rows were built during the lead-in reset)
-                if (visualsState.LayerInstructionPanel != null) {
+                // show the layer instruction panel (rows were built during the lead-in reset),
+                // unless it was just shown in PreAttempt
+                if (visualsState.LayerInstructionPanel != null && !visualsState.SkipLayerPanelAfterCountdown) {
                     visualsState.LayerInstructionPanel.Show();
                 }
+                visualsState.SkipLayerPanelAfterCountdown = false;
 
                 //trigger leaf script
                 ScriptUtility.Trigger(FabricationScriptTriggers.OnAttempt);
@@ -115,6 +125,7 @@ namespace SpaceFab.Fabrication {
                 Log.Msg("[ModeTransitionSystem] Attempt completed. Moving to PostAttempt Mode");
                 ModeUtility.SetNewMode(modeState, LevelMode.PostAttempt);
                 Debug.Log("Fab minigame completed");
+                OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, false);
                 SpacefabGame.Events.Dispatch(GameEvents.FabCompleted);
 
                 GameLoop.SuspendUpdates(UpdateMasks.AttemptMask);

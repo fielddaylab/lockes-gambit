@@ -162,13 +162,13 @@ namespace FieldDay.Scripting {
             if (m_RuntimeState.Cutscene == handle && !m_RuntimeState.SkipCutsceneRoutine) {
                 
                 DebugFlags.BlockTimeControl();
-                Game.Input.PauseDevices();
-                Game.Input.PauseRaycasts();
+                Game.Input.PauseAll();
                 
                 handle.GetThread().Pause();
 
                 m_RuntimeState.IsSkippingCutscene = true;
-                m_RuntimeState.SkipCutsceneRoutine.Replace(GameLoop.Host, SkipRoutine(handle));
+                m_RuntimeState.SkipCutsceneTimescaleRestore = Time.timeScale;
+                m_RuntimeState.SkipCutsceneRoutine.Replace(GameLoop.Host, SkipRoutine(handle)).SetPhase(RoutinePhase.RealtimeUpdate);
             }
         }
 
@@ -176,18 +176,22 @@ namespace FieldDay.Scripting {
             if (m_RuntimeState.Cutscene == handle) {
                 m_RuntimeState.SkipCutsceneRoutine.Stop();
                 m_RuntimeState.IsSkippingCutscene = false;
+                Time.timeScale = m_RuntimeState.SkipCutsceneTimescaleRestore;
+
+                ScriptThread thread = handle.GetThread<ScriptThread>();
 
                 // fade back in
-                handle.GetThread().Resume();
+                thread.Resume();
+                thread.StopSkipping();
                 
                 DebugFlags.UnblockTimeControl();
-                Game.Input.ResumeDevices();
-                Game.Input.ResumeRaycasts();
+                Game.Input.ResumeAll();
             }
         }
 
         static internal IEnumerator SkipRoutine(LeafThreadHandle handle) {
             // fade out
+            Time.timeScale = 100;
             handle.GetThread<ScriptThread>().StartSkipping();
             yield return 0.1f;
             handle.GetThread().Resume();
@@ -205,7 +209,7 @@ namespace FieldDay.Scripting {
             ScriptThread thread = (ScriptThread) inThreadState;
             if (thread.IsSkipping()) {
                 if (LeafRuntime.PredictChoice(thread)) {
-                    thread.StopSkipping();
+                    StopSkippingCutscene(thread.GetHandle());
                 } else {
                     SkipLine(thread, inLine);
                     return null;

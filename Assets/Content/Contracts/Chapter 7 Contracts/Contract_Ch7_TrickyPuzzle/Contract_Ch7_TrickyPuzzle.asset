@@ -19,13 +19,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08721792820144d26b307c84e32a71ae, type: 2}
   m_omitFromSupplyRequirements: []
   m_title: Inverter
-  m_description: This is where the contract is described
+  m_description: Our mining drills keep digging up instead of down. We need Inverters
+    to correct the signal.
   m_client:
-    m_Source: cm
-    m_HashValue: 1680451373
+    m_Source: cm10
+    m_HashValue: 1961950124
   m_payout: 14
   m_expectedDuration: 5
-  m_expectedProfit: 5
+  m_minimumProfit: 5
   m_contractType: 2
   m_difficulty: 2
   m_unlocksBigBattery: 0

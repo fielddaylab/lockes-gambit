@@ -188,3 +188,6 @@ MonoBehaviour:
     - m_HashValue: 3747167047
     ComicPackage:
       m_HashValue: 2762381187
+  HazardChances: 01000000050000000f0000001e0000003200000046000000500000005a00000064000000
+  EpilogueComicPackage:
+    m_HashValue: 2031143026

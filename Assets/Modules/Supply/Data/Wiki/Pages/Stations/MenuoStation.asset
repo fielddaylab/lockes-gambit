@@ -19,7 +19,7 @@ MonoBehaviour:
   IllustrationFPS: 0.5
   IllustrationImageScale: 0.75
   CaptionText: 
-  BodyText: After many cycles being grid-locked by outdated Frontier Robotics systems,
+  BodyText: After many cycles being gridlocked by outdated Frontier Robotics systems,
     the Menuo Station is finally operational. It is one of Kalvis' biggest feats
     as of late.
   MaterialId:

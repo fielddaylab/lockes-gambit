@@ -292,6 +292,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseButton
       objectReference: {fileID: 0}
+    - target: {fileID: 126495916456541605, guid: 353bccb26004c5944ba1f3d1dd7b25b1, type: 3}
+      propertyPath: TooltipHeader
+      value: Open Settings
+      objectReference: {fileID: 0}
     - target: {fileID: 5768883302139231753, guid: 353bccb26004c5944ba1f3d1dd7b25b1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
