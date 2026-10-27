@@ -394,6 +394,7 @@ MonoBehaviour:
   RectTransform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!1 &61560484
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +717,7 @@ MonoBehaviour:
   RectTransform: {fileID: 167493135}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!114 &167493141 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4158551386550084146, guid: 8eada486dc58d1240a5b0427f9f08c04, type: 3}
@@ -818,7 +820,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174963529}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2767,6 +2769,7 @@ MonoBehaviour:
   RectTransform: {fileID: 741261915}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!1001 &753862730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3409,6 +3412,7 @@ MonoBehaviour:
   RectTransform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!1 &988049078
 GameObject:
   m_ObjectHideFlags: 0
@@ -4737,6 +4741,7 @@ MonoBehaviour:
   RectTransform: {fileID: 1436435626}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!1001 &1460440609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5184,6 +5189,7 @@ MonoBehaviour:
   RectTransform: {fileID: 1679707919}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!114 &1679707926 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8628473173527798261, guid: 8eada486dc58d1240a5b0427f9f08c04, type: 3}
@@ -5675,6 +5681,7 @@ MonoBehaviour:
   RectTransform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!1 &1770166377
 GameObject:
   m_ObjectHideFlags: 0
@@ -7198,6 +7205,7 @@ MonoBehaviour:
   RectTransform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!1001 &5201276343860688403
 PrefabInstance:
   m_ObjectHideFlags: 0
