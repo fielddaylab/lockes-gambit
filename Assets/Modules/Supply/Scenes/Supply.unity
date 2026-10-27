@@ -1118,6 +1118,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugChapterIndex: 6
+--- !u!114 &849030537 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8688358371759531549, guid: ccb408836ce37bf4a9f5cb904f4dac7d, type: 3}
+  m_PrefabInstance: {fileID: 5846735789984306294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &849030538 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3234761274827563401, guid: ccb408836ce37bf4a9f5cb904f4dac7d, type: 3}
+  m_PrefabInstance: {fileID: 5846735789984306294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &988049156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7885,8 +7907,8 @@ MonoBehaviour:
   PanelRect: {fileID: 1570598610}
   ShoppingListLabel: {fileID: 564138821}
   CollapseTransform: {fileID: 1517115922}
-  CollapseButton: {fileID: 5846735789984306296}
-  CollapseImage: {fileID: 5846735789984306295}
+  CollapseButton: {fileID: 849030537}
+  CollapseImage: {fileID: 849030538}
   ExpandIcon: {fileID: 21300000, guid: f1b28fb08eb0b6845aace32922c6c729, type: 3}
   CollapseIcon: {fileID: 21300000, guid: 5fdecf4798ca3ad4884412c297fa4308, type: 3}
   ListExpanded: 1
@@ -9420,7 +9442,6 @@ MonoBehaviour:
   RectTransform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
-  ColliderOverride: 0
 --- !u!1001 &5846735789984306294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9616,10 +9637,6 @@ PrefabInstance:
     - target: {fileID: 3786147074205103100, guid: ccb408836ce37bf4a9f5cb904f4dac7d, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 72.41998
-      objectReference: {fileID: 0}
-    - target: {fileID: 3810504261998832219, guid: ccb408836ce37bf4a9f5cb904f4dac7d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -25.400002
       objectReference: {fileID: 0}
     - target: {fileID: 4012727560347314349, guid: ccb408836ce37bf4a9f5cb904f4dac7d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -13744,7 +13761,6 @@ MonoBehaviour:
   RectTransform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
-  ColliderOverride: 0
 --- !u!224 &7015587884658692678 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5576583496230604757, guid: 4f4060100cea14d44b2a28ee2f697427, type: 3}
