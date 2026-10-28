@@ -1325,7 +1325,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: ed52b26a16a6fba43b9225a3f202520b, type: 3}
     - target: {fileID: 1490622939549781980, guid: 338e5776d07785b40aa1a3c5ad36e4a1, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1533125586584246779, guid: 338e5776d07785b40aa1a3c5ad36e4a1, type: 3}
       propertyPath: m_IsActive
@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa1fd4731f4e344d8a4f7b632160a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG_FabricationLevel: {fileID: 11400000, guid: 38a047663027349d790b55a8307ece43, type: 2}
+  DEBUG_FabricationLevel: {fileID: 11400000, guid: d0ada8234b60a4c98b7b9e371478eb62, type: 2}
   DEBUG_StationConfig: {fileID: 11400000, guid: 722373c8e26982040aa5e116a191f69f, type: 2}
 --- !u!114 &879438738
 MonoBehaviour:

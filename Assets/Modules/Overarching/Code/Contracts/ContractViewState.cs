@@ -45,7 +45,6 @@ namespace SpaceFab.Overarching {
         static public void ApplyContract(int chapterContractIndex) {
             Find.State(out ChapterState chapterState, out ContractState contractState);
             chapterState.LastSelectedContractIndex = chapterContractIndex;
-            SpacefabGame.Events.Dispatch(GameEvents.StartSelectContract, chapterContractIndex.ToStringLookup());
             ContractUtility.LoadContractData(contractState, chapterState.ChapterDefinition.AvailableContracts[chapterContractIndex], ContractLoadAction.ResetContractProgress);
         }
 

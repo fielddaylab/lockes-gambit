@@ -75,13 +75,13 @@ LineRenderer:
   m_SortingLayer: 9
   m_SortingOrder: 3
   m_Positions:
-  - {x: -1.31, y: -2.13, z: 1}
+  - {x: -1.31, y: -2.39, z: 1}
   - {x: -1.31, y: 1.41, z: 1}
   - {x: 0.67, y: 1.41, z: 1}
   - {x: 0.67, y: 0.19, z: 1}
   - {x: -0.1, y: 0.19, z: 1}
   - {x: -0.1, y: -1.19, z: 1}
-  - {x: 1.89, y: -1.19, z: 1}
+  - {x: 2.2, y: -1.19, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.2

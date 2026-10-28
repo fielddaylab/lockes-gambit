@@ -21,6 +21,13 @@ namespace SpaceFab.Logging
 {
     public class Logging : MonoBehaviour
     {
+        public enum VolumeType: byte
+        {
+            MASTER,
+            MUSIC,
+            SFX
+        }
+
         public enum ToolID : byte
         {
             PTYPE,
@@ -41,7 +48,30 @@ namespace SpaceFab.Logging
         public enum Layer: byte
         {
             METAL,
-            TRANSISTOR
+            SILICON
+        }
+
+        public enum ElementState: byte
+        {
+            HI,
+            LO
+        }
+
+        public enum Station: byte
+        {
+            FURNACE,
+            SPIN_COATER,
+            MASK_ALIGNER,
+            ETCHER,
+            ION_IMPLANTER,
+            SPUTTERER
+        }
+
+        public enum FabricationLayer: byte
+        {
+            METAL,
+            PTYPE,
+            NTYPE
         }
 
         public struct DesignIO
@@ -68,7 +98,7 @@ namespace SpaceFab.Logging
         [SerializeField] private FirebaseConsts m_Firebase;
         [SerializeField] private bool m_Testing;
 
-        //[NonSerialized] private float m_SecondsFromLaunch;
+        [NonSerialized] private float m_SecondsFromLaunch;
         [NonSerialized] private string m_CurrentContract;
         [NonSerialized] private Minigame? m_CurrentMinigame;
         [NonSerialized] private Dictionary<string, Dictionary<Minigame, int>> m_ContractLevels = new Dictionary<string, Dictionary<Minigame, int>>(); // number of levels of each minigame, specified by the contract
@@ -90,7 +120,7 @@ namespace SpaceFab.Logging
 
             // TODO
             m_JsonBuilder.Begin()
-                //.Field("seconds_from_launch", m_SecondsFromLaunch)
+                .Field("seconds_from_launch", m_SecondsFromLaunch)
                 .Field("current_contract", m_CurrentContract)
                 .Field("current_minigame", m_CurrentMinigame.HasValue ? m_CurrentMinigame.Value.ToString() : null);
             
@@ -142,6 +172,11 @@ namespace SpaceFab.Logging
         private void UpdateContractLevels(string contract, Minigame minigame, int numLevel)
         {
             m_ContractLevels[contract][minigame] += numLevel ;
+        }
+
+        private void UpdateContractId(string contract)
+        {
+            m_CurrentContract = contract;
         }
 
         private void UpdateDesignGridState(Vector2Int gridPos, string tool)
@@ -290,14 +325,18 @@ namespace SpaceFab.Logging
                 .Register(GameEvents.TitleNewGameClicked, LogClickNewGame)
                 .Register(GameEvents.TitleContinueGameClicked, LogClickResumeGame)
                 .Register(GameEvents.ShipMenuDisplayed, LogShipMenuDisplayed)
-                .Register(GameEvents.OpenContractView, LogOpenContractView)
-                .Register<string>(GameEvents.AcceptContract, LogAcceptContract)
-                .Register<string>(GameEvents.StartSelectContract, LogStartSelectContract)
-                .Register<string>(GameEvents.ConfirmSelectContract, LogConfirmSelectContract)
-                .Register<string>(GameEvents.CancelSelectContract, LogCancelSelectContract)
                 .Register<MinigameId>(GameEvents.SelectMinigame, HandleMinigameSelect)
                 .Register<MinigameId>(GameEvents.StartMinigame, HandleMinigameStart)
                 .Register(GameEvents.OnMinigameExit, HandleMinigameExit);
+
+            // Contrat
+            SpacefabGame.Events
+                .Register(GameEvents.OpenContractView, LogOpenContractView)
+                .Register<string>(GameEvents.AcceptContract, LogAcceptContract)
+                .Register<string>(GameEvents.SelectContract, UpdateContractId)
+                .Register<string>(GameEvents.StartChangeContract, LogStartChangeContract)
+                .Register<string>(GameEvents.ConfirmSelectContract, LogConfirmSelectContract)
+                .Register<string>(GameEvents.CancelSelectContract, LogCancelSelectContract);
 
             // Design
             SpacefabGame.Events
@@ -325,7 +364,7 @@ namespace SpaceFab.Logging
 
         #region Logging Variables
 
-        [NonSerialized] private string m_CurrentContractId;
+        //[NonSerialized] private string m_CurrentContractId;
 
         #endregion // Logging Variables
 
@@ -407,7 +446,7 @@ namespace SpaceFab.Logging
           }
          */
         {
-            m_CurrentContractId = contractId;
+            m_CurrentContract = contractId;
             if (!m_ContractLevels.ContainsKey(contractId))
             {
                 m_ContractLevels[contractId] = new Dictionary<Minigame, int>();
@@ -433,21 +472,26 @@ namespace SpaceFab.Logging
             }
         }
 
+        private void LogSelectContract(string contractId)
+        {
+            m_CurrentContract = contractId;
+        }
+
         private void LogOpenContractView()
         {
             using (m_Log.NewEvent("open_contract_view")) { }
         }
 
-        private void LogStartSelectContract(string contractId)
+        private void LogStartChangeContract(string contractId)
         {
-            using (var e = m_Log.NewEvent("start_select_contract"))
+            using (var e = m_Log.NewEvent("start_change_contract"))
             {
                 e.Param("contract_id", contractId);
             }
         }
         private void LogConfirmSelectContract(string contractId)
         {
-            m_CurrentContractId = contractId;
+            m_CurrentContract = contractId;
             SubmitGameState();
 
             using (var e = m_Log.NewEvent("confirm_select_contract"))

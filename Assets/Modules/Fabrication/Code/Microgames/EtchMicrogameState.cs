@@ -83,7 +83,7 @@ namespace SpaceFab.Fabrication.Microgames
             state.InputAccepted = false;
             state.EtchUI.SetActive(true);
 
-            state.Direction = Vector2.right;
+            state.Direction = Vector2.up;
   
             state.PreviewProgress = 0f;
             state.PreviewVisibleCount = 0;

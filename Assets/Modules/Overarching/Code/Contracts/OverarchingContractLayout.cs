@@ -78,6 +78,8 @@ namespace SpaceFab.Overarching {
             Contract.SelectContractButton.OnClick.Register(() => {
                 Find.State(out ContractViewState view);
                 view.QueuedAction = ContractViewQueuedAction.Accept;
+                Find.State(out ContractState contractState);
+                SpacefabGame.Events.Dispatch(GameEvents.SelectContract, contractState.ContractId.ToString());
             });
         }
 

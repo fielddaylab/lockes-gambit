@@ -75,7 +75,7 @@ LineRenderer:
   m_SortingLayer: 9
   m_SortingOrder: 3
   m_Positions:
-  - {x: -1.31, y: -2.04, z: 1}
+  - {x: -1.31, y: -2.39, z: 1}
   - {x: -1.31, y: 0.01, z: 1}
   - {x: -0.08, y: 0.01, z: 1}
   - {x: -0.08, y: 0.77, z: 1}
@@ -88,7 +88,7 @@ LineRenderer:
   - {x: 0.73, y: 0.02, z: 1}
   - {x: 0.73, y: -0.56, z: 1}
   - {x: 1.29, y: -0.56, z: 1}
-  - {x: 1.29, y: -2.35, z: 1}
+  - {x: 1.29, y: -2.59, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.2

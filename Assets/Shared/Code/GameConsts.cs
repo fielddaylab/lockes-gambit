@@ -104,8 +104,10 @@ namespace SpaceFab
 
         // Overarching
         public static readonly StringHash32 OpenContractView = "overarching:open-contract-view";
+        public static readonly StringHash32 SelectContract = "overarching:select-contract"; // when player clicks SelectContractButton
+
         public static readonly StringHash32 AcceptContract = "overarching:confirm-select-contract";
-        public static readonly StringHash32 StartSelectContract = "overarching:start-change-contract";
+        public static readonly StringHash32 StartChangeContract = "overarching:start-change-contract";
         public static readonly StringHash32 ConfirmSelectContract = "overarching:confirm-change-contract";
         public static readonly StringHash32 CancelSelectContract = "overarching:cancel-change-contract";
         public static readonly StringHash32 CompleteGoal = "overarching:complete-goal";

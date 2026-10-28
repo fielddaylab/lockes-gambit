@@ -24,6 +24,8 @@ namespace SpaceFab.Overarching {
             ChangeButton.OnClick.Register(() => {
                 Find.State(out ContractViewState view);
                 view.QueuedMode = OverarchingContractMode.Change;
+                Find.State(out ContractState contractState);
+                SpacefabGame.Events.Dispatch(GameEvents.StartChangeContract, contractState.ContractId.ToString());
             });
 
             SubmitButton.OnClick.Register(() => {

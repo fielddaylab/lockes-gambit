@@ -66,6 +66,7 @@ namespace SpaceFab.Fabrication.Microgames
             MicrogameStationConfig stationConfig = MicrogameUtility.GetStationConfig();
 
             state.PhotomaskSprite.sprite = stationConfig.PhotolithographyMasks[patternIndex];
+            state.PhotomaskSprite.color = new Color32(57, 57, 57, 255);
             state.OutlineSprite.sprite = stationConfig.PhotolithographyOutlines[patternIndex];
 
             // Set angle by chunk type
