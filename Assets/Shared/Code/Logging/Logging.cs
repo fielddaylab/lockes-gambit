@@ -57,6 +57,33 @@ namespace SpaceFab.Logging
             LO
         }
 
+        public enum Material : byte
+        {
+            //TODO: Add the material names in Research
+        }
+
+        public enum Chamber: byte
+        {
+            Battery,
+            Thermal,
+            Doping
+        }
+
+        public enum ChamberSlot : byte
+        {
+            
+        }
+
+        public enum DopantRejection: byte
+        {
+            INVALID_SUBSTRATE,
+            UNIDENTIFIED_SUBSTRATE,
+            DOPANT_TOO_BIG,
+            POLYATOMIC_DOPANT,
+            SUBSTRATE_DOPANT_DUPLICATED,
+            UNSTABLE_ELECTRON_COUNT
+        }
+
         public enum Station: byte
         {
             FURNACE,
@@ -65,6 +92,11 @@ namespace SpaceFab.Logging
             ETCHER,
             ION_IMPLANTER,
             SPUTTERER
+        }
+
+        public enum FabricationAction: byte
+        {
+
         }
 
         public enum FabricationLayer: byte
@@ -421,6 +453,37 @@ namespace SpaceFab.Logging
             m_Log.NewEvent("click_resume_game");
             SubmitGameState();
         }
+
+        private void LogStartCredits()
+        {
+
+        }
+
+        private void LogQuitCredits()
+        {
+
+        }
+
+        private void LogOpenSettings()
+        {
+
+        }
+
+        private void LogCloseSettings()
+        {
+
+        }
+
+        private void LogToggleFullScreen()
+        {
+
+        }
+
+        private void LogSetVolume()
+        {
+
+        }
+
 
         # region Overarching
 
