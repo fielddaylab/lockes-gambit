@@ -1,5 +1,6 @@
 using BeauRoutine;
 using BeauRoutine.Extensions;
+using BeauUtil.Debugger;
 using FieldDay;
 using FieldDay.Audio;
 using FieldDay.Scripting;
@@ -95,22 +96,28 @@ namespace SpaceFab.Research {
 
             // 3. Shake the rig in place. Wave returns the transform to its
             // starting position on completion, so no manual reset is needed.
+            Transform rigT = null;
             if (slot.Rig != null) {
-                Transform rigT = slot.Rig.transform;
+                if (style == ExplosionStyle.TooBig) {
+                    Find.State(out DopingChamberState dopingChamber);
+                    rigT = dopingChamber.DopantAtom.transform;
+                }
+                else {
+                    rigT = slot.Rig.transform;
+                }
                 float startY = rigT.localPosition.y;
                 yield return rigT.MoveTo(startY + 0.1f, 0.27f, Axis.Y, Space.Self).Wave(Wave.Function.Sin, 6);
             }
 
-            if (style == ExplosionStyle.InvalidSubstrate) {
-                Vector2 originalPosition = slot.Rig.transform.position;
+            if (style == ExplosionStyle.InvalidSubstrate || style == ExplosionStyle.TooBig) {
+                Vector2 originalPosition = rigT.position;
                 KinematicAnimation animation = new() {
                     Velocity = new Vector3Range(new Vector3(-8f, 8f, 0f)),
                     Gravity = new Vector3Range(new Vector3(0f, -10f, 0f))
                 };
-                yield return Routine.Inline(animation.Simulate(slot.Rig.transform, 0.5f));
-                slot.Rig.transform.position = originalPosition;
+                yield return Routine.Inline(animation.Simulate(rigT, 0.5f));
+                rigT.position = originalPosition;
             }
-
             else {
                 // 4. Burst VFX + SFX. The sfx key is shared across styles for
                 // now; per-style audio will land when the audio bank does.

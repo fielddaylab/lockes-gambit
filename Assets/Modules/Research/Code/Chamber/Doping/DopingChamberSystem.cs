@@ -100,7 +100,7 @@ namespace SpaceFab.Research
 
                 ResearchExplosionUtility.ExplodeSlot(
                     explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Primary,
-                    ExplosionStyle.InvalidSubstrate, delay: 1f); // TODO: add explosion style if needed
+                    ExplosionStyle.InvalidSubstrate, delay: 0.75f); // TODO: add explosion style if needed
                 dopingChamber.AtomicViewChangedThisFrame = true;
 
                 return;
@@ -154,7 +154,7 @@ namespace SpaceFab.Research
             } else {
                 ResearchExplosionUtility.ExplodeSlot(
                     explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Secondary,
-                    ExplosionStyle.TooBig, delay: 1f);
+                    ExplosionStyle.TooBig, delay: 0.75f);
                 CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
                 CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility, profile.IsLightEmitting);
                 dopingChamber.AtomicViewChangedThisFrame = true;
