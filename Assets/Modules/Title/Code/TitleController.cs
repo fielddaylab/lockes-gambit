@@ -110,7 +110,8 @@ namespace SpaceFab.Title
             PlayCodeInput.SetTextWithoutNotify(string.Empty);
             PlayButton.Interactable = false;
             OGD.Player.NewId(OnCodeGenerated, OnCodeError);
-
+            
+            SpacefabGame.Events.Dispatch(GameEvents.TitleSessionIdAssigned);
             Game.Input.PauseAll();
             Routine.Start(this, ToPlay(PageId.NewGame, NewGameCameraPosition));
         }
@@ -134,6 +135,7 @@ namespace SpaceFab.Title
         private void OnCreditsClick() {
             Game.Input.PauseAll();
             Routine.Start(this, ToCredits());
+            SpacefabGame.Events.Dispatch(GameEvents.CreditsEnterClicked);
         }
 
         private void OnStartClick() {

@@ -36,6 +36,7 @@ namespace SpaceFab.Credits
         private void HandleSkipClicked()
         {
             Game.Scenes.LoadMainScene(m_ReturnScene);
+            SpacefabGame.Events.Dispatch(GameEvents.CreditsQuitClicked);
         }
     }
 }

@@ -351,15 +351,20 @@ namespace SpaceFab.Logging
         {
             SpacefabGame.Events.Register<string>(GameEvents.TitleProfileStarting, SetAnalyticsUserCode);
 
-            // TODO: Logging events
+            // Title
             SpacefabGame.Events
-                .Register<bool>(GameEvents.TitleStartGameClicked, LogGameStart)
+                //.Register<bool>(GameEvents.TitleStartGameClicked, LogGameStart)
                 .Register(GameEvents.TitleNewGameClicked, LogClickNewGame)
                 .Register(GameEvents.TitleContinueGameClicked, LogClickResumeGame)
+                .Register(GameEvents.TitleSessionIdAssigned, LogSessionStart)
                 .Register(GameEvents.ShipMenuDisplayed, LogShipMenuDisplayed)
                 .Register<MinigameId>(GameEvents.SelectMinigame, HandleMinigameSelect)
                 .Register<MinigameId>(GameEvents.StartMinigame, HandleMinigameStart)
                 .Register(GameEvents.OnMinigameExit, HandleMinigameExit);
+
+            SpacefabGame.Events
+                .Register(GameEvents.CreditsEnterClicked, LogStartCredits)
+                .Register(GameEvents.CreditsQuitClicked, LogQuitCredits);
 
             // Contrat
             SpacefabGame.Events
@@ -435,6 +440,10 @@ namespace SpaceFab.Logging
         #endregion // State Handlers
 
         #region Logging
+        private void LogSessionStart()
+        {
+            m_Log.NewEvent("session_start");
+        }
 
         private void LogGameStart(bool fromResume)
         {
@@ -446,22 +455,24 @@ namespace SpaceFab.Logging
         private void LogClickNewGame()
         {
             m_Log.NewEvent("click_new_game");
+            LogGameStart(false);
         }
 
         private void LogClickResumeGame()
         {
             m_Log.NewEvent("click_resume_game");
+            LogGameStart(true);
             SubmitGameState();
         }
 
         private void LogStartCredits()
         {
-
+            m_Log.NewEvent("start_credits");
         }
 
         private void LogQuitCredits()
         {
-
+            m_Log.NewEvent("quit_credits");
         }
 
         private void LogOpenSettings()

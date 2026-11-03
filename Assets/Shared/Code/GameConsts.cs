@@ -18,9 +18,11 @@ namespace SpaceFab
         static public readonly StringHash32 TitleNewGameGroupClicked = "title:new-game-group-clicked";
         static public readonly StringHash32 TitleContinueGameGroupClicked = "title:continue-game-group-clicked";
         static public readonly StringHash32 TitleOptionsGroupClicked = "title:options-group-clicked";
-        static public readonly StringHash32 TitleCreditsClicked = "title:credits-group-clicked";
+        //static public readonly StringHash32 TitleCreditsClicked = "title:credits-group-clicked";
 
-        static public readonly StringHash32 TitleStartGameClicked = "title:start-game-clicked";
+        static public readonly StringHash32 TitleSessionIdAssigned = "title:session-id-assigned";
+
+        //static public readonly StringHash32 TitleStartGameClicked = "title:start-game-clicked";
         static public readonly StringHash32 TitleBackFromInputClicked = "title:back-from-input-clicked";
 
         static public readonly StringHash32 TitleProfileStarting = "title:profile-starting";
@@ -28,6 +30,9 @@ namespace SpaceFab
         static public readonly StringHash32 TitleNewGameClicked = "title:new-game-clicked";
         static public readonly StringHash32 TitleContinueGameClicked = "title:continue-game-clicked";
 
+        // Credits
+        static public readonly StringHash32 CreditsEnterClicked = "credits:enter-clicked";
+        static public readonly StringHash32 CreditsQuitClicked = "credits:quit-clicked";
 
         // Save
         public static readonly StringHash32 ProfileSaveBegin = "save:profile-save-begin";
