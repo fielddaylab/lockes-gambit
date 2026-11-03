@@ -141,12 +141,12 @@ MonoBehaviour:
       rgba: 4292080383
   UnidentifiedPropertyIconTint: {r: 0.9, g: 0.9, b: 0.623, a: 0.8509804}
   UnknownPropertyIcon: {fileID: 21300000, guid: 11c6bffe34bb4ab46a51b067a451cd26, type: 3}
-  EmptyBackground: {fileID: 0}
-  EmptyOutline: {fileID: 0}
+  EmptyBackground: {fileID: 21300000, guid: fbfdd40b110ae49488e0585a2b1014e1, type: 3}
+  EmptyOutline: {fileID: 21300000, guid: bd340ffed730747ffbb6e6cc74c559cf, type: 3}
   EmptyColorPalette:
     Content:
       serializedVersion: 2
-      rgba: 4286414205
+      rgba: 4286283130
     Background:
       serializedVersion: 2
       rgba: 4281808695

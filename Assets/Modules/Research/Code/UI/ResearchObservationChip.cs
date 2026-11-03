@@ -130,10 +130,12 @@ namespace SpaceFab.Research {
         public void ApplyShape(ResearchObservationChipAssets assets, ObservationType observationType, ChipFillState fillState, bool useEmptyDashedSprite) {
             var shape = assets.GetShape(observationType);
             bool isVisible = true;
+            bool isIconVisible = true;
             Color iconColor = Color.white;
 
             if (fillState == ChipFillState.Empty) {
                 isVisible = useEmptyDashedSprite;
+                isIconVisible = observationType != ObservationType.Component;
                 shape = assets.GetEmptyShape(observationType);
             } else if (observationType >= ObservationType.ConfirmedProperty && fillState != ChipFillState.Confirmed) {
                 shape.Palette = assets.UnidentifiedPropertyPalette;
@@ -149,7 +151,7 @@ namespace SpaceFab.Research {
                 graphic.sprite = shape.Outline;
             }
 
-            Icon.enabled = isVisible;
+            Icon.enabled = isVisible && isIconVisible;
             LabelText.enabled = isVisible;
 
             m_LastAssignedIconColor = Icon.color = iconColor;
