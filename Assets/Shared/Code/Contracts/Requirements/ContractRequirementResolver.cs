@@ -146,7 +146,7 @@ namespace SpaceFab {
                     int columnOffset = table.Columns.Count;
                     int columnCount = 0;
 
-                    using (TempReferenceBuffer<MaterialAsset> rowMaterials = ExtractMatchingMaterials(chapterMaterials, conductorProps, !hasNaiveDef)) {
+                    using (TempReferenceBuffer<MaterialAsset> rowMaterials = ExtractMatchingMaterials(chapterMaterials, conductorProps, false)) {
                         Assert.True(rowMaterials.Count <= ContractRequirementSubRow.MaxSlots, "Too many matching conductors for contract {0}", contract.name);
                         for (int i = 0; i < rowMaterials.Count; i++) {
                             MaterialAsset rowMaterial = rowMaterials[i];

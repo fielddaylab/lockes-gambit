@@ -118,6 +118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hypothesis Semiconductor Requirement Row
       objectReference: {fileID: 0}
+    - target: {fileID: 802022529340481564, guid: 560c96e4f30feb74390668ffcaa060e5, type: 3}
+      propertyPath: Slots.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 819783489527009186, guid: 560c96e4f30feb74390668ffcaa060e5, type: 3}
       propertyPath: Heights.Array.size
       value: 3
@@ -222,6 +226,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8215584517679520886, guid: 560c96e4f30feb74390668ffcaa060e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8392659516978640518, guid: 560c96e4f30feb74390668ffcaa060e5, type: 3}
       propertyPath: m_text
       value: semiconductor
@@ -231,7 +239,8 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8215584517679520886, guid: 560c96e4f30feb74390668ffcaa060e5, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7511319893351415252, guid: 560c96e4f30feb74390668ffcaa060e5, type: 3}
       insertIndex: 2

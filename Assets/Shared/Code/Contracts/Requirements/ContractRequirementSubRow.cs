@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace SpaceFab {
     public sealed class ContractRequirementSubRow : MonoBehaviour {
-        public const int MaxSlots = 4;
+        public const int MaxSlots = 5;
 
         public CursorHint Cursor;
 
