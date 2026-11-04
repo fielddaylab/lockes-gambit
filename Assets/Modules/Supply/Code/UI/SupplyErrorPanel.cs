@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using BeauUtil;
 using BeauUtil.Debugger;
 using BeauUtil.UI;
@@ -15,10 +15,25 @@ namespace SpaceFab.Supply {
     public sealed class SupplyErrorPanel : SharedStateComponent, IRegistrationCallbacks {
         public CanvasGroup PopupGroup;
         public ShipListRow Ship;
-        public GameObject DuplicatePanel, UnidentifiedPanel, NotRequiredPanel, DopantPanel;
+        public GameObject DuplicatePanel, UnidentifiedPanel, NotRequiredPanel, DopantMismatchPanel, MissingSemiconductorPanel, NeedsResearchPanel;
         public GuiButton CloseButton;
         public CanvasInputLayer Input;
         public Canvas Canvas;
+
+        private enum SupplyErrorType : byte {
+            None,
+            Pending,
+            Unidentified, // No properties found
+            MissingSemiconductor, // No semiconductor has been collected.
+            DopantMismatch,  // A semiconductor is collected, but the dopant doesn't match.
+            Duplicate,
+            NeedsResearch, // The material can fulfill the property, but the property hasn't been confirmed.
+            NotRequired
+        }
+
+        private static readonly HashSet<StringHash32> s_GatheredScratch = new HashSet<StringHash32>();
+        private static readonly HashSet<StringHash32> s_OtherScratch = new HashSet<StringHash32>();
+        private static readonly List<StringHash32> s_SemiScratch = new List<StringHash32>(4);
 
         void IRegistrationCallbacks.OnRegister() {
             SpacefabGame.Events.Register<SupplyRouteEventArgs>(GameEvents.SupplyRouteDrawingClose, OnRouteEnded);
@@ -47,61 +62,90 @@ namespace SpaceFab.Supply {
             Find.State(out SupplyRouteCollection routes, out SupplyShipIndex ships, out PlayerProgressState progress);
             Find.State(out ContractState contractState);
 
-            MaterialPropertyCheck[] required = contractState.ContractDefinition.RequiredMaterialProperties();
-            MaterialPropertyCheck[] omitted = contractState.ContractDefinition.OmitFromSupplyRequirements();
-            bool[] fulfilled = new bool[required != null ? required.Length : 0];
+            ContractRequirementResolver.RequirementsTable table = contractState.CachedRequirements;
+            var records = progress.MaterialProperties;
+            bool omitInsulator = SupplyRequirementUtility.IsInsulatorOmitted(contractState.ContractDefinition);
 
-            MarkPreviouslyFulfilledRequirements(fulfilled, required, omitted, routes, evtArgs.RouteIndex, progress);
+            GatherMaterials(s_OtherScratch, routes, evtArgs, false);
+            GatherMaterials(s_GatheredScratch, routes, evtArgs, true);
+            SupplyRequirementUtility.FindGatheredSemiconductors(table, records, s_GatheredScratch, s_SemiScratch);
 
-            uint[] excessMaterials = new uint[evtArgs.Stats.MaterialCount];
+            int count = evtArgs.Stats.MaterialCount;
+            uint[] hashes = new uint[count];
+            StringHash32[] ids = new StringHash32[count];
+            SupplyErrorType[] reasons = new SupplyErrorType[count];
+
+            // Pass 1: Unidentified, Missing semiconductor, Dopant mismatch
+            for (int i = 0; i < count; i++) {
+                hashes[i] = evtArgs.Stats.MaterialHashes[i];
+                ids[i] = new StringHash32(hashes[i]);
+
+                if (!progress.MaterialProperties.TryGetValue(ids[i], out MaterialPropertyRecord record)
+                    || MaterialPropertyRecordUtility.IsEmpty(record)) {
+                    reasons[i] = SupplyErrorType.Unidentified;
+                    continue;
+                }
+
+                SupplyRequirementUtility.DopantIssue issue = SupplyRequirementUtility.Diagnose(table, ids[i], record, s_SemiScratch);
+                if (issue == SupplyRequirementUtility.DopantIssue.MissingSemiconductor) {
+                    reasons[i] = SupplyErrorType.MissingSemiconductor;
+                } else if (issue == SupplyRequirementUtility.DopantIssue.Mismatch) {
+                    reasons[i] = SupplyErrorType.DopantMismatch;
+                } else {
+                    reasons[i] = SupplyErrorType.Pending;
+                }
+            }
+
+            // Pass 2: Duplicate, Needs research, Not required
+            int baseline = SupplyRequirementUtility.CountSatisfied(table, records, omitInsulator, s_GatheredScratch);
+            for (int i = count - 1; i >= 0; i--) {
+                if (reasons[i] != SupplyErrorType.Pending) {
+                    continue;
+                }
+
+                StringHash32 id = ids[i];
+                bool repeated = s_OtherScratch.Contains(id) || AppearsEarlier(ids, i);
+                bool needed = false;
+
+                if (!repeated) {
+                    s_GatheredScratch.Remove(id);
+                    needed = SupplyRequirementUtility.CountSatisfied(table, records, omitInsulator, s_GatheredScratch) < baseline;
+                    if (needed) {
+                        s_GatheredScratch.Add(id);
+                    }
+                }
+
+                if (needed) {
+                    reasons[i] = SupplyErrorType.None;
+                } else if (SupplyRequirementUtility.IsCandidate(table, records, omitInsulator, id)) {
+                    reasons[i] = SupplyErrorType.Duplicate;
+                } else if (SupplyRequirementUtility.IsInTable(table, omitInsulator, id)) {
+                    reasons[i] = SupplyErrorType.NeedsResearch;
+                } else {
+                    reasons[i] = SupplyErrorType.NotRequired;
+                }
+            }
+
+            uint[] excessMaterials = new uint[count];
             int excessCount = 0;
             bool hasDuplicate = false;
             bool hasUnidentified = false;
             bool hasNotRequired = false;
             bool hasDopantMismatch = false;
+            bool hasNoContextDopant = false;
+            bool hasNeedsResearch = false;
 
-            for (int i = 0; i < evtArgs.Stats.MaterialCount; i++) {
-                uint materialHash = evtArgs.Stats.MaterialHashes[i];
-                StringHash32 materialId = new StringHash32(materialHash);
-                if (!progress.MaterialProperties.TryGetValue(materialId, out MaterialPropertyRecord record)
-                    || MaterialPropertyRecordUtility.IsEmpty(record)) {
-                    excessMaterials[excessCount++] = materialHash;
-                    hasUnidentified = true;
-                    continue;
+            for (int i = 0; i < count; i++) {
+                switch (reasons[i]) {
+                    case SupplyErrorType.Unidentified: hasUnidentified = true; break;
+                    case SupplyErrorType.MissingSemiconductor: hasNoContextDopant = true; break;
+                    case SupplyErrorType.DopantMismatch: hasDopantMismatch = true; break;
+                    case SupplyErrorType.Duplicate: hasDuplicate = true; break;
+                    case SupplyErrorType.NeedsResearch: hasNeedsResearch = true; break;
+                    case SupplyErrorType.NotRequired: hasNotRequired = true; break;
+                    default: continue; // None
                 }
-
-                bool matchesRequirement = false;
-                bool fillsRequirement = false;
-                if (required != null) {
-                    for (int reqIndex = 0; reqIndex < required.Length; reqIndex++) {
-                        if (IsOmitted(required[reqIndex], omitted)
-                            || !ContractProgressUtility.SatisfiesCheck(record, required[reqIndex])) {
-                            continue;
-                        }
-
-                        matchesRequirement = true;
-                        fillsRequirement |= !fulfilled[reqIndex];
-                    }
-                }
-
-                if (fillsRequirement) {
-                    for (int reqIndex = 0; reqIndex < required.Length; reqIndex++) {
-                        if (!IsOmitted(required[reqIndex], omitted)
-                            && ContractProgressUtility.SatisfiesCheck(record, required[reqIndex])) {
-                            fulfilled[reqIndex] = true;
-                        }
-                    }
-                    continue;
-                }
-
-                excessMaterials[excessCount++] = materialHash;
-                if (matchesRequirement) {
-                    hasDuplicate = true;
-                } else if (HasDopantMismatch(materialId, i, record, routes, evtArgs, progress)) {
-                    hasDopantMismatch = true;
-                } else {
-                    hasNotRequired = true;
-                }
+                excessMaterials[excessCount++] = hashes[i];
             }
 
             if (excessCount == 0) {
@@ -111,7 +155,9 @@ namespace SpaceFab.Supply {
             DuplicatePanel.SetActive(hasDuplicate);
             UnidentifiedPanel.SetActive(hasUnidentified);
             NotRequiredPanel.SetActive(hasNotRequired);
-            DopantPanel.SetActive(hasDopantMismatch);
+            DopantMismatchPanel.SetActive(hasDopantMismatch);
+            MissingSemiconductorPanel.SetActive(hasNoContextDopant);
+            NeedsResearchPanel.SetActive(hasNeedsResearch);
 
             ShipListPanel shipList = Find.Panel<ShipListPanel>();
             SupplyChainUtility.PopulateShipInformation(Ship, ships.ShipAssets[evtArgs.RouteIndex], shipList);
@@ -135,102 +181,28 @@ namespace SpaceFab.Supply {
             SetVisible(true);
         }
 
-        private static unsafe void MarkPreviouslyFulfilledRequirements(bool[] fulfilled, MaterialPropertyCheck[] required,
-            MaterialPropertyCheck[] omitted, SupplyRouteCollection routes, int routeIndex, PlayerProgressState progress) {
-            if (required == null) {
-                return;
-            }
-
-            for (int shipIndex = 0; shipIndex < routes.RouteStats.Length; shipIndex++) {
-                if (shipIndex == routeIndex) {
-                    continue;
-                }
-
-                SupplyRouteStats stats = routes.RouteStats[shipIndex];
-                for (int materialIndex = 0; materialIndex < stats.MaterialCount; materialIndex++) {
-                    StringHash32 materialId = new StringHash32(stats.MaterialHashes[materialIndex]);
-                    if (!progress.MaterialProperties.TryGetValue(materialId, out MaterialPropertyRecord record)) {
-                        continue;
-                    }
-
-                    for (int reqIndex = 0; reqIndex < required.Length; reqIndex++) {
-                        if (!IsOmitted(required[reqIndex], omitted)
-                            && ContractProgressUtility.SatisfiesCheck(record, required[reqIndex])) {
-                            fulfilled[reqIndex] = true;
-                        }
-                    }
-                }
-            }
-        }
-
-        private static bool IsOmitted(MaterialPropertyCheck check, MaterialPropertyCheck[] omitted) {
-            if (omitted == null) {
-                return false;
-            }
-
-            for (int i = 0; i < omitted.Length; i++) {
-                if (ReferenceEquals(check, omitted[i])) {
+        private static bool AppearsEarlier(StringHash32[] ids, int index) {
+            for (int j = 0; j < index; j++) {
+                if (ids[j] == ids[index]) {
                     return true;
                 }
             }
             return false;
         }
 
-        private static unsafe bool HasDopantMismatch(StringHash32 materialId, int candidateMaterialIndex, in MaterialPropertyRecord record,
-            SupplyRouteCollection routes, SupplyRouteEventArgs route, PlayerProgressState progress) {
-            bool isSemiconductor = IsSemiconductor(record);
-            bool isDopant = MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.PDopantFor)
-                || MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.NDopantFor);
-
-            if (!isSemiconductor && !isDopant) {
-                return false;
-            }
-
-            bool hasMatchingSemiconductor = false;
-            bool hasMatchingDopant = false;
-
+        private static unsafe void GatherMaterials(HashSet<StringHash32> output, SupplyRouteCollection routes, SupplyRouteEventArgs route, bool includeCurrent) {
+            output.Clear();
             for (int shipIndex = 0; shipIndex < routes.RouteStats.Length; shipIndex++) {
-                SupplyRouteStats stats = shipIndex == route.RouteIndex ? route.Stats : routes.RouteStats[shipIndex];
-                for (int materialIndex = 0; materialIndex < stats.MaterialCount; materialIndex++) {
-                    if (shipIndex == route.RouteIndex && materialIndex == candidateMaterialIndex) {
-                        continue;
-                    }
+                bool isCurrent = shipIndex == route.RouteIndex;
+                if (isCurrent && !includeCurrent) {
+                    continue;
+                }
 
-                    StringHash32 otherId = new StringHash32(stats.MaterialHashes[materialIndex]);
-                    if (!progress.MaterialProperties.TryGetValue(otherId, out MaterialPropertyRecord otherRecord)) {
-                        continue;
-                    }
-
-                    if (isDopant && IsSemiconductor(otherRecord)
-                        && IsConfirmedDopantFor(record, otherId)) {
-                        hasMatchingSemiconductor = true;
-                    }
-                    if (isSemiconductor && IsDopantRecord(otherRecord)
-                        && IsConfirmedDopantFor(otherRecord, materialId)) {
-                        hasMatchingDopant = true;
-                    }
+                SupplyRouteStats stats = isCurrent ? route.Stats : routes.RouteStats[shipIndex];
+                for (int i = 0; i < stats.MaterialCount; i++) {
+                    output.Add(new StringHash32(stats.MaterialHashes[i]));
                 }
             }
-
-            return (isDopant && !hasMatchingSemiconductor) || (isSemiconductor && !hasMatchingDopant);
-        }
-
-        private static bool IsSemiconductor(in MaterialPropertyRecord record) {
-            return MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.Semiconductor)
-                || MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.HiTempSemiConductor)
-                || MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.LightEmittingSemiconductor)
-                || MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.HighVoltageSemiconductor)
-                || MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.HighMobilitySemiconductor);
-        }
-
-        private static bool IsDopantRecord(in MaterialPropertyRecord record) {
-            return MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.PDopantFor)
-                || MaterialPropertyRecordUtility.HasAny(record, MaterialPropertyLabel.NDopantFor);
-        }
-
-        private static bool IsConfirmedDopantFor(in MaterialPropertyRecord record, StringHash32 semiconductorId) {
-            return MaterialPropertyRecordUtility.Has(record, MaterialPropertyLabel.PDopantFor, semiconductorId)
-                || MaterialPropertyRecordUtility.Has(record, MaterialPropertyLabel.NDopantFor, semiconductorId);
         }
 
         private void SetVisible(bool visible) {

@@ -29,7 +29,7 @@ namespace SpaceFab.Supply {
         // Reused scratch buffers — single-threaded ECS, so static reuse
         // avoids per-rebuild allocation.
         private static readonly HashSet<StringHash32> s_CollectedScratch = new HashSet<StringHash32>();
-        private static readonly List<StringHash32> s_FulfillScratch = new List<StringHash32>(4);
+        //private static readonly List<StringHash32> s_FulfillScratch = new List<StringHash32>(4);
 
         // Frees any prior rows, then builds one row per requirement in the
         // current contract. No contract => zero rows + minimum panel size.
@@ -43,110 +43,78 @@ namespace SpaceFab.Supply {
             // 1. Free prior rows.
             ResetRows(layout);
 
-            // 2. Resolve the current contract via the active contract-assets
-            //    wrapper — the same path Research / Design / Fabrication use, so
-            //    it resolves regardless of which contracts bundle is loaded.
+            // 2. Resolve the current contract.
             layout.LastContractId = contractState.ContractId;
             ContractDef contract = ResolveCurrentContract(contractState);
-            if (contract == null) {
+            if (contract == null || contractState.CachedRequirements.Rows == null) {
                 ResizePanel(layout, 0f);
 
                 Log.Msg("[SupplyBug] contract is null");
                 return;
             }
 
-            // 3. Gather the material ids the player has collected across all
-            //    finalized routes.
+            // 3. Gather the material ids the player has collected across all finalized routes.
             GatherCollectedMaterials(s_CollectedScratch, routes);
 
-            // 4. One row per required property, minus any the contract omits
-            //    from the Supply shopping list (matched by asset reference).
-            MaterialPropertyCheck[] checks = contract.RequiredMaterialProperties();
-            MaterialPropertyCheck[] omitted = contract.OmitFromSupplyRequirements();
+            // 4. Evaluate each table row and add row to shopping list.
+            bool omitInsulator = SupplyRequirementUtility.IsInsulatorOmitted(contract);
+            ContractRequirementResolver.RequirementsTable table = contractState.CachedRequirements;
+            Find.GlobalAsset(out ResearchObservationChipAssets chipAssets);
 
-            if (checks == null)
-            {
-                Log.Msg("[SupplyBug] checks is null ");
+            int totalSuccess = 0;
+            int totalChecks = 0;
 
-            }
-            else
-            {
-                Log.Msg("[SupplyBug] checks is not null ");
-            }
+            for (int r = 0; r < table.Rows.Count; r++) {
+                ContractRequirementResolver.MaterialRow tableRow = table.Rows[r];
+                if (SupplyRequirementUtility.IsRowOmitted(tableRow, omitInsulator)) {
+                    continue;
+                }
 
-            if (checks != null) {
-                bool success = true;
-                int totalSuccess = 0;
-                int totalChecks = 0;
-                int semiconductorRowIndex = -1;
-                List<MaterialPropertyCheck> semiconductorLabels = new();
-                Log.Msg("[SupplyBug] num checks: " + checks.Length);
-                for (int i = 0; i < checks.Length; i++) {
-                    if (IsOmittedFromSupply(checks[i], omitted))
-                    {
-                        Log.Msg("[SupplyBug] check at "+ i + " omitted from supply");
-                        continue;
-                    }
+                SupplyRequirementUtility.RowEval eval = SupplyRequirementUtility.EvaluateRow(table, progressState.MaterialProperties, tableRow, s_CollectedScratch);
 
-                    MaterialPropertyLabelUtility.TryGetBaseProperty(checks[i].Label, out MaterialPropertyLabel baseLabel);
-                    bool rowFulfilled = true;
-                    bool isSubtype = baseLabel == MaterialPropertyLabel.Semiconductor && checks[i].Label != MaterialPropertyLabel.Semiconductor;
-                    if (isSubtype) {
-                        semiconductorLabels.Add(checks[i]);
-                        if (semiconductorRowIndex > -1) {
-                            continue;
-                        } else {
-                            semiconductorRowIndex = totalChecks;
-                            AddRow(layout, progressState, new MaterialPropertyCheck() { Label = MaterialPropertyLabel.Semiconductor });
-                        }
-                    } else {
-                        rowFulfilled = AddRow(layout, progressState, checks[i]);
-                        success &= rowFulfilled;
-                        if (rowFulfilled) totalSuccess++;
-                        Log.Msg("[SupplyBug] added row. Success? " + success);
-                    }
+                AddPrimaryRow(layout, tableRow, eval, chipAssets);
+                totalChecks++;
+                if (eval.PrimaryFound) totalSuccess++;
 
+                if ((tableRow.Dopants & ContractRequirementResolver.DopantRows.N) != 0) {
+                    AddDopantRow(layout, MaterialPropertyLabel.NDopantFor, eval.NFound, eval.N);
                     totalChecks++;
+                    if (eval.NFound) totalSuccess++;
+                }
+                if ((tableRow.Dopants & ContractRequirementResolver.DopantRows.P) != 0) {
+                    AddDopantRow(layout, MaterialPropertyLabel.PDopantFor, eval.PFound, eval.P);
+                    totalChecks++;
+                    if (eval.PFound) totalSuccess++;
+                }
+            }
+
+            bool success = totalSuccess == totalChecks;
+            layout.ShoppingListLabel.text = $"Material Requirements ({totalSuccess}/{totalChecks})";
+            bool confirmActive = success && routes.TempRouteIndex < 0;
+
+            layout.ConfirmButton.gameObject.SetActive(confirmActive);
+            if (confirmActive) {
+                Find.State(out SupplyRouteDrawingState drawing);
+
+                layout.ConfirmButton.TextGraphic.text = "CONFIRM";
+
+                SupplyProgressMeterUtility.ComputeAggregate(routes, drawing, out int risk, out int cost, out int time, out int activeMask);
+                bool buttonEnabled = true;
+                if (time > contractState.ContractDefinition.ExpectedDuration()) {
+                    layout.ConfirmButton.TextGraphic.text = "OUT OF TIME";
+                    buttonEnabled = false;
                 }
 
-                if (semiconductorRowIndex > -1) {
-                    bool rowFulfilled = SetSemiconductorRow(layout, progressState, semiconductorLabels.ToArray(), semiconductorRowIndex);
-                    if (rowFulfilled) totalSuccess++;
-                    success &= rowFulfilled;
+                int maxCost = contractState.ContractDefinition.Payout() - contractState.ContractDefinition.MinimumProfit();
+                if (cost > maxCost) {
+                    layout.ConfirmButton.TextGraphic.text = "OUT OF MONEY";
+                    buttonEnabled = false;
                 }
 
-                layout.ShoppingListLabel.text = $"Material Requirements {totalSuccess}/{totalChecks}";
-                bool confirmActive = success && routes.TempRouteIndex < 0;
-                Log.Msg("[SupplyBug] confirm active? " + confirmActive);
-
-                layout.ConfirmButton.gameObject.SetActive(confirmActive);
-                if (confirmActive) {
-                    Find.State(out SupplyRouteDrawingState drawing);
-
-                    layout.ConfirmButton.TextGraphic.text = "CONFIRM";
-
-                    SupplyProgressMeterUtility.ComputeAggregate(routes, drawing, out int risk, out int cost, out int time, out int activeMask);
-                    bool buttonEnabled = true;
-                    if (time > contractState.ContractDefinition.ExpectedDuration())
-                    {
-                        layout.ConfirmButton.TextGraphic.text = "OUT OF TIME";
-                        buttonEnabled = false;
-                    }
-                    
-                    int maxCost = contractState.ContractDefinition.Payout() - contractState.ContractDefinition.MinimumProfit();
-                    if (cost > maxCost)
-                    {
-                        layout.ConfirmButton.TextGraphic.text = "OUT OF MONEY";
-                        buttonEnabled = false;
-                    }
-
-                    layout.ConfirmButton.Interactable = buttonEnabled;
-                }
-
+                layout.ConfirmButton.Interactable = buttonEnabled;
             }
 
             // 5. Lay out + resize.
-            // TODO: migrate to use our custom Layout elements to handle this layout
             UpdateExpandedY(layout);
         }
 
@@ -174,73 +142,83 @@ namespace SpaceFab.Supply {
         // Allocs one row for the given requirement, sets its property chip
         // label/icon, and fills its slot with the first gathered material
         // that satisfies the check (by player-confirmed knowledge).
-        private static bool AddRow(ShoppingListLayoutState layout, PlayerProgressState progress, MaterialPropertyCheck check) {
-            if (layout.ActiveRowCount >= layout.Rows.Length) { 
-                Debug.LogError("Contract needs more shoppinglist rows than setup in prefab!");
-                return false; 
-            }
-        
+        private static ShoppingListRow AllocRow(ShoppingListLayoutState layout) {
+            Assert.True(layout.ActiveRowCount < layout.Rows.Length, "Contract needs more shopping list rows than setup");
+
             ShoppingListRow row = layout.Rows[layout.ActiveRowCount++];
             row.gameObject.SetActive(true);
-
-            // Property chip: name + sprite bucket. Dynamic dopant labels get
-            // the comparison element appended ("N-TYPE DOPANT for <NAME>").
-            string label = MaterialPropertyLabelDisplay.GetPropertyName(check.Label);
-            ObservationType type = MaterialObservationChamberLookup.GetChamberType(check.Label);
-            row.SetProperty(label, type);
-
-            // Slot: first collected material whose confirmed record satisfies
-            // the requirement, rendered with that material's view sprite.
-            s_FulfillScratch.Clear();
-            ContractProgressUtility.FindFulfillingMaterials(progress, s_CollectedScratch, check, s_FulfillScratch);
-            row.SetSlot(s_FulfillScratch.Count > 0 ? ResolveMaterialIcon(s_FulfillScratch[0]) : null);
-            return s_FulfillScratch.Count > 0;
+            return row;
         }
 
-        /// <summary>
-        /// Configures a semiconductor shopping list row by displaying the required subtype labels
-        /// and finding a collected material that satisfies all checks.
-        /// Returns true if a fulfilling material is found; otherwise, returns false.
-        /// </summary>
-        private static bool SetSemiconductorRow(ShoppingListLayoutState layout, PlayerProgressState progress, MaterialPropertyCheck[] checks, int rowIndex) {
-            ShoppingListRow row = layout.Rows[rowIndex];
+        private static void SetLabelOffset(ShoppingListRow row, bool hasSubLabel) {
             RectTransform rect = row.MaterialLabel.rectTransform;
-            rect.anchoredPosition = new Vector2 (rect.anchoredPosition.x, -5f);
-            
-            StringBuilder subLabelBuilder = new();
-            for (int i = 0; i < checks.Length; i++) {
-                if (i > 0) {
-                    subLabelBuilder.Append(", ");
-                }
-                switch (checks[i].Label) {
-                    case MaterialPropertyLabel.HiTempConductor:
-                    case MaterialPropertyLabel.HiTempSemiConductor: {
-                        subLabelBuilder.Append("Hi-Temp");
-                        break;
-                    }
-                    case MaterialPropertyLabel.HighMobilitySemiconductor: {
-                        subLabelBuilder.Append("Hi-Mobility");
-                        break;
-                    }
-                    case MaterialPropertyLabel.HighVoltageSemiconductor: {
-                        subLabelBuilder.Append("Hi-Voltage");
-                        break;
-                    }
-                    case MaterialPropertyLabel.LightEmittingSemiconductor: {
-                        subLabelBuilder.Append("Light-Emitting");
-                        break;
-                    }
-                }
-            }
-            row.SecondaryLabel.text = subLabelBuilder.ToString();
-
-            // Slot: first collected material whose confirmed record satisfies
-            // the requirement, rendered with that material's view sprite.
-            s_FulfillScratch.Clear();
-            ContractProgressUtility.FindFulfillingMaterials(progress, s_CollectedScratch, checks, s_FulfillScratch);
-            row.SetSlot(s_FulfillScratch.Count > 0 ? ResolveMaterialIcon(s_FulfillScratch[0]) : null);
-            return s_FulfillScratch.Count > 0;
+            rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hasSubLabel ? -5f : 0f);
         }
+
+        // Add Conductor / Insulator / Semiconductor row
+        private static void AddPrimaryRow(ShoppingListLayoutState layout, ContractRequirementResolver.MaterialRow tableRow,
+            SupplyRequirementUtility.RowEval eval, ResearchObservationChipAssets chipAssets) {
+            ShoppingListRow row = AllocRow(layout);
+            if (row == null) {
+                return;
+            }
+
+            using (PooledStringBuilder labelBuilder = PooledStringBuilder.Create())
+            using (PooledStringBuilder subLabelBuilder = PooledStringBuilder.Create()) {
+                ContractRequirementResolver.GenerateLabel(tableRow.Properties, labelBuilder, subLabelBuilder,
+                    out MaterialPropertyLabel baseLabel, chipAssets, out Sprite _);
+
+                ObservationType type = MaterialObservationChamberLookup.GetChamberType(baseLabel);
+                row.SetProperty(labelBuilder.Builder.ToString(), type);
+                row.SecondaryLabel.text = subLabelBuilder.Builder.ToString();
+                SetLabelOffset(row, subLabelBuilder.Builder.Length > 0);
+            }
+
+            row.SetSlot(eval.PrimaryFound ? ResolveMaterialIcon(eval.Primary) : null);
+        }
+
+        // Add N / P dopant row
+        private static void AddDopantRow(ShoppingListLayoutState layout, MaterialPropertyLabel label, bool found, StringHash32 dopantId) {
+            ShoppingListRow row = AllocRow(layout);
+            if (row == null) {
+                return;
+            }
+
+            ObservationType type = MaterialObservationChamberLookup.GetChamberType(label);
+            row.SetProperty(MaterialPropertyLabelDisplay.GetPropertyName(label), type);
+            SetLabelOffset(row, false);
+
+            row.SetSlot(found ? ResolveMaterialIcon(dopantId) : null);
+        }
+        
+        // private static bool AddRow(ShoppingListLayoutState layout, PlayerProgressState progress, ContractState contractState, MaterialPropertyCheck check) {
+        //     if (layout.ActiveRowCount >= layout.Rows.Length) {
+        //         Debug.LogError("Contract needs more shoppinglist rows than setup in prefab!");
+        //         return false;
+        //     }
+
+        //     ShoppingListRow row = layout.Rows[layout.ActiveRowCount++];
+        //     row.gameObject.SetActive(true);
+
+        //     string label = MaterialPropertyLabelDisplay.GetPropertyName(check.Label);
+        //     ObservationType type = MaterialObservationChamberLookup.GetChamberType(check.Label);
+        //     row.SetProperty(label, type);
+
+        //     bool found;
+        //     StringHash32 materialId;
+        //     if (check.Label == MaterialPropertyLabel.NDopantFor || check.Label == MaterialPropertyLabel.PDopantFor) {
+        //         found = SupplyRequirementUtility.TryFindGatheredDopant(contractState.CachedRequirements,
+        //             progress.MaterialProperties, s_CollectedScratch, check.Label, out materialId);
+        //     } else {
+        //         ContractRequirementResolver.PropertyLabelList props = default;
+        //         props.Add(check.Label);
+        //         found = SupplyRequirementUtility.TryFindGatheredMaterial(contractState.CachedRequirements,
+        //             progress.MaterialProperties, s_CollectedScratch, props, out materialId);
+        //     }
+
+        //     row.SetSlot(found ? ResolveMaterialIcon(materialId) : null);
+        //     return found;
+        // }
 
         // Resolves a material id to its shopping-list slot sprite via the
         // material's ResearchMaterialView (same source Supply uses for node
