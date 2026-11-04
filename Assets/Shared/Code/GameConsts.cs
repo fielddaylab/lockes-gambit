@@ -34,6 +34,12 @@ namespace SpaceFab
         static public readonly StringHash32 CreditsEnterClicked = "credits:enter-clicked";
         static public readonly StringHash32 CreditsQuitClicked = "credits:quit-clicked";
 
+        // Settings
+        public static readonly StringHash32 SettingsOpenClicked = "settings:enter-clicked";
+        public static readonly StringHash32 SettingsCloseClicked = "settings:back-clicked";
+        public static readonly StringHash32 SettingsToggleFullScreen = "settings:toggle-fullscreen";
+        public static readonly StringHash32 SettingsSetVolume = "settings:set-volume";
+
         // Save
         public static readonly StringHash32 ProfileSaveBegin = "save:profile-save-begin";
         public static readonly StringHash32 ProfileSaveError = "save:profile-save-error";

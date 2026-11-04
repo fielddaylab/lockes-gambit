@@ -362,9 +362,14 @@ namespace SpaceFab.Logging
                 .Register<MinigameId>(GameEvents.StartMinigame, HandleMinigameStart)
                 .Register(GameEvents.OnMinigameExit, HandleMinigameExit);
 
+            // Settings
             SpacefabGame.Events
+                .Register(GameEvents.SettingsOpenClicked, LogOpenSettings)
+                .Register(GameEvents.SettingsCloseClicked, LogCloseSettings)
                 .Register(GameEvents.CreditsEnterClicked, LogStartCredits)
-                .Register(GameEvents.CreditsQuitClicked, LogQuitCredits);
+                .Register(GameEvents.CreditsQuitClicked, LogQuitCredits)
+                .Register<bool>(GameEvents.SettingsToggleFullScreen, LogToggleFullScreen)
+                .Register<(VolumeType, float)>(GameEvents.SettingsSetVolume, LogSetVolume);
 
             // Contrat
             SpacefabGame.Events
@@ -477,22 +482,29 @@ namespace SpaceFab.Logging
 
         private void LogOpenSettings()
         {
-
+            m_Log.NewEvent("open_settings");
         }
 
         private void LogCloseSettings()
         {
-
+            m_Log.NewEvent("close_settings");
         }
 
-        private void LogToggleFullScreen()
+        private void LogToggleFullScreen(bool toggle)
         {
-
+            using (var e = m_Log.NewEvent("toggle_fullscreen"))
+            {
+                e.Param("is_fullscreen", toggle);
+            }
         }
 
-        private void LogSetVolume()
+        private void LogSetVolume(VolumeType type, float vol)
         {
-
+            using (var e = m_Log.NewEvent("set_volume"))
+            {
+                e.Param("volume_type", type.ToString());
+                e.Param("volume_level", Mathf.RoundToInt(vol));
+            }
         }
 
 

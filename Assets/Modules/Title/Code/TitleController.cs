@@ -130,6 +130,7 @@ namespace SpaceFab.Title
         private void OnSettingsClick() {
             Game.Input.PauseAll();
             Routine.Start(this, ToSettings());
+            SpacefabGame.Events.Dispatch(GameEvents.SettingsOpenClicked);
         }
 
         private void OnCreditsClick() {
@@ -167,6 +168,7 @@ namespace SpaceFab.Title
         private void OnSettingsClickBack() {
             Game.Input.PauseAll();
             Routine.Start(this, BackToMain());
+            SpacefabGame.Events.Dispatch(GameEvents.SettingsCloseClicked);
         }
 
         private void OnTextUpdated(string text) {

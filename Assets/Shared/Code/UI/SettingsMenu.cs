@@ -5,6 +5,7 @@ using FieldDay.Components;
 using FieldDay.Rendering;
 using TMPro;
 using UnityEngine.UI;
+using static SpaceFab.Logging.Logging;
 
 namespace SpaceFab
 {
@@ -37,8 +38,8 @@ namespace SpaceFab
             FullscreenToggle.onValueChanged.AddListener(UpdateFullscreen);
 
             VolumeSlider.onValueChanged.AddListener(UpdateVolume);
-            MusicSlider.onValueChanged.AddListener((float vol) => UpdateBusVolume(SettingsUtility.MUSIC_BUS_ID, vol));
-            SFXSlider.onValueChanged.AddListener((float vol) => UpdateBusVolume(SettingsUtility.SFX_BUS_ID, vol));
+            MusicSlider.onValueChanged.AddListener((float vol) => UpdateBusVolume(SettingsUtility.MUSIC_BUS_ID, VolumeType.MUSIC, vol));
+            SFXSlider.onValueChanged.AddListener((float vol) => UpdateBusVolume(SettingsUtility.SFX_BUS_ID, VolumeType.SFX, vol));
             InitializeVolumeSettings();
         }
 
@@ -53,16 +54,19 @@ namespace SpaceFab
         static private void UpdateFullscreen(bool toggle)
         {
             SettingsUtility.SetFullscreen(Find.State<UserSettingsState>(), toggle);
+            SpacefabGame.Events.Dispatch(GameEvents.SettingsToggleFullScreen, toggle);
         }
 
         static private void UpdateVolume(float volume)
         {
             SettingsUtility.SetMasterVolume(Find.State<UserSettingsState>(), volume / 10);
+            SpacefabGame.Events.Dispatch(GameEvents.SettingsSetVolume, EvtArgs.Box((VolumeType.MASTER, volume / 10)));
         }
 
-        static private void UpdateBusVolume(StringHash32 bus, float volume)
+        static private void UpdateBusVolume(StringHash32 bus, VolumeType type, float volume)
         {
             SettingsUtility.SetAudioBusVolume(Find.State<UserSettingsState>(), bus, volume / 10);
+            SpacefabGame.Events.Dispatch(GameEvents.SettingsSetVolume, EvtArgs.Box((type, volume / 10)));
         }
 
         private void OnFullscreenUpdated(bool fullscreen)
