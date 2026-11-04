@@ -23,6 +23,8 @@ namespace SpaceFab.Comic {
 
         [NonSerialized] public bool QueuedCredits;
 
+        [NonSerialized] private bool m_Started;
+
         protected override IEnumerator<WorkSlicer.Result?> OnScenePreload() {
             Game.Scenes.GetLoadContext(this, out SceneRequestContext context);
             StringHash32 name = StringHash32.First(context.Task.Name, Game.IsDevBuild ? DEBUG_FallbackManifest : default);
@@ -73,6 +75,10 @@ namespace SpaceFab.Comic {
                 using (var table = TempVarTable.Alloc()) {
                     table.Set("comicId", ComicId);
                     ThreadHandle = ScriptUtility.Trigger("ComicExecute", table);
+
+                    m_Started = true;
+                    SpacefabGame.Events.Dispatch(GameEvents.CutsceneStart, ComicsUtility.GetSceneId(PackageId));
+
                     if (!ThreadHandle.IsRunning()) {
                         QueueFinish();
                     }
@@ -90,6 +96,11 @@ namespace SpaceFab.Comic {
 
         private void QueueFinish() {
             GameLoop.QueuePreUpdate(Finish);
+            if (m_Started)
+            {
+                m_Started = false;
+                SpacefabGame.Events.Dispatch(GameEvents.CutsceneComplete, ComicsUtility.GetSceneId(PackageId));
+            }
         }
 
         private void Finish() {

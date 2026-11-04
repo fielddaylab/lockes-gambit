@@ -369,7 +369,14 @@ namespace SpaceFab.Logging
                 .Register(GameEvents.CreditsEnterClicked, LogStartCredits)
                 .Register(GameEvents.CreditsQuitClicked, LogQuitCredits)
                 .Register<bool>(GameEvents.SettingsToggleFullScreen, LogToggleFullScreen)
-                .Register<(VolumeType, float)>(GameEvents.SettingsSetVolume, LogSetVolume);
+                .Register<(VolumeType, float)>(GameEvents.SettingsSetVolume, (data) => LogSetVolume(data.Item1, data.Item2));
+
+            // Cutscene
+            SpacefabGame.Events
+                .Register<int>(GameEvents.CutsceneStart, LogCutsceneStarted)
+                .Register<int>(GameEvents.CutsceneComplete, LogCutsceneCompleted)
+                .Register<(int, int)>(GameEvents.CutsceneClickedNext, (data) => LogClickCutsceneNext(data.Item1, data.Item2))
+                .Register<(int, int)>(GameEvents.CutsceneAdvance, (data) => LogCutsceneAdvanced(data.Item1, data.Item2));
 
             // Contrat
             SpacefabGame.Events
@@ -457,6 +464,8 @@ namespace SpaceFab.Logging
             }
         }
 
+        #region Title
+
         private void LogClickNewGame()
         {
             m_Log.NewEvent("click_new_game");
@@ -507,8 +516,47 @@ namespace SpaceFab.Logging
             }
         }
 
+        #endregion // Title
 
-        # region Overarching
+        #region Cutscene
+
+        private void LogCutsceneStarted(int SceneId)
+        {
+            using (var e = m_Log.NewEvent("cutscene_started"))
+            {
+                e.Param("scene_id", SceneId);
+            }
+        }
+
+        private void LogCutsceneCompleted(int SceneId)
+        {
+            using (var e = m_Log.NewEvent("cutscene_completed"))
+            {
+                e.Param("scene_id", SceneId);
+            }   
+        }
+
+        private void LogClickCutsceneNext(int SceneId, int PanelId)
+        {
+            using (var e = m_Log.NewEvent("click_cutscene_next"))
+            {
+                e.Param("scene_id", SceneId);
+                e.Param("panel_id", PanelId);
+            }
+        }
+
+        private void LogCutsceneAdvanced(int SceneId, int PanelId)
+        {
+            using(var e = m_Log.NewEvent("cutscene_advanced"))
+            {
+                e.Param("scene_id", SceneId);
+                e.Param("panel_id", PanelId);
+            }
+        }
+
+        #endregion // Cutscene
+
+        #region Overarching
 
         private void LogShipMenuDisplayed()
         {

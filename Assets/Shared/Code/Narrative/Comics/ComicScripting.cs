@@ -116,6 +116,11 @@ namespace SpaceFab.Comic {
             PanelData panel = ComicsUtility.Manifest.Panels[displayState.CurrentPanelIndex];
             Assert.True(index >= 0 && index < panel.Layers.Length, "Index out of range");
             UniqueId16 request = ComicResourceUtility.QueueElementSpawn((ushort) (panel.Layers.Offset + index), false, animation);
+            
+            if (index == 0)
+            {
+                SpacefabGame.Events.Dispatch(GameEvents.CutsceneAdvance, EvtArgs.Create((ComicsUtility.CurrentSceneId(), ComicsUtility.CurrentPanelIndex())));
+            }
             return WaitTokens.WhileIdAllocated(request, Find.State<ComicLayoutState>().SpawnIdAllocator);
         }
 

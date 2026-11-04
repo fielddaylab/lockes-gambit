@@ -60,13 +60,13 @@ namespace SpaceFab
         static private void UpdateVolume(float volume)
         {
             SettingsUtility.SetMasterVolume(Find.State<UserSettingsState>(), volume / 10);
-            SpacefabGame.Events.Dispatch(GameEvents.SettingsSetVolume, EvtArgs.Box((VolumeType.MASTER, volume / 10)));
+            SpacefabGame.Events.Dispatch(GameEvents.SettingsSetVolume, EvtArgs.Create((VolumeType.MASTER, volume / 10)));
         }
 
         static private void UpdateBusVolume(StringHash32 bus, VolumeType type, float volume)
         {
             SettingsUtility.SetAudioBusVolume(Find.State<UserSettingsState>(), bus, volume / 10);
-            SpacefabGame.Events.Dispatch(GameEvents.SettingsSetVolume, EvtArgs.Box((type, volume / 10)));
+            SpacefabGame.Events.Dispatch(GameEvents.SettingsSetVolume, EvtArgs.Create((type, volume / 10)));
         }
 
         private void OnFullscreenUpdated(bool fullscreen)

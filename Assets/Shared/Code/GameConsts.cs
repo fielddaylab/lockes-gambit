@@ -40,6 +40,12 @@ namespace SpaceFab
         public static readonly StringHash32 SettingsToggleFullScreen = "settings:toggle-fullscreen";
         public static readonly StringHash32 SettingsSetVolume = "settings:set-volume";
 
+        // Cutscene
+        public static readonly StringHash32 CutsceneStart = "cutscene:start";
+        public static readonly StringHash32 CutsceneComplete = "cutscene:complete";
+        public static readonly StringHash32 CutsceneClickedNext = "cutscene:clicked-next";
+        public static readonly StringHash32 CutsceneAdvance = "cutscene:advance";
+
         // Save
         public static readonly StringHash32 ProfileSaveBegin = "save:profile-save-begin";
         public static readonly StringHash32 ProfileSaveError = "save:profile-save-error";

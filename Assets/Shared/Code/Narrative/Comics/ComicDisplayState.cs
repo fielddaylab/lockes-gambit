@@ -1,4 +1,5 @@
 using BeauRoutine;
+using BeauUtil;
 using BeauUtil.Debugger;
 using BeauUtil.UI;
 using FieldDay;
@@ -95,7 +96,43 @@ namespace SpaceFab.Comic
             while(!ScriptUtility.IsSkippingCutscene() && !displayState.NextButton.ConsumeClick()) {
                 yield return null;
             }
+            if (!ScriptUtility.IsSkippingCutscene())
+            {
+                SpacefabGame.Events.Dispatch(GameEvents.CutsceneClickedNext, EvtArgs.Create((CurrentSceneId(), CurrentPanelIndex())));
+            }
             GuiCommands.SetActive(displayState.NextButtonGroup, false);
+        }
+
+        static private List<StringHash32> s_ComicSceneOrder;
+
+        static public int GetSceneId(StringHash32 packageId)
+        {
+            if (s_ComicSceneOrder == null)
+            {
+                Find.GlobalAsset(out ChapterManifest manifest);
+                s_ComicSceneOrder = new List<StringHash32>();
+                foreach (var data in manifest.ResidentData)
+                {
+                    if (!data.ComicPackage.IsEmpty && !s_ComicSceneOrder.Contains(data.ComicPackage))
+                        s_ComicSceneOrder.Add(data.ComicPackage);
+                }
+                if (!manifest.EpilogueComicPackage.IsEmpty && !s_ComicSceneOrder.Contains(manifest.EpilogueComicPackage))
+                    s_ComicSceneOrder.Add(manifest.EpilogueComicPackage);
+            }
+            return s_ComicSceneOrder.IndexOf(packageId);
+        }
+
+        static public int CurrentSceneId()
+        {
+            ComicLoader loader = Find.Any<ComicLoader>();
+            return loader ? GetSceneId(loader.PackageId) : -1;
+        }
+
+        static public int CurrentPanelIndex()
+        {
+            Find.State(out ComicDisplayState displayState);
+            if (displayState.CurrentPageIndex < 0 || displayState.CurrentPanelIndex < 0) return -1;
+            return displayState.CurrentPanelIndex - Manifest.Pages[displayState.CurrentPageIndex].Panels.Offset;
         }
     }
 }
