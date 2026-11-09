@@ -58,6 +58,8 @@ namespace SpaceFab.Supply
                 }
 
                 SupplyRouteUtility.InitializeTooltipReferences(node);
+                Find.State(out PlayerProgressState progressState, out ChapterState chapterState);
+                SupplyRouteUtility.RefreshNodeTooltip(node, progressState, chapterState.ChapterDefinition);
                 node.gameObject.SetActive(false);
                 yield return null;
             }

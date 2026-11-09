@@ -121,6 +121,25 @@ namespace SpaceFab.Supply {
             }
         }
 
+        static public void RefreshNodeTooltip(SupplyRouteNode node, PlayerProgressState progressState, ChapterDef chapterDef) {
+            if (node.InfoPopup == null || node.InfoPopup.Cursor == null) { return; }
+            if (node.Type != SupplyRouteNodeType.Producer) { return; }
+
+            CursorHint materialHint = node.InfoPopup.Cursor;
+            bool researched = progressState.MaterialProperties.ContainsKey(node.MaterialType);
+            bool researchable = false;
+            foreach (StringHash32 id in chapterDef.AvailableMaterials) {
+                if (id == node.MaterialType) {
+                    researchable = true;
+                }
+            }
+
+            if (!researched && researchable) {
+                materialHint.TooltipHeader = "UNKNOWN MATERIAL";
+                materialHint.MarkDirty();
+            }
+        }
+
         static public void AddNodeHoverFlag(SupplyRouteNode node, SupplyHoverFlags flags) {
             bool wasHovering = node.Hover != 0;
             if ((node.Hover & flags) != flags) {
