@@ -29,6 +29,7 @@ namespace SpaceFab.Supply {
         // Reused scratch buffers — single-threaded ECS, so static reuse
         // avoids per-rebuild allocation.
         private static readonly HashSet<StringHash32> s_CollectedScratch = new HashSet<StringHash32>();
+        private static readonly HashSet<StringHash32> s_ReservedScratch = new HashSet<StringHash32>();
         //private static readonly List<StringHash32> s_FulfillScratch = new List<StringHash32>(4);
 
         // Frees any prior rows, then builds one row per requirement in the
@@ -55,6 +56,9 @@ namespace SpaceFab.Supply {
 
             // 3. Gather the material ids the player has collected across all finalized routes.
             GatherCollectedMaterials(s_CollectedScratch, routes);
+            SupplyRequirementUtility.FindReservedDopants(contractState.CachedRequirements,
+                progressState.MaterialProperties, s_CollectedScratch, s_ReservedScratch);
+
 
             // 4. Evaluate each table row and add row to shopping list.
             bool omitInsulator = SupplyRequirementUtility.IsInsulatorOmitted(contract);
@@ -70,7 +74,7 @@ namespace SpaceFab.Supply {
                     continue;
                 }
 
-                SupplyRequirementUtility.RowEval eval = SupplyRequirementUtility.EvaluateRow(table, progressState.MaterialProperties, tableRow, s_CollectedScratch);
+                SupplyRequirementUtility.RowEval eval = SupplyRequirementUtility.EvaluateRow(table, progressState.MaterialProperties, tableRow, s_CollectedScratch, s_ReservedScratch);
 
                 AddPrimaryRow(layout, tableRow, eval, chipAssets);
                 totalChecks++;

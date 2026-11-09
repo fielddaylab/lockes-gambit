@@ -25,15 +25,16 @@ namespace SpaceFab.Supply {
             Pending,
             Unidentified, // No properties found
             MissingSemiconductor, // No semiconductor has been collected.
-            DopantMismatch,  // A semiconductor is collected, but the dopant doesn't match.
+            DopantMismatch,  // Semiconductor collected, but dopant context doesn't match.
             Duplicate,
-            NeedsResearch, // The material can fulfill the property, but the property hasn't been confirmed.
+            NeedsResearch, // Material can fulfill the requirement, but property not confirmed.
             NotRequired
         }
 
         private static readonly HashSet<StringHash32> s_GatheredScratch = new HashSet<StringHash32>();
         private static readonly HashSet<StringHash32> s_OtherScratch = new HashSet<StringHash32>();
-        private static readonly List<StringHash32> s_SemiScratch = new List<StringHash32>(4);
+        private static readonly HashSet<StringHash32> s_ReservedScratch = new HashSet<StringHash32>();
+        
 
         void IRegistrationCallbacks.OnRegister() {
             SpacefabGame.Events.Register<SupplyRouteEventArgs>(GameEvents.SupplyRouteDrawingClose, OnRouteEnded);
@@ -68,7 +69,6 @@ namespace SpaceFab.Supply {
 
             GatherMaterials(s_OtherScratch, routes, evtArgs, false);
             GatherMaterials(s_GatheredScratch, routes, evtArgs, true);
-            SupplyRequirementUtility.FindGatheredSemiconductors(table, records, s_GatheredScratch, s_SemiScratch);
 
             int count = evtArgs.Stats.MaterialCount;
             uint[] hashes = new uint[count];
@@ -86,18 +86,29 @@ namespace SpaceFab.Supply {
                     continue;
                 }
 
-                SupplyRequirementUtility.DopantIssue issue = SupplyRequirementUtility.Diagnose(table, ids[i], record, s_SemiScratch);
-                if (issue == SupplyRequirementUtility.DopantIssue.MissingSemiconductor) {
-                    reasons[i] = SupplyErrorType.MissingSemiconductor;
-                } else if (issue == SupplyRequirementUtility.DopantIssue.Mismatch) {
-                    reasons[i] = SupplyErrorType.DopantMismatch;
-                } else {
-                    reasons[i] = SupplyErrorType.Pending;
+                SupplyRequirementUtility.DopantRole role = SupplyRequirementUtility.ClassifyDopant(
+                    table, records, omitInsulator, s_GatheredScratch, ids[i], record);
+
+                switch (role) {
+                    case SupplyRequirementUtility.DopantRole.MissingSemiconductor:
+                        reasons[i] = SupplyErrorType.MissingSemiconductor;
+                        break;
+                    case SupplyRequirementUtility.DopantRole.Mismatch:
+                        reasons[i] = SupplyErrorType.DopantMismatch;
+                        break;
+                    case SupplyRequirementUtility.DopantRole.NeedsResearch:
+                        reasons[i] = SupplyErrorType.NeedsResearch;
+                        break;
+                    default:
+                        reasons[i] = SupplyErrorType.Pending;
+                        break;
                 }
             }
 
             // Pass 2: Duplicate, Needs research, Not required
-            int baseline = SupplyRequirementUtility.CountSatisfied(table, records, omitInsulator, s_GatheredScratch);
+            SupplyRequirementUtility.FindReservedDopants(table, records, s_GatheredScratch, s_ReservedScratch);
+            int baseline = SupplyRequirementUtility.CountSatisfied(table, records, omitInsulator, s_GatheredScratch, s_ReservedScratch);
+            
             for (int i = count - 1; i >= 0; i--) {
                 if (reasons[i] != SupplyErrorType.Pending) {
                     continue;
@@ -109,7 +120,7 @@ namespace SpaceFab.Supply {
 
                 if (!repeated) {
                     s_GatheredScratch.Remove(id);
-                    needed = SupplyRequirementUtility.CountSatisfied(table, records, omitInsulator, s_GatheredScratch) < baseline;
+                    needed = SupplyRequirementUtility.CountSatisfied(table, records, omitInsulator, s_GatheredScratch, s_ReservedScratch) < baseline;
                     if (needed) {
                         s_GatheredScratch.Add(id);
                     }
@@ -119,6 +130,9 @@ namespace SpaceFab.Supply {
                     reasons[i] = SupplyErrorType.None;
                 } else if (SupplyRequirementUtility.IsCandidate(table, records, omitInsulator, id)) {
                     reasons[i] = SupplyErrorType.Duplicate;
+                }
+                else if (SupplyRequirementUtility.IsRowFilledByOther(table, records, omitInsulator, s_GatheredScratch, s_ReservedScratch, id)) {
+                    reasons[i] = SupplyErrorType.NotRequired;
                 } else if (SupplyRequirementUtility.IsInTable(table, omitInsulator, id)) {
                     reasons[i] = SupplyErrorType.NeedsResearch;
                 } else {
