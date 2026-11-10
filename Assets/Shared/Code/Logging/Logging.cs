@@ -15,6 +15,7 @@ using System.Linq;
 using SpaceFab.Design;
 using Debug = UnityEngine.Debug;
 using SpaceFab.Overarching;
+using System.Security;
 
 
 namespace SpaceFab.Logging
@@ -556,6 +557,39 @@ namespace SpaceFab.Logging
         }
 
         #endregion // Cutscene
+
+        #region Dialog
+
+        private void LogDialogStarted()
+        {
+            m_Log.NewEvent("dialog_started");
+        }
+
+        private void LogDialogCompleted()
+        {
+            m_Log.NewEvent("dialog_completed");
+        }
+
+        private void LogDialogLineDisplayed(string name, string content, string tutorialHighlight = null)
+        {
+            using (var e = m_Log.NewEvent("dialog_line_displayed"))
+            {
+                e.Param("character_name", name);
+                e.Param("text_content", content);
+                if (tutorialHighlight != null) e.Param("tutorial_highlight", tutorialHighlight);
+                else e.Null("tutorial_highlight");
+            }
+        }
+
+        private void LogClickAdvanceDialog(string name)
+        {
+            using(var e = m_Log.NewEvent("click_advance_dialog"))
+            {
+                e.Param("character_name", name);
+            }
+        }
+
+        #endregion // Dialog
 
         #region Overarching
 

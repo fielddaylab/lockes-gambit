@@ -76,6 +76,7 @@ namespace SpaceFab.Narrative {
             }
 
             m_Typewriter.Prepare(m_Contents, this, text, textData);
+            SpacefabGame.Events.Dispatch(GameEvents.DialogLineDisplayed, EvtArgs.Box((character.OverrideName, text.ToString())));
             yield return m_Typewriter;
         }
 

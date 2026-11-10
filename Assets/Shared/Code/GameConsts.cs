@@ -46,6 +46,12 @@ namespace SpaceFab
         public static readonly StringHash32 CutsceneClickedNext = "cutscene:clicked-next";
         public static readonly StringHash32 CutsceneAdvance = "cutscene:advance";
 
+        // Dialog
+        public static readonly StringHash32 DialogStarted = "dialog:started";
+        public static readonly StringHash32 DialogCompleted = "dialog:completed";
+        public static readonly StringHash32 DialogLineDisplayed = "dialog:line-displayed";
+        public static readonly StringHash32 DialogClickAdvance = "dialog:click-advance";
+
         // Save
         public static readonly StringHash32 ProfileSaveBegin = "save:profile-save-begin";
         public static readonly StringHash32 ProfileSaveError = "save:profile-save-error";

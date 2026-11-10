@@ -113,6 +113,11 @@ namespace SpaceFab.Onboarding {
             }
         }
 
+        public static List<string>? GetActiveHighlight()
+        {
+            return null;
+        }
+
         // ---- Focus lock helpers ----
 
         // Park the target hierarchy on the TutorialFocus layer and, on the first lock,

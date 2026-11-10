@@ -113,6 +113,7 @@ namespace SpaceFab.Narrative {
         protected override IEnumerator AnimateToOn() {
             // TODO: Handle partially offscreen
             m_IsVisible = true;
+            SpacefabGame.Events.Dispatch(GameEvents.DialogStarted);
 
             m_VisiblityGroup.blocksRaycasts = false;
 
@@ -146,6 +147,7 @@ namespace SpaceFab.Narrative {
 
         protected override IEnumerator AnimateToOff() {
             m_IsVisible = false;
+            SpacefabGame.Events.Dispatch(GameEvents.DialogCompleted);
 
             m_VisiblityGroup.blocksRaycasts = false;
             m_InputLayer.TryPopPriority();
