@@ -91,6 +91,7 @@ namespace SpaceFab.Fabrication.Sequence
             if (step.IsCheckpoint)
                 CaptureCheckpoint(sequenceState, waferState, timeState, movementState, justCompleted);
 
+            WaferDisplayUtility.UpdateWaferDisplay(visualsState.WaferDisplay, step);
             sequenceState.CurrentStepIndex++;
 
             if (sequenceState.CurrentStepIndex >= sequenceState.Level.Sequence.Steps.Length) {

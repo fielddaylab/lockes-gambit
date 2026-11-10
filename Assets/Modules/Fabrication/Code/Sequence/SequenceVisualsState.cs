@@ -29,6 +29,8 @@ namespace SpaceFab.Fabrication.Sequence
 
         public CanvasGroup PanelCanvasGroup;
 
+        public WaferDisplay WaferDisplay;
+
         // Layer progress panel (one row per layer). Rebuilt on reset, updated on advance/completion.
         public LayerInstructionPanel LayerInstructionPanel;
         public SequenceCard CardSlotA;
