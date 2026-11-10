@@ -19,5 +19,8 @@ namespace SpaceFab.Supply {
         public GuiCounter Cost;
         public GuiCounter Time;
         public GuiCounter Risk;
+        public TMP_Text CostText;
+        public TMP_Text TimeText;
+        public TMP_Text RiskText;
     }
 }

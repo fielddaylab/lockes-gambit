@@ -49,10 +49,6 @@ MonoBehaviour:
     Position: {x: -4.45, y: -1.24}
   - Name:
       m_Source: 
-      m_HashValue: 91235012
-    Position: {x: -0.39, y: 5.71}
-  - Name:
-      m_Source: 
       m_HashValue: 3801165340
     Position: {x: -5.23, y: 3.41}
   - Name:

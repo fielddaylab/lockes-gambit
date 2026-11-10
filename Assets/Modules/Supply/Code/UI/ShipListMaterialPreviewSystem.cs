@@ -8,6 +8,7 @@ using FieldDay.UI.Widgets;
 using SpaceFab.Materials;
 using SpaceFab.Research;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,9 +47,12 @@ namespace SpaceFab.Supply {
 
                 routeStats.Time = Math.Min(routeStats.Time, SupplyRouteStats.MaxTime);
 
-                row.StatsLayer.Cost.SetValue(routeStats.Cost);
-                row.StatsLayer.Time.SetValue(routeStats.Time);
-                row.StatsLayer.Risk.SetValue(routeStats.Risk);
+                // row.StatsLayer.Cost.SetValue(routeStats.Cost);
+                // row.StatsLayer.Time.SetValue(routeStats.Time);
+                // row.StatsLayer.Risk.SetValue(routeStats.Risk);
+                SetStatsCounter(row.StatsLayer.Cost, row.StatsLayer.CostText, routeStats.Cost);
+                SetStatsCounter(row.StatsLayer.Time, row.StatsLayer.TimeText, routeStats.Time);
+                SetStatsCounter(row.StatsLayer.Risk, row.StatsLayer.RiskText, routeStats.Risk);
             }
 
             if (draw.RouteIndex >= 0 && draw.PreviewDirty) {
@@ -88,9 +92,25 @@ namespace SpaceFab.Supply {
 
                 previewStats.Time = Math.Min(previewStats.Time, SupplyRouteStats.MaxTime);
 
-                row.StatsLayer.Cost.SetValue(previewStats.Cost);
-                row.StatsLayer.Time.SetValue(previewStats.Time);
-                row.StatsLayer.Risk.SetValue(previewStats.Risk);
+                // row.StatsLayer.Cost.SetValue(previewStats.Cost);
+                // row.StatsLayer.Time.SetValue(previewStats.Time);
+                // row.StatsLayer.Risk.SetValue(previewStats.Risk);
+                SetStatsCounter(row.StatsLayer.Cost, row.StatsLayer.CostText, previewStats.Cost);
+                SetStatsCounter(row.StatsLayer.Time, row.StatsLayer.TimeText, previewStats.Time);
+                SetStatsCounter(row.StatsLayer.Risk, row.StatsLayer.RiskText, previewStats.Risk);
+            }
+        }
+
+        private static void SetStatsCounter(GuiCounter counter, TMP_Text counterText, int value)
+        {
+            if (counter.MaxValue < value) {
+                counter.SetValue(1);
+                if (counterText == null) return;
+                counterText.SetText("x{0}", value);
+                counterText.enabled = true;
+            } else {
+                counter.SetValue(value);
+                if (counterText != null) counterText.enabled = false;
             }
         }
     }

@@ -224,12 +224,13 @@ namespace SpaceFab.Supply {
                         for(int i = 0; i < materialCount; i++) {
                             if (materials[i] == node.ConversionInputType) {
                                 materials[i] = node.MaterialType;
+                                cost += node.Cost;
+                                risk += node.Risk;
+                                maxNodeTime = Math.Max(maxNodeTime, node.Time);
+                                converted = true;
+                                converterIndices.Unset(bit);
+                                break;
                             }
-                            cost += node.Cost;
-                            risk += node.Risk;
-                            maxNodeTime = Math.Max(maxNodeTime, node.Time);
-                            converted = true;
-                            converterIndices.Unset(bit);
                         }
                     }
                 } while (converted && !converterIndices.IsEmpty);
