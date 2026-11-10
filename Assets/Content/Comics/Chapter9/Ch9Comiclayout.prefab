@@ -4611,7 +4611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[0]
-      value: e00487ca93b2cdb9a2bf5dd372e8a8bd
+      value: 851ffbe30bf35bbc27af764aec6be77c
       objectReference: {fileID: 0}
     - target: {fileID: 7187921100395212401, guid: d2982777c8102c148b7a490afc74929c, type: 3}
       propertyPath: m_ExportHashes.LastExportSpriteTextureHashes.Array.data[1]
