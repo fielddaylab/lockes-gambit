@@ -209,6 +209,7 @@ namespace SpaceFab.Logging
         private void UpdateContractId(string contract)
         {
             m_CurrentContract = contract;
+            SubmitGameState();
         }
 
         private void UpdateDesignGridState(Vector2Int gridPos, string tool)
@@ -581,21 +582,25 @@ namespace SpaceFab.Logging
          */
         {
             m_CurrentContract = contractId;
-            if (!m_ContractLevels.ContainsKey(contractId))
+
+            // Level counts are defined per contract in its ContractAssetSet
+            // (loaded by the time AcceptContract is dispatched).
+            Find.State(out ContractState contractState);
+            ContractAssetSet assets = contractState.ContractAssets;
+            m_ContractLevels[contractId] = new Dictionary<Minigame, int>()
             {
-                m_ContractLevels[contractId] = new Dictionary<Minigame, int>();
-            }
+                { Minigame.RESEARCH, 1 },
+                { Minigame.DESIGN, assets != null && assets.DesignLevels != null ? assets.DesignLevels.Length : 0 },
+                { Minigame.SUPPLY_CHAIN, 1 },
+                { Minigame.FABRICATION, assets != null && assets.FabricationLevel != null ? 1 : 0 },
+            };
             SubmitGameState();
 
+            m_JsonBuilder.Clear();
             m_JsonBuilder.Begin();
-            foreach (var kvp in m_ContractLevels)
+            foreach (var minigameKvp in m_ContractLevels[contractId])
             {
-                m_JsonBuilder.BeginObject(kvp.Key); // key: minigame
-                foreach (var minigameKvp in kvp.Value)
-                {
-                    m_JsonBuilder.Field(minigameKvp.Key.ToString(), minigameKvp.Value); // value: number of levels
-                }
-                m_JsonBuilder.EndObject();
+                m_JsonBuilder.Field(minigameKvp.Key.ToString(), minigameKvp.Value); // value: number of levels
             }
             string levelsJson = m_JsonBuilder.End().ToString();
 
@@ -953,7 +958,7 @@ namespace SpaceFab.Logging
 
         #endregion // Supply Chain
 
- #region Fabrication
+        #region Fabrication
 
         private void LogSelectFabrication()
         {

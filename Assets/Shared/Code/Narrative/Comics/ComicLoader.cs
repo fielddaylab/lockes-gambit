@@ -77,7 +77,8 @@ namespace SpaceFab.Comic {
                     ThreadHandle = ScriptUtility.Trigger("ComicExecute", table);
 
                     m_Started = true;
-                    SpacefabGame.Events.Dispatch(GameEvents.CutsceneStart, ComicsUtility.GetSceneId(PackageId));
+                    Find.State(out ComicDisplayState displayState);
+                    SpacefabGame.Events.Dispatch(GameEvents.CutsceneStart, displayState.CurrentPageIndex);
 
                     if (!ThreadHandle.IsRunning()) {
                         QueueFinish();
@@ -99,7 +100,8 @@ namespace SpaceFab.Comic {
             if (m_Started)
             {
                 m_Started = false;
-                SpacefabGame.Events.Dispatch(GameEvents.CutsceneComplete, ComicsUtility.GetSceneId(PackageId));
+                Find.State(out ComicDisplayState displayState);
+                SpacefabGame.Events.Dispatch(GameEvents.CutsceneComplete, displayState.CurrentPageIndex);
             }
         }
 

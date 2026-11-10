@@ -119,7 +119,7 @@ namespace SpaceFab.Comic {
             
             if (index == 0)
             {
-                SpacefabGame.Events.Dispatch(GameEvents.CutsceneAdvance, EvtArgs.Create((ComicsUtility.CurrentSceneId(), ComicsUtility.CurrentPanelIndex())));
+                SpacefabGame.Events.Dispatch(GameEvents.CutsceneAdvance, EvtArgs.Create((displayState.CurrentPageIndex, ComicsUtility.CurrentPanelIndex())));
             }
             return WaitTokens.WhileIdAllocated(request, Find.State<ComicLayoutState>().SpawnIdAllocator);
         }

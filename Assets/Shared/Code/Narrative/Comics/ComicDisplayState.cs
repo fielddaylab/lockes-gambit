@@ -98,7 +98,7 @@ namespace SpaceFab.Comic
             }
             if (!ScriptUtility.IsSkippingCutscene())
             {
-                SpacefabGame.Events.Dispatch(GameEvents.CutsceneClickedNext, EvtArgs.Create((CurrentSceneId(), CurrentPanelIndex())));
+                SpacefabGame.Events.Dispatch(GameEvents.CutsceneClickedNext, EvtArgs.Create((displayState.CurrentPageIndex, CurrentPanelIndex())));
             }
             GuiCommands.SetActive(displayState.NextButtonGroup, false);
         }
@@ -124,8 +124,8 @@ namespace SpaceFab.Comic
 
         static public int CurrentSceneId()
         {
-            ComicLoader loader = Find.Any<ComicLoader>();
-            return loader ? GetSceneId(loader.PackageId) : -1;
+            Find.State(out ComicDisplayState displayState);
+            return Math.Max(0, displayState.CurrentPageIndex);
         }
 
         static public int CurrentPanelIndex()

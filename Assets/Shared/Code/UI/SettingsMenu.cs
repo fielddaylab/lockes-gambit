@@ -36,6 +36,7 @@ namespace SpaceFab
             FullscreenToggle.SetIsOnWithoutNotify(ScreenUtility.GetFullscreen());
             UpdateFullscreen(FullscreenToggle.isOn);
             FullscreenToggle.onValueChanged.AddListener(UpdateFullscreen);
+            FullscreenToggle.onValueChanged.AddListener((bool toggle) => SpacefabGame.Events.Dispatch(GameEvents.SettingsToggleFullScreen, toggle));
 
             VolumeSlider.onValueChanged.AddListener(UpdateVolume);
             MusicSlider.onValueChanged.AddListener((float vol) => UpdateBusVolume(SettingsUtility.MUSIC_BUS_ID, VolumeType.MUSIC, vol));
@@ -54,7 +55,6 @@ namespace SpaceFab
         static private void UpdateFullscreen(bool toggle)
         {
             SettingsUtility.SetFullscreen(Find.State<UserSettingsState>(), toggle);
-            SpacefabGame.Events.Dispatch(GameEvents.SettingsToggleFullScreen, toggle);
         }
 
         static private void UpdateVolume(float volume)
