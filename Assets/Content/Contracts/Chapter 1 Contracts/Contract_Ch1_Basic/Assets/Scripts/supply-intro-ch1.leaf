@@ -22,7 +22,7 @@ $if     !temp:wikiOpened
     $call   OpenWikiTo("Materials", "Copper")
     $set    temp:wikiOpened = true
 $else
-    {@PAL}  Select a segment to <color=red>DELETE</color> and build a new route.
+    {@PAL}  Select a planet to <color=yellow>BUILD</yellow> a route, or select a segment to <color=red>DELETE</color>.
 $endif
 
 
