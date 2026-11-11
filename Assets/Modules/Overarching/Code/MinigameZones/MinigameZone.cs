@@ -79,6 +79,7 @@ namespace SpaceFab.Overarching
     public static partial class MinigameZonesUtility
     {
         public static void OnClick(MinigameZone zone) {
+            spacefabGame.Events.Dispatch(GameEvents.SelectMinigame, EvtArgs.Create(zone.Minigame));
             Find.State<MinigameZonesState>().QueuedZone = zone;
         }
 

@@ -91,7 +91,7 @@ namespace SpaceFab
                 // so the re-import lands on the next first-unsolved level.
                 Game.Scenes.LoadMainScene(reloadTarget, true);
             } else {
-                Game.Events.Dispatch(GameEvents.OnMinigameExit);
+                SpacefabGame.Events.Dispatch(GameEvents.OnMinigameExit, EvtArgs.Create(interfacer.Id));
                 Game.Scenes.LoadMainScene(globalSceneConfig.ReturnScene);
             }
 

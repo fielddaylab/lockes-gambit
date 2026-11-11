@@ -131,7 +131,7 @@ namespace SpaceFab.Logging
         [SerializeField] private FirebaseConsts m_Firebase;
         [SerializeField] private bool m_Testing;
 
-        [NonSerialized] private float m_SecondsFromLaunch;
+        [NonSerialized] private float m_LaunchTime;
         [NonSerialized] private string m_CurrentContract;
         [NonSerialized] private Minigame? m_CurrentMinigame;
         [NonSerialized] private Dictionary<string, Dictionary<Minigame, int>> m_ContractLevels = new Dictionary<string, Dictionary<Minigame, int>>(); // number of levels of each minigame, specified by the contract
@@ -141,6 +141,7 @@ namespace SpaceFab.Logging
 
         private void Start()
         {
+            m_LaunchTime = Time.realtimeSinceStartup;
             RegisterEvents();
             PrepareLogging();
         }
@@ -153,7 +154,7 @@ namespace SpaceFab.Logging
 
             // TODO
             m_JsonBuilder.Begin()
-                .Field("seconds_from_launch", m_SecondsFromLaunch)
+                .Field("seconds_from_launch", Time.realtimeSinceStartup - m_LaunchTime)
                 .Field("current_contract", m_CurrentContract)
                 .Field("current_minigame", m_CurrentMinigame.HasValue ? m_CurrentMinigame.Value.ToString() : null);
             
@@ -362,7 +363,7 @@ namespace SpaceFab.Logging
                 .Register(GameEvents.ShipMenuDisplayed, LogShipMenuDisplayed)
                 .Register<MinigameId>(GameEvents.SelectMinigame, HandleMinigameSelect)
                 .Register<MinigameId>(GameEvents.StartMinigame, HandleMinigameStart)
-                .Register(GameEvents.OnMinigameExit, HandleMinigameExit);
+                .Register<MinigameId>(GameEvents.OnMinigameExit, LogExitMinigame);
 
             // Settings
             SpacefabGame.Events
@@ -599,6 +600,8 @@ namespace SpaceFab.Logging
             using (m_Log.NewEvent("ship_menu_displayed")) { }
         }
 
+        #region Contract
+
         private void LogAcceptContract(string contractId)
         /*
          "accept_contract": {
@@ -646,10 +649,10 @@ namespace SpaceFab.Logging
             }
         }
 
-        private void LogSelectContract(string contractId)
-        {
-            m_CurrentContract = contractId;
-        }
+        //private void LogSelectContract(string contractId)
+        //{
+        //    m_CurrentContract = contractId;
+        //}
 
         private void LogOpenContractView()
         {
@@ -682,102 +685,92 @@ namespace SpaceFab.Logging
             }
         }
 
-        private void HandleMinigameSelect(MinigameId zoneIndex)
+        #endregion // Contract
+
+        private void HandleMinigameSelect(MinigameId minigameId)
         {
-            switch(zoneIndex)
+            switch(minigameId)
             {
-                case MinigameId.Supply:
-                    LogSelectSupplyChain();
+                case MinigameId.Research:
+                    m_Log.NewEvent("select_research");
                     break;
                 case MinigameId.Design:
-                    Debug.Log("Design selected");
-                    LogSelectDesign();
+                    m_Log.NewEvent("select_design");
+                    break;
+                case MinigameId.Supply:
+                    m_Log.NewEvent("select_supply_chain");
                     break;
                 case MinigameId.Fabrication:
-                    LogSelectFabrication();
-                    break;
-                case MinigameId.Research:
-                    LogSelectResearch();
+                    m_Log.NewEvent("select_fabrication");
                     break;
                 default:
-                    Log.Msg("[Logging] Unrecognized minigame zone index: {0}", zoneIndex);
+                    Log.Msg("[Logging] Unrecognized minigame zone index: {0}", minigameId);
                     break;
             }
         }
 
         // Ensure the indices, which is different from minigame zone select
-        public void HandleMinigameStart(MinigameId zoneIndex)
+        public void HandleMinigameStart(MinigameId minigameId)
         {
-            switch(zoneIndex)
+            switch(minigameId)
             {
                 case MinigameId.Research:
-                    LogStartResearch();
+                    m_CurrentMinigame = Minigame.RESEARCH;
+                    m_Log.NewEvent("start_research");
                     break;
                 case MinigameId.Design:
-                    Debug.Log("Design started");
-                    LogStartDesign();
+                    m_CurrentMinigame = Minigame.DESIGN;
+                    m_Log.NewEvent("start_design");
                     break;
                 case MinigameId.Supply:
-                    LogStartSupplyChain();
+                    m_CurrentMinigame = Minigame.SUPPLY_CHAIN;
+                    m_Log.NewEvent("start_supply_chain");
                     break;
                 case MinigameId.Fabrication:
-                    LogStartFabrication();
+                    m_CurrentMinigame = Minigame.FABRICATION;
+                    m_Log.NewEvent("start_fabrication");
                     break;
                 default:
-                    Log.Msg("[Logging] Unrecognized minigame zone index: {0}", zoneIndex);
+                    Log.Msg("[Logging] Unrecognized minigame zone index: {0}", minigameId);
                     break;
             }
+            SubmitGameState();
         }
-        public void HandleMinigameExit()
+        public void LogExitMinigame(MinigameId minigameId)
         {
-            switch(m_CurrentMinigame)
+            Minigame minigame = Minigame.RESEARCH;
+            switch (minigameId)
             {
-                case Minigame.RESEARCH:
+                case MinigameId.Research:
                     break;
-                case Minigame.DESIGN:
-                    LogExitDesign();
+                case MinigameId.Design:
+                    minigame = Minigame.DESIGN;
                     break;
-                case Minigame.SUPPLY_CHAIN:
+                case MinigameId.Supply:
+                    minigame = Minigame.SUPPLY_CHAIN;
                     break;
-                case Minigame.FABRICATION:
+                case MinigameId.Fabrication:
+                    minigame = Minigame.FABRICATION;
                     break;
                 default:
                     Log.Msg("[Logging] Unrecognized minigame on exit: {0}", m_CurrentMinigame);
                     break;
+            }
+
+            using (var e = m_Log.NewEvent("exit_minigame")) 
+            {
+                e.Param("minigame", minigame.ToString());
             }
         }
 
         #endregion // Overarching
 
         #region Research
-        private void LogSelectResearch()
-        {
-            using (m_Log.NewEvent("select_research")) { }
-        }
 
-        private void LogStartResearch()
-        {
-            m_CurrentMinigame = Minigame.RESEARCH;
-            SubmitGameState();
-
-            using (m_Log.NewEvent("start_research")) { }
-        }
 
         #endregion // Research
 
         #region Design
-
-        private void LogSelectDesign()
-        {
-            using (m_Log.NewEvent("select_design")) { }
-        }
-
-        private void LogStartDesign()
-        {
-            m_CurrentMinigame = Minigame.DESIGN;
-            SubmitGameState();
-            using (m_Log.NewEvent("start_design")) { }
-        }
 
         private void LogDesignLevelBegin(GridStackConfig config)
         /*
@@ -965,31 +958,20 @@ namespace SpaceFab.Logging
             m_Log.NewEvent("design_complete");
         }
 
-        private void LogExitDesign()
-        {
-            m_CurrentMinigame = null;
-            //m_DesignGrid = null;
-            SubmitGameState();
+        //private void LogExitDesign()
+        //{
+        //    m_CurrentMinigame = null;
+        //    //m_DesignGrid = null;
+        //    SubmitGameState();
 
-            using (m_Log.NewEvent("exit_design")) { }
-        }
+        //    using (m_Log.NewEvent("exit_design")) { }
+        //}
 
         #endregion // Design
 
         #region Supply Chain
 
-        private void LogSelectSupplyChain()
-        {
-            using (m_Log.NewEvent("select_supply_chain")) { }
-        }
 
-        private void LogStartSupplyChain()
-        {
-            m_CurrentMinigame = Minigame.SUPPLY_CHAIN;
-            SubmitGameState();
-
-            using (m_Log.NewEvent("start_supply_chain")) { }
-        }
 
         #endregion // Supply Chain
 
@@ -1000,14 +982,6 @@ namespace SpaceFab.Logging
             using (m_Log.NewEvent("select_fabrication")) { }
         }
         
-        private void LogStartFabrication()
-        {
-            m_CurrentMinigame = Minigame.FABRICATION;
-            SubmitGameState();
-
-            using (m_Log.NewEvent("start_fabrication")) { }
-        }
-
         private void LogGenerateWafer()
         {
             using (m_Log.NewEvent("generate_wafer")) { }
