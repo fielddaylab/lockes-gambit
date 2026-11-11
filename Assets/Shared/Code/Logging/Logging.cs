@@ -847,6 +847,21 @@ namespace SpaceFab.Logging
 
         }
 
+        private void LogToggleInput(string input, ElementState newState)
+        {
+
+        }
+
+        private void LogSwitchLayer(Layer toLyaer)
+        {
+
+        }
+
+        private void LogClearGrid()
+        {
+
+        }
+
         private void LogSelectTool(ToolType toolType)
         {
             var toolId = ToolID.METAL; // by default
@@ -920,6 +935,11 @@ namespace SpaceFab.Logging
             }
         }
 
+        private void LogRunTest(Dictionary<string, ElementState> outputs, Dictionary<string, ElementState> targetInputs)
+        {
+
+        }
+
         private void LogStartTest(List<GridCoord> inputs, List<GridCoord> outputs, int rowIndex)
         {
             // TODO
@@ -933,23 +953,24 @@ namespace SpaceFab.Logging
 
         private void LogTestRowResolved(string resultStr, int rowIndex)
         {
-            if (resultStr == "success") { LogTestSucceeded(rowIndex); }
-            else { LogTestFailed(rowIndex); }
+            //if (resultStr == "success") { LogTestSucceeded(rowIndex); }
+            //else { LogTestFailed(rowIndex); }
         }
 
-        private void LogTestSucceeded(int rowIndex)
+        private void LogTestSucceeded(string message)
         {
-            using (var e = m_Log.NewEvent("submission_succeeded"))
+            using (var e = m_Log.NewEvent("test_succeeded"))
             {
-                e.Param("row_number", rowIndex);
+                e.Param("message", message);
             }
         }
 
-        private void LogTestFailed(int rowIndex)
+        [NonSerialized] private List<string> m_PendingFailedTests;
+        private void LogTestFailed(string message, List<String> failedTests)
         {
-            using (var e = m_Log.NewEvent("submission_failed"))
+            using (var e = m_Log.NewEvent("test_failed"))
             {
-                e.Param("row_number", rowIndex); // need to confirm: are the rows of test suite always in the same order?
+
             }
         }
 
@@ -977,11 +998,6 @@ namespace SpaceFab.Logging
 
         #region Fabrication
 
-        private void LogSelectFabrication()
-        {
-            using (m_Log.NewEvent("select_fabrication")) { }
-        }
-        
         private void LogGenerateWafer()
         {
             using (m_Log.NewEvent("generate_wafer")) { }
