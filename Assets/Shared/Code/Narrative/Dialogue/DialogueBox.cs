@@ -78,6 +78,11 @@ namespace SpaceFab.Narrative {
             }
             m_NextButton.gameObject.SetActive(false);
 
+            if (!ScriptUtility.IsSkippingCutscene())
+            {
+                SpacefabGame.Events.Dispatch(GameEvents.DialogClickAdvance, EvtArgs.Create(m_CharacterName.text));
+            }
+
             if ((m_CurrentLineFlags & LineFlags.IsEnd) != 0) {
                 CurrentThread.ReleaseCurrentPrinter(ScriptThreadOwnershipClearReason.Completed);
             }

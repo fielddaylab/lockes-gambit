@@ -113,9 +113,19 @@ namespace SpaceFab.Onboarding {
             }
         }
 
-        public static List<string>? GetActiveHighlight()
+        public static string GetActiveHighlight()
         {
-            return null;
+            Find.State<OnboardingHighlightState>(out var highlightState);
+            if (highlightState.ActiveById == null || highlightState.ActiveById.Count == 0) return null;
+
+            var lookup = Find.State<ElementTagLookup>();
+            List<string> ids = new List<string>(highlightState.ActiveById.Count);
+            foreach (var hash in highlightState.ActiveById.Keys)
+            {
+                if (lookup != null && ElementTagLookupUtility.TryGet(lookup, hash, out ElementTag tag))
+                    ids.Add(tag.Id.Source());
+            }
+            return ids.Count > 0 ? string.Join(";", ids) : null;
         }
 
         // ---- Focus lock helpers ----

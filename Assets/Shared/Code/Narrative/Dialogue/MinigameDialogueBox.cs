@@ -171,6 +171,8 @@ namespace SpaceFab.Narrative {
             m_IsVisible = true;
             m_VisiblityGroup.gameObject.SetActive(true);
             m_VisiblityGroup.blocksRaycasts = true;
+
+            SpacefabGame.Events.Dispatch(GameEvents.DialogStarted);
             yield return m_VisiblityGroup.FadeTo(1f, m_FadeDuration);
         }
 
@@ -179,6 +181,8 @@ namespace SpaceFab.Narrative {
             m_VisiblityGroup.blocksRaycasts = false;
             yield return m_VisiblityGroup.FadeTo(0f, m_FadeDuration);
             m_VisiblityGroup.gameObject.SetActive(false);
+
+            SpacefabGame.Events.Dispatch(GameEvents.DialogCompleted);
 
             // Cleared after the fade so the button goes out with the box rather than popping away
             // first. blocksRaycasts already made it non-interactive at the start of the fade.

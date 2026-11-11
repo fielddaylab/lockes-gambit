@@ -35,7 +35,7 @@ Material:
     - _ZTestMode: 0
     - _ZWriteMode: 0
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 1}
     - _Plane0: {r: 0, g: 21.81, b: -0.3, a: -1}
     - _Plane1: {r: 0, g: 22.5, b: 0.3, a: 1}
   m_BuildTextureStacks: []

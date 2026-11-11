@@ -371,14 +371,15 @@ namespace SpaceFab.Logging
                 .Register(GameEvents.CreditsEnterClicked, LogStartCredits)
                 .Register(GameEvents.CreditsQuitClicked, LogQuitCredits)
                 .Register<bool>(GameEvents.SettingsToggleFullScreen, LogToggleFullScreen)
-                .Register<(VolumeType, float)>(GameEvents.SettingsSetVolume, (data) => LogSetVolume(data.Item1, data.Item2));
-
-            // Cutscene
-            SpacefabGame.Events
-                .Register<int>(GameEvents.CutsceneStart, LogCutsceneStarted)
+                .Register<(VolumeType, float)>(GameEvents.SettingsSetVolume, (data) => LogSetVolume(data.Item1, data.Item2))
+                .Register<int>(GameEvents.CutsceneStart, LogCutsceneStarted) // Cutscene
                 .Register<int>(GameEvents.CutsceneComplete, LogCutsceneCompleted)
                 .Register<(int, int)>(GameEvents.CutsceneClickedNext, (data) => LogClickCutsceneNext(data.Item1, data.Item2))
-                .Register<(int, int)>(GameEvents.CutsceneAdvance, (data) => LogCutsceneAdvanced(data.Item1, data.Item2));
+                .Register<(int, int)>(GameEvents.CutsceneAdvance, (data) => LogCutsceneAdvanced(data.Item1, data.Item2))
+                .Register(GameEvents.DialogStarted, LogDialogStarted) // Dialog
+                .Register(GameEvents.DialogCompleted, LogDialogCompleted)
+                .Register<(string, string, string)>(GameEvents.DialogLineDisplayed, (data) => LogDialogLineDisplayed(data.Item1, data.Item2, data.Item3))
+                .Register<string>(GameEvents.DialogClickAdvance, LogClickAdvanceDialog);
 
             // Contrat
             SpacefabGame.Events

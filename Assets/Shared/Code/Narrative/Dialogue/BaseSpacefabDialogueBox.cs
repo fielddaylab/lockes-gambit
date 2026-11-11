@@ -9,6 +9,7 @@ using FieldDay.Scripting;
 using FieldDay.UI;
 using FieldDay.UI.Animation;
 using Leaf.Runtime;
+using SpaceFab.Onboarding;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -76,7 +77,8 @@ namespace SpaceFab.Narrative {
             }
 
             m_Typewriter.Prepare(m_Contents, this, text, textData);
-            SpacefabGame.Events.Dispatch(GameEvents.DialogLineDisplayed, EvtArgs.Box((character.OverrideName, text.ToString())));
+            string highlightIds = OnboardingHighlightUtility.GetActiveHighlight();
+            SpacefabGame.Events.Dispatch(GameEvents.DialogLineDisplayed, EvtArgs.Box((m_CurrentCharacter.DisplayName, text.VisibleTextString, highlightIds)));
             yield return m_Typewriter;
         }
 
