@@ -136,7 +136,7 @@ MonoBehaviour:
   Type: 1
   Cost: 2
   Risk: 0
-  Time: 1
+  Time: 3
   MaterialType:
     m_HashValue: 1163381446
   ConversionInputType:
@@ -180,6 +180,7 @@ MonoBehaviour:
   RectTransform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 1942568974416691384}
+  ColliderOverride: 0
 --- !u!1 &5819942576233775732
 GameObject:
   m_ObjectHideFlags: 0

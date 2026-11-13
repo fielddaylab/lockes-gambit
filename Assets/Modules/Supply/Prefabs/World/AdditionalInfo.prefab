@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Cursor: {fileID: 0}
   m_PrimaryGraphic: {fileID: 0}
   m_StartingValue: 0
-  m_MaxValue: 4
+  m_MaxValue: 5
   m_Style: {fileID: 6137396250388104887}
 --- !u!114 &6137396250388104887
 MonoBehaviour:

@@ -74,8 +74,14 @@ MonoBehaviour:
     Position: {x: 4.07, y: 1.25}
   Overrides:
   - Name:
-      m_Source: 
+      m_Source: Planet_Cu
       m_HashValue: 57385584
     Time: 2
     Cost: 2
     Risk: 1
+  - Name:
+      m_Source: Planet_W
+      m_HashValue: 3784387721
+    Time: 2
+    Cost: 3
+    Risk: 0

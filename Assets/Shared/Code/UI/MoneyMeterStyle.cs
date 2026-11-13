@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using FieldDay.UI.Animation;
 using FieldDay.UI.Widgets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 namespace SpaceFab.UI {
     public sealed class MoneyMeterStyle : GuiCounter.Style {
         public Image[] Slots;
+        // public Image[] FlashOverlays;
 
         [Header("Config")]
         public Sprite EmptySlot;
@@ -39,6 +41,12 @@ namespace SpaceFab.UI {
                 Slots[i].enabled = hasEmpty;
                 Slots[i].sprite = EmptySlot;
             }
+
+            // if ((flags & GuiWidgetUpdateFlags.Initialization) == 0
+            //     && (flags & GuiWidgetUpdateFlags.IsIncrease) != 0
+            //     && data > 0 && data <= FlashOverlays.Length) {
+            //     FlashAnim.Play(FlashOverlays[data - 1], Color.white, FlashAnim.Default);
+            // }
         }
 
         static public IEnumerator DrainIntoMeter(GuiCounter src, GuiCounter dst) {

@@ -3,10 +3,12 @@ using System.Collections;
 using FieldDay.UI.Widgets;
 using UnityEngine;
 using UnityEngine.UI;
+using FieldDay.UI.Animation;
 
 namespace SpaceFab.UI {
     public sealed class TimeMeterStyle : GuiCounter.Style {
         public Image[] Slots;
+        public Image[] FlashOverlays;
 
         [Header("Config")]
         public Sprite EmptySlot;
@@ -38,6 +40,12 @@ namespace SpaceFab.UI {
             for (int i = Math.Max(ExpectedSlots, data); i < Slots.Length; i++) {
                 Slots[i].enabled = hasEmpty;
                 Slots[i].sprite = EmptySlot;
+            }
+
+            if ((flags & GuiWidgetUpdateFlags.Initialization) == 0
+                && (flags & GuiWidgetUpdateFlags.IsIncrease) != 0
+                && data > 0 && data <= FlashOverlays.Length) {
+                FlashAnim.Play(FlashOverlays[data - 1], Color.white, FlashAnim.Default);
             }
         }
 
