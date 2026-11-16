@@ -15,5 +15,3 @@ MonoBehaviour:
   Bindings:
   - Scope: 4
     Script: {fileID: -1942890987711236906, guid: f394b288de2f20f47b16f02e70ffa123, type: 3}
-  - Scope: 8
-    Script: {fileID: -1942890987711236906, guid: e101f674f0197dd409a71ec8352473be, type: 3}

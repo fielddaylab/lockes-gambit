@@ -207,11 +207,15 @@ namespace SpaceFab.Fabrication.StationControl {
                     break;
                 default: // Pending
                     if (!stationState.CompletionScriptHandle.IsRunning() && holdElapsed) {
+                    // No Leaf gate decided; apply the default precision gate.
+                    if (stationState.LastMicrogamePrecision >= stationState.MinPrecisionToPass) {
                         ProceedToExit(stationState);
-                    // } else if (stationState.Phase != StationControlPhase.ResolvingCompletion) {
-                    //     stationState.Phase = StationControlPhase.ResolvingCompletion;
-                    //     stationState.PhaseTimer = 0f;
+                    } else {
+                        StationControlUtility.SetCompletionVerdict(stationState, MicrogameExitVerdict.Retry);
+                        // Falls into the Retry branch next call; resolve now to avoid a one-frame lag.
+                        ResolveCompletion(stationState);
                     }
+                }
                     break;
             }
         }

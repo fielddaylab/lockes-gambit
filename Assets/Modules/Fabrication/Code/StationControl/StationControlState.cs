@@ -57,6 +57,9 @@ namespace SpaceFab.Fabrication.StationControl {
         public float StunDuration = 1.5f;
         public float CompletionHoldDuration = 0.5f;
 
+        // Default gate used when no Leaf gate sets a verdict.
+        public float MinPrecisionToPass = 0.3f;
+
         // One-frame flags, cleared by StationControlFlagRefreshSystem in LateUpdate.
         [NonSerialized] public bool MicrogameCompletedThisFrame;
         [NonSerialized] public bool CancelRequestedThisFrame;
@@ -276,6 +279,18 @@ namespace SpaceFab.Fabrication.StationControl {
             ScriptUtility.Trigger(FabricationScriptTriggers.OnStunned);
 
             Game.Events.Dispatch(GameEvents.FabStunBegin);
+        }
+
+        // Applies the default precision gate if no Leaf gate has set a verdict yet.
+        // Leaf's RequireMicrogamePrecision still wins.
+        public static void ApplyDefaultPrecisionGate(StationControlState stationState) {
+            if (stationState.CompletionVerdict != MicrogameExitVerdict.Pending) {
+                return;
+            }
+            MicrogameExitVerdict verdict = stationState.LastMicrogamePrecision >= stationState.MinPrecisionToPass
+                ? MicrogameExitVerdict.Proceed
+                : MicrogameExitVerdict.Retry;
+            SetCompletionVerdict(stationState, verdict);
         }
     }
 }
