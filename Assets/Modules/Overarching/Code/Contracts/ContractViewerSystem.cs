@@ -238,6 +238,7 @@ namespace SpaceFab.Overarching {
 
             using (var t = TempVarTable.Alloc()) {
                 t.Set("risk", MinigameSaveUtility.CurrentRisk(saveStates));
+                t.Set("chapterIndex", chapterState.ChapterIndex);
                 var trigger = ScriptUtility.Trigger("BeforeContractEvaluation", t);
                 do {
                     yield return null;
@@ -378,6 +379,7 @@ namespace SpaceFab.Overarching {
                 t.Set("encounteredHazard", encounteredHazard);
                 t.Set("timeLost", encounteredHazard ? chapterState.ChapterDefinition.HazardTime : 0);
                 t.Set("moneyLost", encounteredHazard ? chapterState.ChapterDefinition.HazardCost : 0);
+                t.Set("chapterIndex", chapterState.ChapterIndex);
                 var thread = ScriptUtility.Trigger("AfterContractEvaluation", t);
                 do {
                     yield return null;

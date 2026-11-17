@@ -1,42 +1,133 @@
 # basePath Overarching
 
-:: BeforeEvaluation.1
+:: BeforeEvaluation.1.PAL
 @trigger    BeforeContractEvaluation
+@when   chapterIndex < 7
 @cutscene
 {@PAL}  Let's see how our routes play out...
 
-:: BeforeEvaluation.Risky.1
+:: BeforeEvaluation.1.MAL
 @trigger    BeforeContractEvaluation
-@when   risk > 4
+@when   chapterIndex >= 7, chapterIndex < 10
+@cutscene
+{@MAL}  Lë†'s s££ hoüw‰ww 0ur rðutës pl@y òu†...
+
+:: BeforeEvaluation.1.Player
+@trigger    BeforeContractEvaluation
+@when   chapterIndex >= 10
+@cutscene
+{@Player}  Let's see how the routes play out...
+
+
+:: BeforeEvaluation.Risky.1.PAL
+@trigger    BeforeContractEvaluation
+@when   risk > 4, chapterIndex < 7
 @cutscene
 {@PAL}  Not sure about this...
 
-:: BeforeEvaluation.Risky.2
+:: BeforeEvaluation.Risky.1.MAL
 @trigger    BeforeContractEvaluation
-@when   risk > 8
+@when   risk > 4, chapterIndex >= 7, chapterIndex < 10
+@cutscene
+{@MAL}  0-oh! ThÏs rðutë's lòòk¡ng Å l¡††le... b-b-bÜmþý!
+
+:: BeforeEvaluation.Risky.1.Player
+@trigger    BeforeContractEvaluation
+@when   risk > 4, chapterIndex >= 10
+@cutscene
+{@Player}   These routes concern me...
+
+
+:: BeforeEvaluation.Risky.2.PAL
+@trigger    BeforeContractEvaluation
+@when   risk > 8, chapterIndex < 7
 @cutscene
 {@PAL}  Locke... Are we sure about this...
 
-:: AfterEvaluation.1
+:: BeforeEvaluation.Risky.2.MAL
+@trigger    BeforeContractEvaluation
+@when   risk > 8, chapterIndex >= 7, chapterIndex < 10
+@cutscene
+{@MAL}  0H Nð— Th¡s rðutë iiiîîîis NO† lòòk¡ng s0 gØØd! <color=red>[ERR¤R]</color>
+
+:: BeforeEvaluation.Risky.2.Player
+@trigger    BeforeContractEvaluation
+@when   risk > 8, chapterIndex >= 10
+@cutscene
+{@Player}   These routes look risky...
+
+
+:: AfterEvaluation.1.PAL
 @trigger    AfterContractEvaluation
-@when   !encounteredHazard
+@when   !encounteredHazard, 
 @cutscene
 {@PAL}  Everything went smoothly!
 
-:: AfterEvaluation.HazardTimeMoney.1
+:: AfterEvaluation.1.MAL
 @trigger    AfterContractEvaluation
-@when   encounteredHazard, timeLost > 0, moneyLost > 0
+@when   !encounteredHazard, chapterIndex >= 7, chapterIndex < 10
+@cutscene
+{@MAL}  Wh@t Å përf£c† rün!
+
+:: AfterEvaluation.1.Player
+@trigger    AfterContractEvaluation
+@when   !encounteredHazard, chapterIndex >= 10
+@cutscene
+{@Player}   No issues. Great.
+
+
+:: AfterEvaluation.HazardTimeMoney.1.PAL
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost > 0, moneyLost > 0, chapterIndex < 7
 @cutscene
 {@PAL}  Unfortunately our haulers ran into hazards. This resulted in lost time and will cost us more.
 
-:: AfterEvaluation.HazardTime.1
+:: AfterEvaluation.HazardTimeMoney.1.MAL
 @trigger    AfterContractEvaluation
-@when   encounteredHazard, timeLost > 0, moneyLost == 0
+@when   encounteredHazard, timeLost > 0, moneyLost > 0, chapterIndex >= 7, chapterIndex < 10
+@cutscene
+{@MAL}  Øh n0... H@ul£rs h!t sòm3 hªzªrds. L0st tìmÊ ÅND m0rë cðst... Thìs ¡s n0† gØØd!
+
+:: AfterEvaluation.HazardTimeMoney.1.Player
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost > 0, moneyLost > 0, chapterIndex >= 10
+@cutscene
+{@Player}  Haulers ran into hazards. I lost time, and it'll cost me extra.
+
+
+:: AfterEvaluation.HazardTime.1.PAL
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost > 0, moneyLost == 0, chapterIndex < 7
 @cutscene
 {@PAL}  Unfortunately our haulers ran into hazards. This resulted in lost time.
 
-:: AfterEvaluation.HazardMoney.1
+:: AfterEvaluation.HazardTime.1.MAL
 @trigger    AfterContractEvaluation
-@when   encounteredHazard, timeLost == 0, moneyLost > 0
+@when   encounteredHazard, timeLost > 0, moneyLost == 0, chapterIndex >= 7, chapterIndex < 10
+@cutscene
+{@MAL}  Øh n0... H@ul£rs h!t sòm3 hªzªrds. Th@t means m0rë dÊlÅÿs... Thìs ¡s n0† gØØd!
+
+:: AfterEvaluation.HazardTime.1.Player
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost > 0, moneyLost == 0, chapterIndex >= 10
+@cutscene
+{@Player}  Haulers ran into hazards. It'll cost me extra.
+
+
+:: AfterEvaluation.HazardMoney.1.PAL
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost == 0, moneyLost > 0, chapterIndex < 7
 @cutscene
 {@PAL}  Unfortunately our haulers ran into hazards. This will cost us more.
+
+:: AfterEvaluation.HazardMoney.1.MAL
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost == 0, moneyLost > 0, chapterIndex >= 7, chapterIndex < 10
+@cutscene
+{@MAL}  Øh n0... H@ul£rs h!t sòm3 hªzªrds. Th@t means m0rë cðst... Thìs ¡s n0† gØØd!
+
+:: AfterEvaluation.HazardMoney.1.Player
+@trigger    AfterContractEvaluation
+@when   encounteredHazard, timeLost == 0, moneyLost > 0, chapterIndex >= 10
+@cutscene
+{@Player}  Haulers ran into hazards. It'll cost me extra.
