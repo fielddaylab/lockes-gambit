@@ -1,6 +1,7 @@
 using FieldDay;
 using FieldDay.Scripting;
 using FieldDay.Systems;
+using Leaf.Runtime;
 using SpaceFab.Design.Visuals;
 using SpaceFab.Save;
 using System.Collections.Generic;
@@ -166,8 +167,8 @@ namespace SpaceFab.Design
             LevelData levelData = DesignLevelUtility.GetActiveLevelData(contractState, designState);
             TestSuiteData suite = levelData.GetTestSuite();
             TestData currTest = suite.Rows[runState.CurrentRow];
-            List<GridCoord> inputs = new List<GridCoord>();
-            List<GridCoord> outputs = new List<GridCoord>();
+            //List<GridCoord> inputs = new List<GridCoord>();
+            //List<GridCoord> outputs = new List<GridCoord>();
 
             for (int i = 0; i < graphState.NodeCount; i++)
             {
@@ -182,17 +183,15 @@ namespace SpaceFab.Design
                     // already on an edge's origin cell, so without this every depth-0 edge would
                     // start from an unpainted origin and nothing would ever advance.
                     SimulateRunScratchUtility.SetCellFlow(runScratch, node.CellIndex, inputFlow);
-                    inputs.Add(node.Coord);
+                    //inputs.Add(node.Coord);
                 }
-                else if (cell.CellType == CellType.Output)
-                {
-                    outputs.Add(node.Coord);
-                }
+                //else if (cell.CellType == CellType.Output)
+                //{
+                //    outputs.Add(node.Coord);
+                //}
             }
 
-            Debug.Log($"{inputs} \n {outputs}");
-
-            SpacefabGame.Events.Dispatch(GameEvents.DesignSimRowStarted, EvtArgs.Box((inputs, outputs, runState.CurrentRow)));
+            //SpacefabGame.Events.Dispatch(GameEvents.DesignSimRowStarted, EvtArgs.Box((inputs, outputs, runState.CurrentRow)));
             SimulateUIUtility.WriteRowInputs(uiState, runState.CurrentRow, currTest);
             SimulateControlUtility.SetVerdictInProgress(runState, runState.CurrentRow);
 
@@ -346,6 +345,8 @@ namespace SpaceFab.Design
             bool allCorrect = true;
             bool anyOutputUnstable = false;
             int outputIdx = 0;
+
+            List<string> failedTests = new List<string>();
             for (int i = 0; i < graphState.NodeCount; i++)
             {
                 CrucialNode node = graphState.CrucialNodes[i];
@@ -355,7 +356,11 @@ namespace SpaceFab.Design
                 FlowState actual = runScratch.SegmentFlow[graphState.CrucialSegment[i]];
                 FlowState expected = EvalUtility.GetTestValBySubType(cell.SubtypeLabel, suite.ColumnMask, currTest);
                 runScratch.OutputFlowBuffer[outputIdx++] = actual;
-                if (actual != expected) { allCorrect = false; }
+                if (actual != expected) { 
+                    failedTests.Add(cell.SubtypeLabel.ToString());
+                    allCorrect = false; 
+                }
+
                 if (actual == FlowState.Unstable) { anyOutputUnstable = true; }
 
                 switch (cell.SubtypeLabel) {
@@ -385,8 +390,9 @@ namespace SpaceFab.Design
                 var resultStr = "failure";
                 if (verdict == TestRowVerdict.Correct) { resultStr = "success"; }
                 table.Set("result", resultStr);
+
+                SpacefabGame.Events.Dispatch(GameEvents.DesignSimRowResolved, EvtArgs.Box((resultStr, runState.CurrentRow, failedTests)));
                 ScriptUtility.Trigger(DesignScriptTriggers.OnSingleTestComplete, table);
-                SpacefabGame.Events.Dispatch(GameEvents.DesignSimRowResolved, EvtArgs.Box((resultStr, runState.CurrentRow)));
             }
 
             // Toggle-input mode: every Test click resolves a single row. Show the results panel

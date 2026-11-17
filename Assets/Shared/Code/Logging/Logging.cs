@@ -1,27 +1,28 @@
 using BeauUtil;
 using BeauUtil.Debugger;
+using BeauUtil.Tags;
 using FieldDay;
+using FieldDay.Analytics;
 using FieldDay.Scripting;
 using FieldDay.Vox;
 using OGD;
+using SpaceFab;
+using SpaceFab.Design;
+using SpaceFab.Overarching;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
-using SpaceFab;
-using System.Diagnostics.Tracing;
-using FieldDay.Analytics;
-using System.Linq;
-using SpaceFab.Design;
 using Debug = UnityEngine.Debug;
-using SpaceFab.Overarching;
-using System.Security;
 
 
 namespace SpaceFab.Logging
 {
     public class Logging : MonoBehaviour
     {
+        #region Enums
+
         public enum VolumeType: byte
         {
             MASTER,
@@ -107,6 +108,8 @@ namespace SpaceFab.Logging
             NTYPE
         }
 
+        #endregion // Enums
+
         public struct DesignIO
         {
             public List<GridCoord> Inputs;
@@ -126,6 +129,7 @@ namespace SpaceFab.Logging
         [NonSerialized] private bool m_Debug;
 
         #region Inspector
+
         [SerializeField, Required] private string m_AppId = "SPACEFAB";
         [SerializeField, Required] private string m_AppVersion;
         [SerializeField] private FirebaseConsts m_Firebase;
@@ -136,6 +140,10 @@ namespace SpaceFab.Logging
         [NonSerialized] private Minigame? m_CurrentMinigame;
         [NonSerialized] private Dictionary<string, Dictionary<Minigame, int>> m_ContractLevels = new Dictionary<string, Dictionary<Minigame, int>>(); // number of levels of each minigame, specified by the contract
         [NonSerialized] private DesignGrid? m_DesignGrid = null;
+
+        [NonSerialized] private List<string> m_PendingFailedTests;
+        [NonSerialized] private Dictionary<string, ElementState> m_inputsState = new Dictionary<string, ElementState>();
+        [NonSerialized] private Dictionary<string, ElementState> m_outputsState = new Dictionary<string, ElementState>();
 
         #endregion //Inspector
 
@@ -334,6 +342,9 @@ namespace SpaceFab.Logging
             m_Log.SetUserId(userCode);
             m_Log.NewEvent("session_start");
             m_Log.Initialize(CreateOGDConsts());
+
+            ScriptUtility.Runtime.OnTaggedLineProcessed.Deregister(TestResultHandler);
+            ScriptUtility.Runtime.OnTaggedLineProcessed.Register(TestResultHandler, this);
         }
 
         private OGDLogConsts CreateOGDConsts()
@@ -345,6 +356,10 @@ namespace SpaceFab.Logging
                 AppBranch = BuildInfo.Branch(),
                 ClientLogVersion = CLIENT_LOG_VERSION,
             };
+        }
+        private void OnDestroy()
+        {
+            ScriptUtility.Runtime?.OnTaggedLineProcessed.Deregister(TestResultHandler);
         }
 
         #endregion //Initialization
@@ -397,8 +412,8 @@ namespace SpaceFab.Logging
                 .Register<ToolType>(GameEvents.DesignToolSelected, LogSelectTool)
                 .Register<(GridCoord, string)>(GameEvents.DesignGridModified, (data) => LogFillGrid(data.Item1, data.Item2))
                 .Register<(Vector2Int, string)>(GameEvents.DesignGridCleared, (data) => UpdateDesignGridState(data.Item1, data.Item2))
-                .Register<(List<GridCoord>, List<GridCoord>, int)>(GameEvents.DesignSimRowStarted, (data) => LogStartTest(data.Item1, data.Item2, data.Item3))
-                .Register<(string, int)>(GameEvents.DesignSimRowResolved, (data) => LogTestRowResolved(data.Item1, data.Item2))
+                .Register<(Dictionary<string, ElementState>, Dictionary<string, ElementState>)>(GameEvents.DesignSimRowStarted, (data) => LogRunTest(data.Item1, data.Item2))
+                .Register<(string, int, List<string>)>(GameEvents.DesignSimRowResolved, (data) => LogTestResult(data.Item1, data.Item2, data.Item3))
                 .Register(GameEvents.DesignSimSuiteSucceeded, LogDesignComplete);
 
             // Fabrication
@@ -793,7 +808,6 @@ namespace SpaceFab.Logging
           }
          */
         {
-
             // need clarification: design level is initialized when a contract is selected, but design_grid should be null when not in design minigame
             Debug.Log("Dispatch design level begin");
 
@@ -802,6 +816,15 @@ namespace SpaceFab.Logging
 
             foreach (GridCellConfig cell in config.Cells)
             {
+                if (cell.SubtypeLabel == InputOutputNodeTypeFlags.OUTX || cell.SubtypeLabel == InputOutputNodeTypeFlags.OUTY)
+                {
+                    m_outputsState.Add(cell.SubtypeLabel.ToString(), ElementState.LO);
+                } 
+                else if (cell.SubtypeLabel == InputOutputNodeTypeFlags.A || cell.SubtypeLabel == InputOutputNodeTypeFlags.B)
+                {
+                    m_outputsState.Add(cell.SubtypeLabel.ToString(), ElementState.LO);
+                }
+
                 if (cell.CellType == CellType.Input)
                 {
                     inputs.Add((cell.RowIndex, cell.ColumnIndex));
@@ -841,10 +864,21 @@ namespace SpaceFab.Logging
             using (var e = m_Log.NewEvent("design_level_begin"))
             {
                 e.Param("initial_board_state", gridJson);
-                e.Param("inputs", string.Join(";", inputs.Select(coord => $"({coord.Item1},{coord.Item2})")));
-                e.Param("outputs", string.Join(";", outputs.Select(coord => $"({coord.Item1},{coord.Item2})")));
+                e.Param("inputs", IOStateDictBuilder(m_inputsState));
+                e.Param("outputs", IOStateDictBuilder(m_outputsState));
             }
 
+        }
+
+        private string IOStateDictBuilder(Dictionary<string, ElementState> states)
+        {
+            m_JsonBuilder.Clear();
+            m_JsonBuilder.Begin();
+            foreach (var kvp in states)
+            {
+                m_JsonBuilder.Field(kvp.Key, kvp.Value.ToString());
+            }
+            return m_JsonBuilder.End().ToString();
         }
 
         private void LogToggleInput(string input, ElementState newState)
@@ -937,56 +971,57 @@ namespace SpaceFab.Logging
 
         private void LogRunTest(Dictionary<string, ElementState> outputs, Dictionary<string, ElementState> targetInputs)
         {
-
-        }
-
-        private void LogStartTest(List<GridCoord> inputs, List<GridCoord> outputs, int rowIndex)
-        {
-            // TODO
-            using (var e = m_Log.NewEvent("start_test"))
+            using (var e = m_Log.NewEvent("run_test"))
             {
-                e.Param("inputs", string.Join(";", inputs.Select(coord => $"({coord.Row},{coord.Col})")));
-                e.Param("outputs", string.Join(";", outputs.Select(coord => $"({coord.Row},{coord.Col})")));
-                e.Param("row_index", rowIndex);
+                e.Param("outputs", string.Join(";", outputs.Select(kvp => $"{kvp.Key}:{kvp.Value}")));
+                e.Param("target_inputs", string.Join(";", targetInputs.Select(kvp => $"{kvp.Key}:{kvp.Value}")));
             }
         }
 
-        private void LogTestRowResolved(string resultStr, int rowIndex)
+        private void LogTestResult(string result, int row, List<string> failedTests)
         {
-            //if (resultStr == "success") { LogTestSucceeded(rowIndex); }
-            //else { LogTestFailed(rowIndex); }
+            m_PendingFailedTests = failedTests;
         }
 
-        private void LogTestSucceeded(string message)
+        private void TestResultHandler(ScriptThread thread, TagString line)
         {
-            using (var e = m_Log.NewEvent("test_succeeded"))
-            {
-                e.Param("message", message);
-            }
-        }
+            if (m_PendingFailedTests == null) return;
+            if (thread.PeekNode()?.TriggerOrFunctionId != DesignScriptTriggers.OnSingleTestComplete) return;
+            string palMsg = line.VisibleTextString;
 
-        [NonSerialized] private List<string> m_PendingFailedTests;
-        private void LogTestFailed(string message, List<String> failedTests)
-        {
-            using (var e = m_Log.NewEvent("test_failed"))
+            if (m_PendingFailedTests.Count == 0)
             {
-
+                using (var e = m_Log.NewEvent("test_succeeded"))
+                {
+                    e.Param("message", palMsg);
+                }
             }
+            else
+            {
+                m_JsonBuilder.Clear();
+                m_JsonBuilder.BeginArray();
+                foreach (var test in m_PendingFailedTests)
+                {
+                    m_JsonBuilder.Item(test);
+                }
+                m_JsonBuilder.EndArray();
+                StringBuilder failedJSON = m_JsonBuilder.End();
+                failedJSON.Length -= 1;
+
+                using (var e = m_Log.NewEvent("test_failed"))
+                {
+                    e.Param("message", palMsg);
+                    e.Param("tests_failed", failedJSON.ToString());
+                }
+            }
+
+            m_PendingFailedTests = null;
         }
 
         private void LogDesignComplete()
         {
             m_Log.NewEvent("design_complete");
         }
-
-        //private void LogExitDesign()
-        //{
-        //    m_CurrentMinigame = null;
-        //    //m_DesignGrid = null;
-        //    SubmitGameState();
-
-        //    using (m_Log.NewEvent("exit_design")) { }
-        //}
 
         #endregion // Design
 

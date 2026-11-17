@@ -121,6 +121,7 @@ namespace SpaceFab
         public static readonly StringHash32 DesignGridCleared = "design-grid:cleared";
         public static readonly StringHash32 DesignToolSelected = "design-grid:tool-selected";
         public static readonly StringHash32 DesignClearSelected = "design-grid:clear-selected";
+        public static readonly StringHash32 DesignInputToggled = "design-frid:input-toggled";
 
         // Wiki
         public static readonly StringHash32 WikiPageUnlocked = "wiki:page-unlocked";

@@ -161,6 +161,8 @@ namespace SpaceFab.Design
             state.Inputs[entryIndex].State = (curr == FlowState.Hi) ? FlowState.Lo : FlowState.Hi;
             state.MatchDirty = true;
 
+            //SpacefabGame.Events.Dispatch(GameEvents.DesignInputToggled, EvtArgs.Box((entryIndex, state.Inputs[entryIndex].State)));
+
             ScriptUtility.Trigger(DesignScriptTriggers.OnInputToggled);
         }
 
