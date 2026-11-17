@@ -65,7 +65,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 21300000, guid: 5238226ae92e1b44682a3dadaddc379f, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: fb4133dded18811428bf1e494ce05fbf, type: 3}
+>>>>>>> Stashed changes
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

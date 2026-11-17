@@ -15,5 +15,13 @@ MonoBehaviour:
   m_IncludeMode: 0
   m_FilterSearch: 
   m_GlobalAssets: []
-  m_NamedAssets: []
+  m_NamedAssets:
+  - {fileID: 11400000, guid: 9f60d8341b588374281adc85c999b5cc, type: 2}
+  - {fileID: 11400000, guid: e6c64ae4cd1383545bcf044b86dcbbe6, type: 2}
+  - {fileID: 11400000, guid: 61bf4b208fb48af4fa0287c8856d1c21, type: 2}
+  - {fileID: 11400000, guid: a611490f31045ec42a081e7a1bd40456, type: 2}
+  - {fileID: 11400000, guid: 69aa51fdcd921194fafb7a0f2e0ff032, type: 2}
+  - {fileID: 11400000, guid: 2d919b57fc5188c43a4fc57fc78cec69, type: 2}
+  - {fileID: 11400000, guid: a6aa6b211e0223747a74a2b0eabd8724, type: 2}
+  - {fileID: 11400000, guid: 3ac8dd2c4f1935643b9e759335aee931, type: 2}
   m_LiteAssets: []

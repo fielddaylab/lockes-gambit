@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Modules/Design/Data/Wiki/Illustrations/art-depletion-frame2.png.meta
 guid: d5ab548a82b47374eaef7779e6d59378
+=======
+guid: 2149d8cb5ed1c4b4b8542b0c2f1f3149
+>>>>>>> Stashed changes:Assets/Shared/Art/Contract/ContractButton.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

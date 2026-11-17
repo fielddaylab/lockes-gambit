@@ -1,4 +1,5 @@
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.SharedState;
 using SpaceFab.Fabrication.Layout;
 using SpaceFab.Fabrication.Sequence;
@@ -45,6 +46,8 @@ namespace SpaceFab.Fabrication.Microgames
         public Transform TargetRangeAnchor, TargetArrowAnchor, MeterArrowAnchor;
 
         public FurnaceMicrogamePhase Phase;
+
+        [NonSerialized] public AudioHandle HeatSfx;
 
         public void OnDeregister()
         {

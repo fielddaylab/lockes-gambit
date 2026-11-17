@@ -1,4 +1,5 @@
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Systems;
 using SpaceFab.Fabrication.Layout;
 using SpaceFab.Fabrication.StationControl;
@@ -53,7 +54,10 @@ namespace SpaceFab.Fabrication.Microgames
         {
             if (state.InputAccepted && Game.Input.IsKeyDown(FabricationConsts.Activate))
             {
-                state.isSpacebarHeld = true;
+                if (!state.isSpacebarHeld) {
+                    state.HeatSfx = Sfx.Play("Fabrication.Furnace.Heat");
+                    state.isSpacebarHeld = true;
+                }
 
                 if (state.IncreasingHeat)
                 {
@@ -74,11 +78,17 @@ namespace SpaceFab.Fabrication.Microgames
 
                 float percentage = state.CurrentValue / state.MaxRange;
                 state.MeterArrowAnchor.rotation = Quaternion.Euler(new Vector3(0, 0, -percentage * 180));
+
+                Sfx.SetVolume(state.HeatSfx, percentage + 0.2f);
             }
             else if (state.InputAccepted && state.isSpacebarHeld)
             {
+                Sfx.Stop(state.HeatSfx);
+                Sfx.Play("Fabrication.Furnace.Exit");
+
                 state.FinalHeat = state.CurrentValue;
                 state.isSpacebarHeld = false;
+                state.InputAccepted = false;
                 Find.State(out StationControlState stationState);
                 MicrogameStationInterfacerUtility.SignalCompleted(stationState.ActiveInterfacer);
                 return;

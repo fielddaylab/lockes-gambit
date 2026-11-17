@@ -1,5 +1,6 @@
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Scripting;
 using FieldDay.Systems;
 using Leaf.Runtime;
@@ -115,6 +116,7 @@ namespace SpaceFab.Fabrication.StationControl {
             }
             stationState.ActiveInterfacer = null;
             stationState.Phase = StationControlPhase.Traveling;
+            Sfx.Play("Fabrication.Robot.Move");
             Log.Msg("[StationControlSystem] left station; AtStation -> Traveling");
             Game.Events.Dispatch(GameEvents.FabStationLeft);
         }

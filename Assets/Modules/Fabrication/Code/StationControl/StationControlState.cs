@@ -1,5 +1,6 @@
 using BeauUtil.Debugger;
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Scripting;
 using FieldDay.SharedState;
 using Leaf.Runtime;
@@ -183,6 +184,7 @@ namespace SpaceFab.Fabrication.StationControl {
             OnboardingStateUtility.SetEnabledGroup(Find.State<OnboardingLayoutState>().ControlsGroup, false);
             stationState.PhaseTimer = 0f;
             stationState.Phase = StationControlPhase.EnteringMicrogame;
+            Sfx.Play("Fabrication.Robot.InsertWafer");
             Log.Msg("[StationControlUtility] RequestActivate accepted; AtStation -> EnteringMicrogame");
             SpacefabGame.Events.Dispatch(GameEvents.FabStationEnterBegin, EvtArgs.Create(sequenceState.Level.Sequence.Steps[sequenceState.CurrentStepIndex].StepId.ToString()));
         }

@@ -2167,10 +2167,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhaseTimer: 0
-  EnterMicrogameDuration: 0.5
+  EnterMicrogameDuration: 1
   ExitMicrogameDuration: 0.5
   StunDuration: 1.5
   CompletionHoldDuration: 0.5
+  MinPrecisionToPass: 0.3
 --- !u!114 &879438742
 MonoBehaviour:
   m_ObjectHideFlags: 0

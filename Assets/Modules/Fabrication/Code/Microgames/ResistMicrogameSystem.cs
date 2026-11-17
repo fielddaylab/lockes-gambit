@@ -1,4 +1,5 @@
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Systems;
 using SpaceFab.Fabrication.Layout;
 using SpaceFab.Fabrication.StationControl;
@@ -84,6 +85,8 @@ namespace SpaceFab.Fabrication.Microgames
                 accruedSpread = 0;
 
                 state.Phase = ResistMicrogamePhase.Spreading;
+
+                Sfx.Play("Fabrication.Resist.Spread");
             }
         }
 

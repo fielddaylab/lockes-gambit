@@ -1,4 +1,5 @@
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Systems;
 using SpaceFab.Fabrication.Layout;
 using SpaceFab.Fabrication.StationControl;
@@ -89,6 +90,7 @@ namespace SpaceFab.Fabrication.Microgames
             if (newDirection != state.Direction) {
                 state.TurnCount++;
                 state.Direction = newDirection;
+                Sfx.Play("Fabrication.Etch.Rotate");
             }
 
             bool hitTurnCap = state.TurnCount > state.CachedPreviewPoints.Count * 2;

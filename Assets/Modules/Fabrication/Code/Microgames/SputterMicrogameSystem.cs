@@ -1,4 +1,5 @@
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.Systems;
 using SpaceFab.Fabrication.Layout;
 using SpaceFab.Fabrication.StationControl;
@@ -83,6 +84,8 @@ namespace SpaceFab.Fabrication.Microgames
                 hitEffect.GetComponent<Transform>().position = hit.point;
                 // direction
                 projectile.SetDirection(angle);
+
+                Sfx.Play("Fabrication.Sputter.Fire");
             }
 
             if (state.IsTrajectoryDisplayed)

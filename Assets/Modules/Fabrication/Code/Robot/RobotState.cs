@@ -1,4 +1,5 @@
 using FieldDay;
+using FieldDay.Audio;
 using FieldDay.SharedState;
 using System;
 using System.Collections;
@@ -52,6 +53,8 @@ namespace SpaceFab.Fabrication.Robot
             robotState.Status = RobotStatus.Stunned;
             robotState.IsStunned = true;
             RobotVisualsUtility.ApplyStunVisuals(visualsState);
+
+            Sfx.Play("Fabrication.Robot.Stunned");
         }
 
         // Clears the stun flag and removes its visuals. Called by StationControlSystem when the Stunned
