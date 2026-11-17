@@ -412,7 +412,9 @@ namespace SpaceFab.Logging
                 .Register<ToolType>(GameEvents.DesignToolSelected, LogSelectTool)
                 .Register<(GridCoord, string)>(GameEvents.DesignGridModified, (data) => LogFillGrid(data.Item1, data.Item2))
                 .Register<(Vector2Int, string)>(GameEvents.DesignGridCleared, (data) => UpdateDesignGridState(data.Item1, data.Item2))
-                .Register<(Dictionary<string, ElementState>, Dictionary<string, ElementState>)>(GameEvents.DesignSimRowStarted, (data) => LogRunTest(data.Item1, data.Item2))
+                .Register<(InputOutputNodeTypeFlags, FlowState)>(GameEvents.DesignInputToggled, (data) => LogToggleInput(data.Item1, data.Item2))
+                .Register<ToolbarLayer>(GameEvents.DesignSwitchedLayer, LogSwitchLayer)
+                .Register<(Dictionary<string, FlowState>, Dictionary<string, FlowState>)>(GameEvents.DesignSimRowStarted, (data) => LogRunTest(data.Item1, data.Item2))
                 .Register<(string, int, List<string>)>(GameEvents.DesignSimRowResolved, (data) => LogTestResult(data.Item1, data.Item2, data.Item3))
                 .Register(GameEvents.DesignSimSuiteSucceeded, LogDesignComplete);
 
@@ -881,19 +883,37 @@ namespace SpaceFab.Logging
             return m_JsonBuilder.End().ToString();
         }
 
-        private void LogToggleInput(string input, ElementState newState)
+        private void LogToggleInput(InputOutputNodeTypeFlags input, FlowState newState)
         {
-
+            using (var e = m_Log.NewEvent("toggle_input"))
+            {
+                e.Param("input", input.ToString());
+                e.Param("new_state", ConvertFlowStateToElementState(newState).ToString());
+            }
         }
 
-        private void LogSwitchLayer(Layer toLyaer)
+        private void LogSwitchLayer(ToolbarLayer toLyaer)
         {
-
+            using (var e = m_Log.NewEvent("switch_layer"))
+            {
+                switch (toLyaer)
+                {
+                    case ToolbarLayer.Metal:
+                        e.Param("new_layer", Layer.METAL.ToString());
+                        break;
+                    case ToolbarLayer.Transistor:
+                        e.Param("new_layer", Layer.SILICON.ToString());
+                        break;
+                    default:
+                        Log.Error("[logging] undefined new tool layer");
+                        break;
+                }
+            }
         }
 
         private void LogClearGrid()
         {
-
+            m_Log.NewEvent("clear_grid");
         }
 
         private void LogSelectTool(ToolType toolType)
@@ -918,6 +938,7 @@ namespace SpaceFab.Logging
                     toolId = ToolID.GATE;
                     break;
                 case ToolType.Erase:
+                    LogClearGrid();
                     break;
                 default:
                     throw new ArgumentException($"Unrecognized ToolbarButtonKind: {toolType}");
@@ -960,21 +981,32 @@ namespace SpaceFab.Logging
 
             UpdateDesignGridState(new Vector2Int(coordinate.Row, coordinate.Col), tool);
 
+            m_JsonBuilder.Clear();
+            m_JsonBuilder.BeginArray();
+            m_JsonBuilder.Item(coordinate.Row);
+            m_JsonBuilder.Item(coordinate.Col);
+            if (coordinate.Layer == 0) m_JsonBuilder.Item(Layer.METAL.ToString());
+            else if (coordinate.Layer == 1) m_JsonBuilder.Item(Layer.SILICON.ToString());
+            m_JsonBuilder.EndArray();
+            StringBuilder coordJSON = m_JsonBuilder.End();
+            coordJSON.Length -= 1;
+
             using (var e = m_Log.NewEvent("fill_grid"))
-            {
-                e.Param("tool_id", toolId.ToString());
-                e.Param("x", coordinate.Row);
-                e.Param("y", coordinate.Col);
-                e.Param("layer", coordinate.Layer.ToString());
+                {
+                    e.Param("tool_id", toolId.ToString());
+                    //e.Param("x", coordinate.Row);
+                    //e.Param("y", coordinate.Col);
+                    //e.Param("layer", coordinate.Layer.ToString());
+                    e.Param("coordinates", coordJSON.ToString());
             }
         }
 
-        private void LogRunTest(Dictionary<string, ElementState> outputs, Dictionary<string, ElementState> targetInputs)
+        private void LogRunTest(Dictionary<string, FlowState> outputs, Dictionary<string, FlowState> targetInputs)
         {
             using (var e = m_Log.NewEvent("run_test"))
             {
-                e.Param("outputs", string.Join(";", outputs.Select(kvp => $"{kvp.Key}:{kvp.Value}")));
-                e.Param("target_inputs", string.Join(";", targetInputs.Select(kvp => $"{kvp.Key}:{kvp.Value}")));
+                e.Param("outputs", string.Join(";", outputs.Select(kvp => $"{kvp.Key}:{ConvertFlowStateToElementState(kvp.Value)}")));
+                e.Param("target_inputs", string.Join(";", targetInputs.Select(kvp => $"{kvp.Key}:{ConvertFlowStateToElementState(kvp.Value)}")));
             }
         }
 
@@ -1021,6 +1053,27 @@ namespace SpaceFab.Logging
         private void LogDesignComplete()
         {
             m_Log.NewEvent("design_complete");
+        }
+
+        private ElementState? ConvertFlowStateToElementState(FlowState flow)
+        {
+            switch (flow)
+            {
+                case FlowState.Empty:
+                    Log.Error("[Logging] No corresponding element state: empty flow state");
+                    break;
+                case FlowState.Hi:
+                    return ElementState.HI;
+                case FlowState.Lo:
+                    return ElementState.LO;
+                case FlowState.Unstable:
+                    Log.Error("[Logging] No corresponding element state: unstable flow state");
+                    break;
+                default:
+                    Log.Error("[Logging] Undefined flow state");
+                    break;
+            }
+            return null;
         }
 
         #endregion // Design

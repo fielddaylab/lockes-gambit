@@ -68,10 +68,18 @@ namespace SpaceFab.Design {
         // (display focus). HoverOverrideActive flips off because the player has committed to
         // a row — any lingering hover focus is now outdated.
         public static void SelectTool(ToolModeState toolModeState, ToolbarState toolbarState, ToolbarButtonKind kind, ToolbarLayer row) {
+            if (RowForTool(toolModeState.ActiveTool, toolbarState.FocusedRow) != row
+                || (toolbarState.FocusedRow == ToolbarLayer.Metal && RowForTool(toolModeState.ActiveTool, toolbarState.FocusedRow) != ToolbarLayer.Metal))
+            {
+                // Also log switch_layer when the first selected tool is metal
+                SpacefabGame.Events.Dispatch(GameEvents.DesignSwitchedLayer, EvtArgs.Create(row));
+            }
+            
             toolModeState.ActiveTool = ToolTypeForKind(kind);
             if (row != ToolbarLayer.Other) {
                 toolModeState.ActiveLayer = (StackLayer)row;
             }
+
             toolbarState.FocusedRow = row;
             toolbarState.HoverOverrideActive = false;
             using (var table = TempVarTable.Alloc()) {
@@ -182,6 +190,7 @@ namespace SpaceFab.Design {
                 case ToolType.DrawPNodes:
                     return ToolbarLayer.Transistor;
                 case ToolType.Erase:
+                case ToolType.None:
                     return ToolbarLayer.Other;
                 default:
                     return fallback;
