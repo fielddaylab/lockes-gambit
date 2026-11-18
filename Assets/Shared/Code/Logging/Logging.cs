@@ -8,7 +8,9 @@ using FieldDay.Vox;
 using OGD;
 using SpaceFab;
 using SpaceFab.Design;
+using SpaceFab.Materials;
 using SpaceFab.Overarching;
+using SpaceFab.Research;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +64,21 @@ namespace SpaceFab.Logging
         public enum Material : byte
         {
             //TODO: Add the material names in Research
+            ALUMINUM,
+            BORON,
+            COPPER,
+            DIAMOND,
+            GALLIUM_ARSENIDE,
+            GALLIUM_NITRIDE,
+            GERMANIUM,
+            GOLD,
+            MAGNESIUM,
+            PHOSPHORUS,
+            RAW_DIAMOND,
+            SILICON,
+            SILICON_CARBIDE,
+            SILICON_DIOXIDE,
+            TUNGSTEN
         }
 
         public enum Chamber: byte
@@ -73,7 +90,10 @@ namespace SpaceFab.Logging
 
         public enum ChamberSlot : byte
         {
-            
+            BatterySlot,
+            ThermalSlot,
+            DopantSlot,
+            SubstrateSlot
         }
 
         public enum DopantRejection: byte
@@ -417,6 +437,14 @@ namespace SpaceFab.Logging
                 .Register<(Dictionary<string, FlowState>, Dictionary<string, FlowState>)>(GameEvents.DesignSimRowStarted, (data) => LogRunTest(data.Item1, data.Item2))
                 .Register<(string, int, List<string>)>(GameEvents.DesignSimRowResolved, (data) => LogTestResult(data.Item1, data.Item2, data.Item3))
                 .Register(GameEvents.DesignSimSuiteSucceeded, LogDesignComplete);
+
+            // Research
+            SpacefabGame.Events
+                .Register(GameEvents.ResearchBegin, LogResearchBegin)
+                .Register<ActiveChamberKind>(GameEvents.ResearchChamberSelected, LogSelectChamber)
+                .Register<MaterialAsset>(GameEvents.ResearchGrabSample, LogGrabSample)
+                .Register<MaterialAsset>(GameEvents.ResearchDropSample, LogDropSample)
+                .Register<(ActiveChamberKind, ChamberSlotKind, MaterialAsset)>(GameEvents.ResearchPlaceSample, (data) => LogPlaceSample(data.Item1, data.Item2, data.Item3));
 
             // Fabrication
             SpacefabGame.Events
@@ -784,6 +812,148 @@ namespace SpaceFab.Logging
 
         #region Research
 
+        private void LogResearchBegin()
+        {
+            // Construct the json for the requirements list
+            Find.State(out ResearchMinigameState researchState);
+            m_JsonBuilder.Clear();
+            m_JsonBuilder.BeginArray();
+            foreach(var req in researchState.RequiredResearchGoals)
+            {
+                if (req != null) m_JsonBuilder.Item(req.Label.ToString());
+            }
+            m_JsonBuilder.EndArray();
+            StringBuilder reqJSON = m_JsonBuilder.End();
+            reqJSON.Length -= 1;
+            string requirements = reqJSON.ToString();
+
+            // Construct the json for the list of initial samples
+            m_JsonBuilder.Clear();
+            m_JsonBuilder.BeginArray();
+            foreach(var sample in researchState.AvailableMaterials)
+            {
+                MaterialAsset material = Find.NamedAsset<MaterialAsset>(sample);
+                if (material == null) Log.Error("[Logging] unrecognized sample");
+                m_JsonBuilder.Item(material.DisplayName);
+            }
+            m_JsonBuilder.EndArray();
+            StringBuilder sampleJSON = m_JsonBuilder.End();
+            sampleJSON.Length -= 1;
+            string samples = sampleJSON.ToString();
+
+            // Construct the json for the list of available chambers
+            Find.State(out PlayerProgressState playerProgress);
+            m_JsonBuilder.Clear();
+            m_JsonBuilder.BeginArray();
+            m_JsonBuilder.Item(Chamber.Battery.ToString());
+            if (playerProgress.ThermalChamberUnlocked) m_JsonBuilder.Item(Chamber.Thermal.ToString());
+            if (playerProgress.DopingChamberUnlocked) m_JsonBuilder.Item(Chamber.Doping.ToString());
+            m_JsonBuilder.EndArray();
+            StringBuilder chamberJSON = m_JsonBuilder.End();
+            chamberJSON.Length -= 1;
+            string chambers = chamberJSON.ToString();
+
+            using(var e = m_Log.NewEvent("research_begin"))
+            {
+                e.Param("requirements", requirements);
+                e.Param("initial_samples", samples);
+                e.Param("available_chambers", chambers);
+            }
+        }
+
+        private void LogSelectChamber(ActiveChamberKind chamber)
+        {
+            using (var e = m_Log.NewEvent("select_chamber"))
+            {
+                switch (chamber)
+                {
+                    case ActiveChamberKind.Voltage:
+                        e.Param("chamber_id", Chamber.Battery.ToString());
+                        break;
+                    case ActiveChamberKind.Thermal:
+                        e.Param("chamber_id", Chamber.Thermal.ToString());
+                        break;
+                    case ActiveChamberKind.Doping:
+                        e.Param("chamber_id", Chamber.Doping.ToString());
+                        break;
+                    default: // None
+                        Log.Error("[Logging] Unrecognized chamber is selected.");
+                        break;
+                }
+            }
+            
+        }
+
+        //private Material ConvertMaterialNameToType(MaterialAsset material)
+        //{
+
+        //}
+
+        private void LogGrabSample(MaterialAsset sample)
+        {
+            using (var e = m_Log.NewEvent("grab_sample"))
+            {
+                e.Param("material_id", sample.name);
+            }
+        }
+
+        private void LogDropSample(MaterialAsset sample)
+        {
+            using (var e = m_Log.NewEvent("drop_sample"))
+            {
+                e.Param("material_id", sample.name);
+            }
+        }
+
+        private void LogPlaceSample(ActiveChamberKind activeChamber, ChamberSlotKind slot, MaterialAsset sample)
+        {
+            ChamberSlot chamberSlot = ChamberSlot.BatterySlot;
+            switch (activeChamber)
+            {
+                case ActiveChamberKind.Voltage:
+                    break;
+                case ActiveChamberKind.Thermal:
+                    chamberSlot = ChamberSlot.ThermalSlot;
+                    break;
+                case ActiveChamberKind.Doping:
+                    chamberSlot = slot == ChamberSlotKind.Primary ? ChamberSlot.SubstrateSlot : ChamberSlot.DopantSlot;
+                    break;
+                default:
+                    break;
+            }
+
+            using (var e = m_Log.NewEvent("place_sample"))
+            {
+                e.Param("slot", chamberSlot.ToString());
+                e.Param("material_id", sample.name.ToString());
+            }
+        }
+
+        private void LogIncreaseVoltage(int voltage)
+        {
+        }
+
+        private void LogDecreaseVoltage(int voltage)
+        {
+        }
+
+        private void LogIncreaseHeat(int heat)
+        {
+        }
+
+        private void LogDecreaseHeat(int heat)
+        {
+        }
+
+        private void LogSampleDestroyed(Material sample, string breakdownType, string breakdownValue)
+        {
+
+        }
+
+        private void LogSampleRejected(Material sample, ChamberSlot slot, DopantRejection reason)
+        {
+
+        }
 
         #endregion // Research
 

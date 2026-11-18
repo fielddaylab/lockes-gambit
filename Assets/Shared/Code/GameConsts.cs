@@ -19,9 +19,7 @@ namespace SpaceFab
         static public readonly StringHash32 TitleContinueGameGroupClicked = "title:continue-game-group-clicked";
         static public readonly StringHash32 TitleOptionsGroupClicked = "title:options-group-clicked";
         //static public readonly StringHash32 TitleCreditsClicked = "title:credits-group-clicked";
-
         static public readonly StringHash32 TitleSessionIdAssigned = "title:session-id-assigned";
-
         //static public readonly StringHash32 TitleStartGameClicked = "title:start-game-clicked";
         static public readonly StringHash32 TitleBackFromInputClicked = "title:back-from-input-clicked";
 
@@ -125,6 +123,13 @@ namespace SpaceFab
         public static readonly StringHash32 DesignClearSelected = "design-tool:clear-selected";
         public static readonly StringHash32 DesignInputToggled = "design-tool:input-toggled";
         public static readonly StringHash32 DesignSwitchedLayer = "design-tool:switched-layer";
+
+        // Research
+        public static readonly StringHash32 ResearchBegin = "research:begin";
+        public static readonly StringHash32 ResearchChamberSelected = "research:chamber-selected";
+        public static readonly StringHash32 ResearchGrabSample = "research:grab-sample";
+        public static readonly StringHash32 ResearchDropSample = "research:drop-sample";
+        public static readonly StringHash32 ResearchPlaceSample = "research:place-sample";
 
         // Wiki
         public static readonly StringHash32 WikiPageUnlocked = "wiki:page-unlocked";

@@ -123,6 +123,7 @@ namespace SpaceFab.Research {
 
             interfacerState.ActiveChamber = kind;
             interfacerState.ActiveChamberChangedThisFrame = true;
+            SpacefabGame.Events.Dispatch(GameEvents.ResearchChamberSelected, EvtArgs.Create(kind));
         }
 
         // Returns the currently-active chamber kind.

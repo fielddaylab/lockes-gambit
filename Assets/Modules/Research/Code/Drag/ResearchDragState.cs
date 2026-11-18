@@ -140,6 +140,8 @@ namespace SpaceFab.Research {
                 return false;
             }
 
+            SpacefabGame.Events.Dispatch(GameEvents.ResearchPlaceSample, EvtArgs.Box((interfacerState.ActiveChamber, kind, draggedMaterial)));
+
             // Retaining logic in case change for future, but currently want items to 
             // return back to the pool when swapped ou
             // if (swap != null)
@@ -168,7 +170,8 @@ namespace SpaceFab.Research {
             //     ResearchMaterialInstanceUtility.Release(pool, dragged);
             //     EndDrag(dragState);
             // }
-
+            SpacefabGame.Events.Dispatch(GameEvents.ResearchDropSample, EvtArgs.Ref(draggedMaterial));
+            
             // 3. If was a swap, put back into pool instead of on cursor
             ResearchMaterialInstanceUtility.Release(pool, dragged);
             EndDrag(dragState);
@@ -204,6 +207,8 @@ namespace SpaceFab.Research {
                 ResearchSlotUtility.FillInSlot(interfacerState, dragState.LiftedFromSlot, dragState.LiftedFromKind, dragged.Material);
             }
 
+            SpacefabGame.Events.Dispatch(GameEvents.ResearchDropSample, EvtArgs.Ref(dragged.Material));
+
             ResearchMaterialInstanceUtility.Release(pool, dragged);
             EndDrag(dragState);
             return true;
@@ -217,6 +222,8 @@ namespace SpaceFab.Research {
             dragState.CurrentInstance = instance;
             dragState.LiftedFromSlot = sourceSlot;
             dragState.LiftedFromKind = sourceKind;
+
+            SpacefabGame.Events.Dispatch(GameEvents.ResearchGrabSample, EvtArgs.Ref(instance.Material));
 
             if (instance != null && dragState.DragRoot != null) {
                 instance.transform.SetParent(dragState.DragRoot, false);

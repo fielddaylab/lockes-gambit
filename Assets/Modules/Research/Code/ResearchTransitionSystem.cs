@@ -132,6 +132,8 @@ namespace SpaceFab.Research {
                 table.Set("minigame", "research");
                 ScriptUtility.Trigger(ResearchScriptTriggers.OnSetupComplete, table);
             }
+
+            SpacefabGame.Events.Dispatch(GameEvents.ResearchBegin);
         }
 
         // Linear membership check against ChapterDef.ExcludeFromResearch.
