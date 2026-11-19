@@ -134,7 +134,7 @@ namespace SpaceFab
                     "\"FR Pharma serves you, through medical, pharmaceutical, and emergency service needs.\"",
                     "PAL-World: \"Save Creds. Live Longer.\"",
                     "\"Pally-World is Auserine's leading choice for any common good for a low-low price.\"",
-                    "Frontline Insurance: \"We're on the Frontline so you don't have to!\"",
+                    "Frontline Insurance: \"We're on the Frontline so you don't have to be!\"",
                     "\"The best and only insurance company in all of Auserine. Frontline Insurance.\"",
                     "\"Frontier founders were the first to set foot on Frosch, paving the way for Frontier Robotics and the future of the Auserine system!\"\n<align=\"right\">- Oscar Grayson",
                     "\"When you look up into the sky to see what the future holds, the smog stares right back at ya.\" - Common Saying on Wolfram"

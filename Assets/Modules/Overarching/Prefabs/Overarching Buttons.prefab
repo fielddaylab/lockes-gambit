@@ -194,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943192689760791763, guid: 5671a5f3c8b59224eb6f9d4b8fe7a896, type: 3}
       propertyPath: m_text
-      value: submit chapter
+      value: submit contract
       objectReference: {fileID: 0}
     - target: {fileID: 3722771882752122432, guid: 5671a5f3c8b59224eb6f9d4b8fe7a896, type: 3}
       propertyPath: m_Color.b
@@ -323,6 +323,7 @@ MonoBehaviour:
   RectTransform: {fileID: 6710386354553087741}
   SpriteRenderer: {fileID: 0}
   Collider: {fileID: 0}
+  ColliderOverride: 0
 --- !u!114 &6171332679498103645 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5417778828197023071, guid: 5671a5f3c8b59224eb6f9d4b8fe7a896, type: 3}
