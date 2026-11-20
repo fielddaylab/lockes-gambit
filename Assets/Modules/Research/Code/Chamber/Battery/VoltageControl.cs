@@ -54,11 +54,13 @@ namespace SpaceFab.Research
         private void HandleIncrease()
         {
             VoltageUtility.Increase(this, Find.GlobalAsset<ResearchVoltageConfig>());
+            SpacefabGame.Events.Dispatch(ResearchScriptTriggers.OnVoltageIncreased, EvtArgs.Create(VoltageIndex));
         }
 
         private void HandleDecrease()
         {
             VoltageUtility.Decrease(this, Find.GlobalAsset<ResearchVoltageConfig>());
+            SpacefabGame.Events.Dispatch(ResearchScriptTriggers.OnVoltageDecreased, EvtArgs.Create(VoltageIndex));
         }
     }
 

@@ -32,6 +32,7 @@ namespace SpaceFab.Research
         public static readonly StringHash32 OnVerifyButtonShown = "OnVerifyButtonShown";
         public static readonly StringHash32 OnHypothesisSubmitted = "OnHypothesisSubmitted";
         public static readonly StringHash32 OnMaterialExploded = "OnMaterialExploded";
+        public static readonly StringHash32 OnMaterialRejected = "OnMaterialRejected";
         public static readonly StringHash32 OnLightEmissionPlayed = "OnLightEmissionPlayed";
         public static readonly StringHash32 OnHighMobilityPlayed = "OnHighMobilityPlayed";
     }

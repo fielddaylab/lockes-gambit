@@ -444,7 +444,13 @@ namespace SpaceFab.Logging
                 .Register<ActiveChamberKind>(GameEvents.ResearchChamberSelected, LogSelectChamber)
                 .Register<MaterialAsset>(GameEvents.ResearchGrabSample, LogGrabSample)
                 .Register<MaterialAsset>(GameEvents.ResearchDropSample, LogDropSample)
-                .Register<(ActiveChamberKind, ChamberSlotKind, MaterialAsset)>(GameEvents.ResearchPlaceSample, (data) => LogPlaceSample(data.Item1, data.Item2, data.Item3));
+                .Register<(ActiveChamberKind, ChamberSlotKind, MaterialAsset)>(GameEvents.ResearchPlaceSample, (data) => LogPlaceSample(data.Item1, data.Item2, data.Item3))
+                .Register<int>(ResearchScriptTriggers.OnVoltageIncreased, LogIncreaseVoltage)
+                .Register<int>(ResearchScriptTriggers.OnVoltageDecreased, LogDecreaseVoltage)
+                .Register<int>(ResearchScriptTriggers.OnHeatIncreased, LogIncreaseHeat)
+                .Register<int>(ResearchScriptTriggers.OnHeatDecreased, LogDecreaseHeat)
+                .Register<(MaterialAsset, string, int)>(ResearchScriptTriggers.OnMaterialExploded, (data) => LogSampleDestroyed(data.Item1, data.Item2, data.Item3))
+                .Register<(MaterialAsset, ChamberSlot, DopantRejection)>(ResearchScriptTriggers.OnMaterialRejected, (data) => LogSampleRejected(data.Item1, data.Item2, data.Item3));
 
             // Fabrication
             SpacefabGame.Events
@@ -931,28 +937,54 @@ namespace SpaceFab.Logging
 
         private void LogIncreaseVoltage(int voltage)
         {
+            using (var e = m_Log.NewEvent("increase_voltage"))
+            {
+                e.Param("new_voltage", voltage);
+            }
         }
 
         private void LogDecreaseVoltage(int voltage)
         {
+            using (var e = m_Log.NewEvent("decrease_voltage"))
+            {
+                e.Param("new_voltage", voltage);
+            }
         }
 
         private void LogIncreaseHeat(int heat)
         {
+            using (var e = m_Log.NewEvent("increase_heat"))
+            {
+                e.Param("new_heat", heat);
+            }
         }
 
         private void LogDecreaseHeat(int heat)
         {
+            using (var e = m_Log.NewEvent("decrease_heat"))
+            {
+                e.Param("new_heat", heat);
+            }
         }
 
-        private void LogSampleDestroyed(Material sample, string breakdownType, string breakdownValue)
+        private void LogSampleDestroyed(MaterialAsset sample, string breakdownType, int breakdownValue)
         {
-
+            using (var e = m_Log.NewEvent("sample_destroyed"))
+            {
+                e.Param("material_id", sample.name);
+                e.Param("breakdown_type", breakdownType);
+                e.Param("breakdown_value", breakdownValue);
+            }
         }
 
-        private void LogSampleRejected(Material sample, ChamberSlot slot, DopantRejection reason)
+        private void LogSampleRejected(MaterialAsset sample, ChamberSlot slot, DopantRejection reason)
         {
-
+            using (var e = m_Log.NewEvent("sample_rejected"))
+            {
+                e.Param("material_id", sample.name);
+                e.Param("slot", slot.ToString());
+                e.Param("rejection_reason", reason.ToString());
+            }
         }
 
         #endregion // Research

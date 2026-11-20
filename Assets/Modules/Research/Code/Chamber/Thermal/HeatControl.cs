@@ -55,11 +55,13 @@ namespace SpaceFab.Research
         private void HandleIncrease()
         {
             HeatUtility.Increase(this, Find.GlobalAsset<ResearchHeatConfig>());
+            SpacefabGame.Events.Dispatch(ResearchScriptTriggers.OnHeatIncreased, EvtArgs.Create(HeatIndex));
         }
 
         private void HandleDecrease()
         {
             HeatUtility.Decrease(this, Find.GlobalAsset<ResearchHeatConfig>());
+            SpacefabGame.Events.Dispatch(ResearchScriptTriggers.OnHeatDecreased, EvtArgs.Create(HeatIndex));
         }
     }
 

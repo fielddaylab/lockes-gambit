@@ -94,6 +94,8 @@ namespace SpaceFab.Research
                 ResearchExplosionUtility.ExplodeSlot(
                     explosionState, vfxPool, interfacerState, slot, batteryChamber.SlotKind,
                     ExplosionStyle.VoltageBreakdown, delay: 1f);
+
+                SpacefabGame.Events.Dispatch(ResearchScriptTriggers.OnMaterialExploded, EvtArgs.Box((material, ExplosionStyle.VoltageBreakdown.ToString(), batteryChamber.VoltageControl.VoltageIndex)));
                 CircuitUtility.SetLightStrength(batteryChamber.Circuit, 0f);
                 CircuitUtility.SetFlowStrength(batteryChamber.Circuit, 0f);
                 return;

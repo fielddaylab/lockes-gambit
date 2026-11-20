@@ -92,6 +92,8 @@ namespace SpaceFab.Research
                 ResearchExplosionUtility.ExplodeSlot(
                     explosionState, vfxPool, interfacerState, slot, thermalChamber.SlotKind,
                     ExplosionStyle.TemperatureBreakdownHot, delay: 1f);
+
+                SpacefabGame.Events.Dispatch(ResearchScriptTriggers.OnMaterialExploded, EvtArgs.Box((material, ExplosionStyle.TemperatureBreakdownHot.ToString(), thermalChamber.HeatControl.HeatIndex)));
                 CircuitUtility.SetLightStrength(thermalChamber.Circuit, 0f);
                 CircuitUtility.SetFlowStrength(thermalChamber.Circuit, 0f);
                 return;

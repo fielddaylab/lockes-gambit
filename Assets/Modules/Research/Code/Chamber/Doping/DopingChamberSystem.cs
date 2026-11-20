@@ -9,6 +9,7 @@ using FieldDay.Systems;
 using SpaceFab;
 using SpaceFab.Materials;
 using UnityEngine;
+using DopantRejection = SpaceFab.Logging.Logging.DopantRejection;
 
 namespace SpaceFab.Research
 {
@@ -101,6 +102,8 @@ namespace SpaceFab.Research
                 ResearchExplosionUtility.ExplodeSlot(
                     explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Primary,
                     ExplosionStyle.InvalidSubstrate, delay: 1f); // TODO: add explosion style if needed
+
+                SpacefabGame.Events.Dispatch(ResearchScriptTriggers.OnMaterialRejected, EvtArgs.Box((material, ChamberSlotKind.Primary, DopantRejection.UNIDENTIFIED_SUBSTRATE)));
                 dopingChamber.AtomicViewChangedThisFrame = true;
 
                 return;
@@ -154,6 +157,9 @@ namespace SpaceFab.Research
                 ResearchExplosionUtility.ExplodeSlot(
                     explosionState, vfxPool, interfacerState, slot, ChamberSlotKind.Secondary,
                     ExplosionStyle.TooBig, delay: 1f);
+
+                var reason = dopant.ConstituentElementNames.Length > 1 ? DopantRejection.POLYATOMIC_DOPANT : DopantRejection.DOPANT_TOO_BIG;
+                SpacefabGame.Events.Dispatch(ResearchScriptTriggers.OnMaterialRejected, EvtArgs.Box((dopant, ChamberSlotKind.Secondary, reason)));
                 CircuitUtility.SetLightStrength(dopingChamber.Circuit, current);
                 CircuitUtility.SetFlowStrength(dopingChamber.Circuit, current, profile.IsHighMobility, profile.IsLightEmitting);
                 dopingChamber.AtomicViewChangedThisFrame = true;
